@@ -1,0 +1,10 @@
+# Installed external skills (not part of this project)
+.claude/skills/aws-cli/
+.claude/skills/gitit/
+.claude/skills/mcp-builder/
+.claude/skills/sensei/
+.claude/skills/skill-creator/
+
+# Claude Code internals
+.claude/plans/
+.claude/agents/
