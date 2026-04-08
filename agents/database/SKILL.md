@@ -28,6 +28,15 @@ You are the top-level routing agent for all database technologies. You have cros
 - "Oracle 23ai JSON Relational Duality" --> `oracle/23ai/SKILL.md`
 - "MySQL 8.4 replication lag" --> `mysql/8.4/SKILL.md`
 - "MariaDB ColumnStore tuning" --> `mariadb/SKILL.md`
+- "MongoDB sharding strategy" --> `mongodb/SKILL.md`
+- "Redis cluster mode" --> `redis/SKILL.md`
+- "Elasticsearch index mapping" --> `elasticsearch/SKILL.md`
+- "Cassandra compaction falling behind" --> `cassandra/SKILL.md`
+- "Neo4j Cypher optimization" --> `neo4j/SKILL.md`
+- "DynamoDB single-table design" --> `dynamodb/SKILL.md`
+- "Snowflake warehouse sizing" --> `snowflake/SKILL.md`
+- "ClickHouse MergeTree tuning" --> `clickhouse/SKILL.md`
+- "DuckDB Parquet analysis" --> `duckdb/SKILL.md`
 
 ## How to Approach Tasks
 
@@ -116,13 +125,30 @@ Universal indexing concepts that apply across engines:
 | **Oracle** | RDBMS | Large enterprise, RAC clustering, PL/SQL codebases | Commercial (XE free) | Extremely expensive, vendor lock-in, complex licensing |
 | **MySQL** | RDBMS | Web applications, read-heavy, simple schemas | Open source (GPL) / Commercial | Weaker optimizer, limited window functions (pre-8.0), no partial indexes |
 | **MariaDB** | RDBMS | MySQL alternative, ColumnStore analytics | Open source (GPL) | Diverging from MySQL compatibility, smaller enterprise support ecosystem |
-| **MongoDB** | Document | Flexible schemas, rapid prototyping, content management | SSPL / Commercial | No multi-document ACID (pre-4.0), eventual consistency gotchas, storage overhead |
-| **Redis** | Key-Value / Cache | Caching, session store, pub/sub, leaderboards | BSD (Redis Source Available for 7.4+) | Single-threaded (CPU-bound), data must fit in memory, persistence trade-offs |
+| **MongoDB** | Document | Flexible schemas, rapid prototyping, content management | SSPL / Commercial | Eventual consistency gotchas, storage overhead, query limitations vs SQL |
+| **Cosmos DB** | Multi-model | Global distribution, multi-API, tunable consistency | Azure managed | Expensive at scale, partition key design critical, 2MB document limit |
+| **DynamoDB** | Key-Value / Document | Serverless, predictable latency at any scale | AWS managed | Vendor lock-in, limited query flexibility, single-table design complexity |
+| **Couchbase** | Document + KV | Combined cache + document, mobile sync | Commercial / Community | Smaller ecosystem, operational complexity, memory-intensive |
+| **Redis** | Key-Value / Cache | Caching, session store, pub/sub, leaderboards | RSALv2 / SSPLv1 (8.0+) | Single-threaded, data must fit in memory, persistence trade-offs |
+| **Memcached** | Key-Value / Cache | Simple caching, multi-threaded high throughput | Open source (BSD) | No persistence, no data structures, no replication built-in |
+| **ElastiCache** | Managed Cache | AWS managed Redis/Valkey/Memcached | AWS managed | Vendor lock-in, VPC-only access, limited customization |
+| **Elasticsearch** | Search / Analytics | Full-text search, log analytics, observability | Elastic License / SSPL | Not a primary database, eventual consistency, high resource usage |
+| **OpenSearch** | Search / Analytics | Search, observability, neural/vector search (AWS-aligned) | Apache 2.0 | Elasticsearch fork, smaller plugin ecosystem |
 | **Cassandra** | Wide-Column | Time-series, IoT, massive write throughput | Open source (Apache) | Query-driven modeling required, no ad-hoc queries, operational complexity |
+| **ScyllaDB** | Wide-Column | Cassandra-compatible with lower latency (C++) | Source-available | Smaller community, less tooling than Cassandra |
 | **Neo4j** | Graph | Social networks, fraud detection, knowledge graphs | GPL / Commercial | Not suited for bulk analytics, limited horizontal scaling |
-| **DynamoDB** | Key-Value / Document | Serverless, predictable latency at any scale | AWS managed | Vendor lock-in, expensive at high throughput, limited query flexibility |
-| **Elasticsearch** | Search / Document | Full-text search, log analytics, observability | SSPL / Elastic License | Not a primary database, eventual consistency, high resource usage |
-| **ClickHouse** | Columnar / OLAP | Real-time analytics, log aggregation | Open source (Apache) | Not for OLTP, no UPDATE/DELETE (MergeTree mutations are expensive) |
+| **Neptune** | Graph | Managed graph on AWS (Gremlin/SPARQL/openCypher) | AWS managed | Vendor lock-in, no Cypher (openCypher subset), VPC-only |
+| **InfluxDB** | Time-Series | Metrics, IoT, monitoring, Telegraf ecosystem | Apache 2.0 (3.x) / MIT (2.x) | Breaking changes between 2.x and 3.x, cardinality limits in 2.x |
+| **TimescaleDB** | Time-Series | Time-series on PostgreSQL, full SQL, extensions | Apache 2.0 + Timescale License | Single-node only (multi-node deprecated), PG version coupling |
+| **ClickHouse** | Columnar / OLAP | Real-time analytics, log aggregation | Open source (Apache) | Not for OLTP, mutations are expensive, operational complexity |
+| **DuckDB** | Embedded OLAP | In-process analytics, Parquet/CSV, data science | MIT | Not for concurrent writes, single-process, no server mode |
+| **Apache Druid** | Real-time OLAP | Sub-second analytics on streaming data | Open source (Apache) | Complex architecture, high resource usage, limited JOINs |
+| **Snowflake** | Cloud Warehouse | Elastic analytics, data sharing, zero-admin | Commercial (managed) | Expensive at scale, vendor lock-in, credit-based pricing complexity |
+| **BigQuery** | Cloud Warehouse | Massive-scale analytics, ML integration | Google managed | Slot contention, eventual consistency for streaming, cost unpredictability |
+| **Redshift** | Cloud Warehouse | AWS analytics, Spectrum for data lake queries | AWS managed | Distribution key design critical, VACUUM overhead, concurrency limits |
+| **Synapse** | Cloud Warehouse | Azure analytics, Spark integration, Pipelines | Azure managed | Complex pricing, dedicated pool maintenance, Spark/SQL pool gap |
+| **Databricks** | Lakehouse | Delta Lake, ML/AI, unified analytics + engineering | Commercial (managed) | Expensive, Spark expertise required, vendor lock-in |
+| **SQLite** | Embedded RDBMS | Mobile/desktop, testing, edge computing, single-user | Public domain | Single-writer, no network access, limited concurrency |
 
 ## Decision Framework
 
@@ -130,12 +156,15 @@ Universal indexing concepts that apply across engines:
 
 | Data Shape | Strong Candidates | Weak Candidates |
 |---|---|---|
-| Highly relational (many FKs, JOINs) | PostgreSQL, SQL Server, Oracle | MongoDB, Redis, Cassandra |
-| Semi-structured / variable schema | MongoDB, PostgreSQL (JSONB), DynamoDB | Oracle, MySQL |
-| Key-value pairs | Redis, DynamoDB, Memcached | Any RDBMS (overkill) |
-| Graph / relationships ARE the query | Neo4j, Amazon Neptune | RDBMS (recursive CTEs are slow at depth) |
-| Time-series | TimescaleDB (PG), InfluxDB, Cassandra | MongoDB, Neo4j |
-| Full-text search dominant | Elasticsearch, PostgreSQL (tsvector) | MySQL (basic), Redis |
+| Highly relational (many FKs, JOINs) | PostgreSQL, SQL Server, Oracle, MySQL | MongoDB, Redis, Cassandra, DynamoDB |
+| Semi-structured / variable schema | MongoDB, Couchbase, PostgreSQL (JSONB), DynamoDB, Cosmos DB | Oracle, MySQL |
+| Key-value pairs | Redis, DynamoDB, Memcached, ElastiCache | Any RDBMS (overkill) |
+| Graph / relationships ARE the query | Neo4j, Neptune | RDBMS (recursive CTEs are slow at depth), Cassandra |
+| Time-series | TimescaleDB, InfluxDB, Cassandra, ClickHouse, Druid | MongoDB, Neo4j |
+| Full-text search dominant | Elasticsearch, OpenSearch, PostgreSQL (tsvector) | MySQL (basic), Redis |
+| Real-time analytics / OLAP | ClickHouse, Druid, Snowflake, BigQuery, Redshift | OLTP databases under analytical load |
+| Embedded / edge / single-process | SQLite, DuckDB | Any client-server database (overkill) |
+| Data lake / lakehouse | Databricks, BigQuery, Snowflake, Redshift Spectrum | Traditional RDBMS |
 
 ### Step 2: What are the consistency requirements?
 
@@ -163,15 +192,45 @@ Route to these technology agents for deep implementation guidance:
 
 | Request Pattern | Route To |
 |---|---|
-| SQL Server questions (T-SQL, SSMS, Always On, SSIS) | `sql-server/SKILL.md` or version-specific `sql-server/{version}/SKILL.md` |
+| **Relational (RDBMS)** | |
+| SQL Server questions (T-SQL, SSMS, Always On, SSIS) | `sql-server/SKILL.md` or `sql-server/{version}/SKILL.md` |
 | PostgreSQL questions (psql, extensions, VACUUM, WAL) | `postgresql/SKILL.md` or `postgresql/{version}/SKILL.md` |
 | Oracle questions (PL/SQL, RAC, ASM, Data Guard) | `oracle/SKILL.md` or `oracle/{version}/SKILL.md` |
 | MySQL questions (InnoDB, replication, MySQL Shell) | `mysql/SKILL.md` or `mysql/{version}/SKILL.md` |
 | MariaDB questions (Galera, ColumnStore, Spider) | `mariadb/SKILL.md` or `mariadb/{version}/SKILL.md` |
-| MongoDB questions (aggregation pipeline, sharding) | `mongodb/SKILL.md` (when available) |
-| Redis questions (data structures, Lua scripting) | `redis/SKILL.md` (when available) |
-
-When a technology agent does not yet exist, provide the best answer you can from your cross-paradigm knowledge and note that a specialized agent would give deeper guidance.
+| **Document** | |
+| MongoDB questions (MQL, aggregation, sharding, replica sets) | `mongodb/SKILL.md` or `mongodb/{version}/SKILL.md` |
+| Cosmos DB questions (RU, consistency levels, partition keys) | `cosmosdb/SKILL.md` |
+| DynamoDB questions (single-table design, GSI, streams) | `dynamodb/SKILL.md` |
+| Couchbase questions (N1QL, XDCR, Eventing, vBuckets) | `couchbase/SKILL.md` or `couchbase/{version}/SKILL.md` |
+| **Key-Value / Cache** | |
+| Redis questions (data structures, clustering, sentinel) | `redis/SKILL.md` or `redis/{version}/SKILL.md` |
+| Memcached questions (slab allocator, consistent hashing) | `memcached/SKILL.md` |
+| ElastiCache / MemoryDB questions (managed Redis/Valkey/Memcached) | `elasticache/SKILL.md` |
+| **Search / Analytics Engine** | |
+| Elasticsearch questions (Query DSL, mappings, cluster ops) | `elasticsearch/SKILL.md` or `elasticsearch/{version}/SKILL.md` |
+| OpenSearch questions (neural search, ISM, security plugin) | `opensearch/SKILL.md` or `opensearch/{version}/SKILL.md` |
+| **Wide-Column** | |
+| Cassandra questions (CQL, nodetool, compaction, repair) | `cassandra/SKILL.md` or `cassandra/{version}/SKILL.md` |
+| ScyllaDB questions (shard-per-core, Seastar, Alternator) | `scylladb/SKILL.md` or `scylladb/{version}/SKILL.md` |
+| **Graph** | |
+| Neo4j questions (Cypher, APOC, GDS, graph modeling) | `neo4j/SKILL.md` or `neo4j/{version}/SKILL.md` |
+| Neptune questions (Gremlin, SPARQL, openCypher, Neptune Analytics) | `neptune/SKILL.md` |
+| **Time-Series** | |
+| InfluxDB questions (Flux, SQL, Telegraf, IOx) | `influxdb/SKILL.md` or `influxdb/{version}/SKILL.md` |
+| TimescaleDB questions (hypertables, continuous aggregates, compression) | `timescaledb/SKILL.md` or `timescaledb/{version}/SKILL.md` |
+| **Columnar / Analytical** | |
+| ClickHouse questions (MergeTree, materialized views, distributed) | `clickhouse/SKILL.md` or `clickhouse/{version}/SKILL.md` |
+| DuckDB questions (embedded OLAP, Parquet, Friendly SQL) | `duckdb/SKILL.md` or `duckdb/{version}/SKILL.md` |
+| Apache Druid questions (real-time OLAP, segments, ingestion) | `druid/SKILL.md` or `druid/{version}/SKILL.md` |
+| **Cloud Data Warehouses** | |
+| Snowflake questions (warehouses, micro-partitions, Cortex) | `snowflake/SKILL.md` |
+| BigQuery questions (slots, BQML, BigLake, Dremel) | `bigquery/SKILL.md` |
+| Redshift questions (distribution keys, Spectrum, Serverless) | `redshift/SKILL.md` |
+| Azure Synapse questions (dedicated/serverless pools, Pipelines) | `synapse/SKILL.md` |
+| Databricks questions (Delta Lake, Unity Catalog, Photon) | `databricks/SKILL.md` |
+| **Embedded** | |
+| SQLite questions (WAL, FTS5, PRAGMA, embedded use) | `sqlite/SKILL.md` |
 
 ## Anti-Patterns to Watch For
 
