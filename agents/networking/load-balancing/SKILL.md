@@ -287,18 +287,16 @@ Client ---[HTTPS/TLS]--> Load Balancer ---[HTTP]--> Backend Server
 
 ### Decision Matrix
 
-| Factor | F5 BIG-IP | NGINX | HAProxy |
-|---|---|---|---|
-| Performance (L7) | High (TMM) | Very High | Highest |
-| Feature breadth | Deepest (LTM+GTM+WAF+APM) | Moderate (Plus for enterprise) | Moderate |
-| Kubernetes native | BIG-IP CIS | NGINX Ingress Controller | HAProxy Ingress |
-| GSLB | Built-in (GTM) | No (external DNS) | No (external DNS) |
-| WAF | Built-in (ASM) | App Protect (Plus) | Enterprise only |
-| Cost | Highest | Medium (OSS free) | Low (OSS free) |
-| Operational model | GUI/CLI/API | Config files + API (Plus) | Config files + Runtime API |
-| Session persistence | Extensive (7+ types) | Cookie (Plus only) | Cookie, stick tables |
-| Rate limiting | iRules / AFM | limit_req module | Stick tables (very powerful) |
-| Configuration model | Object-based (TMSH) | Declarative (nginx.conf) | Declarative (haproxy.cfg) |
+| Factor | F5 BIG-IP | NGINX | HAProxy | NetScaler | Envoy | AWS ALB/NLB | Azure App GW |
+|---|---|---|---|---|---|---|---|
+| Performance (L7) | High (TMM) | Very High | Highest | High (HW ASICs) | Very High | Managed | Managed |
+| Feature breadth | Deepest | Moderate (Plus) | Moderate | Deep (ADC) | Extensible (filters) | AWS-integrated | Azure-integrated |
+| Kubernetes native | BIG-IP CIS | NGINX Ingress | HAProxy Ingress | CPX / CIC | Envoy Gateway | ALB Controller | AGIC |
+| GSLB | Built-in (GTM) | No | No | Built-in (MEP) | No | Route 53 | Traffic Manager |
+| WAF | Built-in (ASM) | App Protect (Plus) | Enterprise only | AppFW | ext_authz filter | AWS WAF | WAF v2 (built-in) |
+| Cost | Highest | Medium (OSS free) | Low (OSS free) | High (license) | Free (OSS) | Consumption | Consumption |
+| Service mesh | No | No | No | CPX sidecar | Core data plane | No | No |
+| Configuration model | Object (TMSH) | Declarative | Declarative | Object (CLI/API) | xDS / YAML | Console/IaC | Console/IaC |
 
 ## Kubernetes Load Balancing
 
@@ -348,6 +346,10 @@ Client ---[HTTPS/TLS]--> Load Balancer ---[HTTP]--> Backend Server
 | F5, BIG-IP, LTM, GTM, iRules, ASM, APM, AFM, TMOS, TMM | `f5-bigip/SKILL.md` or `f5-bigip/17.5/SKILL.md` |
 | NGINX, nginx.conf, upstream, proxy_pass, Ingress Controller, NGINX Plus | `nginx/SKILL.md` or `nginx/plus-r35/SKILL.md` |
 | HAProxy, haproxy.cfg, frontend, backend, stick table, ACL | `haproxy/SKILL.md` or `haproxy/3.2/SKILL.md` |
+| NetScaler, Citrix ADC, MPX, VPX, CPX, SDX, AppExpert, GSLB, NITRO | `netscaler/SKILL.md` |
+| Envoy, Envoy Proxy, xDS, Envoy Gateway, WASM, service mesh proxy | `envoy/SKILL.md` |
+| AWS ALB, NLB, GWLB, ELB, target group, AWS load balancer | `aws-lb/SKILL.md` |
+| Azure Application Gateway, App Gateway, Azure WAF, WAF v2, V1 EOL | `azure-appgw/SKILL.md` |
 
 ## Reference Files
 

@@ -130,6 +130,9 @@ VXLAN adds 50 bytes of overhead. All fabric links (leaf-to-spine, spine-to-spine
 | ACI 6.1, ESG, endpoint security groups | `cisco-aci/6.1/SKILL.md` |
 | VMware NSX, DFW, T0/T1, Geneve, NSX Manager | `vmware-nsx/SKILL.md` |
 | NSX 4.2, vDefend, TEP HA, VCF integration | `vmware-nsx/4.2/SKILL.md` |
+| SONiC, SAI, SwSS, syncd, ConfigDB, whitebox switch, DASH | `sonic/SKILL.md` |
+| Containerlab, clab, network lab, container topology, vrnetlab | `containerlab/SKILL.md` |
+| DENT, DentOS, switchdev, enterprise edge NOS, Just Walk Out | `dent/SKILL.md` |
 | Open EVPN on NX-OS, Nexus standalone | `../routing-switching/cisco-nxos/SKILL.md` |
 | Open EVPN on Arista EOS, CloudVision | `../routing-switching/arista-eos/SKILL.md` |
 
