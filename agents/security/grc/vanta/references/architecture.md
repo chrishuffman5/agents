@@ -1,0 +1,437 @@
+# Vanta Platform Architecture Reference
+
+Deep architecture reference for Vanta compliance automation. Load this for "how does it work" questions, integration design, or advanced configuration.
+
+---
+
+## Platform Architecture
+
+```
+Vanta SaaS Platform (cloud-hosted)
+│
+├── Integration Layer
+│   ├── OAuth connectors (cloud providers, SaaS tools)
+│   ├── API key connectors (read-only API access)
+│   ├── Webhook receivers (push-based integrations)
+│   └── Vanta Agent (lightweight for on-prem/custom)
+│
+├── Compliance Engine
+│   ├── Test definitions (what to check, how to evaluate)
+│   ├── Control library (per framework, per test)
+│   ├── Framework mapping (one control → multiple frameworks)
+│   └── Evidence store (artifacts, expiry, reviewer approval)
+│
+├── Risk Engine
+│   ├── Risk register (create, score, assign, track)
+│   ├── Risk scoring model (configurable 5×5 matrix)
+│   └── Risk treatment tracking
+│
+├── Vendor Risk Module
+│   ├── Questionnaire builder and delivery
+│   ├── Vendor portal (external self-service)
+│   ├── SOC 2 report ingestion and analysis
+│   └── SecurityScorecard integration
+│
+├── Policy Engine
+│   ├── Policy library and versioning
+│   ├── AI Policy Agent (generative policy drafting)
+│   ├── Attestation campaigns
+│   └── Evidence linking (policy doc → control test)
+│
+├── People Management
+│   ├── Employee sync (from HR integrations)
+│   ├── Background check tracking
+│   ├── Security training tracking
+│   └── Access review management
+│
+└── Reporting Layer
+    ├── Trust Center (external-facing)
+    ├── Auditor portal (read-only audit access)
+    ├── Dashboard and readiness scores
+    └── Export (PDF, CSV)
+```
+
+---
+
+## Integration Architecture
+
+### How Vanta Collects Data
+
+**Cloud Provider Pattern (AWS Example):**
+
+```
+1. Setup: Customer deploys Vanta CloudFormation stack
+   → Creates IAM role: VantaRole
+   → Trust policy: allows Vanta's AWS account to assume VantaRole
+   → Permissions: ReadOnlyAccess + Vanta-specific SecurityAudit permissions
+   → External ID: Unique value prevents confused deputy attack
+
+2. Collection cycle (every 4-24 hours):
+   Vanta service → assumes VantaRole (STS AssumeRole)
+   → Calls Read APIs: ListUsers, GetBucketEncryption, DescribeSecurityGroups, etc.
+   → Receives: current state of AWS resources
+   → Stores: resource snapshot in Vanta database
+
+3. Test evaluation:
+   Vanta evaluates: "Is MFA enabled for all IAM users?"
+   → Query: resource snapshots for IAM users
+   → Check: each user has MFA device associated
+   → Result: PASS (all users have MFA) or FAIL (list of non-compliant users)
+   → Updates: test status in control library
+   → Generates: evidence artifact (timestamp + result + resource list)
+```
+
+**SaaS Tool Pattern (Okta Example):**
+
+```
+1. Setup: Customer creates read-only API token in Okta
+   → Token permissions: users.read, apps.read, groups.read, logs.read
+   → Customer enters token + Okta domain in Vanta
+
+2. Collection cycle:
+   Vanta → Okta REST API: GET /api/v1/users
+   → Receives: paginated user list with MFA enrollment status
+   → Stores: user snapshot
+
+3. Test evaluation:
+   "All users have MFA enrolled"
+   → Query: Okta user snapshots
+   → Check: each active user has MFA factor enrolled
+   → PASS: all users MFA-enrolled
+   → FAIL: list of users missing MFA
+```
+
+### Data Residency and Security
+
+```
+Data handling:
+  → Vanta stores: resource metadata and test results (not sensitive data contents)
+  → Vanta does NOT store: file contents, password hashes, private keys
+  → Resource data: AWS resource ARNs, configuration attributes, user email addresses
+  → Evidence artifacts: screenshots + metadata (stored in Vanta's S3, encrypted at rest)
+
+Vanta's security posture:
+  → SOC 2 Type II certified (audit available in Vanta Trust Center)
+  → ISO 27001 certified
+  → Data encrypted at rest (AES-256) and in transit (TLS 1.2+)
+  → Penetration tested annually by third party
+
+Permission minimization:
+  → Vanta requests read-only permissions only
+  → No write access to customer systems
+  → AWS IAM role: ReadOnlyAccess policy
+  → OAuth scopes: read-only (never modify or delete)
+```
+
+---
+
+## Compliance Engine
+
+### Test Definition Structure
+
+Each automated test in Vanta is defined by:
+
+```yaml
+test_id: "aws-iam-mfa-all-users"
+name: "All IAM users have MFA enabled"
+integration: AWS
+resource_type: IAM User
+check:
+  attribute: mfa_enabled
+  condition: equals
+  expected_value: true
+  scope: all  # all matching resources must pass
+aggregation: per_resource  # each user evaluated separately
+
+fail_message: "The following IAM users do not have MFA enabled: {resources}"
+remediation: "Navigate to IAM → Users → [username] → Security credentials → Assign MFA device"
+
+framework_mapping:
+  - framework: SOC 2
+    control: CC6.1
+  - framework: ISO 27001
+    control: "A.8.5"
+  - framework: HIPAA
+    control: "§164.312(d)"
+  - framework: PCI DSS
+    control: "Req 8.4"
+```
+
+### Evidence Lifecycle
+
+```
+Evidence types:
+  1. Automated evidence:
+     → Generated by Vanta's integration checks
+     → Automatically refreshed on each collection cycle
+     → Never expires (always current)
+     → Format: Vanta-generated report with timestamp + result
+
+  2. Manual evidence:
+     → Uploaded by control owner or admin
+     → Requires reviewer approval
+     → Has an expiry date (default 1 year; configurable per test)
+     → Format: PDF, image, CSV, or any file type
+
+Evidence retention:
+  → All evidence stored indefinitely in Vanta (or per org retention settings)
+  → Auditors can view historical evidence periods
+  → Critical: evidence from the audit period must be preserved
+
+Evidence quality checks:
+  → Vanta validates: file uploaded, not just linked
+  → Manual reviews required for key evidence types
+  → AI-assisted review: Vanta can flag evidence that doesn't match expected format
+```
+
+---
+
+## Multi-Framework Architecture
+
+### Control Library Structure
+
+```
+Control:
+  ID: CTRL-ACCESS-001
+  Name: Multi-Factor Authentication on All User Accounts
+  Description: All user accounts accessing production systems require MFA
+  Owner: IT Security Team
+  
+  Tests linked:
+    → aws-iam-mfa-all-users (automated)
+    → okta-mfa-all-users (automated)
+    → gsuite-mfa-all-users (automated)
+    → mfa-policy-documented (manual — policy document)
+  
+  Framework mappings:
+    SOC 2: CC6.1
+    ISO 27001:2022: A.8.5
+    HIPAA: §164.312(d)
+    PCI DSS 4.0: Req 8.4.2
+    NIST CSF: PR.AC-7
+    GDPR: Art 32 (technical measures)
+```
+
+### Gap Analysis Engine
+
+When a new framework is selected:
+
+```
+1. Load framework control library (e.g., ISO 27001:2022)
+2. Map existing controls to new framework requirements
+3. Identify unmapped requirements → create new control needs
+4. Generate gap report:
+   → Covered: 67% of controls already satisfied by existing tests
+   → Gaps: 33% require new controls or evidence
+   → Priority gaps: controls with no coverage at all
+5. Create remediation plan from gaps
+```
+
+---
+
+## People Management
+
+### Employee Lifecycle Integration
+
+```
+HR System (BambooHR/Workday/Rippling) ──► Vanta
+  → Employee added in HR → Vanta creates employee record
+  → Employee terminated in HR → Vanta flags for access revocation check
+  → Employee role changes → Vanta triggers access review
+
+Vanta tracks per employee:
+  → Background check: completed/pending/not completed
+  → Security training: completed/overdue (tracks annual completion)
+  → Policy attestation: completed/pending for each policy
+  → Access review: reviewed/flagged
+  → Hardware: assigned device, encryption status
+```
+
+### Background Check Integration
+
+```
+Providers: Checkr, Sterling, HireRight, Certn
+
+Workflow:
+  1. HR system adds new employee → Vanta creates onboarding checklist
+  2. Vanta: "Background check required" → sends request to provider
+  3. Provider completes check → webhooks result back to Vanta
+  4. Vanta marks: background_check = Completed
+  5. Evidence: provider completion report linked to employee record
+
+For SOC 2/ISO 27001:
+  → Control: "Background checks completed for all employees with access to sensitive data"
+  → Vanta automated test: checks all active employees have completed background check
+  → New hire exceptions: 90-day grace period (hired but check not yet complete)
+```
+
+### Security Training Tracking
+
+```
+Providers: KnowBe4, Proofpoint Security Awareness, Wizer, custom LMS
+
+Integration:
+  → Vanta connects to training platform via API
+  → Pulls: employee training completion records
+  → Checks: completion within last 12 months (or per your policy)
+  → Flags: overdue employees for manager notification
+
+Evidence:
+  → Automated test: "All employees completed annual security training"
+  → Evidence: training platform completion report (API-generated)
+  → Audit artifact: shows employee names, completion dates, training module names
+```
+
+---
+
+## Risk Register
+
+### Risk Register Data Model
+
+```
+Risk:
+  ID: RISK-2025-042
+  Title: Unauthorized access to production database
+  Category: [Access Control, Data Security, Infrastructure]
+  Framework tags: [SOC 2 CC6, ISO 27001 A.8, PCI DSS Req 7]
+  
+  Assessment:
+    Likelihood: 3 (1-5 scale)
+    Impact: 5 (1-5 scale)
+    Inherent risk: 15 (High)
+    Residual risk: 9 (Medium, after controls)
+  
+  Controls:
+    → Link to Vanta controls that mitigate this risk
+    → Vanta shows control effectiveness (passing tests = effective control)
+  
+  Treatment:
+    Type: Mitigate
+    Tasks: [linked to Jira/task management]
+    Due date: 2025-03-01
+    Owner: security_lead@company.com
+  
+  Review:
+    Frequency: Quarterly
+    Last reviewed: 2025-01-15
+    Next review: 2025-04-15
+```
+
+---
+
+## Auditor Portal
+
+### How Auditors Access Vanta
+
+```
+Setup:
+  Vanta → Settings → Auditors → Invite auditor
+  → Enter auditor's email address
+  → Select which framework they're auditing (SOC 2, ISO 27001, etc.)
+  → Auditor receives invitation email
+
+Auditor capabilities (read-only):
+  → View all tests and their pass/fail status
+  → View evidence artifacts for each test
+  → View exception details and justifications
+  → Submit RFIs (Requests for Information)
+  → Download evidence packages
+  → View risk register and risk treatments
+  → View policies and attestation records
+
+RFI workflow:
+  Auditor creates RFI → Your team notified → Team uploads response
+  → All communication logged in Vanta
+  → Reduces reliance on email chains for evidence exchange
+```
+
+---
+
+## Trust Center Architecture
+
+### Public vs. Private Trust Center
+
+```
+Public Trust Center:
+  → No authentication required
+  → Shows: certification badges, general security practices description
+  → Does NOT show: SOC 2 report (requires NDA gate)
+  → URL: trust.yourcompany.com (custom domain supported)
+
+Private/NDA-gated content:
+  → Visitor enters email → receives verification link
+  → OR: visitor signs embedded NDA (DocuSign/HelloSign integration)
+  → After authentication: can view SOC 2 report PDF
+  → Access logged: who viewed, when, which documents
+
+Sales enablement use case:
+  → Sales team sends Trust Center link to prospects
+  → Prospect self-serves compliance info (no security team time required)
+  → Questions answered without custom security questionnaires
+  → Reduces average sales cycle length for compliance-sensitive customers
+```
+
+### Questionnaire Automation
+
+Vanta can auto-complete incoming security questionnaires:
+
+```
+Workflow:
+  1. Prospect sends security questionnaire (Word, Excel, PDF, or via questionnaire platform)
+  2. Upload to Vanta: Questionnaire → Upload questionnaire
+  3. Vanta AI parses questions and matches to Vanta control answers
+  4. Pre-populates answers based on your compliance data
+  5. Human review: verify AI-generated answers, fill gaps
+  6. Export: completed questionnaire in original format
+  
+Supported questionnaire formats:
+  → Excel/Word (any format)
+  → SIG (Standardized Information Gathering) — native support
+  → CAIQ (CSA CAIQ) — native support
+  → SecurityScorecard and BitSight questionnaires
+  → Custom formats (AI handles unknown formats)
+```
+
+---
+
+## API and Webhooks
+
+### Vanta API
+
+Vanta exposes a REST API for programmatic access:
+
+```
+Authentication: Bearer token (OAuth 2.0 client credentials)
+
+Key endpoints:
+  GET /v1/tests — List all tests with status
+  GET /v1/controls — List all controls with framework mappings
+  GET /v1/vendors — List all vendors with review status
+  GET /v1/employees — List all employees with compliance status
+  GET /v1/risks — List all risks in risk register
+  POST /v1/evidence — Upload evidence artifacts programmatically
+
+Use cases:
+  → Custom dashboards pulling Vanta data into internal tools
+  → Automated evidence upload from internal systems
+  → SIEM integration: pull compliance status into Splunk/Sentinel
+  → Custom reporting beyond Vanta's built-in reports
+```
+
+### Webhooks (Outbound)
+
+```
+Events Vanta can send:
+  test.failed — A previously passing test has started failing
+  test.passed — A previously failing test is now passing
+  vendor.review_due — Vendor annual review is coming due
+  employee.training_overdue — Employee hasn't completed training
+  evidence.expiring — Manual evidence expiring within 30 days
+  exception.expiring — Test exception expiring
+
+Webhook destinations:
+  → Slack (via incoming webhook)
+  → Jira (create issues for failing tests)
+  → PagerDuty (critical compliance failures)
+  → Custom HTTP endpoint
+```
