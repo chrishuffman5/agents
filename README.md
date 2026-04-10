@@ -2,7 +2,7 @@
 
 A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
 
-**1,520+ files | 165+ technologies | 15 domains | 427,000+ lines of expert knowledge**
+**1,578+ files | 165+ technologies | 15 domains | 443,000+ lines of expert knowledge**
 
 ---
 
@@ -253,20 +253,20 @@ Expert knowledge for data pipeline orchestration, transformation, integration, a
 | | SSIS | [`etl/orchestration/ssis`](agents/etl/orchestration/ssis/SKILL.md) | 2019, 2022, 2025 |
 | **Transformation** | | | |
 | | Apache Spark | [`etl/transformation/spark`](agents/etl/transformation/spark/SKILL.md) | 3.5, 4.0, 4.2 |
-| | dbt Core | [`etl/transformation/dbt-core`](agents/etl/transformation/dbt-core/SKILL.md) | 1.11 (pending) |
-| | dbt Cloud | [`etl/transformation/dbt-cloud`](agents/etl/transformation/dbt-cloud/SKILL.md) | managed (pending) |
+| | dbt Core | [`etl/transformation/dbt-core`](agents/etl/transformation/dbt-core/SKILL.md) | 1.11 |
+| | dbt Cloud | [`etl/transformation/dbt-cloud`](agents/etl/transformation/dbt-cloud/SKILL.md) | managed |
 | **Integration** | | | |
 | | Azure Data Factory | [`etl/integration/adf`](agents/etl/integration/adf/SKILL.md) | managed |
-| | Apache NiFi | [`etl/integration/nifi`](agents/etl/integration/nifi/SKILL.md) | 2.8 (pending) |
-| | Informatica IDMC | [`etl/integration/informatica`](agents/etl/integration/informatica/SKILL.md) | managed (pending) |
-| | Talend | [`etl/integration/talend`](agents/etl/integration/talend/SKILL.md) | 8.0 (pending) |
-| | Fivetran | [`etl/integration/fivetran`](agents/etl/integration/fivetran/SKILL.md) | managed (pending) |
-| | AWS Glue | [`etl/integration/aws-glue`](agents/etl/integration/aws-glue/SKILL.md) | managed (pending) |
-| | Synapse Pipelines | [`etl/integration/synapse-pipelines`](agents/etl/integration/synapse-pipelines/SKILL.md) | managed (pending) |
+| | Apache NiFi | [`etl/integration/nifi`](agents/etl/integration/nifi/SKILL.md) | 2.8 |
+| | Informatica IDMC | [`etl/integration/informatica`](agents/etl/integration/informatica/SKILL.md) | managed |
+| | Talend | [`etl/integration/talend`](agents/etl/integration/talend/SKILL.md) | 8.0 |
+| | Fivetran | [`etl/integration/fivetran`](agents/etl/integration/fivetran/SKILL.md) | managed |
+| | AWS Glue | [`etl/integration/aws-glue`](agents/etl/integration/aws-glue/SKILL.md) | managed |
+| | Synapse Pipelines | [`etl/integration/synapse-pipelines`](agents/etl/integration/synapse-pipelines/SKILL.md) | managed |
 | **Streaming** | | | |
 | | Apache Kafka | [`etl/streaming/kafka`](agents/etl/streaming/kafka/SKILL.md) | 3.9, 4.0, 4.1, 4.2 |
 
-**Includes:** ETL/ELT patterns, CDC, SCD types, data quality, paradigm references (orchestration, transformation, integration, streaming). Research complete for all pending technologies.
+**Includes:** ETL/ELT patterns, CDC, SCD types, data quality, paradigm references (orchestration, transformation, integration, streaming).
 
 ---
 
@@ -280,15 +280,15 @@ Expert knowledge for business intelligence, reporting, and analytics platforms.
 | Tableau | [`analytics/tableau`](agents/analytics/tableau/SKILL.md) | 2025.x, 2026.1 |
 | SSAS | [`analytics/ssas`](agents/analytics/ssas/SKILL.md) | 2019, 2022, 2025 |
 | SSRS | [`analytics/ssrs`](agents/analytics/ssrs/SKILL.md) | 2019, 2022, 2025 |
-| Looker | [`analytics/looker`](agents/analytics/looker/SKILL.md) | managed (pending) |
-| Apache Superset | [`analytics/superset`](agents/analytics/superset/SKILL.md) | 6.x (pending) |
-| Metabase | [`analytics/metabase`](agents/analytics/metabase/SKILL.md) | v59, v60 (pending) |
-| Grafana | [`analytics/grafana`](agents/analytics/grafana/SKILL.md) | 12.x (pending) |
-| Qlik Sense | [`analytics/qlik-sense`](agents/analytics/qlik-sense/SKILL.md) | managed (pending) |
-| ThoughtSpot | [`analytics/thoughtspot`](agents/analytics/thoughtspot/SKILL.md) | managed (pending) |
-| DuckDB | [`analytics/duckdb-analytics`](agents/analytics/duckdb-analytics/SKILL.md) | cross-ref (pending) |
+| Looker | [`analytics/looker`](agents/analytics/looker/SKILL.md) | managed |
+| Apache Superset | [`analytics/superset`](agents/analytics/superset/SKILL.md) | 6.x |
+| Metabase | [`analytics/metabase`](agents/analytics/metabase/SKILL.md) | v59, v60 |
+| Grafana | [`analytics/grafana`](agents/analytics/grafana/SKILL.md) | 12.x |
+| Qlik Sense | [`analytics/qlik-sense`](agents/analytics/qlik-sense/SKILL.md) | managed |
+| ThoughtSpot | [`analytics/thoughtspot`](agents/analytics/thoughtspot/SKILL.md) | managed |
+| DuckDB | [`analytics/duckdb-analytics`](agents/analytics/duckdb-analytics/SKILL.md) | cross-ref |
 
-**Includes:** Dimensional modeling, OLAP concepts, visualization theory, semantic layers, paradigm references (enterprise BI, SQL analytics, reporting, operational). Research complete for all pending technologies.
+**Includes:** Dimensional modeling, OLAP concepts, visualization theory, semantic layers, paradigm references (enterprise BI, SQL analytics, reporting, operational).
 
 ---
 
@@ -419,12 +419,12 @@ Technologies that span multiple domains use cross-references instead of duplicat
 | Containers | 3 | 45 | 13,539 |
 | CLI / Scripting | 7 | 57 | 12,153 |
 | Monitoring | 11 | 50 | 9,882 |
-| ETL / Data Integration | 14 | 42 | 9,011 |
+| ETL / Data Integration | 14 | 75 | 17,596 |
 | Virtualization | 5 | 41 | 8,997 |
 | Storage | 12 | 60 | 6,497 |
-| Data Analytics / BI | 11 | 30 | 6,181 |
+| Data Analytics / BI | 11 | 55 | 14,271 |
 | Cloud Platforms | 3 | 30 | 5,797 |
-| **Total** | **166** | **1,520** | **427,108** |
+| **Total** | **166** | **1,578** | **443,783** |
 
 ---
 
