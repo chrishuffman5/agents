@@ -269,6 +269,30 @@ Native DAG file sourcing replacing git-sync sidecars:
 - **Production** -- Secrets backends (HashiCorp Vault, AWS Secrets Manager, GCP Secret Manager)
 - Never hardcode credentials in DAG files
 - Test connections via UI or CLI before deploying DAGs
+- Use connection extras (JSON) for provider-specific parameters
+
+## Testing
+
+### DAG Validation (CI/CD)
+
+Run in CI to catch errors before deployment:
+```python
+from airflow.models import DagBag
+
+def test_no_import_errors():
+    dagbag = DagBag(dag_folder="dags/", include_examples=False)
+    assert len(dagbag.import_errors) == 0, f"Errors: {dagbag.import_errors}"
+```
+
+### Unit Testing Task Logic
+
+Extract business logic into pure functions and test independently of Airflow. Use `dag.test()` for end-to-end DAG testing in development.
+
+### Migration Readiness
+
+```bash
+ruff check dags/ --select AIR301,AIR302  # Find Airflow 3 breaking changes
+```
 
 ## Version Routing
 
@@ -276,6 +300,24 @@ Native DAG file sourcing replacing git-sync sidecars:
 |---|---|---|
 | Airflow 2.x | `2.x/SKILL.md` | EOL April 2026 |
 | Airflow 3.x | `3.x/SKILL.md` | Current (3.2.0) |
+
+## Provider Packages
+
+Airflow's integration ecosystem is modular via provider packages:
+- 80+ providers for AWS, GCP, Azure, Snowflake, dbt, Slack, databases, and more
+- Providers are versioned independently from Airflow core
+- **Airflow 3:** Core operators (BashOperator, PythonOperator, FileSensor) moved to `apache-airflow-providers-standard`
+- Install only the providers you need to minimize dependency surface
+
+## Monitoring
+
+Key metrics to track (via StatsD or OpenTelemetry):
+- `scheduler.scheduler_loop_duration` -- Scheduler health (increasing = overload)
+- `scheduler.tasks.starving` -- Tasks waiting for pool/executor slots
+- `executor.open_slots` / `executor.queued_tasks` -- Executor capacity
+- `dag.duration.<dag_id>` -- Pipeline SLA tracking
+
+Typical stack: Airflow -> StatsD -> Prometheus -> Grafana -> Alertmanager.
 
 ## Anti-Patterns
 

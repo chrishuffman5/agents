@@ -224,6 +224,38 @@ Pixel-perfect, print-optimized reports using RDL (Report Definition Language) fo
 - Can connect to Power BI semantic models as data source
 - Require PPU or Fabric F64+ capacity for sharing
 
+## Embedded Analytics
+
+Two embedding scenarios with different authentication and licensing models:
+
+| Scenario | Auth Model | Licensing | Best For |
+|---|---|---|---|
+| **App-Owns-Data** (Embed for Customers) | Service principal (certificate-based) | F-SKU capacity; users need no PBI license | ISVs, customer-facing apps |
+| **User-Owns-Data** (Embed for Your Org) | User's Entra ID token | Pro license per user (or F64+ for viewers) | Internal portals, intranets |
+
+**App-Owns-Data best practices:**
+- Always use service principal authentication (no MFA, no password expiry, certificate-based)
+- Never use master user accounts in production
+- JavaScript SDK (`powerbi-client`) for iframe-based embedding
+- Enforce RLS through effective identity tokens in the embed call
+- F64 is the minimum SKU for unlimited content viewers
+
+## Security Model
+
+### Layered Security
+
+1. **Workspace roles** -- Admin, Member, Contributor, Viewer; controls who can access the workspace
+2. **Row-Level Security (RLS)** -- DAX filter expressions restricting which rows users see; dynamic RLS uses USERPRINCIPALNAME()
+3. **Object-Level Security (OLS)** -- Hides entire tables or columns; only enforced in Premium/PPU/Fabric capacity; define via Tabular Editor or XMLA
+4. **Sensitivity labels** -- Microsoft Purview integration for data classification; carry through on export
+
+**RLS implementation:**
+- Define roles in Desktop or Service with DAX filter expressions
+- Static: `[Region] = "West"` -- hardcoded filter
+- Dynamic: `[SalesRep_Email] = USERPRINCIPALNAME()` -- filters by logged-in user
+- Always test with "View as" role before production deployment
+- Combine with OLS when certain columns must be hidden entirely from specific roles
+
 ## AI Features
 
 - **Copilot** -- Chat-based analysis, report creation, DAX formula assistance; replacing Q&A as primary NL interface (Q&A retiring late 2026); requires PPU or Fabric capacity
@@ -231,6 +263,8 @@ Pixel-perfect, print-optimized reports using RDL (Report Definition Language) fo
 - **Decomposition Tree** -- Interactive root-cause analysis
 - **Smart Narratives** -- Auto-generated text summaries
 - **Anomaly Detection / Forecasting** -- Outlier detection and statistical predictions on time series
+
+**AI governance:** Admins can control which AI features Copilot leverages via tenant settings. Mark AI visuals as "Approved for Copilot" for compliance-aware adoption.
 
 ## Licensing
 
@@ -244,6 +278,31 @@ Pixel-perfect, print-optimized reports using RDL (Report Definition Language) fo
 **Critical:** F2-F32 SKUs include Fabric workloads but do NOT include Power BI Premium features (paginated reports, XMLA, deployment pipelines, unlimited viewers). F64 is the minimum for full Power BI Premium capability.
 
 **P-SKUs are fully retired** (late 2025). All customers transitioned to Fabric F-SKUs.
+
+## Power BI Service Capabilities
+
+### Workspaces and Apps
+
+- Workspaces are organizational containers for reports, semantic models, dataflows, datamarts
+- Apps are curated, read-only packages published from workspaces to broader audiences; support audience targeting
+- Use Azure AD/Entra ID groups for workspace role assignment, not individual users
+- Workspace roles: Admin > Member > Contributor > Viewer (principle of least privilege)
+
+### Deployment and ALM
+
+- **Deployment pipelines**: Built-in ALM with 2-10 stages (Dev, Test, Prod); compare and deploy selectively; automate via REST API; requires Premium or PPU
+- **XMLA endpoint**: Read/write access for third-party tools (Tabular Editor, DAX Studio, ALM Toolkit); enables scripted CI/CD deployments; available in PPU and F64+
+- **PBIR format**: JSON-based report format for git integration; becoming default April 2026; enables meaningful diffs and branch-based development
+- **TMDL**: Tabular Model Definition Language for semantic model definitions in source control
+
+### Development Tools
+
+| Tool | Purpose | Cost |
+|---|---|---|
+| **Tabular Editor 2** | Model editing, Best Practice Analyzer | Free |
+| **Tabular Editor 3** | Full IDE: IntelliSense, VertiPaq Analyzer, diagrams | Commercial |
+| **DAX Studio** | DAX queries, Server Timings, VertiPaq analysis | Free |
+| **ALM Toolkit** | Schema comparison and deployment | Free |
 
 ## Anti-Patterns
 
