@@ -133,6 +133,38 @@ none -> scheduled -> queued -> running -> success
 
 Key states: `scheduled` (ready to run), `queued` (sent to executor), `running` (on a worker), `deferred` (waiting via Triggerer), `up_for_retry` (failed with retries remaining).
 
+## Operators, Sensors, and Hooks
+
+### Operators
+
+Operators define what a task does. Categories:
+- **Action operators** -- Perform work (BashOperator, PythonOperator, EmailOperator)
+- **Transfer operators** -- Move data between systems (S3ToRedshiftOperator, GCSToBigQueryOperator)
+- **Sensor operators** -- Wait for conditions (FileSensor, ExternalTaskSensor, HttpSensor)
+
+In Airflow 3, common operators moved to `apache-airflow-providers-standard`. The broader ecosystem includes 80+ provider packages for AWS, GCP, Azure, Snowflake, dbt, Slack, and more.
+
+### Sensors and Deferrable Operators
+
+Sensors wait for external conditions. Three execution modes:
+- **poke** -- Occupies a worker slot, periodically checking (resource-intensive)
+- **reschedule** -- Releases the worker slot between checks (better for long waits)
+- **Deferrable** -- Hands off to the Triggerer process for async waiting (most efficient, 2.2+)
+
+**Always prefer deferrable sensors** for production workloads. They use asyncio to efficiently monitor many conditions concurrently without consuming worker slots.
+
+### Hooks
+
+Hooks abstract connection management for external systems. Operators use hooks internally. Examples: PostgresHook, S3Hook, HttpHook. Build custom hooks for reusable integrations, then build operators on top.
+
+### Pools
+
+Pools limit concurrent task instances across all DAGs:
+- Create pools per external system (database connection pools, API rate limits)
+- Set pool sizes based on the target system's capacity
+- Tasks consume configurable `pool_slots` (default: 1)
+- Use `priority_weight` to control which tasks get pool slots first
+
 ## TaskFlow API
 
 The recommended way to write DAGs in Airflow 2.0+ (and especially 3.x):

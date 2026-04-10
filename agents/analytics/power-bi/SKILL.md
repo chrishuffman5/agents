@@ -136,6 +136,35 @@ CALCULATE([Total Sales], 'Product'[Category] = "Electronics")
 - **Time intelligence** -- DATESYTD, SAMEPERIODLASTYEAR, DATEADD; use only in CALCULATE filter arguments; requires a proper date table with no gaps
 - **Iterators** -- SUMX, COUNTX, AVERAGEX, FILTER run in the single-threaded Formula Engine; prefer native aggregations (SUM, COUNT) on large tables
 - **Visual calculations** -- DAX scoped to the visual level; RUNNINGSUM, MOVINGAVERAGE, RANK; avoids complex model-level measures for visual-specific needs
+- **Calculation groups** -- Define reusable DAX patterns (e.g., YTD, PY, PY YTD) as calculation items; dramatically reduces measure count in enterprise models
+
+### Common Measure Patterns
+
+```dax
+-- Year-over-year with safe division
+YoY % Change =
+VAR CurrentSales = [Total Sales]
+VAR PriorYear = CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))
+RETURN DIVIDE(CurrentSales - PriorYear, PriorYear)
+
+-- Running total using visual calculations (preferred for visual-level running totals)
+-- In visual calculation pane: Running Total = RUNNINGSUM([Total Sales])
+
+-- Dynamic ranking
+Product Rank =
+VAR CurrentValue = [Total Sales]
+RETURN
+COUNTROWS(
+    FILTER(
+        ALLSELECTED('Product'[ProductName]),
+        [Total Sales] > CurrentValue
+    )
+) + 1
+```
+
+### DAX Query View
+
+Available in both Desktop and Service for ad-hoc DAX exploration. Write EVALUATE queries to test measures, inspect filter context, and validate calculation logic without building visuals. Export results to tables for quick data validation.
 
 ## Power Query (M Language)
 
@@ -146,6 +175,14 @@ Power Query is the data transformation engine, using the M functional programmin
 - Delay non-foldable steps (custom columns, complex text transforms)
 - Check folding: right-click a step > "View Native Query" -- greyed out means folding broke
 - Use native connectors (SQL Server connector over ODBC) for better folding support
+
+**Common folding breakers:**
+- Adding custom columns with complex M logic
+- Using Table.Buffer
+- Merging queries from different data sources
+- List.Generate or custom functions
+
+**Staging query pattern:** Create a staging query that folds completely to the source (filters, column selection), then build dependent queries that apply non-foldable transforms. Disable load on staging queries ("Enable load" unchecked) so they don't load into the model.
 
 **Dataflows:**
 - **Gen1** -- Legacy; moving to end of active innovation
@@ -170,10 +207,13 @@ Power Query is the data transformation engine, using the M functional programmin
 Power BI is the analytics/visualization layer within Fabric. Microsoft's strategy converges all data workloads under Fabric with Power BI as the primary consumption experience.
 
 **Key Fabric workloads integrated with Power BI:**
-- **OneLake** -- Unified data lake; Delta/Parquet format; foundation for Direct Lake mode
+- **OneLake** -- Unified data lake; Delta/Parquet format; foundation for Direct Lake mode; semantic models can write imported data to OneLake Delta tables automatically
 - **Data Factory** -- Data integration and orchestration (replaces standalone dataflows for complex ETL)
-- **Real-Time Intelligence** -- Replacing deprecated streaming datasets (push/streaming/PubNub retiring Oct 2027)
-- **Data Activator** -- Event-driven triggers from data changes
+- **Synapse Data Engineering** -- Spark-based data processing; writes Delta tables to OneLake consumed via Direct Lake
+- **Real-Time Intelligence** -- Replacing deprecated streaming datasets (push/streaming/PubNub retiring Oct 2027); use Eventstreams and KQL databases for real-time analytics
+- **Data Activator** -- Event-driven triggers from data changes; automate actions based on conditions in Power BI reports
+
+**Standalone Power BI vs Fabric:** Standalone Pro/PPU licensing remains available, but OneLake, Direct Lake, Data Factory, Synapse, and Real-Time Intelligence are Fabric-only capabilities. Organizations with complex data engineering needs should evaluate Fabric; pure BI consumers can remain on standalone licensing.
 
 ## Paginated Reports
 

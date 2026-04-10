@@ -212,6 +212,41 @@ Organizations should plan PBIRS migration timelines. For details, see `2025/SKIL
 4. Override data source connection strings per environment
 5. Promote through Dev > Test > Production
 
+## Security Overview
+
+### Role-Based Access Control
+
+SSRS uses a two-level role system:
+
+- **System-level roles** -- Site-wide operations (System Administrator, System User)
+- **Item-level roles** -- Per-folder/report permissions (Content Manager, Publisher, Browser, Report Builder, My Reports)
+
+Assign roles to Active Directory groups (not individual users). Organize reports into folders by department and apply security at the folder level. Reports inherit parent folder permissions by default.
+
+### Row-Level Filtering
+
+SSRS has no built-in row-level security. Implement via query-based filtering using the `User!UserID` built-in field:
+
+```sql
+WHERE ManagerID = @UserID
+```
+
+### SSL/TLS
+
+Always configure HTTPS for both the Report Server web service and web portal. SSL must be configured in two places via Reporting Services Configuration Manager. TLS 1.3 is supported in SSRS 2022.
+
+## URL Access
+
+Reports can be rendered and controlled via URL parameters:
+
+```
+http://<server>/ReportServer?/<folder>/<report>&rs:Format=PDF&Year=2024
+```
+
+- `rs:` prefix -- Report Server parameters (`rs:Format`, `rs:Command`)
+- `rc:` prefix -- HTML Viewer parameters (`rc:Toolbar`, `rc:Parameters`)
+- No prefix -- Report parameters (`&Year=2024&Region=West`)
+
 ## Anti-Patterns
 
 | Anti-Pattern | Why It Fails | Better Approach |
