@@ -2,7 +2,7 @@
 
 A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
 
-**1,246+ files | 120+ technologies | 13 domains | 364,000+ lines of expert knowledge**
+**1,520+ files | 165+ technologies | 15 domains | 427,000+ lines of expert knowledge**
 
 ---
 
@@ -319,6 +319,42 @@ Expert knowledge for enterprise, software-defined, and cloud storage platforms.
 
 ---
 
+### 14. Monitoring / Observability — 11 Technologies
+
+Expert knowledge for metrics, logs, traces, alerting, and full-stack observability platforms.
+
+| Technology | Skill Path | Focus |
+|---|---|---|
+| Prometheus | `monitoring/prometheus` | Pull-based metrics, PromQL, 3.x LTS |
+| Grafana | `monitoring/grafana` | Dashboards, Loki, Tempo, alerting, 12.x |
+| ELK (Elasticsearch + Kibana) | `monitoring/elk` | Log management, APM, 8.x/9.x |
+| OpenTelemetry | `monitoring/opentelemetry` | Vendor-neutral instrumentation, Collector 0.149+ |
+| Datadog | `monitoring/datadog` | Managed full-stack observability |
+| New Relic | `monitoring/newrelic` | Managed APM and observability |
+| Splunk | `monitoring/splunk` | Enterprise log analytics, 9.x |
+| Zabbix | `monitoring/zabbix` | Infrastructure monitoring, 7.4 |
+| Nagios | `monitoring/nagios` | Legacy infrastructure monitoring, XI/Core |
+| PagerDuty | `monitoring/pagerduty` | Incident management, on-call automation |
+| Dynatrace | `monitoring/dynatrace` | AI-powered full-stack observability |
+
+**Includes:** Three pillars of observability (metrics, logs, traces), monitoring strategy (USE/RED/4 Golden Signals), SLI/SLO/SLA design, alerting philosophy, cardinality management, cost control, tool selection frameworks.
+
+---
+
+### 15. Cloud Platforms — 3 Technologies
+
+Expert knowledge for comprehensive cloud architecture across all three major providers.
+
+| Technology | Skill Path | Focus |
+|---|---|---|
+| AWS | `cloud-platforms/aws` | Compute, storage, database, networking, security, serverless |
+| Azure | `cloud-platforms/azure` | Compute, identity, hybrid, data platform, networking, security |
+| GCP | `cloud-platforms/gcp` | Compute, data/analytics, AI/ML, Kubernetes, networking, security |
+
+**Includes:** Cloud selection frameworks, cross-cloud service mapping, Well-Architected design principles, migration strategy (7 Rs), FinOps cost management, vendor-neutral strategic guidance.
+
+---
+
 ## Planned Domains (from PLAN.md)
 
 The following domains are inventoried in PLAN.md but not yet built:
@@ -326,9 +362,7 @@ The following domains are inventoried in PLAN.md but not yet built:
 | # | Domain | Technologies |
 |---|---|---|
 | 10 | WebSockets / Real-Time | SignalR, Socket.IO, gRPC, GraphQL, SSE |
-| 14 | Monitoring / Observability | Prometheus, Grafana, ELK, OpenTelemetry, Datadog |
 | 17 | Messaging / Event Streaming | Kafka, RabbitMQ, NATS, Service Bus, Pulsar |
-| 18 | Cloud Platforms | AWS, Azure, GCP (comprehensive) |
 | 19 | Data APIs / Data Access | GraphQL, OData, gRPC, SignalR |
 | 20 | Mail / Collaboration | Exchange, M365, Google Workspace |
 
@@ -375,20 +409,22 @@ Technologies that span multiple domains use cross-references instead of duplicat
 
 | Domain | Technologies | Files | Lines |
 |---|---|---|---|
-| Database | 29 | 172 | 101,594 |
+| Database | 29 | 238 | 119,694 |
 | Security | 14 | 227 | 77,043 |
+| Operating System | 8 | 261 | 49,452 |
 | Networking | 12 | 192 | 42,609 |
-| Operating System | 8 | 104 | 27,746 |
 | Backend | 10 | 54 | 26,770 |
-| Frontend | 11 | 98 | 24,315 |
+| Frontend | 11 | 116 | 25,844 |
 | DevOps | 16 | 77 | 13,639 |
 | Containers | 3 | 45 | 13,539 |
+| CLI / Scripting | 7 | 57 | 12,153 |
+| Monitoring | 11 | 50 | 9,882 |
 | ETL / Data Integration | 14 | 42 | 9,011 |
-| CLI / Scripting | 7 | 36 | 8,579 |
-| Virtualization | 5 | 29 | 7,041 |
+| Virtualization | 5 | 41 | 8,997 |
 | Storage | 12 | 60 | 6,497 |
 | Data Analytics / BI | 11 | 30 | 6,181 |
-| **Total** | **152** | **1,166** | **364,564** |
+| Cloud Platforms | 3 | 30 | 5,797 |
+| **Total** | **166** | **1,520** | **427,108** |
 
 ---
 
