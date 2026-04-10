@@ -51,7 +51,7 @@ Each partition has a configurable number of **replicas** (set by `replication.fa
 
 ### In-Sync Replicas (ISR)
 
-The **ISR** (In-Sync Replica set) is the subset of replicas that are "caught up" with the leader:
+The **ISR** (In-Sync Replica set) is the subset of replicas that are caught up with the leader:
 - A follower is in the ISR if it has replicated all messages within `replica.lag.time.max.ms` (default 30,000 ms)
 - The leader tracks which followers are in the ISR
 - `acks=all` means the leader waits for ALL ISR members to acknowledge before confirming a write
@@ -137,7 +137,7 @@ A **consumer group** is a set of consumers that cooperatively consume from one o
 ### Rebalancing Protocols
 
 **Eager Rebalance (legacy):**
-- "Stop-the-world": ALL consumers revoke ALL partitions, then re-join and get new assignments
+- Stop-the-world: ALL consumers revoke ALL partitions, then re-join and get new assignments
 - Causes a processing gap across the entire group
 - Strategies: RangeAssignor, RoundRobinAssignor
 
@@ -149,7 +149,7 @@ A **consumer group** is a set of consumers that cooperatively consume from one o
 **KIP-848 New Consumer Group Protocol (Kafka 4.0 GA):**
 - Server-side partition assignment (broker manages assignments, not a consumer leader)
 - Continuous heartbeat mechanism replaces JoinGroup/SyncGroup phases
-- Eliminates "stop-the-world" rebalances entirely
+- Eliminates stop-the-world rebalances entirely
 - Opt-in via `group.protocol=consumer` (client-side)
 - Enabled by default on the server in Kafka 4.0
 
@@ -164,7 +164,7 @@ A **consumer group** is a set of consumers that cooperatively consume from one o
 
 ### Background
 
-KRaft (Kafka Raft) was introduced in KIP-500 to remove Kafka's dependency on ZooKeeper for metadata management. Timeline:
+KRaft (Kafka Raft) was introduced in KIP-500 to remove Kafka dependency on ZooKeeper for metadata management. Timeline:
 - **Kafka 2.8** (2021): KRaft early access (development only)
 - **Kafka 3.3** (2022): KRaft marked production-ready for new clusters
 - **Kafka 3.5**: KRaft GA
@@ -199,7 +199,7 @@ Kafka Connect is a framework for streaming data between Kafka and external syste
 - **Connectors**: High-level abstractions that coordinate data streaming by managing tasks
 - **Tasks**: The implementation of how data is actually copied (each connector spawns one or more tasks)
 - **Workers**: JVM processes that execute connectors and tasks
-- **Converters**: Translate between Connect's internal data format and serialization formats (Avro, JSON, Protobuf)
+- **Converters**: Translate between Connect internal data format and serialization formats (Avro, JSON, Protobuf)
 - **Transforms (SMTs)**: Simple, single-message transformations applied in a pipeline chain
 
 ### Source vs Sink Connectors
@@ -207,7 +207,7 @@ Kafka Connect is a framework for streaming data between Kafka and external syste
 - **Sink connectors**: Deliver data FROM Kafka TO external systems (e.g., Elasticsearch Sink, S3 Sink, HDFS Sink)
 
 ### Converters
-Converters serialize/deserialize data between Connect's internal representation and wire format:
+Converters serialize/deserialize data between Connect internal representation and wire format:
 - `JsonConverter`: JSON (with or without schema)
 - `AvroConverter`: Avro (requires Schema Registry)
 - `ProtobufConverter`: Protobuf (requires Schema Registry)
@@ -291,7 +291,7 @@ Schema Registry (Confluent) provides a centralized repository for schemas, enabl
 
 ### Supported Formats
 - **Apache Avro**: Binary, compact, schema embedded in registry (most mature support)
-- **Protocol Buffers (Protobuf)**: Google's serialization format; strong typing
+- **Protocol Buffers (Protobuf)**: Google serialization format; strong typing
 - **JSON Schema**: Human-readable; less compact but more accessible
 
 ### How It Works
@@ -366,14 +366,6 @@ Exactly-once in Kafka requires three cooperating mechanisms:
 3. **Read Committed Consumers**: `isolation.level=read_committed` ensures consumers only see committed transactional records
 
 ### How It Works End-to-End
-
-```
-Consumer (read_committed) --> Process --> Transactional Producer
-     |                                         |
-     +--- sendOffsetsToTransaction() ----------+
-     |                                         |
-     +--- commitTransaction() ----------------+
-```
 
 1. Consumer reads records with `isolation.level=read_committed`
 2. Application processes records

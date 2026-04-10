@@ -205,6 +205,47 @@ The Secure Agent runs multiple microservices:
 
 ---
 
+## Taskflow Orchestration
+
+### Types of Taskflows
+
+1. **Standard Taskflow**: Full orchestration with parallel execution, decision logic, scheduling, and recovery from failure point
+2. **Linear Taskflow**: Simplified sequential execution; if a task fails, the entire workflow must restart
+
+### Taskflow Step Types (13 Total)
+
+| Step Type | Purpose | Analogy |
+|-----------|---------|---------|
+| Assignment | Set field values | Expression transformation |
+| Data Task | Run mapping, sync, or PowerCenter tasks | Session/Workflow |
+| Notification Task | Send email with execution metrics | Post-session email |
+| Command Task | Execute shell scripts/batch commands on agent | Command task |
+| File Watch Task | Monitor file events in specified locations | Event wait |
+| Ingestion Task | Trigger file ingestion operations | Mass ingestion |
+| Subtaskflow | Embed and reuse existing taskflows | Subworkflow |
+| Decision | Route execution based on conditions | Router transformation |
+| Parallel Paths | Execute multiple items simultaneously | Concurrent workflows |
+| Jump | Redirect execution flow (looping) | Loop |
+| Wait | Pause execution for specified duration | Timer |
+| Throw | Catch faults and terminate execution | Abort |
+| End | Define HTTP status codes for completion | Workflow end |
+
+### Execution Methods
+
+- Designer interface (manual run)
+- REST/SOAP APIs
+- RunAJob command-line utility
+- File listener events
+- Scheduled execution
+
+### Publishing Options
+
+- **REST/SOAP Binding**: Publish taskflows as APIs with access controls
+- **Event Binding**: Trigger on file arrival events
+- **Schedule Binding**: Automated periodic execution
+
+---
+
 ## Deployment Model
 
 ### Informatica Processing Units (IPU)

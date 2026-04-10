@@ -6,15 +6,15 @@
 
 Spotter is ThoughtSpot's primary AI-powered analytics interface, used by over 64% of customers as their primary analyst tool (as of end of fiscal 2025, with 133% year-over-year platform growth).
 
-- **Conversational analytics**: users interact with data through natural language questions
-- **Context-aware responses**: Spotter maintains conversation context across follow-up questions
-- **Visualization generation**: automatically selects appropriate chart types based on query intent
-- **Drill-down capability**: supports iterative exploration through follow-up queries
-- **Guided insights**: proactively surfaces related insights and follow-up questions
+- Conversational analytics: users interact with data through natural language questions
+- Context-aware responses: Spotter maintains conversation context across follow-up questions
+- Visualization generation: automatically selects appropriate chart types based on query intent
+- Drill-down capability: supports iterative exploration through follow-up queries
+- Guided insights: proactively surfaces related insights and follow-up questions
 
 ### Spotter Agents Suite (GA Early 2026)
 
-ThoughtSpot expanded into **agentic analytics** with four specialized agents:
+ThoughtSpot expanded into agentic analytics with four specialized agents:
 
 #### SpotterModel
 
@@ -40,12 +40,12 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Core Search Capabilities
 
-- **Search bar**: type questions in natural language to generate instant visualizations
-- **Auto-suggestions**: as users type, the system suggests matching data objects, values, and analytical keywords
-- **Token-based parsing**: queries are parsed into structured tokens mapped to the semantic model
-- **Formula support**: search queries can include calculated fields, aggregations, and filters
-- **Keyword vocabulary**: supports analytical keywords like "top", "bottom", "growth", "vs", "by", "daily", "monthly"
-- **Search assist**: guided search experience for users unfamiliar with available data
+- Search bar: type questions in natural language to generate instant visualizations
+- Auto-suggestions: as users type, the system suggests matching data objects, values, and analytical keywords
+- Token-based parsing: queries are parsed into structured tokens mapped to the semantic model
+- Formula support: search queries can include calculated fields, aggregations, and filters
+- Keyword vocabulary: supports analytical keywords like "top", "bottom", "growth", "vs", "by", "daily", "monthly"
+- Search assist: guided search experience for users unfamiliar with available data
 
 ### Sage-Enhanced Search
 
@@ -58,11 +58,11 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Automated Analysis
 
-- **One-click insights**: SpotIQ Analyze runs dozens of algorithms on any answer or visualization
-- **Anomaly detection**: identifies statistical outliers using z-scores, Seasonal Hybrid ESD, and Linear Regression
-- **Trend detection**: surfaces trends, seasonality patterns, and change points
-- **Comparative analysis**: finds interesting cross-dimensional comparisons
-- **Correlation analysis**: identifies relationships between different measures
+- One-click insights: SpotIQ Analyze runs dozens of algorithms on any answer or visualization
+- Anomaly detection: identifies statistical outliers using z-scores, Seasonal Hybrid ESD, and Linear Regression
+- Trend detection: surfaces trends, seasonality patterns, and change points
+- Comparative analysis: finds interesting cross-dimensional comparisons
+- Correlation analysis: identifies relationships between different measures
 
 ### Personalization and Learning
 
@@ -86,16 +86,16 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 | Component | Description |
 |-----------|-------------|
-| **LiveboardEmbed** | Embed a single visualization or a full Liveboard |
-| **SpotterEmbed** | Embed the Spotter AI search and analytics experience |
-| **SearchEmbed** | Embed the full ThoughtSpot Search page |
-| **SearchBarEmbed** | Embed only the ThoughtSpot Search bar |
-| **AppEmbed** | Embed the complete ThoughtSpot application |
+| LiveboardEmbed | Embed a single visualization or a full Liveboard |
+| SpotterEmbed | Embed the Spotter AI search and analytics experience |
+| SearchEmbed | Embed the full ThoughtSpot Search page |
+| SearchBarEmbed | Embed only the ThoughtSpot Search bar |
+| AppEmbed | Embed the complete ThoughtSpot application |
 
 ### Visual Embed SDK
 
 - JavaScript/TypeScript library for embedding ThoughtSpot components
-- Available via npm: `@thoughtspot/visual-embed-sdk`
+- Available via npm: @thoughtspot/visual-embed-sdk
 - Event-driven architecture with callbacks for host app integration
 - Customizable styling (CSS overrides) to match host application branding
 - Responsive design support for various viewport sizes
@@ -109,8 +109,8 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Custom Actions
 
-- **Callback actions**: trigger events to the host application with data payloads
-- **URL actions**: invoke external URLs with ThoughtSpot data parameters
+- Callback actions: trigger events to the host application with data payloads
+- URL actions: invoke external URLs with ThoughtSpot data parameters
 - Create workflow integrations with external applications
 - Available on visualizations, answers, and Liveboards
 
@@ -126,9 +126,9 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Alert Types
 
-- **Anomaly alerts**: triggered when KPI data is statistically anomalous (powered by SpotIQ)
-- **Threshold alerts**: triggered when KPIs cross defined conditions (above, below, equals)
-- **Scheduled notifications**: recurring alerts on hourly, daily, weekly, or monthly schedules
+- Anomaly alerts: triggered when KPI data is statistically anomalous (powered by SpotIQ)
+- Threshold alerts: triggered when KPIs cross defined conditions (above, below, equals)
+- Scheduled notifications: recurring alerts on hourly, daily, weekly, or monthly schedules
 
 ### Configuration
 
@@ -148,18 +148,18 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Core Capabilities
 
-- **Interactive visualizations**: charts, tables, pivot tables, KPI cards
-- **Cross-filtering**: clicking on one visualization filters others on the same Liveboard
-- **Drill-down**: explore data hierarchies by clicking into chart elements
-- **Filters**: global Liveboard-level filters and per-visualization filters
-- **Layout management**: arrange and resize visualizations in a grid layout
-- **Scheduling**: schedule Liveboard snapshots for email distribution (PDF/CSV)
+- Interactive visualizations: charts, tables, pivot tables, KPI cards
+- Cross-filtering: clicking on one visualization filters others on the same Liveboard
+- Drill-down: explore data hierarchies by clicking into chart elements
+- Filters: global Liveboard-level filters and per-visualization filters
+- Layout management: arrange and resize visualizations in a grid layout
+- Scheduling: schedule Liveboard snapshots for email distribution (PDF/CSV)
 
 ### Liveboard Types
 
-- **Standard Liveboards**: curated dashboards with multiple visualizations
-- **System Liveboards**: pre-built dashboards for cluster health and usage monitoring
-- **Performance Tracking Liveboard**: built-in dashboard for understanding cluster performance
+- Standard Liveboards: curated dashboards with multiple visualizations
+- System Liveboards: pre-built dashboards for cluster health and usage monitoring
+- Performance Tracking Liveboard: built-in dashboard for understanding cluster performance
 
 ### SpotterViz Integration
 
@@ -171,10 +171,10 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Next-Generation Data Preparation
 
-- **Native spreadsheet interface**: governed, scalable data preparation in a familiar format
-- **Data mashups**: combine data from multiple sources within ThoughtSpot
-- **Data prep agent**: AI-assisted data preparation workflows
-- **SpotCache**: caching layer for controlling cloud data warehouse costs
+- Native spreadsheet interface: governed, scalable data preparation in a familiar format
+- Data mashups: combine data from multiple sources within ThoughtSpot
+- Data prep agent: AI-assisted data preparation workflows
+- SpotCache: caching layer for controlling cloud data warehouse costs
 
 ### SpotCache
 
@@ -200,7 +200,7 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### MCP Server
 
-- **Model Context Protocol (MCP) server** connects external AI agents to ThoughtSpot's semantic layer
+- Model Context Protocol (MCP) server connects external AI agents to ThoughtSpot's semantic layer
 - Bridges disparate data sources and tools with a single version of truth
 - Allows enterprises to use preferred AI stacks while maintaining governed data access
 
@@ -214,10 +214,10 @@ ThoughtSpot expanded into **agentic analytics** with four specialized agents:
 
 ### Data Security
 
-- **Row-Level Security (RLS)**: restrict data access at the row level based on user or group context
-- **Column-Level Security (CLS)**: control visibility of specific columns per user/group
-- **Object-level sharing**: content is only accessible when explicitly shared
-- **Group-based access**: hierarchical group structures for managing permissions
+- Row-Level Security (RLS): restrict data access at the row level based on user or group context
+- Column-Level Security (CLS): control visibility of specific columns per user/group
+- Object-level sharing: content is only accessible when explicitly shared
+- Group-based access: hierarchical group structures for managing permissions
 
 ### Authentication
 

@@ -171,7 +171,7 @@ Key differences:
 
 ### Deployment Options
 
-#### Looker (Google Cloud Core) — Hosted by Google
+#### Looker (Google Cloud Core) -- Hosted by Google
 
 - Provisioned and managed through the Google Cloud console
 - Available in multiple editions (Standard, Enterprise, Embed)
