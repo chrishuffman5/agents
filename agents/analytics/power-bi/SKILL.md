@@ -90,6 +90,10 @@ Power BI is a managed service with monthly releases. There are no discrete versi
 | **Power BI Embedded** | Embed analytics in custom apps (app-owns-data / user-owns-data) | Azure / Fabric |
 | **Microsoft Fabric** | Unified analytics platform; OneLake, Direct Lake, lakehouses | Cloud SaaS |
 
+### Desktop vs Service Authoring
+
+Desktop remains the primary tool for production-quality reports with complex data models. Key Desktop-only features include Performance Analyzer, What-If Parameters, and the full relationship diagram view. The Service achieved core modeling parity in September 2025 (Power Query, DAX measures, RLS, calculation groups), enabling Mac users and browser-only workflows for lighter authoring scenarios.
+
 ## Semantic Model Architecture
 
 The semantic model (formerly "dataset") is the analytical engine between raw data and report visuals.
@@ -221,6 +225,8 @@ Power BI is the analytics/visualization layer within Fabric. Microsoft's strateg
 
 **Standalone Power BI vs Fabric:** Standalone Pro/PPU licensing remains available, but OneLake, Direct Lake, Data Factory, Synapse, and Real-Time Intelligence are Fabric-only capabilities. Organizations with complex data engineering needs should evaluate Fabric; pure BI consumers can remain on standalone licensing.
 
+**Streaming data migration:** Legacy push, streaming, and PubNub dataset types are deprecated (retiring October 2027). Migrate to Real-Time Intelligence in Fabric using Eventstreams for ingestion and KQL databases for real-time querying.
+
 ## Paginated Reports
 
 Pixel-perfect, print-optimized reports using RDL (Report Definition Language) format:
@@ -229,6 +235,9 @@ Pixel-perfect, print-optimized reports using RDL (Report Definition Language) fo
 - Ideal for invoices, statements, regulatory reports, multi-page tabular data
 - Can connect to Power BI semantic models as data source
 - Require PPU or Fabric F64+ capacity for sharing
+- Parameters allow users to filter data before rendering; cascading parameters for dependent filters
+- Subreports for nested/repeated report sections
+- Not a replacement for interactive Power BI reports -- use paginated reports when exact print layout and multi-page tabular exports are required
 
 ## Embedded Analytics
 
@@ -324,6 +333,10 @@ Two embedding scenarios with different authentication and licensing models:
 | No query folding awareness | Full data pulled into Power Query engine | Structure steps to maintain folding; check with "View Native Query" |
 | Skipping RLS testing | Data leaks in production | Always test with "View as" role and DAX Studio before deployment |
 | Manual ALM (copy/paste between environments) | Error-prone, no audit trail | Use deployment pipelines + PBIR format + git integration |
+| SELECT * in Power Query | Loads all columns including unused ones | Select only needed columns; remove others early |
+| Ignoring referential integrity | Orphan keys bloat model, cause blank rows in visuals | Clean orphan keys in Power Query; validate key relationships |
+| Using Report Server for new deployments | Feature lag, no AI, no Direct Lake, no monthly updates | Use Power BI Service unless regulatory/compliance mandates on-premises |
+| All refreshes at midnight | Capacity contention, throttling | Stagger refresh schedules across 2-hour windows |
 
 ## Cross-References
 

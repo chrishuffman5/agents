@@ -208,6 +208,33 @@ A client library for stateful stream processing with no external dependencies be
 - **Windowing**: Tumbling, hopping, sliding, session windows with grace periods
 - **Joins**: KStream-KStream (windowed), KTable-KTable (changelog), KStream-KTable (enrichment), KStream-GlobalKTable (broadcast)
 
+## Storage and Retention
+
+Three cleanup policies (`cleanup.policy`) control how data is retained:
+
+- **`delete`** (default): Old segments removed after `retention.ms` (default 7 days) or `retention.bytes`
+- **`compact`**: Log compaction retains only the latest value per key. Tombstones (null value) signal deletion, retained for `delete.retention.ms` (default 24h).
+- **`compact,delete`**: Both policies apply
+
+**Tiered Storage** (GA in 3.9+, KIP-405): Offloads older segments to object storage (S3, GCS, Azure Blob). Recent data stays on local disk for low-latency tail reads. Transparent to consumers. Reduces broker storage costs and enables much longer retention.
+
+## Schema Registry
+
+Centralized schema management for data governance on Kafka topics:
+
+1. Producer registers schema, gets a schema ID
+2. Producer serializes data, prepends magic byte + 4-byte schema ID
+3. Consumer fetches schema by ID, deserializes data
+4. Schemas stored in `_schemas` topic (Kafka-backed)
+
+**Compatibility modes** control what schema changes are allowed:
+- `BACKWARD` (default): New schema can read old data. Safe: add optional fields with defaults, delete fields.
+- `FORWARD`: Old schema can read new data. Safe: add fields, delete optional fields with defaults.
+- `FULL`: Both backward and forward compatible.
+- Add `_TRANSITIVE` suffix to check against ALL previous versions, not just the last.
+
+**Format guidance**: Avro (most mature, binary, compact), Protobuf (strong typing, use `BACKWARD_TRANSITIVE`), JSON Schema (human-readable, less compact).
+
 ## Exactly-Once Semantics
 
 Three cooperating mechanisms:
@@ -216,9 +243,39 @@ Three cooperating mechanisms:
 2. **Transactional Producer** -- Atomic writes across partitions + atomic offset commits
 3. **Read Committed Consumers** -- `isolation.level=read_committed` ensures only committed records are visible
 
-End-to-end: Consumer reads (read_committed) -> process -> transactional producer writes output + commits input offsets atomically. If any step fails, the entire transaction aborts and the consumer re-reads from the last committed offset.
+End-to-end flow: Consumer reads (read_committed) -> process -> transactional producer writes output + commits input offsets in a single atomic transaction. If any step fails, the entire transaction aborts and the consumer re-reads from the last committed offset.
 
-**Limitation**: Exactly-once applies within Kafka. External side effects require outbox or dedup patterns.
+**Kafka Streams shortcut**: Set `processing.guarantee=exactly_once_v2` -- Streams handles all three components automatically.
+
+**Kafka-to-external patterns**: Exactly-once applies within Kafka only. For external systems, use the outbox pattern (write to external system + dedup table in one DB transaction) or idempotent writes with a deduplication key.
+
+## Monitoring Essentials
+
+### Critical Alerts
+
+| What to Monitor | Alert When | Why |
+|----------------|------------|-----|
+| Under-replicated partitions | > 0 for > 5 min | Data durability at risk |
+| Offline partitions | > 0 | Partitions unavailable for reads/writes |
+| Active controller count | != 1 | Split-brain or no controller |
+| Consumer group lag | Growing consistently | Consumers falling behind producers |
+| ISR shrink rate | Sustained > 0 | Followers losing sync |
+| Request handler idle % | < 30% | Broker I/O threads saturated |
+
+### Key Tools
+
+- `kafka-consumer-groups.sh --describe --group <id>` -- Check consumer lag per partition
+- `kafka-topics.sh --describe --under-replicated-partitions` -- Find replication issues
+- `kafka-metadata-quorum.sh describe --status` -- KRaft quorum health
+- Prometheus + JMX Exporter + Grafana for continuous monitoring
+
+## Security Fundamentals
+
+- **Always use `SASL_SSL`** in production -- never `PLAINTEXT`
+- **Authentication**: SASL/SCRAM-SHA-256 (username/password), mTLS (certificates), SASL/OAUTHBEARER (OAuth/OIDC, native in 4.1+)
+- **Authorization**: ACLs via `kafka-acls.sh`; set `allow.everyone.if.no.acl.found=false` (deny by default)
+- **Encryption**: TLS for client-broker and inter-broker traffic. At-rest encryption handled at OS/disk level.
+- Use separate credentials per application. Rotate regularly.
 
 ## Anti-Patterns
 
