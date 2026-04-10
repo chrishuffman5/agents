@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    // Vue 3.5 + Vite recommended settings
+    "target": "ESNext",              // modern output; Vite handles downleveling
+    "module": "ESNext",              // ESM -- required for Vite
+    "moduleResolution": "Bundler",   // Vite/bundler resolution (not Node16)
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    // Required for Vue SFC type checking
+    "strict": true,                  // enables all strict checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+
+    // JSX -- Vue uses its own transform, not React
+    "jsx": "preserve",               // leave JSX for Vite to handle
+    "jsxImportSource": "vue",        // optional -- for <script lang="tsx">
+
+    // Path aliases (mirror vite.config.ts resolve.alias)
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    // SFC support -- vue-tsc uses this
+    "verbatimModuleSyntax": true,    // enforce import type for type-only imports
+    "isolatedModules": true,         // required for Vite/esbuild single-file transform
+
+    // Output
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true,
+    "skipLibCheck": true             // skip .d.ts checks in node_modules
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",                  // .vue files included for vue-tsc
+    "env.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

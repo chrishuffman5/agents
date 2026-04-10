@@ -1,0 +1,72 @@
+{
+  // Next.js TypeScript Configuration
+  // Reference: https://nextjs.org/docs/app/api-reference/config/typescript
+  //
+  // Next.js auto-generates tsconfig.json on first run if it doesn't exist.
+  // This file shows the recommended configuration with path aliases.
+
+  "compilerOptions": {
+    // ─── Target & Module ──────────────────────────────────────────────────────
+    // Next.js handles transpilation — these are for type checking and IDE support.
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+
+    // ─── Strict Type Checking ─────────────────────────────────────────────────
+    // Recommended: enable all strict checks for production projects.
+    "strict": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // ─── JSX ──────────────────────────────────────────────────────────────────
+    // "preserve" lets Next.js handle JSX transformation via SWC/Turbopack.
+    "jsx": "preserve",
+
+    // ─── Interop ──────────────────────────────────────────────────────────────
+    "esModuleInterop": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // ─── Incremental ──────────────────────────────────────────────────────────
+    // Speeds up repeated type-checking by caching results.
+    "incremental": true,
+
+    // ─── Path Aliases ─────────────────────────────────────────────────────────
+    // Map "@/" to the project root (or "src/" if using src directory).
+    // Enables imports like: import { db } from "@/lib/db"
+    //
+    // For projects WITH src/:
+    //   "@/*": ["./src/*"]
+    //
+    // For projects WITHOUT src/:
+    //   "@/*": ["./*"]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"],
+      "@/lib/*": ["./lib/*"],
+      "@/actions/*": ["./actions/*"],
+      "@/types/*": ["./types/*"]
+    },
+
+    // ─── Next.js Plugin ───────────────────────────────────────────────────────
+    // Provides enhanced type checking for Next.js-specific APIs.
+    // Added automatically by create-next-app.
+    "plugins": [
+      { "name": "next" }
+    ]
+  },
+
+  // ─── Include / Exclude ────────────────────────────────────────────────────
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

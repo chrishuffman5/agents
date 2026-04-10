@@ -1,0 +1,78 @@
+<!--
+  Blazor Project File Reference
+  Two projects shown: Server/Host and WASM Client
+-->
+
+<!-- ============================================================ -->
+<!-- SERVER / HOST PROJECT (.csproj)                               -->
+<!-- ============================================================ -->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>     <!-- net8.0 | net9.0 | net10.0 -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Server-side hosting for WASM client -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server"
+                      Version="10.*" />
+
+    <!-- Reference the WASM client project -->
+    <ProjectReference Include="..\BlazorApp.Client\BlazorApp.Client.csproj">
+      <IsWasmProject>true</IsWasmProject>          <!-- Marks as WASM client to embed -->
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
+
+
+<!-- ============================================================ -->
+<!-- WASM CLIENT PROJECT (.csproj)                                 -->
+<!-- ============================================================ -->
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- == Trimming ================================================ -->
+    <!-- Enabled automatically on publish; set explicitly for clarity -->
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>                       <!-- full: trim unused members -->
+    <!-- <TrimMode>partial</TrimMode> -->            <!-- partial: less aggressive -->
+    <TrimmerRootDescriptor>TrimmerRoots.xml</TrimmerRootDescriptor>
+
+    <!-- == AOT Compilation ========================================= -->
+    <!-- Compiles IL to WASM at publish; faster runtime, larger download -->
+    <!-- <RunAOTCompilation>true</RunAOTCompilation> -->
+
+    <!-- == Compression ============================================= -->
+    <!-- Produces .br (Brotli) and .gz files alongside assemblies -->
+    <BlazorEnableCompression>true</BlazorEnableCompression>
+
+    <!-- == PWA ===================================================== -->
+    <!-- Generates service worker asset manifest for offline caching -->
+    <!-- <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Core WASM runtime -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly"
+                      Version="10.*" />
+
+    <!-- Auth state persistence from server prerender to WASM -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication"
+                      Version="10.*" />
+  </ItemGroup>
+
+  <!-- == Lazy Loading ============================================== -->
+  <!-- Listed assemblies excluded from initial download; loaded on demand -->
+  <ItemGroup>
+    <!-- <BlazorWebAssemblyLazyLoad Include="HeavyChartLib.dll" /> -->
+    <!-- <BlazorWebAssemblyLazyLoad Include="PdfGenerator.dll" /> -->
+  </ItemGroup>
+
+</Project>

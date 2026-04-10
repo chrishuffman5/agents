@@ -1,0 +1,138 @@
+// Annotated Angular Workspace Configuration
+// This file configures the Angular CLI build system, dev server, and code generation.
+// File: angular.json (root of workspace)
+//
+// NOTES:
+// - Angular 19/20 use @angular-devkit/build-angular:application (esbuild)
+// - Angular 21 uses @angular/build:application (same esbuild, new package name)
+// - Vite powers the dev server for both builders
+// - SSR is configured via "server" and "ssr" options in the build target
+
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+    "my-app": {
+      "projectType": "application",
+      "architect": {
+
+        // ─── BUILD ─────────────────────────────────────────────────────────────
+        "build": {
+          // v19/v20: "@angular-devkit/build-angular:application"
+          // v21:     "@angular/build:application"
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/my-app",
+            "index": "src/index.html",
+
+            // Entry point for the browser bundle
+            "browser": "src/main.ts",
+
+            // SSR entry point (omit if no SSR)
+            "server": "src/main.server.ts",
+
+            // Polyfills array:
+            // - Angular 19/20 with Zone.js: ["zone.js"]
+            // - Angular 20 zoneless / Angular 21 default: []
+            "polyfills": [],
+
+            "tsConfig": "tsconfig.app.json",
+
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+
+            // Global styles — Tailwind directives go in styles.css for v21
+            "styles": ["src/styles.css"],
+
+            "scripts": [],
+
+            // SSR configuration (omit entire block if CSR-only)
+            "ssr": {
+              "entry": "src/server.ts"
+            },
+
+            // Enable prerendering (SSG) for routes marked RenderMode.Prerender
+            "prerender": true
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+
+              // Budget warnings help catch bundle size regressions
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          }
+        },
+
+        // ─── DEV SERVER ────────────────────────────────────────────────────────
+        "serve": {
+          // v19/v20: "@angular-devkit/build-angular:dev-server"
+          // v21:     "@angular/build:dev-server"
+          "builder": "@angular/build:dev-server",
+          "options": {
+            // HMR is enabled by default in v19+
+            // Set to false if HMR causes issues during development
+            // "hmr": false
+          },
+          "configurations": {
+            "production": { "buildTarget": "my-app:build:production" },
+            "development": { "buildTarget": "my-app:build:development" }
+          },
+          "defaultConfiguration": "development"
+        },
+
+        // ─── TEST ──────────────────────────────────────────────────────────────
+        "test": {
+          // v19/v20: "@angular-devkit/build-angular:karma"
+          // v21:     "@angular/build:unit-test" (Vitest)
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "my-app:build",
+            "runner": "vitest"
+            // Uncomment for experimental Playwright browser-mode testing:
+            // "browser": true
+          }
+        }
+
+      },
+
+      // ─── SCHEMATICS DEFAULTS ───────────────────────────────────────────────
+      // Configure ng generate defaults for the project
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": true,
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
+        },
+        "@schematics/angular:directive": {
+          "standalone": true
+        }
+      }
+    }
+  }
+}

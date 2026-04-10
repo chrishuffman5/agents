@@ -1,0 +1,85 @@
+// Annotated tsconfig.json for React 19 + TypeScript
+// Optimized for Vite-based projects with React Compiler support
+{
+  "compilerOptions": {
+    // --- Language and Emit ---
+
+    // Target modern JS -- React 19 drops IE11 entirely
+    // ES2022 supports top-level await, class fields, and Error.cause
+    "target": "ES2022",
+
+    // Vite handles bundling and transpilation -- TypeScript only type-checks
+    "noEmit": true,
+
+    // Each file must be independently compilable (required for Vite/esbuild)
+    "isolatedModules": true,
+
+    // --- Module System ---
+
+    // ESNext modules -- Vite handles the actual module bundling
+    "module": "ESNext",
+
+    // Bundler resolution matches how Vite resolves imports
+    // Supports package.json "exports" field, extensionless imports, etc.
+    "moduleResolution": "bundler",
+
+    // Keeps type-only imports from being emitted as runtime values
+    // Prevents bundler confusion with re-exported types
+    "verbatimModuleSyntax": true,
+
+    // Allows importing .json files as modules
+    "resolveJsonModule": true,
+
+    // Allows default imports from CommonJS modules (e.g., `import React from 'react'`)
+    "esModuleInterop": true,
+
+    // --- JSX ---
+
+    // Automatic JSX transform (React 17+)
+    // No need for `import React from 'react'` in every file
+    // Compiles JSX to jsx() calls from react/jsx-runtime
+    "jsx": "react-jsx",
+
+    // --- Type Checking ---
+
+    // Enables strict null checks, no implicit any, strict function types, etc.
+    // Catches undefined ref callbacks, missing children types, null access
+    "strict": true,
+
+    // Consistent casing prevents cross-platform path bugs (macOS vs Linux)
+    "forceConsistentCasingInFileNames": true,
+
+    // Skip type checking of node_modules for build performance
+    // React 19 ships its own types -- no @types/react needed
+    "skipLibCheck": true,
+
+    // --- Libraries ---
+
+    // ES2022: Promise.allSettled, Array.at, Object.hasOwn, structuredClone
+    // DOM: Browser APIs (document, window, fetch, ResizeObserver)
+    // DOM.Iterable: NodeList iteration, FormData iteration
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    // --- Source Maps ---
+
+    // Enable source maps for debugging in browser DevTools
+    "sourceMap": true,
+
+    // --- Path Aliases ---
+
+    // Base URL for non-relative imports
+    "baseUrl": ".",
+
+    // Path alias: import from "@/components/Button" instead of "../../../components/Button"
+    // Must match the alias in vite.config.ts resolve.alias
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+
+  // Include application source and Vite config for type checking
+  "include": ["src", "vite.config.ts"],
+
+  // Exclude build output and dependencies
+  "exclude": ["node_modules", "dist"]
+}

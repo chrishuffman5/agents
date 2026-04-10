@@ -1,0 +1,99 @@
+// Annotated Angular TypeScript Configuration
+// File: tsconfig.json (root of workspace)
+//
+// This is the base tsconfig that tsconfig.app.json and tsconfig.spec.json extend.
+// Angular-specific options are in the "angularCompilerOptions" section.
+
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+
+    // ─── OUTPUT ──────────────────────────────────────────────────────────────
+    "outDir": "./dist/out-tsc",
+
+    // ─── STRICT MODE ─────────────────────────────────────────────────────────
+    // Always enable strict — Angular's template type-checking relies on it
+    "strict": true,
+
+    // Require "override" keyword when overriding base class methods
+    "noImplicitOverride": true,
+
+    // Disallow property access via bracket notation on index signatures
+    "noPropertyAccessFromIndexSignature": true,
+
+    // Require explicit return statements in all code paths
+    "noImplicitReturns": true,
+
+    // Report errors for fallthrough cases in switch statements
+    "noFallthroughCasesInSwitch": true,
+
+    // ─── MODULE RESOLUTION ───────────────────────────────────────────────────
+    // "bundler" resolution works with esbuild/Vite (Angular 17+)
+    // Replaces older "node" resolution
+    "moduleResolution": "bundler",
+
+    // Required for proper interop with CommonJS modules
+    "esModuleInterop": true,
+
+    // Import tslib helpers instead of inlining them (smaller output)
+    "importHelpers": true,
+
+    // ─── LANGUAGE TARGET ─────────────────────────────────────────────────────
+    // ES2022 enables native class fields, private fields, top-level await
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom"],
+
+    // ─── PERFORMANCE ─────────────────────────────────────────────────────────
+    // Skip type checking of .d.ts files from node_modules (faster builds)
+    "skipLibCheck": true,
+
+    // Ensure each file can be independently transpiled (required for esbuild)
+    "isolatedModules": true,
+
+    // ─── DECORATORS ──────────────────────────────────────────────────────────
+    // Required for Angular decorators (@Component, @Injectable, etc.)
+    "experimentalDecorators": true
+
+    // NOTE: "useDefineForClassFields" defaults to true with ES2022 target.
+    // Angular's inject() function works correctly with this setting.
+  },
+
+  // ─── ANGULAR COMPILER OPTIONS ────────────────────────────────────────────
+  "angularCompilerOptions": {
+
+    // Disable legacy i18n message ID format (use new format)
+    "enableI18nLegacyMessageIdFormat": false,
+
+    // Strict DI: report errors for ambiguous injection parameters
+    "strictInjectionParameters": true,
+
+    // Strict input access: enforce @Input visibility modifiers
+    "strictInputAccessModifiers": true,
+
+    // Strict templates: full type-checking in component templates
+    // Catches binding errors, undefined properties, and type mismatches
+    "strictTemplates": true
+  }
+}
+
+// ─── tsconfig.app.json (extends this file) ─────────────────────────────────
+// {
+//   "extends": "./tsconfig.json",
+//   "compilerOptions": {
+//     "outDir": "./out-tsc/app",
+//     "types": []
+//   },
+//   "files": ["src/main.ts", "src/main.server.ts"],
+//   "include": ["src/**/*.d.ts"]
+// }
+
+// ─── tsconfig.spec.json (extends this file) ────────────────────────────────
+// {
+//   "extends": "./tsconfig.json",
+//   "compilerOptions": {
+//     "outDir": "./out-tsc/spec",
+//     "types": ["vitest/globals"]
+//   },
+//   "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+// }
