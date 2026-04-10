@@ -2,7 +2,7 @@
 
 A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
 
-**1,172 files | 83 technologies | 8 domains | 347,000+ lines of expert knowledge**
+**1,246+ files | 120+ technologies | 13 domains | 364,000+ lines of expert knowledge**
 
 ---
 
@@ -195,12 +195,127 @@ Expert knowledge for enterprise networking, from routing to SD-WAN.
 
 ---
 
-### 8. Backend Frameworks — 2 Technologies
+### 8. Backend Frameworks — 10 Technologies
 
-| Technology | Skill Path | Focus |
+Expert knowledge for REST API and web backend frameworks across all major languages.
+
+| Technology | Skill Path | Versions |
 |---|---|---|
-| ASP.NET Core | `backend/aspnet-core` | .NET 8/9/10, Web API, minimal APIs |
+| ASP.NET Core | `backend/aspnet-core` | .NET 8, 9, 10 + Minimal APIs |
 | Spring Boot | `backend/spring-boot` | 3.x, 4.0 |
+| Django | `backend/django` | 4.2 LTS, 5.2 LTS, 6.0 |
+| Ruby on Rails | `backend/rails` | 7.2, 8.0, 8.1 |
+| Express.js | `backend/express` | 5.x |
+| FastAPI | `backend/fastapi` | current |
+| NestJS | `backend/nestjs` | 11.x |
+| Flask | `backend/flask` | 3.1 |
+| Go Web (net/http, Gin, Fiber) | `backend/go-web` | Go 1.23/1.24 |
+| Rust Web (Actix, Axum) | `backend/rust-web` | stable toolchain |
+
+**Includes:** API design patterns, REST/HTTP semantics, authentication paradigms, async runtime models, framework comparison guides, version migration references.
+
+---
+
+### 9. Virtualization — 5 Technologies
+
+| Technology | Skill Path | Versions |
+|---|---|---|
+| VMware vSphere / ESXi | `virtualization/vmware` | 8.x, 9.0 |
+| Proxmox VE | `virtualization/proxmox` | 8.4, 9.0, 9.1 |
+| KVM/QEMU | `virtualization/kvm` | kernel-tied |
+| Citrix Hypervisor | `virtualization/citrix` | 8.x |
+| Nutanix AHV | `virtualization/nutanix` | AOS-tied |
+
+---
+
+### 10. CLI / Scripting — 7 Technologies
+
+| Technology | Skill Path | Versions |
+|---|---|---|
+| PowerShell | `cli-scripting/powershell` | 7.4 LTS, 7.6 LTS |
+| Bash | `cli-scripting/bash` | 5.x |
+| Python | `cli-scripting/python` | 3.10–3.14 |
+| Node.js | `cli-scripting/nodejs` | 20 LTS, 22 LTS, 24 |
+| Azure CLI | `cli-scripting/azure-cli` | rolling |
+| AWS CLI | `cli-scripting/aws-cli` | v2 |
+| kubectl | `cli-scripting/kubectl` | 1.33–1.35 |
+
+---
+
+### 11. ETL / Data Integration — 14 Technologies
+
+Expert knowledge for data pipeline orchestration, transformation, integration, and streaming.
+
+| Sub-domain | Technology | Skill Path | Versions |
+|---|---|---|---|
+| **Orchestration** | | | |
+| | Apache Airflow | `etl/orchestration/airflow` | 2.x (EOL), 3.x |
+| | SSIS | `etl/orchestration/ssis` | 2019, 2022, 2025 |
+| **Transformation** | | | |
+| | Apache Spark | `etl/transformation/spark` | 3.5, 4.0, 4.2 |
+| | dbt Core | `etl/transformation/dbt-core` | 1.11 (pending) |
+| | dbt Cloud | `etl/transformation/dbt-cloud` | managed (pending) |
+| **Integration** | | | |
+| | Azure Data Factory | `etl/integration/adf` | managed |
+| | Apache NiFi | `etl/integration/nifi` | 2.8 (pending) |
+| | Informatica IDMC | `etl/integration/informatica` | managed (pending) |
+| | Talend | `etl/integration/talend` | 8.0 (pending) |
+| | Fivetran | `etl/integration/fivetran` | managed (pending) |
+| | AWS Glue | `etl/integration/aws-glue` | managed (pending) |
+| | Synapse Pipelines | `etl/integration/synapse-pipelines` | managed (pending) |
+| **Streaming** | | | |
+| | Apache Kafka | `etl/streaming/kafka` | 3.9, 4.0, 4.1, 4.2 |
+
+**Includes:** ETL/ELT patterns, CDC, SCD types, data quality, paradigm references (orchestration, transformation, integration, streaming). Research complete for all pending technologies.
+
+---
+
+### 12. Data Analytics / BI — 11 Technologies
+
+Expert knowledge for business intelligence, reporting, and analytics platforms.
+
+| Technology | Skill Path | Versions |
+|---|---|---|
+| Power BI | `analytics/power-bi` | managed (monthly) |
+| Tableau | `analytics/tableau` | 2025.x, 2026.1 |
+| SSAS | `analytics/ssas` | 2019, 2022, 2025 |
+| SSRS | `analytics/ssrs` | 2019, 2022, 2025 |
+| Looker | `analytics/looker` | managed (pending) |
+| Apache Superset | `analytics/superset` | 6.x (pending) |
+| Metabase | `analytics/metabase` | v59, v60 (pending) |
+| Grafana | `analytics/grafana` | 12.x (pending) |
+| Qlik Sense | `analytics/qlik-sense` | managed (pending) |
+| ThoughtSpot | `analytics/thoughtspot` | managed (pending) |
+| DuckDB | `analytics/duckdb-analytics` | cross-ref (pending) |
+
+**Includes:** Dimensional modeling, OLAP concepts, visualization theory, semantic layers, paradigm references (enterprise BI, SQL analytics, reporting, operational). Research complete for all pending technologies.
+
+---
+
+### 13. Storage — 12 Technologies
+
+Expert knowledge for enterprise, software-defined, and cloud storage platforms.
+
+| Category | Technology | Skill Path | Versions |
+|---|---|---|---|
+| **Enterprise SAN/NAS** | | | |
+| | NetApp ONTAP | `storage/netapp-ontap` | 9.14, 9.15, 9.16, 9.17, 9.18 |
+| | Dell PowerStore | `storage/dell-powerstore` | 4.0 |
+| | Dell Unity | `storage/dell-unity` | OE 5.5 |
+| | Pure Storage FlashArray | `storage/pure-storage` | current |
+| | HPE Alletra | `storage/hpe-alletra` | current |
+| **Software-Defined** | | | |
+| | Ceph | `storage/ceph` | 19.2 Squid, 20.2 Tentacle |
+| | MinIO | `storage/minio` | current |
+| | GlusterFS | `storage/glusterfs` | 11.x |
+| **Cloud Object** | | | |
+| | AWS S3 | `storage/aws-s3` | managed |
+| | Azure Blob Storage | `storage/azure-blob` | managed |
+| | Google Cloud Storage | `storage/gcs` | managed |
+| **Windows** | | | |
+| | Storage Spaces Direct | `storage/storage-spaces-direct` | WS 2019/2022/2025 |
+
+**Includes:** Block/file/object fundamentals, RAID/erasure coding, replication patterns, data reduction, storage networking, paradigm references (enterprise, SDS, cloud).
 
 ---
 
@@ -211,14 +326,10 @@ The following domains are inventoried in PLAN.md but not yet built:
 | # | Domain | Technologies |
 |---|---|---|
 | 10 | WebSockets / Real-Time | SignalR, Socket.IO, gRPC, GraphQL, SSE |
-| 11 | CLI / Scripting | PowerShell, Bash, Python, Node.js |
-| 12 | ETL / Data Integration | SSIS, Airflow, dbt, Spark, Kafka, NiFi |
-| 13 | Data Analytics / BI | Power BI, Tableau, SSAS/SSRS, Superset, Grafana |
 | 14 | Monitoring / Observability | Prometheus, Grafana, ELK, OpenTelemetry, Datadog |
-| 16 | Storage | NetApp, Dell, Pure, Ceph, MinIO, S3 |
 | 17 | Messaging / Event Streaming | Kafka, RabbitMQ, NATS, Service Bus, Pulsar |
 | 18 | Cloud Platforms | AWS, Azure, GCP (comprehensive) |
-| 6 | Virtualization | VMware vSphere, Proxmox, KVM/QEMU |
+| 19 | Data APIs / Data Access | GraphQL, OData, gRPC, SignalR |
 | 20 | Mail / Collaboration | Exchange, M365, Google Workspace |
 
 ---
@@ -264,15 +375,20 @@ Technologies that span multiple domains use cross-references instead of duplicat
 
 | Domain | Technologies | Files | Lines |
 |---|---|---|---|
-| Database | 29 | 238 | 119,694 |
+| Database | 29 | 172 | 101,594 |
 | Security | 14 | 227 | 77,043 |
-| Operating System | 8 | 261 | 49,452 |
 | Networking | 12 | 192 | 42,609 |
-| Frontend | 11 | 116 | 25,844 |
-| DevOps | 4 | 77 | 13,639 |
+| Operating System | 8 | 104 | 27,746 |
+| Backend | 10 | 54 | 26,770 |
+| Frontend | 11 | 98 | 24,315 |
+| DevOps | 16 | 77 | 13,639 |
 | Containers | 3 | 45 | 13,539 |
-| Backend | 2 | 16 | 6,163 |
-| **Total** | **83** | **1,172** | **347,983** |
+| ETL / Data Integration | 14 | 42 | 9,011 |
+| CLI / Scripting | 7 | 36 | 8,579 |
+| Virtualization | 5 | 29 | 7,041 |
+| Storage | 12 | 60 | 6,497 |
+| Data Analytics / BI | 11 | 30 | 6,181 |
+| **Total** | **152** | **1,166** | **364,564** |
 
 ---
 
