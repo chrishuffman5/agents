@@ -4,7 +4,7 @@ description: "Memcached technology expert. Deep expertise in distributed caching
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Memcached Technology Expert

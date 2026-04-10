@@ -4,7 +4,7 @@ description: "Apache NiFi specialist for flow-based data integration, routing, a
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache NiFi Technology Expert

@@ -4,7 +4,7 @@ description: "Metabase expert. Deep expertise in question design, models, dashbo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Metabase Technology Expert

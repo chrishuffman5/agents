@@ -4,7 +4,7 @@ description: "Expert agent for GlusterFS distributed filesystem. Covers volume t
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GlusterFS Technology Expert

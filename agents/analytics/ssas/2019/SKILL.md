@@ -4,7 +4,7 @@ description: "Version-specific expert for SQL Server Analysis Services 2019 (com
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSAS 2019 Version Expert

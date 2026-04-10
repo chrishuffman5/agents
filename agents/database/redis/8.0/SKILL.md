@@ -4,7 +4,7 @@ description: "Redis 8.0 version-specific expert. Deep knowledge of the major rel
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Redis 8.0 Expert

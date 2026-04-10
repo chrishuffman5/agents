@@ -4,7 +4,7 @@ description: "Version-specific expert for Tableau 2025.x releases (2025.1, 2025.
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Tableau 2025.x Version Expert

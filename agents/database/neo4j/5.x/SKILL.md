@@ -4,7 +4,7 @@ description: "Neo4j 5.x LTS version-specific expert. Deep knowledge of composite
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Neo4j 5.x LTS Expert

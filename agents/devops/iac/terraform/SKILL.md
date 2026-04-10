@@ -4,7 +4,7 @@ description: "Expert agent for HashiCorp Terraform across all versions. Provides
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Terraform Technology Expert

@@ -4,7 +4,7 @@ description: "AWS Glue specialist for serverless data integration on AWS. Deep e
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # AWS Glue Technology Expert

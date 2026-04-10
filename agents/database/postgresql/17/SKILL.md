@@ -4,7 +4,7 @@ description: "PostgreSQL 17 version-specific expert. Deep knowledge of increment
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # PostgreSQL 17 Expert

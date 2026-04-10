@@ -4,7 +4,7 @@ description: "OpenSearch 3.x version-specific expert. Deep knowledge of Lucene 1
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # OpenSearch 3.x Expert

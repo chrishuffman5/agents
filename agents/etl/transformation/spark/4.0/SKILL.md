@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Spark 4.0 (released June 2025).
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spark 4.0 Version Expert

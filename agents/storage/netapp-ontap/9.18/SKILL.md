@@ -4,7 +4,7 @@ description: "Version-specific expert for NetApp ONTAP 9.18.1. Covers mTLS for c
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ONTAP 9.18.1 Version Expert

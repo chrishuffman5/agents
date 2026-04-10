@@ -4,7 +4,7 @@ description: "Expert agent for Pulumi IaC platform. Provides deep expertise in i
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Pulumi Technology Expert

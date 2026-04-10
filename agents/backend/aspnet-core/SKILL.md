@@ -4,7 +4,7 @@ description: "Expert agent for ASP.NET Core Web API across .NET 8, 9, and 10. Co
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ASP.NET Core Web API Expert

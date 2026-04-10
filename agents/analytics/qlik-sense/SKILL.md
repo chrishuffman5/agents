@@ -4,7 +4,7 @@ description: "Expert agent for Qlik Sense across all deployment models (Cloud, E
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Qlik Sense Technology Expert

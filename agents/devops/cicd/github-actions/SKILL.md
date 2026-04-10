@@ -4,7 +4,7 @@ description: "Expert agent for GitHub Actions. Provides deep expertise in workfl
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitHub Actions Expert

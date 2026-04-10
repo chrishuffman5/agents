@@ -4,7 +4,7 @@ description: "MariaDB technology expert covering ALL versions. Deep expertise in
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MariaDB Technology Expert

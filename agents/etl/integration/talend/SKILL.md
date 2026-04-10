@@ -4,7 +4,7 @@ description: "Talend (Qlik Talend Cloud) specialist for Java-based enterprise da
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Talend (Qlik Talend Cloud) Technology Expert

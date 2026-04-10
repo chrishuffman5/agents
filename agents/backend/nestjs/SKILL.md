@@ -4,7 +4,7 @@ description: "Expert agent for NestJS framework development. Covers modules, pro
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # NestJS Expert

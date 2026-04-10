@@ -4,7 +4,7 @@ description: "OpenSearch technology expert covering ALL versions. Deep expertise
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # OpenSearch Technology Expert

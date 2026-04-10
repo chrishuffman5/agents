@@ -4,7 +4,7 @@ description: "Version-specific expert for Ceph Tentacle 20.2 (current stable). C
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ceph Tentacle 20.2 Version Expert

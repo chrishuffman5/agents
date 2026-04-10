@@ -4,7 +4,7 @@ description: "DuckDB as an in-process data transformation and ETL engine. Covers
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
   primary-agent: "agents/database/duckdb/SKILL.md"
   type: cross-reference
 ---

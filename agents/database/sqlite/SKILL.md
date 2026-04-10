@@ -4,7 +4,7 @@ description: "SQLite technology expert. Deep expertise in embedded database desi
 license: Public Domain
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SQLite Technology Expert

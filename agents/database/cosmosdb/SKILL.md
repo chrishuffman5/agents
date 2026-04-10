@@ -4,7 +4,7 @@ description: "Azure Cosmos DB expert. Deep expertise in multi-model APIs (NoSQL,
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Cosmos DB Technology Expert

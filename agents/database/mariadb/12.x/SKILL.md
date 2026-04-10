@@ -4,7 +4,7 @@ description: "MariaDB 12.x rolling release expert. WHEN: \"MariaDB 12\", \"Maria
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MariaDB 12.x Rolling Release Expert

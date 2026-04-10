@@ -4,7 +4,7 @@ description: "Expert agent for SQL Server Reporting Services (SSRS) across all v
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSRS Technology Expert

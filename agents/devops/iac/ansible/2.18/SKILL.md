@@ -4,7 +4,7 @@ description: "Version-specific expert for ansible-core 2.18 (Ansible community p
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ansible 2.18 (ansible-core) Version Expert

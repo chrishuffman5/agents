@@ -4,7 +4,7 @@ description: "Expert agent for Google Cloud Storage. Covers storage classes (Rap
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Google Cloud Storage Technology Expert

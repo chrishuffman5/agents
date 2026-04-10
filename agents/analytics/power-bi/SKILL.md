@@ -4,7 +4,7 @@ description: "Microsoft Power BI expert. Deep expertise in semantic models, DAX,
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Microsoft Power BI Technology Expert

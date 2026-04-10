@@ -4,7 +4,7 @@ description: "Expert agent for MinIO high-performance S3-compatible object stora
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MinIO Technology Expert

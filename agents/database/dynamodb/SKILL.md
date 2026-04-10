@@ -4,7 +4,7 @@ description: "Amazon DynamoDB expert. Deep expertise in single-table design, GSI
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Amazon DynamoDB Technology Expert

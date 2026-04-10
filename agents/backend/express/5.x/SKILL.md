@@ -4,7 +4,7 @@ description: "Expert agent for Express 5.x specific features and migration from 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Express 5.x Expert

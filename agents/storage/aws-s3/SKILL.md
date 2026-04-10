@@ -4,7 +4,7 @@ description: "Expert agent for Amazon S3 cloud object storage. Covers storage cl
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # AWS S3 Technology Expert

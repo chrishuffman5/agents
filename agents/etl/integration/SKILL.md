@@ -4,7 +4,7 @@ description: "Routes data integration and EL (Extract-Load) requests to the corr
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Integration / EL Router

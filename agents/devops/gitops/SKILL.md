@@ -4,7 +4,7 @@ description: "Routes GitOps requests to the correct technology agent. Compares A
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitOps Router

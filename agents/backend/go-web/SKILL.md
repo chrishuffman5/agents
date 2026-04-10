@@ -4,7 +4,7 @@ description: "Expert agent for Go web development across net/http (Go 1.22+), Gi
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Go Web Frameworks Expert

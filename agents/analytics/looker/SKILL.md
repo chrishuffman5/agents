@@ -4,7 +4,7 @@ description: "Google Cloud Looker expert. Deep expertise in LookML semantic mode
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Google Cloud Looker Technology Expert

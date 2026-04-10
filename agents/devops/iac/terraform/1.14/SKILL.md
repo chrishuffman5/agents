@@ -4,7 +4,7 @@ description: "Version-specific expert for Terraform 1.14 (2025). Covers ephemera
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Terraform 1.14 Version Expert

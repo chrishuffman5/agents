@@ -4,7 +4,7 @@ description: "MongoDB 6.0 version-specific expert. Deep knowledge of Queryable E
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MongoDB 6.0 Expert

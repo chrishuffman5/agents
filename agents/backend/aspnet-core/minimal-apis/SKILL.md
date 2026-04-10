@@ -4,7 +4,7 @@ description: "Deep-dive expert for ASP.NET Core Minimal APIs across .NET 6-10. C
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ASP.NET Core Minimal APIs Expert

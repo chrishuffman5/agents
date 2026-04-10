@@ -4,7 +4,7 @@ description: "MongoDB 8.0 version-specific expert. Deep knowledge of OIDC authen
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MongoDB 8.0 Expert

@@ -4,7 +4,7 @@ description: "Expert agent for OpenTofu, the open-source Terraform fork. Provide
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # OpenTofu Technology Expert

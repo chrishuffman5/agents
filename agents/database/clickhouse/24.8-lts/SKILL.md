@@ -4,7 +4,7 @@ description: "ClickHouse 24.8 LTS version-specific expert. Deep knowledge of Sha
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ClickHouse 24.8 LTS Expert

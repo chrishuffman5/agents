@@ -4,7 +4,7 @@ description: "Expert agent for Azure Bicep and ARM templates. Provides deep expe
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Bicep / ARM Expert

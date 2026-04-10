@@ -4,7 +4,7 @@ description: "Neo4j 2026.x version-specific expert. Deep knowledge of CalVer rel
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Neo4j 2026.x Expert

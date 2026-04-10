@@ -4,7 +4,7 @@ description: "Version-specific expert for SSRS 2022 (SQL Server 2022). Covers An
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSRS 2022 Version Expert

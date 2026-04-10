@@ -4,7 +4,7 @@ description: "Expert agent for Django web framework across versions 4.2 LTS, 5.2
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Django Web Framework Expert

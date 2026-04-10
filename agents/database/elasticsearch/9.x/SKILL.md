@@ -4,7 +4,7 @@ description: "Elasticsearch 9.x version-specific expert. Deep knowledge of Lucen
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Elasticsearch 9.x Expert

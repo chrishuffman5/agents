@@ -4,7 +4,7 @@ description: "Apache Cassandra technology expert covering ALL versions. Deep exp
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Cassandra Technology Expert

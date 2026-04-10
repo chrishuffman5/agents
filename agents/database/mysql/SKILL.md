@@ -4,7 +4,7 @@ description: "MySQL technology expert covering ALL versions. Deep expertise in I
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MySQL Technology Expert

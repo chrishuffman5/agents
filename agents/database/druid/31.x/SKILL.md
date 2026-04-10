@@ -4,7 +4,7 @@ description: "Apache Druid 31.x version expert. Covers Dart query engine, projec
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Druid 31.x Version Expert

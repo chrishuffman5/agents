@@ -4,7 +4,7 @@ description: "TimescaleDB technology expert covering ALL versions. Deep expertis
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # TimescaleDB Technology Expert

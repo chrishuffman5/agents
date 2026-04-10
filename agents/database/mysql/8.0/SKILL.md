@@ -4,7 +4,7 @@ description: "Expert agent for MySQL 8.0. Provides deep expertise in the Transac
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MySQL 8.0 Expert

@@ -4,7 +4,7 @@ description: "ClickHouse 25.12 LTS version-specific expert. Deep knowledge of th
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ClickHouse 25.12 LTS Expert

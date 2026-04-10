@@ -4,7 +4,7 @@ description: "Apache Cassandra 4.x version-specific expert covering 4.0 and 4.1.
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Cassandra 4.x Expert

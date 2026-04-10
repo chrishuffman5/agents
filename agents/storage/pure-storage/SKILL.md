@@ -4,7 +4,7 @@ description: "Expert agent for Pure Storage FlashArray (Everpure). Provides deep
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Pure Storage FlashArray Technology Expert

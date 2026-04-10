@@ -4,7 +4,7 @@ description: "dbt Cloud technology expert for managed data transformation platfo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # dbt Cloud Technology Expert

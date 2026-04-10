@@ -4,7 +4,7 @@ description: "Expert agent for FastAPI web framework development. Covers ASGI/St
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # FastAPI Expert

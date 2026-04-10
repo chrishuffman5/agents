@@ -4,7 +4,7 @@ description: "Version-specific expert for Spring Boot 4.0 (GA November 2025, cur
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spring Boot 4.0 Version Expert

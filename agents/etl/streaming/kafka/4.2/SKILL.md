@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Kafka 4.2 (February 2026, curre
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Kafka 4.2 Version Expert

@@ -4,7 +4,7 @@ description: "Version-specific expert for SQL Server 2025 reporting, where SSRS 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SQL Server 2025 Reporting — SSRS Replaced by PBIRS

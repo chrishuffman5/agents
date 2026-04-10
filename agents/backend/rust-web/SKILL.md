@@ -4,7 +4,7 @@ description: "Expert agent for Rust web development with Axum and Actix Web. Cov
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Rust Web Frameworks Expert

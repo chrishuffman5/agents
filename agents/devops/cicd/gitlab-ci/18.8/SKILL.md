@@ -4,7 +4,7 @@ description: "Version-specific expert for GitLab CI 18.8. Covers CI Steps (beta)
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitLab CI 18.8 Version Expert

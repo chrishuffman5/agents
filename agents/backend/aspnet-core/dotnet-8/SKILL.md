@@ -4,7 +4,7 @@ description: "Version-specific expert for ASP.NET Core on .NET 8 LTS (Nov 2023 -
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ASP.NET Core on .NET 8 LTS Version Expert

@@ -4,7 +4,7 @@ description: "Version-specific expert for Tableau 2026.1 (current, March 2026). 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Tableau 2026.1 Version Expert

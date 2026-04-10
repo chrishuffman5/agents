@@ -4,7 +4,7 @@ description: "DuckDB 1.4 LTS version-specific expert. Deep knowledge of database
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # DuckDB 1.4 LTS Expert

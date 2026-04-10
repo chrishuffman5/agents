@@ -4,7 +4,7 @@ description: "Redis technology expert covering ALL versions. Deep expertise in d
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Redis Technology Expert

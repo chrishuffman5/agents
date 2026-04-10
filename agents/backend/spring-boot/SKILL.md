@@ -4,7 +4,7 @@ description: "Expert agent for Spring Boot across all supported versions (3.x an
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spring Boot Expert

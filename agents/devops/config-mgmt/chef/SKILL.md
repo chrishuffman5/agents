@@ -4,7 +4,7 @@ description: "Expert agent for Chef Infra (18.x). Provides deep expertise in coo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Chef Infra Expert

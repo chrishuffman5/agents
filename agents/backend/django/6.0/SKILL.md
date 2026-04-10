@@ -4,7 +4,7 @@ description: "Version-specific expert for Django 6.0 (current feature release). 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Django 6.0 Version Expert

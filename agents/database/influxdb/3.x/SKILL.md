@@ -4,7 +4,7 @@ description: "InfluxDB 3.x version-specific expert. Deep knowledge of Apache IOx
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # InfluxDB 3.x Expert

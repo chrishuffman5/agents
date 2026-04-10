@@ -4,7 +4,7 @@ description: "MongoDB 7.0 version-specific expert. Deep knowledge of compound wi
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MongoDB 7.0 Expert

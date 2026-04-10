@@ -4,7 +4,7 @@ description: "Version-specific expert for Argo CD 3.1. Covers ApplicationSet imp
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Argo CD 3.1 Version Expert

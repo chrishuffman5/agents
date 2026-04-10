@@ -4,7 +4,7 @@ description: "Version-specific expert for Spring Boot 3.x (3.0 through 3.5). Cov
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spring Boot 3.x Version Expert

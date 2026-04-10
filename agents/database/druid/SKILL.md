@@ -4,7 +4,7 @@ description: "Apache Druid technology expert. Deep expertise in real-time analyt
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Druid Technology Expert

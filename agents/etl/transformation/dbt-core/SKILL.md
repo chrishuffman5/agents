@@ -4,7 +4,7 @@ description: "dbt Core technology expert for SQL-based data transformation in wa
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # dbt Core Technology Expert

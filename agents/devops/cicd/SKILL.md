@@ -4,7 +4,7 @@ description: "Routes CI/CD requests to the correct technology agent. Compares Gi
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # CI/CD Platform Router

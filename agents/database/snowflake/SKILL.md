@@ -4,7 +4,7 @@ description: "Snowflake expert. Deep expertise in virtual warehouses, micro-part
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Snowflake Technology Expert

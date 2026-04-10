@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Kafka 4.0 (March 2025). MAJOR r
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Kafka 4.0 Version Expert

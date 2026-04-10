@@ -4,7 +4,7 @@ description: "Routes data pipeline orchestration requests to the correct technol
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Orchestration Router

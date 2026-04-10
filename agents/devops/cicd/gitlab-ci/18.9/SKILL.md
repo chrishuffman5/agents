@@ -4,7 +4,7 @@ description: "Version-specific expert for GitLab CI 18.9 (current, 2026). Covers
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitLab CI 18.9 Version Expert

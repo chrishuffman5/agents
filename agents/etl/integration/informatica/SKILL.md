@@ -4,7 +4,7 @@ description: "Informatica IDMC specialist for enterprise cloud data integration,
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Informatica IDMC Technology Expert

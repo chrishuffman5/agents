@@ -4,7 +4,7 @@ description: "DuckDB 1.5 version-specific expert. Deep knowledge of the VARIANT 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # DuckDB 1.5 Expert

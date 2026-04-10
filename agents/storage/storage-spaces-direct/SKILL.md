@@ -4,7 +4,7 @@ description: "Expert agent for Windows Storage Spaces Direct (S2D) hyper-converg
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Storage Spaces Direct Technology Expert

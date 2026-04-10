@@ -4,7 +4,7 @@ description: "MariaDB 11.4 LTS version expert. WHEN: \"MariaDB 11.4\", \"11.4 LT
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MariaDB 11.4 LTS Version Expert

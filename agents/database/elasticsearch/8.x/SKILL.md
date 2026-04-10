@@ -4,7 +4,7 @@ description: "Elasticsearch 8.x version-specific expert. Deep knowledge of secur
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Elasticsearch 8.x Expert

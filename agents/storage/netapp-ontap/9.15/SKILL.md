@@ -4,7 +4,7 @@ description: "Version-specific expert for NetApp ONTAP 9.15.1. Covers SnapMirror
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ONTAP 9.15.1 Version Expert

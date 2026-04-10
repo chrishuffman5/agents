@@ -4,7 +4,7 @@ description: "Redis 7.2 version-specific expert. Deep knowledge of client-side c
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Redis 7.2 Expert

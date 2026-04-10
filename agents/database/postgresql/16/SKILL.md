@@ -4,7 +4,7 @@ description: "PostgreSQL 16 version-specific expert. Deep knowledge of logical r
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # PostgreSQL 16 Expert

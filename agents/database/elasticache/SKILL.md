@@ -4,7 +4,7 @@ description: "Amazon ElastiCache and MemoryDB expert. Deep expertise in managed 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Amazon ElastiCache and MemoryDB Technology Expert

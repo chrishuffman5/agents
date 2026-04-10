@@ -4,7 +4,7 @@ description: "Neo4j technology expert covering ALL versions. Deep expertise in C
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Neo4j Technology Expert

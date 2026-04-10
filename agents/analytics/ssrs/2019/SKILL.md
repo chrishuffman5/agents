@@ -4,7 +4,7 @@ description: "Version-specific expert for SSRS 2019 (SQL Server 2019). Covers Az
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSRS 2019 Version Expert

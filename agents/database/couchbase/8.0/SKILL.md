@@ -4,7 +4,7 @@ description: "Couchbase 8.0 version-specific expert. Deep knowledge of Hyperscal
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Couchbase 8.0 Expert

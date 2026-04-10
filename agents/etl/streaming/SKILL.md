@@ -4,7 +4,7 @@ description: "Routes streaming and real-time data integration requests to the co
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Streaming Router

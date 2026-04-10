@@ -4,7 +4,7 @@ description: "Expert agent for Apache Airflow across all versions. Provides deep
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Airflow Technology Expert

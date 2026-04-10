@@ -4,7 +4,7 @@ description: "Redis 7.4 version-specific expert. Deep knowledge of hash field ex
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Redis 7.4 Expert

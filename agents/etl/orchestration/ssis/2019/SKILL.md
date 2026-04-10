@@ -4,7 +4,7 @@ description: "Version-specific expert for SSIS 2019 (SQL Server 2019). Covers Fl
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSIS 2019 Version Expert

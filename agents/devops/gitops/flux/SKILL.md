@@ -4,7 +4,7 @@ description: "Expert agent for Flux CD v2. Provides deep expertise in GitReposit
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Flux CD Expert

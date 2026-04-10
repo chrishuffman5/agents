@@ -4,7 +4,7 @@ description: "Top-level routing agent for ALL DevOps, CI/CD, Infrastructure as C
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # DevOps / CI-CD / IaC Domain Agent

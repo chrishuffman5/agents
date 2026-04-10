@@ -4,7 +4,7 @@ description: "Apache Spark technology expert for ETL and data transformation acr
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Spark Technology Expert

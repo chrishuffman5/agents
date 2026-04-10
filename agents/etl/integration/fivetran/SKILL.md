@@ -4,7 +4,7 @@ description: "Fivetran specialist for fully managed Extract-Load (EL) data pipel
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Fivetran Technology Expert

@@ -4,7 +4,7 @@ description: "Routes Infrastructure as Code requests to the correct technology a
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Infrastructure as Code Router

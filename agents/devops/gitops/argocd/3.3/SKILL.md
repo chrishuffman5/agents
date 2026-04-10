@@ -4,7 +4,7 @@ description: "Version-specific expert for Argo CD 3.3 (current, 2026). Covers de
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Argo CD 3.3 Version Expert

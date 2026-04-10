@@ -4,7 +4,7 @@ description: "ClickHouse 25.3 LTS version-specific expert. Deep knowledge of Var
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ClickHouse 25.3 LTS Expert

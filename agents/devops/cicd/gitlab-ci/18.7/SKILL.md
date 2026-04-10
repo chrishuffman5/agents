@@ -4,7 +4,7 @@ description: "Version-specific expert for GitLab CI 18.7. Covers CI/CD catalog G
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitLab CI 18.7 Version Expert

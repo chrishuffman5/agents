@@ -4,7 +4,7 @@ description: "OpenSearch 2.x version-specific expert. Deep knowledge of neural s
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # OpenSearch 2.x Expert

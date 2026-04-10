@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Kafka 4.1 (September 2025). Cov
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Kafka 4.1 Version Expert

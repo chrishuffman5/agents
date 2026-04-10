@@ -4,7 +4,7 @@ description: "Top-level routing agent for ALL networking technologies and discip
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Networking Domain Agent

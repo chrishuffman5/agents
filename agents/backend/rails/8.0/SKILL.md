@@ -4,7 +4,7 @@ description: "Version-specific expert for Rails 8.0 (November 2024). The 'No Paa
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Rails 8.0 Version Expert

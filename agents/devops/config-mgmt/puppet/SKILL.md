@@ -4,7 +4,7 @@ description: "Expert agent for Puppet (8.x). Provides deep expertise in Puppet D
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Puppet Expert

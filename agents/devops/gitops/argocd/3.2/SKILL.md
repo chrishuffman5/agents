@@ -4,7 +4,7 @@ description: "Version-specific expert for Argo CD 3.2. Covers improved multi-clu
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Argo CD 3.2 Version Expert

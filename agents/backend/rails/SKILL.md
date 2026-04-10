@@ -4,7 +4,7 @@ description: "Expert agent for Ruby on Rails web development across Rails 7.2, 8
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ruby on Rails Expert

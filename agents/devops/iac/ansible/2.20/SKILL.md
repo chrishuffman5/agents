@@ -4,7 +4,7 @@ description: "Version-specific expert for ansible-core 2.20 (current, 2026). Cov
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ansible 2.20 (ansible-core) Version Expert

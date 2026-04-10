@@ -4,7 +4,7 @@ description: "Expert agent for CircleCI CI/CD platform. Provides deep expertise 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # CircleCI Expert

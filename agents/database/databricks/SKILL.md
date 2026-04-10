@@ -4,7 +4,7 @@ description: "Databricks expert. Deep expertise in lakehouse architecture, Delta
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Databricks Technology Expert

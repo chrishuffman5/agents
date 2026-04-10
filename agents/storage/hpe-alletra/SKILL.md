@@ -4,7 +4,7 @@ description: "Expert agent for HPE Alletra enterprise storage portfolio. Provide
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # HPE Alletra Technology Expert

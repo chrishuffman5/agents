@@ -4,7 +4,7 @@ description: "Couchbase 7.x version-specific expert. Deep knowledge of scopes an
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Couchbase 7.x Expert

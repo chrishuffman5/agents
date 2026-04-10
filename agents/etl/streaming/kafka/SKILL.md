@@ -4,7 +4,7 @@ description: "Expert agent for Apache Kafka as a streaming data integration plat
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Kafka Technology Expert

@@ -4,7 +4,7 @@ description: "Expert agent for Azure DevOps Services and Server. Provides deep e
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure DevOps Expert

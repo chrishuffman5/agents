@@ -4,7 +4,7 @@ description: "Apache Cassandra 5.0 version-specific expert. Deep knowledge of St
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Cassandra 5.0 Expert

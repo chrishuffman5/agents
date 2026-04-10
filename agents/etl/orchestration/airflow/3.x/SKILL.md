@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Airflow 3.x (current, 3.0-3.2).
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Airflow 3.x Version Expert

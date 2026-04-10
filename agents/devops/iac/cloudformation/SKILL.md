@@ -4,7 +4,7 @@ description: "Expert agent for AWS CloudFormation. Provides deep expertise in te
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # AWS CloudFormation Expert

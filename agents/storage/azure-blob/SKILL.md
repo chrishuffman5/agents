@@ -4,7 +4,7 @@ description: "Expert agent for Azure Blob Storage. Covers storage accounts, acce
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Blob Storage Technology Expert

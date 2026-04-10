@@ -4,7 +4,7 @@ description: "ScyllaDB 2025.1 LTS version-specific expert. Deep knowledge of tab
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ScyllaDB 2025.1 LTS Expert

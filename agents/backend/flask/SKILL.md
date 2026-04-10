@@ -4,7 +4,7 @@ description: "Expert agent for Flask web framework development. Covers applicati
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Flask Expert

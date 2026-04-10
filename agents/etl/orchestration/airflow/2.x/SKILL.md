@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Airflow 2.x (2.0-2.10, EOL Apri
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Airflow 2.x Version Expert

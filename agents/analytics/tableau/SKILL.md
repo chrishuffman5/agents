@@ -4,7 +4,7 @@ description: "Expert agent for Tableau across all versions. Provides deep expert
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Tableau Technology Expert

@@ -4,7 +4,7 @@ description: "Expert agent for Jenkins CI/CD. Provides deep expertise in Declara
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Jenkins Expert

@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Kafka 3.9 (November 2024). Last
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Kafka 3.9 Version Expert

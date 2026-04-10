@@ -4,7 +4,7 @@ description: "InfluxDB 2.x version-specific expert. Deep knowledge of TSM storag
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # InfluxDB 2.x Expert

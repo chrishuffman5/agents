@@ -4,7 +4,7 @@ description: "Expert agent for MySQL 9.x Innovation Releases (9.0 through 9.5+).
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MySQL 9.x Innovation Releases Expert

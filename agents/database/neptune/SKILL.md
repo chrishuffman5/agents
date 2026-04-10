@@ -4,7 +4,7 @@ description: "Amazon Neptune expert. Deep expertise in property graphs, RDF, Gre
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Amazon Neptune Technology Expert

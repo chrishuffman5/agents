@@ -4,7 +4,7 @@ description: "Expert agent for Argo CD across all versions. Provides deep expert
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Argo CD Expert

@@ -4,7 +4,7 @@ description: "PostgreSQL 14 version-specific expert. Deep knowledge of multirang
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # PostgreSQL 14 Expert

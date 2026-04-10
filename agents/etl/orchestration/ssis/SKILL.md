@@ -4,7 +4,7 @@ description: "Expert agent for SQL Server Integration Services (SSIS) across all
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSIS Technology Expert

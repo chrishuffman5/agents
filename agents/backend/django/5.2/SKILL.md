@@ -4,7 +4,7 @@ description: "Version-specific expert for Django 5.2 LTS and features introduced
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Django 5.2 LTS Version Expert

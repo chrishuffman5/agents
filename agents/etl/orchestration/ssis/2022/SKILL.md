@@ -4,7 +4,7 @@ description: "Version-specific expert for SSIS 2022 (SQL Server 2022). Covers th
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSIS 2022 Version Expert

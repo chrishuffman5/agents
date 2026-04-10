@@ -4,7 +4,7 @@ description: "Routes configuration management requests to the correct technology
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Configuration Management Router

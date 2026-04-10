@@ -4,7 +4,7 @@ description: "Azure Synapse Analytics expert. Deep expertise in dedicated SQL po
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Synapse Analytics Technology Expert

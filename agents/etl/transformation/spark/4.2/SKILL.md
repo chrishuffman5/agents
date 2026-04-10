@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Spark 4.2 (preview, GA expected
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spark 4.2 / 4.1 Version Expert

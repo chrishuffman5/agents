@@ -4,7 +4,7 @@ description: "Version-specific expert for Ceph Squid 19.2. Covers BlueStore LZ4 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ceph Squid 19.2 Version Expert

@@ -4,7 +4,7 @@ description: "Amazon Redshift expert. Deep expertise in columnar storage, distri
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Amazon Redshift Technology Expert

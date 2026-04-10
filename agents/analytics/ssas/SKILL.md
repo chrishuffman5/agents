@@ -4,7 +4,7 @@ description: "Expert agent for SQL Server Analysis Services (SSAS) across all ve
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSAS Technology Expert

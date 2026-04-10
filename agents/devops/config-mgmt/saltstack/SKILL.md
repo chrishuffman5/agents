@@ -4,7 +4,7 @@ description: "Expert agent for SaltStack/Salt (3007.x). Provides deep expertise 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SaltStack Expert

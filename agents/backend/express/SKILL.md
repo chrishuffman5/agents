@@ -4,7 +4,7 @@ description: "Expert agent for Express.js web framework development across Expre
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Express.js Expert

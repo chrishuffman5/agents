@@ -4,7 +4,7 @@ description: "Expert agent for GitLab CI/CD. Provides deep expertise in .gitlab-
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # GitLab CI/CD Expert

@@ -4,7 +4,7 @@ description: "Expert agent for Ceph distributed storage across all supported ver
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Ceph Technology Expert

@@ -4,7 +4,7 @@ description: "ScyllaDB 2026.1 LTS version-specific expert. Deep knowledge of vec
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ScyllaDB 2026.1 LTS Expert

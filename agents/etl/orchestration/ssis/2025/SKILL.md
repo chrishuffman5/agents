@@ -4,7 +4,7 @@ description: "Version-specific expert for SSIS 2025 (SQL Server 2025). Covers En
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # SSIS 2025 Version Expert

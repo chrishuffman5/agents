@@ -4,7 +4,7 @@ description: "Azure Data Factory specialist for cloud-based data integration pip
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Data Factory Technology Expert

@@ -4,7 +4,7 @@ description: "Top-level routing agent for ALL ETL, data integration, and data pi
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # ETL / Data Integration Domain Agent

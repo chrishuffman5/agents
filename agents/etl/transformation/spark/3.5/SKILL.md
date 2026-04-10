@@ -4,7 +4,7 @@ description: "Version-specific expert for Apache Spark 3.5 (Extended LTS, EOL No
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Spark 3.5 Version Expert

@@ -4,7 +4,7 @@ description: "Top-level routing agent for ALL container and orchestration techno
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Containers & Orchestration Domain Agent

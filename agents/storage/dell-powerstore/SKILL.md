@@ -4,7 +4,7 @@ description: "Expert agent for Dell PowerStore all-flash unified storage. Provid
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Dell PowerStore Technology Expert

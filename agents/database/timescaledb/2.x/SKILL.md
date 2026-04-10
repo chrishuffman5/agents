@@ -4,7 +4,7 @@ description: "TimescaleDB 2.x version-specific expert. Deep knowledge of columns
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # TimescaleDB 2.x Expert

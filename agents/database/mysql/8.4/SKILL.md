@@ -4,7 +4,7 @@ description: "Expert agent for MySQL 8.4 LTS. Provides deep expertise in GTID Ta
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # MySQL 8.4 LTS Expert

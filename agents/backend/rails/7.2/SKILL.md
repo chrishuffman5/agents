@@ -4,7 +4,7 @@ description: "Version-specific expert for Rails 7.2 (August 2024, maintenance mo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Rails 7.2 Version Expert

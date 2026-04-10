@@ -4,7 +4,7 @@ description: "Azure Synapse Pipelines specialist for data integration within the
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Azure Synapse Pipelines Technology Expert

@@ -4,7 +4,7 @@ description: "Create specialized IT domain agents following Anthropic's agent de
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Agent Creator

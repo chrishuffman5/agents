@@ -4,7 +4,7 @@ description: "Expert agent for NetApp ONTAP unified storage across all supported
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # NetApp ONTAP Technology Expert

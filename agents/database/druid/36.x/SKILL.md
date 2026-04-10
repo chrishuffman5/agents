@@ -4,7 +4,7 @@ description: "Apache Druid 36.x version expert. Covers cost-based autoscaling fo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Druid 36.x Version Expert

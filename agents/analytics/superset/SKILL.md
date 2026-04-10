@@ -4,7 +4,7 @@ description: "Expert agent for Apache Superset (5.x through 6.x). Provides deep 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Apache Superset Technology Expert

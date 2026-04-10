@@ -4,7 +4,7 @@ description: "Version-specific expert for Django 4.2 LTS. Covers psycopg 3 suppo
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Django 4.2 LTS Version Expert

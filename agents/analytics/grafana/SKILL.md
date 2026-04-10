@@ -4,7 +4,7 @@ description: "Grafana expert for analytics and dashboarding use cases. Deep expe
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Grafana Technology Expert

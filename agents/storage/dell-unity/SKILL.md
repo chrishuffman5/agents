@@ -4,7 +4,7 @@ description: "Expert agent for Dell Unity XT midrange unified storage. Provides 
 license: MIT
 metadata:
   version: "1.0.0"
-  author: chris
+  author: christopher huffman
 ---
 
 # Dell Unity XT Technology Expert
