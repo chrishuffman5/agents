@@ -238,6 +238,44 @@ query = stream_df.writeStream.foreachBatch(process_batch).start()
 | **4.0** | Stable | ANSI mode default, VARIANT type, Java 17 required, breaking changes | `4.0/SKILL.md` |
 | **4.2** | Preview (GA mid-2026) | Declarative Pipelines, Real-Time Mode, SQL Scripting GA | `4.2/SKILL.md` |
 
+## Performance Quick Reference
+
+### Shuffle Partitions
+
+```python
+# With AQE (recommended): set high, let AQE coalesce
+spark.conf.set("spark.sql.shuffle.partitions", "2000")
+spark.conf.set("spark.sql.adaptive.enabled", "true")
+spark.conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
+
+# Without AQE: calculate based on data volume
+# Target 128-256 MB per partition
+# partitions = total_shuffle_data_bytes / target_partition_size
+```
+
+### Join Strategy Selection
+
+| Scenario | Strategy | Config/Hint |
+|---|---|---|
+| One side < 50MB | Broadcast hash join | `broadcast(small_df)` or increase `autoBroadcastJoinThreshold` |
+| Both sides large, equi-join | Sort-merge join (default) | No action needed |
+| Repeated large-large joins on same key | Bucketed join (shuffle-free) | `df.write.bucketBy(N, "key").saveAsTable(...)` |
+| Non-equi join, one side small | Broadcast nested loop | `broadcast(small_df)` |
+
+### Data Skew First Response
+
+1. Enable AQE (default since 3.2) -- handles most skew automatically
+2. Check Spark UI > Stages > task duration variance
+3. If AQE insufficient: salt the skewed key, isolate hot keys, or pre-aggregate
+
+### UDF Decision Tree
+
+1. Can it be expressed with `pyspark.sql.functions.*`? --> Use built-in (fastest)
+2. Can it be expressed as a SQL expression? --> Use `expr()` (Catalyst-optimized)
+3. Need custom logic? --> Use Pandas UDF (10-100x faster than Python UDF)
+4. Need table output? --> Use Python UDTF (4.0+)
+5. Last resort --> Python UDF (avoid if possible)
+
 ## Anti-Patterns
 
 1. **Using `collect()` on large datasets** -- Pulls all data to the driver, causing OOM. Use `take(N)`, `show()`, or write to storage. The only valid use of `collect()` is for small lookup results.

@@ -103,7 +103,9 @@ The semantic model (formerly "dataset") is the analytical engine between raw dat
 - **Hierarchies** -- User-defined drill paths (Year > Quarter > Month > Day)
 - **Field parameters** -- Let report readers dynamically switch measures or dimensions in visuals
 
-**Editing locations:** Semantic models can be created and edited in both Desktop and Service (web authoring GA Sept 2025). Desktop remains recommended for complex production models.
+**Perspectives:** Subsets of the model exposed to simplify the user experience for specific audiences. Do not provide security -- use RLS/OLS for access control.
+
+**Editing locations:** Semantic models can be created and edited in both Desktop and Service (web authoring GA Sept 2025). Desktop remains recommended for complex production models. Web authoring supports: Power Query transformations, relationship management, DAX measures, RLS definition, DAX Query View, and calculation groups.
 
 ## DAX Fundamentals
 
@@ -198,9 +200,13 @@ Power Query is the data transformation engine, using the M functional programmin
 | **Dual** | Both Import + DirectQuery | Cached + source | Depends on query | Aggregation tables |
 | **Composite** | Mix of modes per table | Multiple locations | Varies | Flexibility across sources |
 
-**Import** is the default and preferred for most scenarios. Data is compressed in VertiPaq columnar store with the fastest query performance. Limited by model size (1 GB shared, 10 GB+ Premium).
+**Import** is the default and preferred for most scenarios. Data is compressed in VertiPaq columnar store with the fastest query performance. Limited by model size (1 GB shared, 10 GB+ Premium). Requires scheduled refresh to update data.
 
-**Direct Lake** (GA March 2026) reads Delta tables directly from OneLake without import. Combines Import-like performance with DirectQuery-like freshness. Available only in Microsoft Fabric. Supports composite models mixing Direct Lake + Import tables.
+**DirectQuery** sends queries to the source database at runtime. No data is copied. Real-time freshness but higher latency (1-10 seconds per query). Source must be optimized with proper indexes. Each visual generates a separate source query.
+
+**Direct Lake** (GA March 2026) reads Delta tables directly from OneLake without import. Combines Import-like performance with DirectQuery-like freshness. Available only in Microsoft Fabric. Uses "framing" to capture Delta table snapshots. Falls back to DirectQuery via SQL analytics endpoint when data exceeds memory. Supports composite models mixing Direct Lake + Import tables.
+
+**Composite models** allow mixing storage modes per table within a single semantic model. Common pattern: Import for dimensions (fast filtering), DirectQuery for large fact tables (real-time). Aggregation tables in Dual mode serve 95%+ of queries from cache while detail queries hit the source on demand.
 
 ## Fabric Integration
 

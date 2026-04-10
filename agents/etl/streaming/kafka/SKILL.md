@@ -112,10 +112,16 @@ KRaft (Kafka Raft) replaced ZooKeeper for metadata management:
 
 ### Batching and Compression
 
-The producer buffers records in a `RecordAccumulator`, groups them into batches per topic-partition, and a background Sender thread transmits full batches. Key controls:
-- `batch.size` (default 16 KB): maximum batch size in bytes
-- `linger.ms` (default 5 ms in 4.x): wait time for batch filling
-- `compression.type`: `none`, `gzip`, `snappy`, `lz4`, `zstd` -- applied per batch
+The producer buffers records in a `RecordAccumulator`, groups them into batches per topic-partition, and a background Sender thread transmits full batches:
+
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `batch.size` | 16,384 (16 KB) | Maximum batch size in bytes per partition |
+| `linger.ms` | 5 ms (Kafka 4.x) | Wait time for batch filling before sending |
+| `buffer.memory` | 33,554,432 (32 MB) | Total memory for buffering; `send()` blocks when full |
+| `compression.type` | `none` | `lz4` for speed, `zstd` for best ratio; applied per batch |
+
+Larger batches yield better compression and throughput. `batch.size` and `linger.ms` work together -- increase both for throughput workloads.
 
 ### Acknowledgements
 
@@ -125,17 +131,35 @@ The producer buffers records in a `RecordAccumulator`, groups them into batches 
 
 ### Idempotent Producer
 
-Enabled by default (3.0+). Broker assigns a Producer ID and tracks sequence numbers per partition. Duplicate records from retries are silently rejected. Requires `acks=all`, `retries > 0`, `max.in.flight.requests.per.connection <= 5`.
+Enabled by default (3.0+). Broker assigns a Producer ID (PID) and tracks sequence numbers per partition. Duplicate records from retries are silently rejected. Requires `acks=all`, `retries > 0`, `max.in.flight.requests.per.connection <= 5`. There is no reason to disable this -- it is free deduplication.
 
 ### Transactional Producer
 
-Extends idempotence for atomic writes across multiple partitions. Configured via `transactional.id`. Enables exactly-once when combined with `read_committed` consumers. Uses a Transaction Coordinator broker managing the `__transaction_state` topic.
+Extends idempotence for atomic writes across multiple partitions:
+
+```
+producer.initTransactions();
+producer.beginTransaction();
+producer.send(record1);  // To partition A
+producer.send(record2);  // To partition B
+producer.sendOffsetsToTransaction(offsets, consumerGroupMetadata);
+producer.commitTransaction();  // Atomic: all or nothing
+```
+
+Configured via `transactional.id` (must be stable and unique per producer instance). Enables exactly-once when combined with `read_committed` consumers. Uses a Transaction Coordinator broker managing the `__transaction_state` internal topic. Adds ~10-50ms overhead per transaction.
 
 ## Consumer Patterns
 
 ### Consumer Groups
 
-A consumer group cooperatively consumes from topics. Each partition is assigned to exactly one consumer within a group. The Group Coordinator (a broker) manages membership and assignment. Coordinator determined by hashing `group.id` to a partition of `__consumer_offsets`.
+A consumer group cooperatively consumes from topics. Each partition is assigned to exactly one consumer within a group. Multiple groups can independently consume the same topic. The Group Coordinator (a broker) manages membership and assignment. Coordinator determined by hashing `group.id` to a partition of `__consumer_offsets` (50 partitions by default).
+
+### Offset Management
+
+- Offsets committed to internal `__consumer_offsets` topic
+- `enable.auto.commit=true` (default): offsets committed periodically (`auto.commit.interval.ms`, default 5s)
+- Manual commit: `commitSync()` or `commitAsync()` for precise control
+- `auto.offset.reset`: `latest` (default) for real-time, `earliest` for reprocessing
 
 ### Rebalancing Protocols
 
@@ -143,19 +167,35 @@ A consumer group cooperatively consumes from topics. Each partition is assigned 
 
 **KIP-848 New Consumer Group Protocol** (4.0 GA): Server-side partition assignment. Continuous heartbeat replaces JoinGroup/SyncGroup. Eliminates stop-the-world rebalances. Opt-in: `group.protocol=consumer`.
 
-**Static Group Membership**: Set `group.instance.id` to a stable identifier. Consumer retains its assignment across restarts within `session.timeout.ms`. Prevents unnecessary rebalances in Kubernetes.
+**Static Group Membership**: Set `group.instance.id` to a stable identifier (e.g., Kubernetes pod name). Consumer retains its assignment across restarts within `session.timeout.ms`. Prevents unnecessary rebalances in containerized environments.
+
+### Key Consumer Timeouts
+
+| Parameter | Default | Impact |
+|-----------|---------|--------|
+| `session.timeout.ms` | 45,000 | Consumer removed from group if no heartbeat within this window |
+| `heartbeat.interval.ms` | 3,000 | Set to 1/3 of `session.timeout.ms` |
+| `max.poll.interval.ms` | 300,000 | Consumer evicted if no `poll()` call within this window |
+| `max.poll.records` | 500 | Records per `poll()` call; reduce if processing is slow |
 
 ## Kafka Connect
 
-A framework for streaming data between Kafka and external systems:
+A framework for streaming data between Kafka and external systems without writing code:
 
-- **Source connectors**: Ingest FROM external systems INTO Kafka (JDBC Source, Debezium CDC)
-- **Sink connectors**: Deliver FROM Kafka TO external systems (Elasticsearch, S3, JDBC Sink)
-- **Converters**: Serialize/deserialize between Connect's internal format and wire format (Avro, JSON, Protobuf)
-- **SMTs**: Single-message transforms applied in a pipeline chain (InsertField, ReplaceField, TimestampRouter)
-- **Dead Letter Queue**: Failed records routed to a DLQ topic (sink connectors only). Config: `errors.tolerance=all`, `errors.deadletterqueue.topic.name=<topic>`
+```
+External System ──► Source Connector ──► Kafka ──► Sink Connector ──► External System
+                         │                              │
+                    Converter (Avro)              Converter (Avro)
+                    SMT chain                     SMT chain
+```
 
-**Deployment**: Use distributed mode for production (multiple workers, REST API, automatic failover). Use standalone for development only.
+- **Source connectors**: Ingest FROM external systems INTO Kafka (JDBC Source, Debezium CDC, FileStream)
+- **Sink connectors**: Deliver FROM Kafka TO external systems (Elasticsearch, S3, JDBC Sink, HDFS)
+- **Converters**: Serialize/deserialize between Connect's internal format and wire format (Avro, JSON, Protobuf). Decoupled from connectors -- any connector works with any converter.
+- **SMTs**: Single-message transforms applied in an ordered pipeline chain (InsertField, ReplaceField, TimestampRouter, RegexRouter, Cast, Flatten)
+- **Dead Letter Queue**: Failed records routed to a DLQ topic with error context in headers (sink connectors only). Config: `errors.tolerance=all`, `errors.deadletterqueue.topic.name=<topic>`
+
+**Deployment**: Use distributed mode for production (multiple workers, REST API, automatic task failover). Internal topics (`connect-offsets`, `connect-configs`, `connect-status`) should have `replication.factor=3`. Use standalone mode for development only.
 
 ## Kafka Streams Overview
 
