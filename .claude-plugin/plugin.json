@@ -1,6 +1,6 @@
 {
   "name": "domain-expert",
-  "version": "1.0.0",
+  "version": "0.7.0",
   "description": "Expert knowledge across 18 IT domains (186+ technologies) with task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
   "author": { "name": "Christopher Huffman" },
   "license": "MIT",

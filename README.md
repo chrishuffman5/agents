@@ -1,5 +1,7 @@
 # Domain Expert Plugin
 
+> **Preview / Beta** — This plugin is in beta experimentation mode (v0.7.0). It is not intended for production use without proper testing and validation. Features, skill content, and agent behavior may change between releases.
+
 A Claude Code plugin providing **domain expert knowledge skills** and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Agents orchestrate that knowledge for cross-domain workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
 
 **1,664+ files | 186+ technologies | 18 domains | 6 agents | 460,000+ lines of expert knowledge**
@@ -600,4 +602,4 @@ All skills reflect technology versions current as of **April 2026**. Each skill 
 
 ## License
 
-MIT
+MIT — See [LICENSE](LICENSE) for full terms, including the AI agent liability disclaimer.
