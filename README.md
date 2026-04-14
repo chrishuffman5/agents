@@ -12,7 +12,7 @@ A Claude Code plugin providing **domain expert knowledge skills** and **task-ori
 
 ```bash
 # Install as a Claude Code plugin
-git clone https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
+git clone https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
 ```
 
 Claude Code auto-discovers all skills and agents via the `.claude-plugin/plugin.json` manifest. Once installed, just describe what you need — no manual configuration required.
@@ -46,7 +46,7 @@ Claude Code auto-discovers all skills and agents via the `.claude-plugin/plugin.
 
 ```bash
 # Clone a single domain (e.g., just database skills)
-git clone --filter=blob:none --sparse https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
+git clone --filter=blob:none --sparse https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
 cd .claude/plugins/domain-expert/
 git sparse-checkout set skills/database agents .claude-plugin CLAUDE.md
 
