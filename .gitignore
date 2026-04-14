@@ -13,6 +13,6 @@
 deleteme/
 
 # Research workspaces (intermediate research used to build skills)
-agents/api-realtime/research/
-agents/messaging/research/
-agents/mail-collab/research/
+skills/api-realtime/research/
+skills/messaging/research/
+skills/mail-collab/research/
