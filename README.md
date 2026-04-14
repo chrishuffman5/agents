@@ -8,38 +8,56 @@ A Claude Code plugin providing **domain expert knowledge skills** and **task-ori
 
 ## Installation
 
-### Claude Code Plugin (recommended)
+### Claude Code
 
 ```bash
-# Install as a Claude Code plugin
 git clone https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
 ```
 
-Claude Code auto-discovers all skills and agents via the `.claude-plugin/plugin.json` manifest. Once installed, just describe what you need — no manual configuration required.
+Auto-discovers all skills and agents via `.claude-plugin/plugin.json`. Just describe what you need — no configuration required.
 
-### Quick Examples
+### GitHub Copilot CLI
+
+```bash
+copilot plugin install chrishuffman5/domain-expert
+```
+
+Copilot installs skills, agents, and hooks from the plugin structure. Verified working with Copilot CLI v1.0.11+.
+
+### OpenAI Codex CLI
+
+```bash
+git clone https://github.com/chrishuffman5/domain-expert.git ~/.codex/skills/domain-expert/
+```
+
+Codex discovers skills from `SKILL.md` files in `~/.codex/skills/`. Restart Codex after installing to pick up new skills.
+
+### Gemini CLI
+
+> **Note:** Gemini CLI extension support is still maturing. The commands below follow the official `gemini extensions` documentation but may require a recent Gemini CLI version.
+
+```bash
+gemini extensions install https://github.com/chrishuffman5/domain-expert
+```
+
+If the remote install fails, use a local clone instead:
+
+```bash
+git clone https://github.com/chrishuffman5/domain-expert.git ~/domain-expert
+gemini extensions link ~/domain-expert
+```
+
+### Verify Installation
+
+Start a new session in your chosen platform and ask something that should trigger a skill or agent:
 
 ```
-# Knowledge question — skill loads automatically
-> How does PostgreSQL VACUUM work?
-
-# Task request — agent auto-delegates
-> We need a database for a social app with 10M users. Recommend options.
-
-# Troubleshooting — diagnostic agent takes over
+> Which database should I use for a social app with 10M users?
 > Our SQL Server 2022 instance has had CPU at 95% since last night.
-
-# Migration planning — loads both source and target expertise
 > Plan a migration from SQL Server 2019 to PostgreSQL 17.
-
-# Infrastructure — generates IaC with correct technology parameters
 > Create Terraform for a PostgreSQL 16 cluster on AWS RDS with read replicas.
-
-# Security — designs hardening and agent permission boundaries
-> Harden our database infrastructure and scope permissions for our monitoring agents.
-
-# Data governance — classification, encryption, compliance
 > Classify our customer database for GDPR and design least-privilege agent access.
+> Harden our database infrastructure and scope permissions for our monitoring agents.
 ```
 
 ### Other Installation Methods
