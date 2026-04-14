@@ -9,12 +9,16 @@
     {
       "name": "domain-expert",
       "description": "Expert knowledge across 18 IT domains (186+ technologies) with task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
-      "version": "0.7.1",
-      "source": "./",
+      "version": "0.7.2",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/chrishuffman5/domain-expert.git"
+      },
       "author": {
         "name": "Christopher Huffman",
         "email": "50709169+chrishuffman5@users.noreply.github.com"
-      }
+      },
+      "homepage": "https://github.com/chrishuffman5/domain-expert"
     }
   ]
 }
