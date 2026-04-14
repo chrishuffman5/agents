@@ -1,8 +1,13 @@
 {
   "name": "domain-expert",
-  "version": "0.7.2",
   "description": "Expert knowledge across 18 IT domains (186+ technologies) with task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
-  "author": { "name": "Christopher Huffman" },
+  "version": "0.7.2",
+  "author": {
+    "name": "Christopher Huffman",
+    "email": "50709169+chrishuffman5@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
   "license": "MIT",
   "keywords": [
     "database",
@@ -14,7 +19,5 @@
     "cloud",
     "networking",
     "monitoring"
-  ],
-  "skills": ["./skills/"],
-  "agents": ["./agents/"]
+  ]
 }
