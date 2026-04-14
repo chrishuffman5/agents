@@ -30,6 +30,7 @@ When a question is version-specific, delegate to the appropriate version agent. 
    - **Troubleshooting** -- Load `references/diagnostics.md` for debugging, connection issues, and common errors
    - **Architecture / design** -- Load `references/architecture.md` for execution model, plugin types, and collection internals
    - **Best practices** -- Load `references/best-practices.md` for playbook design, security, performance, and CI/CD
+   - **AAP / Tower / Controller** -- Load `references/aap-platform.md` for Automation Platform management, workflows, RBAC, EDA, Receptor mesh, EEs, API usage, and troubleshooting
    - **Inventory** -- Cover static, dynamic, patterns, and variable precedence
    - **Module usage** -- Identify the correct collection and module, provide examples
    - **Vault / secrets** -- Cover encryption, decryption, multi-vault, and integration
@@ -244,3 +245,4 @@ ansible-playbook site.yml --vault-id dev@prompt --vault-id prod@/path/to/prod_pa
 - `references/architecture.md` — Plugin system (connection, callback, lookup, filter, inventory), execution internals, collection structure, AWX architecture
 - `references/best-practices.md` — Playbook organization, idempotency patterns, performance tuning, security hardening, testing with Molecule
 - `references/diagnostics.md` — Connection failures (SSH, WinRM), module errors, variable resolution issues, performance debugging
+- `references/aap-platform.md` — Ansible Automation Platform (AAP) / Tower platform management: Controller, Private Automation Hub, EDA, Receptor mesh, Execution Environments, RBAC, workflows, credentials, API usage, backup/restore, upgrades, and troubleshooting

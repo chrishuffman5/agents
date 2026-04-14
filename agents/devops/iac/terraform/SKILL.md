@@ -28,6 +28,7 @@ When a question is version-specific, delegate to the appropriate version agent. 
    - **Troubleshooting** -- Load `references/diagnostics.md` for common errors, state issues, and debugging workflows
    - **Architecture / module design** -- Load `references/architecture.md` for provider internals, state mechanics, and module patterns
    - **Best practices** -- Load `references/best-practices.md` for code organization, naming, security, and CI/CD integration
+   - **Terraform Cloud / HCP Terraform** -- Load `references/terraform-cloud.md` for workspaces, runs, VCS integration, policies, agents, dynamic credentials, API, and tfe provider
    - **State management** -- Cover backends, locking, import, moved blocks, state surgery
    - **Provider issues** -- Authentication, version constraints, data sources, resource lifecycle
 
@@ -239,3 +240,4 @@ locals {
 - `references/architecture.md` — Provider plugin protocol, state file internals, dependency graph, plan/apply mechanics, backend deep dive
 - `references/best-practices.md` — Code organization, naming conventions, module design, CI/CD integration, security hardening, cost management
 - `references/diagnostics.md` — Common errors (state lock, provider auth, dependency cycles, plan drift), debugging workflows, state recovery
+- `references/terraform-cloud.md` — HCP Terraform / Terraform Cloud workspace management, VCS integration, run workflow, policy enforcement, dynamic credentials, agents, API automation, tfe provider, troubleshooting
