@@ -6,6 +6,56 @@ A Claude Code plugin providing **domain expert knowledge skills** and **task-ori
 
 ---
 
+## Installation
+
+### Claude Code Plugin (recommended)
+
+```bash
+# Install as a Claude Code plugin
+git clone https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
+```
+
+Claude Code auto-discovers all skills and agents via the `.claude-plugin/plugin.json` manifest. Once installed, just describe what you need — no manual configuration required.
+
+### Quick Examples
+
+```
+# Knowledge question — skill loads automatically
+> How does PostgreSQL VACUUM work?
+
+# Task request — agent auto-delegates
+> We need a database for a social app with 10M users. Recommend options.
+
+# Troubleshooting — diagnostic agent takes over
+> Our SQL Server 2022 instance has had CPU at 95% since last night.
+
+# Migration planning — loads both source and target expertise
+> Plan a migration from SQL Server 2019 to PostgreSQL 17.
+
+# Infrastructure — generates IaC with correct technology parameters
+> Create Terraform for a PostgreSQL 16 cluster on AWS RDS with read replicas.
+
+# Security — designs hardening and agent permission boundaries
+> Harden our database infrastructure and scope permissions for our monitoring agents.
+
+# Data governance — classification, encryption, compliance
+> Classify our customer database for GDPR and design least-privilege agent access.
+```
+
+### Other Installation Methods
+
+```bash
+# Clone a single domain (e.g., just database skills)
+git clone --filter=blob:none --sparse https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
+cd .claude/plugins/domain-expert/
+git sparse-checkout set skills/database agents .claude-plugin CLAUDE.md
+
+# Or copy individual skill directories into your existing .claude/skills/
+cp -r domain-expert/skills/database .claude/skills/database
+```
+
+---
+
 ## What Are These Skills?
 
 Each skill is a structured knowledge package that gives an AI assistant deep expertise in a specific technology and version. Rather than one monolithic "IT expert" that knows a little about everything, this library provides narrowly focused specialists that know the exact quirks, features, and pitfalls of their specific domain.
@@ -443,24 +493,7 @@ Each agent:
 
 ---
 
-## How to Use
-
-### As a Claude Code Plugin
-
-Install as a plugin by cloning into your project:
-
-```bash
-# Clone the full plugin
-git clone https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
-```
-
-Claude Code auto-discovers skills and agents from the plugin's `skills/` and `agents/` directories via the `.claude-plugin/plugin.json` manifest.
-
-### Direct Usage
-
-Skills in this library are designed as Claude Code skills. Each `SKILL.md` file can be loaded as a skill to give Claude deep expertise in that domain.
-
-### Plugin Structure
+## Project Structure
 
 ```
 domain-expert/
