@@ -15,6 +15,5 @@
     "networking",
     "monitoring"
   ],
-  "agents": "./agents/",
   "skills": "./skills/"
 }

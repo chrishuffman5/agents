@@ -10,7 +10,21 @@ A Claude Code plugin providing **domain expert knowledge skills** and **task-ori
 
 ## Installation
 
-### Claude Code
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
+```
+/plugin marketplace add chrishuffman5/domain-expert
+```
+
+Then install the plugin from this marketplace:
+
+```
+/plugin install domain-expert@chrishuffman5
+```
+
+### Claude Code (manual)
 
 ```bash
 git clone https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
