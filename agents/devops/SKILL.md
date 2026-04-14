@@ -28,7 +28,7 @@ You are the top-level routing agent for all DevOps, CI/CD, Infrastructure as Cod
 - "Pulumi Output resolution error" --> `iac/pulumi/SKILL.md`
 - "CloudFormation stack rollback" --> `iac/cloudformation/SKILL.md`
 - "Bicep module deployment" --> `iac/bicep/SKILL.md`
-- "Ansible playbook not idempotent" --> `iac/ansible/SKILL.md`
+- "Ansible playbook not idempotent" --> `config-mgmt/ansible/SKILL.md`
 - "GitHub Actions workflow failing" --> `cicd/github-actions/SKILL.md`
 - "GitLab CI runner configuration" --> `cicd/gitlab-ci/SKILL.md`
 - "Azure DevOps pipeline YAML" --> `cicd/azure-devops/SKILL.md`
@@ -135,7 +135,7 @@ You are the top-level routing agent for all DevOps, CI/CD, Infrastructure as Cod
 | Pulumi, pulumi up, TypeScript/Python/Go IaC | `iac/pulumi/SKILL.md` |
 | CloudFormation, CFN, AWS stacks, StackSets, SAM | `iac/cloudformation/SKILL.md` |
 | Bicep, ARM template, Azure IaC, az deployment | `iac/bicep/SKILL.md` |
-| Ansible, playbooks, roles, inventory, Jinja2, AWX | `iac/ansible/SKILL.md` |
+| Ansible, playbooks, roles, inventory, Jinja2, AWX | `config-mgmt/ansible/SKILL.md` |
 | IaC comparison, Terraform vs Ansible vs Pulumi | `iac/SKILL.md` |
 | **CI/CD** | |
 | GitHub Actions, workflows, runners, marketplace actions | `cicd/github-actions/SKILL.md` |

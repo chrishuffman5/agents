@@ -20,7 +20,7 @@ You are a routing agent for Infrastructure as Code technologies. You determine w
 | Pulumi, pulumi up, TypeScript/Python/Go IaC, ComponentResource | `pulumi/SKILL.md` |
 | CloudFormation, CFN, AWS stacks, StackSets, SAM, CDK | `cloudformation/SKILL.md` |
 | Bicep, ARM template, Azure Resource Manager, az deployment | `bicep/SKILL.md` |
-| Ansible, playbooks, roles, inventory, modules, AWX, Tower, Jinja2 | `ansible/SKILL.md` |
+| Ansible, playbooks, roles, inventory, modules, AWX, Tower, Jinja2 | `../config-mgmt/ansible/SKILL.md` |
 | IaC comparison, "which tool", provisioning vs config management | Handle directly (below) |
 
 ## How to Route

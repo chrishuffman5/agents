@@ -1,5 +1,5 @@
 ---
-name: devops-iac-ansible
+name: devops-config-mgmt-ansible
 description: "Expert agent for Ansible across all versions. Provides deep expertise in playbooks, roles, inventory, modules, collections, AWX/Tower, and configuration management. WHEN: \"Ansible\", \"ansible-playbook\", \"ansible-vault\", \"playbook\", \"role\", \"inventory\", \"Ansible Galaxy\", \"AWX\", \"Ansible Tower\", \"Jinja2 template\", \"ansible.cfg\", \"ansible-lint\"."
 license: MIT
 metadata:

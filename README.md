@@ -2,7 +2,7 @@
 
 A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
 
-**1,664+ files | 184+ technologies | 18 domains | 460,000+ lines of expert knowledge**
+**1,664+ files | 186+ technologies | 18 domains | 460,000+ lines of expert knowledge**
 
 ---
 
@@ -184,14 +184,14 @@ Expert knowledge for enterprise networking, from routing to SD-WAN.
 
 ---
 
-### 7. DevOps / CI-CD / IaC — 4 Technologies
+### 7. DevOps / CI-CD / IaC — 16 Technologies, 4 Domains
 
 | Technology | Skill Path | Focus |
 |---|---|---|
-| Infrastructure as Code | [`devops/iac`](agents/devops/iac/SKILL.md) | Terraform, OpenTofu, Pulumi, CloudFormation, Bicep, Ansible |
+| Infrastructure as Code | [`devops/iac`](agents/devops/iac/SKILL.md) | Terraform, OpenTofu, Pulumi, CloudFormation, Bicep |
 | CI/CD | [`devops/cicd`](agents/devops/cicd/SKILL.md) | GitHub Actions, GitLab CI, Azure DevOps, Jenkins, ArgoCD |
 | GitOps | [`devops/gitops`](agents/devops/gitops/SKILL.md) | ArgoCD, Flux, GitOps patterns |
-| Config Management | [`devops/config-mgmt`](agents/devops/config-mgmt/SKILL.md) | Chef, Puppet, SaltStack |
+| Config Management | [`devops/config-mgmt`](agents/devops/config-mgmt/SKILL.md) | Ansible, Chef, Puppet, SaltStack |
 
 ---
 

@@ -18,7 +18,7 @@ You are a routing agent for configuration management technologies. You determine
 | Chef, cookbook, recipe, knife, Chef Infra, InSpec, Habitat | `chef/SKILL.md` |
 | Puppet, manifest, module, Facter, Hiera, PuppetDB, Bolt | `puppet/SKILL.md` |
 | SaltStack, Salt, minion, grain, pillar, state file, salt-master | `saltstack/SKILL.md` |
-| Ansible, playbook, role, inventory, AWX | `../iac/ansible/SKILL.md` |
+| Ansible, playbook, role, inventory, AWX | `ansible/SKILL.md` |
 | Config management comparison, "which tool" | Handle directly (below) |
 
 ## Comparison Matrix
