@@ -2,7 +2,7 @@
 
 A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
 
-**1,578+ files | 165+ technologies | 15 domains | 443,000+ lines of expert knowledge**
+**1,664+ files | 184+ technologies | 18 domains | 460,000+ lines of expert knowledge**
 
 ---
 
@@ -355,16 +355,58 @@ Expert knowledge for comprehensive cloud architecture across all three major pro
 
 ---
 
-## Planned Domains (from PLAN.md)
+### 16. API & Real-Time — 8 Technologies
 
-The following domains are inventoried in PLAN.md but not yet built:
+Expert knowledge for data access protocols and real-time communication patterns.
 
-| # | Domain | Technologies |
+| Category | Technology | Skill Path | Focus |
+|---|---|---|---|
+| **Request/Response** | | | |
+| | GraphQL | [`api-realtime/graphql`](agents/api-realtime/graphql/SKILL.md) | Schema, resolvers, Apollo, Federation, Relay |
+| | gRPC | [`api-realtime/grpc`](agents/api-realtime/grpc/SKILL.md) | Protobuf, streaming, load balancing, 1.x |
+| | REST | [`api-realtime/rest`](agents/api-realtime/rest/SKILL.md) | OpenAPI 3.1, HTTP semantics, API gateways |
+| | OData | [`api-realtime/odata`](agents/api-realtime/odata/SKILL.md) | EDM, query options, Microsoft/SAP ecosystem, 4.x |
+| **Real-Time** | | | |
+| | SignalR | [`api-realtime/signalr`](agents/api-realtime/signalr/SKILL.md) | Hubs, scaling, Azure SignalR Service, .NET 8–10 |
+| | Socket.IO | [`api-realtime/socketio`](agents/api-realtime/socketio/SKILL.md) | Rooms, namespaces, adapters, 4.x |
+| | WebSocket | [`api-realtime/websocket`](agents/api-realtime/websocket/SKILL.md) | RFC 6455, native protocol, scaling patterns |
+| | Server-Sent Events | [`api-realtime/sse`](agents/api-realtime/sse/SKILL.md) | EventSource, LLM streaming, unidirectional |
+
+**Includes:** Protocol selection frameworks (REST vs GraphQL vs gRPC vs WebSocket), API design theory, authentication across protocols, versioning strategies, API gateway patterns, paradigm references (request/response, real-time).
+
+---
+
+### 17. Messaging & Event Streaming — 8 Technologies
+
+Expert knowledge for asynchronous messaging, event streaming, and event-driven architecture.
+
+| Technology | Skill Path | Focus |
 |---|---|---|
-| 10 | WebSockets / Real-Time | SignalR, Socket.IO, gRPC, GraphQL, SSE |
-| 17 | Messaging / Event Streaming | Kafka, RabbitMQ, NATS, Service Bus, Pulsar |
-| 19 | Data APIs / Data Access | GraphQL, OData, gRPC, SignalR |
-| 20 | Mail / Collaboration | Exchange, M365, Google Workspace |
+| RabbitMQ | [`messaging/rabbitmq`](agents/messaging/rabbitmq/SKILL.md) | AMQP, exchanges, quorum queues, streams, Khepri, 4.x |
+| NATS | [`messaging/nats`](agents/messaging/nats/SKILL.md) | Core NATS, JetStream, KV/Object Store, 2.12 |
+| Azure Service Bus | [`messaging/azure-service-bus`](agents/messaging/azure-service-bus/SKILL.md) | Queues, topics, sessions, Premium tier |
+| AWS SQS / SNS | [`messaging/aws-sqs-sns`](agents/messaging/aws-sqs-sns/SKILL.md) | Standard/FIFO queues, fan-out, message filtering |
+| Google Cloud Pub/Sub | [`messaging/gcp-pubsub`](agents/messaging/gcp-pubsub/SKILL.md) | Ordering, exactly-once, BigQuery subscriptions |
+| Apache Pulsar | [`messaging/pulsar`](agents/messaging/pulsar/SKILL.md) | Multi-tenancy, geo-replication, tiered storage, 4.x |
+| Apache Kafka | [`messaging/kafka`](agents/messaging/kafka/SKILL.md) | Cross-ref to ETL/streaming Kafka |
+| Redis Streams | [`messaging/redis-streams`](agents/messaging/redis-streams/SKILL.md) | Cross-ref to database Redis |
+
+**Includes:** Messaging patterns (pub/sub, point-to-point, request/reply), delivery guarantees, event-driven architecture (event sourcing, CQRS, sagas), broker selection frameworks, paradigm references (traditional brokers, event streaming).
+
+---
+
+### 18. Mail & Collaboration — 4 Technologies
+
+Expert knowledge for enterprise email infrastructure and collaboration platforms.
+
+| Technology | Skill Path | Focus |
+|---|---|---|
+| Microsoft Exchange | [`mail-collab/exchange`](agents/mail-collab/exchange/SKILL.md) | 2019, Exchange Online, hybrid, DAG, migration |
+| Microsoft 365 | [`mail-collab/m365`](agents/mail-collab/m365/SKILL.md) | Tenant admin, licensing, Purview, Conditional Access |
+| Google Workspace | [`mail-collab/google-workspace`](agents/mail-collab/google-workspace/SKILL.md) | Admin Console, Vault, GCDS, GAM |
+| Postfix | [`mail-collab/postfix`](agents/mail-collab/postfix/SKILL.md) | MTA config, TLS/DANE, anti-spam, milters, 3.9/3.10 |
+
+**Includes:** Email protocols (SMTP, IMAP, JMAP), DNS records (SPF, DKIM, DMARC, DANE, MTA-STS), mail flow architecture, migration patterns, compliance frameworks, paradigm references (on-prem, cloud).
 
 ---
 
@@ -424,7 +466,10 @@ Technologies that span multiple domains use cross-references instead of duplicat
 | Storage | 12 | 60 | 6,497 |
 | Data Analytics / BI | 11 | 55 | 14,271 |
 | Cloud Platforms | 3 | 30 | 5,797 |
-| **Total** | **166** | **1,578** | **443,783** |
+| API & Real-Time | 8 | 36 | 7,232 |
+| Messaging | 8 | 30 | 4,881 |
+| Mail & Collaboration | 4 | 20 | 5,084 |
+| **Total** | **186** | **1,664** | **460,980** |
 
 ---
 
