@@ -9,7 +9,7 @@
     {
       "name": "domain-expert",
       "description": "Expert knowledge across 18 IT domains (186+ technologies) with task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
-      "version": "0.7.0",
+      "version": "0.7.1",
       "source": "./",
       "author": {
         "name": "Christopher Huffman",
