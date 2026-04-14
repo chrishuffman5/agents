@@ -1,8 +1,8 @@
-# IT Domain Knowledge Skills Library
+# Domain Expert Plugin
 
-A comprehensive library of **domain expert knowledge skills** organized by IT domain, technology, and version. Each skill provides deep, version-specific expertise that transforms a general-purpose AI assistant into a genuine specialist.
+A Claude Code plugin providing **domain expert knowledge skills** and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Agents orchestrate that knowledge for cross-domain workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
 
-**1,664+ files | 186+ technologies | 18 domains | 460,000+ lines of expert knowledge**
+**1,664+ files | 186+ technologies | 18 domains | 6 agents | 460,000+ lines of expert knowledge**
 
 ---
 
@@ -410,11 +410,76 @@ Expert knowledge for enterprise email infrastructure and collaboration platforms
 
 ---
 
+## Agents
+
+Task-oriented subagents that run in their own context window with preloaded skills. Claude auto-delegates based on the user's prompt — no manual routing needed.
+
+| Agent | What It Does | Triggers On |
+|-------|-------------|-------------|
+| [**architecture-consultant**](agents/architecture-consultant.md) | Technology selection, capacity planning, architecture decisions | "which database", "recommend a stack", "compare technologies", "architecture review" |
+| [**troubleshooting-agent**](agents/troubleshooting-agent.md) | Systematic diagnostic triage with version-specific scripts and queries | "slow", "CPU high", "error", "timeout", "diagnose", "not working" |
+| [**migration-expert**](agents/migration-expert.md) | Cross-technology migration planning with feature compatibility mapping | "migrate from X to Y", "switch from", "feature mapping", "compatibility" |
+| [**iac-consultant**](agents/iac-consultant.md) | Infrastructure-as-code generation (Terraform, CloudFormation, Bicep, Pulumi) | "create Terraform", "provision", "IaC for", "deploy to cloud" |
+| [**data-expert**](agents/data-expert.md) | Data governance, classification, privacy, encryption, agent data access | "GDPR", "data classification", "PII", "data masking", "agent data access" |
+| [**security-expert**](agents/security-expert.md) | Hardening, IAM, secrets management, agent security profiles, compliance | "harden", "CIS benchmark", "IAM", "agent permissions", "SOC2", "NIST" |
+
+### How Agents Work
+
+Each agent:
+- Runs in its **own isolated context window** with a custom system prompt
+- Has **restricted tool access** (e.g., troubleshooting-agent gets Read/Grep/Glob/Bash, not Write/Edit)
+- **Preloads specific skills** via the `skills` frontmatter field (e.g., migration-expert loads database + backend + cloud-platforms + devops)
+- Uses **project memory** to persist decisions and findings across sessions
+- Returns results to the main conversation when done
+
+### Skills vs Agents
+
+| | Skill | Agent |
+|---|---|---|
+| **Answers** | "What do I know about X?" | "Help me accomplish Y" |
+| **Runs in** | Main conversation context | Own isolated context |
+| **Scope** | Single technology or domain | Cross-domain orchestration |
+| **Contains** | Facts, references, diagnostic queries | Persona, workflow, output format |
+
+---
+
 ## How to Use
 
-### With Claude Code
+### As a Claude Code Plugin
+
+Install as a plugin by cloning into your project:
+
+```bash
+# Clone the full plugin
+git clone https://github.com/chrishuffman5/agents.git .claude/plugins/domain-expert/
+```
+
+Claude Code auto-discovers skills and agents from the plugin's `skills/` and `agents/` directories via the `.claude-plugin/plugin.json` manifest.
+
+### Direct Usage
 
 Skills in this library are designed as Claude Code skills. Each `SKILL.md` file can be loaded as a skill to give Claude deep expertise in that domain.
+
+### Plugin Structure
+
+```
+domain-expert/
+├── .claude-plugin/plugin.json    # Plugin manifest
+├── agents/                       # Subagent definitions (.md files)
+│   ├── architecture-consultant.md
+│   ├── troubleshooting-agent.md
+│   ├── migration-expert.md
+│   ├── iac-consultant.md
+│   ├── data-expert.md
+│   └── security-expert.md
+├── skills/                       # Knowledge library (SKILL.md hierarchy)
+│   ├── database/                 # 29 technologies
+│   ├── security/                 # 14 technologies
+│   ├── devops/                   # 16 technologies
+│   └── [15 more domains]
+├── CLAUDE.md                     # Plugin entry point
+└── README.md
+```
 
 ### Skill Structure
 
@@ -427,7 +492,7 @@ technology/
 │   ├── architecture.md   # How the technology works internally
 │   ├── best-practices.md # Operational best practices
 │   └── diagnostics.md    # Troubleshooting guides
-├── scripts/              # Diagnostic scripts (OS domain — PowerShell/Bash)
+├── scripts/              # Diagnostic scripts (SQL, PowerShell, Bash)
 │   └── 01-health.ps1
 ├── configs/              # Configuration references (Frontend domain)
 │   └── tsconfig.json
