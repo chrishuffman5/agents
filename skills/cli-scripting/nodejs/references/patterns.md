@@ -534,3 +534,4 @@ const toJson = new Transform({
 | HTTP advanced | `undici` | Connection pooling, built into Node |
 | Concurrency | `p-limit`, `p-queue` | Precise concurrency control |
 | SQLite (24+) | `node:sqlite` | Built-in, no install |
+| Date/time (26+) | `Temporal` (global) | Built-in, replaces Luxon/Day.js/date-fns for most needs |
