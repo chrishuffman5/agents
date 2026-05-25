@@ -90,6 +90,49 @@ cp -r domain-expert/skills/database .claude/skills/database
 
 ---
 
+## Keeping the Plugin Up to Date
+
+New releases ship regularly. The fastest way to update is to **ask Claude** — the bundled [`update-plugin`](skills/update-plugin/SKILL.md) skill detects how the plugin was installed and runs the right update steps for you:
+
+```
+> Update the domain-expert plugin to the latest version.
+> Is there a newer version of domain-expert?
+```
+
+### Manual update (Claude Code marketplace install)
+
+Two non-interactive steps — refresh the marketplace, then update the plugin:
+
+```bash
+# 1. Refresh the marketplace so it sees the newest release
+claude plugin marketplace update domain-expert
+
+# 2. Update the plugin (run `claude plugin list` first to confirm the current version)
+claude plugin update domain-expert@domain-expert --scope user
+```
+
+Or use the in-session slash commands `/plugin marketplace update domain-expert` then `/plugin update domain-expert`.
+
+> **Restart Claude Code after updating.** Plugin changes apply on the next session — the running session keeps the version it started with.
+
+### Manual update (git clone install)
+
+```bash
+cd ~/.claude/plugins/domain-expert      # adjust to your clone path
+git pull --ff-only origin main          # or: git checkout v0.7.6  (a specific release tag)
+```
+
+### Verify
+
+```bash
+claude plugin list                                              # installed version
+gh release view --repo chrishuffman5/domain-expert              # latest published version
+```
+
+When the two match, you're current. See [`skills/update-plugin`](skills/update-plugin/SKILL.md) for Copilot/Codex/Gemini commands and troubleshooting.
+
+---
+
 ## What Are These Skills?
 
 Each skill is a structured knowledge package that gives an AI assistant deep expertise in a specific technology and version. Rather than one monolithic "IT expert" that knows a little about everything, this library provides narrowly focused specialists that know the exact quirks, features, and pitfalls of their specific domain.
