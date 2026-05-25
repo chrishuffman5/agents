@@ -6,9 +6,9 @@ metadata:
   version: "1.0.0"
 ---
 
-# Node.js 24 (Current) Version Expert
+# Node.js 24 (LTS) Version Expert
 
-Node 24 Current. Released May 2025. Will become LTS October 2025, EOL April 2028.
+Node 24 LTS. Released May 2025, entered LTS October 2025, EOL April 2028. (Node 26 is the current "Current" release.)
 
 ## Key Features
 
