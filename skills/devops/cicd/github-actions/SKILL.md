@@ -44,14 +44,14 @@ permissions:
   packages: write
 
 env:
-  NODE_VERSION: '22'
+  NODE_VERSION: '26'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
@@ -109,18 +109,18 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [20, 22]
+        node: [24, 26]
         exclude:
           - os: windows-latest
-            node: 20
+            node: 24
         include:
           - os: ubuntu-latest
-            node: 22
+            node: 26
             coverage: true
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci && npm test
@@ -193,11 +193,11 @@ name: Setup Project
 description: Install dependencies and build
 inputs:
   node-version:
-    default: '22'
+    default: '26'
 runs:
   using: composite
   steps:
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
