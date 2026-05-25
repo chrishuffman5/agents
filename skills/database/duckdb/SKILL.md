@@ -1,6 +1,6 @@
 ---
 name: database-duckdb
-description: "DuckDB technology expert covering ALL versions. Deep expertise in embedded OLAP, SQL dialect, file format support (Parquet/CSV/JSON), extension system, and analytical query optimization. WHEN: \"DuckDB\", \"duckdb CLI\", \"embedded OLAP\", \"DuckDB Parquet\", \"DuckDB extension\", \"httpfs\", \"spatial\", \"duckdb_fdw\", \"DuckDB Python\", \"DuckDB WASM\", \"Friendly SQL\", \"DuckDB pivot\", \"duckdb-wasm\"."
+description: "DuckDB technology expert covering ALL versions. Deep expertise in embedded OLAP, SQL dialect, file format support (Parquet/CSV/JSON), extension system, the Quack remote/client-server protocol, and analytical query optimization. WHEN: \"DuckDB\", \"duckdb CLI\", \"embedded OLAP\", \"DuckDB Parquet\", \"DuckDB extension\", \"httpfs\", \"spatial\", \"duckdb_fdw\", \"DuckDB Python\", \"DuckDB WASM\", \"Friendly SQL\", \"DuckDB pivot\", \"duckdb-wasm\", \"DuckDB Quack\", \"quack_serve\", \"DuckDB remote protocol\", \"DuckDB client-server\"."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -26,6 +26,7 @@ You are a specialist in DuckDB across all supported versions (1.4 LTS and 1.5). 
 - "DuckDB 1.5 VARIANT type" --> `1.5/SKILL.md`
 - "DuckDB 1.5 built-in GEOMETRY type" --> `1.5/SKILL.md`
 - "DuckDB 1.5 PEG parser" --> `1.5/SKILL.md`
+- "DuckDB 1.5.3 Quack remote protocol / quack_serve / how to secure Quack" --> `1.5/SKILL.md` (+ `references/quack.md`)
 - "DuckDB 1.4 database encryption" --> `1.4/SKILL.md`
 - "DuckDB 1.4 MERGE statement" --> `1.4/SKILL.md`
 - "DuckDB 1.4 Iceberg writes" --> `1.4/SKILL.md`
@@ -61,7 +62,23 @@ DuckDB is an in-process analytical SQL database -- it runs inside the host appli
 - **Embedded deployment** -- Ships as a library linked into your application (C++, Python, R, Node.js, Java, Rust, Go, WASM)
 - **Concurrent readers** -- Multiple processes can read a persistent database simultaneously; writes require exclusive access
 
-**Key implication:** DuckDB is not a replacement for PostgreSQL/MySQL in multi-user OLTP workloads. It excels at single-user or embedded analytical workloads -- data science notebooks, ETL pipelines, local data exploration, edge analytics, and browser-based analytics via WASM.
+**Key implication:** DuckDB is not a replacement for PostgreSQL/MySQL in multi-user OLTP workloads. It excels at single-user or embedded analytical workloads -- data science notebooks, ETL pipelines, local data exploration, edge analytics, and browser-based analytics via WASM. (As of v1.5.3, the **Quack** protocol adds an *optional* client-server mode on top of this -- see below.)
+
+### Remote Access via the Quack Protocol (v1.5.3+)
+
+DuckDB's in-process model means a persistent database file allows concurrent readers but only a single writer. The **Quack remote protocol** (a core extension shipped in v1.5.3, currently **beta**) relaxes this by turning a DuckDB process into an HTTP(S) server that other DuckDB processes connect to as clients -- giving DuckDB an optional client-server / RPC mode for concurrent remote read-write against a shared database.
+
+```sql
+-- Server: expose this DuckDB over HTTP (default port 9494, localhost-only by default)
+CALL quack_serve('quack:localhost', token = 'super_secret');
+
+-- Client: attach and query the remote database as if it were local
+CREATE SECRET (TYPE quack, TOKEN 'super_secret', SCOPE 'quack:localhost');
+ATTACH 'quack:localhost' AS remote;
+FROM remote.my_table;
+```
+
+The client uses plain HTTP for local URIs and **HTTPS for everything else** automatically. The server does not terminate TLS itself: for any non-local deployment the recommendation is to **front it with a TLS-terminating reverse proxy (e.g. nginx) and serve over standard HTTPS** rather than exposing Quack directly. Quack is version-specific to 1.5.3+ -- route deep questions to `1.5/SKILL.md`, and load `references/quack.md` for the full setup, security model, and endpoint guidance.
 
 ### Vectorized Execution Engine
 
@@ -407,6 +424,7 @@ UPDATE EXTENSIONS;
 | **inet** | IP address types and functions | Network data analysis |
 | **autocomplete** | SQL autocomplete in CLI | Interactive use |
 | **lance** | Lance lakehouse format (v1.5.1+) | Lance reads/writes |
+| **quack** | Remote/client-server RPC protocol over HTTP (v1.5.3+, beta) | Concurrent remote read/write to a shared DuckDB |
 
 ### Window Functions and QUALIFY
 
@@ -666,7 +684,7 @@ SELECT * FROM duckdb_indexes();
 
 ## Common Pitfalls
 
-1. **Treating DuckDB as a multi-user server** -- DuckDB is single-writer. Use PostgreSQL, MySQL, or a cloud warehouse for concurrent multi-user OLTP/OLAP workloads.
+1. **Treating DuckDB as a multi-user server** -- DuckDB is single-writer at the file level. The Quack protocol (v1.5.3+, beta) adds a client-server mode for concurrent remote read/write against a shared DuckDB, but it is point-to-point (not a distributed engine) and tops out around 8 concurrent write threads today. For high-concurrency multi-user OLTP/OLAP, still use PostgreSQL, MySQL, or a cloud warehouse.
 
 2. **Not leveraging direct file queries** -- Importing data into tables before querying is often unnecessary. `SELECT * FROM 'data.parquet'` is efficient and avoids data duplication.
 
@@ -690,7 +708,7 @@ SELECT * FROM duckdb_indexes();
 
 | Version | Status | Key Features | Route To |
 |---|---|---|---|
-| **DuckDB 1.5** | Current (Mar 2026) | VARIANT type, built-in GEOMETRY, Friendly CLI, PEG parser, ODBC scanner, Lance format, Azure writes | `1.5/SKILL.md` |
+| **DuckDB 1.5** | Current (Mar 2026) | VARIANT type, built-in GEOMETRY, Friendly CLI, PEG parser, ODBC scanner, Lance format, Azure writes, Quack remote protocol (v1.5.3, beta) | `1.5/SKILL.md` |
 | **DuckDB 1.4** | LTS (until Sep 2026) | Database encryption (AES-256-GCM), MERGE statement, Iceberg writes, materialized CTEs by default | `1.4/SKILL.md` |
 
 ## Reference Files
@@ -699,7 +717,8 @@ Load these when you need deep knowledge for a specific area:
 
 - `references/architecture.md` -- Vectorized execution engine, columnar storage format, buffer management, morsel-driven parallelism, extension loading, catalog system. Read for "how does DuckDB work internally" questions.
 - `references/diagnostics.md` -- PRAGMA commands, system catalog queries, EXPLAIN ANALYZE interpretation, profiling, extension management, file scanning options, memory diagnostics. Read when troubleshooting performance or investigating database state.
-- `references/best-practices.md` -- Memory/thread tuning, file format selection, data loading strategies, Python/R integration patterns, deployment models, backup/recovery, security. Read for configuration and operational guidance.
+- `references/best-practices.md` -- Memory/thread tuning, file format selection, data loading strategies, Python/R integration patterns, deployment models, backup/recovery, security (including Quack remote-protocol security). Read for configuration and operational guidance.
+- `references/quack.md` -- The Quack remote/client-server protocol (v1.5.3+, beta): what it is, server and client setup, the full security model (HTTP-vs-HTTPS rule, TLS-terminating reverse proxy, token/secret auth, bind defaults), the recommended HTTPS endpoint, hardening checklist, and limitations. Read for "how do I set up / secure DuckDB remote access" questions.
 
 ## External Resources
 

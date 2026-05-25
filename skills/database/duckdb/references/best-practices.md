@@ -631,6 +631,52 @@ SELECT * FROM duckdb_secrets();
 DROP SECRET my_s3;
 ```
 
+### Quack Remote Protocol Security (v1.5.3+, beta)
+
+When you expose a DuckDB instance over the Quack remote protocol, you are publishing the **full
+read/write SQL surface** of that instance to the network. Secure it like any database endpoint. (See
+`quack.md` for the complete protocol reference; this is the operational security checklist.)
+
+```sql
+-- Server: bind to localhost only (the default) and require a strong token.
+-- A random token is generated if you omit one; custom tokens need 4+ characters.
+CALL quack_serve('quack:localhost', token = 'use_a_long_random_token');
+
+-- Binding to a non-local address is a deliberate opt-in -- only do this behind a proxy/firewall.
+CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
+
+-- Client: store the token as a secret instead of inlining it in every query.
+CREATE SECRET (TYPE quack, TOKEN 'use_a_long_random_token', SCOPE 'quack:localhost');
+ATTACH 'quack:localhost' AS remote;
+```
+
+**Transport -- HTTP local, HTTPS remote.** The client automatically picks **plain HTTP for local URIs**
+(`localhost`, `127.0.0.1`, `::1`) and **HTTPS for everything else**. The Quack server itself does *not*
+terminate TLS. Do not set `DISABLE_SSL` for remote clients -- that would send queries and tokens in
+clear text.
+
+**Recommended endpoint -- standard HTTPS via a TLS-terminating reverse proxy.** For any deployment
+beyond local-only, do not expose Quack directly to the internet. Put a proven HTTP reverse proxy
+(nginx is the reference) in front of it, let the proxy terminate TLS, and serve over standard HTTPS on
+443. The official AWS one-click template implements exactly this (nginx + Let's Encrypt, security group
+opening only 80 for ACME and 443 for HTTPS):
+
+```
+client ──HTTPS:443──▶ nginx (TLS termination) ──HTTP──▶ quack server (localhost:9494)
+```
+
+**Quack hardening checklist:**
+- Keep the server bound to **localhost**; reach it only through the reverse proxy. Require
+  `allow_other_hostname => true` consciously, never by default.
+- **Terminate TLS at the proxy**; never `DISABLE_SSL` for non-local clients.
+- Use a **strong, unique token** stored via `CREATE SECRET (TYPE quack, ...)`; rotate it; never commit
+  it to source control.
+- **Firewall port 9494** so only the proxy/loopback can reach it; expose only 443 publicly.
+- Use the protocol's **authorization callback** to enforce least privilege (e.g. reject writes), since
+  the server otherwise grants the client the full SQL surface its session can see.
+- Quack is **beta** until DuckDB v2.0.0 -- pin your version and re-review settings on upgrade, as
+  function names and defaults may change.
+
 ## Common Operational Patterns
 
 ### Format Conversion
