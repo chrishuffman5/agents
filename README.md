@@ -4,7 +4,7 @@
 
 A Claude Code plugin providing **domain expert knowledge skills** and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Agents orchestrate that knowledge for cross-domain workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
 
-**1,664+ files | 186+ technologies | 18 domains | 6 agents | 460,000+ lines of expert knowledge**
+**1,668+ files | 187+ technologies | 18 domains | 6 agents | 460,000+ lines of expert knowledge**
 
 ---
 
@@ -268,7 +268,7 @@ Expert knowledge for enterprise networking, from routing to SD-WAN.
 
 ---
 
-### 7. DevOps / CI-CD / IaC — 16 Technologies, 4 Domains
+### 7. DevOps / CI-CD / IaC — 17 Technologies, 5 Domains
 
 | Technology | Skill Path | Focus |
 |---|---|---|
@@ -276,6 +276,7 @@ Expert knowledge for enterprise networking, from routing to SD-WAN.
 | CI/CD | [`devops/cicd`](skills/devops/cicd/SKILL.md) | GitHub Actions, GitLab CI, Azure DevOps, Jenkins, ArgoCD |
 | GitOps | [`devops/gitops`](skills/devops/gitops/SKILL.md) | ArgoCD, Flux, GitOps patterns |
 | Config Management | [`devops/config-mgmt`](skills/devops/config-mgmt/SKILL.md) | Ansible, Chef, Puppet, SaltStack |
+| Version Control / Repo Mgmt | [`devops/version-control/github`](skills/devops/version-control/github/SKILL.md) | Branching strategies, PR/review process, branch protection, SemVer, tags & releases |
 
 ---
 
@@ -542,7 +543,7 @@ domain-expert/
 ├── skills/                       # Knowledge library (SKILL.md hierarchy)
 │   ├── database/                 # 29 technologies
 │   ├── security/                 # 14 technologies
-│   ├── devops/                   # 16 technologies
+│   ├── devops/                   # 17 technologies
 │   └── [15 more domains]
 ├── CLAUDE.md                     # Plugin entry point
 └── README.md
@@ -589,7 +590,7 @@ Technologies that span multiple domains use cross-references instead of duplicat
 | Networking | 12 | 192 | 42,609 |
 | Backend | 10 | 54 | 26,770 |
 | Frontend | 11 | 116 | 25,844 |
-| DevOps | 16 | 77 | 13,639 |
+| DevOps | 17 | 81 | 14,257 |
 | Containers | 3 | 45 | 13,539 |
 | CLI / Scripting | 7 | 57 | 12,153 |
 | Monitoring | 11 | 50 | 9,882 |
@@ -601,7 +602,7 @@ Technologies that span multiple domains use cross-references instead of duplicat
 | API & Real-Time | 8 | 36 | 7,232 |
 | Messaging | 8 | 30 | 4,881 |
 | Mail & Collaboration | 4 | 20 | 5,084 |
-| **Total** | **186** | **1,664** | **460,980** |
+| **Total** | **187** | **1,668** | **461,598** |
 
 ---
 
