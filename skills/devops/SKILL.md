@@ -36,6 +36,7 @@ You are the top-level routing agent for all DevOps, CI/CD, Infrastructure as Cod
 - "CircleCI orb configuration" --> `cicd/circleci/SKILL.md`
 - "ArgoCD application sync" --> `gitops/argocd/SKILL.md`
 - "Flux Kustomization not reconciling" --> `gitops/flux/SKILL.md`
+- "Branching strategy / PR process / release tagging" --> `version-control/github/SKILL.md`
 - "Chef cookbook convergence" --> `config-mgmt/chef/SKILL.md`
 - "Puppet manifest compilation" --> `config-mgmt/puppet/SKILL.md`
 - "SaltStack state apply" --> `config-mgmt/saltstack/SKILL.md`
@@ -49,6 +50,7 @@ You are the top-level routing agent for all DevOps, CI/CD, Infrastructure as Cod
    - **CI/CD pipelines** -- Route to `cicd/SKILL.md`
    - **GitOps / continuous delivery** -- Route to `gitops/SKILL.md`
    - **Configuration management** -- Route to `config-mgmt/SKILL.md`
+   - **Version control / repo governance** (branching, PRs, releases/tags) -- Route to `version-control/github/SKILL.md`
    - **Technology-specific** -- Route directly to the technology agent
 
 2. **Gather context** -- Team size, cloud providers, existing tooling, compliance requirements, deployment frequency targets, monorepo vs polyrepo
@@ -148,6 +150,10 @@ You are the top-level routing agent for all DevOps, CI/CD, Infrastructure as Cod
 | ArgoCD, Application, ApplicationSet, sync, app-of-apps | `gitops/argocd/SKILL.md` |
 | Flux, GitRepository, Kustomization, HelmRelease, source | `gitops/flux/SKILL.md` |
 | GitOps comparison, ArgoCD vs Flux, pull-based delivery | `gitops/SKILL.md` |
+| **Version Control / Repo Management** | |
+| Branching strategy, trunk-based, GitHub Flow, GitFlow, release branches | `version-control/github/SKILL.md` |
+| Pull request process, code review, CODEOWNERS, branch protection, rulesets, merge strategy | `version-control/github/SKILL.md` |
+| Release management, semantic versioning, conventional commits, git tags, GitHub Releases, changelog | `version-control/github/SKILL.md` |
 | **Configuration Management** | |
 | Chef, cookbook, recipe, knife, InSpec, Habitat | `config-mgmt/chef/SKILL.md` |
 | Puppet, manifest, Facter, Hiera, PuppetDB, Bolt | `config-mgmt/puppet/SKILL.md` |

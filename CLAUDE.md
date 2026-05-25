@@ -7,7 +7,7 @@ Expert knowledge across 18 IT domains (186+ technologies) with task-oriented sub
 Ask technology-specific questions and get deep, version-specific expertise from `skills/`.
 
 - **Database** (29 technologies) — SQL Server, PostgreSQL, Oracle, MySQL, MongoDB, Redis, Snowflake, and more
-- **DevOps** (16) — Terraform, GitHub Actions, Ansible, ArgoCD, Jenkins, and more
+- **DevOps** (17) — Terraform, GitHub Actions, Ansible, ArgoCD, Jenkins, GitHub repo management, and more
 - **Security** (14) — Active Directory, Entra ID, CrowdStrike, and more
 - **Operating Systems** (8) — Windows Server, RHEL, Ubuntu, macOS, and more
 - **Frontend** (11) — React, Vue, Angular, Next.js, and more
