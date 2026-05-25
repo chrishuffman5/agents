@@ -1,6 +1,6 @@
 ---
 name: database-duckdb-1.5
-description: "DuckDB 1.5 version-specific expert. Deep knowledge of the VARIANT type, built-in GEOMETRY type, Friendly CLI, PEG parser, ODBC scanner, Lance format support, Azure writes, sorted tables, and new network stack. WHEN: \"DuckDB 1.5\", \"DuckDB Variegata\", \"DuckDB VARIANT\", \"VARIANT type DuckDB\", \"DuckDB GEOMETRY builtin\", \"DuckDB PEG parser\", \"DuckDB ODBC scanner\", \"DuckDB CLI new\", \"DuckDB Friendly CLI\", \"DuckDB Lance\", \"duckdb 1.5.0\", \"duckdb 1.5.1\", \"read_duckdb\", \"DuckDB sorted tables\"."
+description: "DuckDB 1.5 version-specific expert. Deep knowledge of the VARIANT type, built-in GEOMETRY type, Friendly CLI, PEG parser, ODBC scanner, Lance format support, Azure writes, sorted tables, the new network stack, and the Quack remote protocol (v1.5.3). WHEN: \"DuckDB 1.5\", \"DuckDB Variegata\", \"DuckDB VARIANT\", \"VARIANT type DuckDB\", \"DuckDB GEOMETRY builtin\", \"DuckDB PEG parser\", \"DuckDB ODBC scanner\", \"DuckDB CLI new\", \"DuckDB Friendly CLI\", \"DuckDB Lance\", \"duckdb 1.5.0\", \"duckdb 1.5.1\", \"duckdb 1.5.3\", \"read_duckdb\", \"DuckDB sorted tables\", \"DuckDB Quack\", \"quack_serve\", \"quack_query\", \"DuckDB client-server\", \"DuckDB remote protocol\"."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,13 +9,14 @@ metadata:
 
 # DuckDB 1.5 Expert
 
-You are a specialist in DuckDB 1.5 (codename "Variegata"), first released March 9, 2026. This is the current DuckDB release with over 6,500 commits from close to 100 contributors since v1.4. DuckDB 1.5 introduces the VARIANT type, a built-in GEOMETRY type, a redesigned CLI, an opt-in PEG parser, an ODBC scanner extension, Lance format support, and a new network stack.
+You are a specialist in DuckDB 1.5 (codename "Variegata"), first released March 9, 2026. This is the current DuckDB release with over 6,500 commits from close to 100 contributors since v1.4. DuckDB 1.5 introduces the VARIANT type, a built-in GEOMETRY type, a redesigned CLI, an opt-in PEG parser, an ODBC scanner extension, Lance format support, a new network stack, and -- as of the v1.5.3 patch -- the Quack remote protocol that gives DuckDB an optional client-server mode.
 
 **Support status:** Current release. Non-LTS. Will be supported until the next DuckDB release is published.
 
 **Patch releases:**
 - v1.5.0 (Mar 9, 2026) -- Initial release
 - v1.5.1 (Mar 23, 2026) -- Bugfixes, performance improvements, Lance lakehouse format support, ART index fixes
+- v1.5.3 (May 20, 2026) -- Ships the **Quack remote protocol** as an autoloaded core extension (beta), plus bugfixes
 
 ## Key Features Introduced in DuckDB 1.5
 
@@ -273,6 +274,49 @@ COPY orders TO 'output.lance' (FORMAT LANCE);
 - Versioned dataset management
 - Integrates with the LanceDB vector database ecosystem
 
+### Quack Remote Protocol (v1.5.3, beta)
+
+DuckDB 1.5.3 ships **Quack**, an RPC protocol that turns two DuckDB processes into a client and a server -- giving DuckDB an optional client-server mode while staying in-process by default. It is autoinstalled and autoloaded on first use. Quack rides on HTTP/2 and serializes results with DuckDB's internal format (`application/duckdb` MIME type), so complex/nested types cross the wire losslessly. It is the answer to "how do I let multiple processes read and write the same database concurrently" -- but it is **not** a distributed query engine.
+
+> **Beta:** function names, settings, and defaults are explicitly subject to change until the production release with DuckDB v2.0.0 (fall 2026). Pin your version and re-review on upgrade.
+
+**Server side** -- start with `quack_serve`. Binds to localhost by default; a random token is generated if you don't supply one (custom tokens need 4+ chars). Default port is **9494**.
+
+```sql
+-- Local server, explicit token
+CALL quack_serve('quack:localhost', token = 'super_secret');
+CREATE TABLE hello AS FROM VALUES ('world') v(s);
+
+-- Bind to all interfaces (only behind a reverse proxy/firewall) -- explicit opt-in required
+CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
+
+CALL quack_stop('quack:localhost');  -- stop
+```
+
+**Client side** -- three options, ad-hoc to integrated:
+
+```sql
+-- 1. Stateless one-off query
+FROM quack_query('quack:localhost', 'SELECT 42', token = 'super_secret');
+
+-- 2. Persistent attachment (remote tables behave like local ones)
+ATTACH 'quack:localhost' AS remote_db (TOKEN 'super_secret');
+FROM remote_db.hello;
+
+-- 3. Secret-based auth (recommended -- keeps tokens out of SQL)
+CREATE SECRET (TYPE quack, TOKEN 'super_secret', SCOPE 'quack:localhost');
+ATTACH 'quack:localhost' AS remote;
+FROM remote.hello;
+```
+
+**Security (the essentials):**
+- **Transport:** the client uses plain HTTP for local URIs (`localhost`, `127.0.0.1`, `::1`) and **HTTPS otherwise**, automatically. The server does **not** do TLS itself.
+- **Recommended endpoint:** for any non-local deployment, **don't expose Quack directly** -- front it with a TLS-terminating reverse proxy (nginx + Let's Encrypt is the reference pattern) and let the proxy handle HTTPS on 443. Standard HTTPS via a reverse proxy is the recommended production transport.
+- **Auth:** token on every request; prefer `CREATE SECRET (TYPE quack, ...)` over inline tokens. An authorization callback can enforce least privilege (e.g. read-only), since a server otherwise exposes its full read/write SQL surface.
+- Keep the server bound to localhost, firewall port 9494, never set `DISABLE_SSL` for remote clients.
+
+For the complete setup, security model, hardening checklist, and endpoint summary, load `../references/quack.md`.
+
 ## Additional v1.5 Improvements
 
 ### Performance Improvements
@@ -330,6 +374,7 @@ Choose 1.5 when:
 - **CLI usability matters** -- The new Friendly CLI is a major productivity improvement
 - **ODBC federation needed** -- Query any ODBC source directly from DuckDB
 - **Azure writes required** -- Write Parquet/data directly to Azure storage
+- **Remote/client-server access needed** -- The Quack protocol (v1.5.3+, beta) lets processes read/write the same DuckDB remotely over HTTP(S)
 - **Latest features** -- You want the newest capabilities and are comfortable with non-LTS
 
 Stay on 1.4 LTS when:
