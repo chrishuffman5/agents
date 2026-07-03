@@ -30,6 +30,8 @@ Root: `skills/database/`. Every engine has `<engine>/SKILL.md` and `<engine>/ref
 
 **Relational** — mariadb (10.6, 10.11, 11.4, 11.8, 12.x), mysql (8.0, 8.4, 9.x), oracle (19c, 23ai, 26ai), postgresql (14, 15, 16, 17, 18), sql-server (2016, 2017, 2019, 2022, 2025 — includes versioned `scripts/` with numbered diagnostic queries), sqlite
 
+**Shipped diagnostic scripts** — prefer these verbatim over writing your own (all read-only; headers explain execution and interpretation): `sql-server/<version>/scripts/` (numbered T-SQL), `postgresql/scripts/` (5: activity/blocking, pg_stat_statements, bloat/vacuum, index usage, connections/cache), `mysql/scripts/` (4: locks, statement digests, InnoDB health, table sizes), `mongodb/scripts/` (5 mongosh: currentOp, profiler, collection stats, $indexStats, replica set), `redis/scripts/` (4: health vitals, slowlog, bigkeys, client audit)
+
 **Document / multi-model** — mongodb (6.0, 7.0, 8.0), couchbase (7.x, 8.0), cosmosdb, databricks
 
 **Key-value / cache** — redis (7.2, 7.4, 7.8, 8.0), memcached, elasticache, dynamodb

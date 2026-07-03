@@ -284,3 +284,13 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- Process architecture, shared memory, storage layout, WAL internals, checkpoint mechanism. Read for "how does PostgreSQL work internally" questions.
 - `references/diagnostics.md` -- pg_stat views, pg_locks, EXPLAIN ANALYZE interpretation, auto_explain, log analysis. Read when troubleshooting performance or locking issues.
 - `references/best-practices.md` -- postgresql.conf tuning, pg_hba.conf, backup strategies, vacuum tuning, security hardening. Read for configuration and operational guidance.
+
+## Diagnostic Scripts
+
+Ready-made SQL in `scripts/` (version-agnostic, PostgreSQL 14+), numbered by investigation order. All read-only; run as a role with pg_read_all_stats.
+
+- `scripts/01-activity-and-blocking.sql` -- Current activity with blocking chains (pg_blocking_pids)
+- `scripts/02-slow-queries.sql` -- Top statements from pg_stat_statements with cache hit ratios
+- `scripts/03-bloat-and-vacuum.sql` -- Dead-tuple pressure and vacuum recency per table
+- `scripts/04-index-usage.sql` -- Never-scanned indexes plus seq-scan-heavy tables
+- `scripts/05-connections-and-cache.sql` -- Connection saturation by state, per-database cache/temp/deadlock vitals

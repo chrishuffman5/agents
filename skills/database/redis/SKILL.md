@@ -490,3 +490,12 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- Event loop, memory allocator, data structure encodings, persistence internals, cluster protocol, replication protocol. Read for "how does Redis work internally" questions.
 - `references/diagnostics.md` -- INFO sections, SLOWLOG, LATENCY, MEMORY, CLIENT LIST, cluster diagnostics, sentinel diagnostics, redis-cli tools. Read when troubleshooting performance or operational issues.
 - `references/best-practices.md` -- redis.conf tuning, persistence strategy, cluster sizing, sentinel deployment, security hardening, key naming, monitoring. Read for configuration and operational guidance.
+
+## Diagnostic Scripts
+
+Ready-made redis-cli scripts in `scripts/` (Redis 7.2+), numbered by investigation order. All read-only and SCAN-based (production-safe).
+
+- `scripts/01-server-health.sh` -- Memory/eviction-policy sanity, hit ratio, replication, persistence status
+- `scripts/02-slowlog.sh` -- Slow commands and latency events (the single-threaded stall finder)
+- `scripts/03-bigkeys.sh` -- Biggest keys per type (memory hogs and O(N) landmines)
+- `scripts/04-clients-and-blocking.sh` -- Connection audit, slow consumers by output buffer

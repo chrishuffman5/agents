@@ -498,3 +498,13 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- WiredTiger internals, replication protocol, sharding internals, query planner, locking model, transaction implementation. Read for "how does MongoDB work internally" questions.
 - `references/diagnostics.md` -- serverStatus, currentOp, profiler, replication monitoring, sharding diagnostics, index analysis, memory analysis. Read when troubleshooting performance or operational issues.
 - `references/best-practices.md` -- Production deployment checklist, replica set sizing, shard key selection, security hardening, backup strategies, monitoring setup, capacity planning. Read for configuration and operational guidance.
+
+## Diagnostic Scripts
+
+Ready-made mongosh scripts in `scripts/` (MongoDB 6.0+), numbered by investigation order. All read-only.
+
+- `scripts/01-current-ops.js` -- Long-running operations with COLLSCAN detection
+- `scripts/02-profiler-slow-queries.js` -- Slowest ops from system.profile (docsExamined vs nreturned)
+- `scripts/03-collection-stats.js` -- Collection/index sizes, unbounded-growth detection
+- `scripts/04-index-usage.js` -- Dead indexes via $indexStats (with unique/TTL/restart caveats)
+- `scripts/05-replset-status.js` -- Member states, replication lag, oplog window
