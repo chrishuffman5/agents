@@ -34,6 +34,12 @@ Domain references — `skills/storage/references/`:
 - `paradigm-sds.md` — software-defined/scale-out architecture
 - `paradigm-cloud.md` — object storage, classes, lifecycle economics
 
+**Shipped diagnostic scripts** — prefer these verbatim over writing your own (all read-only; headers explain execution and interpretation):
+- `netapp-ontap/scripts/` — 4 SSH command bundles (cluster health, volume capacity, LIF/network, performance sample)
+- `ceph/scripts/` — 3 CLI bundles (cluster status, OSD health/skew, PG troubleshooting)
+- `aws-s3/scripts/` — 3 CLI audits (governance, lifecycle/versioning cost bombs, size metrics)
+- `storage-spaces-direct/scripts/` — 2 PowerShell checks (pool/disk health, repair-job maintenance gate)
+
 ## Resolution Protocol
 
 1. **Classify:** platform selection / capacity & performance sizing / data protection & replication design / performance troubleshooting / cloud object design / migration.

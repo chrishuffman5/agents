@@ -92,3 +92,11 @@ Transitions are one-way within a lifecycle rule.
 - `references/architecture.md` -- Storage classes, versioning, lifecycle, replication, event notifications, access points, Express One Zone, S3 Select, Object Lambda, Object Lock
 - `references/best-practices.md` -- Security hardening (10-point checklist), lifecycle design, cost optimization, performance patterns, encryption strategy, monitoring
 - `references/diagnostics.md` -- Access denied troubleshooting, slow transfer diagnosis, replication lag, cost analysis, CloudWatch metrics, Storage Lens, diagnostic toolkit
+
+## Diagnostic Scripts
+
+Ready-made AWS CLI v2 audit scripts (read-only IAM) in `scripts/`, numbered by investigation order.
+
+- `scripts/01-bucket-governance-audit.sh` -- Region, versioning, encryption, public-access-block per bucket
+- `scripts/02-lifecycle-versioning-audit.sh` -- Versioned buckets without noncurrent expiration (cost bombs)
+- `scripts/03-bucket-size-metrics.sh` -- Size/object counts from CloudWatch without listing objects

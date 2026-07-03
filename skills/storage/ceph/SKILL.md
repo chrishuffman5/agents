@@ -142,3 +142,11 @@ Default OSD backend. Manages raw block devices directly without an intermediate 
 - `references/architecture.md` -- RADOS internals, CRUSH algorithm, BlueStore, RBD, CephFS, RGW, data flow, erasure coding, Cephadm
 - `references/best-practices.md` -- Cluster sizing, CRUSH design, pool config, BlueStore tuning, Rook/K8s, CephFS, Prometheus monitoring
 - `references/diagnostics.md` -- Health checks, OSD failures, slow ops, PG states, recovery, clock skew, network partitions, log analysis
+
+## Diagnostic Scripts
+
+Ready-made CLI bundles (admin/readonly keyring; prepend `cephadm shell --` if containerized) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-cluster-status.sh` -- Status, health detail, capacity, monitor quorum
+- `scripts/02-osd-health.sh` -- OSD tree, fill skew, latency outliers, balancer state
+- `scripts/03-pg-troubleshoot.sh` -- Stuck/degraded PG triage and recovery reading

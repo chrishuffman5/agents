@@ -101,3 +101,10 @@ For cross-platform storage questions, refer to the parent domain agent at `skill
 - `references/architecture.md` -- Full S2D stack, SBL cache, storage pool, virtual disks, fault domains, SMB Direct/RDMA, ReFS, CSV, Hyper-V integration, Azure Local
 - `references/best-practices.md` -- Hardware selection, network design, cache configuration, volume sizing, fault domain planning, Windows Admin Center monitoring, performance tuning, maintenance
 - `references/diagnostics.md` -- PowerShell diagnostic commands, drive/pool/virtual disk health states, repair workflows, event log analysis, performance counters, common scenarios
+
+## Diagnostic Scripts
+
+Ready-made PowerShell (run elevated on a cluster node) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-pool-and-disk-health.ps1` -- Subsystem, pool, virtual disk, physical disk, health faults
+- `scripts/02-repair-jobs-status.ps1` -- Repair/rebalance job progress (the maintenance gate)
