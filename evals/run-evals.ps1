@@ -61,7 +61,8 @@ function Invoke-Attempt([string]$prompt, [string]$agent) {
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
     Push-Location $repoRoot
-    try     { $raw = & claude @args 2>&1 | Out-String }
+    # '' | closes stdin immediately (avoids the CLI's 3s stdin wait and its warning line)
+    try     { $raw = '' | & claude @args 2>&1 | Out-String }
     finally { Pop-Location; $sw.Stop() }
 
     $rec = [ordered]@{
@@ -71,7 +72,10 @@ function Invoke-Attempt([string]$prompt, [string]$agent) {
         raw_error = $null
     }
     try {
-        $j = $raw | ConvertFrom-Json
+        # The CLI may emit warning lines before the JSON payload - parse from the first brace
+        $start = $raw.IndexOf('{')
+        if ($start -lt 0) { throw 'no JSON object in CLI output' }
+        $j = $raw.Substring($start) | ConvertFrom-Json
         $rec.ok            = ($j.subtype -eq 'success')
         $rec.answer        = [string]$j.result
         $rec.api_ms        = $j.duration_api_ms ?? $j.duration_ms
