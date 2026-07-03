@@ -6,6 +6,8 @@ A Claude Code plugin providing **domain expert knowledge skills**, **domain-spec
 
 **1,668+ files | 187+ technologies | 18 domains | 24 agents | 460,000+ lines of expert knowledge**
 
+📊 **[Live Evaluation Dashboard](https://chrishuffman5.github.io/domain-expert/)** — per-domain accuracy, script coverage, and agent-vs-baseline results, measured by a Sonnet-driven eval harness.
+
 ---
 
 ## Installation
