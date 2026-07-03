@@ -389,3 +389,10 @@ Load these when you need deep knowledge:
 
 - `references/architecture.md` -- Frontend/backend model, ACL system, stick table internals, runtime API mechanics, multi-threading. Read for "how does X work" questions.
 - `references/best-practices.md` -- SSL offload patterns, health check design, rate limiting strategies, K8s integration, performance tuning. Read for design and configuration questions.
+
+## Diagnostic Scripts
+
+Ready-made stats-socket and config-check scripts (read-only) in `scripts/`.
+
+- `scripts/01-runtime-stats.sh` -- Down servers with check reasons, queueing, error rates
+- `scripts/02-config-check.sh` -- Config validation gate before reload (and the reload-vs-restart rule)

@@ -14,7 +14,11 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `storage` | ⚠️ Partial | netapp-ontap (4), ceph (3), aws-s3 (3), storage-spaces-direct (2); remaining: azure-blob, gcs, minio, glusterfs, dell-powerstore, dell-unity, hpe-alletra, pure-storage |
 | `database` | ⚠️ Partial | sql-server (per-version), postgresql (5), mysql (4), mongodb (5), redis (4); remaining: 24 engines |
 | `messaging` | ⚠️ Partial | kafka (3), rabbitmq (3), aws-sqs-sns (2); remaining: pulsar, nats, redis-streams, azure-service-bus, gcp-pubsub |
-| All 10 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, frontend, mail-collab, monitoring, networking, security |
+| `containers` | ⚠️ Partial | kubernetes (4), docker (2) |
+| `networking` | ⚠️ Partial | cisco-ios-xe (2), panos (2), bind (2), haproxy (2) |
+| `monitoring` | ⚠️ Partial | prometheus (3), elk (2); grafana ops scripts live under analytics |
+| `devops` | ⚠️ Partial | github-actions (2), terraform (2), ansible (2), argocd (2) |
+| All 6 other domains | ❌ None | api-realtime, backend, cloud-platforms, frontend, mail-collab, security |
 
 ## The Standard
 

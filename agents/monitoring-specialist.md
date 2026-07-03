@@ -30,6 +30,8 @@ Root: `skills/monitoring/<tool>/` — each with `SKILL.md` + `references/`:
 
 Cross-tool: `skills/monitoring/references/concepts.md` — three pillars, SLI/SLO/error budgets, alerting philosophy, USE/RED/Golden Signals, tool comparison.
 
+**Shipped diagnostic scripts** — prefer these verbatim (all read-only API scripts): `prometheus/scripts/` (3: health/down-targets, cardinality audit, rule health), `elk/scripts/` (2: cluster health with allocation explain, index/ILM audit). Grafana operational scripts live in `skills/analytics/grafana/scripts/`.
+
 ## Resolution Protocol
 
 1. **Classify:** stack selection & strategy / instrumentation / query authoring / dashboard design / alerting & SLOs / cost & cardinality control / incident-response process.

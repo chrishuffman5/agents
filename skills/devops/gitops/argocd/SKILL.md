@@ -266,3 +266,10 @@ argocd repo list
 - `references/architecture.md` — ArgoCD components (API server, repo server, application controller, Redis, Dex), reconciliation loop, manifest generation, caching
 - `references/best-practices.md` — Application design patterns, RBAC configuration, SSO integration, performance tuning, multi-cluster strategies, secret management
 - `references/diagnostics.md` — Sync failures, health check issues, connectivity problems, performance debugging, common error messages
+
+## Diagnostic Scripts
+
+Ready-made argocd CLI triage scripts (read-only) in `scripts/`.
+
+- `scripts/01-app-health.sh` -- Fleet-wide not-Healthy/not-Synced triage with state decoding
+- `scripts/02-sync-failures.sh` -- One app's operation state, failing resources, sync history

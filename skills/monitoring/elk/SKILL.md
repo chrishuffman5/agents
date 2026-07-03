@@ -111,3 +111,10 @@ Load these when you need deep knowledge for a specific area:
 - `references/log-management.md` -- Log collection (Filebeat, Elastic Agent, Kubernetes autodiscover), index templates, data stream operations, KQL, Lucene, ES|QL, Discover and Logs Explorer. Read for log ingestion and search questions.
 - `references/apm.md` -- APM agent setup (Java, .NET, Node.js, Python, Go, Ruby, Browser/RUM), APM data model (transactions, spans, errors, metrics), distributed tracing, service maps, correlations, OpenTelemetry integration, continuous profiling. Read for APM and tracing questions.
 - `references/diagnostics.md` -- Cluster health APIs, shard allocation diagnostics, disk watermarks, slow query diagnostics, ILM troubleshooting, APM data stream health, Fleet agent status. Read for troubleshooting.
+
+## Diagnostic Scripts
+
+Ready-made Elasticsearch API scripts (read-only; OpenSearch-compatible endpoints) in `scripts/`.
+
+- `scripts/01-cluster-health.sh` -- Status, node disk/heap, unassigned-shard explanation
+- `scripts/02-index-audit.sh` -- Biggest indices, shard-size sanity, ILM errors

@@ -241,3 +241,10 @@ locals {
 - `references/best-practices.md` — Code organization, naming conventions, module design, CI/CD integration, security hardening, cost management
 - `references/diagnostics.md` — Common errors (state lock, provider auth, dependency cycles, plan drift), debugging workflows, state recovery
 - `references/terraform-cloud.md` — HCP Terraform / Terraform Cloud workspace management, VCS integration, run workflow, policy enforcement, dynamic credentials, agents, API automation, tfe provider, troubleshooting
+
+## Diagnostic Scripts
+
+Ready-made validation/drift scripts (read-only; drift preview never writes state) in `scripts/`.
+
+- `scripts/01-validate-and-fmt.sh` -- fmt/validate/lock-file gate without backend access
+- `scripts/02-drift-preview.sh` -- -refresh-only plan with exit-code decoding (drift vs clean)

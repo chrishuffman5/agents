@@ -340,3 +340,10 @@ Load these when you need deep knowledge:
 - `references/architecture.md` -- Daemon/containerd/runc internals, BuildKit, networking drivers, storage drivers. Read for "how does X work" questions.
 - `references/diagnostics.md` -- docker logs, inspect, stats, events, system df, troubleshooting workflows. Read when troubleshooting.
 - `references/best-practices.md` -- Dockerfile patterns, multi-stage builds, security hardening, Compose patterns, image optimization. Read for design questions.
+
+## Diagnostic Scripts
+
+Ready-made docker CLI bundles (read-only, nothing pruned) in `scripts/`.
+
+- `scripts/01-disk-usage.sh` -- Disk breakdown with reclaimable-space preview (dangling images/volumes)
+- `scripts/02-container-health.sh` -- Restarting/unhealthy/exited sweep plus one-shot stats

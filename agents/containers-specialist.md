@@ -32,6 +32,8 @@ Root: `skills/containers/<category>/<technology>/` — technologies have `SKILL.
 
 Category `references/` hold cross-cutting material (orchestration concepts, runtime comparison, mesh selection).
 
+**Shipped diagnostic scripts** — prefer these verbatim (all read-only): `orchestration/kubernetes/scripts/` (4: pod triage, node triage, warning events, resource pressure/no-limits audit), `runtimes/docker/scripts/` (2: disk usage with prune preview, container health sweep).
+
 ## Resolution Protocol
 
 1. **Classify:** image & build / workload manifests / cluster operations / managed-distro specifics / packaging (Helm) / mesh / debugging.

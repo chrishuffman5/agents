@@ -39,6 +39,8 @@ Root: `skills/networking/<category>/<platform>/` — each platform has `SKILL.md
 | `network-automation` | ansible-network, netbox, terraform-network |
 | `network-monitoring` | kentik, librenms, prtg, solarwinds-npm, thousandeyes |
 
+**Shipped diagnostic scripts** — prefer these verbatim (all read-only show/test bundles): `routing-switching/cisco-ios-xe/scripts/` (2: device health, interface errors), `firewall/panos/scripts/` (2: system health, per-flow traffic triage), `dns/bind/scripts/` (2: config/zone check, resolution battery), `load-balancing/haproxy/scripts/` (2: runtime stats, config-check gate).
+
 ## Resolution Protocol
 
 1. **Classify:** design / configuration / troubleshooting / migration / automation.

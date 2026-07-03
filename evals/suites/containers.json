@@ -5,50 +5,104 @@
     {
       "id": "kubernetes-nodeport-range",
       "prompt": "According to the skills library, what range does a Kubernetes NodePort Service allocate its node port from?",
-      "expected": { "type": "contains_all", "value": ["30000", "32767"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30000",
+          "32767"
+        ]
+      },
       "notes": "skills/containers/orchestration/kubernetes/SKILL.md - \"NodePort | ClusterIP + port on every node (30000-32767)\""
     },
     {
       "id": "istio-hbone-acronym",
       "prompt": "According to the skills library, what does the acronym HBONE stand for in Istio ambient mesh?",
-      "expected": { "type": "contains_all", "value": ["HTTP-Based Overlay Network Environment"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "HTTP-Based Overlay Network Environment"
+        ]
+      },
       "notes": "skills/containers/service-mesh/istio/SKILL.md - \"HBONE (HTTP-Based Overlay Network Environment)\""
     },
     {
       "id": "eks-fargate-pod-limits",
       "prompt": "According to the skills library, what are the maximum vCPU and memory limits for a single pod running on EKS Fargate?",
-      "expected": { "type": "contains_all", "value": ["4 vCPU", "30 GB"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4 vCPU",
+          "30 GB"
+        ]
+      },
       "notes": "skills/containers/orchestration/eks/SKILL.md - \"Max 4 vCPU, 30 GB memory per pod\""
     },
     {
       "id": "docker-v29-containerd-version",
       "prompt": "According to the skills library, which containerd version does Docker Engine v29 ship with, and what config version does it use?",
-      "expected": { "type": "contains_all", "value": ["2.2.2", "config version 3"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.2.2",
+          "config version 3"
+        ]
+      },
       "notes": "skills/containers/runtimes/docker/SKILL.md - \"Docker Engine v29 ships containerd 2.2.2 with config version 3\""
     },
     {
       "id": "istio-envoy-sidecar-ram",
       "prompt": "According to the skills library, approximately how much RAM does each Envoy sidecar consume in Istio sidecar mode?",
-      "expected": { "type": "regex", "value": "\\b50 MB\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "\\b50 MB\\b"
+      },
       "notes": "skills/containers/service-mesh/istio/SKILL.md - \"Each Envoy sidecar consumes ~50 MB RAM. For large clusters, consider ambient mode.\""
     },
     {
       "id": "kubernetes-etcd-ha-members",
       "prompt": "According to the skills library, how many members should an etcd cluster have for high availability, and what consensus does it use?",
-      "expected": { "type": "contains_all", "value": ["Raft"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Raft"
+        ]
+      },
       "notes": "skills/containers/orchestration/kubernetes/SKILL.md - \"HA: 3 or 5 member cluster (Raft consensus). Even numbers provide no quorum benefit.\""
     },
     {
       "id": "docker-overlay-vxlan-port",
       "prompt": "According to the skills library, what encapsulation and UDP port does the Docker overlay network driver use for multi-host networking?",
-      "expected": { "type": "contains_all", "value": ["VXLAN", "4789"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "VXLAN",
+          "4789"
+        ]
+      },
       "notes": "skills/containers/runtimes/docker/SKILL.md - \"overlay | swarm | Multi-host (VXLAN encapsulation, UDP 4789)\""
     },
     {
       "id": "eks-vpc-cni-prefix-delegation",
       "prompt": "According to the skills library, what does EKS VPC CNI prefix delegation assign to ENIs, and roughly how many pods per node does it enable on an m5.xlarge?",
-      "expected": { "type": "contains_all", "value": ["/28", "110"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/28",
+          "110"
+        ]
+      },
       "notes": "skills/containers/orchestration/eks/SKILL.md - \"Prefix delegation: assigns /28 prefixes to ENIs... up to 110+ pods per node on m5.xlarge vs ~29 in secondary IP mode\""
+    },
+    {
+      "id": "k8s-script-pod-triage",
+      "prompt": "According to the skills library, which shipped Kubernetes diagnostic script sweeps for not-Running or not-Ready pods and ranks restart leaders?",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "01-pod-triage.sh"
+        ]
+      },
+      "notes": "skills/containers/orchestration/kubernetes/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

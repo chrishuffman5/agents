@@ -173,3 +173,10 @@ Automated zone provisioning: primary maintains list of zones as DNS records; sec
 
 - `references/architecture.md` -- named.conf structure, views, zone files, DNSSEC/KASP, RPZ configuration
 - `references/diagnostics.md` -- rndc commands, query logging, statistics, troubleshooting workflows
+
+## Diagnostic Scripts
+
+Ready-made validation/resolution scripts (read-only) in `scripts/`.
+
+- `scripts/01-config-and-zone-check.sh` -- named-checkconf -z full zone parse plus rndc status
+- `scripts/02-resolution-battery.sh` -- Serial consistency across NS set, DNSSEC check, timing samples
