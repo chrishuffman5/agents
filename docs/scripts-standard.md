@@ -18,7 +18,10 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `networking` | ⚠️ Partial | cisco-ios-xe (2), panos (2), bind (2), haproxy (2) |
 | `monitoring` | ⚠️ Partial | prometheus (3), elk (2); grafana ops scripts live under analytics |
 | `devops` | ⚠️ Partial | github-actions (2), terraform (2), ansible (2), argocd (2) |
-| All 6 other domains | ❌ None | api-realtime, backend, cloud-platforms, frontend, mail-collab, security |
+| `security` | ⚠️ Partial | entra-id (3), ad-ds (2), vault (2), crowdstrike (1) — read-only defensive audits |
+| `cloud-platforms` | ⚠️ Partial | aws (3), azure (2) — FinOps cost/idle audits |
+| `mail-collab` | ⚠️ Partial | postfix (2), m365 (1) |
+| All 3 other domains | ❌ None | api-realtime, backend, frontend |
 
 ## The Standard
 

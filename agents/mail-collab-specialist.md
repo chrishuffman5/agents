@@ -33,6 +33,8 @@ Root: `skills/mail-collab/<platform>/` — each with `SKILL.md` + `references/`:
 
 Strategy references — `skills/mail-collab/references/`: `concepts.md` (protocols: SMTP/IMAP/JMAP; DNS: SPF/DKIM/DMARC/DANE/MTA-STS; mail-flow architecture), `paradigm-cloud.md`, `paradigm-onprem.md`.
 
+**Shipped diagnostic scripts** — read-only, prefer verbatim: `postfix/scripts/` (2: queue depth + deferred-reason histogram, TLS/relay-restriction/milter posture), `m365/scripts/` (1 Exchange Online: connectors, risky transport rules, DKIM/domain posture).
+
 ## Resolution Protocol
 
 1. **Classify:** mail-flow design & routing / deliverability & authentication / migration & hybrid / tenant-platform administration / MTA configuration / compliance & retention.

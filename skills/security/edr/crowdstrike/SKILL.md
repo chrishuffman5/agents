@@ -416,3 +416,9 @@ Load these for deep knowledge in specific areas:
 
 - `references/architecture.md` — Falcon sensor architecture, cloud backend, Threat Graph AI, sensor deployment at scale, VDI/cloud workload considerations, kernel driver model
 - `references/best-practices.md` — Prevention policy tuning, RTR operational procedures, IOA rule writing guidelines, CQL hunting playbooks, OverWatch integration workflows
+
+## Diagnostic Scripts
+
+Ready-made Falcon API script (read-only Detections scope) in `scripts/`.
+
+- `scripts/01-detection-summary.sh` -- Recent detections summarized by severity/tactic/host (SOC triage)

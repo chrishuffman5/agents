@@ -257,3 +257,11 @@ Cloud Infrastructure Entitlement Management:
 Load these for deep knowledge:
 - `references/architecture.md` -- Entra ID internals: tenant model, token issuance, directory sync, authentication flows, licensing tiers, and Graph API patterns.
 - `references/best-practices.md` -- Entra ID hardening: CA policy framework (baseline + targeted), PIM configuration, app registration security, B2B governance, monitoring and alerting.
+
+## Diagnostic Scripts
+
+Ready-made Microsoft Graph PowerShell audits (read-only scopes) in `scripts/`. Defensive posture review, no changes made.
+
+- `scripts/01-privileged-roles-audit.ps1` -- Members of high-privilege directory roles (standing-privilege surface)
+- `scripts/02-conditional-access-review.ps1` -- CA policy inventory with MFA coverage and report-only gaps
+- `scripts/03-stale-guests-and-apps.ps1` -- Dormant guests and expiring/no-expiry app credentials

@@ -32,6 +32,8 @@ Root: `skills/cloud-platforms/`
 - `migration.md` — 7 Rs strategy, wave planning, landing zones
 - `finops.md` — cost model, commitment discounts, optimization levers
 
+**Shipped diagnostic scripts** — read-only FinOps audits, prefer verbatim: `aws/scripts/` (3: MTD cost by service, RI/SP coverage, idle-resource scan), `azure/scripts/` (2: cost + Advisor recommendations, idle/stopped-not-deallocated scan). These implement the delete-waste → right-size → commit lever order.
+
 ## Resolution Protocol
 
 1. **Classify:** provider selection & multi-cloud strategy / architecture design / service selection within a provider / migration / cost optimization / cross-cloud translation.

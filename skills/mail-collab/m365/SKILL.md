@@ -181,3 +181,9 @@ Get-MgServiceAnnouncementIssue -Filter "status ne 'resolved'" | Select Title, Se
 - `references/architecture.md` -- Tenant model, Entra ID integration, service endpoints, Microsoft Graph API, data residency, admin center map, core services (Exchange Online, SharePoint, Teams, OneDrive). **Load when:** architecture questions, tenant planning, Graph API usage.
 - `references/best-practices.md` -- Tenant setup checklist, security hardening (CA policies, PIM, break-glass accounts), compliance configuration, backup strategy, monitoring, change management. **Load when:** new tenant setup, security review, compliance planning.
 - `references/diagnostics.md` -- Sign-in failures, license assignment errors, sync issues, service health troubleshooting, Conditional Access debugging, audit log search. **Load when:** troubleshooting user issues, diagnosing policy problems, investigating incidents.
+
+## Diagnostic Scripts
+
+Ready-made Exchange Online PowerShell audit (read-only Get-* cmdlets) in `scripts/`.
+
+- `scripts/01-mailflow-and-auth-audit.ps1` -- Connectors, risky transport rules, DKIM/domain posture
