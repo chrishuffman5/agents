@@ -117,3 +117,12 @@ All new AFF/FAS/ASA systems ship with ONTAP One — a single NLF enabling SnapMi
 - `references/architecture.md` -- WAFL internals, storage hierarchy, RAID, cluster architecture, multi-protocol, data protection, FabricPool, Trident CSI, StorageGRID
 - `references/best-practices.md` -- Volume design, aggregate layout, data protection strategy, performance tuning, Trident for Kubernetes, FlexGroup, FlexClone, FabricPool tiering
 - `references/diagnostics.md` -- Performance counters, latency analysis, disk failures, SnapMirror lag, network troubleshooting, key CLI command reference, investigation workflow
+
+## Diagnostic Scripts
+
+Ready-made SSH command bundles (readonly-role admin) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-cluster-health.sh` -- Node state, failover readiness, aggregate capacity, health alerts
+- `scripts/02-volume-capacity.sh` -- Volume fill levels, snapshot-reserve spill detection
+- `scripts/03-network-lif-status.sh` -- LIF placement/home status, port health, failover coverage
+- `scripts/04-performance-snapshot.sh` -- 30-second latency/IOPS sample per volume + QoS view

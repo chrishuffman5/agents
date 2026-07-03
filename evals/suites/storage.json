@@ -49,6 +49,18 @@
       "prompt": "According to the skills library, which Ceph Tentacle 20.2 service provides an Nginx-based reverse proxy giving a single TLS-terminated HTTPS entry point for Dashboard, Prometheus, Grafana, and Alertmanager?",
       "expected": { "type": "contains_all", "value": ["mgmt-gateway"] },
       "notes": "skills/storage/ceph/20.2/SKILL.md - \"mgmt-gateway service: Nginx-based reverse proxy providing single TLS-terminated HTTPS entry point\""
+    },
+    {
+      "id": "s2d-script-maintenance-gate",
+      "prompt": "According to the skills library, which shipped Storage Spaces Direct diagnostic script shows repair and rebalance job progress and acts as the gate before maintenance?",
+      "expected": { "type": "contains_all", "value": ["02-repair-jobs-status.ps1"] },
+      "notes": "skills/storage/storage-spaces-direct/SKILL.md Diagnostic Scripts section - \"scripts/02-repair-jobs-status.ps1 -- Repair/rebalance job progress (the maintenance gate)\" (script-retrieval task)"
+    },
+    {
+      "id": "s3-script-cost-bombs",
+      "prompt": "According to the skills library, which shipped S3 audit script finds versioned buckets lacking noncurrent-version expiration?",
+      "expected": { "type": "contains_all", "value": ["02-lifecycle-versioning-audit.sh"] },
+      "notes": "skills/storage/aws-s3/SKILL.md Diagnostic Scripts section - \"scripts/02-lifecycle-versioning-audit.sh -- Versioned buckets without noncurrent expiration (cost bombs)\" (script-retrieval task)"
     }
   ]
 }
