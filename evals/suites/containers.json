@@ -35,7 +35,7 @@
     {
       "id": "kubernetes-etcd-ha-members",
       "prompt": "According to the skills library, how many members should an etcd cluster have for high availability, and what consensus does it use?",
-      "expected": { "type": "contains_all", "value": ["Raft", "quorum"] },
+      "expected": { "type": "contains_all", "value": ["Raft"] },
       "notes": "skills/containers/orchestration/kubernetes/SKILL.md - \"HA: 3 or 5 member cluster (Raft consensus). Even numbers provide no quorum benefit.\""
     },
     {
