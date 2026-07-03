@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain Expert — Evaluation Dashboard</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --panel: #ffffff;
+    --panel-2: #fbfcfd;
+    --ink: #12161c;
+    --ink-soft: #5a6572;
+    --line: #e4e8ee;
+    --accent: #2f6df6;
+    --agent: #1f9d63;
+    --baseline: #b0873a;
+    --shadow: 0 1px 2px rgba(16,22,28,.05), 0 4px 16px rgba(16,22,28,.05);
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1116; --panel: #161b22; --panel-2: #1a2029;
+      --ink: #e7ecf2; --ink-soft: #8b95a3; --line: #262d38;
+      --accent: #5b8cff; --agent: #3ecb86; --baseline: #d0a656;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.28);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); line-height: 1.5;
+    font-feature-settings: "tnum" 1;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px; }
+
+  header.hero { margin-bottom: 32px; }
+  .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -.02em; }
+  .lede { font-size: 17px; color: var(--ink-soft); max-width: 68ch; margin: 0; }
+  .genstamp { font: 500 12px/1 var(--mono); color: var(--ink-soft); margin-top: 14px; }
+
+  /* headline stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 28px 0 8px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; box-shadow: var(--shadow); }
+  .stat .n { font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .stat .n.small { font-size: 24px; }
+  .stat .l { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+  .stat.agent .n { color: var(--agent); }
+  .stat.base .n { color: var(--baseline); }
+
+  /* methodology callout */
+  .method { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 26px 0 34px; }
+  @media (max-width: 720px){ .method { grid-template-columns: 1fr; } }
+  .method .box { background: var(--panel-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .method h3 { margin: 0 0 6px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .method p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.agent { background: var(--agent); } .dot.base { background: var(--baseline); }
+
+  /* controls */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 20px; }
+  .chip { font: 500 13px var(--sans); border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft);
+          padding: 7px 13px; border-radius: 999px; cursor: pointer; transition: .12s; }
+  .chip:hover { color: var(--ink); border-color: var(--accent); }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .controls .spacer { flex: 1; }
+  .count { font: 500 12.5px var(--mono); color: var(--ink-soft); }
+
+  /* domain grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px;
+          box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+  .card .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .card h2 { font-size: 17px; margin: 0 0 3px; letter-spacing: -.01em; }
+  .card .desc { font-size: 12.5px; color: var(--ink-soft); margin: 0; }
+  .tag { font: 600 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+         border: 1px solid var(--line); border-radius: 6px; padding: 4px 7px; white-space: nowrap; }
+
+  .facts { display: flex; gap: 16px; flex-wrap: wrap; }
+  .fact { font-size: 12px; color: var(--ink-soft); }
+  .fact b { display: block; font-size: 17px; color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* pass@1 comparison bars */
+  .bars { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+  .barrow { display: grid; grid-template-columns: 54px 1fr 46px; align-items: center; gap: 8px; }
+  .barrow .k { font: 600 11px var(--mono); color: var(--ink-soft); }
+  .track { height: 9px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 999px; transition: width .5s ease; }
+  .fill.agent { background: var(--agent); } .fill.base { background: var(--baseline); }
+  .barrow .v { font: 600 12px var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+
+  .metaline { display: flex; gap: 14px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid var(--line);
+              font: 500 11.5px var(--mono); color: var(--ink-soft); }
+  .metaline .delta { margin-left: auto; }
+  .metaline .up { color: var(--agent); }
+  .noeval { font-size: 12px; color: var(--ink-soft); font-style: italic; padding-top: 8px; border-top: 1px solid var(--line); }
+
+  footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); }
+  footer p { margin: 0 0 8px; max-width: 80ch; }
+  code { font: 500 12px var(--mono); background: var(--panel-2); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Domain Expert Plugin</p>
+    <h1>Domain Specialist Evaluation Dashboard</h1>
+    <p class="lede">Eighteen domain-specialist agents, each aligned 1:1 with a skills library and armed with shipped
+      diagnostic scripts. Every domain is measured by a Sonnet-driven eval harness that logs accuracy, token use, and
+      latency — and compared against a no-tools baseline to quantify what the skills layer buys.</p>
+    <p class="genstamp" id="genstamp"></p>
+  </header>
+
+  <section class="stats" id="stats" aria-label="Portfolio totals"></section>
+
+  <section class="method">
+    <div class="box">
+      <h3><span class="dot agent"></span> Agent mode</h3>
+      <p>The task is delegated to the domain specialist, which navigates its skills library and cites sources. This is
+        the shipped product path — measured for pass@1 accuracy, output tokens, and wall-clock per task.</p>
+    </div>
+    <div class="box">
+      <h3><span class="dot base"></span> Baseline (control)</h3>
+      <p>The same tasks answered from the model's own knowledge with no agents, skills, or tools. The gap between the two
+        is the measured value of the skills + specialist layer.</p>
+    </div>
+  </section>
+
+  <div class="controls" id="controls" role="tablist" aria-label="Filter by category"></div>
+  <section class="grid" id="grid" aria-live="polite"></section>
+
+  <footer>
+    <p><strong>Method.</strong> Each domain has a task suite whose ground truth is quoted from the skills library. The
+      harness runs every task as an independent headless session (up to 3 attempts), grading with deterministic
+      matchers. <em>pass@1</em> is first-attempt accuracy; <em>solved</em> counts success within three attempts.
+      Baseline runs the identical tasks with tools disabled.</p>
+    <p><strong>Data.</strong> Numbers are generated from the raw eval CSVs and the live script tree by
+      <code>evals/build-dashboard.py</code> into <code>docs/results.js</code>. Re-run it after any eval sweep to refresh
+      this page. Some domains show newer agent runs (larger task counts including script-retrieval checks) than the
+      shared agent-vs-baseline sweep; the baseline bar always reflects the fair same-task comparison.</p>
+    <p id="repo-link"></p>
+  </footer>
+</div>
+
+<script src="results.js"></script>
+<script>
+(function () {
+  var data = window.DASHBOARD_DATA;
+  var grid = document.getElementById('grid');
+  if (!data) {
+    grid.innerHTML = '<p style="color:var(--ink-soft)">results.js failed to load — run <code>python evals/build-dashboard.py</code>.</p>';
+    return;
+  }
+
+  var pct = function (v) { return v == null ? '—' : Math.round(v * 100) + '%'; };
+  var CATEGORY_ORDER = ['Data', 'Infrastructure', 'Operations', 'Application'];
+
+  // ---- generated stamp ----
+  if (data.generated) {
+    document.getElementById('genstamp').textContent = 'Last generated ' + data.generated + ' · Sonnet subagents';
+  }
+
+  // ---- headline stats ----
+  var t = data.totals;
+  var statsHtml = [
+    ['n', t.domains, 'domains, 1:1 with skills'],
+    ['n', t.scripts, 'shipped diagnostic scripts'],
+    ['n', (data.domains.reduce(function (a, d) { return a + (d.technologies || 0); }, 0)), 'technologies covered'],
+    ['agent', pct(t.agent.passAt1), 'agent pass@1 · ' + t.agent.tasks + ' tasks'],
+    ['base', pct(t.baseline.passAt1), 'baseline pass@1 · same tasks']
+  ].map(function (s, i) {
+    var cls = s[0] === 'agent' ? 'stat agent' : s[0] === 'base' ? 'stat base' : 'stat';
+    var nCls = (typeof s[1] === 'string') ? 'n small' : 'n';
+    return '<div class="' + cls + '"><div class="' + nCls + '">' + s[1] + '</div><div class="l">' + s[2] + '</div></div>';
+  }).join('');
+  document.getElementById('stats').innerHTML = statsHtml;
+
+  // ---- category filter chips ----
+  var cats = ['All'].concat(CATEGORY_ORDER.filter(function (c) {
+    return data.domains.some(function (d) { return d.category === c; });
+  }));
+  var active = 'All';
+  var controls = document.getElementById('controls');
+  controls.innerHTML = cats.map(function (c) {
+    return '<button class="chip' + (c === 'All' ? ' on' : '') + '" data-cat="' + c + '">' + c + '</button>';
+  }).join('') + '<span class="spacer"></span><span class="count" id="count"></span>';
+
+  // ---- render ----
+  function card(d) {
+    var a = d.agent, b = d.baseline;
+    var aFill = a ? Math.round(a.passAt1 * 100) : 0;
+    var bFill = b ? Math.round(b.passAt1 * 100) : 0;
+
+    var bars = (a || b) ? (
+      '<div class="bars">' +
+        '<div class="barrow"><span class="k">agent</span><div class="track"><div class="fill agent" style="width:' + aFill + '%"></div></div><span class="v">' + pct(a && a.passAt1) + '</span></div>' +
+        '<div class="barrow"><span class="k">base</span><div class="track"><div class="fill base" style="width:' + bFill + '%"></div></div><span class="v">' + pct(b && b.passAt1) + '</span></div>' +
+      '</div>') : '';
+
+    var meta = '';
+    if (a) {
+      var delta = (a && b) ? Math.round((a.passAt1 - b.passAt1) * 100) : null;
+      meta = '<div class="metaline">' +
+        '<span>' + a.meanTokens + ' tok</span>' +
+        '<span>' + a.meanWallS + 's</span>' +
+        '<span>' + a.solved + '/' + a.tasks + ' solved</span>' +
+        (delta != null && delta > 0 ? '<span class="delta up">+' + delta + ' pts vs base</span>'
+          : delta === 0 ? '<span class="delta">baseline parity</span>' : '') +
+      '</div>';
+    } else {
+      meta = '<div class="noeval">eval suite pending</div>';
+    }
+
+    var techLine = (d.scriptTechs && d.scriptTechs.length)
+      ? d.scriptTechs.slice(0, 5).join(' · ') + (d.scriptTechs.length > 5 ? ' · …' : '')
+      : 'coverage in progress';
+
+    return '<article class="card" data-cat="' + d.category + '">' +
+      '<div class="top"><div><h2>' + d.title + '</h2><p class="desc">' + d.description + '</p></div>' +
+        '<span class="tag">' + d.category + '</span></div>' +
+      '<div class="facts">' +
+        '<div class="fact"><b>' + (d.technologies != null ? d.technologies : '—') + '</b>technologies</div>' +
+        '<div class="fact"><b>' + d.scripts + '</b>scripts</div>' +
+        '<div class="fact"><b>' + (d.taskCount != null ? d.taskCount : '—') + '</b>eval tasks</div>' +
+      '</div>' +
+      bars + meta +
+      '<div class="desc" style="font-family:var(--mono);font-size:11px">' + techLine + '</div>' +
+    '</article>';
+  }
+
+  function render() {
+    var list = data.domains.filter(function (d) { return active === 'All' || d.category === active; });
+    // sort: by category order, then by agent pass@1 desc, then title
+    list.sort(function (x, y) {
+      var cx = CATEGORY_ORDER.indexOf(x.category), cy = CATEGORY_ORDER.indexOf(y.category);
+      if (cx !== cy) return cx - cy;
+      var px = x.agent ? x.agent.passAt1 : -1, py = y.agent ? y.agent.passAt1 : -1;
+      if (px !== py) return py - px;
+      return x.title.localeCompare(y.title);
+    });
+    grid.innerHTML = list.map(card).join('');
+    document.getElementById('count').textContent = list.length + ' of ' + data.domains.length + ' domains';
+  }
+
+  controls.addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip');
+    if (!btn) return;
+    active = btn.getAttribute('data-cat');
+    controls.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === btn); });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
