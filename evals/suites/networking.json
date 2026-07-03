@@ -1,0 +1,54 @@
+{
+  "domain": "networking",
+  "agent": "domain-expert:networking-specialist",
+  "tasks": [
+    {
+      "id": "panos-wildfire-wf500-verdict",
+      "prompt": "According to the skills library, which WildFire verdict is not supported by the WF-500 on-premises appliance?",
+      "expected": { "type": "contains_all", "value": ["phishing"] },
+      "notes": "skills/networking/firewall/panos/SKILL.md - \"WF-500 on-premises appliance does NOT support phishing verdict\""
+    },
+    {
+      "id": "panos-security-policy-nat-matching",
+      "prompt": "According to the skills library, when PAN-OS evaluates a security policy, does it match on the original or translated source/destination IP addresses, and on the zones before or after address translation?",
+      "expected": { "type": "contains_all", "value": ["pre-NAT", "post-NAT"] },
+      "notes": "skills/networking/firewall/panos/SKILL.md - \"Security policy matches pre-NAT source/destination IPs but post-NAT zones\""
+    },
+    {
+      "id": "cisco-ios-xe-gnmi-port",
+      "prompt": "According to the skills library, which TCP port does the gNMI programmability interface use on Cisco IOS-XE?",
+      "expected": { "type": "regex", "value": "\\b9339\\b" },
+      "notes": "skills/networking/routing-switching/cisco-ios-xe/SKILL.md - \"| gNMI | gRPC | 9339 | Protobuf | Streaming telemetry\""
+    },
+    {
+      "id": "cisco-ios-xe-stp-root-priority",
+      "prompt": "According to the skills library, what spanning tree root bridge priority does Cisco IOS-XE best practice recommend setting for the primary root switch?",
+      "expected": { "type": "regex", "value": "\\b4096\\b" },
+      "notes": "skills/networking/routing-switching/cisco-ios-xe/SKILL.md - \"Set explicit root priorities: primary 4096, secondary 8192\""
+    },
+    {
+      "id": "bind-auto-dnssec-removed-920",
+      "prompt": "According to the skills library, which legacy DNSSEC signing directive was removed in BIND 9.20 and must be replaced with dnssec-policy?",
+      "expected": { "type": "contains_all", "value": ["auto-dnssec"] },
+      "notes": "skills/networking/dns/bind/SKILL.md - \"auto-dnssec is removed in BIND 9.20. Use dnssec-policy (KASP) instead\""
+    },
+    {
+      "id": "bind-default-dnssec-policy-algorithm",
+      "prompt": "According to the skills library, which signing algorithm does BIND's built-in default dnssec-policy use for its combined signing key?",
+      "expected": { "type": "contains_all", "value": ["ECDSAP256SHA256"] },
+      "notes": "skills/networking/dns/bind/SKILL.md - \"Built-in: ECDSAP256SHA256 CSK, 1-year lifetime\""
+    },
+    {
+      "id": "haproxy-least-connections-algorithm",
+      "prompt": "According to the skills library, which HAProxy load balancing algorithm directs traffic to the server with the fewest active connections?",
+      "expected": { "type": "contains_all", "value": ["leastconn"] },
+      "notes": "skills/networking/load-balancing/haproxy/SKILL.md - \"| Least Connections | balance leastconn | Fewest active connections |\""
+    },
+    {
+      "id": "wireguard-noise-protocol-name",
+      "prompt": "According to the skills library, what is the full Noise Protocol Framework name used by WireGuard's handshake?",
+      "expected": { "type": "contains_all", "value": ["Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s"] },
+      "notes": "skills/networking/vpn/wireguard/SKILL.md - \"Noise Protocol Framework (Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s)\""
+    }
+  ]
+}

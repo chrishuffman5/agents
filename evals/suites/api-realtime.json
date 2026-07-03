@@ -1,0 +1,54 @@
+{
+  "domain": "api-realtime",
+  "agent": "domain-expert:api-realtime-specialist",
+  "tasks": [
+    {
+      "id": "grpc-binary-metadata-suffix",
+      "prompt": "According to the skills library, what suffix must binary gRPC metadata keys end with to avoid their values being corrupted?",
+      "expected": { "type": "contains_all", "value": ["-bin"] },
+      "notes": "skills/api-realtime/grpc/SKILL.md - \"Binary metadata keys must end with `-bin` or values will be corrupted.\""
+    },
+    {
+      "id": "websocket-close-code-abnormal",
+      "prompt": "According to the skills library, which WebSocket close code indicates an abnormal closure where the TCP connection dropped without a close frame?",
+      "expected": { "type": "regex", "value": "\\b1006\\b" },
+      "notes": "skills/api-realtime/websocket/SKILL.md - \"1006 | Abnormal closure (no close frame -- TCP dropped)\""
+    },
+    {
+      "id": "sse-mime-type",
+      "prompt": "According to the skills library, what MIME type identifies a Server-Sent Events stream?",
+      "expected": { "type": "contains_all", "value": ["text/event-stream"] },
+      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"MIME type: `text/event-stream`\""
+    },
+    {
+      "id": "sse-close-status",
+      "prompt": "According to the skills library, what HTTP status does an SSE server send to permanently close a stream?",
+      "expected": { "type": "regex", "value": "\\b204\\b" },
+      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Server sends `204 No Content` to permanently close stream\""
+    },
+    {
+      "id": "signalr-messagepack-protocol",
+      "prompt": "According to the skills library, besides JSON, which serialization protocol does SignalR support that is roughly 30-40% smaller?",
+      "expected": { "type": "contains_all", "value": ["MessagePack"] },
+      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Protocols: JSON (default) or MessagePack (~30-40% smaller)\""
+    },
+    {
+      "id": "socketio-engineio-transport",
+      "prompt": "According to the skills library, what transport layer is Socket.IO built on?",
+      "expected": { "type": "contains_all", "value": ["Engine.IO"] },
+      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Built on Engine.IO transport layer (HTTP long-polling upgrade to WebSocket)\""
+    },
+    {
+      "id": "graphql-http-200-errors",
+      "prompt": "According to the skills library, what HTTP status code does GraphQL return even when the response contains errors?",
+      "expected": { "type": "regex", "value": "\\b200\\b" },
+      "notes": "skills/api-realtime/references/concepts.md - \"GraphQL: Always returns HTTP 200 (even for errors).\""
+    },
+    {
+      "id": "odata-functions-actions",
+      "prompt": "According to the skills library, what are the two OData operation constructs, one side-effect-free via GET and one with side effects via POST?",
+      "expected": { "type": "contains_all", "value": ["Functions", "Actions"] },
+      "notes": "skills/api-realtime/references/paradigm-request-response.md - \"Functions (side-effect-free, GET) and Actions (side effects, POST)\""
+    }
+  ]
+}

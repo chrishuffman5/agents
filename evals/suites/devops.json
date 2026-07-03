@@ -1,0 +1,54 @@
+{
+  "domain": "devops",
+  "agent": "domain-expert:devops-specialist",
+  "tasks": [
+    {
+      "id": "ansible-variable-precedence-levels",
+      "prompt": "According to the skills library, how many distinct levels of variable precedence does Ansible define?",
+      "expected": { "type": "regex", "value": "\\b22\\b" },
+      "notes": "skills/devops/config-mgmt/ansible/SKILL.md - \"Variable precedence (22 levels of precedence)\""
+    },
+    {
+      "id": "ansible-extra-vars-highest-precedence",
+      "prompt": "According to the skills library, which Ansible variable source has the highest precedence and always overrides everything else?",
+      "expected": { "type": "contains_all", "value": ["extra"] },
+      "notes": "skills/devops/config-mgmt/ansible/SKILL.md - \"Extra vars (`-e` / `--extra-vars`) - always wins\""
+    },
+    {
+      "id": "terraform-ephemeral-resources-version",
+      "prompt": "According to the skills library, starting in which Terraform version are ephemeral resources available?",
+      "expected": { "type": "regex", "value": "\\b1\\.10\\b" },
+      "notes": "skills/devops/iac/terraform/SKILL.md - \"ephemeral resources (1.10+) are version-gated\""
+    },
+    {
+      "id": "terraform-import-blocks-version",
+      "prompt": "According to the skills library, from which Terraform version can you adopt existing infrastructure using a config-based import block?",
+      "expected": { "type": "regex", "value": "\\b1\\.5\\b" },
+      "notes": "skills/devops/iac/terraform/SKILL.md - \"import { to = aws_instance.web; id = ... } | Adopt existing infrastructure (1.5+ config)\""
+    },
+    {
+      "id": "argocd-matrix-generator-cartesian",
+      "prompt": "According to the skills library, what does the ArgoCD ApplicationSet Matrix generator produce from two generators?",
+      "expected": { "type": "contains_all", "value": ["Cartesian product"] },
+      "notes": "skills/devops/gitops/argocd/SKILL.md - \"Matrix | Cartesian product of 2 generators | Cluster x environment combinations\""
+    },
+    {
+      "id": "argocd-sync-wave-annotation",
+      "prompt": "According to the skills library, which annotation controls the order in which ArgoCD applies resources during a sync?",
+      "expected": { "type": "contains_all", "value": ["argocd.argoproj.io/sync-wave"] },
+      "notes": "skills/devops/gitops/argocd/SKILL.md - \"annotations: argocd.argoproj.io/sync-wave: \\\"-1\\\" # Create namespace first\""
+    },
+    {
+      "id": "github-actions-ubuntu-latest-version",
+      "prompt": "According to the skills library, which Ubuntu release does the ubuntu-latest GitHub Actions runner map to?",
+      "expected": { "type": "regex", "value": "\\b24\\.04\\b" },
+      "notes": "skills/devops/cicd/github-actions/SKILL.md - \"`ubuntu-latest` | Ubuntu 24.04 | Default for most workloads\""
+    },
+    {
+      "id": "github-default-merge-strategy",
+      "prompt": "According to the skills library, which merge strategy is recommended as the default for most teams because it yields one clean commit per pull request?",
+      "expected": { "type": "contains_all", "value": ["Squash"] },
+      "notes": "skills/devops/version-control/github/SKILL.md - \"Squash & merge | One clean commit per PR | Default for most teams - tidy, linear history\""
+    }
+  ]
+}
