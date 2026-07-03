@@ -1,0 +1,18 @@
+{
+  "domain": "REPLACE - domain name matching skills/<domain>/",
+  "agent": "domain-expert:REPLACE-specialist",
+  "tasks": [
+    {
+      "id": "navigation-task-example",
+      "prompt": "A task verifiable against the skill TREE STRUCTURE (documented versions, reference file names, script inventories). Isolates the reduce-research goal.",
+      "expected": { "type": "contains_all", "value": ["required-substring-1", "required-substring-2"] },
+      "notes": "REQUIRED: cite the skill path holding the ground truth, e.g. skills/<domain>/<tech>/"
+    },
+    {
+      "id": "knowledge-task-example",
+      "prompt": "A task verifiable against a FACT STATED INSIDE a skill file (feature, default, version change). Isolates the increase-accuracy goal. Verify the fact in the file when authoring.",
+      "expected": { "type": "regex", "value": "\\bshort-token\\b" },
+      "notes": "Use regex with \\b word boundaries for short tokens to avoid substring collisions. Other grader types: exact, contains_any."
+    }
+  ]
+}
