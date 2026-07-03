@@ -256,3 +256,9 @@ Load these when you need deep knowledge for a specific area:
 - `patterns/data-fetching.md` -- Server Components fetch, Server Actions, Cache Components, ISR, Route Handlers
 - `patterns/authentication.md` -- NextAuth/Auth.js, middleware/proxy auth, session patterns, cascading auth checks
 - `patterns/deployment.md` -- Vercel vs self-hosting, standalone output, Docker, ISR on self-hosted, Build Adapters
+
+## Diagnostic Scripts
+
+Ready-made build audit (read-only) in `scripts/`.
+
+- `scripts/01-build-and-config-audit.sh` -- Per-route bundle sizes, render-strategy sanity, middleware/proxy check

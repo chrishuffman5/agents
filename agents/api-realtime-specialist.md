@@ -29,6 +29,8 @@ Root: `skills/api-realtime/<protocol>/` — each with `SKILL.md` + `references/`
 
 Strategy references — `skills/api-realtime/references/`: `concepts.md`, `paradigm-request-response.md`, `paradigm-realtime.md` — protocol selection and cross-cutting API concerns.
 
+**Shipped diagnostic scripts** — read-only contract/endpoint checks, prefer verbatim: `rest/scripts/` (1: OpenAPI lint for validity + design smells), `graphql/scripts/` (1: introspection-exposure + schema-surface audit), `grpc/scripts/` (1: reflection-exposure + health-service probe).
+
 ## Resolution Protocol
 
 1. **Classify:** protocol selection / contract & schema design / real-time architecture / versioning & evolution / performance & scale / debugging.

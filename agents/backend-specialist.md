@@ -42,6 +42,8 @@ Cross-framework references — `skills/backend/references/`:
 - `paradigm-traditional.md` — sync/threaded frameworks
 - `paradigm-async.md` — event-loop and async-native frameworks
 
+**Shipped diagnostic scripts** — read-only project audits, prefer verbatim: `aspnet-core/scripts/` (1: TFM/vulnerable-package/build audit), `django/scripts/` (1: deploy check, migration drift, pip-audit), `express/scripts/` (1: npm audit, outdated, security-middleware presence).
+
 ## Resolution Protocol
 
 1. **Classify:** framework selection / endpoint & feature implementation / auth / data access / performance & concurrency / upgrade / debugging.

@@ -98,3 +98,9 @@ function resolver(parent, args, context, info) { }
 
 - `../SKILL.md` -- Parent API & Real-Time domain for cross-protocol comparisons
 - `../websocket/SKILL.md` -- WebSocket transport for GraphQL subscriptions
+
+## Diagnostic Scripts
+
+Ready-made endpoint-audit script (read-only introspection) in `scripts/`.
+
+- `scripts/01-schema-introspection-audit.sh` -- Introspection exposure check and schema surface review

@@ -21,7 +21,11 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `security` | ⚠️ Partial | entra-id (3), ad-ds (2), vault (2), crowdstrike (1) — read-only defensive audits |
 | `cloud-platforms` | ⚠️ Partial | aws (3), azure (2) — FinOps cost/idle audits |
 | `mail-collab` | ⚠️ Partial | postfix (2), m365 (1) |
-| All 3 other domains | ❌ None | api-realtime, backend, frontend |
+| `backend` | ⚠️ Partial | aspnet-core (1), django (1), express (1) — project/dep audits |
+| `frontend` | ⚠️ Partial | react (1), nextjs (1), angular (1) — build/bundle audits |
+| `api-realtime` | ⚠️ Partial | rest (1), graphql (1), grpc (1) — contract/endpoint checks |
+
+**All 18 domains now have at least partial script coverage.** Remaining work is depth (more technologies per domain), driven by eval deltas and real usage.
 
 ## The Standard
 

@@ -255,3 +255,9 @@ Load these for deep knowledge on specific topics:
 - `references/architecture.md` -- Middleware pipeline internals, DI container patterns, Kestrel configuration, routing engine, filter pipeline, hosting models. **Load when:** architecture questions, middleware ordering, DI lifetime issues, Kestrel tuning, reverse proxy setup.
 - `references/best-practices.md` -- Configuration patterns, security hardening, performance tuning, testing strategies, deployment patterns. **Load when:** "how should I configure", security review, performance optimization, CI/CD setup.
 - `references/diagnostics.md` -- Common errors and fixes, middleware ordering bugs, DI resolution failures, authentication debugging, performance profiling. **Load when:** troubleshooting errors, debugging auth issues, diagnosing performance problems.
+
+## Diagnostic Scripts
+
+Ready-made dotnet CLI audit (read-only) in `scripts/`.
+
+- `scripts/01-project-audit.sh` -- Target frameworks, vulnerable/deprecated/outdated packages, build health

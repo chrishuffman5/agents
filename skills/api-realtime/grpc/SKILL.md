@@ -81,3 +81,9 @@ A channel represents a connection to a gRPC server. Shared by multiple concurren
 
 - `../SKILL.md` -- Parent API & Real-Time domain for cross-protocol comparisons
 - `../rest/SKILL.md` -- REST API design (grpc-gateway transcoding context)
+
+## Diagnostic Scripts
+
+Ready-made server-probe script (read-only) in `scripts/`.
+
+- `scripts/01-reflection-and-health.sh` -- Reflection exposure and grpc.health.v1 status probe
