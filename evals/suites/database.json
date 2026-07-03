@@ -49,6 +49,18 @@
       "prompt": "According to the database domain skill's CAP theorem guidance, does Cassandra behave as a CP or an AP system during a network partition? Answer with just the classification.",
       "expected": { "type": "regex", "value": "\\bAP\\b" },
       "notes": "Ground truth: skills/database/SKILL.md CAP table lists Cassandra under AP. Regex word-boundary avoids matching the AP inside 'CAP'."
+    },
+    {
+      "id": "pg-script-bloat-vacuum",
+      "prompt": "According to the skills library, which shipped PostgreSQL diagnostic script reports dead-tuple pressure and vacuum recency per table?",
+      "expected": { "type": "contains_all", "value": ["03-bloat-and-vacuum.sql"] },
+      "notes": "skills/database/postgresql/SKILL.md Diagnostic Scripts section - \"scripts/03-bloat-and-vacuum.sql -- Dead-tuple pressure and vacuum recency per table\" (script-retrieval task)"
+    },
+    {
+      "id": "redis-script-bigkeys",
+      "prompt": "According to the skills library, which shipped Redis diagnostic script finds the biggest keys per type using a SCAN-based, production-safe approach?",
+      "expected": { "type": "contains_all", "value": ["03-bigkeys.sh"] },
+      "notes": "skills/database/redis/SKILL.md Diagnostic Scripts section - \"scripts/03-bigkeys.sh -- Biggest keys per type\" (script-retrieval task)"
     }
   ]
 }

@@ -12,7 +12,7 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `analytics` | ⚠️ Partial | ssas (6), ssrs (5), power-bi (4), tableau (4), grafana (4); remaining: looker, metabase, qlik-sense, superset, thoughtspot, duckdb-analytics |
 | `etl` | ⚠️ Partial | airflow (5), ssis (4), dbt-core (4), spark (4), adf (3); remaining: dbt-cloud, kafka, aws-glue, fivetran, informatica, nifi, synapse-pipelines, talend, duckdb-etl |
 | `storage` | ⚠️ Partial | netapp-ontap (4), ceph (3), aws-s3 (3), storage-spaces-direct (2); remaining: azure-blob, gcs, minio, glusterfs, dell-powerstore, dell-unity, hpe-alletra, pure-storage |
-| `database` | ⚠️ Partial | `sql-server` only (per-version diagnostic scripts, numbered) |
+| `database` | ⚠️ Partial | sql-server (per-version), postgresql (5), mysql (4), mongodb (5), redis (4); remaining: 24 engines |
 | All 11 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, frontend, mail-collab, messaging, monitoring, networking, security |
 
 ## The Standard
@@ -73,7 +73,7 @@ Re-prioritized 2026-07-03 by measured agent-vs-baseline eval deltas (runs `20260
 1. **analytics** (delta +4) — ✅ started: ssas/ssrs/power-bi/tableau/grafana packs shipped; remaining tools on demand
 2. **etl** (+3) — ✅ started: airflow/ssis/dbt-core/spark/adf packs shipped; remaining tools on demand
 3. **storage** (+3) — ✅ started: netapp-ontap/ceph/aws-s3/storage-spaces-direct packs shipped; remaining platforms on demand
-4. **database** (+5 on navigation suite) — extend the sql-server pattern to postgresql, mysql, mongodb, redis; then remaining engines
+4. **database** (+5 on navigation suite) — ✅ started: postgresql/mysql/mongodb/redis packs shipped alongside sql-server; remaining engines on demand
 5. **cli-scripting / cloud-platforms / messaging** (+2) — consumer-lag and queue diagnostics, cost/usage pulls
 6. **containers / networking / monitoring** (+1) — kubectl triage bundles, `show`-command packs, query packs
 7. **devops / mail-collab / security** (0 measured delta) — after their eval suites are hardened with newer version-gated content

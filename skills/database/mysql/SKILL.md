@@ -246,3 +246,12 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- InnoDB buffer pool, redo log, undo log, doublewrite buffer, change buffer, adaptive hash index, tablespace types. Read for "how does InnoDB work internally" questions.
 - `references/diagnostics.md` -- Performance Schema instruments and key tables, sys schema views, EXPLAIN formats and interpretation, slow query log configuration and analysis. Read when troubleshooting performance.
 - `references/best-practices.md` -- InnoDB tuning parameters with values, replication best practices, security hardening, backup strategies. Read for configuration and operational guidance.
+
+## Diagnostic Scripts
+
+Ready-made SQL in `scripts/` (MySQL 8.0+, performance_schema/sys), numbered by investigation order. All read-only.
+
+- `scripts/01-processlist-and-locks.sql` -- Sessions plus InnoDB lock-wait chains (sys.innodb_lock_waits)
+- `scripts/02-statement-digest.sql` -- Top statements by latency with missing-index signatures
+- `scripts/03-innodb-health.sql` -- Buffer pool hit rate, purge lag, lock and tmp-table counters
+- `scripts/04-table-sizes.sql` -- Largest tables with index share and fragmentation
