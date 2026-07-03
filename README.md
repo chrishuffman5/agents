@@ -2,9 +2,9 @@
 
 > **Preview / Beta** — This plugin is in beta experimentation mode (v0.7.0). It is not intended for production use without proper testing and validation. Features, skill content, and agent behavior may change between releases.
 
-A Claude Code plugin providing **domain expert knowledge skills** and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Agents orchestrate that knowledge for cross-domain workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
+A Claude Code plugin providing **domain expert knowledge skills**, **domain-specialist subagents** (one per domain), and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Domain specialists navigate their skill tree deterministically — exact paths, narrowest-file reads, cited sources — for fast, accurate, token-efficient answers. Task agents orchestrate multiple domains for workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
 
-**1,668+ files | 187+ technologies | 18 domains | 6 agents | 460,000+ lines of expert knowledge**
+**1,668+ files | 187+ technologies | 18 domains | 24 agents | 460,000+ lines of expert knowledge**
 
 ---
 
@@ -540,7 +540,34 @@ Expert knowledge for enterprise email infrastructure and collaboration platforms
 
 ## Agents
 
-Task-oriented subagents that run in their own context window with preloaded skills. Claude auto-delegates based on the user's prompt — no manual routing needed.
+Subagents run in their own context window with preloaded skills. Claude auto-delegates based on the user's prompt — no manual routing needed. There are two layers: **domain specialists** (one per domain, aligned 1:1 with the skills library) and **task specialists** (cross-domain orchestration).
+
+### Domain Specialists
+
+Each specialist carries a precise knowledge map of its `skills/` domain tree. Instead of searching, it resolves exact file paths, reads the narrowest file that answers, prefers shipped scripts over improvised ones, and cites every technology-specific claim with a skill path. This reduces research overhead and token use while increasing answer accuracy.
+
+| Agent | Domain Coverage |
+|-------|----------------|
+| [**database-specialist**](agents/database-specialist.md) | 29 engines across relational, document, key-value, graph, search, time-series, OLAP |
+| [**os-specialist**](agents/os-specialist.md) | Windows Server/Client, RHEL, Rocky/Alma, Ubuntu, Debian, SLES, macOS |
+| [**networking-specialist**](agents/networking-specialist.md) | Routing/switching, firewalls, DNS, load balancing, VPN, SD-WAN, wireless, DC fabric, cloud networking |
+| [**security-specialist**](agents/security-specialist.md) | IAM, EDR, SIEM, secrets, cloud/app/network/email security, DLP, GRC, zero trust |
+| [**devops-specialist**](agents/devops-specialist.md) | CI/CD, IaC, config management, GitOps, version control |
+| [**containers-specialist**](agents/containers-specialist.md) | Kubernetes + managed distros, Helm, Docker/containerd/Podman, service mesh |
+| [**cloud-platforms-specialist**](agents/cloud-platforms-specialist.md) | AWS, Azure, GCP — architecture, migration, FinOps, cross-cloud mapping |
+| [**frontend-specialist**](agents/frontend-specialist.md) | React, Next.js, Vue, Nuxt, Angular, Svelte, Astro, Remix, Blazor, Gatsby, htmx |
+| [**backend-specialist**](agents/backend-specialist.md) | ASP.NET Core, Spring Boot, Django, Rails, Express, NestJS, FastAPI, Flask, Go, Rust |
+| [**monitoring-specialist**](agents/monitoring-specialist.md) | Prometheus, Grafana, ELK, OpenTelemetry, Datadog, New Relic, Dynatrace, Splunk, PagerDuty |
+| [**storage-specialist**](agents/storage-specialist.md) | Enterprise arrays, software-defined storage, cloud object storage |
+| [**virtualization-specialist**](agents/virtualization-specialist.md) | VMware, Proxmox, KVM, Nutanix, Citrix, cloud VMs |
+| [**cli-scripting-specialist**](agents/cli-scripting-specialist.md) | PowerShell, Bash, Python, Node.js, AWS/Azure CLI, kubectl |
+| [**etl-specialist**](agents/etl-specialist.md) | Airflow, SSIS, dbt, Spark, Kafka pipelines, ADF, Glue, Fivetran, NiFi, Talend |
+| [**analytics-specialist**](agents/analytics-specialist.md) | Power BI, Tableau, Looker, Qlik, SSAS, SSRS, Grafana, Superset, Metabase, ThoughtSpot |
+| [**api-realtime-specialist**](agents/api-realtime-specialist.md) | REST, GraphQL, gRPC, OData, WebSocket, SSE, SignalR, Socket.IO |
+| [**messaging-specialist**](agents/messaging-specialist.md) | Kafka, RabbitMQ, Pulsar, NATS, Redis Streams, SQS/SNS, Service Bus, Pub/Sub |
+| [**mail-collab-specialist**](agents/mail-collab-specialist.md) | Exchange, Microsoft 365, Google Workspace, Postfix |
+
+### Task Specialists
 
 | Agent | What It Does | Triggers On |
 |-------|-------------|-------------|
