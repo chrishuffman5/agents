@@ -220,3 +220,10 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- AD DS internals: NTDS.dit, ESE database, replication protocols, partitions, FSMO mechanics, sites and subnets, Global Catalog, schema, trust authentication flow. Read for "how does X work" questions.
 - `references/diagnostics.md` -- Troubleshooting playbooks: repadmin commands, dcdiag tests, critical event IDs, replication failure resolution, DNS issues, authentication failures, GPO troubleshooting. Read when diagnosing issues.
 - `references/best-practices.md` -- Hardening and operational guidance: tiered administration, GPO security baselines, LAPS deployment, PAW architecture, monitoring and alerting, backup/recovery, DC placement. Read for design and operations questions.
+
+## Diagnostic Scripts
+
+Ready-made RSAT ActiveDirectory audits (read-only) in `scripts/`. Defensive review of on-prem tier-0 exposure.
+
+- `scripts/01-privileged-group-audit.ps1` -- Recursive membership of Domain/Enterprise/Schema Admins and operators
+- `scripts/02-kerberoast-exposure.ps1` -- Kerberoastable SPN accounts and AS-REP-roastable accounts, privilege-weighted

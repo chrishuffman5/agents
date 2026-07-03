@@ -206,3 +206,10 @@ non_smtpd_milters = inet:127.0.0.1:8891
 - `references/architecture.md` -- Daemon model, mail flow internals, queue system, milter interface, virtual domain classes, lookup tables, master.cf service definitions. **Load when:** architecture questions, daemon troubleshooting, virtual domain design.
 - `references/best-practices.md` -- TLS configuration (server/client, DANE, MTA-STS), SASL setup, anti-spam pipeline (postscreen, OpenDKIM, OpenDMARC, Rspamd, ClamAV), performance tuning, Dovecot integration. **Load when:** security hardening, anti-spam setup, performance optimization.
 - `references/diagnostics.md` -- Queue issues, TLS handshake failures, relay denied errors, milter failures, delivery failures, log analysis, common error messages. **Load when:** troubleshooting mail flow, diagnosing delivery problems, interpreting log entries.
+
+## Diagnostic Scripts
+
+Ready-made postconf/postqueue scripts (read-only) in `scripts/`.
+
+- `scripts/01-queue-and-health.sh` -- Queue depth, deferred-reason histogram, service sanity
+- `scripts/02-tls-and-auth-config.sh` -- Relay-restriction (open-relay) safety, TLS posture, milter chain

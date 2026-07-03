@@ -559,3 +559,10 @@ Load these for deep knowledge on specific topics:
 
 - `references/architecture.md` — Vault internals: storage engine, WAL, Raft consensus, replication internals, namespace architecture, plugin system, performance tuning, capacity planning.
 - `references/best-practices.md` — Secret engine patterns, auth method selection guide, policy design, audit compliance, dynamic secrets patterns, PKI engine deployment, Transit engine usage, Vault Agent templates, VSO patterns.
+
+## Diagnostic Scripts
+
+Ready-made Vault status/audit scripts (read-only) in `scripts/`.
+
+- `scripts/01-health-and-seal.sh` -- Seal status, HA leadership, health (the down-Vault triage)
+- `scripts/02-auth-and-policy-audit.sh` -- Auth methods, mounts, and over-broad (sudo/wildcard) policies

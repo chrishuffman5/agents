@@ -176,3 +176,10 @@ Load these when you need deep knowledge for a specific area:
 - `references/security.md` -- Entra ID (tiers, Conditional Access, managed identities, PIM), Key Vault (SKUs, best practices, references), Defender for Cloud (plans, JIT access), Azure Policy (effects, initiatives, Management Groups), RBAC (custom roles, best practices), Bastion, Sentinel. Read for security architecture.
 - `references/data-platform.md` -- Data Factory (pricing, integration runtimes), Synapse Analytics (Dedicated vs Serverless SQL, Spark pools), Event Hubs vs Service Bus vs Event Grid (selection criteria, pricing). Read for data pipeline and messaging decisions.
 - `references/cost.md` -- Cost Management tools, Reserved Instances vs Savings Plans, Azure Hybrid Benefit, Dev/Test pricing, common cost traps with $ impact, monthly optimization checklist, tagging strategy. Read for cost optimization guidance.
+
+## Diagnostic Scripts
+
+Ready-made Az PowerShell FinOps scripts (read-only) in `scripts/`.
+
+- `scripts/01-cost-and-advisor.ps1` -- MTD cost by service plus Advisor cost recommendations
+- `scripts/02-idle-resource-scan.ps1` -- Unattached disks, stopped-not-deallocated VMs, empty groups

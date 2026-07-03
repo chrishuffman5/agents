@@ -41,6 +41,8 @@ Root: `skills/security/<subdomain>/<platform>/` — platforms have `SKILL.md` + 
 | `grc` | vanta, drata, onetrust, archer, servicenow-grc |
 | `backup-security` | veeam, rubrik, commvault, cohesity |
 
+**Shipped diagnostic scripts** — read-only defensive audits, prefer verbatim: `iam/entra-id/scripts/` (3 Graph PowerShell: privileged-role, conditional-access, stale-guest/app-credential audits), `iam/ad-ds/scripts/` (2 RSAT: tier-0 group membership, Kerberoast/AS-REP exposure), `secrets/vault/scripts/` (2: seal/HA health, auth/policy over-breadth), `edr/crowdstrike/scripts/` (1: detection summary by severity/tactic). All are posture review — no changes, no response actions.
+
 ## Resolution Protocol
 
 1. **Classify:** identity design / detection & response / hardening & posture / compliance mapping / architecture (zero trust, segmentation) / incident support.

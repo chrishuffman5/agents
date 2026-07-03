@@ -328,3 +328,11 @@ Load these when you need deep knowledge for a specific service category:
 - `references/serverless.md` -- Lambda patterns (layers, extensions, edge compute), concurrency management, API Gateway (REST vs HTTP), Step Functions (Standard vs Express), EventBridge patterns. Read for serverless architecture.
 - `references/messaging.md` -- SQS vs SNS vs EventBridge vs Kinesis decision tree, pricing comparison, FIFO vs Standard, long polling, batch operations, fan-out patterns. Read for async/messaging.
 - `references/cost.md` -- Cost optimization framework, Savings Plans vs RIs, right-sizing process, common cost traps (NAT Gateway, cross-AZ, DynamoDB On-Demand, CloudWatch Logs), estimation templates. Read for cost reviews.
+
+## Diagnostic Scripts
+
+Ready-made AWS CLI FinOps scripts (read-only IAM) in `scripts/`.
+
+- `scripts/01-account-cost-summary.sh` -- MTD spend by service with prior-month trend
+- `scripts/02-savings-coverage.sh` -- RI/Savings Plans coverage and utilization (commitment lever)
+- `scripts/03-idle-resource-scan.sh` -- Unattached volumes, idle EIPs, stopped instances (delete-waste lever)
