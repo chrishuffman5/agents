@@ -39,10 +39,10 @@
       "notes": "skills/storage/netapp-ontap/SKILL.md - \"All new AFF/FAS/ASA systems ship with ONTAP One - a single NLF enabling SnapMirror, FlexClone, SnapLock...\""
     },
     {
-      "id": "minio-license-agpl-feb-2026",
-      "prompt": "According to the skills library, what open-source license did MinIO switch to as of February 2026, and what license was it previously under?",
-      "expected": { "type": "contains_all", "value": ["AGPL 3.0", "Apache 2.0"] },
-      "notes": "skills/storage/references/paradigm-sds.md - \"AGPL 3.0 (since Feb 2026, was Apache 2.0)\""
+      "id": "minio-community-archived-feb-2026",
+      "prompt": "According to the skills library, what happened to the MinIO community (OSS) edition in February 2026, and under which license had it been distributed?",
+      "expected": { "type": "contains_all", "value": ["archived", "AGPL"] },
+      "notes": "skills/storage/minio/SKILL.md - \"Community (OSS) | Archived Feb 13, 2026 | AGPLv3\" / \"The archived community repository remains functional but receives no patches.\" (Replaced a defective task whose premise came from a since-corrected paradigm-sds.md line; the specialist correctly refuted it in the 20260702-233837 run.)"
     },
     {
       "id": "ceph-20-2-mgmt-gateway",

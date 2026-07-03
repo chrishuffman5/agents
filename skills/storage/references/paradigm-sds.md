@@ -29,7 +29,7 @@ Software-defined storage (Ceph, MinIO, GlusterFS) decouples the storage control 
 | **Kubernetes** | Rook-Ceph operator (mature) | MinIO Operator (Helm) | CSI driver available |
 | **Performance** | Good (latency ~1-5ms block, tunable) | Excellent for object (designed for throughput) | Moderate (FUSE overhead for native mount) |
 | **Operational Complexity** | High (CRUSH maps, PG tuning, balancing) | Low-moderate (simpler architecture) | Moderate (heal, split-brain) |
-| **Licensing** | LGPL 2.1 / 3.0 | AGPL 3.0 (since Feb 2026, was Apache 2.0) | GPL 3.0 |
+| **Licensing** | LGPL 2.1 / 3.0 | AGPL 3.0 community (archived Feb 2026); commercial AIStor going forward | GPL 3.0 |
 | **Commercial Support** | Red Hat Ceph Storage, IBM, SUSE | MinIO commercial subscription | Red Hat Gluster (winding down) |
 
 ## Architecture Patterns
@@ -91,4 +91,4 @@ MinIO Server Pool (erasure-coded)
 1. **"Ceph on 3 nodes for production"** — Minimum viable Ceph is 3 MON + 3 OSD nodes. But production needs 5+ OSD nodes for proper failure domain separation and rebuild performance.
 2. **"MinIO for block storage"** — MinIO is object-only. If you need block volumes, use Ceph or an enterprise array.
 3. **"SDS without dedicated storage network"** — SDS replication traffic will saturate your production network. Always use a dedicated storage/replication network.
-4. **"Ignoring the license change"** — MinIO switched from Apache 2.0 to AGPL 3.0 (Feb 2026). Evaluate compliance implications before deploying.
+4. **"Ignoring the licensing shift"** — MinIO's AGPLv3 community edition was archived in Feb 2026 (no further patches); continued use means frozen code or moving to commercial AIStor. Evaluate implications before deploying. See `skills/storage/minio/SKILL.md` for edition details.
