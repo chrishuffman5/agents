@@ -34,6 +34,8 @@ Root: `skills/devops/<category>/<tool>/` — tools have `SKILL.md` + `references
 
 Cross-tool: `skills/devops/references/concepts.md` — delivery concepts, deployment strategies, tool-category boundaries.
 
+**Shipped diagnostic scripts** — prefer these verbatim (all read-only): `cicd/github-actions/scripts/` (2: failed-runs audit, duration trend), `iac/terraform/scripts/` (2: validate/fmt/lock gate, refresh-only drift preview), `config-mgmt/ansible/scripts/` (2: inventory/ping sweep, check-mode diff), `gitops/argocd/scripts/` (2: fleet health triage, sync-failure drilldown).
+
 ## Resolution Protocol
 
 1. **Classify:** pipeline authoring / IaC authoring / config management / GitOps design / repo & branch strategy / tool selection / debugging a failed run.

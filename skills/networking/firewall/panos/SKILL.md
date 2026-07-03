@@ -188,3 +188,10 @@ Load these when you need deep knowledge:
 - `references/architecture.md` -- SP3 internals, packet flow stages, session management, zone types, vsys, HA mechanics, log forwarding. Read for "how does X work" questions.
 - `references/diagnostics.md` -- CLI troubleshooting commands, packet captures, debug dataplane, session inspection, HA commands, content updates. Read when troubleshooting.
 - `references/best-practices.md` -- Policy design, zone design, NAT design, HA deployment, Panorama architecture, IronSkillet, BPA, upgrade procedures. Read for design and operations questions.
+
+## Diagnostic Scripts
+
+Ready-made SSH operational-command bundles (read-only) in `scripts/`.
+
+- `scripts/01-system-health.sh` -- System state, resources, HA state, session pressure
+- `scripts/02-traffic-triage.sh` -- Policy-match test, live sessions, drop counters for one flow

@@ -263,3 +263,10 @@ if: ${{ cancelled() }}
 - `references/architecture.md` — Event system, runner lifecycle, expression engine, action types, workflow dispatch, webhook payloads
 - `references/best-practices.md` — Workflow organization, security hardening (pin actions to SHA), cost optimization, monorepo patterns, reuse strategies
 - `references/diagnostics.md` — Workflow debugging, runner connectivity, permission errors, cache misses, action version conflicts
+
+## Diagnostic Scripts
+
+Ready-made gh CLI audits (read-only) in `scripts/`.
+
+- `scripts/01-failed-runs-audit.sh` -- Failed runs and per-workflow failure rates (deterministic vs flaky)
+- `scripts/02-workflow-duration-trend.sh` -- Duration stats per workflow (the runner-minutes levers)

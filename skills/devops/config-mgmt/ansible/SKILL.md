@@ -246,3 +246,10 @@ ansible-playbook site.yml --vault-id dev@prompt --vault-id prod@/path/to/prod_pa
 - `references/best-practices.md` — Playbook organization, idempotency patterns, performance tuning, security hardening, testing with Molecule
 - `references/diagnostics.md` — Connection failures (SSH, WinRM), module errors, variable resolution issues, performance debugging
 - `references/aap-platform.md` — Ansible Automation Platform (AAP) / Tower platform management: Controller, Private Automation Hub, EDA, Receptor mesh, Execution Environments, RBAC, workflows, credentials, API usage, backup/restore, upgrades, and troubleshooting
+
+## Diagnostic Scripts
+
+Ready-made dry-run/verification scripts (read-only) in `scripts/`.
+
+- `scripts/01-inventory-and-ping.sh` -- Inventory graph plus connectivity sweep
+- `scripts/02-check-mode-diff.sh` -- --check --diff preview with non-idempotence caveats

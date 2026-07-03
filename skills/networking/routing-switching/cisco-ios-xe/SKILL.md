@@ -171,3 +171,10 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- Linux/IOSd layers, YANG models, NETCONF/RESTCONF/gNMI, SD-Access LISP/VXLAN/CTS, Catalyst Center API, ZTP/PnP, Guest Shell, EEM, StackWise
 - `references/diagnostics.md` -- Show command reference for routing, interfaces, L2, security, platform/hardware, FHRP, NETCONF/RESTCONF examples, cross-platform CLI comparison
 - `references/best-practices.md` -- Campus design (traditional vs SD-Access), STP configuration, FHRP setup, security hardening, AAA, CoPP, upgrade procedures, ISSU
+
+## Diagnostic Scripts
+
+Ready-made SSH show-command bundles (read-only) in `scripts/`.
+
+- `scripts/01-device-health.sh` -- Version/uptime, CPU/memory, environment, recent logs
+- `scripts/02-interface-errors.sh` -- Error/drop counters, err-disabled ports, flap detection (run twice for deltas)

@@ -253,3 +253,12 @@ Load these when you need deep knowledge:
 - `references/architecture.md` -- Control plane internals, etcd operations, API server flow, kubelet mechanics, CRI details, kube-proxy modes. Read for "how does X work" questions.
 - `references/diagnostics.md` -- kubectl debug, describe, logs, events, resource troubleshooting, pod not starting flowcharts, node issues, network debugging. Read when troubleshooting.
 - `references/best-practices.md` -- Resource management, RBAC design, NetworkPolicy strategy, Pod Security Standards adoption, HPA/VPA tuning, PDB configuration, upgrade procedures. Read for design and operations questions.
+
+## Diagnostic Scripts
+
+Ready-made kubectl bundles (read-only) in `scripts/`, numbered by investigation order.
+
+- `scripts/01-pod-triage.sh` -- Not-Running/not-Ready pods, restart leaders, status-ladder guidance
+- `scripts/02-node-triage.sh` -- NotReady nodes, pressure conditions, allocatable headroom
+- `scripts/03-recent-events.sh` -- Warning events newest-first (the what-changed feed)
+- `scripts/04-resource-pressure.sh` -- Top consumers plus containers without memory limits

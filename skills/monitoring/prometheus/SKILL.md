@@ -176,3 +176,11 @@ Load these when you need deep knowledge for a specific area:
 - `references/alerting.md` -- Alert rule structure and examples, Alertmanager architecture, configuration (routing, grouping, inhibition, silencing), receiver types (Slack, PagerDuty, email, webhook), Go templating, alert fatigue prevention. Read for alerting questions.
 - `references/configuration.md` -- prometheus.yml structure, global settings, scrape_configs options, Kubernetes SD scrape config, relabeling patterns (relabel_configs and metric_relabel_configs), recording rules, OTLP receiver config, remote write/read. Read for configuration questions.
 - `references/diagnostics.md` -- TSDB status analysis, cardinality investigation, scrape failure diagnosis, high memory troubleshooting, high disk usage, slow query optimization, WAL corruption recovery, Alertmanager diagnostics, key internal metrics. Read for troubleshooting.
+
+## Diagnostic Scripts
+
+Ready-made HTTP API scripts (read-only) in `scripts/`, numbered by investigation order.
+
+- `scripts/01-health-and-targets.sh` -- Down targets with errors, TSDB head stats
+- `scripts/02-cardinality-audit.sh` -- Top metrics/label-pairs by series count (the explosion finder)
+- `scripts/03-rule-health.sh` -- Broken/slow rules and currently firing alerts
