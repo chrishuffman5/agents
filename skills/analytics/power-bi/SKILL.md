@@ -349,3 +349,12 @@ Two embedding scenarios with different authentication and licensing models:
 - `references/architecture.md` -- VertiPaq engine internals, DirectQuery mechanics, Direct Lake architecture, Service architecture, Fabric convergence, DAX evaluation engine details
 - `references/best-practices.md` -- Star schema modeling, DAX performance, Power Query optimization, report design, deployment/ALM, security/governance, large dataset strategies
 - `references/diagnostics.md` -- Performance Analyzer workflow, DAX Studio analysis, VertiPaq Analyzer, gateway troubleshooting, capacity management, refresh failure diagnosis
+
+## Diagnostic Scripts
+
+Ready-made PowerShell (MicrosoftPowerBIMgmt / SqlServer modules) in `scripts/`, numbered by investigation order. All read-only; placeholders are `__UPPER_SNAKE__` tokens.
+
+- `scripts/01-workspace-inventory.ps1` -- Tenant-wide workspace/dataset/report inventory (admin scope)
+- `scripts/02-activity-events.ps1` -- One day of tenant activity events (usage audit, export forensics)
+- `scripts/03-dataset-refresh-history.ps1` -- Refresh history with status, duration, failure cause
+- `scripts/04-xmla-model-memory.ps1` -- Table sizes of a Premium model via XMLA DMV; the full SSAS DMV pack in `skills/analytics/ssas/scripts/` works against the same endpoint

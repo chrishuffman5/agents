@@ -274,6 +274,16 @@ http://<server>/ReportServer?/<folder>/<report>&rs:Format=PDF&Year=2024
 - `references/best-practices.md` -- Report design, parameter patterns, performance optimization, subscription management, security, CI/CD
 - `references/diagnostics.md` -- ExecutionLog3 queries, common errors, subscription failures, timeout analysis, configuration diagnostics, migration troubleshooting
 
+## Diagnostic Scripts
+
+Ready-made T-SQL against the ReportServer catalog database in `scripts/`, numbered by investigation order. All read-only; run in SSMS against the catalog instance.
+
+- `scripts/01-execution-summary-daily.sql` -- 14-day volume/latency trend with per-phase breakdown
+- `scripts/02-slowest-reports.sql` -- Top 20 slow reports; which phase (data/processing/rendering) dominates
+- `scripts/03-report-usage-ranking.sql` -- Usage ranking plus never-run reports (cleanup/migration scoping)
+- `scripts/04-subscription-failures.sql` -- Failed/stalled subscriptions with owner and delivery type
+- `scripts/05-execution-source-breakdown.sql` -- Live vs Cache vs Snapshot mix (caching opportunities)
+
 ## Cross-References
 
 - Parent domain: `skills/analytics/SKILL.md`
