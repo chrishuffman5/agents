@@ -13,7 +13,8 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `etl` | ⚠️ Partial | airflow (5), ssis (4), dbt-core (4), spark (4), adf (3); remaining: dbt-cloud, kafka, aws-glue, fivetran, informatica, nifi, synapse-pipelines, talend, duckdb-etl |
 | `storage` | ⚠️ Partial | netapp-ontap (4), ceph (3), aws-s3 (3), storage-spaces-direct (2); remaining: azure-blob, gcs, minio, glusterfs, dell-powerstore, dell-unity, hpe-alletra, pure-storage |
 | `database` | ⚠️ Partial | sql-server (per-version), postgresql (5), mysql (4), mongodb (5), redis (4); remaining: 24 engines |
-| All 11 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, frontend, mail-collab, messaging, monitoring, networking, security |
+| `messaging` | ⚠️ Partial | kafka (3), rabbitmq (3), aws-sqs-sns (2); remaining: pulsar, nats, redis-streams, azure-service-bus, gcp-pubsub |
+| All 10 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, frontend, mail-collab, monitoring, networking, security |
 
 ## The Standard
 
@@ -74,7 +75,7 @@ Re-prioritized 2026-07-03 by measured agent-vs-baseline eval deltas (runs `20260
 2. **etl** (+3) — ✅ started: airflow/ssis/dbt-core/spark/adf packs shipped; remaining tools on demand
 3. **storage** (+3) — ✅ started: netapp-ontap/ceph/aws-s3/storage-spaces-direct packs shipped; remaining platforms on demand
 4. **database** (+5 on navigation suite) — ✅ started: postgresql/mysql/mongodb/redis packs shipped alongside sql-server; remaining engines on demand
-5. **cli-scripting / cloud-platforms / messaging** (+2) — consumer-lag and queue diagnostics, cost/usage pulls
+5. **cli-scripting / cloud-platforms / messaging** (+2) — messaging ✅ started (kafka/rabbitmq/sqs packs); cloud-platforms cost/usage pulls remain
 6. **containers / networking / monitoring** (+1) — kubectl triage bundles, `show`-command packs, query packs
 7. **devops / mail-collab / security** (0 measured delta) — after their eval suites are hardened with newer version-gated content
 8. **virtualization** (+3) — already fully covered; audit existing scripts against the header contract instead

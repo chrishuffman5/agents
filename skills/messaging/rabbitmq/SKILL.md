@@ -154,3 +154,11 @@ rabbitmqctl set_policy DLX ".*" \
 
 - `../SKILL.md` -- Parent messaging domain agent for cross-broker comparisons
 - Future: `skills/etl/integration/rabbitmq/` -- RabbitMQ as a data integration component
+
+## Diagnostic Scripts
+
+Ready-made rabbitmqctl/rabbitmq-diagnostics bundles (run on a cluster node) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-node-health.sh` -- Alarms (publisher-blocking!), health checks, quorum-critical queues
+- `scripts/02-queue-depths.sh` -- Depth/consumer/memory ranking, zero-consumer backlogs
+- `scripts/03-connections-channels.sh` -- Connection/channel leak audit, flow-controlled publishers

@@ -84,3 +84,11 @@ Share Groups provide traditional queue semantics on Kafka topics:
 - **Version agents:** `skills/etl/streaming/kafka/3.9/`, `4.0/`, `4.1/`, `4.2/` -- Version-specific features
 - **Parent domain:** `../SKILL.md` -- Messaging domain routing and cross-broker comparisons
 - **Pulsar comparison:** `../pulsar/SKILL.md` -- Alternative streaming platform
+
+## Diagnostic Scripts
+
+Ready-made CLI bundles (Kafka distribution tools; add --command-config for SASL/TLS) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-consumer-lag.sh` -- Lag across all consumer groups with dead-consumer detection
+- `scripts/02-under-replicated.sh` -- URP / under-min-ISR / offline partition triage (fix order included)
+- `scripts/03-topic-config-audit.sh` -- RF vs min.insync sanity, retention overrides, partition ceilings
