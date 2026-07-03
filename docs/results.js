@@ -7,9 +7,9 @@ window.DASHBOARD_DATA = {
     "scripts": 375,
     "agent": {
       "suites": 18,
-      "tasks": 152,
-      "solved": 152,
-      "passAt1": 0.993
+      "tasks": 162,
+      "solved": 162,
+      "passAt1": 1.0
     },
     "baseline": {
       "suites": 18,
@@ -237,13 +237,13 @@ window.DASHBOARD_DATA = {
         "runtimes (2)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
-        "passAt1": 0.875,
-        "meanAttempts": 1.12,
-        "meanTokens": 670,
-        "meanWallS": 24.6,
-        "costUsd": 2.62
+        "tasks": 9,
+        "solved": 9,
+        "passAt1": 1,
+        "meanAttempts": 1,
+        "meanTokens": 609,
+        "meanWallS": 21.1,
+        "costUsd": 2.549
       },
       "baseline": {
         "tasks": 8,
@@ -270,13 +270,13 @@ window.DASHBOARD_DATA = {
         "dns (2)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 673,
-        "meanWallS": 24.4,
-        "costUsd": 2.379
+        "meanTokens": 706,
+        "meanWallS": 23.9,
+        "costUsd": 2.614
       },
       "baseline": {
         "tasks": 8,
@@ -301,13 +301,13 @@ window.DASHBOARD_DATA = {
         "azure (2)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 640,
-        "meanWallS": 19.8,
-        "costUsd": 2.294
+        "meanTokens": 543,
+        "meanWallS": 19,
+        "costUsd": 2.681
       },
       "baseline": {
         "tasks": 8,
@@ -332,13 +332,13 @@ window.DASHBOARD_DATA = {
         "elk (2)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 673,
-        "meanWallS": 22.3,
-        "costUsd": 2.312
+        "meanTokens": 742,
+        "meanWallS": 22.5,
+        "costUsd": 2.6
       },
       "baseline": {
         "tasks": 8,
@@ -365,13 +365,13 @@ window.DASHBOARD_DATA = {
         "cicd (2)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 531,
-        "meanWallS": 23.1,
-        "costUsd": 2.349
+        "meanTokens": 553,
+        "meanWallS": 26.8,
+        "costUsd": 2.749
       },
       "baseline": {
         "tasks": 8,
@@ -431,13 +431,13 @@ window.DASHBOARD_DATA = {
         "edr (1)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 634,
-        "meanWallS": 26.1,
-        "costUsd": 2.514
+        "meanTokens": 686,
+        "meanWallS": 25.2,
+        "costUsd": 2.738
       },
       "baseline": {
         "tasks": 8,
@@ -495,13 +495,13 @@ window.DASHBOARD_DATA = {
         "graphql (1)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 577,
-        "meanWallS": 20,
-        "costUsd": 2.327
+        "meanTokens": 697,
+        "meanWallS": 25.6,
+        "costUsd": 2.748
       },
       "baseline": {
         "tasks": 8,
@@ -527,13 +527,13 @@ window.DASHBOARD_DATA = {
         "aspnet-core (1)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 476,
-        "meanWallS": 18.6,
-        "costUsd": 2.264
+        "meanTokens": 575,
+        "meanWallS": 21.4,
+        "costUsd": 2.563
       },
       "baseline": {
         "tasks": 8,
@@ -559,13 +559,13 @@ window.DASHBOARD_DATA = {
         "angular (1)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 694,
-        "meanWallS": 25.1,
-        "costUsd": 2.353
+        "meanTokens": 800,
+        "meanWallS": 27.2,
+        "costUsd": 2.815
       },
       "baseline": {
         "tasks": 8,
@@ -590,13 +590,13 @@ window.DASHBOARD_DATA = {
         "m365 (1)"
       ],
       "agent": {
-        "tasks": 8,
-        "solved": 8,
+        "tasks": 9,
+        "solved": 9,
         "passAt1": 1,
         "meanAttempts": 1,
-        "meanTokens": 603,
-        "meanWallS": 26.2,
-        "costUsd": 2.516
+        "meanTokens": 588,
+        "meanWallS": 27.3,
+        "costUsd": 2.832
       },
       "baseline": {
         "tasks": 8,
