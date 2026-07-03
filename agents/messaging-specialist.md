@@ -30,6 +30,11 @@ Root: `skills/messaging/<broker>/`:
 
 Strategy references — `skills/messaging/references/`: `concepts.md`, `paradigm-streaming.md`, `paradigm-broker.md` — log-based streaming vs. broker/queue semantics and selection.
 
+**Shipped diagnostic scripts** — prefer these verbatim over writing your own (all read-only; headers explain execution and interpretation):
+- `kafka/scripts/` — 3 CLI bundles (consumer lag with dead-consumer detection, URP/min-ISR/offline triage, topic config audit)
+- `rabbitmq/scripts/` — 3 node bundles (alarms/quorum-critical health, queue depths and zero-consumer backlogs, connection/channel leak audit)
+- `aws-sqs-sns/scripts/` — 2 CLI audits (queue depth with DLQ-buildup flags, redrive-policy gaps)
+
 ## Resolution Protocol
 
 1. **Classify:** broker selection / topology & schema design / delivery-semantics design / consumer implementation patterns / operations & performance (lag, throughput) / migration.

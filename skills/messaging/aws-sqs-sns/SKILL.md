@@ -75,3 +75,10 @@ Producer --> SNS Topic --> SQS Queue A --> Consumer A
 ## Cross-References
 
 - `../SKILL.md` -- Parent messaging domain agent for cross-broker comparisons
+
+## Diagnostic Scripts
+
+Ready-made AWS CLI v2 audits (read-only IAM) in `scripts/`, numbered by investigation order.
+
+- `scripts/01-queue-depth-audit.sh` -- Depth/in-flight across all queues with DLQ-buildup flags
+- `scripts/02-redrive-config-audit.sh` -- Queues without DLQs and maxReceiveCount sanity

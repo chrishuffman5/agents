@@ -49,6 +49,18 @@
       "prompt": "According to the skills library, what delivery model do traditional message brokers implement whereby the broker receives messages, stores them temporarily, and forwards them to consumers?",
       "expected": { "type": "contains_all", "value": ["store-and-forward"] },
       "notes": "skills/messaging/references/paradigm-broker.md - \"Traditional message brokers implement a store-and-forward model\""
+    },
+    {
+      "id": "kafka-script-consumer-lag",
+      "prompt": "According to the skills library, which shipped Kafka diagnostic script reports lag across all consumer groups and detects partitions with no active consumer?",
+      "expected": { "type": "contains_all", "value": ["01-consumer-lag.sh"] },
+      "notes": "skills/messaging/kafka/SKILL.md Diagnostic Scripts section - \"scripts/01-consumer-lag.sh -- Lag across all consumer groups with dead-consumer detection\" (script-retrieval task)"
+    },
+    {
+      "id": "sqs-script-redrive-audit",
+      "prompt": "According to the skills library, which shipped SQS audit script identifies queues lacking dead-letter configuration and checks receive-count sanity?",
+      "expected": { "type": "contains_all", "value": ["02-redrive-config-audit.sh"] },
+      "notes": "skills/messaging/aws-sqs-sns/SKILL.md Diagnostic Scripts section - \"scripts/02-redrive-config-audit.sh -- Queues without DLQs and maxReceiveCount sanity\" (script-retrieval task)"
     }
   ]
 }
