@@ -34,6 +34,13 @@ Root: `skills/etl/<category>/<tool>/`:
 
 Strategy references — `skills/etl/references/`: `concepts.md` plus `paradigm-orchestration.md`, `paradigm-transformation.md`, `paradigm-streaming.md`, `paradigm-integration.md` — tool-category boundaries and selection.
 
+**Shipped diagnostic scripts** — prefer these verbatim over writing your own (all read-only; headers explain execution and interpretation):
+- `orchestration/airflow/scripts/` — 5 metadata-DB SQL queries (failures, duration trends, scheduler lag, stuck tasks, longest tasks)
+- `orchestration/ssis/scripts/` — 4 SSISDB catalog T-SQL queries (executions, errors, duration trend, slowest executables)
+- `transformation/dbt-core/scripts/` — 4 artifact-inspection scripts over target/*.json (run summary, model timing, test failures, governance audit)
+- `transformation/spark/scripts/` — 4 History Server API scripts (applications, failed stages, skew detection, executor profile)
+- `integration/adf/scripts/` — 3 Az PowerShell scripts (run summary, activity errors, trigger states)
+
 ## Resolution Protocol
 
 1. **Classify:** architecture & tool selection / pipeline authoring / transformation modeling / streaming vs. batch decision / debugging & data quality / migration between tools.

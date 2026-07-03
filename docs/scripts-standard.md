@@ -10,8 +10,9 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `cli-scripting` | ✅ Full | All 7 tools ship `scripts/` |
 | `virtualization` | ✅ Full | All 6 platforms ship `scripts/` |
 | `analytics` | ⚠️ Partial | ssas (6), ssrs (5), power-bi (4), tableau (4), grafana (4); remaining: looker, metabase, qlik-sense, superset, thoughtspot, duckdb-analytics |
+| `etl` | ⚠️ Partial | airflow (5), ssis (4), dbt-core (4), spark (4), adf (3); remaining: dbt-cloud, kafka, aws-glue, fivetran, informatica, nifi, synapse-pipelines, talend, duckdb-etl |
 | `database` | ⚠️ Partial | `sql-server` only (per-version diagnostic scripts, numbered) |
-| All 13 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, etl, frontend, mail-collab, messaging, monitoring, networking, security, storage |
+| All 12 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, frontend, mail-collab, messaging, monitoring, networking, security, storage |
 
 ## The Standard
 
@@ -69,7 +70,7 @@ Every script begins with a comment header the agent can relay to the user withou
 Re-prioritized 2026-07-03 by measured agent-vs-baseline eval deltas (runs `20260702-233837` in `evals/results/`): domains where baseline accuracy collapsed get scripts first.
 
 1. **analytics** (delta +4) — ✅ started: ssas/ssrs/power-bi/tableau/grafana packs shipped; remaining tools on demand
-2. **etl** (+3) — Airflow metadata-DB queries, dbt artifact inspection, Spark history/API pulls
+2. **etl** (+3) — ✅ started: airflow/ssis/dbt-core/spark/adf packs shipped; remaining tools on demand
 3. **storage** (+3) — array/cluster health bundles (ONTAP CLI, `ceph status` pack, S3 inventory/lifecycle audit)
 4. **database** (+5 on navigation suite) — extend the sql-server pattern to postgresql, mysql, mongodb, redis; then remaining engines
 5. **cli-scripting / cloud-platforms / messaging** (+2) — consumer-lag and queue diagnostics, cost/usage pulls

@@ -321,3 +321,12 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- Execution model (DAG, ref/source, compilation), materializations, Jinja templating (syntax, macros, key functions), adapters (official and community), testing framework (generic, singular, unit), documentation system, packages, dbt Mesh, MetricFlow/Semantic Layer, incremental strategies, snapshots
 - `references/best-practices.md` -- Project structure (staging/intermediate/marts), naming conventions, incremental model selection, testing strategy, performance optimization (partitioning, clustering, query tips), CI/CD workflows (Slim CI, state:modified, --defer), code style guide (SQL formatting, CTE organization, Jinja patterns)
 - `references/diagnostics.md` -- Error categories (runtime, compilation, dependency, database), common errors and solutions, debugging tools (dbt debug, compiled SQL, logs, artifacts), performance diagnostics (slow models, full refresh triggers, warehouse tuning), CI/CD diagnostics (state comparison, environment issues, pipeline failures)
+
+## Diagnostic Scripts
+
+Ready-made artifact-inspection scripts (bash + jq over `target/*.json`) in `scripts/`, numbered by investigation order. All read-only.
+
+- `scripts/01-run-results-summary.sh` -- Last invocation: status mix, errors/failures, slowest models
+- `scripts/02-model-timing.sh` -- All models ranked by execution time (incremental-strategy review list)
+- `scripts/03-test-failures.sh` -- Failed and warning data-quality tests with violating row counts
+- `scripts/04-manifest-governance-audit.sh` -- Models missing tests or descriptions (governance gaps)

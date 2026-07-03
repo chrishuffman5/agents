@@ -252,3 +252,12 @@ SSIS remains fully supported through SQL Server 2025's lifecycle, but Microsoft 
 - `references/architecture.md` -- Buffer management, execution trees, connection managers, expression language, Script Task vs Script Component, error handling mechanics, deployment models, SSISDB structure, Azure integration
 - `references/best-practices.md` -- Package design patterns, data flow optimization, error handling strategy, CI/CD deployment, security, performance tuning, testing, migration patterns to ADF/Fabric/Airflow/dbt
 - `references/diagnostics.md` -- Common errors (type conversion, truncation, connection timeout, lookup failure, validation, 32/64-bit), performance bottlenecks, SSISDB monitoring queries, debugging techniques, Azure-SSIS IR troubleshooting
+
+## Diagnostic Scripts
+
+Ready-made T-SQL against the SSISDB catalog in `scripts/`, numbered by investigation order. All read-only; run in SSMS on the catalog instance.
+
+- `scripts/01-recent-executions.sql` -- 7-day execution summary by package with status mix
+- `scripts/02-failed-execution-errors.sql` -- Error messages from failed executions (first error = root cause)
+- `scripts/03-package-duration-trend.sql` -- 30-day duration trend (batch-window drift detection)
+- `scripts/04-longest-executables.sql` -- Slowest tasks/containers inside packages (the bottleneck locator)

@@ -309,3 +309,12 @@ Load these when you need deep knowledge for a specific area:
 - `references/architecture.md` -- Execution engine (Driver/Executor, DAG, stages, tasks), Catalyst optimizer internals, Tungsten codegen, memory model (unified memory manager, off-heap), AQE mechanics, deployment modes, Data Source API v2
 - `references/best-practices.md` -- Partition strategies (sizing, repartition vs coalesce, pruning), join optimization (broadcast, sort-merge, bucketing), data skew handling (AQE, salting, hot-key isolation), UDF performance hierarchy, resource sizing formulas, pipeline patterns (medallion, CDC, incremental), caching, testing, cost optimization
 - `references/diagnostics.md` -- Spark UI interpretation (Jobs, Stages, SQL, Storage, Executors tabs), common errors (OOM, shuffle fetch failures, serialization, GC pressure, small files, schema drift), performance tuning configs (shuffle, AQE, memory, I/O, timeouts), reading query plans (`explain()`), monitoring (event logs, History Server, Prometheus)
+
+## Diagnostic Scripts
+
+Ready-made History Server REST API scripts (bash + curl + jq) in `scripts/`, numbered by investigation order. All read-only; also work against a live driver UI (port 4040).
+
+- `scripts/01-recent-applications.sh` -- Recent applications with durations and dirty-exit detection
+- `scripts/02-app-failed-stages.sh` -- Failed jobs/stages with failure reasons (OOM vs fetch-failure vs executor loss)
+- `scripts/03-slow-stages.sh` -- Slowest stages plus task-time quantiles (the skew detector)
+- `scripts/04-executor-usage.sh` -- Executor memory/GC/failure profile (resourcing vs code discriminator)
