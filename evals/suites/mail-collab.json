@@ -1,0 +1,54 @@
+{
+  "domain": "mail-collab",
+  "agent": "domain-expert:mail-collab-specialist",
+  "tasks": [
+    {
+      "id": "concepts-smtps-port",
+      "prompt": "According to the skills library, which TCP port is designated for SMTPS implicit TLS, and which RFC specifies it?",
+      "expected": { "type": "contains_all", "value": ["465", "8314"] },
+      "notes": "skills/mail-collab/references/concepts.md - \"| 465 | SMTPS implicit TLS (RFC 8314) | Implicit TLS |\""
+    },
+    {
+      "id": "concepts-mta-sts-modes",
+      "prompt": "According to the skills library, what are the three policy modes available for an MTA-STS policy?",
+      "expected": { "type": "contains_all", "value": ["testing", "enforce"] },
+      "notes": "skills/mail-collab/references/concepts.md - \"Modes: `testing` (report only), `enforce` (reject non-TLS), `none` (withdraw policy).\""
+    },
+    {
+      "id": "concepts-imap4rev2-rfc",
+      "prompt": "According to the skills library, which RFC defines IMAP4rev2, and which earlier RFC does it supersede?",
+      "expected": { "type": "contains_all", "value": ["9051", "3501"] },
+      "notes": "skills/mail-collab/references/concepts.md - \"IMAP4rev2 (RFC 9051) supersedes RFC 3501.\""
+    },
+    {
+      "id": "concepts-jmap-adoption",
+      "prompt": "According to the skills library, which mail providers and servers are named as having adopted JMAP?",
+      "expected": { "type": "contains_all", "value": ["Fastmail", "Cyrus"] },
+      "notes": "skills/mail-collab/references/concepts.md - \"Adoption: Fastmail (primary), Cyrus IMAP, Apache James.\""
+    },
+    {
+      "id": "concepts-dane-postfix-tlsa",
+      "prompt": "According to the skills library, which Postfix configuration parameter setting enables DANE, and which DNS record type does DANE use to pin certificates?",
+      "expected": { "type": "contains_all", "value": ["smtp_tls_security_level", "TLSA"] },
+      "notes": "skills/mail-collab/references/concepts.md - \"DANE pins TLS certificates via TLSA records...Postfix supports DANE natively (`smtp_tls_security_level = dane`).\""
+    },
+    {
+      "id": "postfix-310-tlsrpt",
+      "prompt": "According to the skills library, what new capability related to TLS reporting did Postfix 3.10 add, and which RFC does it correspond to?",
+      "expected": { "type": "contains_all", "value": ["TLSRPT", "8460"] },
+      "notes": "skills/mail-collab/postfix/SKILL.md - \"3.10 added TLSRPT support and security improvements.\" / \"TLSRPT (RFC 8460)\""
+    },
+    {
+      "id": "exchange-se-rtm-cu15",
+      "prompt": "According to the skills library, the RTM release of Exchange Server SE is functionally identical to which Exchange 2019 cumulative update?",
+      "expected": { "type": "contains_all", "value": ["CU15"] },
+      "notes": "skills/mail-collab/references/paradigm-onprem.md - \"RTM functionally identical to Exchange 2019 CU15\""
+    },
+    {
+      "id": "google-workspace-vault-retention-max",
+      "prompt": "According to the skills library, what is the maximum duration, in days, that a Google Vault retention rule can be set to?",
+      "expected": { "type": "contains_all", "value": ["36,500"] },
+      "notes": "skills/mail-collab/google-workspace/SKILL.md - \"Duration: 1 to 36,500 days\""
+    }
+  ]
+}

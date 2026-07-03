@@ -1,0 +1,54 @@
+{
+  "domain": "cloud-platforms",
+  "agent": "domain-expert:cloud-platforms-specialist",
+  "tasks": [
+    {
+      "id": "service-mapping-dynamodb-gcp",
+      "prompt": "According to the skills library, in the cross-cloud service equivalence tables, which GCP service is listed as the NoSQL key-value equivalent of AWS DynamoDB?",
+      "expected": { "type": "contains_all", "value": ["Bigtable"] },
+      "notes": "skills/cloud-platforms/references/service-mapping.md - \"NoSQL key-value | DynamoDB | Cosmos DB (Table API) / Table Storage | Bigtable\""
+    },
+    {
+      "id": "service-mapping-azure-data-warehouse",
+      "prompt": "According to the skills library, in the cross-cloud service mapping, which Azure service is listed as the data warehouse equivalent of AWS Redshift and GCP BigQuery?",
+      "expected": { "type": "contains_all", "value": ["Synapse Analytics"] },
+      "notes": "skills/cloud-platforms/references/service-mapping.md - \"Data warehouse | Redshift | Synapse Analytics | BigQuery\""
+    },
+    {
+      "id": "well-architected-aws-sixth-pillar",
+      "prompt": "According to the skills library, the AWS Well-Architected Framework is listed with six pillars while Azure's has five. Which additional pillar does AWS list that Azure's five do not include?",
+      "expected": { "type": "contains_all", "value": ["Sustainability"] },
+      "notes": "skills/cloud-platforms/references/well-architected.md - \"Six pillars: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability.\""
+    },
+    {
+      "id": "migration-vmware-to-vmware-r",
+      "prompt": "According to the skills library's 7 Rs framework, which strategy describes a hypervisor-level lift and shift that moves VMware VMs to a cloud VMware environment without re-platforming?",
+      "expected": { "type": "contains_all", "value": ["Relocate"] },
+      "notes": "skills/cloud-platforms/references/migration.md - \"Relocate (Hypervisor-Level Lift and Shift) ... Move VMware VMs to cloud VMware environment without re-platforming.\""
+    },
+    {
+      "id": "finops-three-phases",
+      "prompt": "According to the skills library, what are the three phases of the FinOps Foundation framework?",
+      "expected": { "type": "contains_all", "value": ["Inform", "Optimize", "Operate"] },
+      "notes": "skills/cloud-platforms/SKILL.md - \"Three phases: Inform (visibility + allocation via tagging), Optimize (right-sizing + reserved capacity + waste elimination), Operate (budgets + anomaly detection + continuous reviews).\""
+    },
+    {
+      "id": "pricing-azure-byol-savings",
+      "prompt": "According to the skills library, which Azure bring-your-own-license mechanism for Windows and SQL Server is cited, and what maximum savings percentage is given for it?",
+      "expected": { "type": "contains_all", "value": ["Hybrid Benefit", "85"] },
+      "notes": "skills/cloud-platforms/references/service-mapping.md - \"Bring your own license ... Azure Hybrid Benefit (Windows + SQL): up to 85% savings\""
+    },
+    {
+      "id": "reference-migration-file-load",
+      "prompt": "According to the skills library's cloud-platforms skill, which reference file does it instruct you to load when the request is classified as migration planning?",
+      "expected": { "type": "regex", "value": "\\bmigration\\.md\\b" },
+      "notes": "skills/cloud-platforms/SKILL.md - \"Migration planning -- Load `references/migration.md`\""
+    },
+    {
+      "id": "reference-finops-file-topics",
+      "prompt": "According to the skills library's cloud-platforms skill, which reference file is described as covering chargeback vs showback, commitment management, and unit economics?",
+      "expected": { "type": "contains_all", "value": ["finops.md"] },
+      "notes": "skills/cloud-platforms/SKILL.md - \"references/finops.md -- FinOps phases, tagging strategy, chargeback vs showback, anomaly detection, commitment management, unit economics\""
+    }
+  ]
+}

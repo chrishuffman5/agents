@@ -1,0 +1,54 @@
+{
+  "domain": "monitoring",
+  "agent": "domain-expert:monitoring-specialist",
+  "tasks": [
+    {
+      "id": "monitoring-fast-burn-alert-conditions",
+      "prompt": "According to the skills library, what are the two rate-and-window conditions that together define a fast-burn multi-window error budget alert (the tier that pages)?",
+      "expected": { "type": "contains_all", "value": ["14x", "5 minutes"] },
+      "notes": "skills/monitoring/references/concepts.md - \"Fast burn: 14x rate over 1 hour AND 14x rate over 5 minutes -- page\""
+    },
+    {
+      "id": "monitoring-red-method-author",
+      "prompt": "According to the skills library, which person is credited with originating the RED method for monitoring services?",
+      "expected": { "type": "contains_all", "value": ["Tom Wilkie"] },
+      "notes": "skills/monitoring/references/concepts.md - \"## RED Method (Tom Wilkie)\""
+    },
+    {
+      "id": "monitoring-slo-999-downtime-month",
+      "prompt": "According to the skills library, how much downtime per month is allowed under a 99.9% service level objective?",
+      "expected": { "type": "contains_all", "value": ["43.8 minutes"] },
+      "notes": "skills/monitoring/references/concepts.md - \"| 99.9% | 43.8 minutes | 8.76 hours |\""
+    },
+    {
+      "id": "prometheus-tsdb-xor-compression",
+      "prompt": "According to the skills library, what compression technique does the Prometheus TSDB use, and roughly how many bytes per sample does it achieve?",
+      "expected": { "type": "contains_all", "value": ["XOR", "1.3"] },
+      "notes": "skills/monitoring/prometheus/SKILL.md - \"XOR compression achieves ~1.3 bytes/sample. Retention by time (default 15d) or size.\""
+    },
+    {
+      "id": "prometheus-default-retention",
+      "prompt": "According to the skills library, what is the default local storage retention period for a Prometheus server?",
+      "expected": { "type": "contains_all", "value": ["15 days"] },
+      "notes": "skills/monitoring/prometheus/SKILL.md - \"Default retention is 15 days.\""
+    },
+    {
+      "id": "grafana-mute-timings-vs-silences",
+      "prompt": "According to the skills library, which recurring, policy-based Grafana feature is recommended instead of silences for suppressing alert notifications?",
+      "expected": { "type": "contains_all", "value": ["mute timings"] },
+      "notes": "skills/monitoring/grafana/SKILL.md - \"Use mute timings, not silences -- Mute timings are recurring and policy-based.\""
+    },
+    {
+      "id": "opentelemetry-memory-limiter-first-processor",
+      "prompt": "According to the skills library, which OpenTelemetry Collector processor must always be placed first in a pipeline to prevent the Collector from running out of memory?",
+      "expected": { "type": "contains_all", "value": ["memory_limiter"] },
+      "notes": "skills/monitoring/opentelemetry/SKILL.md - \"The memory_limiter processor must be the first processor in every Collector pipeline.\""
+    },
+    {
+      "id": "datadog-distribution-global-percentiles",
+      "prompt": "According to the skills library, which DogStatsD metric type computes accurate global percentiles across all agents?",
+      "expected": { "type": "regex", "value": "\\bDistribution\\b" },
+      "notes": "skills/monitoring/datadog/SKILL.md - \"Distribution | name:value|d | Global percentiles across all agents\""
+    }
+  ]
+}

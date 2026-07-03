@@ -1,0 +1,54 @@
+{
+  "domain": "security",
+  "agent": "domain-expert:security-specialist",
+  "tasks": [
+    {
+      "id": "nist-csf-govern-function",
+      "prompt": "According to the skills library, NIST Cybersecurity Framework 2.0 adds a sixth core function focused on risk management strategy and oversight. What is that function's name and its two-letter identifier?",
+      "expected": { "type": "contains_all", "value": ["Govern", "GV"] },
+      "notes": "skills/security/references/concepts.md - \"| Govern | GV | Risk management strategy and oversight |\""
+    },
+    {
+      "id": "kerberos-golden-ticket-hash",
+      "prompt": "According to the skills library, which Kerberos attack forges a Ticket Granting Ticket, and which account's hash does it require?",
+      "expected": { "type": "contains_all", "value": ["Golden Ticket", "KRBTGT"] },
+      "notes": "skills/security/references/concepts.md - \"Golden Ticket (forged TGT with KRBTGT hash)\""
+    },
+    {
+      "id": "entra-id-permissions-creep-index",
+      "prompt": "According to the skills library, what metric does Entra Permissions Management (CIEM) use to measure the gap between granted and used permissions?",
+      "expected": { "type": "contains_all", "value": ["Permissions Creep Index"] },
+      "notes": "skills/security/iam/entra-id/SKILL.md - \"Permissions Creep Index (PCI): measures gap between granted and used permissions\""
+    },
+    {
+      "id": "crowdstrike-processrollup2-event",
+      "prompt": "According to the skills library, which CrowdStrike CQL event_simpleName value represents process execution events in Falcon Insight?",
+      "expected": { "type": "contains_all", "value": ["ProcessRollup2"] },
+      "notes": "skills/security/edr/crowdstrike/SKILL.md - \"| `ProcessRollup2` | Process execution events |\""
+    },
+    {
+      "id": "crowdstrike-reduced-functionality-mode",
+      "prompt": "According to the skills library, what term describes a CrowdStrike Falcon sensor that is running but operating with limited capabilities, typically due to an incompatible Linux kernel version?",
+      "expected": { "type": "contains_all", "value": ["Reduced Functionality Mode"] },
+      "notes": "skills/security/edr/crowdstrike/SKILL.md - \"Reduced Functionality Mode (RFM): Sensor is running but operating with limited capabilities\""
+    },
+    {
+      "id": "sentinel-asim-imauthentication-parser",
+      "prompt": "According to the skills library, in Microsoft Sentinel's Advanced Security Information Model, what is the unifying parser schema for login/logout events across all sources?",
+      "expected": { "type": "contains_all", "value": ["imAuthentication"] },
+      "notes": "skills/security/siem/sentinel/SKILL.md - \"`imAuthentication` -- Login/logout events across all sources\""
+    },
+    {
+      "id": "vault-transit-default-key-type",
+      "prompt": "According to the skills library, what is the default key type created by HashiCorp Vault's Transit secret engine?",
+      "expected": { "type": "contains_all", "value": ["aes256-gcm96"] },
+      "notes": "skills/security/secrets/vault/SKILL.md - \"Key types: `aes256-gcm96` (default), `aes128-gcm96`, `chacha20-poly1305`, `rsa-2048`...\""
+    },
+    {
+      "id": "zscaler-ztunnel-dtls",
+      "prompt": "According to the skills library, Zscaler's proprietary Z-Tunnel 2.0 runs over which datagram transport protocol?",
+      "expected": { "type": "contains_all", "value": ["DTLS"] },
+      "notes": "skills/security/zero-trust/zscaler/SKILL.md - \"Z-Tunnel 2.0: Zscaler's proprietary protocol over DTLS (Datagram TLS).\""
+    }
+  ]
+}

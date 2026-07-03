@@ -1,0 +1,54 @@
+{
+  "domain": "storage",
+  "agent": "domain-expert:storage-specialist",
+  "tasks": [
+    {
+      "id": "ceph-20-2-fastec-default-plugin",
+      "prompt": "According to the skills library, in Ceph Tentacle 20.2 (FastEC), which erasure coding plugin becomes the default for new pools, replacing the older unmaintained one?",
+      "expected": { "type": "contains_all", "value": ["ISA-L"] },
+      "notes": "skills/storage/ceph/20.2/SKILL.md - \"ISA-L as default plugin: Intel Storage Acceleration Library replaces the unmaintained Jerasure for new pools.\""
+    },
+    {
+      "id": "netapp-ontap-9-18-mtls-cluster-backend",
+      "prompt": "According to the skills library, what encryption mechanism does NetApp ONTAP 9.18.1 introduce to protect the internal cluster interconnect (back-end storage network)?",
+      "expected": { "type": "regex", "value": "(?i)\\bmutual TLS\\b|\\bmTLS\\b" },
+      "notes": "skills/storage/netapp-ontap/9.18/SKILL.md - \"ONTAP 9.18.1 encrypts the internal cluster interconnect (back-end storage network) using mutual TLS.\""
+    },
+    {
+      "id": "storage-concepts-raid-tec-triple-parity",
+      "prompt": "According to the skills library, what is NetApp's triple-parity RAID level named?",
+      "expected": { "type": "contains_all", "value": ["RAID-TEC"] },
+      "notes": "skills/storage/references/concepts.md - \"RAID-TEC | NetApp triple parity | ... | 3 disks\""
+    },
+    {
+      "id": "aws-s3-standard-durability",
+      "prompt": "According to the skills library, what designed durability does Amazon S3 Standard provide, and across how many Availability Zones minimum?",
+      "expected": { "type": "contains_all", "value": ["11 nines", "3 AZs"] },
+      "notes": "skills/storage/aws-s3/SKILL.md - \"Durability: 99.999999999% (11 nines) across minimum 3 AZs (Standard)\""
+    },
+    {
+      "id": "aws-s3-glacier-deep-archive-minimums",
+      "prompt": "According to the skills library, for the S3 Glacier Deep Archive storage class, what is the minimum storage duration and the retrieval time?",
+      "expected": { "type": "contains_all", "value": ["180 days", "12-48 hours"] },
+      "notes": "skills/storage/aws-s3/SKILL.md - \"Glacier Deep Archive | 12-48 hours | 180 days | Regulatory, 7-10+ years\""
+    },
+    {
+      "id": "netapp-ontap-one-license",
+      "prompt": "According to the skills library, what single licensing offering ships with all new NetApp AFF/FAS/ASA systems?",
+      "expected": { "type": "contains_all", "value": ["ONTAP One"] },
+      "notes": "skills/storage/netapp-ontap/SKILL.md - \"All new AFF/FAS/ASA systems ship with ONTAP One - a single NLF enabling SnapMirror, FlexClone, SnapLock...\""
+    },
+    {
+      "id": "minio-license-agpl-feb-2026",
+      "prompt": "According to the skills library, what open-source license did MinIO switch to as of February 2026, and what license was it previously under?",
+      "expected": { "type": "contains_all", "value": ["AGPL 3.0", "Apache 2.0"] },
+      "notes": "skills/storage/references/paradigm-sds.md - \"AGPL 3.0 (since Feb 2026, was Apache 2.0)\""
+    },
+    {
+      "id": "ceph-20-2-mgmt-gateway",
+      "prompt": "According to the skills library, which Ceph Tentacle 20.2 service provides an Nginx-based reverse proxy giving a single TLS-terminated HTTPS entry point for Dashboard, Prometheus, Grafana, and Alertmanager?",
+      "expected": { "type": "contains_all", "value": ["mgmt-gateway"] },
+      "notes": "skills/storage/ceph/20.2/SKILL.md - \"mgmt-gateway service: Nginx-based reverse proxy providing single TLS-terminated HTTPS entry point\""
+    }
+  ]
+}

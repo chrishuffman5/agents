@@ -1,0 +1,54 @@
+{
+  "domain": "backend",
+  "agent": "domain-expert:backend-specialist",
+  "tasks": [
+    {
+      "id": "aspnet-core-docker-port",
+      "prompt": "According to the skills library, what did the default Docker container port for ASP.NET Core change to, and in which .NET release did that change happen?",
+      "expected": { "type": "contains_all", "value": ["8080", ".NET 8"] },
+      "notes": "skills/backend/aspnet-core/SKILL.md - \"Docker default port changed to 8080 in .NET 8 (non-root). Use ASPNETCORE_HTTP_PORTS=8080.\""
+    },
+    {
+      "id": "aspnet-core-openapi-endpoint",
+      "prompt": "According to the skills library, what is the default document endpoint path served by ASP.NET Core's built-in OpenAPI generation on .NET 9?",
+      "expected": { "type": "contains_all", "value": ["/openapi/v1.json"] },
+      "notes": "skills/backend/aspnet-core/dotnet-9/SKILL.md - \"Default endpoint: /openapi/v1.json (not /swagger/v1/swagger.json)\""
+    },
+    {
+      "id": "django-pbkdf2-iterations",
+      "prompt": "According to the skills library, how many PBKDF2 hashing iterations does Django 5.2 use?",
+      "expected": { "type": "contains_all", "value": ["1,000,000"] },
+      "notes": "skills/backend/django/5.2/SKILL.md - \"PBKDF2 iterations: 1,000,000\""
+    },
+    {
+      "id": "django-mysql-charset",
+      "prompt": "According to the skills library, what did MySQL's default character set change to in Django 5.2?",
+      "expected": { "type": "contains_all", "value": ["utf8mb4"] },
+      "notes": "skills/backend/django/5.2/SKILL.md - \"MySQL default charset changed from utf8 to utf8mb4\""
+    },
+    {
+      "id": "rails-solid-queue-throughput",
+      "prompt": "According to the skills library, how many jobs per day does 37signals' HEY process using Solid Queue in Rails 8.0?",
+      "expected": { "type": "contains_all", "value": ["20 million"] },
+      "notes": "skills/backend/rails/8.0/SKILL.md - \"At 37signals (HEY), it processes 20 million jobs per day.\""
+    },
+    {
+      "id": "rails-default-asset-pipeline",
+      "prompt": "According to the skills library, which asset pipeline replaced Sprockets as the default in Rails 8.0?",
+      "expected": { "type": "contains_all", "value": ["Propshaft"] },
+      "notes": "skills/backend/rails/8.0/SKILL.md - \"Propshaft (Default Asset Pipeline) Replaces Sprockets as the default.\""
+    },
+    {
+      "id": "express-path-to-regexp-version",
+      "prompt": "According to the skills library, which major version of path-to-regexp does Express 5 upgrade to from the 0.x line?",
+      "expected": { "type": "regex", "value": "\\bv?8\\b" },
+      "notes": "skills/backend/express/5.x/SKILL.md - \"Express 5 upgrades from path-to-regexp v0.x to v8.\""
+    },
+    {
+      "id": "express-min-node-version",
+      "prompt": "According to the skills library, what is the minimum Node.js version required by Express 5.x?",
+      "expected": { "type": "regex", "value": "\\b18\\b" },
+      "notes": "skills/backend/express/5.x/SKILL.md - \"Express 5 requires Node.js 18+.\""
+    }
+  ]
+}

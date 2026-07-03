@@ -1,0 +1,54 @@
+{
+  "domain": "cli-scripting",
+  "agent": "domain-expert:cli-scripting-specialist",
+  "tasks": [
+    {
+      "id": "powershell-76-feedback-provider",
+      "prompt": "According to the skills library, when targeting PowerShell 7.6, which graduated experimental feature offers corrections when you mistype a command name?",
+      "expected": { "type": "contains_all", "value": ["PSFeedbackProvider"] },
+      "notes": "skills/cli-scripting/powershell/7.6/SKILL.md - \"Graduated features: PSFeedbackProvider (command suggestions)\""
+    },
+    {
+      "id": "powershell-76-threadjob-rename",
+      "prompt": "According to the skills library, in PowerShell 7.6 the module previously imported as ThreadJob was renamed. What is its new module name?",
+      "expected": { "type": "contains_all", "value": ["Microsoft.PowerShell.ThreadJob"] },
+      "notes": "skills/cli-scripting/powershell/7.6/SKILL.md - \"PS 7.6: renamed to Microsoft.PowerShell.ThreadJob\""
+    },
+    {
+      "id": "python-314-template-strings-pep",
+      "prompt": "According to the skills library, Python 3.14 adds strings written with a t-prefix. What object type do they produce instead of str, and which PEP number defines them?",
+      "expected": { "type": "contains_all", "value": ["Template", "750"] },
+      "notes": "skills/cli-scripting/python/3.14/SKILL.md - \"Template Strings (PEP 750)\"; \"t-strings produce a Template object\""
+    },
+    {
+      "id": "python-314-deferred-annotations-pep",
+      "prompt": "According to the skills library, which PEP number is associated with Python 3.14's deferred, lazy evaluation of annotations?",
+      "expected": { "type": "regex", "value": "\\b749\\b" },
+      "notes": "skills/cli-scripting/python/3.14/SKILL.md - \"Deferred Annotation Evaluation (PEP 749)\""
+    },
+    {
+      "id": "python-tomllib-version",
+      "prompt": "According to the skills library's Python scripting agent, which standard-library module handles TOML parsing, and from which Python version is it available?",
+      "expected": { "type": "contains_all", "value": ["tomllib", "3.11"] },
+      "notes": "skills/cli-scripting/python/SKILL.md - \"Data formats: csv, json, yaml (PyYAML), toml (tomllib 3.11+)\""
+    },
+    {
+      "id": "nodejs-24-sqlite-class",
+      "prompt": "According to the skills library, which class is imported from node:sqlite to open a database in Node.js 24?",
+      "expected": { "type": "contains_all", "value": ["DatabaseSync"] },
+      "notes": "skills/cli-scripting/nodejs/24/SKILL.md - \"import { DatabaseSync } from 'node:sqlite';\""
+    },
+    {
+      "id": "nodejs-26-temporal-default",
+      "prompt": "According to the skills library, which global date/time API becomes default-on in Node.js 26?",
+      "expected": { "type": "contains_all", "value": ["Temporal"] },
+      "notes": "skills/cli-scripting/nodejs/SKILL.md - \"Temporal global date/time API (default-on 26+)\""
+    },
+    {
+      "id": "bash-scripts-backup-rotate",
+      "prompt": "According to the skills library, the Bash agent ships four example scripts. What is the filename of the one that performs backups with rotation and retention?",
+      "expected": { "type": "contains_all", "value": ["03-backup-rotate.sh"] },
+      "notes": "skills/cli-scripting/bash/SKILL.md - \"scripts/03-backup-rotate.sh -- Backup with rotation and retention\""
+    }
+  ]
+}
