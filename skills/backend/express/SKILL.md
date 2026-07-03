@@ -266,3 +266,9 @@ Load these for deep knowledge on specific topics:
 - `references/architecture.md` -- Middleware internals, routing engine, request/response lifecycle, Express 5 breaking changes, error handling patterns. **Load when:** architecture questions, middleware ordering, Express 5 migration, routing issues.
 - `references/best-practices.md` -- Project structure, security (helmet, cors, rate-limit), testing (supertest), deployment (cluster, PM2, Docker), performance, popular middleware integration (passport, multer, express-validator). **Load when:** "how should I structure", security review, testing setup, deployment patterns.
 - `references/diagnostics.md` -- Common errors (middleware ordering, unhandled rejections, CORS, body parsing), debugging, memory leaks, async error handling. **Load when:** troubleshooting errors, debugging issues, diagnosing performance problems.
+
+## Diagnostic Scripts
+
+Ready-made npm/node audit (read-only) in `scripts/`.
+
+- `scripts/01-dependency-and-security-audit.sh` -- npm vulns, outdated deps, security-middleware presence

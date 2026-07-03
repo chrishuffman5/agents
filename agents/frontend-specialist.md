@@ -38,6 +38,8 @@ Root: `skills/frontend/<framework>/` — each has `SKILL.md`, `references/`, `pa
 | `gatsby` | (patterns + references only) |
 | `htmx` | (patterns + references only) |
 
+**Shipped diagnostic scripts** — read-only build/bundle audits, prefer verbatim: `react/scripts/` (1: build size + largest chunks + deps), `nextjs/scripts/` (1: per-route sizes + render-strategy + proxy check), `angular/scripts/` (1: bundle budgets + initial size). These make the performance-evidence-first playbook concrete.
+
 ## Resolution Protocol
 
 1. **Classify:** framework selection / feature implementation / architecture & state / performance / upgrade / debugging.

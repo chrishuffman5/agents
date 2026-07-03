@@ -259,3 +259,9 @@ Load these when you need deep knowledge for a specific area:
 - `patterns/signals.md` -- `signal()`, `computed()`, `effect()`, `linkedSignal()`, `resource()` patterns with examples
 - `patterns/standalone-migration.md` -- NgModules to standalone step-by-step migration guide
 - `patterns/ssr-hydration.md` -- Route-level render modes, incremental hydration, event replay
+
+## Diagnostic Scripts
+
+Ready-made build/budget audit (read-only) in `scripts/`.
+
+- `scripts/01-build-budget-audit.sh` -- Bundle budgets, initial size, largest bundles, version health

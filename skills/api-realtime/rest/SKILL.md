@@ -123,3 +123,9 @@ Gateways handle: routing, authentication, rate limiting, transformation, TLS ter
 
 - `../SKILL.md` -- Parent API & Real-Time domain agent for cross-protocol comparisons
 - `skills/backend/SKILL.md` -- Backend framework-specific REST implementation
+
+## Diagnostic Scripts
+
+Ready-made contract-validation script (read-only) in `scripts/`.
+
+- `scripts/01-openapi-lint.sh` -- OpenAPI structural validity and REST design-smell lint

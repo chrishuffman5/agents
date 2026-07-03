@@ -303,3 +303,9 @@ Load these when you need deep knowledge for a specific area:
 - `patterns/data-fetching.md` -- Suspense, `use()`, TanStack Query, SWR patterns
 - `patterns/forms.md` -- Actions, `useActionState`, `useOptimistic`, `useFormStatus`
 - `patterns/state-management.md` -- Context+useReducer, Zustand, Jotai, Redux Toolkit, TanStack Query comparison
+
+## Diagnostic Scripts
+
+Ready-made build/dependency audit (read-only) in `scripts/`.
+
+- `scripts/01-bundle-and-deps-audit.sh` -- Production build size, largest chunks, dependency vulns

@@ -351,3 +351,9 @@ Load these for deep knowledge on specific topics:
 - `references/architecture.md` -- ORM internals (QuerySet evaluation, lazy loading, select_related/prefetch_related), middleware pipeline, template engine, admin internals, auth system, signals, forms, management commands. **Load when:** architecture questions, ORM behavior, middleware ordering, auth model design.
 - `references/best-practices.md` -- DRF patterns (serializers, viewsets, permissions), testing (TestCase, pytest-django, factory_boy), deployment (Gunicorn/Uvicorn, WhiteNoise, collectstatic), security (CSRF, HSTS, CSP), performance (N+1 fixes, caching, connection pooling), project structure. **Load when:** "how should I structure", deployment, security review, performance optimization.
 - `references/diagnostics.md` -- Common errors (ImproperlyConfigured, FieldError, migration conflicts, circular imports), ORM debugging (django-debug-toolbar, explain(), query logging), performance profiling, async pitfalls. **Load when:** troubleshooting errors, debugging queries, performance problems.
+
+## Diagnostic Scripts
+
+Ready-made manage.py audit (read-only) in `scripts/`.
+
+- `scripts/01-deploy-check.sh` -- Production deploy check, migration drift, dependency vulnerabilities
