@@ -49,6 +49,18 @@
       "prompt": "According to the skills library, under what dataset size does the ETL guidance say DuckDB on a single machine can replace Spark, processing data faster without a distributed cluster?",
       "expected": { "type": "contains_all", "value": ["200 GB"] },
       "notes": "skills/etl/duckdb-etl/SKILL.md - \"Datasets under ~200 GB do not need a distributed cluster. DuckDB on a single machine processes them faster than Spark\""
+    },
+    {
+      "id": "airflow-script-scheduler-lag",
+      "prompt": "According to the skills library, which shipped Airflow diagnostic script measures queued-to-started latency to detect scheduler or executor saturation?",
+      "expected": { "type": "contains_all", "value": ["03-scheduler-lag.sql"] },
+      "notes": "skills/etl/orchestration/airflow/SKILL.md Diagnostic Scripts section - \"scripts/03-scheduler-lag.sql -- Queued-to-started latency (executor/scheduler saturation)\" (script-retrieval task)"
+    },
+    {
+      "id": "spark-script-skew-detector",
+      "prompt": "According to the skills library, which shipped Spark diagnostic script ranks stages by duration and exposes task-time quantiles to detect data skew?",
+      "expected": { "type": "contains_all", "value": ["03-slow-stages.sh"] },
+      "notes": "skills/etl/transformation/spark/SKILL.md Diagnostic Scripts section - \"scripts/03-slow-stages.sh -- Slowest stages plus task-time quantiles (the skew detector)\" (script-retrieval task)"
     }
   ]
 }

@@ -199,6 +199,14 @@ Adding a new source becomes a configuration row, not a pipeline change.
 - `references/best-practices.md` -- Pipeline design patterns (metadata-driven, parent-child, incremental load), Copy Activity optimization (DIU, parallel copy, staging, partitioning), data flow performance tuning, error handling, CI/CD workflow, security hardening, cost optimization
 - `references/diagnostics.md` -- Connectivity failures, IR troubleshooting (SHIR offline, Azure-SSIS startup), data type mapping errors, Copy/Data Flow performance issues, trigger problems, debugging workflows, cost analysis
 
+## Diagnostic Scripts
+
+Ready-made Az PowerShell scripts (Az.DataFactory module, Reader role) in `scripts/`, numbered by investigation order. All read-only; placeholders are `__UPPER_SNAKE__` tokens.
+
+- `scripts/01-pipeline-runs-summary.ps1` -- 7-day run status/duration summary per pipeline
+- `scripts/02-failed-activity-runs.ps1` -- Activity-level errors for a failed run (root-cause activity)
+- `scripts/03-trigger-status.ps1` -- Trigger runtime states (stopped triggers = silent staleness)
+
 ## Cross-References
 
 - `../../orchestration/ssis/SKILL.md` -- SSIS migration context (Azure-SSIS IR lift-and-shift, package execution)

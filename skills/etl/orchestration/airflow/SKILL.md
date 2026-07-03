@@ -335,3 +335,13 @@ Typical stack: Airflow -> StatsD -> Prometheus -> Grafana -> Alertmanager.
 - `references/architecture.md` -- Scheduler loop, executor internals, metadata DB schema, DAG parsing, task lifecycle, trigger rules, timetables, data-aware scheduling, security model
 - `references/best-practices.md` -- DAG design patterns, TaskFlow API vs operators, XCom patterns, testing strategies, dynamic DAGs, monitoring, connection management, performance tuning, code organization
 - `references/diagnostics.md` -- Zombie tasks, scheduler delays, DAG parsing errors, import errors, executor-specific issues, database maintenance, migration troubleshooting
+
+## Diagnostic Scripts
+
+Ready-made metadata-DB SQL (PostgreSQL, read-only) in `scripts/`, numbered by investigation order. Airflow 3 note: prefer the REST API for programmatic access, but these read-only queries remain valid against the same tables.
+
+- `scripts/01-failed-tasks-recent.sql` -- Failures by DAG/task, last 7 days (code defect vs infra event pattern)
+- `scripts/02-dag-run-durations.sql` -- DAG duration trend, avg/p95/max (SLA drift detection)
+- `scripts/03-scheduler-lag.sql` -- Queued-to-started latency (executor/scheduler saturation)
+- `scripts/04-stuck-tasks.sql` -- Zombie/stuck running and queued tasks holding pool slots
+- `scripts/05-top-longest-tasks.sql` -- Slowest tasks by average duration (optimization targets)
