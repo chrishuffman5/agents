@@ -40,6 +40,13 @@ Root: `skills/analytics/<tool>/` — each with `SKILL.md` + `references/`; versi
 
 Strategy references — `skills/analytics/references/`: `concepts.md` plus `paradigm-enterprise-bi.md`, `paradigm-sql-analytics.md`, `paradigm-operational.md`, `paradigm-reporting.md`.
 
+**Shipped diagnostic scripts** — prefer these verbatim over writing your own (all read-only; headers explain execution and interpretation):
+- `ssas/scripts/` — 6 DMV queries (sessions, commands, memory, storage, connections, locks); also valid against Azure AS and Power BI XMLA endpoints
+- `ssrs/scripts/` — 5 ReportServer-catalog T-SQL queries (execution trends, slow reports, usage, subscription failures, cache mix)
+- `power-bi/scripts/` — 4 PowerShell admin/REST scripts (workspace inventory, activity events, refresh history, XMLA model memory)
+- `tableau/scripts/` — 4 repository SQL queries (slow views, refresh failures, content usage, backgrounder queue)
+- `grafana/scripts/` — 4 HTTP API scripts (health/datasources, dashboard inventory, alert-rule status, user audit)
+
 ## Resolution Protocol
 
 1. **Classify:** tool selection / semantic modeling / calculation authoring (DAX, LOD, LookML, MDX) / dashboard design / performance / governance & RLS / embedding.

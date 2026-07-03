@@ -289,6 +289,17 @@ Microsoft is consolidating analytical platforms toward Power BI/Fabric:
 - `references/best-practices.md` -- Star schema design, DAX performance, processing optimization, memory management, deployment/CI/CD
 - `references/diagnostics.md` -- DAX Studio, Extended Events, DMVs, VertiPaq Analyzer, common performance issues, processing failures
 
+## Diagnostic Scripts
+
+Ready-made DMV queries in `scripts/`, numbered by investigation order. Deliver them verbatim (they are read-only); each header explains how to run it and how to interpret output. All also work against Azure AS and Power BI Premium XMLA endpoints.
+
+- `scripts/01-active-sessions.sql` -- Active sessions with user, duration, CPU, last command
+- `scripts/02-current-commands.sql` -- Commands executing right now (query vs processing, waiting vs computing)
+- `scripts/03-object-memory.sql` -- Objects ranked by memory (find the column eating the instance)
+- `scripts/04-storage-by-table.sql` -- Table/partition sizes and row counts for the current model
+- `scripts/05-connections.sql` -- Client connections (tool audit, connection leaks)
+- `scripts/06-locks-and-blocking.sql` -- Lock grants/waits (processing-commit blocking queries)
+
 ## Cross-References
 
 - `skills/analytics/SKILL.md` -- Parent analytics domain agent for cross-platform BI questions

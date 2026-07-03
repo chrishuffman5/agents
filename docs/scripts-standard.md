@@ -9,8 +9,9 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 | `os` | ✅ Full | All 8 OS trees ship `scripts/` (34 script dirs incl. per-version) |
 | `cli-scripting` | ✅ Full | All 7 tools ship `scripts/` |
 | `virtualization` | ✅ Full | All 6 platforms ship `scripts/` |
+| `analytics` | ⚠️ Partial | ssas (6), ssrs (5), power-bi (4), tableau (4), grafana (4); remaining: looker, metabase, qlik-sense, superset, thoughtspot, duckdb-analytics |
 | `database` | ⚠️ Partial | `sql-server` only (per-version diagnostic scripts, numbered) |
-| All 14 other domains | ❌ None | analytics, api-realtime, backend, cloud-platforms, containers, devops, etl, frontend, mail-collab, messaging, monitoring, networking, security, storage |
+| All 13 other domains | ❌ None | api-realtime, backend, cloud-platforms, containers, devops, etl, frontend, mail-collab, messaging, monitoring, networking, security, storage |
 
 ## The Standard
 
@@ -65,14 +66,15 @@ Every script begins with a comment header the agent can relay to the user withou
 
 ## Rollout Order
 
-Prioritized by troubleshooting frequency and eval value:
+Re-prioritized 2026-07-03 by measured agent-vs-baseline eval deltas (runs `20260702-233837` in `evals/results/`): domains where baseline accuracy collapsed get scripts first.
 
-1. **database** — extend the sql-server pattern to postgresql, mysql, mongodb, redis first; then remaining engines
-2. **containers** — kubectl diagnostic bundles (pod triage, node triage, networking triage) under `orchestration/kubernetes/`
-3. **networking** — per-platform `show`-command bundles (routing-switching and firewall categories first)
-4. **monitoring** — PromQL/SPL/query packs per tool (golden-signals starter queries, cardinality audits)
-5. **devops** — pipeline debug checklists as scripts (runner diagnostics, state inspection for IaC)
-6. **storage / messaging / mail-collab** — health-check and queue/lag/mail-trace bundles
-7. Remaining domains as demanded by eval results (see `evals/` — low-accuracy or high-token domains get scripts first)
+1. **analytics** (delta +4) — ✅ started: ssas/ssrs/power-bi/tableau/grafana packs shipped; remaining tools on demand
+2. **etl** (+3) — Airflow metadata-DB queries, dbt artifact inspection, Spark history/API pulls
+3. **storage** (+3) — array/cluster health bundles (ONTAP CLI, `ceph status` pack, S3 inventory/lifecycle audit)
+4. **database** (+5 on navigation suite) — extend the sql-server pattern to postgresql, mysql, mongodb, redis; then remaining engines
+5. **cli-scripting / cloud-platforms / messaging** (+2) — consumer-lag and queue diagnostics, cost/usage pulls
+6. **containers / networking / monitoring** (+1) — kubectl triage bundles, `show`-command packs, query packs
+7. **devops / mail-collab / security** (0 measured delta) — after their eval suites are hardened with newer version-gated content
+8. **virtualization** (+3) — already fully covered; audit existing scripts against the header contract instead
 
 Each domain lands as its own `feat/scripts-<domain>` PR: scripts + SKILL.md listings + agent Knowledge Map update, per the Definition of Done.

@@ -49,6 +49,18 @@
       "prompt": "According to the skills library, in what month and year did Power BI Direct Lake reach general availability?",
       "expected": { "type": "contains_all", "value": ["March 2026"] },
       "notes": "skills/analytics/power-bi/SKILL.md - \"Direct Lake (GA March 2026) reads Delta tables directly from OneLake without import.\""
+    },
+    {
+      "id": "ssas-script-object-memory",
+      "prompt": "According to the skills library, which shipped SSAS diagnostic script ranks objects by how much instance memory they consume?",
+      "expected": { "type": "contains_all", "value": ["03-object-memory.sql"] },
+      "notes": "skills/analytics/ssas/SKILL.md Diagnostic Scripts section - \"scripts/03-object-memory.sql -- Objects ranked by memory\" (script-retrieval task; measures determinism rollout)"
+    },
+    {
+      "id": "ssrs-script-cache-mix",
+      "prompt": "According to the skills library, which shipped SSRS diagnostic script breaks report executions down by Live versus Cache versus Snapshot source?",
+      "expected": { "type": "contains_all", "value": ["05-execution-source-breakdown.sql"] },
+      "notes": "skills/analytics/ssrs/SKILL.md Diagnostic Scripts section - \"scripts/05-execution-source-breakdown.sql -- Live vs Cache vs Snapshot mix\" (script-retrieval task; measures determinism rollout)"
     }
   ]
 }

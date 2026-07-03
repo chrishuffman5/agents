@@ -262,3 +262,12 @@ LGTM stack query P99: 85ms vs ELK stack at 650ms (7x faster).
 - `references/architecture.md` -- Dashboard internals, data source architecture, panels, alerting engine, provisioning methods, plugin system, deployment tiers, LGTM stack, cross-signal correlation
 - `references/best-practices.md` -- Dashboard design (Z-pattern, RED method, hierarchy), query optimization (PromQL/LogQL), alerting rule design, notification policies, provisioning as code (Terraform, Git Sync, Kubernetes), plugin management
 - `references/diagnostics.md` -- Slow dashboard diagnosis (Query Inspector, network tab, server metrics, logs), data source error troubleshooting, alerting failure investigation, resource usage monitoring, self-monitoring setup
+
+## Diagnostic Scripts
+
+Ready-made HTTP API scripts (bash + curl + jq, service-account token) in `scripts/`, numbered by investigation order. All read-only; placeholders are `__UPPER_SNAKE__` tokens.
+
+- `scripts/01-health-and-datasources.sh` -- Instance health plus per-datasource connectivity checks
+- `scripts/02-dashboard-inventory.sh` -- Dashboard inventory by folder with stale-content detection
+- `scripts/03-alert-rules-status.sh` -- Alert rule health (error/nodata) and currently firing alerts
+- `scripts/04-user-access-audit.sh` -- Users by role, last-seen age, service accounts (privilege creep)

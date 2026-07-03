@@ -258,3 +258,12 @@ Load these for deep technical detail:
 - `references/architecture.md` -- VizQL engine, data connectivity (live/extract/Bridge), Server components (Gateway, VizQL Server, Backgrounder, Repository), Cloud architecture, Prep flow design, Embedding API v3, Pulse
 - `references/best-practices.md` -- Extract optimization, query performance, LOD expression patterns, visual design, governance (permissions, certification, content lifecycle), extract refresh strategies
 - `references/diagnostics.md` -- Performance Recording, Workbook Optimizer, common issues (slow dashboards, extract failures, connectivity), TSM commands, log analysis, embedding troubleshooting
+
+## Diagnostic Scripts
+
+Ready-made SQL against the Tableau Server repository (`workgroup` database, readonly user, port 8060) in `scripts/`, numbered by investigation order. All read-only — never write to the repository. Tableau Cloud: use Admin Insights instead.
+
+- `scripts/01-slow-view-loads.sql` -- Slowest view loads (p95) from http_requests, last 7 days
+- `scripts/02-extract-refresh-failures.sql` -- Failed/cancelled extract refreshes with error excerpts
+- `scripts/03-content-usage-inventory.sql` -- Workbook usage ranking plus dormant content
+- `scripts/04-background-job-queue.sql` -- Backgrounder queue latency by job type (capacity signal)
