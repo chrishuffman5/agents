@@ -1,0 +1,54 @@
+{
+  "domain": "database",
+  "agent": "domain-expert:database-specialist",
+  "tasks": [
+    {
+      "id": "pg-versions",
+      "prompt": "Which PostgreSQL major versions have dedicated version directories in the skills library? List them all.",
+      "expected": { "type": "contains_all", "value": ["14", "15", "16", "17", "18"] },
+      "notes": "Ground truth: skills/database/postgresql/ contains 14, 15, 16, 17, 18"
+    },
+    {
+      "id": "mongo-versions",
+      "prompt": "List the MongoDB versions documented in the skills library.",
+      "expected": { "type": "contains_all", "value": ["6.0", "7.0", "8.0"] },
+      "notes": "Ground truth: skills/database/mongodb/ contains 6.0, 7.0, 8.0"
+    },
+    {
+      "id": "oracle-versions",
+      "prompt": "Which Oracle Database releases are documented in the skills library?",
+      "expected": { "type": "contains_all", "value": ["19c", "23ai", "26ai"] },
+      "notes": "Ground truth: skills/database/oracle/ contains 19c, 23ai, 26ai"
+    },
+    {
+      "id": "redis-versions",
+      "prompt": "List every Redis version that has a version directory in the skills library.",
+      "expected": { "type": "contains_all", "value": ["7.2", "7.4", "7.8", "8.0"] },
+      "notes": "Ground truth: skills/database/redis/ contains 7.2, 7.4, 7.8, 8.0"
+    },
+    {
+      "id": "paradigm-refs",
+      "prompt": "What paradigm reference files exist under skills/database/references/? Give the file names.",
+      "expected": { "type": "contains_all", "value": ["paradigm-rdbms", "paradigm-document", "paradigm-keyvalue", "paradigm-graph"] },
+      "notes": "Ground truth: skills/database/references/ contains concepts.md plus 4 paradigm-*.md files"
+    },
+    {
+      "id": "clickhouse-versions",
+      "prompt": "Which ClickHouse LTS releases are documented in the skills library?",
+      "expected": { "type": "contains_all", "value": ["24.8", "25.3", "25.12"] },
+      "notes": "Ground truth: skills/database/clickhouse/ contains 24.8-lts, 25.3-lts, 25.12-lts"
+    },
+    {
+      "id": "sqlserver-script-versions",
+      "prompt": "Which SQL Server versions are documented in the skills library?",
+      "expected": { "type": "contains_all", "value": ["2016", "2017", "2019", "2022", "2025"] },
+      "notes": "Ground truth: skills/database/sql-server/ contains 2016, 2017, 2019, 2022, 2025"
+    },
+    {
+      "id": "cassandra-cap",
+      "prompt": "According to the database domain skill's CAP theorem guidance, does Cassandra behave as a CP or an AP system during a network partition? Answer with just the classification.",
+      "expected": { "type": "regex", "value": "\\bAP\\b" },
+      "notes": "Ground truth: skills/database/SKILL.md CAP table lists Cassandra under AP. Regex word-boundary avoids matching the AP inside 'CAP'."
+    }
+  ]
+}
