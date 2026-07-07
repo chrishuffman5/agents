@@ -1,6 +1,6 @@
 # Domain Expert Plugin
 
-> **Preview / Beta** — This plugin is in beta experimentation mode (v0.7.0). It is not intended for production use without proper testing and validation. Features, skill content, and agent behavior may change between releases.
+> **Preview / Beta** — This plugin is in beta experimentation mode. It is not intended for production use without proper testing and validation. Features, skill content, and agent behavior may change between releases.
 
 A Claude Code plugin providing **domain expert knowledge skills**, **domain-specialist subagents** (one per domain), and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Domain specialists navigate their skill tree deterministically — exact paths, narrowest-file reads, cited sources — for fast, accurate, token-efficient answers. Task agents orchestrate multiple domains for workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
 
@@ -23,7 +23,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin from this marketplace:
 
 ```
-/plugin install domain-expert@chrishuffman5
+/plugin install domain-expert@domain-expert
 ```
 
 ### Claude Code (manual)
