@@ -23,7 +23,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin from this marketplace:
 
 ```
-/plugin install domain-expert@chrishuffman5
+/plugin install domain-expert@domain-expert
 ```
 
 ### Claude Code (manual)
