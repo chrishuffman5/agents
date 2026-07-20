@@ -1,0 +1,10 @@
+{
+  "name": "mail-collab",
+  "description": "Expert knowledge across 4 mail and collaboration technologies -- Exchange Server/Online, Microsoft 365 tenant administration, Google Workspace, and Postfix -- with a domain specialist agent for mail flow architecture, deliverability, hybrid coexistence, migration planning, and tenant administration.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["email", "exchange", "microsoft-365", "google-workspace", "postfix", "smtp", "mail-flow", "deliverability", "collaboration"]
+}

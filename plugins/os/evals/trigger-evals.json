@@ -1,0 +1,64 @@
+{
+  "plugin": "os",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're standing up a new fleet and need to decide between RHEL and Ubuntu for our app servers -- what should we weigh?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "How do I check what version of RHEL I'm running and see if it's past EOL?", "should_trigger": false},
+
+    {"id": "debian-pos", "skill": "debian", "prompt": "Our Debian 12 box has non-free-firmware issues after upgrading from 11, apt keeps failing on some drivers.", "should_trigger": true},
+    {"id": "debian-neg", "skill": "debian", "prompt": "How do I set up snap confinement and connect the network interface plug on Ubuntu 24.04?", "should_trigger": false},
+
+    {"id": "ubuntu-pos", "skill": "ubuntu", "prompt": "Netplan won't apply my static IP config on Ubuntu 22.04, systemd-networkd shows the interface down.", "should_trigger": true},
+    {"id": "ubuntu-neg", "skill": "ubuntu", "prompt": "What's the difference between Debian's testing and unstable release channels?", "should_trigger": false},
+
+    {"id": "rhel-pos", "skill": "rhel", "prompt": "dnf module streams are conflicting on my RHEL 8 box, getting dependency errors when I try to enable postgresql:15.", "should_trigger": true},
+    {"id": "rhel-neg", "skill": "rhel", "prompt": "I need to write a custom SELinux policy module for a service that's getting AVC denials on RHEL 9.", "should_trigger": false},
+
+    {"id": "rocky-alma-pos", "skill": "rocky-alma", "prompt": "Migrating from CentOS 8 to Rocky Linux with migrate2rocky, the script is failing on a residual centos-release package.", "should_trigger": true},
+    {"id": "rocky-alma-neg", "skill": "rocky-alma", "prompt": "What's new in RHEL 10's crypto policy defaults compared to RHEL 9?", "should_trigger": false},
+
+    {"id": "sles-pos", "skill": "sles", "prompt": "zypper dup is failing during our SLES 15 SP5 to SP6 migration, getting module registration errors.", "should_trigger": true},
+    {"id": "sles-neg", "skill": "sles", "prompt": "Need to set up Pacemaker fencing with SBD for a two-node SAP HANA cluster on SLES.", "should_trigger": false},
+
+    {"id": "windows-server-pos", "skill": "windows-server", "prompt": "Windows Server 2022 still shows SMBv1 enabled after our Group Policy push, need to verify and disable it properly.", "should_trigger": true},
+    {"id": "windows-server-neg", "skill": "windows-server", "prompt": "Setting up a stretch failover cluster across two sites with a file share witness on Windows Server 2019.", "should_trigger": false},
+
+    {"id": "windows-client-pos", "skill": "windows-client", "prompt": "Windows 11 BitLocker recovery key isn't backing up to Entra ID after a TPM reset, users are getting locked out.", "should_trigger": true},
+    {"id": "windows-client-neg", "skill": "windows-client", "prompt": "WSL2 networking mode keeps resetting to NAT after Windows updates, need mirrored mode back.", "should_trigger": false},
+
+    {"id": "macos-pos", "skill": "macos", "prompt": "MacBook won't mount its APFS volume after a firmware update, diskutil list shows it as external only.", "should_trigger": true},
+    {"id": "macos-neg", "skill": "macos", "prompt": "Configuring Platform SSO with Entra ID so users authenticate at the login window on our managed Macs.", "should_trigger": false},
+
+    {"id": "failover-clustering-pos", "skill": "failover-clustering", "prompt": "Our WSFC cluster keeps losing quorum during patching, we only have a disk witness configured across 4 nodes.", "should_trigger": true},
+    {"id": "failover-clustering-neg", "skill": "failover-clustering", "prompt": "Need to set up live migration between two Hyper-V hosts with SET teaming for the VM network.", "should_trigger": false},
+
+    {"id": "hyper-v-pos", "skill": "hyper-v", "prompt": "GPU-P assignment to a Hyper-V VM is failing on Windows Server 2025, Get-VMHostPartitionableGpu shows no GPUs.", "should_trigger": true},
+    {"id": "hyper-v-neg", "skill": "hyper-v", "prompt": "Need to set up vMotion between two ESXi hosts with shared storage.", "should_trigger": false},
+
+    {"id": "macos-developer-toolchain-pos", "skill": "macos-developer-toolchain", "prompt": "notarytool keeps rejecting my app submission with 'Invalid Developer ID' after I upgraded to Xcode 16.", "should_trigger": true},
+    {"id": "macos-developer-toolchain-neg", "skill": "macos-developer-toolchain", "prompt": "How do I enroll a fleet of Macs into Jamf Pro with zero-touch ADE provisioning?", "should_trigger": false},
+
+    {"id": "macos-mdm-deployment-pos", "skill": "macos-mdm-deployment", "prompt": "Declarative Device Management activations aren't applying restrictions on our supervised iPads managed through Jamf.", "should_trigger": true},
+    {"id": "macos-mdm-deployment-neg", "skill": "macos-mdm-deployment", "prompt": "Users on Okta can't get Platform SSO to grant a Kerberos TGT after login on their Macs.", "should_trigger": false},
+
+    {"id": "macos-platform-sso-pos", "skill": "macos-platform-sso", "prompt": "Setting up Platform SSO with Microsoft Entra ID so login window authentication grants an SSO token, but users aren't getting prompted to register.", "should_trigger": true},
+    {"id": "macos-platform-sso-neg", "skill": "macos-platform-sso", "prompt": "MDM enrollment keeps failing during Automated Device Enrollment for new Mac minis in Apple Business Manager.", "should_trigger": false},
+
+    {"id": "rhel-podman-pos", "skill": "rhel-podman", "prompt": "Rootless Podman container on RHEL 9 can't bind to port 80, getting permission denied even with the right SELinux context.", "should_trigger": true},
+    {"id": "rhel-podman-neg", "skill": "rhel-podman", "prompt": "Our Kubernetes cluster's pods are stuck in CrashLoopBackOff after a Helm chart upgrade.", "should_trigger": false},
+
+    {"id": "selinux-pos", "skill": "selinux", "prompt": "Apache is getting AVC denials trying to connect to a custom port for a Python backend on RHEL 9, audit2why says the port context is wrong.", "should_trigger": true},
+    {"id": "selinux-neg", "skill": "selinux", "prompt": "Need to write a new AppArmor profile for a custom binary in complain mode on Ubuntu 24.04.", "should_trigger": false},
+
+    {"id": "sles-ha-extension-pos", "skill": "sles-ha-extension", "prompt": "Pacemaker cluster on SLES keeps fencing nodes during network blips, need to tune the Corosync token timeout and check the SBD watchdog config.", "should_trigger": true},
+    {"id": "sles-ha-extension-neg", "skill": "sles-ha-extension", "prompt": "Setting up a Windows Server failover cluster with a cloud witness for a two-node stretch cluster.", "should_trigger": false},
+
+    {"id": "btrfs-snapper-pos", "skill": "btrfs-snapper", "prompt": "Btrfs root filesystem on SLES is showing ENOSPC even though df says there's 40% free space, suspect metadata exhaustion.", "should_trigger": true},
+    {"id": "btrfs-snapper-neg", "skill": "btrfs-snapper", "prompt": "Need to design our S3 lifecycle policy for infrequent-access tiering.", "should_trigger": false},
+
+    {"id": "apparmor-pos", "skill": "apparmor", "prompt": "AppArmor is blocking my custom nginx config from writing to a non-standard directory on Ubuntu 22.04, aa-status shows it enforced.", "should_trigger": true},
+    {"id": "apparmor-neg", "skill": "apparmor", "prompt": "Getting AVC denials in the audit log for httpd on RHEL 9, need to fix the SELinux context.", "should_trigger": false},
+
+    {"id": "wsl-pos", "skill": "wsl", "prompt": "WSL2 mirrored networking mode keeps dropping DNS resolution inside Ubuntu after the Windows 11 24H2 update.", "should_trigger": true},
+    {"id": "wsl-neg", "skill": "wsl", "prompt": "Need to enable BitLocker with TPM+PIN on a fleet of Windows 11 laptops managed through Intune.", "should_trigger": false}
+  ]
+}

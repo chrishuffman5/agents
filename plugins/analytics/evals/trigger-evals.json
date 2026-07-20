@@ -1,0 +1,37 @@
+{"plugin": "analytics", "cases": [
+  {"id": "overview-pos", "skill": "overview", "prompt": "Our regional managers need weekly sales dashboards on tablets, refreshed by 6am. Should we go with Power BI or Tableau, or something else?", "should_trigger": true},
+  {"id": "overview-neg", "skill": "overview", "prompt": "My Power BI DAX measure keeps returning blank for the current month, can you help fix the formula?", "should_trigger": false},
+
+  {"id": "duckdb-pos", "skill": "duckdb", "prompt": "Can I point Tableau at a folder of Parquet files through DuckDB instead of standing up a warehouse for this analyst team?", "should_trigger": true},
+  {"id": "duckdb-neg", "skill": "duckdb", "prompt": "What DuckDB extension do I need to read directly from an S3 bucket, and how do I configure httpfs credentials?", "should_trigger": false},
+
+  {"id": "grafana-pos", "skill": "grafana", "prompt": "I need to build a Grafana dashboard with a variable-driven panel and set up an alert rule that pages on threshold breach.", "should_trigger": true},
+  {"id": "grafana-neg", "skill": "grafana", "prompt": "What's the right SLO error-budget alerting philosophy for our on-call rotation across the whole observability stack?", "should_trigger": false},
+
+  {"id": "looker-pos", "skill": "looker", "prompt": "How do I define a derived table in LookML that uses aggregate awareness against BigQuery?", "should_trigger": true},
+  {"id": "looker-neg", "skill": "looker", "prompt": "We're choosing between Looker and Power BI for a team that's all-in on Google Cloud -- which one fits better?", "should_trigger": false},
+
+  {"id": "metabase-pos", "skill": "metabase", "prompt": "I want to set up static embedding for a Metabase dashboard inside our customer portal with row-level data sandboxing.", "should_trigger": true},
+  {"id": "metabase-neg", "skill": "metabase", "prompt": "Is Metabase powerful enough for our analytics needs or should we spend the money on Looker instead?", "should_trigger": false},
+
+  {"id": "power-bi-pos", "skill": "power-bi", "prompt": "My DAX CALCULATE measure isn't respecting the slicer filter context, can you help debug it?", "should_trigger": true},
+  {"id": "power-bi-neg", "skill": "power-bi", "prompt": "Should we license Power BI Premium or just stick with Pro per-user for a 300-person org?", "should_trigger": false},
+
+  {"id": "qlik-sense-pos", "skill": "qlik-sense", "prompt": "My set analysis expression with P() isn't excluding the selected state correctly, what's wrong with the syntax?", "should_trigger": true},
+  {"id": "qlik-sense-neg", "skill": "qlik-sense", "prompt": "Is Qlik Sense's associative model worth the learning curve versus a more standard tool like Tableau?", "should_trigger": false},
+
+  {"id": "ssas-pos", "skill": "ssas", "prompt": "Our SSAS tabular model partition processing is taking hours every night, how do we speed it up?", "should_trigger": true},
+  {"id": "ssas-neg", "skill": "ssas", "prompt": "Our SSRS subscriptions keep failing silently every Monday morning, how do I find out why?", "should_trigger": false},
+
+  {"id": "ssrs-pos", "skill": "ssrs", "prompt": "A paginated SSRS report with a subreport in every detail row is timing out, how do I redesign it?", "should_trigger": true},
+  {"id": "ssrs-neg", "skill": "ssrs", "prompt": "We're on SQL Server 2025 and I hear SSRS isn't included anymore -- what's the migration path to PBIRS?", "should_trigger": false},
+
+  {"id": "superset-pos", "skill": "superset", "prompt": "SQL Lab queries are timing out in Superset -- how do I configure async queries with Celery?", "should_trigger": true},
+  {"id": "superset-neg", "skill": "superset", "prompt": "For an open-source, SQL-first BI tool for a small data team, is Superset or Metabase the better fit?", "should_trigger": false},
+
+  {"id": "tableau-pos", "skill": "tableau", "prompt": "My LOD FIXED expression isn't respecting the dashboard filters the way I expected, why is that?", "should_trigger": true},
+  {"id": "tableau-neg", "skill": "tableau", "prompt": "We're evaluating Tableau against Power BI for a 200-person analyst rollout -- what should drive the decision?", "should_trigger": false},
+
+  {"id": "thoughtspot-pos", "skill": "thoughtspot", "prompt": "How does SpotIQ's anomaly detection tune its sensitivity, and can I adjust it for a noisy metric?", "should_trigger": true},
+  {"id": "thoughtspot-neg", "skill": "thoughtspot", "prompt": "Is a natural-language search tool like ThoughtSpot actually a good fit for non-technical business users, or is it overkill?", "should_trigger": false}
+]}

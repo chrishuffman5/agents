@@ -1,0 +1,49 @@
+{
+  "plugin": "frontend",
+  "cases": [
+    { "id": "overview-pos", "skill": "overview", "prompt": "We're starting a new marketing site with a content team that edits posts weekly. Should we go SSR, SSG, or islands? Not tied to a framework yet.", "should_trigger": true },
+    { "id": "overview-neg", "skill": "overview", "prompt": "How do I fix a stale closure inside a useEffect in my React 18 component?", "should_trigger": false },
+
+    { "id": "react-pos", "skill": "react", "prompt": "My useEffect cleanup isn't firing and I'm getting duplicate event listeners in React 18 with StrictMode on.", "should_trigger": true },
+    { "id": "react-neg", "skill": "react", "prompt": "I have a 'use client' component importing a Server Component directly and it silently becomes a Client Component -- what composition pattern fixes this?", "should_trigger": false },
+
+    { "id": "react-server-components-pos", "skill": "react-server-components", "prompt": "I'm getting 'Functions cannot be passed to Client Components' when I try to pass a callback prop from a Server Component -- what's the right pattern here?", "should_trigger": true },
+    { "id": "react-server-components-neg", "skill": "react-server-components", "prompt": "What's the difference between useMemo and useCallback in React 19, and does the Compiler make them unnecessary?", "should_trigger": false },
+
+    { "id": "nextjs-pos", "skill": "nextjs", "prompt": "After upgrading from Next.js 14 to 15 our API routes stopped returning cached data -- did something change with fetch() caching defaults?", "should_trigger": true },
+    { "id": "nextjs-neg", "skill": "nextjs", "prompt": "I need a parallel route with a named @modal slot that intercepts navigation to a photo detail page -- how do I structure the app directory?", "should_trigger": false },
+
+    { "id": "nextjs-app-router-pos", "skill": "nextjs-app-router", "prompt": "My @analytics parallel route slot 404s the whole page when there's no matching sub-route -- what file am I missing?", "should_trigger": true },
+    { "id": "nextjs-app-router-neg", "skill": "nextjs-app-router", "prompt": "Should I enable Turbopack for production builds on Next.js 16, and what's the expected build time improvement?", "should_trigger": false },
+
+    { "id": "vue-pos", "skill": "vue", "prompt": "I destructured my defineProps in a script setup component and lost reactivity on the destructured value -- what's the Vue 3.5 fix?", "should_trigger": true },
+    { "id": "vue-neg", "skill": "vue", "prompt": "How do route groups work in Nuxt 4's app/pages directory?", "should_trigger": false },
+
+    { "id": "nuxt-pos", "skill": "nuxt", "prompt": "useFetch isn't deduplicating between two components calling the same endpoint in my Nuxt 3 app -- what am I doing wrong?", "should_trigger": true },
+    { "id": "nuxt-neg", "skill": "nuxt", "prompt": "What's the difference between ref and reactive in the Vue Composition API?", "should_trigger": false },
+
+    { "id": "angular-pos", "skill": "angular", "prompt": "I'm getting NullInjectorError for HttpClient even though I added provideHttpClient() -- what's wrong with my app.config.ts?", "should_trigger": true },
+    { "id": "angular-neg", "skill": "angular", "prompt": "How does resource() track its request signal and cancel in-flight fetches when the id changes?", "should_trigger": false },
+
+    { "id": "angular-signals-pos", "skill": "angular-signals", "prompt": "My computed() is throwing at runtime because I'm writing to a signal inside it -- what's the right pattern to derive and also trigger a side effect?", "should_trigger": true },
+    { "id": "angular-signals-neg", "skill": "angular-signals", "prompt": "What's the difference between a functional route guard and the old CanActivate class-based guard in Angular?", "should_trigger": false },
+
+    { "id": "svelte-pos", "skill": "svelte", "prompt": "I'm converting a Svelte 4 component to runes mode and $: reactive statements aren't updating anymore -- how do I migrate this to $derived?", "should_trigger": true },
+    { "id": "svelte-neg", "skill": "svelte", "prompt": "How does React's automatic batching differ from what Svelte does with reactive statements?", "should_trigger": false },
+
+    { "id": "astro-pos", "skill": "astro", "prompt": "My React component in an Astro page isn't interactive at all -- clicking the button does nothing even though the markup renders.", "should_trigger": true },
+    { "id": "astro-neg", "skill": "astro", "prompt": "What's the tradeoff between islands architecture and full SSR for a content-heavy blog?", "should_trigger": false },
+
+    { "id": "remix-pos", "skill": "remix", "prompt": "My <Form method=\"post\"> submit is returning 405 Method Not Allowed in React Router v7 -- what am I missing in the route module?", "should_trigger": true },
+    { "id": "remix-neg", "skill": "remix", "prompt": "How do Server Actions handle revalidation compared to a loader re-run after a mutation?", "should_trigger": false },
+
+    { "id": "blazor-pos", "skill": "blazor", "prompt": "My Blazor Interactive Server component loses its fetched data every time it reconnects after prerendering -- how do I persist it across the transition?", "should_trigger": true },
+    { "id": "blazor-neg", "skill": "blazor", "prompt": "What's the difference between SSR and islands architecture for a mostly-static site?", "should_trigger": false },
+
+    { "id": "gatsby-pos", "skill": "gatsby", "prompt": "Our Gatsby 5 site's GraphQL source plugin for our CMS is broken on Node 20 -- should we patch it or start planning a migration to Astro?", "should_trigger": true },
+    { "id": "gatsby-neg", "skill": "gatsby", "prompt": "We're starting a brand new content site from scratch -- is Gatsby a good choice in 2026?", "should_trigger": false },
+
+    { "id": "htmx-pos", "skill": "htmx", "prompt": "My hx-swap-oob element never updates even though the response includes an element with the matching id -- what could cause the OOB swap to silently fail?", "should_trigger": true },
+    { "id": "htmx-neg", "skill": "htmx", "prompt": "How would I structure a React Server Components app to avoid shipping JS for a mostly-static product page?", "should_trigger": false }
+  ]
+}

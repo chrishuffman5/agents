@@ -1,0 +1,40 @@
+{
+  "plugin": "monitoring",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're a 15-person platform team on Kubernetes with a $5k/mo observability budget. Should we self-host Prometheus/Grafana or go with Datadog?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "Write me a PromQL query for p99 latency by service over the last hour.", "should_trigger": false},
+
+    {"id": "prometheus-pos", "skill": "prometheus", "prompt": "My Prometheus recording rule keeps evaluating slowly and I'm seeing rule_evaluation_duration_seconds spike. How do I fix it?", "should_trigger": true},
+    {"id": "prometheus-neg", "skill": "prometheus", "prompt": "How do I build a Grafana dashboard panel that shows this PromQL query as a heatmap?", "should_trigger": false},
+
+    {"id": "grafana-pos", "skill": "grafana", "prompt": "How do I set up Grafana Unified Alerting with a multi-window burn-rate alert against a Prometheus data source?", "should_trigger": true},
+    {"id": "grafana-neg", "skill": "grafana", "prompt": "I want to build an executive Grafana dashboard showing monthly revenue and customer churn pulled from our data warehouse.", "should_trigger": false},
+
+    {"id": "elk-pos", "skill": "elk", "prompt": "Our Elasticsearch cluster has yellow health with unassigned shards after a node restart, and Kibana ILM policies aren't rolling over indices. What's wrong?", "should_trigger": true},
+    {"id": "elk-neg", "skill": "elk", "prompt": "We want to use Elastic Security to write detection rules for lateral movement across our Windows fleet.", "should_trigger": false},
+
+    {"id": "opentelemetry-pos", "skill": "opentelemetry", "prompt": "How do I configure the OTel Collector with a tail-sampling processor before exporting traces to both Grafana Tempo and Datadog?", "should_trigger": true},
+    {"id": "opentelemetry-neg", "skill": "opentelemetry", "prompt": "How do I write a PromQL query using the exemplar data already stored in Prometheus?", "should_trigger": false},
+
+    {"id": "datadog-pos", "skill": "datadog", "prompt": "Our Datadog custom metrics bill jumped 3x this month after adding DogStatsD tags per user ID — how do we get cardinality under control?", "should_trigger": true},
+    {"id": "datadog-neg", "skill": "datadog", "prompt": "We're deciding between Datadog and New Relic for a 200-host fleet — which is cheaper at our scale?", "should_trigger": false},
+
+    {"id": "newrelic-pos", "skill": "newrelic", "prompt": "Write an NRQL query to show p95 transaction duration by app name over the last 24 hours in New Relic.", "should_trigger": true},
+    {"id": "newrelic-neg", "skill": "newrelic", "prompt": "Should we migrate from New Relic to an open-source Prometheus/Grafana stack to cut observability costs?", "should_trigger": false},
+
+    {"id": "dynatrace-pos", "skill": "dynatrace", "prompt": "How does Dynatrace's Davis AI causation engine decide root cause versus a symptom in Smartscape topology, and how do I query it with DQL?", "should_trigger": true},
+    {"id": "dynatrace-neg", "skill": "dynatrace", "prompt": "We're comparing Dynatrace against Datadog and New Relic for full-stack APM — what's the pricing model difference?", "should_trigger": false},
+
+    {"id": "splunk-pos", "skill": "splunk", "prompt": "Write an SPL search using tstats against our indexed fields to find the top 10 sourcetypes by daily indexing volume.", "should_trigger": true},
+    {"id": "splunk-neg", "skill": "splunk", "prompt": "We need to build Splunk ES correlation searches and notable events for detecting brute-force login attempts.", "should_trigger": false},
+
+    {"id": "zabbix-pos", "skill": "zabbix", "prompt": "Our Zabbix server database is bloating past 500GB — should we move to TimescaleDB, and how do I set up Low-Level Discovery for dynamic disk monitoring?", "should_trigger": true},
+    {"id": "zabbix-neg", "skill": "zabbix", "prompt": "We're evaluating whether Prometheus or Zabbix is the better fit for monitoring our new Kubernetes cluster.", "should_trigger": false},
+
+    {"id": "nagios-pos", "skill": "nagios", "prompt": "Our Nagios check_nrpe checks keep timing out against remote hosts — how do I debug the NRPE config, and what's our migration path off Nagios Core?", "should_trigger": true},
+    {"id": "nagios-neg", "skill": "nagios", "prompt": "We're setting up brand-new infrastructure monitoring for a cloud-native Kubernetes environment — what should we use?", "should_trigger": false},
+
+    {"id": "pagerduty-pos", "skill": "pagerduty", "prompt": "Our PagerDuty escalation policy isn't grouping duplicate alerts and MTTA has gotten worse — how do we configure alert grouping and Events API v2 dedup_key correctly?", "should_trigger": true},
+    {"id": "pagerduty-neg", "skill": "pagerduty", "prompt": "How do I write a Prometheus alerting rule with a 5-minute `for` clause so it doesn't fire on transient spikes?", "should_trigger": false}
+  ]
+}

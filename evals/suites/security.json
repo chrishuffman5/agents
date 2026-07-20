@@ -12,7 +12,7 @@
           "GV"
         ]
       },
-      "notes": "skills/security/references/concepts.md - \"| Govern | GV | Risk management strategy and oversight |\""
+      "notes": "plugins/security/skills/overview/references/concepts.md - \"| Govern | GV | Risk management strategy and oversight |\""
     },
     {
       "id": "kerberos-golden-ticket-hash",
@@ -24,7 +24,7 @@
           "KRBTGT"
         ]
       },
-      "notes": "skills/security/references/concepts.md - \"Golden Ticket (forged TGT with KRBTGT hash)\""
+      "notes": "plugins/security/skills/overview/references/concepts.md - \"Golden Ticket (forged TGT with KRBTGT hash)\""
     },
     {
       "id": "entra-id-permissions-creep-index",
@@ -35,7 +35,7 @@
           "Permissions Creep Index"
         ]
       },
-      "notes": "skills/security/iam/entra-id/SKILL.md - \"Permissions Creep Index (PCI): measures gap between granted and used permissions\""
+      "notes": "plugins/security/skills/entra-id/SKILL.md - \"Permissions Creep Index (PCI): measures gap between granted and used permissions\""
     },
     {
       "id": "crowdstrike-processrollup2-event",
@@ -46,7 +46,7 @@
           "ProcessRollup2"
         ]
       },
-      "notes": "skills/security/edr/crowdstrike/SKILL.md - \"| `ProcessRollup2` | Process execution events |\""
+      "notes": "plugins/security/skills/crowdstrike/SKILL.md - \"| `ProcessRollup2` | Process execution events |\""
     },
     {
       "id": "crowdstrike-reduced-functionality-mode",
@@ -57,7 +57,7 @@
           "Reduced Functionality Mode"
         ]
       },
-      "notes": "skills/security/edr/crowdstrike/SKILL.md - \"Reduced Functionality Mode (RFM): Sensor is running but operating with limited capabilities\""
+      "notes": "plugins/security/skills/crowdstrike/SKILL.md - \"Reduced Functionality Mode (RFM): Sensor is running but operating with limited capabilities\""
     },
     {
       "id": "sentinel-asim-imauthentication-parser",
@@ -68,7 +68,7 @@
           "imAuthentication"
         ]
       },
-      "notes": "skills/security/siem/sentinel/SKILL.md - \"`imAuthentication` -- Login/logout events across all sources\""
+      "notes": "plugins/security/skills/sentinel/SKILL.md - \"`imAuthentication` -- Login/logout events across all sources\""
     },
     {
       "id": "vault-transit-default-key-type",
@@ -79,7 +79,7 @@
           "aes256-gcm96"
         ]
       },
-      "notes": "skills/security/secrets/vault/SKILL.md - \"Key types: `aes256-gcm96` (default), `aes128-gcm96`, `chacha20-poly1305`, `rsa-2048`...\""
+      "notes": "plugins/security/skills/vault/SKILL.md - \"Key types: `aes256-gcm96` (default), `aes128-gcm96`, `chacha20-poly1305`, `rsa-2048`...\""
     },
     {
       "id": "zscaler-ztunnel-dtls",
@@ -90,7 +90,7 @@
           "DTLS"
         ]
       },
-      "notes": "skills/security/zero-trust/zscaler/SKILL.md - \"Z-Tunnel 2.0: Zscaler's proprietary protocol over DTLS (Datagram TLS).\""
+      "notes": "plugins/security/skills/zscaler/SKILL.md - \"Z-Tunnel 2.0: Zscaler's proprietary protocol over DTLS (Datagram TLS).\""
     },
     {
       "id": "entra-script-privileged-roles",
@@ -101,7 +101,7 @@
           "01-privileged-roles-audit.ps1"
         ]
       },
-      "notes": "skills/security/iam/entra-id/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/security/skills/entra-id/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

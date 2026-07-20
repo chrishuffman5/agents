@@ -2,6 +2,17 @@
 
 Measures whether the domain-specialist agents (running on **Sonnet** subagents) can arrive at known-correct answers **efficiently, quickly, and accurately** against the skills library.
 
+## Two Eval Layers
+
+The marketplace has two independent, non-overlapping layers of evals — this directory is only the first one:
+
+| Layer | Where | Question it answers | Format |
+|---|---|---|---|
+| **Repo-level agent-accuracy suites** | `evals/suites/*.json` (this directory) | Given a task delegated to `domain-expert:<domain>-specialist`, does the agent retrieve the *correct, cite-able answer* from the skills library — accurately, cheaply, and fast? | One JSON file per domain; each task has a `prompt` and a graded `expected` answer (see Suite Format below). Run with `evals/run-evals.ps1`. |
+| **Per-plugin trigger evals** | `plugins/<domain>/evals/trigger-evals.json` (one per plugin) | For a given user prompt, does the *right skill* inside the plugin activate (or correctly stay silent when a neighboring skill should activate instead)? | Positive/negative cases per skill: `{"skill": "postgresql", "prompt": "...", "should_trigger": true\|false}`. Negative cases are usually a lookalike prompt that should trigger a *different* skill in the same plugin (e.g. a PostgreSQL-flavored question that should trigger `timescaledb` instead), catching over-broad `description` frontmatter. |
+
+In short: trigger evals check *routing* (did the correct skill file get loaded at all), while the suites in this directory check *competence* (given that the right specialist is engaged, does it produce the right, well-cited answer). A domain can have perfect trigger accuracy and still fail its agent-accuracy suite (e.g., it loads the right skill but misreads a version table), and vice versa.
+
 ## Metrics
 
 Per task attempt, the runner logs:
@@ -18,7 +29,7 @@ Each attempt is an **independent fresh session** (no retry-with-feedback), so at
 ## Prerequisites
 
 - Claude Code CLI (`claude`) on PATH, authenticated
-- The `domain-expert` plugin installed (agents must be resolvable as `domain-expert:<name>-specialist`)
+- The `domain-expert` marketplace added, with the domain plugin(s) under test installed (agents must be resolvable as `domain-expert:<name>-specialist`)
 - PowerShell 7+
 
 ## Usage
@@ -79,7 +90,7 @@ Grader types:
 
 ## Roadmap
 
-- [ ] Suites for the remaining 16 domains (2 shipped: database, os)
+- [x] Suites for all 18 domains
 - [ ] LLM-judge grader type for free-form answers (rubric + judge model)
 - [ ] Path-citation check: verify the agent cited real skill paths (files exist)
 - [ ] Trend tracking across runs (before/after each `feat/scripts-<domain>` PR — see `docs/scripts-standard.md` rollout)

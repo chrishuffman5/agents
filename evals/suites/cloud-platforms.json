@@ -11,7 +11,7 @@
           "Bigtable"
         ]
       },
-      "notes": "skills/cloud-platforms/references/service-mapping.md - \"NoSQL key-value | DynamoDB | Cosmos DB (Table API) / Table Storage | Bigtable\""
+      "notes": "plugins/cloud-platforms/skills/overview/references/service-mapping.md - \"NoSQL key-value | DynamoDB | Cosmos DB (Table API) / Table Storage | Bigtable\""
     },
     {
       "id": "service-mapping-azure-data-warehouse",
@@ -22,7 +22,7 @@
           "Synapse Analytics"
         ]
       },
-      "notes": "skills/cloud-platforms/references/service-mapping.md - \"Data warehouse | Redshift | Synapse Analytics | BigQuery\""
+      "notes": "plugins/cloud-platforms/skills/overview/references/service-mapping.md - \"Data warehouse | Redshift | Synapse Analytics | BigQuery\""
     },
     {
       "id": "well-architected-aws-sixth-pillar",
@@ -33,7 +33,7 @@
           "Sustainability"
         ]
       },
-      "notes": "skills/cloud-platforms/references/well-architected.md - \"Six pillars: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability.\""
+      "notes": "plugins/cloud-platforms/skills/overview/references/well-architected.md - \"Six pillars: Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability.\""
     },
     {
       "id": "migration-vmware-to-vmware-r",
@@ -44,7 +44,7 @@
           "Relocate"
         ]
       },
-      "notes": "skills/cloud-platforms/references/migration.md - \"Relocate (Hypervisor-Level Lift and Shift) ... Move VMware VMs to cloud VMware environment without re-platforming.\""
+      "notes": "plugins/cloud-platforms/skills/overview/references/migration.md - \"Relocate (Hypervisor-Level Lift and Shift) ... Move VMware VMs to cloud VMware environment without re-platforming.\""
     },
     {
       "id": "finops-three-phases",
@@ -57,7 +57,7 @@
           "Operate"
         ]
       },
-      "notes": "skills/cloud-platforms/SKILL.md - \"Three phases: Inform (visibility + allocation via tagging), Optimize (right-sizing + reserved capacity + waste elimination), Operate (budgets + anomaly detection + continuous reviews).\""
+      "notes": "plugins/cloud-platforms/skills/overview/SKILL.md - \"Three phases: Inform (visibility + allocation via tagging), Optimize (right-sizing + reserved capacity + waste elimination), Operate (budgets + anomaly detection + continuous reviews).\""
     },
     {
       "id": "pricing-azure-byol-savings",
@@ -69,27 +69,27 @@
           "85"
         ]
       },
-      "notes": "skills/cloud-platforms/references/service-mapping.md - \"Bring your own license ... Azure Hybrid Benefit (Windows + SQL): up to 85% savings\""
+      "notes": "plugins/cloud-platforms/skills/overview/references/service-mapping.md - \"Bring your own license ... Azure Hybrid Benefit (Windows + SQL): up to 85% savings\""
     },
     {
       "id": "reference-migration-file-load",
-      "prompt": "According to the skills library's cloud-platforms skill, which reference file does it instruct you to load when the request is classified as migration planning?",
+      "prompt": "According to the skills library's cloud-platforms overview skill, which reference file does it instruct you to load when the request is classified as migration planning?",
       "expected": {
         "type": "regex",
         "value": "\\bmigration\\.md\\b"
       },
-      "notes": "skills/cloud-platforms/SKILL.md - \"Migration planning -- Load `references/migration.md`\""
+      "notes": "plugins/cloud-platforms/skills/overview/SKILL.md - \"Migration planning -- Load `references/migration.md`\""
     },
     {
       "id": "reference-finops-file-topics",
-      "prompt": "According to the skills library's cloud-platforms skill, which reference file is described as covering chargeback vs showback, commitment management, and unit economics?",
+      "prompt": "According to the skills library's cloud-platforms overview skill, which reference file is described as covering chargeback vs showback, commitment management, and unit economics?",
       "expected": {
         "type": "contains_all",
         "value": [
           "finops.md"
         ]
       },
-      "notes": "skills/cloud-platforms/SKILL.md - \"references/finops.md -- FinOps phases, tagging strategy, chargeback vs showback, anomaly detection, commitment management, unit economics\""
+      "notes": "plugins/cloud-platforms/skills/overview/SKILL.md - \"references/finops.md -- FinOps phases, tagging strategy, chargeback vs showback, anomaly detection, commitment management, unit economics\""
     },
     {
       "id": "aws-script-idle-scan",
@@ -100,7 +100,7 @@
           "03-idle-resource-scan.sh"
         ]
       },
-      "notes": "skills/cloud-platforms/aws/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/cloud-platforms/skills/aws/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

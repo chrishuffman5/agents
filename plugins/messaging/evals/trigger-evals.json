@@ -1,0 +1,31 @@
+{
+  "plugin": "messaging",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're designing a new order-processing platform from scratch and need to decide between RabbitMQ, Kafka, and just using SQS/SNS -- what should drive that decision?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "Our RabbitMQ quorum queue keeps failing to elect a leader after a node restart -- how do I fix it?", "should_trigger": false},
+
+    {"id": "kafka-pos", "skill": "kafka", "prompt": "We want to use Kafka consumer groups as a work queue for our order processor -- how do Share Groups compare to classic partition-bound consumer groups for this?", "should_trigger": true},
+    {"id": "kafka-neg", "skill": "kafka", "prompt": "I need to set up a Kafka Connect JDBC sink connector to land CDC events into our warehouse -- what SMTs should I use?", "should_trigger": false},
+
+    {"id": "rabbitmq-pos", "skill": "rabbitmq", "prompt": "Our RabbitMQ cluster keeps hitting memory alarms and blocking publishers -- how do I diagnose which queues are the problem?", "should_trigger": true},
+    {"id": "rabbitmq-neg", "skill": "rabbitmq", "prompt": "Should we pick RabbitMQ or Kafka for a new event-driven microservices platform with no existing messaging infrastructure?", "should_trigger": false},
+
+    {"id": "nats-pos", "skill": "nats", "prompt": "Our NATS JetStream consumers are falling behind and I'm not sure if it's a pull consumer config issue or a cluster health problem -- how do I debug it?", "should_trigger": true},
+    {"id": "nats-neg", "skill": "nats", "prompt": "How does Redis Streams XREADGROUP compare to a dedicated broker's consumer groups for a lightweight internal queue?", "should_trigger": false},
+
+    {"id": "pulsar-pos", "skill": "pulsar", "prompt": "We need Key_Shared subscriptions in Pulsar to get per-entity ordering while still scaling out consumers -- how does that work with BookKeeper?", "should_trigger": true},
+    {"id": "pulsar-neg", "skill": "pulsar", "prompt": "We're trying to decide between Kafka and Pulsar for a new high-throughput event streaming platform -- what's the real trade-off?", "should_trigger": false},
+
+    {"id": "redis-streams-pos", "skill": "redis-streams", "prompt": "We already run Redis for caching -- can we use XADD/XREADGROUP as a lightweight task queue instead of standing up RabbitMQ?", "should_trigger": true},
+    {"id": "redis-streams-neg", "skill": "redis-streams", "prompt": "Our Redis Cluster is evicting keys under memory pressure -- how do I tune the maxmemory-policy and diagnose which keyspace is growing?", "should_trigger": false},
+
+    {"id": "aws-sqs-sns-pos", "skill": "aws-sqs-sns", "prompt": "Our SQS FIFO queue is capped at 300 messages/sec and it's becoming a bottleneck for Lambda consumers -- how do we get more throughput?", "should_trigger": true},
+    {"id": "aws-sqs-sns-neg", "skill": "aws-sqs-sns", "prompt": "We need to stand up a new VPC with private subnets and an ALB in front of our ECS services -- can you help design the AWS architecture?", "should_trigger": false},
+
+    {"id": "azure-service-bus-pos", "skill": "azure-service-bus", "prompt": "Our Service Bus session-enabled queue seems to be deadlocking -- consumers grab a session lock and never release it, how do I troubleshoot?", "should_trigger": true},
+    {"id": "azure-service-bus-neg", "skill": "azure-service-bus", "prompt": "What's the right landing zone architecture for a new Azure subscription with hub-and-spoke networking?", "should_trigger": false},
+
+    {"id": "gcp-pubsub-pos", "skill": "gcp-pubsub", "prompt": "We're seeing hot-key throttling on a Pub/Sub ordering key -- how do we redesign the key scheme without losing per-entity ordering?", "should_trigger": true},
+    {"id": "gcp-pubsub-neg", "skill": "gcp-pubsub", "prompt": "How should we structure our GCP folder and project hierarchy for a multi-team organization?", "should_trigger": false}
+  ]
+}

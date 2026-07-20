@@ -12,7 +12,7 @@
           ".NET 8"
         ]
       },
-      "notes": "skills/backend/aspnet-core/SKILL.md - \"Docker default port changed to 8080 in .NET 8 (non-root). Use ASPNETCORE_HTTP_PORTS=8080.\""
+      "notes": "plugins/backend/skills/aspnet-core/SKILL.md - \"Docker default port changed to 8080 in .NET 8 (non-root). Use ASPNETCORE_HTTP_PORTS=8080.\""
     },
     {
       "id": "aspnet-core-openapi-endpoint",
@@ -23,7 +23,7 @@
           "/openapi/v1.json"
         ]
       },
-      "notes": "skills/backend/aspnet-core/dotnet-9/SKILL.md - \"Default endpoint: /openapi/v1.json (not /swagger/v1/swagger.json)\""
+      "notes": "plugins/backend/skills/aspnet-core/references/versions/dotnet-9.md - \"Default endpoint: /openapi/v1.json (not /swagger/v1/swagger.json)\""
     },
     {
       "id": "django-pbkdf2-iterations",
@@ -34,7 +34,7 @@
           "1,000,000"
         ]
       },
-      "notes": "skills/backend/django/5.2/SKILL.md - \"PBKDF2 iterations: 1,000,000\""
+      "notes": "plugins/backend/skills/django/references/versions/5.2.md - \"PBKDF2 iterations: 1,000,000\""
     },
     {
       "id": "django-mysql-charset",
@@ -45,7 +45,7 @@
           "utf8mb4"
         ]
       },
-      "notes": "skills/backend/django/5.2/SKILL.md - \"MySQL default charset changed from utf8 to utf8mb4\""
+      "notes": "plugins/backend/skills/django/references/versions/5.2.md - \"MySQL default charset changed from utf8 to utf8mb4\""
     },
     {
       "id": "rails-solid-queue-throughput",
@@ -56,7 +56,7 @@
           "20 million"
         ]
       },
-      "notes": "skills/backend/rails/8.0/SKILL.md - \"At 37signals (HEY), it processes 20 million jobs per day.\""
+      "notes": "plugins/backend/skills/rails/references/versions/8.0.md - \"At 37signals (HEY), it processes 20 million jobs per day.\""
     },
     {
       "id": "rails-default-asset-pipeline",
@@ -67,7 +67,7 @@
           "Propshaft"
         ]
       },
-      "notes": "skills/backend/rails/8.0/SKILL.md - \"Propshaft (Default Asset Pipeline) Replaces Sprockets as the default.\""
+      "notes": "plugins/backend/skills/rails/references/versions/8.0.md - \"Propshaft (Default Asset Pipeline) Replaces Sprockets as the default.\""
     },
     {
       "id": "express-path-to-regexp-version",
@@ -76,7 +76,7 @@
         "type": "regex",
         "value": "\\bv?8\\b"
       },
-      "notes": "skills/backend/express/5.x/SKILL.md - \"Express 5 upgrades from path-to-regexp v0.x to v8.\""
+      "notes": "plugins/backend/skills/express/references/versions/5.x.md - \"Express 5 upgrades from path-to-regexp v0.x to v8.\""
     },
     {
       "id": "express-min-node-version",
@@ -85,7 +85,7 @@
         "type": "regex",
         "value": "\\b18\\b"
       },
-      "notes": "skills/backend/express/5.x/SKILL.md - \"Express 5 requires Node.js 18+.\""
+      "notes": "plugins/backend/skills/express/references/versions/5.x.md - \"Express 5 requires Node.js 18+.\""
     },
     {
       "id": "django-script-deploy-check",
@@ -96,7 +96,7 @@
           "01-deploy-check.sh"
         ]
       },
-      "notes": "skills/backend/django/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/backend/skills/django/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

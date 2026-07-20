@@ -4,63 +4,63 @@
   "tasks": [
     {
       "id": "pg-versions",
-      "prompt": "Which PostgreSQL major versions have dedicated version directories in the skills library? List them all.",
+      "prompt": "Which PostgreSQL major versions have dedicated version reference files in the skills library? List them all.",
       "expected": { "type": "contains_all", "value": ["14", "15", "16", "17", "18"] },
-      "notes": "Ground truth: skills/database/postgresql/ contains 14, 15, 16, 17, 18"
+      "notes": "Ground truth: plugins/database/skills/postgresql/references/versions/ contains 14.md, 15.md, 16.md, 17.md, 18.md"
     },
     {
       "id": "mongo-versions",
       "prompt": "List the MongoDB versions documented in the skills library.",
       "expected": { "type": "contains_all", "value": ["6.0", "7.0", "8.0"] },
-      "notes": "Ground truth: skills/database/mongodb/ contains 6.0, 7.0, 8.0"
+      "notes": "Ground truth: plugins/database/skills/mongodb/references/versions/ contains 6.0.md, 7.0.md, 8.0.md"
     },
     {
       "id": "oracle-versions",
       "prompt": "Which Oracle Database releases are documented in the skills library?",
       "expected": { "type": "contains_all", "value": ["19c", "23ai", "26ai"] },
-      "notes": "Ground truth: skills/database/oracle/ contains 19c, 23ai, 26ai"
+      "notes": "Ground truth: plugins/database/skills/oracle/references/versions/ contains 19c.md, 23ai.md, 26ai.md"
     },
     {
       "id": "redis-versions",
-      "prompt": "List every Redis version that has a version directory in the skills library.",
+      "prompt": "List every Redis version that has a dedicated version reference file in the skills library.",
       "expected": { "type": "contains_all", "value": ["7.2", "7.4", "7.8", "8.0"] },
-      "notes": "Ground truth: skills/database/redis/ contains 7.2, 7.4, 7.8, 8.0"
+      "notes": "Ground truth: plugins/database/skills/redis/references/versions/ contains 7.2.md, 7.4.md, 7.8.md, 8.0.md"
     },
     {
       "id": "paradigm-refs",
-      "prompt": "What paradigm reference files exist under skills/database/references/? Give the file names.",
+      "prompt": "What paradigm reference files exist under the database plugin's overview skill references directory? Give the file names.",
       "expected": { "type": "contains_all", "value": ["paradigm-rdbms", "paradigm-document", "paradigm-keyvalue", "paradigm-graph"] },
-      "notes": "Ground truth: skills/database/references/ contains concepts.md plus 4 paradigm-*.md files"
+      "notes": "Ground truth: plugins/database/skills/overview/references/ contains concepts.md plus paradigm-rdbms.md, paradigm-document.md, paradigm-keyvalue.md, paradigm-graph.md"
     },
     {
       "id": "clickhouse-versions",
       "prompt": "Which ClickHouse LTS releases are documented in the skills library?",
       "expected": { "type": "contains_all", "value": ["24.8", "25.3", "25.12"] },
-      "notes": "Ground truth: skills/database/clickhouse/ contains 24.8-lts, 25.3-lts, 25.12-lts"
+      "notes": "Ground truth: plugins/database/skills/clickhouse/references/versions/ contains 24.8-lts.md, 25.3-lts.md, 25.12-lts.md"
     },
     {
       "id": "sqlserver-script-versions",
       "prompt": "Which SQL Server versions are documented in the skills library?",
       "expected": { "type": "contains_all", "value": ["2016", "2017", "2019", "2022", "2025"] },
-      "notes": "Ground truth: skills/database/sql-server/ contains 2016, 2017, 2019, 2022, 2025"
+      "notes": "Ground truth: plugins/database/skills/sql-server/references/versions/ contains 2016.md, 2017.md, 2019.md, 2022.md, 2025.md"
     },
     {
       "id": "cassandra-cap",
-      "prompt": "According to the database domain skill's CAP theorem guidance, does Cassandra behave as a CP or an AP system during a network partition? Answer with just the classification.",
+      "prompt": "According to the database plugin's overview skill CAP theorem guidance, does Cassandra behave as a CP or an AP system during a network partition? Answer with just the classification.",
       "expected": { "type": "regex", "value": "\\bAP\\b" },
-      "notes": "Ground truth: skills/database/SKILL.md CAP table lists Cassandra under AP. Regex word-boundary avoids matching the AP inside 'CAP'."
+      "notes": "Ground truth: plugins/database/skills/overview/SKILL.md CAP table lists Cassandra under AP. Regex word-boundary avoids matching the AP inside 'CAP'."
     },
     {
       "id": "pg-script-bloat-vacuum",
       "prompt": "According to the skills library, which shipped PostgreSQL diagnostic script reports dead-tuple pressure and vacuum recency per table?",
       "expected": { "type": "contains_all", "value": ["03-bloat-and-vacuum.sql"] },
-      "notes": "skills/database/postgresql/SKILL.md Diagnostic Scripts section - \"scripts/03-bloat-and-vacuum.sql -- Dead-tuple pressure and vacuum recency per table\" (script-retrieval task)"
+      "notes": "plugins/database/skills/postgresql/SKILL.md Diagnostic Scripts section - \"scripts/03-bloat-and-vacuum.sql -- Dead-tuple pressure and vacuum recency per table\" (script-retrieval task)"
     },
     {
       "id": "redis-script-bigkeys",
       "prompt": "According to the skills library, which shipped Redis diagnostic script finds the biggest keys per type using a SCAN-based, production-safe approach?",
       "expected": { "type": "contains_all", "value": ["03-bigkeys.sh"] },
-      "notes": "skills/database/redis/SKILL.md Diagnostic Scripts section - \"scripts/03-bigkeys.sh -- Biggest keys per type\" (script-retrieval task)"
+      "notes": "plugins/database/skills/redis/SKILL.md Diagnostic Scripts section - \"scripts/03-bigkeys.sh -- Biggest keys per type\" (script-retrieval task)"
     }
   ]
 }

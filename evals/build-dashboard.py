@@ -2,9 +2,9 @@
 """Generate docs/results.js for the GitHub Pages dashboard.
 
 Reads:
-  - evals/results/*-summary.csv   (agent + baseline eval runs)
-  - evals/suites/*.json           (task counts, ground-truth citations)
-  - skills/<domain>/**/scripts/*  (shipped diagnostic script coverage)
+  - evals/results/*-summary.csv           (agent + baseline eval runs)
+  - evals/suites/*.json                   (task counts, ground-truth citations)
+  - plugins/<domain>/skills/**/scripts/*  (shipped diagnostic script coverage)
 
 Emits docs/results.js as `window.DASHBOARD_DATA = {...}` so the page renders
 over file:// and GitHub Pages alike (no fetch/CORS). Re-run after each eval sweep.
@@ -21,7 +21,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "evals" / "results"
 SUITES = REPO / "evals" / "suites"
-SKILLS = REPO / "skills"
+PLUGINS = REPO / "plugins"
 OUT = REPO / "docs" / "results.js"
 
 # Domain display metadata: title + one-line description + category grouping.
@@ -79,13 +79,13 @@ def load_runs():
 
 def count_scripts(domain):
     """Count shipped script files and the technologies that carry them."""
-    base = SKILLS / domain
+    base = PLUGINS / domain / "skills"
     if not base.exists():
         return 0, []
     techs = {}
     for p in base.rglob("*"):
         if p.suffix in SCRIPT_EXTS and p.parent.name == "scripts":
-            # tech = the directory above scripts/ (or version/tech above that)
+            # tech = the skill directory above scripts/ (or version/tech above that)
             rel = p.relative_to(base)
             tech = rel.parts[0] if rel.parts else "?"
             techs[tech] = techs.get(tech, 0) + 1
@@ -95,8 +95,8 @@ def count_scripts(domain):
 
 
 def count_tech_dirs(domain):
-    """Best-effort technology count = immediate subdirs excluding references/scripts."""
-    base = SKILLS / domain
+    """Best-effort technology count = immediate skill subdirs excluding references/scripts."""
+    base = PLUGINS / domain / "skills"
     if not base.exists():
         return None
     skip = {"references", "scripts"}

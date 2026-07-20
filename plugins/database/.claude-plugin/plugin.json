@@ -1,0 +1,10 @@
+{
+  "name": "database",
+  "description": "Expert knowledge across 29 database engines and paradigms — PostgreSQL, SQL Server, MySQL, MariaDB, Oracle, MongoDB, Redis, Cassandra, Snowflake, BigQuery, ClickHouse, DuckDB, Neo4j, Elasticsearch, and more — with a domain specialist agent for architecture selection, query tuning, replication, and version-accurate operational guidance.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["database", "sql", "nosql", "postgresql", "sql-server", "mongodb", "redis", "data-modeling", "query-tuning"]
+}

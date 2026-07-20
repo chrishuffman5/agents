@@ -1,0 +1,10 @@
+{
+  "name": "virtualization",
+  "description": "Expert knowledge across 6 server virtualization and hypervisor platforms — VMware vSphere/ESXi, Proxmox VE, KVM/QEMU with libvirt, Citrix Hypervisor/XenServer, Nutanix AHV, and cloud VM services (EC2, Azure VM, Compute Engine) — with a domain specialist agent for platform selection, VM performance diagnosis, cluster/HA design, and V2V hypervisor migration.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["virtualization", "hypervisor", "vmware", "vsphere", "proxmox", "kvm", "nutanix", "citrix", "cloud-vms"]
+}

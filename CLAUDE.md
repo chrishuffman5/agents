@@ -1,61 +1,56 @@
-# Domain Expert Plugin
+# Domain Expert Marketplace
 
-Expert knowledge across 18 IT domains (186+ technologies) with domain-specialist subagents (one per domain) and task-oriented subagents that orchestrate that knowledge for complex workflows.
+This repository is a **Claude Code plugin marketplace**: one plugin per IT domain (18 domains, 186+ technologies) plus a cross-domain task-agent plugin. The catalog lives at `.claude-plugin/marketplace.json`; every plugin lives under `plugins/`.
 
-## Skills (Knowledge Library)
+## Repository layout
 
-Ask technology-specific questions and get deep, version-specific expertise from `skills/`.
+```
+.claude-plugin/marketplace.json     ← the marketplace catalog (pluginRoot: ./plugins)
+plugins/
+├── <domain>/                       ← one plugin per domain (database, os, security, …)
+│   ├── .claude-plugin/plugin.json
+│   ├── agents/<domain>-specialist.md
+│   ├── evals/trigger-evals.json    ← positive + near-miss trigger prompts per skill
+│   └── skills/
+│       ├── overview/               ← cross-technology domain guidance
+│       ├── <category>/             ← (categorized domains) selection guidance, e.g. security/iam
+│       └── <technology>/           ← one skill per technology, e.g. /database:postgresql
+│           ├── SKILL.md
+│           ├── references/         ← deep docs, loaded on demand
+│           │   └── versions/<v>.md ← version-specific nuances (new/deprecated features)
+│           ├── scripts/            ← runnable diagnostics (scripts/versions/<v>/ for version-specific)
+│           └── assets/             ← templates/config files used in output
+└── domain-expert-core/             ← cross-domain task agents + update-plugin skill
+docs/    evals/                     ← eval dashboard and harness (repo-level)
+```
 
-- **Database** (29 technologies) — SQL Server, PostgreSQL, Oracle, MySQL, MongoDB, Redis, Snowflake, and more
-- **DevOps** (17) — Terraform, GitHub Actions, Ansible, ArgoCD, Jenkins, GitHub repo management, and more
-- **Security** (14) — Active Directory, Entra ID, CrowdStrike, and more
-- **Operating Systems** (8) — Windows Server, RHEL, Ubuntu, macOS, and more
-- **Frontend** (11) — React, Vue, Angular, Next.js, and more
-- **Backend** (10) — ASP.NET Core, Express, FastAPI, Django, Spring Boot, and more
-- **Networking** (12) — Cisco IOS, Palo Alto, Fortinet, and more
-- **Monitoring** (11) — Prometheus, Grafana, ELK Stack, Datadog, and more
-- **Containers** (3) — Docker, Kubernetes, Podman
-- **Cloud Platforms** (3) — AWS, Azure, GCP
-- **ETL** (14), **Analytics** (11), **Storage** (12), **Virtualization** (5), **CLI/Scripting** (7), **API/Real-Time** (8), **Messaging** (6), **Mail/Collaboration** (4)
+## Conventions (enforced — apply to every change)
 
-## Domain Specialists (One Agent per Domain)
+**Structure**
+- Skill = technology. Plugin = domain. Skill folder name is the invocation name (`/security:entra-id`), so folders are kebab-case and self-explanatory.
+- Version-specific knowledge is NEVER a skill or nested SKILL.md — it goes in `references/versions/<v>.md` of the technology skill.
+- No `SKILL.md` below a skill's top level. Bundled content only in `references/`, `scripts/`, `assets/`.
 
-Each of the 18 domains has a dedicated specialist agent in `agents/` that runs in its own context with a precise knowledge map of its skill tree — it resolves exact file paths instead of searching, reads the narrowest file that answers, and cites every claim with a skill path.
+**SKILL.md quality** (from the skills-evals training; violations block merge)
+- Frontmatter: `name` (= folder name), `description`, `license: MIT`. The description states WHAT the skill covers, WHEN to use it (concrete trigger terms), and when NOT to (negative clause for overlapping skills — duckdb/kafka/grafana/splunk/spark exist in multiple plugins with different angles).
+- Body: 200–500 lines is the target; never above 1000. Push detail into `references/` with when-to-read pointers.
+- Directives over essays ("Always X. Never Y." + short why), outcomes + constraints over rigid step lists, no no-op filler lines.
+- Each plugin's `evals/trigger-evals.json` keeps one positive and one near-miss negative prompt per skill; add a case when adding or renaming a skill.
 
-| Agent | Domain | Example Triggers |
-|-------|--------|------------------|
-| **database-specialist** | 29 engines (SQL Server, PostgreSQL, MongoDB, Redis…) | "query tuning", "replication", "which database" |
-| **os-specialist** | Windows Server/Client, RHEL, Ubuntu, Debian, SLES, macOS | "SELinux", "GPO", "kernel tuning", "patching" |
-| **networking-specialist** | Routing, firewalls, DNS, LB, VPN, SD-WAN, wireless | "BGP", "firewall rule", "packet loss", "VLAN" |
-| **security-specialist** | IAM, EDR, SIEM, secrets, cloud/app/network security | "Entra ID", "CrowdStrike", "detection rule", "Vault" |
-| **devops-specialist** | CI/CD, IaC, config mgmt, GitOps, version control | "GitHub Actions", "Terraform", "ArgoCD", "pipeline" |
-| **containers-specialist** | Kubernetes, EKS/AKS/GKE, Helm, Docker, service mesh | "CrashLoopBackOff", "Helm chart", "Istio" |
-| **cloud-platforms-specialist** | AWS, Azure, GCP strategy and architecture | "which cloud", "migration", "FinOps", "landing zone" |
-| **frontend-specialist** | React, Next.js, Vue, Angular, Svelte, Astro, Blazor… | "hydration", "server components", "signals" |
-| **backend-specialist** | ASP.NET Core, Spring Boot, Django, Rails, Express… | "REST endpoint", "middleware", "ORM", "JWT" |
-| **monitoring-specialist** | Prometheus, Grafana, ELK, OTel, Datadog, PagerDuty | "PromQL", "SLO", "alert fatigue", "tracing" |
-| **storage-specialist** | ONTAP, Pure, Ceph, MinIO, S3, Azure Blob, GCS | "SAN", "erasure coding", "IOPS", "lifecycle" |
-| **virtualization-specialist** | VMware, Proxmox, KVM, Nutanix, Citrix, cloud VMs | "vMotion", "CPU ready", "VMware exit", "P2V" |
-| **cli-scripting-specialist** | PowerShell, Bash, Python, Node, AWS/Azure CLI, kubectl | "script", "one-liner", "cron", "exit code" |
-| **etl-specialist** | Airflow, dbt, Spark, SSIS, ADF, Glue, Fivetran, NiFi | "data pipeline", "DAG", "CDC", "backfill" |
-| **analytics-specialist** | Power BI, Tableau, Looker, Qlik, SSAS/SSRS, Superset | "DAX", "semantic model", "dashboard", "RLS" |
-| **api-realtime-specialist** | REST, GraphQL, gRPC, OData, WebSocket, SSE, SignalR | "API versioning", "resolver", "reconnect" |
-| **messaging-specialist** | Kafka, RabbitMQ, Pulsar, NATS, SQS/SNS, Service Bus | "consumer lag", "DLQ", "exactly-once", "outbox" |
-| **mail-collab-specialist** | Exchange, M365, Google Workspace, Postfix | "mail flow", "SPF/DKIM/DMARC", "hybrid", "NDR" |
+**Agents**
+- Each domain plugin ships `<domain>-specialist.md` with a knowledge map of its own `skills/` tree (paths relative to the plugin root). Cross-domain task agents live only in `domain-expert-core` and must not hardcode other plugins' file paths — they delegate to domain specialists or degrade gracefully.
 
-## Agents (Task Specialists)
+## Validation
 
-Cross-domain task agents orchestrate multiple domains for complex workflows.
+Before committing structural changes:
 
-| Agent | Triggers On |
-|-------|------------|
-| **architecture-consultant** | "which database", "recommend", "compare", "what stack for", "capacity planning" |
-| **troubleshooting-agent** | "slow", "error", "CPU high", "diagnose", "not working", "outage" |
-| **migration-expert** | "migrate from X to Y", "switch from", "feature mapping", "compatibility" |
-| **iac-consultant** | "create Terraform", "CloudFormation", "provision", "deploy to cloud" |
-| **data-expert** | "data classification", "PII", "GDPR", "data masking", "agent data access" |
-| **security-expert** | "harden", "CIS benchmark", "IAM", "agent permissions", "secrets management" |
+```bash
+claude plugin validate .                      # marketplace catalog
+claude plugin validate ./plugins/<domain>     # each touched plugin (checks plugin.json + skill/agent frontmatter)
+```
 
-## Usage
+Also grep for stale pre-marketplace paths — `skills/<domain>/...` at repo root must not appear inside `plugins/`.
 
-Just describe what you need. Knowledge questions load skills directly. Single-domain work auto-delegates to the matching domain specialist; cross-domain tasks go to a task specialist. Advanced users can invoke directly with `@agent-name`.
+## Versioning
+
+Each plugin pins its own `version` in `plugin.json` — bump it on every release of that plugin or users never receive the update. `renames` in marketplace.json is append-only history (old monolithic `domain-expert` → `domain-expert-core`).

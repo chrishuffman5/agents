@@ -6,49 +6,49 @@
       "id": "vmware-9-percore-minimum",
       "prompt": "According to the skills library, when vSphere 9.0 replaced per-CPU socket licensing with per-core licensing, what is the stated minimum number of cores licensed per CPU?",
       "expected": { "type": "regex", "value": "\\b16\\b" },
-      "notes": "skills/virtualization/vmware/9/SKILL.md - \"Per-CPU socket licensing replaced by per-core licensing (16-core minimum per CPU)\""
+      "notes": "plugins/virtualization/skills/vmware/references/versions/9.md - \"Per-CPU socket licensing replaced by per-core licensing (16-core minimum per CPU)\""
     },
     {
       "id": "vmware-8-esa-iops-gain",
       "prompt": "According to the skills library, approximately how much IOPS improvement does vSAN Express Storage Architecture (ESA) deliver over OSA on equivalent hardware?",
       "expected": { "type": "regex", "value": "\\b4x\\b" },
-      "notes": "skills/virtualization/vmware/8/SKILL.md - \"Approximately 4x IOPS improvement over OSA on equivalent hardware\""
+      "notes": "plugins/virtualization/skills/vmware/references/versions/8.md - \"Approximately 4x IOPS improvement over OSA on equivalent hardware\""
     },
     {
       "id": "vmware-ha-heartbeat-timeout",
       "prompt": "According to the skills library, after how many seconds of missed heartbeats does vSphere HA declare an ESXi host failed?",
       "expected": { "type": "regex", "value": "\\b12\\b" },
-      "notes": "skills/virtualization/vmware/SKILL.md - \"Heartbeats exchanged every second; host declared failed after 12 seconds of missed heartbeats.\""
+      "notes": "plugins/virtualization/skills/vmware/SKILL.md - \"Heartbeats exchanged every second; host declared failed after 12 seconds of missed heartbeats.\""
     },
     {
       "id": "proxmox-pbs-encryption-cipher",
       "prompt": "According to the skills library, what client-side encryption cipher does Proxmox Backup Server (PBS) use for its backups?",
       "expected": { "type": "contains_all", "value": ["AES-256-GCM"] },
-      "notes": "skills/virtualization/proxmox/SKILL.md - \"Client-side encryption with AES-256-GCM.\""
+      "notes": "plugins/virtualization/skills/proxmox/SKILL.md - \"Client-side encryption with AES-256-GCM.\""
     },
     {
       "id": "proxmox-9-firewall-backend",
       "prompt": "According to the skills library, which firewall backend does Proxmox VE 9.x adopt in full, replacing iptables?",
       "expected": { "type": "contains_all", "value": ["nftables"] },
-      "notes": "skills/virtualization/proxmox/SKILL.md - \"Full nftables firewall backend (replaces iptables)\" under Proxmox VE 9.x"
+      "notes": "plugins/virtualization/skills/proxmox/SKILL.md - \"Full nftables firewall backend (replaces iptables)\" under Proxmox VE 9.x"
     },
     {
       "id": "kvm-numa-latency-penalty",
       "prompt": "According to the skills library, what memory latency penalty do KVM VMs incur when their vCPU count causes them to span NUMA nodes?",
       "expected": { "type": "contains_all", "value": ["30-40%"] },
-      "notes": "skills/virtualization/kvm/SKILL.md - \"will span NUMA nodes, causing 30-40% memory latency penalty\""
+      "notes": "plugins/virtualization/skills/kvm/references/best-practices.md - \"will span NUMA nodes, causing 30-40% memory latency penalty\""
     },
     {
       "id": "cloud-vms-azure-stop-billing",
       "prompt": "According to the skills library, which Azure CLI action must be used instead of a plain stop to actually release compute resources and halt billing on an Azure VM?",
       "expected": { "type": "contains_all", "value": ["deallocate"] },
-      "notes": "skills/virtualization/cloud-vms/SKILL.md - \"Always use `az vm deallocate` to release compute resources and stop billing.\""
+      "notes": "plugins/virtualization/skills/cloud-vms/SKILL.md - \"Always use `az vm deallocate` to release compute resources and stop billing.\""
     },
     {
       "id": "kvm-script-inventory-name",
       "prompt": "According to the skills library, which shipped KVM script produces a report of all VMs with state, CPU, memory, disk, and network details?",
       "expected": { "type": "contains_all", "value": ["02-virsh-inventory.sh"] },
-      "notes": "skills/virtualization/kvm/SKILL.md - \"scripts/02-virsh-inventory.sh -- All VMs with state, CPU, memory, disk, network details\""
+      "notes": "plugins/virtualization/skills/kvm/SKILL.md - \"scripts/02-virsh-inventory.sh -- All VMs with state, CPU, memory, disk, network details\""
     }
   ]
 }

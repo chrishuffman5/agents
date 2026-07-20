@@ -1,0 +1,97 @@
+{
+  "plugin": "database",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "What database should I use for a high-write IoT sensor platform, SQL or NoSQL?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "My PostgreSQL 16 autovacuum isn't keeping up and the table is bloating, how do I fix it?", "should_trigger": false},
+
+    {"id": "postgresql-pos", "skill": "postgresql", "prompt": "My PostgreSQL 16 autovacuum isn't keeping up and table bloat is growing, how do I fix it?", "should_trigger": true},
+    {"id": "postgresql-neg", "skill": "postgresql", "prompt": "I'm using TimescaleDB hypertables on top of Postgres 16 and my continuous aggregates are refreshing way too slowly", "should_trigger": false},
+
+    {"id": "sql-server-pos", "skill": "sql-server", "prompt": "Our SQL Server 2022 Always On availability group keeps failing over randomly, how do I diagnose it?", "should_trigger": true},
+    {"id": "sql-server-neg", "skill": "sql-server", "prompt": "We're using Azure Synapse dedicated SQL pools and distribution skew is causing some queries to crawl", "should_trigger": false},
+
+    {"id": "mysql-pos", "skill": "mysql", "prompt": "InnoDB buffer pool keeps thrashing on our MySQL 8.0 replica during peak traffic, how do I fix it?", "should_trigger": true},
+    {"id": "mysql-neg", "skill": "mysql", "prompt": "We're running MariaDB 10.11 with Galera cluster and getting wsrep certification failures under write load", "should_trigger": false},
+
+    {"id": "mariadb-pos", "skill": "mariadb", "prompt": "MariaDB Galera cluster is throwing wsrep certification failures during high write load, what's going on?", "should_trigger": true},
+    {"id": "mariadb-neg", "skill": "mariadb", "prompt": "MySQL 8.0's InnoDB redo log is filling up too fast, how do I resize it safely?", "should_trigger": false},
+
+    {"id": "oracle-pos", "skill": "oracle", "prompt": "We're getting ORA-01555 snapshot too old errors on Oracle 19c, what's causing it and how do I fix it?", "should_trigger": true},
+    {"id": "oracle-neg", "skill": "oracle", "prompt": "How do I set up logical replication in PostgreSQL 16 for a reporting replica?", "should_trigger": false},
+
+    {"id": "mongodb-pos", "skill": "mongodb", "prompt": "MongoDB 7.0 aggregation pipeline is timing out on a large collection, how do I optimize it?", "should_trigger": true},
+    {"id": "mongodb-neg", "skill": "mongodb", "prompt": "We're using Azure Cosmos DB with the MongoDB API and keep hitting 429 rate-limit errors on RU consumption", "should_trigger": false},
+
+    {"id": "cosmosdb-pos", "skill": "cosmosdb", "prompt": "Our Cosmos DB NoSQL API container keeps hitting 429 throttling errors, how do I fix the partition key design?", "should_trigger": true},
+    {"id": "cosmosdb-neg", "skill": "cosmosdb", "prompt": "Our MongoDB sharded cluster's balancer isn't moving chunks evenly across shards", "should_trigger": false},
+
+    {"id": "dynamodb-pos", "skill": "dynamodb", "prompt": "DynamoDB single-table design question: how do I model a one-to-many relationship using a GSI?", "should_trigger": true},
+    {"id": "dynamodb-neg", "skill": "dynamodb", "prompt": "We need a managed Redis cache in AWS with cluster mode enabled, what ElastiCache node settings do we need?", "should_trigger": false},
+
+    {"id": "couchbase-pos", "skill": "couchbase", "prompt": "Couchbase N1QL query is doing a full bucket scan, how do I add the right index to speed it up?", "should_trigger": true},
+    {"id": "couchbase-neg", "skill": "couchbase", "prompt": "MongoDB's aggregation $lookup stage is running slow across our sharded collections", "should_trigger": false},
+
+    {"id": "redis-pos", "skill": "redis", "prompt": "Redis cluster mode keeps having key migration failures during resharding, how do I fix it?", "should_trigger": true},
+    {"id": "redis-neg", "skill": "redis", "prompt": "We're using Redis Streams with XREADGROUP as a lightweight message queue and consumers keep leaving entries stuck in the pending list", "should_trigger": false},
+
+    {"id": "memcached-pos", "skill": "memcached", "prompt": "Memcached slab allocator eviction rate is high on our session cache cluster, how do I tune slab classes?", "should_trigger": true},
+    {"id": "memcached-neg", "skill": "memcached", "prompt": "Redis sorted sets don't seem like the right data structure for our leaderboard, what should I use instead?", "should_trigger": false},
+
+    {"id": "elasticache-pos", "skill": "elasticache", "prompt": "We're running ElastiCache for Redis with cluster mode enabled and Global Datastore, and replication lag is spiking", "should_trigger": true},
+    {"id": "elasticache-neg", "skill": "elasticache", "prompt": "Our self-managed Redis Sentinel setup isn't promoting a new primary during failover", "should_trigger": false},
+
+    {"id": "elasticsearch-pos", "skill": "elasticsearch", "prompt": "Elasticsearch cluster health is yellow and shard allocation seems stuck, how do I diagnose it?", "should_trigger": true},
+    {"id": "elasticsearch-neg", "skill": "elasticsearch", "prompt": "OpenSearch security plugin role mappings aren't applying correctly after our last upgrade", "should_trigger": false},
+    {"id": "elasticsearch-neg-2", "skill": "elasticsearch", "prompt": "We're shipping logs into our ELK stack with Elastic Agent and Kibana dashboards aren't showing the new data stream", "should_trigger": false},
+    {"id": "elasticsearch-neg-3", "skill": "elasticsearch", "prompt": "I need to write an EQL detection rule in Elastic Security to catch suspicious PowerShell process chains", "should_trigger": false},
+
+    {"id": "opensearch-pos", "skill": "opensearch", "prompt": "OpenSearch ISM policy isn't rolling over old log indices, what's wrong with my policy JSON?", "should_trigger": true},
+    {"id": "opensearch-neg", "skill": "opensearch", "prompt": "Elasticsearch ILM policy isn't transitioning indices into the warm phase like it should", "should_trigger": false},
+    {"id": "opensearch-neg-2", "skill": "opensearch", "prompt": "We're using OpenSearch Dashboards purely for log observability with Elastic Agent-style shipping, and the log volume dashboard is empty", "should_trigger": false},
+
+    {"id": "cassandra-pos", "skill": "cassandra", "prompt": "Cassandra compaction is falling behind and SSTable count keeps growing on one node, how do I fix it?", "should_trigger": true},
+    {"id": "cassandra-neg", "skill": "cassandra", "prompt": "One of our ScyllaDB shards is pegged at high CPU, is this a Seastar reactor stall?", "should_trigger": false},
+
+    {"id": "scylladb-pos", "skill": "scylladb", "prompt": "ScyllaDB tablets aren't rebalancing evenly across nodes after we added a new node to the cluster", "should_trigger": true},
+    {"id": "scylladb-neg", "skill": "scylladb", "prompt": "Cassandra repair is taking forever on a large table, how do I speed up anti-entropy repair?", "should_trigger": false},
+
+    {"id": "neo4j-pos", "skill": "neo4j", "prompt": "Neo4j Cypher query with a variable-length path is running extremely slow, how do I optimize it?", "should_trigger": true},
+    {"id": "neo4j-neg", "skill": "neo4j", "prompt": "Our Amazon Neptune openCypher query keeps timing out on a graph with 50M edges", "should_trigger": false},
+
+    {"id": "neptune-pos", "skill": "neptune", "prompt": "Amazon Neptune Gremlin traversal is timing out, how do I profile and optimize it?", "should_trigger": true},
+    {"id": "neptune-neg", "skill": "neptune", "prompt": "A Neo4j APOC shortest-path procedure keeps running out of memory on a large graph", "should_trigger": false},
+
+    {"id": "influxdb-pos", "skill": "influxdb", "prompt": "InfluxDB 3.x SQL query against a large time-series table is slow, how do I optimize the IOx storage layout?", "should_trigger": true},
+    {"id": "influxdb-neg", "skill": "influxdb", "prompt": "TimescaleDB's continuous aggregate refresh job is falling behind on a busy hypertable", "should_trigger": false},
+
+    {"id": "timescaledb-pos", "skill": "timescaledb", "prompt": "TimescaleDB compression policy isn't kicking in, chunks are staying uncompressed way past the threshold", "should_trigger": true},
+    {"id": "timescaledb-neg", "skill": "timescaledb", "prompt": "InfluxDB 2.x Flux task keeps failing silently, how do I debug it?", "should_trigger": false},
+
+    {"id": "clickhouse-pos", "skill": "clickhouse", "prompt": "ClickHouse MergeTree table has too many parts and inserts are getting throttled, how do I fix it?", "should_trigger": true},
+    {"id": "clickhouse-neg", "skill": "clickhouse", "prompt": "Druid ingestion from Kafka is lagging behind and segments aren't getting published", "should_trigger": false},
+
+    {"id": "druid-pos", "skill": "druid", "prompt": "Druid real-time ingestion from Kafka is lagging behind, how do I diagnose the ingestion task lag?", "should_trigger": true},
+    {"id": "druid-neg", "skill": "druid", "prompt": "Replication between our ClickHouse nodes is falling behind via ClickHouse Keeper", "should_trigger": false},
+
+    {"id": "duckdb-pos", "skill": "duckdb", "prompt": "DuckDB's Quack remote protocol won't let a client connect over HTTPS, how do I fix the TLS setup?", "should_trigger": true},
+    {"id": "duckdb-neg", "skill": "duckdb", "prompt": "I want to use DuckDB inside a dbt pipeline to transform Parquet files before loading them into our warehouse", "should_trigger": false},
+
+    {"id": "bigquery-pos", "skill": "bigquery", "prompt": "BigQuery is scanning way more bytes than expected on a query, how do I use partitioning and clustering to cut cost?", "should_trigger": true},
+    {"id": "bigquery-neg", "skill": "bigquery", "prompt": "Our Snowflake virtual warehouse keeps auto-suspending mid-query and burning credits fast", "should_trigger": false},
+
+    {"id": "redshift-pos", "skill": "redshift", "prompt": "A Redshift query is slow because of a broadcast join, how do I choose the right distribution style for the table?", "should_trigger": true},
+    {"id": "redshift-neg", "skill": "redshift", "prompt": "Azure Synapse dedicated SQL pool is showing heavy distribution skew on a large fact table", "should_trigger": false},
+
+    {"id": "synapse-pos", "skill": "synapse", "prompt": "Azure Synapse serverless SQL pool OPENROWSET query against our data lake is failing, how do I fix the external table setup?", "should_trigger": true},
+    {"id": "synapse-neg", "skill": "synapse", "prompt": "Redshift Spectrum query against S3 external tables keeps timing out", "should_trigger": false},
+
+    {"id": "databricks-pos", "skill": "databricks", "prompt": "Our Databricks Delta Lake table has too many small files after streaming writes, how do I OPTIMIZE and Z-ORDER it?", "should_trigger": true},
+    {"id": "databricks-neg", "skill": "databricks", "prompt": "Snowflake Snowpipe continuous ingestion is delayed, how do I check the load history to see what's stuck?", "should_trigger": false},
+
+    {"id": "sqlite-pos", "skill": "sqlite", "prompt": "SQLite is throwing 'database is locked' errors under concurrent writes, should I switch to WAL mode?", "should_trigger": true},
+    {"id": "sqlite-neg", "skill": "sqlite", "prompt": "DuckDB is running out of memory doing an aggregation over a large Parquet file, how do I tune its memory limits?", "should_trigger": false},
+
+    {"id": "snowflake-pos", "skill": "snowflake", "prompt": "Snowflake credit consumption spiked overnight because warehouses are auto-scaling too aggressively, how do I control it?", "should_trigger": true},
+    {"id": "snowflake-neg", "skill": "snowflake", "prompt": "BigQuery slot contention is causing query queueing during peak hours, how do I manage reservations?", "should_trigger": false}
+  ]
+}

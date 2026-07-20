@@ -1,0 +1,10 @@
+{
+  "name": "os",
+  "description": "Expert knowledge across 8 operating systems -- Windows Server, Windows Client, RHEL, Rocky Linux/AlmaLinux, Ubuntu, Debian, SLES, and macOS -- with a domain specialist agent for version-specific administration, hardening, patching, diagnostics, failover clustering, Hyper-V, SELinux/AppArmor, WSL, and macOS MDM/Platform SSO.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["operating-systems", "windows-server", "linux", "rhel", "ubuntu", "macos", "systemd", "selinux", "hyper-v", "wsl"]
+}

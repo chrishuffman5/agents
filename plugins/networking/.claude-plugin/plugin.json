@@ -1,0 +1,10 @@
+{
+  "name": "networking",
+  "description": "Expert knowledge across 55 networking technologies -- Cisco IOS-XE/NX-OS, Arista EOS, Juniper Junos, Palo Alto PAN-OS, Fortinet FortiOS, Cisco FTD/ASA, F5 BIG-IP, HAProxy, NGINX, BIND, Windows DNS, Route 53, IPsec, WireGuard, Cisco/Fortinet SD-WAN, Cisco/Aruba/Mist wireless, Cisco ACI, VMware NSX, and more -- with a domain specialist agent for design, configuration, troubleshooting, and vendor migration across routing/switching, firewall, DNS, load balancing, VPN, SD-WAN, wireless, DC fabric, cloud networking, IPAM, and network automation.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["networking", "cisco", "firewall", "dns", "vpn", "sd-wan", "load-balancing", "wireless", "routing", "switching"]
+}

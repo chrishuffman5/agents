@@ -1,0 +1,10 @@
+{
+  "name": "frontend",
+  "description": "Frontend framework expertise across 11 technologies -- React, Next.js, Vue, Nuxt, Angular, Svelte, Astro, Remix, Blazor, Gatsby, and htmx -- covering rendering models, reactivity systems, routing, and performance with version-pinned guidance and a frontend-specialist agent.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["frontend", "react", "vue", "angular", "nextjs", "svelte", "astro", "blazor", "ssr", "hydration"]
+}

@@ -1,0 +1,821 @@
+{
+  "plugin": "networking",
+  "cases": [
+    {
+      "id": "aws-vpc-pos",
+      "skill": "aws-vpc",
+      "prompt": "We're running AWS VPC and need help with Security Group -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-vpc-neg",
+      "skill": "aws-vpc",
+      "prompt": "We're picking a new platform for this project -- should we go with AWS VPC or Azure VNet, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "azure-vnet-pos",
+      "skill": "azure-vnet",
+      "prompt": "We're running Azure VNet and need help with NSG -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "azure-vnet-neg",
+      "skill": "azure-vnet",
+      "prompt": "We're picking a new platform for this project -- should we go with Azure VNet or AWS VPC, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "gcp-vpc-pos",
+      "skill": "gcp-vpc",
+      "prompt": "We're running GCP VPC and need help with GCP firewall -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "gcp-vpc-neg",
+      "skill": "gcp-vpc",
+      "prompt": "We're picking a new platform for this project -- should we go with GCP VPC or AWS VPC, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-aci-pos",
+      "skill": "cisco-aci",
+      "prompt": "We're running Cisco ACI and need help with APIC -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-aci-neg",
+      "skill": "cisco-aci",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco ACI or Containerlab, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "containerlab-pos",
+      "skill": "containerlab",
+      "prompt": "We're running Containerlab and need help with clab -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "containerlab-neg",
+      "skill": "containerlab",
+      "prompt": "We're picking a new platform for this project -- should we go with Containerlab or Cisco ACI, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "dent-pos",
+      "skill": "dent",
+      "prompt": "We're running DENT (DentOS) and need help with switchdev -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "dent-neg",
+      "skill": "dent",
+      "prompt": "We're picking a new platform for this project -- should we go with DENT (DentOS) or Cisco ACI, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "sonic-pos",
+      "skill": "sonic",
+      "prompt": "We're running SONiC and need help with SAI -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "sonic-neg",
+      "skill": "sonic",
+      "prompt": "We're picking a new platform for this project -- should we go with SONiC or Cisco ACI, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "vmware-nsx-pos",
+      "skill": "vmware-nsx",
+      "prompt": "We're running VMware NSX and need help with NSX Manager -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "vmware-nsx-neg",
+      "skill": "vmware-nsx",
+      "prompt": "We're picking a new platform for this project -- should we go with VMware NSX or Cisco ACI, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "azure-dns-pos",
+      "skill": "azure-dns",
+      "prompt": "We're running Azure DNS and need help with private zone -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "azure-dns-neg",
+      "skill": "azure-dns",
+      "prompt": "We're picking a new platform for this project -- should we go with Azure DNS or ISC BIND, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "bind-pos",
+      "skill": "bind",
+      "prompt": "We're running ISC BIND and need help with named.conf -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "bind-neg",
+      "skill": "bind",
+      "prompt": "We're picking a new platform for this project -- should we go with ISC BIND or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cloudflare-dns-pos",
+      "skill": "cloudflare-dns",
+      "prompt": "We're running Cloudflare DNS and need help with proxy mode -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cloudflare-dns-neg",
+      "skill": "cloudflare-dns",
+      "prompt": "We're picking a new platform for this project -- should we go with Cloudflare DNS or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "coredns-pos",
+      "skill": "coredns",
+      "prompt": "We're running CoreDNS and need help with Corefile -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "coredns-neg",
+      "skill": "coredns",
+      "prompt": "We're picking a new platform for this project -- should we go with CoreDNS or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "powerdns-pos",
+      "skill": "powerdns",
+      "prompt": "We're running PowerDNS and need help with pdns -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "powerdns-neg",
+      "skill": "powerdns",
+      "prompt": "We're picking a new platform for this project -- should we go with PowerDNS or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "route53-pos",
+      "skill": "route53",
+      "prompt": "We're running AWS Route 53 and need help with AWS DNS -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "route53-neg",
+      "skill": "route53",
+      "prompt": "We're picking a new platform for this project -- should we go with AWS Route 53 or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "unbound-pos",
+      "skill": "unbound",
+      "prompt": "We're running Unbound and need help with recursive resolver -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "unbound-neg",
+      "skill": "unbound",
+      "prompt": "We're picking a new platform for this project -- should we go with Unbound or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "windows-dns-pos",
+      "skill": "windows-dns",
+      "prompt": "We're running Windows DNS Server and need help with AD-integrated zones -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "windows-dns-neg",
+      "skill": "windows-dns",
+      "prompt": "We're picking a new platform for this project -- should we go with Windows DNS Server or Azure DNS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "checkpoint-pos",
+      "skill": "checkpoint",
+      "prompt": "We're running Check Point and need help with SmartConsole -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "checkpoint-neg",
+      "skill": "checkpoint",
+      "prompt": "We're picking a new platform for this project -- should we go with Check Point or Cisco ASA, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-asa-pos",
+      "skill": "cisco-asa",
+      "prompt": "We're running Cisco ASA and need help with ASA firewall -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-asa-neg",
+      "skill": "cisco-asa",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco ASA or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-ftd-pos",
+      "skill": "cisco-ftd",
+      "prompt": "We're running Cisco FTD and need help with Cisco Secure Firewall -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-ftd-neg",
+      "skill": "cisco-ftd",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco FTD or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "fortios-pos",
+      "skill": "fortios",
+      "prompt": "We're running FortiOS and need help with FortiGate -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "fortios-neg",
+      "skill": "fortios",
+      "prompt": "We're picking a new platform for this project -- should we go with FortiOS or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "opnsense-pos",
+      "skill": "opnsense",
+      "prompt": "We're running OPNsense and need help with HardenedBSD -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "opnsense-neg",
+      "skill": "opnsense",
+      "prompt": "We're picking a new platform for this project -- should we go with OPNsense or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "panos-pos",
+      "skill": "panos",
+      "prompt": "We're running PAN-OS and need help with Palo Alto -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "panos-neg",
+      "skill": "panos",
+      "prompt": "We're picking a new platform for this project -- should we go with PAN-OS or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "pfsense-pos",
+      "skill": "pfsense",
+      "prompt": "We're running pfSense and need help with Netgate -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "pfsense-neg",
+      "skill": "pfsense",
+      "prompt": "We're picking a new platform for this project -- should we go with pfSense or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "sophos-firewall-pos",
+      "skill": "sophos-firewall",
+      "prompt": "We're running Sophos Firewall and need help with XGS -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "sophos-firewall-neg",
+      "skill": "sophos-firewall",
+      "prompt": "We're picking a new platform for this project -- should we go with Sophos Firewall or Check Point, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "efficientip-pos",
+      "skill": "efficientip",
+      "prompt": "We're running EfficientIP SOLIDserver and need help with DNS Guardian -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "efficientip-neg",
+      "skill": "efficientip",
+      "prompt": "We're picking a new platform for this project -- should we go with EfficientIP SOLIDserver or Infoblox, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "infoblox-pos",
+      "skill": "infoblox",
+      "prompt": "We're running Infoblox and need help with NIOS -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "infoblox-neg",
+      "skill": "infoblox",
+      "prompt": "We're picking a new platform for this project -- should we go with Infoblox or EfficientIP SOLIDserver, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "aws-lb-pos",
+      "skill": "aws-lb",
+      "prompt": "We're running AWS Elastic Load Balancing and need help with ALB -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-lb-neg",
+      "skill": "aws-lb",
+      "prompt": "We're picking a new platform for this project -- should we go with AWS Elastic Load Balancing or Azure Application Gateway V2, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "azure-appgw-pos",
+      "skill": "azure-appgw",
+      "prompt": "We're running Azure Application Gateway V2 and need help with App Gateway -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "azure-appgw-neg",
+      "skill": "azure-appgw",
+      "prompt": "We're picking a new platform for this project -- should we go with Azure Application Gateway V2 or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "envoy-pos",
+      "skill": "envoy",
+      "prompt": "We're running Envoy Proxy and need help with xDS -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "envoy-neg",
+      "skill": "envoy",
+      "prompt": "We're picking a new platform for this project -- should we go with Envoy Proxy or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "f5-bigip-pos",
+      "skill": "f5-bigip",
+      "prompt": "We're running F5 BIG-IP and need help with LTM -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "f5-bigip-neg",
+      "skill": "f5-bigip",
+      "prompt": "We're picking a new platform for this project -- should we go with F5 BIG-IP or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "haproxy-pos",
+      "skill": "haproxy",
+      "prompt": "We're running HAProxy and need help with frontend -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "haproxy-neg",
+      "skill": "haproxy",
+      "prompt": "We're picking a new platform for this project -- should we go with HAProxy or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "netscaler-pos",
+      "skill": "netscaler",
+      "prompt": "We're running Citrix NetScaler ADC and need help with Citrix ADC -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "netscaler-neg",
+      "skill": "netscaler",
+      "prompt": "We're picking a new platform for this project -- should we go with Citrix NetScaler ADC or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "nginx-pos",
+      "skill": "nginx",
+      "prompt": "We're running NGINX and need help with upstream -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "nginx-neg",
+      "skill": "nginx",
+      "prompt": "We're picking a new platform for this project -- should we go with NGINX or AWS Elastic Load Balancing, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "ansible-network-pos",
+      "skill": "ansible-network",
+      "prompt": "We're running Ansible Network Automation and need help with network_cli -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "ansible-network-neg",
+      "skill": "ansible-network",
+      "prompt": "We're picking a new platform for this project -- should we go with Ansible Network Automation or NetBox, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "netbox-pos",
+      "skill": "netbox",
+      "prompt": "We're running NetBox and need help with IPAM -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "netbox-neg",
+      "skill": "netbox",
+      "prompt": "We're picking a new platform for this project -- should we go with NetBox or Ansible Network Automation, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "terraform-network-pos",
+      "skill": "terraform-network",
+      "prompt": "We're running Terraform Network Automation and need help with Terraform ACI -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "terraform-network-neg",
+      "skill": "terraform-network",
+      "prompt": "We're picking a new platform for this project -- should we go with Terraform Network Automation or Ansible Network Automation, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "kentik-pos",
+      "skill": "kentik",
+      "prompt": "We're running Kentik and need help with flow analytics -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "kentik-neg",
+      "skill": "kentik",
+      "prompt": "We're picking a new platform for this project -- should we go with Kentik or LibreNMS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "librenms-pos",
+      "skill": "librenms",
+      "prompt": "We're running LibreNMS and need help with Oxidized -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "librenms-neg",
+      "skill": "librenms",
+      "prompt": "We're picking a new platform for this project -- should we go with LibreNMS or Kentik, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "prtg-pos",
+      "skill": "prtg",
+      "prompt": "We're running PRTG Network Monitor and need help with Paessler -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "prtg-neg",
+      "skill": "prtg",
+      "prompt": "We're picking a new platform for this project -- should we go with PRTG Network Monitor or Kentik, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "solarwinds-npm-pos",
+      "skill": "solarwinds-npm",
+      "prompt": "We're running SolarWinds NPM and need help with Orion -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "solarwinds-npm-neg",
+      "skill": "solarwinds-npm",
+      "prompt": "We're picking a new platform for this project -- should we go with SolarWinds NPM or Kentik, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "thousandeyes-pos",
+      "skill": "thousandeyes",
+      "prompt": "We're running ThousandEyes and need help with path visualization -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "thousandeyes-neg",
+      "skill": "thousandeyes",
+      "prompt": "We're picking a new platform for this project -- should we go with ThousandEyes or Kentik, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "arista-eos-pos",
+      "skill": "arista-eos",
+      "prompt": "We're running Arista EOS and need help with eAPI -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "arista-eos-neg",
+      "skill": "arista-eos",
+      "prompt": "We're picking a new platform for this project -- should we go with Arista EOS or Aruba AOS-CX, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "aruba-aoscx-pos",
+      "skill": "aruba-aoscx",
+      "prompt": "We're running Aruba AOS-CX and need help with Aruba CX -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "aruba-aoscx-neg",
+      "skill": "aruba-aoscx",
+      "prompt": "We're picking a new platform for this project -- should we go with Aruba AOS-CX or Arista EOS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-ios-xe-pos",
+      "skill": "cisco-ios-xe",
+      "prompt": "We're running Cisco IOS-XE and need help with Catalyst 9000 -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-ios-xe-neg",
+      "skill": "cisco-ios-xe",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco IOS-XE or Arista EOS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-nxos-pos",
+      "skill": "cisco-nxos",
+      "prompt": "We're running Cisco NX-OS and need help with Nexus 9000 -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-nxos-neg",
+      "skill": "cisco-nxos",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco NX-OS or Arista EOS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "juniper-junos-pos",
+      "skill": "juniper-junos",
+      "prompt": "We're running Juniper Junos and need help with MX series -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "juniper-junos-neg",
+      "skill": "juniper-junos",
+      "prompt": "We're picking a new platform for this project -- should we go with Juniper Junos or Arista EOS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "meraki-pos",
+      "skill": "meraki",
+      "prompt": "We're running Cisco Meraki and need help with Meraki Dashboard -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "meraki-neg",
+      "skill": "meraki",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco Meraki or Arista EOS, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-sdwan-pos",
+      "skill": "cisco-sdwan",
+      "prompt": "We're running Cisco Catalyst SD-WAN and need help with Cisco SD-WAN -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-sdwan-neg",
+      "skill": "cisco-sdwan",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco Catalyst SD-WAN or Fortinet SD-WAN, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "fortinet-sdwan-pos",
+      "skill": "fortinet-sdwan",
+      "prompt": "We're running Fortinet SD-WAN and need help with FortiGate SD-WAN -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "fortinet-sdwan-neg",
+      "skill": "fortinet-sdwan",
+      "prompt": "We're picking a new platform for this project -- should we go with Fortinet SD-WAN or Cisco Catalyst SD-WAN, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-secure-client-pos",
+      "skill": "cisco-secure-client",
+      "prompt": "We're running Cisco Secure Client and need help with AnyConnect -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-secure-client-neg",
+      "skill": "cisco-secure-client",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco Secure Client or IPsec/IKEv2, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "ipsec-pos",
+      "skill": "ipsec",
+      "prompt": "We're running IPsec/IKEv2 and need help with site-to-site VPN -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "ipsec-neg",
+      "skill": "ipsec",
+      "prompt": "We're picking a new platform for this project -- should we go with IPsec/IKEv2 or Cisco Secure Client, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "wireguard-pos",
+      "skill": "wireguard",
+      "prompt": "We're running WireGuard and need help with wg-quick -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "wireguard-neg",
+      "skill": "wireguard",
+      "prompt": "We're picking a new platform for this project -- should we go with WireGuard or Cisco Secure Client, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "aruba-wireless-pos",
+      "skill": "aruba-wireless",
+      "prompt": "We're running Aruba Wireless and need help with AOS 10 -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "aruba-wireless-neg",
+      "skill": "aruba-wireless",
+      "prompt": "We're picking a new platform for this project -- should we go with Aruba Wireless or Cisco Wireless, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-wireless-pos",
+      "skill": "cisco-wireless",
+      "prompt": "We're running Cisco Wireless and need help with C9800 -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-wireless-neg",
+      "skill": "cisco-wireless",
+      "prompt": "We're picking a new platform for this project -- should we go with Cisco Wireless or Aruba Wireless, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "juniper-mist-pos",
+      "skill": "juniper-mist",
+      "prompt": "We're running Juniper Mist Wireless and need help with Mist AI -- can you walk me through it?",
+      "should_trigger": true
+    },
+    {
+      "id": "juniper-mist-neg",
+      "skill": "juniper-mist",
+      "prompt": "We're picking a new platform for this project -- should we go with Juniper Mist Wireless or Aruba Wireless, and why?",
+      "should_trigger": false
+    },
+    {
+      "id": "cloud-networking-pos",
+      "skill": "cloud-networking",
+      "prompt": "We're evaluating options for cloud networking -- how do AWS VPC and Azure VNet compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "cloud-networking-neg",
+      "skill": "cloud-networking",
+      "prompt": "We're running AWS VPC already -- can you show me exactly how to configure Security Group?",
+      "should_trigger": false
+    },
+    {
+      "id": "dc-fabric-pos",
+      "skill": "dc-fabric",
+      "prompt": "We're evaluating options for data center fabric -- how do Cisco ACI and Containerlab compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "dc-fabric-neg",
+      "skill": "dc-fabric",
+      "prompt": "We're running Cisco ACI already -- can you show me exactly how to configure APIC?",
+      "should_trigger": false
+    },
+    {
+      "id": "dns-pos",
+      "skill": "dns",
+      "prompt": "We're evaluating options for DNS -- how do Azure DNS and ISC BIND compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "dns-neg",
+      "skill": "dns",
+      "prompt": "We're running Azure DNS already -- can you show me exactly how to configure private zone?",
+      "should_trigger": false
+    },
+    {
+      "id": "firewall-pos",
+      "skill": "firewall",
+      "prompt": "We're evaluating options for firewall comparison -- how do Check Point and Cisco ASA compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "firewall-neg",
+      "skill": "firewall",
+      "prompt": "We're running Check Point already -- can you show me exactly how to configure SmartConsole?",
+      "should_trigger": false
+    },
+    {
+      "id": "ipam-ddi-pos",
+      "skill": "ipam-ddi",
+      "prompt": "We're evaluating options for IPAM -- how do EfficientIP SOLIDserver and Infoblox compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "ipam-ddi-neg",
+      "skill": "ipam-ddi",
+      "prompt": "We're running EfficientIP SOLIDserver already -- can you show me exactly how to configure DNS Guardian?",
+      "should_trigger": false
+    },
+    {
+      "id": "load-balancing-pos",
+      "skill": "load-balancing",
+      "prompt": "We're evaluating options for load balancer comparison -- how do AWS Elastic Load Balancing and Azure Application Gateway V2 compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "load-balancing-neg",
+      "skill": "load-balancing",
+      "prompt": "We're running AWS Elastic Load Balancing already -- can you show me exactly how to configure ALB?",
+      "should_trigger": false
+    },
+    {
+      "id": "network-automation-pos",
+      "skill": "network-automation",
+      "prompt": "We're evaluating options for network automation -- how do Ansible Network Automation and NetBox compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "network-automation-neg",
+      "skill": "network-automation",
+      "prompt": "We're running Ansible Network Automation already -- can you show me exactly how to configure network_cli?",
+      "should_trigger": false
+    },
+    {
+      "id": "network-monitoring-pos",
+      "skill": "network-monitoring",
+      "prompt": "We're evaluating options for network monitoring comparison -- how do Kentik and LibreNMS compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "network-monitoring-neg",
+      "skill": "network-monitoring",
+      "prompt": "We're running Kentik already -- can you show me exactly how to configure flow analytics?",
+      "should_trigger": false
+    },
+    {
+      "id": "routing-switching-pos",
+      "skill": "routing-switching",
+      "prompt": "We're evaluating options for routing protocol -- how do Arista EOS and Aruba AOS-CX compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "routing-switching-neg",
+      "skill": "routing-switching",
+      "prompt": "We're running Arista EOS already -- can you show me exactly how to configure eAPI?",
+      "should_trigger": false
+    },
+    {
+      "id": "sd-wan-pos",
+      "skill": "sd-wan",
+      "prompt": "We're evaluating options for SD-WAN comparison -- how do Cisco Catalyst SD-WAN and Fortinet SD-WAN compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "sd-wan-neg",
+      "skill": "sd-wan",
+      "prompt": "We're running Cisco Catalyst SD-WAN already -- can you show me exactly how to configure Cisco SD-WAN?",
+      "should_trigger": false
+    },
+    {
+      "id": "vpn-pos",
+      "skill": "vpn",
+      "prompt": "We're evaluating options for VPN comparison -- how do Cisco Secure Client and IPsec/IKEv2 compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "vpn-neg",
+      "skill": "vpn",
+      "prompt": "We're running Cisco Secure Client already -- can you show me exactly how to configure AnyConnect?",
+      "should_trigger": false
+    },
+    {
+      "id": "wireless-pos",
+      "skill": "wireless",
+      "prompt": "We're evaluating options for wireless comparison -- how do Aruba Wireless and Cisco Wireless compare, and which should we pick?",
+      "should_trigger": true
+    },
+    {
+      "id": "wireless-neg",
+      "skill": "wireless",
+      "prompt": "We're running Aruba Wireless already -- can you show me exactly how to configure AOS 10?",
+      "should_trigger": false
+    },
+    {
+      "id": "overview-pos",
+      "skill": "overview",
+      "prompt": "We're designing a new campus network from scratch -- 500 users, three buildings. Where do we even start on architecture?",
+      "should_trigger": true
+    },
+    {
+      "id": "overview-neg",
+      "skill": "overview",
+      "prompt": "What's the exact CLI command to check BGP neighbor status on Cisco IOS-XE?",
+      "should_trigger": false
+    }
+  ]
+}

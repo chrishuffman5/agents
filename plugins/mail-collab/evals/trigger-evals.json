@@ -1,0 +1,19 @@
+{
+  "plugin": "mail-collab",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're a 3,000-seat manufacturing company on Exchange 2019 on-prem trying to decide between M365 and Google Workspace — what should drive that call?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "Get-MoveRequest is stuck at 95% for one mailbox in our hybrid migration batch, how do I unstick it?", "should_trigger": false},
+
+    {"id": "exchange-pos", "skill": "exchange", "prompt": "Our DAG failed over to the passive copy overnight and now Get-MailboxDatabaseCopyStatus shows CopyQueueLength climbing — how do I diagnose it?", "should_trigger": true},
+    {"id": "exchange-neg", "skill": "exchange", "prompt": "We're an all-cloud shop on Exchange Online — how do I set up a Purview retention policy for the finance team?", "should_trigger": false},
+
+    {"id": "m365-pos", "skill": "m365", "prompt": "New E5 tenant setup — walk me through the Conditional Access baseline policies I should require before we onboard users.", "should_trigger": true},
+    {"id": "m365-neg", "skill": "m365", "prompt": "Our DKIM selector1 CNAME isn't resolving and Exchange Online mail is going out unsigned, what's wrong?", "should_trigger": false},
+
+    {"id": "google-workspace-pos", "skill": "google-workspace", "prompt": "GCDS sync job is failing every night with an LDAP timeout against our on-prem AD — how do I troubleshoot it?", "should_trigger": true},
+    {"id": "google-workspace-neg", "skill": "google-workspace", "prompt": "We're mid-migration from Exchange to M365 and want to compare it against just moving to Google Workspace instead — which fits our compliance needs better?", "should_trigger": false},
+
+    {"id": "postfix-pos", "skill": "postfix", "prompt": "postqueue -p shows 400 messages stuck in the deferred queue with 'Connection timed out' — how do I dig into main.cf and figure out what's blocking delivery?", "should_trigger": true},
+    {"id": "postfix-neg", "skill": "postfix", "prompt": "Our mail server (running Postfix) keeps running out of disk space and the systemd service won't restart cleanly — how do I fix the underlying OS issue?", "should_trigger": false}
+  ]
+}

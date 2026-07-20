@@ -12,7 +12,7 @@
           "8314"
         ]
       },
-      "notes": "skills/mail-collab/references/concepts.md - \"| 465 | SMTPS implicit TLS (RFC 8314) | Implicit TLS |\""
+      "notes": "plugins/mail-collab/skills/overview/references/concepts.md - \"| 465 | SMTPS implicit TLS (RFC 8314) | Implicit TLS |\""
     },
     {
       "id": "concepts-mta-sts-modes",
@@ -24,7 +24,7 @@
           "enforce"
         ]
       },
-      "notes": "skills/mail-collab/references/concepts.md - \"Modes: `testing` (report only), `enforce` (reject non-TLS), `none` (withdraw policy).\""
+      "notes": "plugins/mail-collab/skills/overview/references/concepts.md - \"Modes: `testing` (report only), `enforce` (reject non-TLS), `none` (withdraw policy).\""
     },
     {
       "id": "concepts-imap4rev2-rfc",
@@ -36,7 +36,7 @@
           "3501"
         ]
       },
-      "notes": "skills/mail-collab/references/concepts.md - \"IMAP4rev2 (RFC 9051) supersedes RFC 3501.\""
+      "notes": "plugins/mail-collab/skills/overview/references/concepts.md - \"IMAP4rev2 (RFC 9051) supersedes RFC 3501.\""
     },
     {
       "id": "concepts-jmap-adoption",
@@ -48,7 +48,7 @@
           "Cyrus"
         ]
       },
-      "notes": "skills/mail-collab/references/concepts.md - \"Adoption: Fastmail (primary), Cyrus IMAP, Apache James.\""
+      "notes": "plugins/mail-collab/skills/overview/references/concepts.md - \"Adoption: Fastmail (primary), Cyrus IMAP, Apache James.\""
     },
     {
       "id": "concepts-dane-postfix-tlsa",
@@ -60,7 +60,7 @@
           "TLSA"
         ]
       },
-      "notes": "skills/mail-collab/references/concepts.md - \"DANE pins TLS certificates via TLSA records...Postfix supports DANE natively (`smtp_tls_security_level = dane`).\""
+      "notes": "plugins/mail-collab/skills/overview/references/concepts.md - \"DANE pins TLS certificates via TLSA records...Postfix supports DANE natively (`smtp_tls_security_level = dane`).\""
     },
     {
       "id": "postfix-310-tlsrpt",
@@ -72,7 +72,7 @@
           "8460"
         ]
       },
-      "notes": "skills/mail-collab/postfix/SKILL.md - \"3.10 added TLSRPT support and security improvements.\" / \"TLSRPT (RFC 8460)\""
+      "notes": "plugins/mail-collab/skills/postfix/SKILL.md - \"3.10 added TLSRPT support and security improvements.\" / \"TLSRPT (RFC 8460)\""
     },
     {
       "id": "exchange-se-rtm-cu15",
@@ -83,7 +83,7 @@
           "CU15"
         ]
       },
-      "notes": "skills/mail-collab/references/paradigm-onprem.md - \"RTM functionally identical to Exchange 2019 CU15\""
+      "notes": "plugins/mail-collab/skills/overview/references/paradigm-onprem.md - \"RTM functionally identical to Exchange 2019 CU15\""
     },
     {
       "id": "google-workspace-vault-retention-max",
@@ -94,7 +94,7 @@
           "36,500"
         ]
       },
-      "notes": "skills/mail-collab/google-workspace/SKILL.md - \"Duration: 1 to 36,500 days\""
+      "notes": "plugins/mail-collab/skills/google-workspace/SKILL.md - \"Duration: 1 to 36,500 days\""
     },
     {
       "id": "postfix-script-relay-safety",
@@ -105,7 +105,7 @@
           "02-tls-and-auth-config.sh"
         ]
       },
-      "notes": "skills/mail-collab/postfix/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/mail-collab/skills/postfix/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

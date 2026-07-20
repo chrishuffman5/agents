@@ -12,7 +12,7 @@
           "32767"
         ]
       },
-      "notes": "skills/containers/orchestration/kubernetes/SKILL.md - \"NodePort | ClusterIP + port on every node (30000-32767)\""
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md - \"NodePort | ClusterIP + port on every node (30000-32767)\""
     },
     {
       "id": "istio-hbone-acronym",
@@ -23,7 +23,7 @@
           "HTTP-Based Overlay Network Environment"
         ]
       },
-      "notes": "skills/containers/service-mesh/istio/SKILL.md - \"HBONE (HTTP-Based Overlay Network Environment)\""
+      "notes": "plugins/containers/skills/istio/SKILL.md - \"HBONE (HTTP-Based Overlay Network Environment)\""
     },
     {
       "id": "eks-fargate-pod-limits",
@@ -35,7 +35,7 @@
           "30 GB"
         ]
       },
-      "notes": "skills/containers/orchestration/eks/SKILL.md - \"Max 4 vCPU, 30 GB memory per pod\""
+      "notes": "plugins/containers/skills/eks/SKILL.md - \"Max 4 vCPU, 30 GB memory per pod\""
     },
     {
       "id": "docker-v29-containerd-version",
@@ -47,7 +47,7 @@
           "config version 3"
         ]
       },
-      "notes": "skills/containers/runtimes/docker/SKILL.md - \"Docker Engine v29 ships containerd 2.2.2 with config version 3\""
+      "notes": "plugins/containers/skills/docker/references/versions/29.md - \"Docker Engine v29 ships containerd 2.2.2 with config version 3\""
     },
     {
       "id": "istio-envoy-sidecar-ram",
@@ -56,7 +56,7 @@
         "type": "regex",
         "value": "\\b50 MB\\b"
       },
-      "notes": "skills/containers/service-mesh/istio/SKILL.md - \"Each Envoy sidecar consumes ~50 MB RAM. For large clusters, consider ambient mode.\""
+      "notes": "plugins/containers/skills/istio/SKILL.md - \"Each Envoy sidecar consumes ~50 MB RAM. For large clusters, consider ambient mode.\""
     },
     {
       "id": "kubernetes-etcd-ha-members",
@@ -67,7 +67,7 @@
           "Raft"
         ]
       },
-      "notes": "skills/containers/orchestration/kubernetes/SKILL.md - \"HA: 3 or 5 member cluster (Raft consensus). Even numbers provide no quorum benefit.\""
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md - \"HA: 3 or 5 member cluster (Raft consensus). Even numbers provide no quorum benefit.\""
     },
     {
       "id": "docker-overlay-vxlan-port",
@@ -79,7 +79,7 @@
           "4789"
         ]
       },
-      "notes": "skills/containers/runtimes/docker/SKILL.md - \"overlay | swarm | Multi-host (VXLAN encapsulation, UDP 4789)\""
+      "notes": "plugins/containers/skills/docker/SKILL.md - \"overlay | swarm | Multi-host (VXLAN encapsulation, UDP 4789)\""
     },
     {
       "id": "eks-vpc-cni-prefix-delegation",
@@ -91,7 +91,7 @@
           "110"
         ]
       },
-      "notes": "skills/containers/orchestration/eks/SKILL.md - \"Prefix delegation: assigns /28 prefixes to ENIs... up to 110+ pods per node on m5.xlarge vs ~29 in secondary IP mode\""
+      "notes": "plugins/containers/skills/eks/SKILL.md - \"Prefix delegation: assigns /28 prefixes to ENIs... up to 110+ pods per node on m5.xlarge vs ~29 in secondary IP mode\""
     },
     {
       "id": "k8s-script-pod-triage",
@@ -102,7 +102,7 @@
           "01-pod-triage.sh"
         ]
       },
-      "notes": "skills/containers/orchestration/kubernetes/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

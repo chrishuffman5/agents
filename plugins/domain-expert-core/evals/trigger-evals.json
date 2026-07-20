@@ -1,0 +1,4 @@
+{"plugin": "domain-expert-core", "cases": [
+  {"id": "update-plugin-pos", "skill": "update-plugin", "prompt": "I set this up months ago, is there a new version of the domain-expert plugin available? Can you update it for me and make sure it actually installs.", "should_trigger": true},
+  {"id": "update-plugin-neg", "skill": "update-plugin", "prompt": "I've never installed anything from this marketplace before -- how do I add the domain-expert marketplace and install the database plugin for the first time?", "should_trigger": false}
+]}

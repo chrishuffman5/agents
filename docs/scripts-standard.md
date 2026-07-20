@@ -2,28 +2,30 @@
 
 The determinism goal: when an agent needs to diagnose or operate on a technology, it should **deliver a tested, shipped script verbatim** instead of generating one from memory. Generated scripts vary run-to-run and can be subtly wrong; shipped scripts are reviewed once and reused forever. This reduces tokens (no generation, no self-correction), reduces attempts-to-correct, and makes agent behavior reproducible for evals.
 
-## Current Coverage (audited 2026-07-02)
+## Current Coverage (audited 2026-07-19, post-marketplace-restructure)
+
+Each domain is now its own plugin under `plugins/<domain>/`, and every technology is a flat skill directory under `plugins/<domain>/skills/<technology>/` (the old `skills/<domain>/<category>/<technology>/` nesting was flattened — category groupings like `orchestration`, `service-mesh`, or `firewall` survive only as thin overview-style skills with a `references/concepts.md`, not as directories that contain other technologies).
 
 | Domain | Coverage | Detail |
 |---|---|---|
-| `os` | ✅ Full | All 8 OS trees ship `scripts/` (34 script dirs incl. per-version) |
-| `cli-scripting` | ✅ Full | All 7 tools ship `scripts/` |
-| `virtualization` | ✅ Full | All 6 platforms ship `scripts/` |
-| `analytics` | ⚠️ Partial | ssas (6), ssrs (5), power-bi (4), tableau (4), grafana (4); remaining: looker, metabase, qlik-sense, superset, thoughtspot, duckdb-analytics |
-| `etl` | ⚠️ Partial | airflow (5), ssis (4), dbt-core (4), spark (4), adf (3); remaining: dbt-cloud, kafka, aws-glue, fivetran, informatica, nifi, synapse-pipelines, talend, duckdb-etl |
-| `storage` | ⚠️ Partial | netapp-ontap (4), ceph (3), aws-s3 (3), storage-spaces-direct (2); remaining: azure-blob, gcs, minio, glusterfs, dell-powerstore, dell-unity, hpe-alletra, pure-storage |
-| `database` | ⚠️ Partial | sql-server (per-version), postgresql (5), mysql (4), mongodb (5), redis (4); remaining: 24 engines |
-| `messaging` | ⚠️ Partial | kafka (3), rabbitmq (3), aws-sqs-sns (2); remaining: pulsar, nats, redis-streams, azure-service-bus, gcp-pubsub |
-| `containers` | ⚠️ Partial | kubernetes (4), docker (2) |
-| `networking` | ⚠️ Partial | cisco-ios-xe (2), panos (2), bind (2), haproxy (2) |
-| `monitoring` | ⚠️ Partial | prometheus (3), elk (2); grafana ops scripts live under analytics |
-| `devops` | ⚠️ Partial | github-actions (2), terraform (2), ansible (2), argocd (2) |
+| `os` | ✅ Full | All 19 OS-domain skills ship `scripts/` — 8 base OSes (windows-server, windows-client, rhel, rocky-alma, ubuntu, debian, sles, macos) plus 11 related-topic skills (apparmor, btrfs-snapper, failover-clustering, hyper-v, macos-developer-toolchain, macos-mdm-deployment, macos-platform-sso, rhel-podman, selinux, sles-ha-extension, wsl) |
+| `cli-scripting` | ✅ Full | All 7 tools ship `scripts/`: bash (4), nodejs (4), powershell (4), python (4), kubectl (3), aws-cli (1), azure-cli (1) |
+| `virtualization` | ✅ Full | All 6 platforms ship `scripts/`: cloud-vms (3), vmware (3), kvm (2), proxmox (2), citrix (1), nutanix (1) |
+| `analytics` | ⚠️ Partial | ssas (6), ssrs (5), power-bi (4), tableau (4), grafana (4); remaining: duckdb, looker, metabase, qlik-sense, superset, thoughtspot |
+| `etl` | ⚠️ Partial | airflow (5), ssis (4), dbt-core (4), spark (4), adf (3); remaining: aws-glue, dbt-cloud, duckdb, fivetran, informatica, kafka, nifi, synapse-pipelines, talend |
+| `storage` | ⚠️ Partial | netapp-ontap (4), ceph (3), aws-s3 (3), storage-spaces-direct (2); remaining: azure-blob, dell-powerstore, dell-unity, gcs, glusterfs, hpe-alletra, minio, pure-storage |
+| `database` | ⚠️ Partial | sql-server (66, per-version under `scripts/versions/<v>/`), postgresql (5), mongodb (5), mysql (4), redis (4); remaining: 24 engines |
+| `messaging` | ⚠️ Partial | kafka (3), rabbitmq (3), aws-sqs-sns (2); remaining: azure-service-bus, gcp-pubsub, nats, pulsar, redis-streams |
+| `containers` | ⚠️ Partial | kubernetes (4), docker (2); remaining: aks, consul, containerd, eks, gke, helm, istio, linkerd, openshift, podman, rancher |
+| `networking` | ⚠️ Partial | cisco-ios-xe (2), panos (2), bind (2), haproxy (2); remaining: ~60 other technologies |
+| `monitoring` | ⚠️ Partial | prometheus (3), elk (2); grafana ops scripts live under the `analytics` plugin's `grafana` skill, not the `monitoring` plugin's |
+| `devops` | ⚠️ Partial | github-actions (2), terraform (2), ansible (2), argocd (2); remaining: azure-devops, bicep, chef, circleci, cloudformation, flux, github, gitlab-ci, jenkins, opentofu, pulumi, puppet, saltstack |
 | `security` | ⚠️ Partial | entra-id (3), ad-ds (2), vault (2), crowdstrike (1) — read-only defensive audits |
-| `cloud-platforms` | ⚠️ Partial | aws (3), azure (2) — FinOps cost/idle audits |
-| `mail-collab` | ⚠️ Partial | postfix (2), m365 (1) |
-| `backend` | ⚠️ Partial | aspnet-core (1), django (1), express (1) — project/dep audits |
-| `frontend` | ⚠️ Partial | react (1), nextjs (1), angular (1) — build/bundle audits |
-| `api-realtime` | ⚠️ Partial | rest (1), graphql (1), grpc (1) — contract/endpoint checks |
+| `cloud-platforms` | ⚠️ Partial | aws (3), azure (2) — FinOps cost/idle audits; remaining: gcp |
+| `mail-collab` | ⚠️ Partial | postfix (2), m365 (1); remaining: exchange, google-workspace |
+| `backend` | ⚠️ Partial | aspnet-core (1), django (1), express (1) — project/dep audits; remaining: aspnet-minimal-apis, fastapi, flask, go-web, nestjs, rails, rust-web, spring-boot |
+| `frontend` | ⚠️ Partial | react (1), nextjs (1), angular (1) — build/bundle audits; remaining: angular-signals, astro, blazor, gatsby, htmx, nextjs-app-router, nuxt, react-server-components, remix, svelte, vue |
+| `api-realtime` | ⚠️ Partial | rest (1), graphql (1), grpc (1) — contract/endpoint checks; remaining: odata, signalr, socketio, sse, websocket |
 
 **All 18 domains now have at least partial script coverage.** Remaining work is depth (more technologies per domain), driven by eval deltas and real usage.
 
@@ -32,8 +34,8 @@ The determinism goal: when an agent needs to diagnose or operate on a technology
 ### Location
 
 ```
-skills/<domain>/<technology>/scripts/            # version-agnostic scripts
-skills/<domain>/<technology>/<version>/scripts/  # version-specific scripts (preferred when syntax differs by version)
+plugins/<domain>/skills/<technology>/scripts/                    # version-agnostic scripts
+plugins/<domain>/skills/<technology>/scripts/versions/<v>/       # version-specific scripts (preferred when syntax differs by version)
 ```
 
 ### Naming
@@ -76,7 +78,7 @@ Every script begins with a comment header the agent can relay to the user withou
 - `scripts/` exists with the top 5–10 diagnostic/operational questions for that technology covered
 - Every script satisfies the header contract
 - The technology's `SKILL.md` lists the scripts with one-line descriptions
-- The domain specialist agent's Knowledge Map notes that scripts exist (update `agents/<domain>-specialist.md`)
+- The domain specialist agent's Knowledge Map notes that scripts exist (update `plugins/<domain>/agents/<domain>-specialist.md`)
 
 ## Rollout Order
 

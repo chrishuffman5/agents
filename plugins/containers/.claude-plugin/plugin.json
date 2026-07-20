@@ -1,0 +1,10 @@
+{
+  "name": "containers",
+  "description": "Expert knowledge across 13 container and orchestration technologies -- Kubernetes, Docker, Podman, containerd, Helm, EKS, AKS, GKE, OpenShift, Rancher, Istio, Linkerd, and Consul -- with a domain specialist agent for image builds, workload manifests, cluster operations, and service mesh adoption.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["containers", "kubernetes", "docker", "podman", "helm", "service-mesh", "istio", "eks", "aks", "gke"]
+}

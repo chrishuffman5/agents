@@ -1,0 +1,28 @@
+{
+  "plugin": "cli-scripting",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're kicking off a new automation project and the team can't agree — should this be a Bash script or a Python script?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "My Python argparse subcommand isn't picking up the --verbose flag, can you fix it?", "should_trigger": false},
+
+    {"id": "powershell-pos", "skill": "powershell", "prompt": "I need a PowerShell 7.6 function with CmdletBinding that pulls AD group membership and exports it to CSV.", "should_trigger": true},
+    {"id": "powershell-neg", "skill": "powershell", "prompt": "Should we standardize our Windows fleet automation on PowerShell or Python going forward?", "should_trigger": false},
+
+    {"id": "bash-pos", "skill": "bash", "prompt": "Write me a bash script that tails a log file, greps for ERROR, and emails a summary with sed-cleaned output.", "should_trigger": true},
+    {"id": "bash-neg", "skill": "bash", "prompt": "For a cron job that just orchestrates a couple of existing CLI tools on Linux, is bash still the right call over Python?", "should_trigger": false},
+
+    {"id": "python-pos", "skill": "python", "prompt": "My python script's subprocess.run call with shell=True is throwing a security warning in our SAST scan — how do I fix it?", "should_trigger": true},
+    {"id": "python-neg", "skill": "python", "prompt": "We're building a REST API in FastAPI, what's the right way to structure the routers?", "should_trigger": false},
+
+    {"id": "nodejs-pos", "skill": "nodejs", "prompt": "I want a Node.js CLI tool using parseArgs that reads a CSV and streams it to JSON with node:fs/promises.", "should_trigger": true},
+    {"id": "nodejs-neg", "skill": "nodejs", "prompt": "How should I structure middleware in my Express app for request logging?", "should_trigger": false},
+
+    {"id": "aws-cli-pos", "skill": "aws-cli", "prompt": "What's the aws cli command with --query to get the public IP of an EC2 instance by tag, output as text for a script variable?", "should_trigger": true},
+    {"id": "aws-cli-neg", "skill": "aws-cli", "prompt": "Should we go multi-account with AWS Organizations or keep everything in one account for our new landing zone?", "should_trigger": false},
+
+    {"id": "azure-cli-pos", "skill": "azure-cli", "prompt": "Give me the az cli commands to create a resource group, VNet, and NSG, with --no-wait for the long-running parts.", "should_trigger": true},
+    {"id": "azure-cli-neg", "skill": "azure-cli", "prompt": "What's the recommended landing zone architecture for a new Azure enterprise deployment?", "should_trigger": false},
+
+    {"id": "kubectl-pos", "skill": "kubectl", "prompt": "My kubectl logs --previous shows nothing for a CrashLoopBackOff pod, what jsonpath do I use to check the last state?", "should_trigger": true},
+    {"id": "kubectl-neg", "skill": "kubectl", "prompt": "How many nodes and what instance types should we size our new EKS cluster with?", "should_trigger": false}
+  ]
+}

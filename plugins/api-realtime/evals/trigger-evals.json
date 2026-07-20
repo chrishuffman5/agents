@@ -1,0 +1,31 @@
+{
+  "plugin": "api-realtime",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're building a new public API and need to decide between REST and GraphQL, and separately whether notifications should go over WebSocket or SSE. Can you help us think through the trade-offs?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "How do I add a DataLoader to my Apollo Server resolver to fix an N+1 query problem?", "should_trigger": false},
+
+    {"id": "rest-pos", "skill": "rest", "prompt": "What status code should I return for a POST that creates a resource asynchronously, and how do I document it in OpenAPI 3.1?", "should_trigger": true},
+    {"id": "rest-neg", "skill": "rest", "prompt": "How do I set up route middleware for authentication in my Express app?", "should_trigger": false},
+
+    {"id": "graphql-pos", "skill": "graphql", "prompt": "Our GraphQL API is doing hundreds of DB queries per request when clients fetch a list with nested fields — how do I fix the N+1 problem with DataLoader?", "should_trigger": true},
+    {"id": "graphql-neg", "skill": "graphql", "prompt": "Should we build our public API with GraphQL or plain REST endpoints given our client is mostly mobile apps?", "should_trigger": false},
+
+    {"id": "grpc-pos", "skill": "grpc", "prompt": "Our gRPC bidirectional streaming call keeps hitting DEADLINE_EXCEEDED under load — how should we tune deadlines and retry policy?", "should_trigger": true},
+    {"id": "grpc-neg", "skill": "grpc", "prompt": "Should our internal microservices talk gRPC or REST to each other?", "should_trigger": false},
+
+    {"id": "odata-pos", "skill": "odata", "prompt": "How do I write an OData $filter with a lambda `any` operator to find orders where any line item has a discount, and expose it through $metadata?", "should_trigger": true},
+    {"id": "odata-neg", "skill": "odata", "prompt": "Is OData or plain REST a better fit for our Power BI-consumed reporting API?", "should_trigger": false},
+
+    {"id": "signalr-pos", "skill": "signalr", "prompt": "Our SignalR hub isn't broadcasting to all connected clients after we scaled to 3 servers — do we need a Redis backplane or Azure SignalR Service?", "should_trigger": true},
+    {"id": "signalr-neg", "skill": "signalr", "prompt": "How do I register middleware and configure minimal APIs in ASP.NET Core 8?", "should_trigger": false},
+
+    {"id": "socketio-pos", "skill": "socketio", "prompt": "socket.io broadcasts to a room aren't reaching clients connected through a second server instance — do I need a Redis adapter?", "should_trigger": true},
+    {"id": "socketio-neg", "skill": "socketio", "prompt": "Should we use Socket.IO or plain WebSocket for our new chat feature, given we don't need automatic reconnect fallback?", "should_trigger": false},
+
+    {"id": "websocket-pos", "skill": "websocket", "prompt": "Our WebSocket connections are closing with code 1006 randomly after a few minutes idle — how do I diagnose this and add reconnect with backoff?", "should_trigger": true},
+    {"id": "websocket-neg", "skill": "websocket", "prompt": "We want to fan out order-created events to multiple consumer services reliably — should we use Kafka or RabbitMQ for that?", "should_trigger": false},
+
+    {"id": "sse-pos", "skill": "sse", "prompt": "I'm streaming LLM tokens to the browser with Server-Sent Events but the connection drops after 60 seconds behind our Nginx proxy — how do I fix buffering and add Last-Event-ID resumption?", "should_trigger": true},
+    {"id": "sse-neg", "skill": "sse", "prompt": "We need to fan out real-time price updates to thousands of subscribers using a message broker with consumer groups — what should we use?", "should_trigger": false}
+  ]
+}

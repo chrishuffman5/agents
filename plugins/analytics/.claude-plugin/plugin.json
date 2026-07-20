@@ -1,0 +1,10 @@
+{
+  "name": "analytics",
+  "description": "Data analytics and business intelligence expertise across 11 technologies -- Power BI, Tableau, Looker, Qlik Sense, SSAS, SSRS, Grafana, Superset, Metabase, ThoughtSpot, and DuckDB -- covering semantic modeling, DAX/LookML/MDX, dashboard design, and BI platform operations.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["analytics", "business-intelligence", "bi", "dashboard", "power-bi", "tableau", "looker", "grafana", "reporting", "semantic-model"]
+}
