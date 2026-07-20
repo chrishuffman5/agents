@@ -11,7 +11,7 @@
           "phishing"
         ]
       },
-      "notes": "skills/networking/firewall/panos/SKILL.md - \"WF-500 on-premises appliance does NOT support phishing verdict\""
+      "notes": "plugins/networking/skills/panos/SKILL.md - \"WF-500 on-premises appliance does NOT support phishing verdict\""
     },
     {
       "id": "panos-security-policy-nat-matching",
@@ -23,7 +23,7 @@
           "post-NAT"
         ]
       },
-      "notes": "skills/networking/firewall/panos/SKILL.md - \"Security policy matches pre-NAT source/destination IPs but post-NAT zones\""
+      "notes": "plugins/networking/skills/panos/SKILL.md - \"Security policy matches pre-NAT source/destination IPs but post-NAT zones\""
     },
     {
       "id": "cisco-ios-xe-gnmi-port",
@@ -32,7 +32,7 @@
         "type": "regex",
         "value": "\\b9339\\b"
       },
-      "notes": "skills/networking/routing-switching/cisco-ios-xe/SKILL.md - \"| gNMI | gRPC | 9339 | Protobuf | Streaming telemetry\""
+      "notes": "plugins/networking/skills/cisco-ios-xe/SKILL.md - \"| gNMI | gRPC | 9339 | Protobuf | Streaming telemetry\""
     },
     {
       "id": "cisco-ios-xe-stp-root-priority",
@@ -41,7 +41,7 @@
         "type": "regex",
         "value": "\\b4096\\b"
       },
-      "notes": "skills/networking/routing-switching/cisco-ios-xe/SKILL.md - \"Set explicit root priorities: primary 4096, secondary 8192\""
+      "notes": "plugins/networking/skills/cisco-ios-xe/references/best-practices.md - \"Set explicit root priorities: primary 4096, secondary 8192\""
     },
     {
       "id": "bind-auto-dnssec-removed-920",
@@ -52,7 +52,7 @@
           "auto-dnssec"
         ]
       },
-      "notes": "skills/networking/dns/bind/SKILL.md - \"auto-dnssec is removed in BIND 9.20. Use dnssec-policy (KASP) instead\""
+      "notes": "plugins/networking/skills/bind/references/versions/9.20.md - \"auto-dnssec is removed in BIND 9.20. Use dnssec-policy (KASP) instead\""
     },
     {
       "id": "bind-default-dnssec-policy-algorithm",
@@ -63,7 +63,7 @@
           "ECDSAP256SHA256"
         ]
       },
-      "notes": "skills/networking/dns/bind/SKILL.md - \"Built-in: ECDSAP256SHA256 CSK, 1-year lifetime\""
+      "notes": "plugins/networking/skills/bind/SKILL.md - \"Built-in: ECDSAP256SHA256 CSK, 1-year lifetime\""
     },
     {
       "id": "haproxy-least-connections-algorithm",
@@ -74,7 +74,7 @@
           "leastconn"
         ]
       },
-      "notes": "skills/networking/load-balancing/haproxy/SKILL.md - \"| Least Connections | balance leastconn | Fewest active connections |\""
+      "notes": "plugins/networking/skills/haproxy/references/best-practices.md - \"| Least Connections | balance leastconn | Fewest active connections |\""
     },
     {
       "id": "wireguard-noise-protocol-name",
@@ -85,7 +85,7 @@
           "Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s"
         ]
       },
-      "notes": "skills/networking/vpn/wireguard/SKILL.md - \"Noise Protocol Framework (Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s)\""
+      "notes": "plugins/networking/skills/wireguard/SKILL.md - \"Noise Protocol Framework (Noise_IKpsk2_25519_ChaChaPoly_BLAKE2s)\""
     },
     {
       "id": "panos-script-traffic-triage",
@@ -96,7 +96,7 @@
           "02-traffic-triage.sh"
         ]
       },
-      "notes": "skills/networking/firewall/panos/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/networking/skills/panos/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

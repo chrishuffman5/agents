@@ -6,61 +6,61 @@
       "id": "ssas-2025-compatibility-level",
       "prompt": "According to the skills library, which model compatibility level is associated with SQL Server 2025 Analysis Services?",
       "expected": { "type": "contains_all", "value": ["1700"] },
-      "notes": "skills/analytics/ssas/2025/SKILL.md - \"You are a specialist in SQL Server 2025 Analysis Services, compatibility level 1700.\""
+      "notes": "plugins/analytics/skills/ssas/references/versions/2025.md - \"You are a specialist in SQL Server 2025 Analysis Services, compatibility level 1700.\""
     },
     {
       "id": "ssas-2025-linest-functions",
       "prompt": "According to the skills library, which two new DAX functions were added in SSAS 2025 for performing linear regression?",
       "expected": { "type": "contains_all", "value": ["LINEST", "LINESTX"] },
-      "notes": "skills/analytics/ssas/2025/SKILL.md - \"LINEST and LINESTX: Perform linear regression using the Least Squares method\""
+      "notes": "plugins/analytics/skills/ssas/references/versions/2025.md - \"LINEST and LINESTX: Perform linear regression using the Least Squares method\""
     },
     {
       "id": "ssas-2022-maxparallelism",
       "prompt": "According to the skills library, which property controls the number of parallel threads used by parallel DirectQuery in SSAS 2022?",
       "expected": { "type": "contains_all", "value": ["MaxParallelism"] },
-      "notes": "skills/analytics/ssas/2022/SKILL.md - \"MaxParallelism property controls the number of parallel threads to prevent overburdening the data source\""
+      "notes": "plugins/analytics/skills/ssas/references/versions/2022.md - \"MaxParallelism property controls the number of parallel threads to prevent overburdening the data source\""
     },
     {
       "id": "ssrs-2025-patch-timeline",
       "prompt": "According to the skills library, through what date does SSRS 2022 continue receiving security patches in the SQL Server 2025 reporting transition?",
       "expected": { "type": "contains_all", "value": ["January 2033"] },
-      "notes": "skills/analytics/ssrs/2025/SKILL.md - \"SSRS 2022 continues receiving security patches through January 2033\""
+      "notes": "plugins/analytics/skills/ssrs/references/versions/2025.md - \"SSRS 2022 continues receiving security patches through January 2033\""
     },
     {
       "id": "ssrs-2025-rdl-migration-tool",
       "prompt": "According to the skills library, which GitHub tool automates conversion and publishing of paginated reports to Power BI Service workspaces in the SQL Server 2025 cloud migration path?",
       "expected": { "type": "contains_all", "value": ["RdlMigration"] },
-      "notes": "skills/analytics/ssrs/2025/SKILL.md - \"RDL Migration Tool (microsoft/RdlMigration on GitHub) automates conversion and publishing of RDL reports to Power BI Service workspaces\""
+      "notes": "plugins/analytics/skills/ssrs/references/versions/2025.md - \"RDL Migration Tool (microsoft/RdlMigration on GitHub) automates conversion and publishing of RDL reports to Power BI Service workspaces\""
     },
     {
       "id": "tableau-2026-1-rest-api-connector",
       "prompt": "According to the skills library, what new Tableau 2026.1 connector replaces the deprecated Web Data Connector?",
       "expected": { "type": "contains_all", "value": ["REST API Connector"] },
-      "notes": "skills/analytics/tableau/2026.1/SKILL.md - \"REST API Connector: New general-purpose connector replacing deprecated Web Data Connector (WDC).\""
+      "notes": "plugins/analytics/skills/tableau/references/versions/2026.1.md - \"REST API Connector: New general-purpose connector replacing deprecated Web Data Connector (WDC).\""
     },
     {
       "id": "tableau-2025-uat-release",
       "prompt": "According to the skills library, which Tableau 2025.x release introduced JWT-based Unified Access Tokens via Tableau Cloud Manager?",
       "expected": { "type": "contains_all", "value": ["2025.3"] },
-      "notes": "skills/analytics/tableau/2025.x/SKILL.md - \"Unified Access Tokens (2025.3) New JWT-based authentication via Tableau Cloud Manager\""
+      "notes": "plugins/analytics/skills/tableau/references/versions/2025.x.md - \"Unified Access Tokens (2025.3) New JWT-based authentication via Tableau Cloud Manager\""
     },
     {
       "id": "power-bi-direct-lake-ga",
       "prompt": "According to the skills library, in what month and year did Power BI Direct Lake reach general availability?",
       "expected": { "type": "contains_all", "value": ["March 2026"] },
-      "notes": "skills/analytics/power-bi/SKILL.md - \"Direct Lake (GA March 2026) reads Delta tables directly from OneLake without import.\""
+      "notes": "plugins/analytics/skills/power-bi/SKILL.md - \"Direct Lake (GA March 2026) reads Delta tables directly from OneLake without import.\""
     },
     {
       "id": "ssas-script-object-memory",
       "prompt": "According to the skills library, which shipped SSAS diagnostic script ranks objects by how much instance memory they consume?",
       "expected": { "type": "contains_all", "value": ["03-object-memory.sql"] },
-      "notes": "skills/analytics/ssas/SKILL.md Diagnostic Scripts section - \"scripts/03-object-memory.sql -- Objects ranked by memory\" (script-retrieval task; measures determinism rollout)"
+      "notes": "plugins/analytics/skills/ssas/SKILL.md Diagnostic Scripts section - \"scripts/03-object-memory.sql -- Objects ranked by memory\" (script-retrieval task; measures determinism rollout)"
     },
     {
       "id": "ssrs-script-cache-mix",
       "prompt": "According to the skills library, which shipped SSRS diagnostic script breaks report executions down by Live versus Cache versus Snapshot source?",
       "expected": { "type": "contains_all", "value": ["05-execution-source-breakdown.sql"] },
-      "notes": "skills/analytics/ssrs/SKILL.md Diagnostic Scripts section - \"scripts/05-execution-source-breakdown.sql -- Live vs Cache vs Snapshot mix\" (script-retrieval task; measures determinism rollout)"
+      "notes": "plugins/analytics/skills/ssrs/SKILL.md Diagnostic Scripts section - \"scripts/05-execution-source-breakdown.sql -- Live vs Cache vs Snapshot mix\" (script-retrieval task; measures determinism rollout)"
     }
   ]
 }

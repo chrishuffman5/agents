@@ -1,12 +1,12 @@
 {
-  "domain": "REPLACE - domain name matching skills/<domain>/",
+  "domain": "REPLACE - domain name matching plugins/<domain>/",
   "agent": "domain-expert:REPLACE-specialist",
   "tasks": [
     {
       "id": "navigation-task-example",
       "prompt": "A task verifiable against the skill TREE STRUCTURE (documented versions, reference file names, script inventories). Isolates the reduce-research goal.",
       "expected": { "type": "contains_all", "value": ["required-substring-1", "required-substring-2"] },
-      "notes": "REQUIRED: cite the skill path holding the ground truth, e.g. skills/<domain>/<tech>/"
+      "notes": "REQUIRED: cite the skill path holding the ground truth, e.g. plugins/<domain>/skills/<tech>/"
     },
     {
       "id": "knowledge-task-example",

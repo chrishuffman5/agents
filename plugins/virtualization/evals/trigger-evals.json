@@ -1,0 +1,25 @@
+{
+  "plugin": "virtualization",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're planning a fresh virtualization buildout for a 40-VM environment and need to decide between VMware, Proxmox, and KVM before we buy any hardware. What should drive the decision?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "My ESXi host is showing high CPU ready time on a few VMs — how do I fix that in vSphere?", "should_trigger": false},
+
+    {"id": "vmware-pos", "skill": "vmware", "prompt": "vMotion keeps failing between two of our ESXi 8 hosts with an EVC compatibility error — how do I troubleshoot this in vCenter?", "should_trigger": true},
+    {"id": "vmware-neg", "skill": "vmware", "prompt": "We're configuring NSX overlay segments and distributed firewall policies for a new microsegmentation project — what's the design approach?", "should_trigger": false},
+
+    {"id": "proxmox-pos", "skill": "proxmox", "prompt": "I'm setting up a 3-node Proxmox VE cluster with Ceph for HA and want to know how to configure fencing correctly before enabling HA Manager.", "should_trigger": true},
+    {"id": "proxmox-neg", "skill": "proxmox", "prompt": "I want to run a standalone Docker container on my Debian box, not a Proxmox LXC container — what's the setup?", "should_trigger": false},
+
+    {"id": "kvm-pos", "skill": "kvm", "prompt": "My Windows guest on KVM is dropping network throughput badly — I think it's using the emulated e1000 NIC instead of VirtIO. How do I switch it over with virsh?", "should_trigger": true},
+    {"id": "kvm-neg", "skill": "kvm", "prompt": "I need to harden SELinux policy on this RHEL 9 box for general compliance, nothing to do with the VMs it happens to host.", "should_trigger": false},
+
+    {"id": "citrix-pos", "skill": "citrix", "prompt": "XenMotion is refusing to migrate a VM because it has an ISO mounted from a local SR — what's the xe CLI fix?", "should_trigger": true},
+    {"id": "citrix-neg", "skill": "citrix", "prompt": "We're moving VMs from VMware to KVM using qemu-img — what's the conversion process end to end?", "should_trigger": false},
+
+    {"id": "nutanix-pos", "skill": "nutanix", "prompt": "Our Nutanix cluster's NCC health check is flagging CVM memory pressure — how do I check the Stargate/Cassandra service status with ncli?", "should_trigger": true},
+    {"id": "nutanix-neg", "skill": "nutanix", "prompt": "We're evaluating hyperconverged options in general — Nutanix vs vSAN vs Proxmox+Ceph — what are the tradeoffs?", "should_trigger": false},
+
+    {"id": "cloud-vms-pos", "skill": "cloud-vms", "prompt": "Our az vm stop command isn't reducing our Azure bill — the VM still shows as allocated. What's the right way to stop billing?", "should_trigger": true},
+    {"id": "cloud-vms-neg", "skill": "cloud-vms", "prompt": "We're designing our overall AWS account structure and VPC layout for a new landing zone — where do we start?", "should_trigger": false}
+  ]
+}

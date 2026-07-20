@@ -11,7 +11,7 @@
           "-bin"
         ]
       },
-      "notes": "skills/api-realtime/grpc/SKILL.md - \"Binary metadata keys must end with `-bin` or values will be corrupted.\""
+      "notes": "plugins/api-realtime/skills/grpc/SKILL.md - \"Binary metadata keys must end with `-bin` or values will be corrupted.\""
     },
     {
       "id": "websocket-close-code-abnormal",
@@ -20,7 +20,7 @@
         "type": "regex",
         "value": "\\b1006\\b"
       },
-      "notes": "skills/api-realtime/websocket/SKILL.md - \"1006 | Abnormal closure (no close frame -- TCP dropped)\""
+      "notes": "plugins/api-realtime/skills/websocket/SKILL.md - \"1006 | Abnormal closure (no close frame -- TCP dropped)\""
     },
     {
       "id": "sse-mime-type",
@@ -31,7 +31,7 @@
           "text/event-stream"
         ]
       },
-      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"MIME type: `text/event-stream`\""
+      "notes": "plugins/api-realtime/skills/overview/references/paradigm-realtime.md - \"MIME type: `text/event-stream`\""
     },
     {
       "id": "sse-close-status",
@@ -40,7 +40,7 @@
         "type": "regex",
         "value": "\\b204\\b"
       },
-      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Server sends `204 No Content` to permanently close stream\""
+      "notes": "plugins/api-realtime/skills/overview/references/paradigm-realtime.md - \"Server sends `204 No Content` to permanently close stream\""
     },
     {
       "id": "signalr-messagepack-protocol",
@@ -51,7 +51,7 @@
           "MessagePack"
         ]
       },
-      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Protocols: JSON (default) or MessagePack (~30-40% smaller)\""
+      "notes": "plugins/api-realtime/skills/overview/references/paradigm-realtime.md - \"Protocols: JSON (default) or MessagePack (~30-40% smaller)\""
     },
     {
       "id": "socketio-engineio-transport",
@@ -62,7 +62,7 @@
           "Engine.IO"
         ]
       },
-      "notes": "skills/api-realtime/references/paradigm-realtime.md - \"Built on Engine.IO transport layer (HTTP long-polling upgrade to WebSocket)\""
+      "notes": "plugins/api-realtime/skills/overview/references/paradigm-realtime.md - \"Built on Engine.IO transport layer (HTTP long-polling upgrade to WebSocket)\""
     },
     {
       "id": "graphql-http-200-errors",
@@ -71,7 +71,7 @@
         "type": "regex",
         "value": "\\b200\\b"
       },
-      "notes": "skills/api-realtime/references/concepts.md - \"GraphQL: Always returns HTTP 200 (even for errors).\""
+      "notes": "plugins/api-realtime/skills/overview/references/concepts.md - \"GraphQL: Always returns HTTP 200 (even for errors).\""
     },
     {
       "id": "odata-functions-actions",
@@ -83,7 +83,7 @@
           "Actions"
         ]
       },
-      "notes": "skills/api-realtime/references/paradigm-request-response.md - \"Functions (side-effect-free, GET) and Actions (side effects, POST)\""
+      "notes": "plugins/api-realtime/skills/overview/references/paradigm-request-response.md - \"Functions (side-effect-free, GET) and Actions (side effects, POST)\""
     },
     {
       "id": "graphql-script-introspection",
@@ -94,7 +94,7 @@
           "01-schema-introspection-audit.sh"
         ]
       },
-      "notes": "skills/api-realtime/graphql/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/api-realtime/skills/graphql/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

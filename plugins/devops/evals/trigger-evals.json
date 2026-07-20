@@ -1,0 +1,70 @@
+{
+  "plugin": "devops",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're a 40-person startup with zero CI/CD today — how should we think about building out a delivery pipeline across dev, staging, and prod?", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "My GitHub Actions workflow keeps failing on the deploy step with a permissions error, can you fix the YAML?", "should_trigger": false},
+
+    {"id": "cicd-pos", "skill": "cicd", "prompt": "We're evaluating GitHub Actions vs GitLab CI vs Jenkins for a new platform team — what's the tradeoff matrix?", "should_trigger": true},
+    {"id": "cicd-neg", "skill": "cicd", "prompt": "How do I add a matrix build strategy to my existing GitHub Actions workflow?", "should_trigger": false},
+
+    {"id": "config-mgmt-pos", "skill": "config-mgmt", "prompt": "Chef vs Ansible vs Puppet for managing 500 RHEL servers with compliance requirements — which should we pick?", "should_trigger": true},
+    {"id": "config-mgmt-neg", "skill": "config-mgmt", "prompt": "My Ansible playbook isn't idempotent, it reinstalls the same package every single run.", "should_trigger": false},
+
+    {"id": "gitops-pos", "skill": "gitops", "prompt": "Should we use ArgoCD or Flux for our multi-cluster Kubernetes GitOps rollout?", "should_trigger": true},
+    {"id": "gitops-neg", "skill": "gitops", "prompt": "My ArgoCD Application is stuck OutOfSync and selfHeal isn't kicking in, how do I debug it?", "should_trigger": false},
+
+    {"id": "iac-pos", "skill": "iac", "prompt": "Terraform vs Pulumi vs CloudFormation for a new greenfield AWS project — the team knows Python well.", "should_trigger": true},
+    {"id": "iac-neg", "skill": "iac", "prompt": "My terraform plan shows a resource being destroyed and recreated that shouldn't be — help me fix the config.", "should_trigger": false},
+
+    {"id": "github-actions-pos", "skill": "github-actions", "prompt": "My GitHub Actions workflow fails with 'Error: Resource not accessible by integration' when it tries to comment on a PR.", "should_trigger": true},
+    {"id": "github-actions-neg", "skill": "github-actions", "prompt": "What branch protection rules should we require before anything can merge to main?", "should_trigger": false},
+
+    {"id": "gitlab-ci-pos", "skill": "gitlab-ci", "prompt": "My .gitlab-ci.yml DAG pipeline is stuck at the test stage because the needs: dependencies aren't wired up right.", "should_trigger": true},
+    {"id": "gitlab-ci-neg", "skill": "gitlab-ci", "prompt": "We're deciding between GitLab CI and GitHub Actions for a new GitLab-hosted monorepo — which fits better?", "should_trigger": false},
+
+    {"id": "jenkins-pos", "skill": "jenkins", "prompt": "My Jenkinsfile shared library isn't loading, I keep getting 'unable to resolve class' in a Scripted Pipeline.", "should_trigger": true},
+    {"id": "jenkins-neg", "skill": "jenkins", "prompt": "Is Jenkins still the right call versus GitHub Actions for our air-gapped on-prem environment?", "should_trigger": false},
+
+    {"id": "azure-devops-pos", "skill": "azure-devops", "prompt": "My Azure Pipelines YAML needs a manual approval gate before the production environment stage runs — how do I configure that?", "should_trigger": true},
+    {"id": "azure-devops-neg", "skill": "azure-devops", "prompt": "We use Azure DevOps Boards already, but should our Azure infra be provisioned with Bicep or Terraform?", "should_trigger": false},
+
+    {"id": "circleci-pos", "skill": "circleci", "prompt": "My CircleCI orb isn't caching node_modules between runs, config.yml keeps re-downloading every dependency.", "should_trigger": true},
+    {"id": "circleci-neg", "skill": "circleci", "prompt": "Do you recommend CircleCI or GitHub Actions for a fast Docker-native monorepo build pipeline?", "should_trigger": false},
+
+    {"id": "terraform-pos", "skill": "terraform", "prompt": "Terraform state shows drift after someone manually changed an S3 bucket policy in the console — how do I reconcile it?", "should_trigger": true},
+    {"id": "terraform-neg", "skill": "terraform", "prompt": "We're deciding between Terraform and OpenTofu given the BSL license change — what actually differs now?", "should_trigger": false},
+
+    {"id": "opentofu-pos", "skill": "opentofu", "prompt": "How do I migrate an existing Terraform state file over to OpenTofu without breaking the S3 backend lock?", "should_trigger": true},
+    {"id": "opentofu-neg", "skill": "opentofu", "prompt": "What's the license difference between Terraform and OpenTofu, and which should a brand-new project pick?", "should_trigger": false},
+
+    {"id": "pulumi-pos", "skill": "pulumi", "prompt": "My Pulumi ComponentResource in TypeScript isn't exposing its outputs correctly to the parent stack.", "should_trigger": true},
+    {"id": "pulumi-neg", "skill": "pulumi", "prompt": "Our devs want real programming languages instead of HCL — is Pulumi or Terraform CDK more production-ready?", "should_trigger": false},
+
+    {"id": "cloudformation-pos", "skill": "cloudformation", "prompt": "My CloudFormation stack is stuck in UPDATE_ROLLBACK_FAILED — how do I recover it without deleting the stack?", "should_trigger": true},
+    {"id": "cloudformation-neg", "skill": "cloudformation", "prompt": "For an AWS-only shop, should we standardize on CloudFormation or Terraform for our IaC?", "should_trigger": false},
+
+    {"id": "bicep-pos", "skill": "bicep", "prompt": "My Bicep module deployment fails with a scope mismatch when deploying to a resource group instead of a subscription.", "should_trigger": true},
+    {"id": "bicep-neg", "skill": "bicep", "prompt": "Is Bicep or Terraform the better pick for an Azure-only shop that wants native Microsoft tooling?", "should_trigger": false},
+
+    {"id": "ansible-pos", "skill": "ansible", "prompt": "My Ansible playbook's variable precedence is off — group_vars aren't overriding the role defaults like I expect.", "should_trigger": true},
+    {"id": "ansible-neg", "skill": "ansible", "prompt": "Should we use Ansible or Terraform to provision our EC2 instances from scratch?", "should_trigger": false},
+
+    {"id": "chef-pos", "skill": "chef", "prompt": "My Chef cookbook convergence keeps failing during a knife bootstrap — the chef-client run errors on one resource.", "should_trigger": true},
+    {"id": "chef-neg", "skill": "chef", "prompt": "Which config management tool handles a 10,000+ node fleet best — Chef, Puppet, or SaltStack?", "should_trigger": false},
+
+    {"id": "puppet-pos", "skill": "puppet", "prompt": "My Puppet manifest won't compile — a Hiera lookup is returning nil for an environment-specific variable.", "should_trigger": true},
+    {"id": "puppet-neg", "skill": "puppet", "prompt": "We're comparing Puppet to Ansible for a Windows-heavy environment — which has better DSC integration?", "should_trigger": false},
+
+    {"id": "saltstack-pos", "skill": "saltstack", "prompt": "My Salt highstate is failing on one minion — salt-call state.apply shows a stack trace in the pillar render.", "should_trigger": true},
+    {"id": "saltstack-neg", "skill": "saltstack", "prompt": "For managing 15,000 servers with real-time execution needs, is SaltStack a better fit than Ansible?", "should_trigger": false},
+
+    {"id": "argocd-pos", "skill": "argocd", "prompt": "My ArgoCD ApplicationSet with a cluster generator isn't picking up newly registered clusters.", "should_trigger": true},
+    {"id": "argocd-neg", "skill": "argocd", "prompt": "Should our platform team standardize on ArgoCD or Flux for GitOps across multiple Kubernetes clusters?", "should_trigger": false},
+
+    {"id": "flux-pos", "skill": "flux", "prompt": "My Flux HelmRelease keeps failing reconciliation with a 'chart pull error' against our OCI registry.", "should_trigger": true},
+    {"id": "flux-neg", "skill": "flux", "prompt": "We want a built-in web UI for GitOps visibility across clusters — is ArgoCD or Flux the better fit?", "should_trigger": false},
+
+    {"id": "github-pos", "skill": "github", "prompt": "What branch protection ruleset should we require on main — status checks, required reviews, linear history?", "should_trigger": true},
+    {"id": "github-neg", "skill": "github", "prompt": "Our release process needs to auto-build and publish a Docker image whenever we push a semver tag — how do I wire that up in GitHub Actions?", "should_trigger": false}
+  ]
+}

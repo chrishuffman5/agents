@@ -1,24 +1,149 @@
 {
   "name": "domain-expert",
-  "description": "Expert knowledge across 18 IT domains (186+ technologies) with domain-specialist subagents for every domain plus task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
+  "description": "Domain-expert marketplace: one plugin per IT domain (186+ technologies), each with per-technology skills, version-specific references, diagnostic scripts, and a domain-specialist subagent.",
   "owner": {
     "name": "Christopher Huffman",
     "email": "50709169+chrishuffman5@users.noreply.github.com"
   },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
   "plugins": [
     {
-      "name": "domain-expert",
-      "description": "Expert knowledge across 18 IT domains (186+ technologies) with domain-specialist subagents for every domain plus task-oriented subagents for architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening.",
-      "version": "0.9.2",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/chrishuffman5/domain-expert.git"
-      },
-      "author": {
-        "name": "Christopher Huffman",
-        "email": "50709169+chrishuffman5@users.noreply.github.com"
-      },
-      "homepage": "https://github.com/chrishuffman5/domain-expert"
+      "name": "database",
+      "source": "./plugins/database",
+      "description": "29 database engines — PostgreSQL, SQL Server, Oracle, MySQL, MongoDB, Redis, Snowflake, DuckDB, and more — with version-specific references and a database-specialist agent.",
+      "category": "data",
+      "keywords": ["database", "sql", "nosql", "postgresql", "sql-server", "mongodb", "redis"]
+    },
+    {
+      "name": "os",
+      "source": "./plugins/os",
+      "description": "Operating systems — Windows Server/Client, RHEL, Ubuntu, Debian, SLES, Rocky/Alma, macOS — plus Hyper-V, failover clustering, SELinux, WSL, and an os-specialist agent.",
+      "category": "infrastructure",
+      "keywords": ["windows-server", "linux", "rhel", "ubuntu", "macos", "selinux", "hyper-v"]
+    },
+    {
+      "name": "networking",
+      "source": "./plugins/networking",
+      "description": "Routing/switching, firewalls, DNS, load balancing, VPN, SD-WAN, wireless, IPAM, and network automation across Cisco, Palo Alto, Fortinet, F5, and more, with a networking-specialist agent.",
+      "category": "infrastructure",
+      "keywords": ["networking", "firewall", "dns", "bgp", "load-balancer", "vpn", "sd-wan"]
+    },
+    {
+      "name": "security",
+      "source": "./plugins/security",
+      "description": "IAM, EDR, SIEM, secrets management, cloud/app/network security, DLP, GRC, and zero trust — Entra ID, CrowdStrike, Sentinel, Vault, Wiz, and more, with a security-specialist agent.",
+      "category": "security",
+      "keywords": ["security", "iam", "edr", "siem", "secrets", "zero-trust", "entra-id"]
+    },
+    {
+      "name": "devops",
+      "source": "./plugins/devops",
+      "description": "CI/CD, Infrastructure as Code, configuration management, GitOps, and version control — GitHub Actions, Terraform, Ansible, ArgoCD, Jenkins, and more, with a devops-specialist agent.",
+      "category": "devops",
+      "keywords": ["devops", "cicd", "terraform", "ansible", "github-actions", "gitops"]
+    },
+    {
+      "name": "containers",
+      "source": "./plugins/containers",
+      "description": "Kubernetes and managed K8s (EKS/AKS/GKE), Helm, OpenShift, Docker, Podman, containerd, and service mesh (Istio, Linkerd, Consul), with a containers-specialist agent.",
+      "category": "infrastructure",
+      "keywords": ["kubernetes", "docker", "helm", "istio", "containers", "openshift"]
+    },
+    {
+      "name": "cloud-platforms",
+      "source": "./plugins/cloud-platforms",
+      "description": "AWS, Azure, and GCP strategy and architecture — cloud selection, multi-cloud, Well-Architected design, migration patterns, FinOps — with a cloud-platforms-specialist agent.",
+      "category": "cloud",
+      "keywords": ["aws", "azure", "gcp", "cloud", "finops", "well-architected"]
+    },
+    {
+      "name": "frontend",
+      "source": "./plugins/frontend",
+      "description": "Frontend frameworks — React, Next.js, Vue, Nuxt, Angular, Svelte, Astro, Blazor, and more — with version-specific references and a frontend-specialist agent.",
+      "category": "development",
+      "keywords": ["react", "nextjs", "vue", "angular", "svelte", "frontend"]
+    },
+    {
+      "name": "backend",
+      "source": "./plugins/backend",
+      "description": "Backend web frameworks — ASP.NET Core, Spring Boot, Django, Rails, Express, FastAPI, NestJS, Flask, Go, Rust — with version-specific references and a backend-specialist agent.",
+      "category": "development",
+      "keywords": ["aspnet-core", "spring-boot", "django", "rails", "express", "fastapi", "backend"]
+    },
+    {
+      "name": "monitoring",
+      "source": "./plugins/monitoring",
+      "description": "Observability across metrics, logs, and traces — Prometheus, Grafana, ELK, OpenTelemetry, Datadog, Splunk, PagerDuty, and more — with a monitoring-specialist agent.",
+      "category": "operations",
+      "keywords": ["monitoring", "observability", "prometheus", "grafana", "opentelemetry", "datadog"]
+    },
+    {
+      "name": "storage",
+      "source": "./plugins/storage",
+      "description": "Enterprise and cloud storage — NetApp ONTAP, Pure, Dell, Ceph, MinIO, GlusterFS, S3, Azure Blob, GCS, Storage Spaces Direct — with a storage-specialist agent.",
+      "category": "infrastructure",
+      "keywords": ["storage", "san", "nas", "ceph", "s3", "netapp", "object-storage"]
+    },
+    {
+      "name": "virtualization",
+      "source": "./plugins/virtualization",
+      "description": "Hypervisors and VM platforms — VMware vSphere, Proxmox, KVM/QEMU, Nutanix, Citrix, and cloud VMs — with a virtualization-specialist agent.",
+      "category": "infrastructure",
+      "keywords": ["vmware", "proxmox", "kvm", "nutanix", "hypervisor", "virtualization"]
+    },
+    {
+      "name": "cli-scripting",
+      "source": "./plugins/cli-scripting",
+      "description": "CLI tools and scripting — PowerShell, Bash, Python, Node.js, AWS/Azure CLI, kubectl — with version-specific references and a cli-scripting-specialist agent.",
+      "category": "development",
+      "keywords": ["powershell", "bash", "python", "nodejs", "cli", "scripting", "kubectl"]
+    },
+    {
+      "name": "etl",
+      "source": "./plugins/etl",
+      "description": "Data pipelines and integration — Airflow, dbt, Spark, Kafka, SSIS, ADF, Glue, Fivetran, NiFi, and more — with version-specific references and an etl-specialist agent.",
+      "category": "data",
+      "keywords": ["etl", "airflow", "dbt", "spark", "kafka", "data-pipeline", "cdc"]
+    },
+    {
+      "name": "analytics",
+      "source": "./plugins/analytics",
+      "description": "BI and analytics — Power BI, Tableau, Looker, Qlik, SSAS/SSRS, Grafana, Superset, Metabase, ThoughtSpot — with an analytics-specialist agent.",
+      "category": "data",
+      "keywords": ["power-bi", "tableau", "looker", "dax", "bi", "analytics", "dashboards"]
+    },
+    {
+      "name": "api-realtime",
+      "source": "./plugins/api-realtime",
+      "description": "API design and real-time transports — REST, GraphQL, gRPC, OData, WebSocket, SSE, SignalR, Socket.IO — with an api-realtime-specialist agent.",
+      "category": "development",
+      "keywords": ["rest", "graphql", "grpc", "websocket", "sse", "api-design"]
+    },
+    {
+      "name": "messaging",
+      "source": "./plugins/messaging",
+      "description": "Message brokers and event streaming — Kafka, RabbitMQ, Pulsar, NATS, SQS/SNS, Azure Service Bus, GCP Pub/Sub, Redis Streams — with a messaging-specialist agent.",
+      "category": "data",
+      "keywords": ["kafka", "rabbitmq", "pubsub", "message-queue", "event-streaming", "dlq"]
+    },
+    {
+      "name": "mail-collab",
+      "source": "./plugins/mail-collab",
+      "description": "Email and collaboration — Exchange, Microsoft 365, Google Workspace, Postfix — mail flow, SPF/DKIM/DMARC, hybrid, migrations — with a mail-collab-specialist agent.",
+      "category": "operations",
+      "keywords": ["exchange", "m365", "google-workspace", "postfix", "email", "dmarc"]
+    },
+    {
+      "name": "domain-expert-core",
+      "source": "./plugins/domain-expert-core",
+      "description": "Cross-domain task agents — architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening — that orchestrate the installed domain plugins.",
+      "category": "productivity",
+      "keywords": ["architecture", "troubleshooting", "migration", "iac", "governance", "hardening"]
     }
-  ]
+  ],
+  "renames": {
+    "domain-expert": "domain-expert-core"
+  }
 }

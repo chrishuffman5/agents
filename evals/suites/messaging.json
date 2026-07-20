@@ -6,61 +6,61 @@
       "id": "rabbitmq-quorum-default-delivery-limit",
       "prompt": "According to the skills library, how many redeliveries is the default delivery limit on a RabbitMQ quorum queue before a message is dead-lettered?",
       "expected": { "type": "regex", "value": "\\b20\\b" },
-      "notes": "skills/messaging/rabbitmq/SKILL.md - \"Default delivery limit: 20 redeliveries before dead-lettering.\""
+      "notes": "plugins/messaging/skills/rabbitmq/SKILL.md - \"Default delivery limit: 20 redeliveries before dead-lettering.\""
     },
     {
       "id": "aws-sqs-fifo-high-throughput-max",
       "prompt": "According to the skills library, what is the maximum number of transactions per second SQS FIFO can reach when running in high-throughput mode?",
       "expected": { "type": "contains_all", "value": ["70,000"] },
-      "notes": "skills/messaging/aws-sqs-sns/SKILL.md - \"High-throughput mode: up to 70,000 transactions/s.\""
+      "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - \"High-throughput mode: up to 70,000 transactions/s.\""
     },
     {
       "id": "nats-jetstream-consume-once-retention-policy",
       "prompt": "According to the skills library, which NATS JetStream retention policy provides consume-once semantics where a message is removed once it has been consumed?",
       "expected": { "type": "contains_all", "value": ["WorkQueuePolicy"] },
-      "notes": "skills/messaging/nats/SKILL.md - \"WorkQueuePolicy (consume-once)\""
+      "notes": "plugins/messaging/skills/nats/SKILL.md - \"WorkQueuePolicy (consume-once)\""
     },
     {
       "id": "kafka-share-groups-ga-version",
       "prompt": "According to the skills library, in which Kafka release did Share Groups reach general availability (GA)?",
       "expected": { "type": "regex", "value": "\\b4\\.2\\b" },
-      "notes": "skills/messaging/kafka/SKILL.md - \"GA in Kafka 4.2; preview in 4.1; EA in 4.0\""
+      "notes": "plugins/messaging/skills/kafka/SKILL.md - \"GA in Kafka 4.2; preview in 4.1; EA in 4.0\""
     },
     {
       "id": "azure-service-bus-dedup-window-max",
       "prompt": "According to the skills library, what is the maximum message-ID deduplication window supported by Azure Service Bus duplicate detection?",
       "expected": { "type": "contains_all", "value": ["7 days"] },
-      "notes": "skills/messaging/references/concepts.md - \"requiresDuplicateDetection with message ID deduplication window (up to 7 days).\""
+      "notes": "plugins/messaging/skills/overview/references/concepts.md - \"requiresDuplicateDetection with message ID deduplication window (up to 7 days).\""
     },
     {
       "id": "aws-sqs-fifo-dedup-window",
       "prompt": "According to the skills library, what deduplication window does SQS FIFO apply to MessageDeduplicationId for exactly-once processing?",
       "expected": { "type": "regex", "value": "5[- ]minute" },
-      "notes": "skills/messaging/aws-sqs-sns/SKILL.md - \"Exactly-once processing via MessageDeduplicationId (5-minute window).\""
+      "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - \"Exactly-once processing via MessageDeduplicationId (5-minute window).\""
     },
     {
       "id": "rabbitmq-khepri-metadata-store",
       "prompt": "According to the skills library, what Raft-based metadata store replaces Mnesia as the default for new RabbitMQ deployments in 4.2?",
       "expected": { "type": "contains_all", "value": ["Khepri"] },
-      "notes": "skills/messaging/rabbitmq/SKILL.md - \"Khepri is a Raft-based, tree-structured replicated database replacing Mnesia for metadata\""
+      "notes": "plugins/messaging/skills/rabbitmq/SKILL.md - \"Khepri is a Raft-based, tree-structured replicated database replacing Mnesia for metadata\""
     },
     {
       "id": "broker-store-and-forward-model",
       "prompt": "According to the skills library, what delivery model do traditional message brokers implement whereby the broker receives messages, stores them temporarily, and forwards them to consumers?",
       "expected": { "type": "contains_all", "value": ["store-and-forward"] },
-      "notes": "skills/messaging/references/paradigm-broker.md - \"Traditional message brokers implement a store-and-forward model\""
+      "notes": "plugins/messaging/skills/overview/references/paradigm-broker.md - \"Traditional message brokers implement a store-and-forward model\""
     },
     {
       "id": "kafka-script-consumer-lag",
       "prompt": "According to the skills library, which shipped Kafka diagnostic script reports lag across all consumer groups and detects partitions with no active consumer?",
       "expected": { "type": "contains_all", "value": ["01-consumer-lag.sh"] },
-      "notes": "skills/messaging/kafka/SKILL.md Diagnostic Scripts section - \"scripts/01-consumer-lag.sh -- Lag across all consumer groups with dead-consumer detection\" (script-retrieval task)"
+      "notes": "plugins/messaging/skills/kafka/SKILL.md Diagnostic Scripts section - \"scripts/01-consumer-lag.sh -- Lag across all consumer groups with dead-consumer detection\" (script-retrieval task)"
     },
     {
       "id": "sqs-script-redrive-audit",
       "prompt": "According to the skills library, which shipped SQS audit script identifies queues lacking dead-letter configuration and checks receive-count sanity?",
       "expected": { "type": "contains_all", "value": ["02-redrive-config-audit.sh"] },
-      "notes": "skills/messaging/aws-sqs-sns/SKILL.md Diagnostic Scripts section - \"scripts/02-redrive-config-audit.sh -- Queues without DLQs and maxReceiveCount sanity\" (script-retrieval task)"
+      "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md Diagnostic Scripts section - \"scripts/02-redrive-config-audit.sh -- Queues without DLQs and maxReceiveCount sanity\" (script-retrieval task)"
     }
   ]
 }

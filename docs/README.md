@@ -22,7 +22,7 @@ DASHBOARD_STAMP="$(date -u +%Y-%m-%d)" python evals/build-dashboard.py
 This rewrites `docs/results.js` from:
 - `evals/results/*-summary.csv` — newest agent + baseline run per suite
 - `evals/suites/*.json` — task counts
-- `skills/<domain>/**/scripts/*` — live script coverage counts
+- `plugins/<domain>/skills/**/scripts/*` — live script coverage counts
 
 The page reads `results.js` via a `<script>` tag, so it renders both over `file://` (double-click `index.html`) and
 over GitHub Pages — no local server or fetch/CORS needed.

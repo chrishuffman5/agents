@@ -11,7 +11,7 @@
           "Vitest"
         ]
       },
-      "notes": "skills/frontend/angular/21/SKILL.md - \"Angular 21 replaces Karma with Vitest as the default unit test runner.\""
+      "notes": "plugins/frontend/skills/angular/references/versions/21.md - \"Angular 21 replaces Karma with Vitest as the default unit test runner.\""
     },
     {
       "id": "angular-hammerjs-removed",
@@ -22,7 +22,7 @@
           "HammerJS"
         ]
       },
-      "notes": "skills/frontend/angular/21/SKILL.md - \"HammerJS touch gesture support is fully removed.\""
+      "notes": "plugins/frontend/skills/angular/references/versions/21.md - \"HammerJS touch gesture support is fully removed.\""
     },
     {
       "id": "nextjs-proxy-ts-replaces-middleware",
@@ -33,7 +33,7 @@
           "proxy.ts"
         ]
       },
-      "notes": "skills/frontend/nextjs/SKILL.md - \"v16 | Node.js Runtime (full APIs) | proxy.ts at project root\""
+      "notes": "plugins/frontend/skills/nextjs/references/versions/16.md - \"v16 | Node.js Runtime (full APIs) | proxy.ts at project root\""
     },
     {
       "id": "nextjs-fetch-default-nostore",
@@ -44,7 +44,7 @@
           "no-store"
         ]
       },
-      "notes": "skills/frontend/nextjs/SKILL.md - \"v15+ does NOT cache by default (no-store).\""
+      "notes": "plugins/frontend/skills/nextjs/references/versions/15.md - \"v15+ does NOT cache by default (no-store).\""
     },
     {
       "id": "nextjs-use-cache-directive",
@@ -55,7 +55,7 @@
           "use cache"
         ]
       },
-      "notes": "skills/frontend/nextjs/SKILL.md - \"In v16, the 'use cache' directive provides fine-grained, function-level caching via Cache Components\""
+      "notes": "plugins/frontend/skills/nextjs/references/versions/16.md - \"In v16, the 'use cache' directive provides fine-grained, function-level caching via Cache Components\""
     },
     {
       "id": "react-19-new-hooks",
@@ -67,7 +67,7 @@
           "useOptimistic"
         ]
       },
-      "notes": "skills/frontend/react/SKILL.md - \"React 19 hooks: useActionState, useOptimistic, useFormStatus, use().\""
+      "notes": "plugins/frontend/skills/react/references/versions/19.md - \"React 19 hooks: useActionState, useOptimistic, useFormStatus, use().\""
     },
     {
       "id": "vue-3-5-reactivity-memory",
@@ -78,7 +78,7 @@
           "56%"
         ]
       },
-      "notes": "skills/frontend/vue/SKILL.md - \"Vue 3.5 ships a new reactivity engine with 56% memory reduction\""
+      "notes": "plugins/frontend/skills/vue/references/versions/3.5.md - \"Vue 3.5 ships a new reactivity engine with 56% memory reduction\""
     },
     {
       "id": "vue-vapor-alien-signals",
@@ -89,7 +89,7 @@
           "Alien Signals"
         ]
       },
-      "notes": "skills/frontend/vue/SKILL.md - \"Vapor Mode (3.6 beta): no-VDOM compilation, fine-grained DOM updates, Alien Signals engine\""
+      "notes": "plugins/frontend/skills/vue/SKILL.md - \"Vapor Mode (3.6 beta): no-VDOM compilation, fine-grained DOM updates, Alien Signals engine\""
     },
     {
       "id": "nextjs-script-build-audit",
@@ -100,7 +100,7 @@
           "01-build-and-config-audit.sh"
         ]
       },
-      "notes": "skills/frontend/nextjs/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/frontend/skills/nextjs/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

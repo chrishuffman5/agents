@@ -1,0 +1,55 @@
+{
+  "plugin": "containers",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're starting a new product and trying to decide whether to containerize our services at all, and if so what orchestration platform to run them on.", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "My Kubernetes deployment keeps crash-looping and the pod shows OOMKilled -- can you help me debug it?", "should_trigger": false},
+
+    {"id": "orchestration-pos", "skill": "orchestration", "prompt": "Should we run self-managed Kubernetes, EKS, or OpenShift for our new regulated-industry platform?", "should_trigger": true},
+    {"id": "orchestration-neg", "skill": "orchestration", "prompt": "How do I fix a pod stuck in CrashLoopBackOff after a kubectl rollout?", "should_trigger": false},
+
+    {"id": "runtimes-pos", "skill": "runtimes", "prompt": "Docker vs Podman vs containerd -- which container runtime should we standardize on for our CI runners?", "should_trigger": true},
+    {"id": "runtimes-neg", "skill": "runtimes", "prompt": "How do I write a multi-stage Dockerfile that minimizes the final image size?", "should_trigger": false},
+
+    {"id": "service-mesh-pos", "skill": "service-mesh", "prompt": "Do we actually need a service mesh, or is Kubernetes NetworkPolicy enough for our 8-service app?", "should_trigger": true},
+    {"id": "service-mesh-neg", "skill": "service-mesh", "prompt": "How do I configure an Istio VirtualService to canary 10% of traffic to v2?", "should_trigger": false},
+
+    {"id": "aks-pos", "skill": "aks", "prompt": "How do I set up AKS Automatic with workload identity for our Azure-hosted app?", "should_trigger": true},
+    {"id": "aks-neg", "skill": "aks", "prompt": "How do I configure EKS Pod Identity so my pods get IAM permissions without IRSA?", "should_trigger": false},
+
+    {"id": "eks-pos", "skill": "eks", "prompt": "We need Karpenter configured on EKS with IRSA so pods get scoped AWS permissions.", "should_trigger": true},
+    {"id": "eks-neg", "skill": "eks", "prompt": "How does GKE Autopilot handle node provisioning and billing compared to Standard mode?", "should_trigger": false},
+
+    {"id": "gke-pos", "skill": "gke", "prompt": "What's the difference between GKE Autopilot and Standard mode for our workload billing?", "should_trigger": true},
+    {"id": "gke-neg", "skill": "gke", "prompt": "How do I enable AKS Automatic mode and Node Auto Provisioning on Azure?", "should_trigger": false},
+
+    {"id": "helm-pos", "skill": "helm", "prompt": "My Helm chart's values.yaml isn't overriding the subchart defaults -- how does dependency value merging work?", "should_trigger": true},
+    {"id": "helm-neg", "skill": "helm", "prompt": "How do I write a plain Kubernetes Deployment manifest with resource requests and limits?", "should_trigger": false},
+
+    {"id": "kubernetes-pos", "skill": "kubernetes", "prompt": "My pod is stuck in ImagePullBackOff and I can't figure out why -- how do I debug it with kubectl?", "should_trigger": true},
+    {"id": "kubernetes-neg", "skill": "kubernetes", "prompt": "How do I set up Karpenter node provisioning specifically on EKS with EC2NodeClass?", "should_trigger": false},
+
+    {"id": "openshift-pos", "skill": "openshift", "prompt": "How do Routes differ from Ingress in OpenShift, and how do I set up TLS re-encrypt termination?", "should_trigger": true},
+    {"id": "openshift-neg", "skill": "openshift", "prompt": "How do I create a Kubernetes Gateway API HTTPRoute for path-based routing?", "should_trigger": false},
+
+    {"id": "rancher-pos", "skill": "rancher", "prompt": "We manage 40 downstream RKE2 clusters through Rancher -- how does Fleet GitOps sync configuration across all of them?", "should_trigger": true},
+    {"id": "rancher-neg", "skill": "rancher", "prompt": "How do I create a Kubernetes ClusterRole and bind it to a ServiceAccount for least-privilege RBAC?", "should_trigger": false},
+
+    {"id": "containerd-pos", "skill": "containerd", "prompt": "How does containerd's snapshotter architecture work, and how do I inspect images with nerdctl without Docker installed?", "should_trigger": true},
+    {"id": "containerd-neg", "skill": "containerd", "prompt": "How do I speed up my Dockerfile build with BuildKit cache mounts?", "should_trigger": false},
+
+    {"id": "docker-pos", "skill": "docker", "prompt": "How do I write a multi-stage Dockerfile with BuildKit cache mounts to speed up npm install?", "should_trigger": true},
+    {"id": "docker-neg", "skill": "docker", "prompt": "How do I turn a running Podman container into a Quadlet systemd unit that starts on boot?", "should_trigger": false},
+
+    {"id": "podman-pos", "skill": "podman", "prompt": "How do I turn a running Podman container into a Quadlet systemd unit that auto-updates from the registry?", "should_trigger": true},
+    {"id": "podman-neg", "skill": "podman", "prompt": "I'm on RHEL 9 -- which dnf module provides Podman, and how do SELinux contexts affect my bind mounts?", "should_trigger": false},
+
+    {"id": "consul-pos", "skill": "consul", "prompt": "How do Consul intentions control service-to-service access across our hybrid VM and Kubernetes deployment?", "should_trigger": true},
+    {"id": "consul-neg", "skill": "consul", "prompt": "How do I write an Istio AuthorizationPolicy that only lets the frontend service call the API?", "should_trigger": false},
+
+    {"id": "istio-pos", "skill": "istio", "prompt": "How do I migrate from Istio sidecar mode to ambient mesh with ztunnel and waypoint proxies?", "should_trigger": true},
+    {"id": "istio-neg", "skill": "istio", "prompt": "How does Linkerd's zero-config mTLS compare to manually managing certificates?", "should_trigger": false},
+
+    {"id": "linkerd-pos", "skill": "linkerd", "prompt": "Why isn't my Linkerd ServiceProfile applying retry budgets to one specific route?", "should_trigger": true},
+    {"id": "linkerd-neg", "skill": "linkerd", "prompt": "How do I set up mesh gateways for multi-datacenter Consul federation?", "should_trigger": false}
+  ]
+}

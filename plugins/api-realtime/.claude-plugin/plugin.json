@@ -1,0 +1,10 @@
+{
+  "name": "api-realtime",
+  "description": "API design and real-time communication expertise across 8 technologies: REST, GraphQL, gRPC, OData, WebSocket, Server-Sent Events, SignalR, and Socket.IO. Covers protocol selection, contract design, schema evolution, and real-time transport architecture.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["api", "rest", "graphql", "grpc", "odata", "websocket", "sse", "signalr", "socketio", "real-time"]
+}

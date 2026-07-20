@@ -1,0 +1,22 @@
+{
+  "name": "cloud-platforms",
+  "description": "Vendor-neutral cloud architecture and strategy across AWS, Azure, and GCP — cloud selection, multi-cloud strategy, cross-cloud service mapping, Well-Architected reviews, migration (7 Rs), and FinOps cost optimization, plus per-provider service-selection expertise for all three hyperscalers.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Christopher Huffman",
+    "email": "50709169+chrishuffman5@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": [
+    "cloud",
+    "aws",
+    "azure",
+    "gcp",
+    "multi-cloud",
+    "finops",
+    "well-architected",
+    "cloud-migration"
+  ]
+}

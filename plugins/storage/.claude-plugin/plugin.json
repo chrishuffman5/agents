@@ -1,0 +1,10 @@
+{
+  "name": "storage",
+  "description": "Expert knowledge across 12 storage technologies -- NetApp ONTAP, Pure Storage FlashArray, Dell PowerStore/Unity, HPE Alletra, Ceph, MinIO, GlusterFS, Storage Spaces Direct, AWS S3, Azure Blob, and Google Cloud Storage -- with a domain specialist agent for platform selection, capacity planning, data protection design, and performance troubleshooting across enterprise arrays, software-defined storage, and cloud object storage.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["storage", "san", "nas", "object-storage", "netapp", "ceph", "s3", "block-storage", "data-protection"]
+}

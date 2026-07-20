@@ -12,7 +12,7 @@
           "5 minutes"
         ]
       },
-      "notes": "skills/monitoring/references/concepts.md - \"Fast burn: 14x rate over 1 hour AND 14x rate over 5 minutes -- page\""
+      "notes": "plugins/monitoring/skills/overview/references/concepts.md - \"Fast burn: 14x rate over 1 hour AND 14x rate over 5 minutes -- page\""
     },
     {
       "id": "monitoring-red-method-author",
@@ -23,7 +23,7 @@
           "Tom Wilkie"
         ]
       },
-      "notes": "skills/monitoring/references/concepts.md - \"## RED Method (Tom Wilkie)\""
+      "notes": "plugins/monitoring/skills/overview/references/concepts.md - \"## RED Method (Tom Wilkie)\""
     },
     {
       "id": "monitoring-slo-999-downtime-month",
@@ -34,7 +34,7 @@
           "43.8 minutes"
         ]
       },
-      "notes": "skills/monitoring/references/concepts.md - \"| 99.9% | 43.8 minutes | 8.76 hours |\""
+      "notes": "plugins/monitoring/skills/overview/references/concepts.md - \"| 99.9% | 43.8 minutes | 8.76 hours |\""
     },
     {
       "id": "prometheus-tsdb-xor-compression",
@@ -46,7 +46,7 @@
           "1.3"
         ]
       },
-      "notes": "skills/monitoring/prometheus/SKILL.md - \"XOR compression achieves ~1.3 bytes/sample. Retention by time (default 15d) or size.\""
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md - \"XOR compression achieves ~1.3 bytes/sample. Retention by time (default 15d) or size.\""
     },
     {
       "id": "prometheus-default-retention",
@@ -57,7 +57,7 @@
           "15 days"
         ]
       },
-      "notes": "skills/monitoring/prometheus/SKILL.md - \"Default retention is 15 days.\""
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md - \"Default retention is 15 days.\""
     },
     {
       "id": "grafana-mute-timings-vs-silences",
@@ -68,7 +68,7 @@
           "mute timings"
         ]
       },
-      "notes": "skills/monitoring/grafana/SKILL.md - \"Use mute timings, not silences -- Mute timings are recurring and policy-based.\""
+      "notes": "plugins/monitoring/skills/grafana/SKILL.md - \"Use mute timings, not silences -- Mute timings are recurring and policy-based.\""
     },
     {
       "id": "opentelemetry-memory-limiter-first-processor",
@@ -79,7 +79,7 @@
           "memory_limiter"
         ]
       },
-      "notes": "skills/monitoring/opentelemetry/SKILL.md - \"The memory_limiter processor must be the first processor in every Collector pipeline.\""
+      "notes": "plugins/monitoring/skills/opentelemetry/SKILL.md - \"The memory_limiter processor must be the first processor in every Collector pipeline.\""
     },
     {
       "id": "datadog-distribution-global-percentiles",
@@ -88,7 +88,7 @@
         "type": "regex",
         "value": "\\bDistribution\\b"
       },
-      "notes": "skills/monitoring/datadog/SKILL.md - \"Distribution | name:value|d | Global percentiles across all agents\""
+      "notes": "plugins/monitoring/skills/datadog/SKILL.md - \"Distribution | name:value|d | Global percentiles across all agents\""
     },
     {
       "id": "prometheus-script-cardinality",
@@ -99,7 +99,7 @@
           "02-cardinality-audit.sh"
         ]
       },
-      "notes": "skills/monitoring/prometheus/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

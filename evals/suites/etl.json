@@ -6,61 +6,61 @@
       "id": "airflow-standard-provider-package",
       "prompt": "According to the skills library, in Airflow 3 which provider package did core operators like BashOperator, PythonOperator, and FileSensor move to?",
       "expected": { "type": "contains_all", "value": ["apache-airflow-providers-standard"] },
-      "notes": "skills/etl/orchestration/airflow/SKILL.md - \"Core operators (BashOperator, PythonOperator, FileSensor) moved to `apache-airflow-providers-standard`\""
+      "notes": "plugins/etl/skills/airflow/references/versions/3.x.md - \"Core operators (BashOperator, PythonOperator, FileSensor) moved to `apache-airflow-providers-standard`\""
     },
     {
       "id": "airflow-xcom-size-thresholds",
       "prompt": "According to the skills library, what XCom value size does Airflow best practice recommend staying under for reliability, and what size causes performance degradation?",
       "expected": { "type": "contains_all", "value": ["48 KB", "1 MB"] },
-      "notes": "skills/etl/orchestration/airflow/SKILL.md - \"Keep values small -- Under 48 KB for reliability; over 1 MB causes performance degradation\""
+      "notes": "plugins/etl/skills/airflow/references/best-practices.md - \"Keep values small -- Under 48 KB for reliability; over 1 MB causes performance degradation\""
     },
     {
       "id": "dbt-core-large-table-incremental-strategy",
       "prompt": "According to the skills library, which dbt incremental strategy is recommended for a large table over 100M rows with a unique key, and how much faster is it than merge at scale?",
       "expected": { "type": "contains_all", "value": ["delete+insert", "3.4x"] },
-      "notes": "skills/etl/transformation/dbt-core/SKILL.md - \"Large table (>100M rows) with unique key | `delete+insert` | 3.4x faster than merge at scale\""
+      "notes": "plugins/etl/skills/dbt-core/SKILL.md - \"Large table (>100M rows) with unique key | `delete+insert` | 3.4x faster than merge at scale\""
     },
     {
       "id": "dbt-core-mesh-default-access-modifier",
       "prompt": "According to the skills library, in dbt Mesh which access modifier is the default for a model, and what scope does it grant?",
       "expected": { "type": "contains_all", "value": ["protected", "same project"] },
-      "notes": "skills/etl/transformation/dbt-core/SKILL.md - \"Access modifiers: `private` (same group), `protected` (same project, default), `public` (any project)\""
+      "notes": "plugins/etl/skills/dbt-core/SKILL.md - \"Access modifiers: `private` (same group), `protected` (same project, default), `public` (any project)\""
     },
     {
       "id": "spark-aqe-default-version",
       "prompt": "According to the skills library, since which Apache Spark version has Adaptive Query Execution been enabled by default?",
       "expected": { "type": "regex", "value": "\\b3\\.2\\b" },
-      "notes": "skills/etl/transformation/spark/SKILL.md - \"AQE (Adaptive Query Execution): re-optimizes plans at runtime using actual data statistics. Enabled by default since 3.2.\""
+      "notes": "plugins/etl/skills/spark/SKILL.md - \"AQE (Adaptive Query Execution): re-optimizes plans at runtime using actual data statistics. Enabled by default since 3.2.\""
     },
     {
       "id": "spark-pandas-udf-speedup",
       "prompt": "According to the skills library, how much faster are Pandas UDFs than plain Python UDFs in Spark?",
       "expected": { "type": "contains_all", "value": ["10-100x"] },
-      "notes": "skills/etl/transformation/spark/SKILL.md - \"Use Pandas UDF (10-100x faster than Python UDF) when custom logic is unavoidable\""
+      "notes": "plugins/etl/skills/spark/references/best-practices.md - \"Use Pandas UDF (10-100x faster than Python UDF) when custom logic is unavoidable\""
     },
     {
       "id": "adf-tumbling-window-trigger",
       "prompt": "According to the skills library, which Azure Data Factory trigger type is stateful, supports backfill of historical periods, has built-in retry policies, and supports trigger-to-trigger dependencies?",
       "expected": { "type": "contains_all", "value": ["Tumbling Window"] },
-      "notes": "skills/etl/integration/adf/SKILL.md - \"Tumbling Window is the most powerful trigger type: retains state, supports backfill of historical periods, has built-in retry policies, and supports trigger-to-trigger dependencies\""
+      "notes": "plugins/etl/skills/adf/SKILL.md - \"Tumbling Window is the most powerful trigger type: retains state, supports backfill of historical periods, has built-in retry policies, and supports trigger-to-trigger dependencies\""
     },
     {
       "id": "duckdb-etl-spark-replacement-threshold",
-      "prompt": "According to the skills library, under what dataset size does the ETL guidance say DuckDB on a single machine can replace Spark, processing data faster without a distributed cluster?",
+      "prompt": "According to the skills library, under what dataset size does the DuckDB skill's ETL guidance say DuckDB on a single machine can replace Spark, processing data faster without a distributed cluster?",
       "expected": { "type": "contains_all", "value": ["200 GB"] },
-      "notes": "skills/etl/duckdb-etl/SKILL.md - \"Datasets under ~200 GB do not need a distributed cluster. DuckDB on a single machine processes them faster than Spark\""
+      "notes": "plugins/etl/skills/duckdb/SKILL.md - \"Datasets under ~200 GB do not need a distributed cluster. DuckDB on a single machine processes them faster than Spark\""
     },
     {
       "id": "airflow-script-scheduler-lag",
       "prompt": "According to the skills library, which shipped Airflow diagnostic script measures queued-to-started latency to detect scheduler or executor saturation?",
       "expected": { "type": "contains_all", "value": ["03-scheduler-lag.sql"] },
-      "notes": "skills/etl/orchestration/airflow/SKILL.md Diagnostic Scripts section - \"scripts/03-scheduler-lag.sql -- Queued-to-started latency (executor/scheduler saturation)\" (script-retrieval task)"
+      "notes": "plugins/etl/skills/airflow/SKILL.md Diagnostic Scripts section - \"scripts/03-scheduler-lag.sql -- Queued-to-started latency (executor/scheduler saturation)\" (script-retrieval task)"
     },
     {
       "id": "spark-script-skew-detector",
       "prompt": "According to the skills library, which shipped Spark diagnostic script ranks stages by duration and exposes task-time quantiles to detect data skew?",
       "expected": { "type": "contains_all", "value": ["03-slow-stages.sh"] },
-      "notes": "skills/etl/transformation/spark/SKILL.md Diagnostic Scripts section - \"scripts/03-slow-stages.sh -- Slowest stages plus task-time quantiles (the skew detector)\" (script-retrieval task)"
+      "notes": "plugins/etl/skills/spark/SKILL.md Diagnostic Scripts section - \"scripts/03-slow-stages.sh -- Slowest stages plus task-time quantiles (the skew detector)\" (script-retrieval task)"
     }
   ]
 }

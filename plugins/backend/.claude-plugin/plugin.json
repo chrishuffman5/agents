@@ -1,0 +1,10 @@
+{
+  "name": "backend",
+  "description": "Expert knowledge across 10 backend web framework and REST API technologies -- ASP.NET Core, Spring Boot, Django, Rails, Express, NestJS, FastAPI, Flask, Go web frameworks, and Rust web frameworks -- with a domain specialist agent for API design, authentication, ORM/data access, and framework selection.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["backend", "rest-api", "aspnet-core", "spring-boot", "django", "rails", "express", "fastapi", "nestjs"]
+}

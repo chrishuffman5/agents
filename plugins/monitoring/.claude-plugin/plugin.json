@@ -1,0 +1,10 @@
+{
+  "name": "monitoring",
+  "description": "Vendor-neutral observability and monitoring expertise across 11 technologies: Prometheus, Grafana, ELK (Elasticsearch/Kibana), OpenTelemetry, Datadog, New Relic, Dynatrace, Splunk, Zabbix, Nagios, and PagerDuty. Covers metrics, logs, traces, SLO/alerting design, and incident response.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["monitoring", "observability", "prometheus", "grafana", "elk", "opentelemetry", "datadog", "splunk", "sre", "alerting"]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "etl",
+  "description": "ETL, data integration, and data pipeline expertise across 19 technologies -- Airflow, SSIS, dbt Core, dbt Cloud, Spark, Kafka, Azure Data Factory, AWS Glue, Fivetran, Informatica, NiFi, Talend, Synapse Pipelines, and DuckDB -- covering orchestration, transformation, streaming, and integration/EL patterns.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["etl", "elt", "data-pipeline", "data-integration", "airflow", "dbt", "spark", "kafka"]
+}

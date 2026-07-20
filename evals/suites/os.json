@@ -4,39 +4,39 @@
   "tasks": [
     {
       "id": "ubuntu-versions",
-      "prompt": "Which Ubuntu LTS versions have dedicated version directories in the skills library? List them all.",
+      "prompt": "Which Ubuntu LTS versions have dedicated version reference files in the skills library? List them all.",
       "expected": { "type": "contains_all", "value": ["20.04", "22.04", "24.04", "26.04"] },
-      "notes": "Ground truth: skills/os/ubuntu/ contains 20.04, 22.04, 24.04, 26.04"
+      "notes": "Ground truth: plugins/os/skills/ubuntu/references/versions/ contains 20.04.md, 22.04.md, 24.04.md, 26.04.md"
     },
     {
-      "id": "rhel-topics",
-      "prompt": "Besides version directories, references, and scripts, which special topic subdirectories exist under skills/os/rhel/?",
-      "expected": { "type": "contains_all", "value": ["selinux", "podman"] },
-      "notes": "Ground truth: skills/os/rhel/ contains selinux/ and podman/ topic dirs"
+      "id": "rhel-related-skills",
+      "prompt": "According to the operating systems overview skill's table of OS skills, which two related skills are listed alongside RHEL for SELinux and Podman coverage?",
+      "expected": { "type": "contains_all", "value": ["selinux", "rhel-podman"] },
+      "notes": "Ground truth: plugins/os/skills/overview/SKILL.md table row \"RHEL | `rhel` | 8, 9, 10 | `selinux`, `rhel-podman`\" -- these are now sibling skills under plugins/os/skills/, not subdirectories of rhel/"
     },
     {
       "id": "winserver-versions",
-      "prompt": "Which Windows Server versions are documented in the skills library?",
+      "prompt": "Which Windows Server versions have dedicated version reference files in the skills library?",
       "expected": { "type": "contains_all", "value": ["2016", "2019", "2022", "2025"] },
-      "notes": "Ground truth: skills/os/windows-server/ contains 2016, 2019, 2022, 2025"
+      "notes": "Ground truth: plugins/os/skills/windows-server/references/versions/ contains 2016.md, 2019.md, 2022.md, 2025.md"
     },
     {
-      "id": "winserver-topics",
-      "prompt": "Which special topic subdirectories does the Windows Server skill tree include beyond version directories, references, and scripts?",
+      "id": "winserver-related-skills",
+      "prompt": "According to the operating systems overview skill's table of OS skills, which two related skills does it list alongside Windows Server?",
       "expected": { "type": "contains_all", "value": ["failover-clustering", "hyper-v"] },
-      "notes": "Ground truth: skills/os/windows-server/ contains failover-clustering/ and hyper-v/"
+      "notes": "Ground truth: plugins/os/skills/overview/SKILL.md table row \"Windows Server | `windows-server` | 2016, 2019, 2022, 2025 | `failover-clustering`, `hyper-v`\" -- sibling skills under plugins/os/skills/"
     },
     {
-      "id": "sles-topics",
-      "prompt": "Which special topic subdirectories exist under skills/os/sles/ beyond the service-pack version directories?",
-      "expected": { "type": "contains_all", "value": ["btrfs-snapper", "ha-extension"] },
-      "notes": "Ground truth: skills/os/sles/ contains btrfs-snapper/ and ha-extension/"
+      "id": "sles-related-skills",
+      "prompt": "According to the operating systems overview skill's table of OS skills, which two related skills does it list alongside SLES?",
+      "expected": { "type": "contains_all", "value": ["btrfs-snapper", "sles-ha-extension"] },
+      "notes": "Ground truth: plugins/os/skills/overview/SKILL.md table row \"SLES | `sles` | 15-sp5, 15-sp6 | `btrfs-snapper`, `sles-ha-extension`\" -- sibling skills under plugins/os/skills/"
     },
     {
-      "id": "macos-topics",
-      "prompt": "List the special topic subdirectories in the macOS skill tree (beyond version directories, references, and scripts).",
-      "expected": { "type": "contains_all", "value": ["developer-toolchain", "mdm-deployment", "platform-sso"] },
-      "notes": "Ground truth: skills/os/macos/ contains developer-toolchain/, mdm-deployment/, platform-sso/"
+      "id": "macos-related-skills",
+      "prompt": "According to the operating systems overview skill's table of OS skills, which three related skills does it list alongside macOS?",
+      "expected": { "type": "contains_all", "value": ["macos-developer-toolchain", "macos-mdm-deployment", "macos-platform-sso"] },
+      "notes": "Ground truth: plugins/os/skills/overview/SKILL.md table row \"macOS | `macos` | 14, 15, 26 | `macos-developer-toolchain`, `macos-mdm-deployment`, `macos-platform-sso`\" -- sibling skills under plugins/os/skills/"
     }
   ]
 }

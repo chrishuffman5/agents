@@ -9,7 +9,7 @@
         "type": "regex",
         "value": "\\b22\\b"
       },
-      "notes": "skills/devops/config-mgmt/ansible/SKILL.md - \"Variable precedence (22 levels of precedence)\""
+      "notes": "plugins/devops/skills/ansible/SKILL.md - \"Variable precedence (22 levels of precedence)\""
     },
     {
       "id": "ansible-extra-vars-highest-precedence",
@@ -20,7 +20,7 @@
           "extra"
         ]
       },
-      "notes": "skills/devops/config-mgmt/ansible/SKILL.md - \"Extra vars (`-e` / `--extra-vars`) - always wins\""
+      "notes": "plugins/devops/skills/ansible/SKILL.md - \"Extra vars (`-e` / `--extra-vars`) -- always wins\""
     },
     {
       "id": "terraform-ephemeral-resources-version",
@@ -29,7 +29,7 @@
         "type": "regex",
         "value": "\\b1\\.10\\b"
       },
-      "notes": "skills/devops/iac/terraform/SKILL.md - \"ephemeral resources (1.10+) are version-gated\""
+      "notes": "plugins/devops/skills/terraform/SKILL.md - \"ephemeral resources (1.10+) are version-gated\""
     },
     {
       "id": "terraform-import-blocks-version",
@@ -38,7 +38,7 @@
         "type": "regex",
         "value": "\\b1\\.5\\b"
       },
-      "notes": "skills/devops/iac/terraform/SKILL.md - \"import { to = aws_instance.web; id = ... } | Adopt existing infrastructure (1.5+ config)\""
+      "notes": "plugins/devops/skills/terraform/SKILL.md - \"import { to = aws_instance.web; id = ... } | Adopt existing infrastructure (1.5+ config)\""
     },
     {
       "id": "argocd-matrix-generator-cartesian",
@@ -49,7 +49,7 @@
           "Cartesian product"
         ]
       },
-      "notes": "skills/devops/gitops/argocd/SKILL.md - \"Matrix | Cartesian product of 2 generators | Cluster x environment combinations\""
+      "notes": "plugins/devops/skills/argocd/SKILL.md - \"Matrix | Cartesian product of 2 generators | Cluster x environment combinations\""
     },
     {
       "id": "argocd-sync-wave-annotation",
@@ -60,7 +60,7 @@
           "argocd.argoproj.io/sync-wave"
         ]
       },
-      "notes": "skills/devops/gitops/argocd/SKILL.md - \"annotations: argocd.argoproj.io/sync-wave: \\\"-1\\\" # Create namespace first\""
+      "notes": "plugins/devops/skills/argocd/SKILL.md - \"annotations: argocd.argoproj.io/sync-wave: \\\"-1\\\" # Create namespace first\""
     },
     {
       "id": "github-actions-ubuntu-latest-version",
@@ -69,7 +69,7 @@
         "type": "regex",
         "value": "\\b24\\.04\\b"
       },
-      "notes": "skills/devops/cicd/github-actions/SKILL.md - \"`ubuntu-latest` | Ubuntu 24.04 | Default for most workloads\""
+      "notes": "plugins/devops/skills/github-actions/SKILL.md - \"`ubuntu-latest` | Ubuntu 24.04 | Default for most workloads\""
     },
     {
       "id": "github-default-merge-strategy",
@@ -80,7 +80,7 @@
           "Squash"
         ]
       },
-      "notes": "skills/devops/version-control/github/SKILL.md - \"Squash & merge | One clean commit per PR | Default for most teams - tidy, linear history\""
+      "notes": "plugins/devops/skills/github/SKILL.md - \"Squash & merge | One clean commit per PR | Default for most teams - tidy, linear history\""
     },
     {
       "id": "terraform-script-drift",
@@ -91,7 +91,7 @@
           "02-drift-preview.sh"
         ]
       },
-      "notes": "skills/devops/iac/terraform/SKILL.md Diagnostic Scripts section (script-retrieval task)"
+      "notes": "plugins/devops/skills/terraform/SKILL.md Diagnostic Scripts section (script-retrieval task)"
     }
   ]
 }

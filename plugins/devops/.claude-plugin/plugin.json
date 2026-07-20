@@ -1,0 +1,10 @@
+{
+  "name": "devops",
+  "description": "DevOps, CI/CD, Infrastructure as Code, GitOps, and version control expertise across 17 platforms including Terraform, Ansible, GitHub Actions, GitLab CI, Jenkins, Azure DevOps, ArgoCD, and Flux.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["devops", "ci-cd", "infrastructure-as-code", "gitops", "terraform", "ansible", "kubernetes-delivery", "github-actions"]
+}

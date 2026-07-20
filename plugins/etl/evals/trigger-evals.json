@@ -1,0 +1,61 @@
+{
+  "plugin": "etl",
+  "cases": [
+    {"id": "overview-pos", "skill": "overview", "prompt": "We're a 50-person startup with Postgres and Snowflake -- help us design a data pipeline architecture from scratch, covering ingestion, transformation, and orchestration.", "should_trigger": true},
+    {"id": "overview-neg", "skill": "overview", "prompt": "How do I fix a Kafka consumer that's stuck rebalancing every few seconds?", "should_trigger": false},
+
+    {"id": "orchestration-pos", "skill": "orchestration", "prompt": "Airflow or SSIS for a SQL-Server-heavy shop that also wants to add some Python-based pipelines later -- what should we pick?", "should_trigger": true},
+    {"id": "orchestration-neg", "skill": "orchestration", "prompt": "Our Airflow scheduler's DAG parsing takes 45 seconds and tasks are queuing up -- how do we speed that up?", "should_trigger": false},
+
+    {"id": "airflow-pos", "skill": "airflow", "prompt": "Our Airflow 3.x DAG has a task stuck in 'deferred' state forever even though the sensor condition is clearly true -- how do we debug this?", "should_trigger": true},
+    {"id": "airflow-neg", "skill": "airflow", "prompt": "We're trying to decide whether to move our SSIS packages to Airflow or Azure Data Factory -- which is the better target?", "should_trigger": false},
+
+    {"id": "ssis-pos", "skill": "ssis", "prompt": "An SSIS package fails with DTS_E_OLEDBERROR on the OLE DB destination during a nightly load -- how do I read the SSISDB execution report to find the root cause?", "should_trigger": true},
+    {"id": "ssis-neg", "skill": "ssis", "prompt": "We want to move our legacy SSIS packages to a cloud-native orchestrator -- Airflow or ADF?", "should_trigger": false},
+
+    {"id": "transformation-pos", "skill": "transformation", "prompt": "Should our new analytics engineering team build models in dbt Core or just do everything in Spark? We're mostly SQL-first with under 1TB of data.", "should_trigger": true},
+    {"id": "transformation-neg", "skill": "transformation", "prompt": "My dbt incremental model with a merge strategy is duplicating rows on reruns -- what's wrong?", "should_trigger": false},
+
+    {"id": "dbt-core-pos", "skill": "dbt-core", "prompt": "My dbt incremental model using the merge strategy is producing duplicate rows after a full-refresh followed by an incremental run -- how do I fix the unique_key config?", "should_trigger": true},
+    {"id": "dbt-core-neg", "skill": "dbt-core", "prompt": "How do I set up a CI job in dbt Cloud that only builds modified models using state:modified+?", "should_trigger": false},
+
+    {"id": "dbt-cloud-pos", "skill": "dbt-cloud", "prompt": "We want to set up an Advanced CI job in dbt Cloud that shows a data diff between the PR branch and production before merging -- how do we configure that?", "should_trigger": true},
+    {"id": "dbt-cloud-neg", "skill": "dbt-cloud", "prompt": "My dbt model's incremental merge strategy isn't deduplicating rows correctly on the unique key -- what's wrong with my Jinja?", "should_trigger": false},
+
+    {"id": "spark-pos", "skill": "spark", "prompt": "Our PySpark job is spilling to disk during a large groupBy aggregation and running for hours -- how do we tune shuffle partitions and diagnose the skew?", "should_trigger": true},
+    {"id": "spark-neg", "skill": "spark", "prompt": "Can DuckDB query a Parquet file directly on S3 without spinning up a cluster?", "should_trigger": false},
+
+    {"id": "duckdb-pos", "skill": "duckdb", "prompt": "We want to replace a 30GB nightly Spark ETL job with DuckDB to cut infrastructure cost -- how do we structure the COPY/read_parquet pipeline and does dbt-duckdb make sense for local dev?", "should_trigger": true},
+    {"id": "duckdb-neg", "skill": "duckdb", "prompt": "What's the fastest way to write a MERGE statement in DuckDB's SQL dialect and which extensions do I need to load first?", "should_trigger": false},
+
+    {"id": "streaming-pos", "skill": "streaming", "prompt": "We need sub-second event processing for fraud detection -- should we go with Kafka, Kinesis, or just stick with our nightly batch loads?", "should_trigger": true},
+    {"id": "streaming-neg", "skill": "streaming", "prompt": "Our Kafka consumer group keeps rebalancing every 30 seconds and lag is climbing -- how do we stabilize it?", "should_trigger": false},
+
+    {"id": "kafka-pos", "skill": "kafka", "prompt": "Our Kafka consumer group is stuck rebalancing every 30 seconds under the new KIP-848 protocol and lag keeps climbing -- how do we diagnose this?", "should_trigger": true},
+    {"id": "kafka-neg", "skill": "kafka", "prompt": "We're building a notification service and need a message queue for microservices -- should we use Kafka or RabbitMQ for simple pub/sub?", "should_trigger": false},
+
+    {"id": "integration-pos", "skill": "integration", "prompt": "We need to move Salesforce and HubSpot data into Snowflake daily -- should we use Fivetran, ADF, or build something custom with Glue?", "should_trigger": true},
+    {"id": "integration-neg", "skill": "integration", "prompt": "Our ADF pipeline's self-hosted integration runtime keeps going offline -- how do we troubleshoot SHIR connectivity?", "should_trigger": false},
+
+    {"id": "adf-pos", "skill": "adf", "prompt": "Our ADF self-hosted integration runtime keeps showing 'offline' in the monitoring hub even though the on-prem VM is running -- how do we troubleshoot SHIR connectivity?", "should_trigger": true},
+    {"id": "adf-neg", "skill": "adf", "prompt": "Should we use Azure Data Factory or Fivetran to replicate our SaaS sources into the warehouse?", "should_trigger": false},
+
+    {"id": "aws-glue-pos", "skill": "aws-glue", "prompt": "Our AWS Glue job keeps re-processing files that were already loaded because job bookmarks aren't working -- what's misconfigured with transformation_ctx?", "should_trigger": true},
+    {"id": "aws-glue-neg", "skill": "aws-glue", "prompt": "We're on AWS and deciding between Glue and Fivetran for replicating RDS Postgres into Redshift -- which is the better fit?", "should_trigger": false},
+
+    {"id": "fivetran-pos", "skill": "fivetran", "prompt": "Our Fivetran connector's Monthly Active Rows spiked this month because a full-refresh table is re-syncing everything -- how do we bring MAR back down?", "should_trigger": true},
+    {"id": "fivetran-neg", "skill": "fivetran", "prompt": "Should we use Fivetran or Azure Data Factory to sync Salesforce data into our warehouse?", "should_trigger": false},
+
+    {"id": "informatica-pos", "skill": "informatica", "prompt": "Our Informatica CDI mapping is running slow because pushdown optimization isn't engaging on the Aggregator transformation -- how do we get it to push down to Snowflake?", "should_trigger": true},
+    {"id": "informatica-neg", "skill": "informatica", "prompt": "We're evaluating Informatica IDMC versus Talend for our enterprise integration replatform -- which handles MDM better?", "should_trigger": false},
+
+    {"id": "nifi-pos", "skill": "nifi", "prompt": "Our NiFi flow is backing up because the connection queue keeps hitting the default back pressure threshold of 10,000 objects -- how do we resize it correctly?", "should_trigger": true},
+    {"id": "nifi-neg", "skill": "nifi", "prompt": "Should we use NiFi or ADF for real-time flow-based routing with full data provenance tracking?", "should_trigger": false},
+
+    {"id": "synapse-pipelines-pos", "skill": "synapse-pipelines", "prompt": "Our Synapse Pipelines trigger shows as published but never fires at the scheduled time -- what are we missing in Synapse Studio?", "should_trigger": true},
+    {"id": "synapse-pipelines-neg", "skill": "synapse-pipelines", "prompt": "Is Synapse Pipelines basically the same as ADF, or are there features we'd lose by using it inside our Synapse workspace instead?", "should_trigger": false},
+
+    {"id": "talend-pos", "skill": "talend", "prompt": "Our Talend tMap component is running out of memory doing a 'Load All' lookup against a 50 million row reference table -- how do we fix this without a full redesign?", "should_trigger": true},
+    {"id": "talend-neg", "skill": "talend", "prompt": "We're migrating off Talend Open Studio since it was discontinued -- should we move to Fivetran or rebuild in ADF?", "should_trigger": false}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "messaging",
+  "description": "Expert knowledge across 8 messaging and event-streaming technologies -- Kafka, RabbitMQ, Pulsar, NATS, Redis Streams, AWS SQS/SNS, Azure Service Bus, and GCP Pub/Sub -- with a domain specialist agent for broker selection, event-driven architecture, delivery-semantics design, and operational troubleshooting.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["messaging", "kafka", "rabbitmq", "pubsub", "event-streaming", "sqs", "sns", "service-bus", "nats", "pulsar"]
+}

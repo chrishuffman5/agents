@@ -1,0 +1,10 @@
+{
+  "name": "security",
+  "description": "Expert knowledge across 14 security disciplines and 100+ platforms -- IAM (Entra ID, Okta, Active Directory), EDR (CrowdStrike, Defender, SentinelOne), SIEM/SOAR (Splunk, Sentinel, Elastic Security), secrets and PKI (Vault, CyberArk, Key Vault), cloud security (Wiz, Prisma Cloud, Defender for Cloud), appsec (SAST/DAST/SCA/WAF), network security, DLP, email security, zero trust/SASE, GRC, threat intel, vulnerability management, and backup security.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["security", "iam", "edr", "siem", "cloud-security", "appsec", "secrets", "zero-trust", "vulnerability-management", "compliance"]
+}

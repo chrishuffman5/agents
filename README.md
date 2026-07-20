@@ -1,692 +1,166 @@
-# Domain Expert Plugin
+# Domain Expert Marketplace
 
-> **Preview / Beta** — This plugin is in beta experimentation mode. It is not intended for production use without proper testing and validation. Features, skill content, and agent behavior may change between releases.
+> **Preview / Beta** — This marketplace is in beta experimentation mode. It is not intended for production use without proper testing and validation. Plugin content and agent behavior may change between releases.
 
-A Claude Code plugin providing **domain expert knowledge skills**, **domain-specialist subagents** (one per domain), and **task-oriented subagents** across 18 IT domains. Skills provide deep, version-specific expertise. Domain specialists navigate their skill tree deterministically — exact paths, narrowest-file reads, cited sources — for fast, accurate, token-efficient answers. Task agents orchestrate multiple domains for workflows like architecture consulting, troubleshooting, migration planning, and security hardening.
+A **Claude Code plugin marketplace** with one plugin per IT domain. Each domain plugin ships:
 
-**1,668+ files | 187+ technologies | 18 domains | 24 agents | 460,000+ lines of expert knowledge**
+- **One skill per technology** (`/database:postgresql`, `/security:entra-id`, `/containers:kubernetes`) with deep, version-specific expertise
+- **Version references** — `references/versions/<v>.md` files capturing what's new, changed, or deprecated in each release, so answers stay version-accurate
+- **Diagnostic scripts** — runnable PowerShell/Bash/CLI diagnostics bundled with the skills that need them
+- **A domain-specialist subagent** that navigates its plugin's skill tree deterministically — exact paths, narrowest-file reads, cited sources
 
-📊 **[Live Evaluation Dashboard](https://chrishuffman5.github.io/domain-expert/)** — per-domain accuracy, script coverage, and agent-vs-baseline results, measured by a Sonnet-driven eval harness.
+Install only the domains you work with. A DBA might install `database` and `os`; a platform team might add `containers`, `devops`, and `monitoring`.
+
+**19 plugins | 18 domains | 420 skills | 190+ version references | ~390 diagnostic scripts | 24 agents**
+
+📊 **[Live Evaluation Dashboard](https://chrishuffman5.github.io/domain-expert/)** — per-domain accuracy, script coverage, and agent-vs-baseline results.
 
 ---
 
 ## Installation
 
-### Claude Code (via Plugin Marketplace)
-
-In Claude Code, register the marketplace first:
+Register the marketplace once:
 
 ```
 /plugin marketplace add chrishuffman5/domain-expert
 ```
 
-Then install the plugin from this marketplace:
+Then install the domain plugins you need:
 
 ```
-/plugin install domain-expert@domain-expert
+/plugin install database@domain-expert
+/plugin install security@domain-expert
+/plugin install domain-expert-core@domain-expert   # cross-domain task agents
 ```
 
-### Claude Code (manual)
+Restart Claude Code (or run `/reload-plugins`) after installing.
 
-```bash
-git clone https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
-```
+### Verify
 
-Auto-discovers all skills and agents via `.claude-plugin/plugin.json`. Just describe what you need — no configuration required.
-
-### GitHub Copilot CLI
-
-```bash
-copilot plugin install chrishuffman5/domain-expert
-```
-
-Copilot installs skills, agents, and hooks from the plugin structure. Verified working with Copilot CLI v1.0.11+.
-
-### OpenAI Codex CLI
-
-```bash
-git clone https://github.com/chrishuffman5/domain-expert.git ~/.codex/skills/domain-expert/
-```
-
-Codex discovers skills from `SKILL.md` files in `~/.codex/skills/`. Restart Codex after installing to pick up new skills.
-
-### Gemini CLI
-
-> **Note:** Gemini CLI extension support is still maturing. The commands below follow the official `gemini extensions` documentation but may require a recent Gemini CLI version.
-
-```bash
-gemini extensions install https://github.com/chrishuffman5/domain-expert
-```
-
-If the remote install fails, use a local clone instead:
-
-```bash
-git clone https://github.com/chrishuffman5/domain-expert.git ~/domain-expert
-gemini extensions link ~/domain-expert
-```
-
-### Verify Installation
-
-Start a new session in your chosen platform and ask something that should trigger a skill or agent:
+Ask something that should trigger a skill or agent:
 
 ```
 > Which database should I use for a social app with 10M users?
 > Our SQL Server 2022 instance has had CPU at 95% since last night.
-> Plan a migration from SQL Server 2019 to PostgreSQL 17.
-> Create Terraform for a PostgreSQL 16 cluster on AWS RDS with read replicas.
-> Classify our customer database for GDPR and design least-privilege agent access.
-> Harden our database infrastructure and scope permissions for our monitoring agents.
+> What changed in PostgreSQL 18 that affects our upgrade from 16?
+> Harden our Entra ID conditional access policies.
 ```
 
-### Other Installation Methods
+### Upgrading from the old monolithic plugin
 
-```bash
-# Clone a single domain (e.g., just database skills)
-git clone --filter=blob:none --sparse https://github.com/chrishuffman5/domain-expert.git .claude/plugins/domain-expert/
-cd .claude/plugins/domain-expert/
-git sparse-checkout set skills/database agents .claude-plugin CLAUDE.md
+Before v1.0 this repository was a single `domain-expert` plugin. The marketplace maps that name to `domain-expert-core` automatically (Claude Code v2.1.193+): update the marketplace and your install migrates, then add the domain plugins you want:
 
-# Or copy individual skill directories into your existing .claude/skills/
-cp -r domain-expert/skills/database .claude/skills/database
+```
+/plugin marketplace update domain-expert
+/plugin install database@domain-expert    # etc.
 ```
 
 ---
 
-## Keeping the Plugin Up to Date
+## The Plugins
 
-New releases ship regularly. The fastest way to update is to **ask Claude** — the bundled [`update-plugin`](skills/update-plugin/SKILL.md) skill detects how the plugin was installed and runs the right update steps for you:
+| Plugin | Skills | Covers | Specialist Agent |
+|--------|-------:|--------|------------------|
+| **database** | 30 | PostgreSQL, SQL Server, Oracle, MySQL, MongoDB, Redis, Snowflake, DuckDB + 21 more engines | database-specialist |
+| **security** | 137 | IAM (Entra ID, Okta, AD DS…), EDR (CrowdStrike…), SIEM (Sentinel, Splunk…), secrets (Vault…), AppSec, DLP, GRC, zero trust | security-specialist |
+| **networking** | 68 | Routing/switching, firewalls (PAN-OS, FortiOS…), DNS, load balancing, VPN, SD-WAN, wireless, IPAM, automation | networking-specialist |
+| **devops** | 22 | GitHub Actions, GitLab CI, Jenkins, Terraform, Bicep, Ansible, ArgoCD, Flux, GitHub | devops-specialist |
+| **os** | 20 | Windows Server/Client, RHEL, Ubuntu, Debian, SLES, Rocky/Alma, macOS + Hyper-V, SELinux, WSL, failover clustering | os-specialist |
+| **etl** | 19 | Airflow, dbt, Spark, Kafka (pipelines), SSIS, ADF, Glue, Fivetran, NiFi, DuckDB | etl-specialist |
+| **containers** | 17 | Kubernetes, EKS/AKS/GKE, Helm, OpenShift, Docker, Podman, containerd, Istio, Linkerd, Consul | containers-specialist |
+| **frontend** | 15 | React (+ Server Components), Next.js (+ App Router), Vue, Nuxt, Angular (+ Signals), Svelte, Astro, Blazor | frontend-specialist |
+| **storage** | 13 | NetApp ONTAP, Pure, Dell, Ceph, MinIO, GlusterFS, S3, Azure Blob, GCS, Storage Spaces Direct | storage-specialist |
+| **analytics** | 12 | Power BI, Tableau, Looker, Qlik, SSAS/SSRS, Superset, Metabase, ThoughtSpot, Grafana (BI), DuckDB (BI) | analytics-specialist |
+| **monitoring** | 12 | Prometheus, Grafana, ELK, OpenTelemetry, Datadog, New Relic, Dynatrace, Splunk (observability), PagerDuty | monitoring-specialist |
+| **backend** | 12 | ASP.NET Core (+ Minimal APIs), Spring Boot, Django, Rails, Express, FastAPI, NestJS, Flask, Go, Rust | backend-specialist |
+| **api-realtime** | 9 | REST, GraphQL, gRPC, OData, WebSocket, SSE, SignalR, Socket.IO | api-realtime-specialist |
+| **messaging** | 9 | Kafka (brokers), RabbitMQ, Pulsar, NATS, SQS/SNS, Service Bus, Pub/Sub, Redis Streams | messaging-specialist |
+| **cli-scripting** | 8 | PowerShell, Bash, Python, Node.js, AWS CLI, Azure CLI, kubectl | cli-scripting-specialist |
+| **virtualization** | 7 | VMware vSphere, Proxmox, KVM/QEMU, Nutanix, Citrix, cloud VMs | virtualization-specialist |
+| **mail-collab** | 5 | Exchange, Microsoft 365, Google Workspace, Postfix | mail-collab-specialist |
+| **cloud-platforms** | 4 | AWS, Azure, GCP architecture, Well-Architected, migration, FinOps | cloud-platforms-specialist |
+| **domain-expert-core** | 1 | Cross-domain task agents (below) + the update-plugin skill | — |
+
+Overlapping technologies are deliberately split by angle, with each skill's description excluding the others — e.g. Kafka broker ops (`messaging`) vs Kafka pipelines (`etl`), Grafana observability (`monitoring`) vs Grafana BI (`analytics`), Splunk platform ops (`monitoring`) vs Splunk SIEM (`security`), DuckDB engine (`database`) vs ETL (`etl`) vs BI (`analytics`).
+
+### Cross-domain task agents (`domain-expert-core`)
+
+| Agent | Triggers On |
+|-------|------------|
+| **architecture-consultant** | "which database", "recommend", "compare", "what stack for", "capacity planning" |
+| **troubleshooting-agent** | "slow", "error", "CPU high", "diagnose", "not working", "outage" |
+| **migration-expert** | "migrate from X to Y", "switch from", "feature mapping", "compatibility" |
+| **iac-consultant** | "create Terraform", "CloudFormation", "provision", "deploy to cloud" |
+| **data-expert** | "data classification", "PII", "GDPR", "data masking", "agent data access" |
+| **security-expert** | "harden", "CIS benchmark", "IAM", "agent permissions", "secrets management" |
+
+These orchestrate whichever domain plugins you have installed, delegating depth to the domain specialists and degrading gracefully when a domain isn't installed.
+
+---
+
+## How a Skill Is Structured
 
 ```
-> Update the domain-expert plugin to the latest version.
-> Is there a newer version of domain-expert?
-```
-
-### Manual update (Claude Code marketplace install)
-
-Two non-interactive steps — refresh the marketplace, then update the plugin:
-
-```bash
-# 1. Refresh the marketplace so it sees the newest release
-claude plugin marketplace update domain-expert
-
-# 2. Update the plugin (run `claude plugin list` first to confirm the current version)
-claude plugin update domain-expert@domain-expert --scope user
-```
-
-Or use the in-session slash commands `/plugin marketplace update domain-expert` then `/plugin update domain-expert`.
-
-> **Restart Claude Code after updating.** Plugin changes apply on the next session — the running session keeps the version it started with.
-
-### Manual update (git clone install)
-
-```bash
-cd ~/.claude/plugins/domain-expert      # adjust to your clone path
-git pull --ff-only origin main          # or: git checkout v0.7.6  (a specific release tag)
-```
-
-### Verify
-
-```bash
-claude plugin list                                              # installed version
-gh release view --repo chrishuffman5/domain-expert              # latest published version
-```
-
-When the two match, you're current. See [`skills/update-plugin`](skills/update-plugin/SKILL.md) for Copilot/Codex/Gemini commands and troubleshooting.
-
----
-
-## What Are These Skills?
-
-Each skill is a structured knowledge package that gives an AI assistant deep expertise in a specific technology and version. Rather than one monolithic "IT expert" that knows a little about everything, this library provides narrowly focused specialists that know the exact quirks, features, and pitfalls of their specific domain.
-
-A **SQL Server 2025 skill** knows about native vector types, DiskANN indexes, and optimized locking. A **React 19 skill** knows about Actions, the React Compiler, and `useActionState`. A **Windows Server 2025 skill** knows about DTrace, dMSA, NVMe/TCP, and GPU partitioning.
-
-### Three-Layer Hierarchy
-
-```
-Domain                     (database, os, frontend, security, networking...)
-  Technology               (sql-server, postgresql, react, angular, rhel, ubuntu...)
-    Version                  (2022, 2025, v18, v19, 15 SP6...)
-```
-
-Each layer inherits from its parent:
-- **Domain** provides foundational concepts (ACID theory, component models, kernel architectures)
-- **Technology** provides implementation-specific expertise (T-SQL patterns, hooks system, systemd)
-- **Version** provides release-specific features and migration guidance
-
-### Skill Contents
-
-Each technology skill includes:
-
-| Component | Description |
-|---|---|
-| **SKILL.md** | Core expertise, routing logic, common pitfalls, version routing |
-| **references/** | Deep knowledge (architecture, best practices, diagnostics) |
-| **scripts/** or **configs/** | Diagnostic scripts (PowerShell/Bash) or configuration references |
-| **patterns/** | Code recipes and implementation patterns (frontend) |
-
----
-
-## Domains
-
-### 1. Database — 29 Technologies
-
-Expert knowledge for relational, NoSQL, analytical, and cloud-managed databases.
-
-| Category | Skills | Versions |
-|---|---|---|
-| **Relational (RDBMS)** | | |
-| SQL Server | [`database/sql-server`](skills/database/sql-server/SKILL.md) | 2016, 2017, 2019, 2022, 2025 |
-| PostgreSQL | [`database/postgresql`](skills/database/postgresql/SKILL.md) | 14, 15, 16, 17, 18 |
-| Oracle Database | [`database/oracle`](skills/database/oracle/SKILL.md) | 19c, 23ai, 26ai |
-| MySQL | [`database/mysql`](skills/database/mysql/SKILL.md) | 8.0, 8.4, 9.x |
-| MariaDB | [`database/mariadb`](skills/database/mariadb/SKILL.md) | 10.6, 10.11, 11.4, 11.8, 12.x |
-| SQLite | [`database/sqlite`](skills/database/sqlite/SKILL.md) | 3.51.x |
-| **Document** | | |
-| MongoDB | [`database/mongodb`](skills/database/mongodb/SKILL.md) | 6.0, 7.0, 8.0 |
-| Azure Cosmos DB | [`database/cosmosdb`](skills/database/cosmosdb/SKILL.md) | managed |
-| Amazon DynamoDB | [`database/dynamodb`](skills/database/dynamodb/SKILL.md) | managed |
-| Couchbase | [`database/couchbase`](skills/database/couchbase/SKILL.md) | 7.x |
-| **Key-Value / Cache** | | |
-| Redis | [`database/redis`](skills/database/redis/SKILL.md) | 7.2, 7.4, 7.8, 8.0 |
-| Memcached | [`database/memcached`](skills/database/memcached/SKILL.md) | 1.6.x |
-| Amazon ElastiCache | [`database/elasticache`](skills/database/elasticache/SKILL.md) | managed |
-| **Search / Analytics** | | |
-| Elasticsearch | [`database/elasticsearch`](skills/database/elasticsearch/SKILL.md) | 8.x, 9.x |
-| OpenSearch | [`database/opensearch`](skills/database/opensearch/SKILL.md) | 2.x |
-| **Wide-Column** | | |
-| Apache Cassandra | [`database/cassandra`](skills/database/cassandra/SKILL.md) | 4.0, 4.1, 5.0 |
-| ScyllaDB | [`database/scylladb`](skills/database/scylladb/SKILL.md) | 6.x |
-| **Graph** | | |
-| Neo4j | [`database/neo4j`](skills/database/neo4j/SKILL.md) | 5.x, 2026.x |
-| Amazon Neptune | [`database/neptune`](skills/database/neptune/SKILL.md) | managed |
-| **Time-Series** | | |
-| InfluxDB | [`database/influxdb`](skills/database/influxdb/SKILL.md) | 2.x, 3.x |
-| TimescaleDB | [`database/timescaledb`](skills/database/timescaledb/SKILL.md) | 2.25+ |
-| **Columnar / Analytical** | | |
-| ClickHouse | [`database/clickhouse`](skills/database/clickhouse/SKILL.md) | 25.x, 26.x LTS |
-| DuckDB | [`database/duckdb`](skills/database/duckdb/SKILL.md) | 1.4, 1.5 |
-| Apache Druid | [`database/druid`](skills/database/druid/SKILL.md) | 31.x |
-| **Cloud Data Warehouses** | | |
-| Snowflake | [`database/snowflake`](skills/database/snowflake/SKILL.md) | managed |
-| Google BigQuery | [`database/bigquery`](skills/database/bigquery/SKILL.md) | managed |
-| Amazon Redshift | [`database/redshift`](skills/database/redshift/SKILL.md) | managed |
-| Azure Synapse | [`database/synapse`](skills/database/synapse/SKILL.md) | managed |
-| Databricks | [`database/databricks`](skills/database/databricks/SKILL.md) | managed |
-
-**Includes:** SQL diagnostic scripts per version, architecture references, query optimization guides, migration playbooks.
-
----
-
-### 2. Operating System — 8 Technologies
-
-Expert knowledge for Windows, Linux, and macOS administration.
-
-| Technology | Skill Path | Versions | Feature Sub-Skills |
-|---|---|---|---|
-| Windows Server | [`os/windows-server`](skills/os/windows-server/SKILL.md) | 2016, 2019, 2022, 2025 | Failover Clustering (WSFC), Hyper-V |
-| Windows Client | [`os/windows-client`](skills/os/windows-client/SKILL.md) | 10, 11 | WSL |
-| RHEL | [`os/rhel`](skills/os/rhel/SKILL.md) | 8, 9, 10 | SELinux, Podman |
-| Ubuntu | [`os/ubuntu`](skills/os/ubuntu/SKILL.md) | 20.04, 22.04, 24.04, 26.04 | AppArmor |
-| Debian | [`os/debian`](skills/os/debian/SKILL.md) | 11, 12, 13 | — |
-| Rocky / AlmaLinux | [`os/rocky-alma`](skills/os/rocky-alma/SKILL.md) | 8, 9, 10 | — |
-| SLES | [`os/sles`](skills/os/sles/SKILL.md) | 15 SP5, 15 SP6 | Btrfs/Snapper, HA Extension |
-| macOS | [`os/macos`](skills/os/macos/SKILL.md) | 14, 15, 26 | MDM, Platform SSO, Developer Toolchain |
-
-**Includes:** PowerShell diagnostic scripts (Windows), Bash diagnostic scripts (Linux/macOS), edition/licensing matrices, CIS/STIG hardening guides, performance counter references.
-
----
-
-### 3. Web UI / Frontend — 11 Technologies
-
-Expert knowledge for frontend frameworks, meta-frameworks, and UI paradigms.
-
-| Technology | Skill Path | Versions | Feature Sub-Skills |
-|---|---|---|---|
-| React | [`frontend/react`](skills/frontend/react/SKILL.md) | 18, 19 | Server Components |
-| Next.js | [`frontend/nextjs`](skills/frontend/nextjs/SKILL.md) | 15, 16 | App Router |
-| Angular | [`frontend/angular`](skills/frontend/angular/SKILL.md) | 19, 20, 21 | Signals |
-| Vue.js | [`frontend/vue`](skills/frontend/vue/SKILL.md) | 3.5 | — |
-| Nuxt | [`frontend/nuxt`](skills/frontend/nuxt/SKILL.md) | 3, 4 | — |
-| Svelte / SvelteKit | [`frontend/svelte`](skills/frontend/svelte/SKILL.md) | 5 / 2.x | — |
-| Blazor | [`frontend/blazor`](skills/frontend/blazor/SKILL.md) | .NET 8, 9, 10 | — |
-| HTMX | [`frontend/htmx`](skills/frontend/htmx/SKILL.md) | 2.0 | — |
-| Astro | [`frontend/astro`](skills/frontend/astro/SKILL.md) | 5.x | — |
-| Remix / React Router v7 | [`frontend/remix`](skills/frontend/remix/SKILL.md) | 2.x / v7 | — |
-| Gatsby | [`frontend/gatsby`](skills/frontend/gatsby/SKILL.md) | 5.x (maintenance) | — |
-
-**Includes:** Annotated configuration references (tsconfig, vite.config, next.config, etc.), code pattern guides (data fetching, forms, state management, auth), version migration guides.
-
----
-
-### 4. Security — 14 Technologies
-
-Expert knowledge across identity, endpoint, network, application, and data security.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| IAM | [`security/iam`](skills/security/iam/SKILL.md) | Active Directory, Entra ID, Okta, SAML, OIDC, RBAC/ABAC |
-| EDR | [`security/edr`](skills/security/edr/SKILL.md) | CrowdStrike, Defender for Endpoint, SentinelOne, Carbon Black |
-| SIEM | [`security/siem`](skills/security/siem/SKILL.md) | Splunk, Sentinel, Elastic Security, QRadar |
-| Vulnerability Management | [`security/vulnerability-management`](skills/security/vulnerability-management/SKILL.md) | Nessus, Qualys, Rapid7 |
-| Secrets Management | [`security/secrets`](skills/security/secrets/SKILL.md) | HashiCorp Vault, Azure Key Vault, AWS Secrets Manager |
-| Application Security | [`security/appsec`](skills/security/appsec/SKILL.md) | OWASP, SAST/DAST, dependency scanning, WAF |
-| Cloud Security | [`security/cloud-security`](skills/security/cloud-security/SKILL.md) | CSPM, CWPP, cloud IAM, security benchmarks |
-| Network Security | [`security/network-security`](skills/security/network-security/SKILL.md) | Firewall policy, IDS/IPS, segmentation, zero trust networking |
-| Zero Trust | [`security/zero-trust`](skills/security/zero-trust/SKILL.md) | Architecture, implementation, identity-centric security |
-| GRC | [`security/grc`](skills/security/grc/SKILL.md) | Compliance frameworks (SOC 2, ISO 27001, NIST, PCI DSS) |
-| Threat Intelligence | [`security/threat-intel`](skills/security/threat-intel/SKILL.md) | MITRE ATT&CK, IOCs, threat hunting, intelligence platforms |
-| Email Security | [`security/email-security`](skills/security/email-security/SKILL.md) | SPF, DKIM, DMARC, phishing defense, email gateways |
-| DLP | [`security/dlp`](skills/security/dlp/SKILL.md) | Data classification, prevention policies, monitoring |
-| Backup Security | [`security/backup-security`](skills/security/backup-security/SKILL.md) | Immutable backups, air-gapped recovery, ransomware resilience |
-
----
-
-### 5. Networking — 12 Technologies
-
-Expert knowledge for enterprise networking, from routing to SD-WAN.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| Routing & Switching | [`networking/routing-switching`](skills/networking/routing-switching/SKILL.md) | Cisco IOS-XE, NX-OS, Juniper Junos, Arista EOS |
-| Firewall | [`networking/firewall`](skills/networking/firewall/SKILL.md) | Palo Alto PAN-OS, Fortinet FortiOS, Cisco FTD, pfSense, OPNsense |
-| Load Balancing | [`networking/load-balancing`](skills/networking/load-balancing/SKILL.md) | F5 BIG-IP, NGINX, HAProxy, cloud ALB/NLB |
-| DNS | [`networking/dns`](skills/networking/dns/SKILL.md) | BIND, PowerDNS, Windows DNS, cloud DNS services |
-| SD-WAN | [`networking/sd-wan`](skills/networking/sd-wan/SKILL.md) | Cisco SD-WAN, Fortinet SD-WAN |
-| Wireless | [`networking/wireless`](skills/networking/wireless/SKILL.md) | Cisco WLC, Aruba AOS |
-| VPN | [`networking/vpn`](skills/networking/vpn/SKILL.md) | IPsec, SSL VPN, WireGuard |
-| DC Fabric | [`networking/dc-fabric`](skills/networking/dc-fabric/SKILL.md) | Spine-leaf, VXLAN/EVPN, fabric automation |
-| IPAM/DDI | [`networking/ipam-ddi`](skills/networking/ipam-ddi/SKILL.md) | Infoblox, IP address management |
-| Network Automation | [`networking/network-automation`](skills/networking/network-automation/SKILL.md) | Ansible networking, NAPALM, Netmiko, RESTCONF/NETCONF |
-| Network Monitoring | [`networking/network-monitoring`](skills/networking/network-monitoring/SKILL.md) | SNMP, NetFlow, sFlow, network observability |
-| Cloud Networking | [`networking/cloud-networking`](skills/networking/cloud-networking/SKILL.md) | AWS VPC, Azure VNet, GCP VPC, transit gateway, peering |
-
----
-
-### 6. Containers & Orchestration — 3 Technologies
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| Container Runtimes | [`containers/runtimes`](skills/containers/runtimes/SKILL.md) | Docker, Podman, containerd |
-| Orchestration | [`containers/orchestration`](skills/containers/orchestration/SKILL.md) | Kubernetes, Helm, EKS, AKS, GKE, OpenShift |
-| Service Mesh | [`containers/service-mesh`](skills/containers/service-mesh/SKILL.md) | Istio, Linkerd, Consul Connect |
-
----
-
-### 7. DevOps / CI-CD / IaC — 17 Technologies, 5 Domains
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| Infrastructure as Code | [`devops/iac`](skills/devops/iac/SKILL.md) | Terraform, OpenTofu, Pulumi, CloudFormation, Bicep |
-| CI/CD | [`devops/cicd`](skills/devops/cicd/SKILL.md) | GitHub Actions, GitLab CI, Azure DevOps, Jenkins, ArgoCD |
-| GitOps | [`devops/gitops`](skills/devops/gitops/SKILL.md) | ArgoCD, Flux, GitOps patterns |
-| Config Management | [`devops/config-mgmt`](skills/devops/config-mgmt/SKILL.md) | Ansible, Chef, Puppet, SaltStack |
-| Version Control / Repo Mgmt | [`devops/version-control/github`](skills/devops/version-control/github/SKILL.md) | Branching strategies, PR/review process, branch protection, SemVer, tags & releases |
-
----
-
-### 8. Backend Frameworks — 10 Technologies
-
-Expert knowledge for REST API and web backend frameworks across all major languages.
-
-| Technology | Skill Path | Versions |
-|---|---|---|
-| ASP.NET Core | [`backend/aspnet-core`](skills/backend/aspnet-core/SKILL.md) | .NET 8, 9, 10 + Minimal APIs |
-| Spring Boot | [`backend/spring-boot`](skills/backend/spring-boot/SKILL.md) | 3.x, 4.0 |
-| Django | [`backend/django`](skills/backend/django/SKILL.md) | 4.2 LTS, 5.2 LTS, 6.0 |
-| Ruby on Rails | [`backend/rails`](skills/backend/rails/SKILL.md) | 7.2, 8.0, 8.1 |
-| Express.js | [`backend/express`](skills/backend/express/SKILL.md) | 5.x |
-| FastAPI | [`backend/fastapi`](skills/backend/fastapi/SKILL.md) | current |
-| NestJS | [`backend/nestjs`](skills/backend/nestjs/SKILL.md) | 11.x |
-| Flask | [`backend/flask`](skills/backend/flask/SKILL.md) | 3.1 |
-| Go Web (net/http, Gin, Fiber) | [`backend/go-web`](skills/backend/go-web/SKILL.md) | Go 1.23/1.24 |
-| Rust Web (Actix, Axum) | [`backend/rust-web`](skills/backend/rust-web/SKILL.md) | stable toolchain |
-
-**Includes:** API design patterns, REST/HTTP semantics, authentication paradigms, async runtime models, framework comparison guides, version migration references.
-
----
-
-### 9. Virtualization — 5 Technologies
-
-| Technology | Skill Path | Versions |
-|---|---|---|
-| VMware vSphere / ESXi | [`virtualization/vmware`](skills/virtualization/vmware/SKILL.md) | 8.x, 9.0 |
-| Proxmox VE | [`virtualization/proxmox`](skills/virtualization/proxmox/SKILL.md) | 8.4, 9.0, 9.1 |
-| KVM/QEMU | [`virtualization/kvm`](skills/virtualization/kvm/SKILL.md) | kernel-tied |
-| Citrix Hypervisor | [`virtualization/citrix`](skills/virtualization/citrix/SKILL.md) | 8.x |
-| Nutanix AHV | [`virtualization/nutanix`](skills/virtualization/nutanix/SKILL.md) | AOS-tied |
-
----
-
-### 10. CLI / Scripting — 7 Technologies
-
-| Technology | Skill Path | Versions |
-|---|---|---|
-| PowerShell | [`cli-scripting/powershell`](skills/cli-scripting/powershell/SKILL.md) | 7.4 LTS, 7.6 LTS |
-| Bash | [`cli-scripting/bash`](skills/cli-scripting/bash/SKILL.md) | 5.x |
-| Python | [`cli-scripting/python`](skills/cli-scripting/python/SKILL.md) | 3.10–3.14 |
-| Node.js | [`cli-scripting/nodejs`](skills/cli-scripting/nodejs/SKILL.md) | 20 LTS, 22 LTS, 24 |
-| Azure CLI | [`cli-scripting/azure-cli`](skills/cli-scripting/azure-cli/SKILL.md) | rolling |
-| AWS CLI | [`cli-scripting/aws-cli`](skills/cli-scripting/aws-cli/SKILL.md) | v2 |
-| kubectl | [`cli-scripting/kubectl`](skills/cli-scripting/kubectl/SKILL.md) | 1.33–1.35 |
-
----
-
-### 11. ETL / Data Integration — 14 Technologies
-
-Expert knowledge for data pipeline orchestration, transformation, integration, and streaming.
-
-| Sub-domain | Technology | Skill Path | Versions |
-|---|---|---|---|
-| **Orchestration** | | | |
-| | Apache Airflow | [`etl/orchestration/airflow`](skills/etl/orchestration/airflow/SKILL.md) | 2.x (EOL), 3.x |
-| | SSIS | [`etl/orchestration/ssis`](skills/etl/orchestration/ssis/SKILL.md) | 2019, 2022, 2025 |
-| **Transformation** | | | |
-| | Apache Spark | [`etl/transformation/spark`](skills/etl/transformation/spark/SKILL.md) | 3.5, 4.0, 4.2 |
-| | dbt Core | [`etl/transformation/dbt-core`](skills/etl/transformation/dbt-core/SKILL.md) | 1.11 |
-| | dbt Cloud | [`etl/transformation/dbt-cloud`](skills/etl/transformation/dbt-cloud/SKILL.md) | managed |
-| **Integration** | | | |
-| | Azure Data Factory | [`etl/integration/adf`](skills/etl/integration/adf/SKILL.md) | managed |
-| | Apache NiFi | [`etl/integration/nifi`](skills/etl/integration/nifi/SKILL.md) | 2.8 |
-| | Informatica IDMC | [`etl/integration/informatica`](skills/etl/integration/informatica/SKILL.md) | managed |
-| | Talend | [`etl/integration/talend`](skills/etl/integration/talend/SKILL.md) | 8.0 |
-| | Fivetran | [`etl/integration/fivetran`](skills/etl/integration/fivetran/SKILL.md) | managed |
-| | AWS Glue | [`etl/integration/aws-glue`](skills/etl/integration/aws-glue/SKILL.md) | managed |
-| | Synapse Pipelines | [`etl/integration/synapse-pipelines`](skills/etl/integration/synapse-pipelines/SKILL.md) | managed |
-| **Streaming** | | | |
-| | Apache Kafka | [`etl/streaming/kafka`](skills/etl/streaming/kafka/SKILL.md) | 3.9, 4.0, 4.1, 4.2 |
-
-**Includes:** ETL/ELT patterns, CDC, SCD types, data quality, paradigm references (orchestration, transformation, integration, streaming).
-
----
-
-### 12. Data Analytics / BI — 11 Technologies
-
-Expert knowledge for business intelligence, reporting, and analytics platforms.
-
-| Technology | Skill Path | Versions |
-|---|---|---|
-| Power BI | [`analytics/power-bi`](skills/analytics/power-bi/SKILL.md) | managed (monthly) |
-| Tableau | [`analytics/tableau`](skills/analytics/tableau/SKILL.md) | 2025.x, 2026.1 |
-| SSAS | [`analytics/ssas`](skills/analytics/ssas/SKILL.md) | 2019, 2022, 2025 |
-| SSRS | [`analytics/ssrs`](skills/analytics/ssrs/SKILL.md) | 2019, 2022, 2025 |
-| Looker | [`analytics/looker`](skills/analytics/looker/SKILL.md) | managed |
-| Apache Superset | [`analytics/superset`](skills/analytics/superset/SKILL.md) | 6.x |
-| Metabase | [`analytics/metabase`](skills/analytics/metabase/SKILL.md) | v59, v60 |
-| Grafana | [`analytics/grafana`](skills/analytics/grafana/SKILL.md) | 12.x |
-| Qlik Sense | [`analytics/qlik-sense`](skills/analytics/qlik-sense/SKILL.md) | managed |
-| ThoughtSpot | [`analytics/thoughtspot`](skills/analytics/thoughtspot/SKILL.md) | managed |
-| DuckDB | [`analytics/duckdb-analytics`](skills/analytics/duckdb-analytics/SKILL.md) | cross-ref |
-
-**Includes:** Dimensional modeling, OLAP concepts, visualization theory, semantic layers, paradigm references (enterprise BI, SQL analytics, reporting, operational).
-
----
-
-### 13. Storage — 12 Technologies
-
-Expert knowledge for enterprise, software-defined, and cloud storage platforms.
-
-| Category | Technology | Skill Path | Versions |
-|---|---|---|---|
-| **Enterprise SAN/NAS** | | | |
-| | NetApp ONTAP | [`storage/netapp-ontap`](skills/storage/netapp-ontap/SKILL.md) | 9.14, 9.15, 9.16, 9.17, 9.18 |
-| | Dell PowerStore | [`storage/dell-powerstore`](skills/storage/dell-powerstore/SKILL.md) | 4.0 |
-| | Dell Unity | [`storage/dell-unity`](skills/storage/dell-unity/SKILL.md) | OE 5.5 |
-| | Pure Storage FlashArray | [`storage/pure-storage`](skills/storage/pure-storage/SKILL.md) | current |
-| | HPE Alletra | [`storage/hpe-alletra`](skills/storage/hpe-alletra/SKILL.md) | current |
-| **Software-Defined** | | | |
-| | Ceph | [`storage/ceph`](skills/storage/ceph/SKILL.md) | 19.2 Squid, 20.2 Tentacle |
-| | MinIO | [`storage/minio`](skills/storage/minio/SKILL.md) | current |
-| | GlusterFS | [`storage/glusterfs`](skills/storage/glusterfs/SKILL.md) | 11.x |
-| **Cloud Object** | | | |
-| | AWS S3 | [`storage/aws-s3`](skills/storage/aws-s3/SKILL.md) | managed |
-| | Azure Blob Storage | [`storage/azure-blob`](skills/storage/azure-blob/SKILL.md) | managed |
-| | Google Cloud Storage | [`storage/gcs`](skills/storage/gcs/SKILL.md) | managed |
-| **Windows** | | | |
-| | Storage Spaces Direct | [`storage/storage-spaces-direct`](skills/storage/storage-spaces-direct/SKILL.md) | WS 2019/2022/2025 |
-
-**Includes:** Block/file/object fundamentals, RAID/erasure coding, replication patterns, data reduction, storage networking, paradigm references (enterprise, SDS, cloud).
-
----
-
-### 14. Monitoring / Observability — 11 Technologies
-
-Expert knowledge for metrics, logs, traces, alerting, and full-stack observability platforms.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| Prometheus | [`monitoring/prometheus`](skills/monitoring/prometheus/SKILL.md) | Pull-based metrics, PromQL, 3.x LTS |
-| Grafana | [`monitoring/grafana`](skills/monitoring/grafana/SKILL.md) | Dashboards, Loki, Tempo, alerting, 12.x |
-| ELK (Elasticsearch + Kibana) | [`monitoring/elk`](skills/monitoring/elk/SKILL.md) | Log management, APM, 8.x/9.x |
-| OpenTelemetry | [`monitoring/opentelemetry`](skills/monitoring/opentelemetry/SKILL.md) | Vendor-neutral instrumentation, Collector 0.149+ |
-| Datadog | [`monitoring/datadog`](skills/monitoring/datadog/SKILL.md) | Managed full-stack observability |
-| New Relic | [`monitoring/newrelic`](skills/monitoring/newrelic/SKILL.md) | Managed APM and observability |
-| Splunk | [`monitoring/splunk`](skills/monitoring/splunk/SKILL.md) | Enterprise log analytics, 9.x |
-| Zabbix | [`monitoring/zabbix`](skills/monitoring/zabbix/SKILL.md) | Infrastructure monitoring, 7.4 |
-| Nagios | [`monitoring/nagios`](skills/monitoring/nagios/SKILL.md) | Legacy infrastructure monitoring, XI/Core |
-| PagerDuty | [`monitoring/pagerduty`](skills/monitoring/pagerduty/SKILL.md) | Incident management, on-call automation |
-| Dynatrace | [`monitoring/dynatrace`](skills/monitoring/dynatrace/SKILL.md) | AI-powered full-stack observability |
-
-**Includes:** Three pillars of observability (metrics, logs, traces), monitoring strategy (USE/RED/4 Golden Signals), SLI/SLO/SLA design, alerting philosophy, cardinality management, cost control, tool selection frameworks.
-
----
-
-### 15. Cloud Platforms — 3 Technologies
-
-Expert knowledge for comprehensive cloud architecture across all three major providers.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| AWS | [`cloud-platforms/aws`](skills/cloud-platforms/aws/SKILL.md) | Compute, storage, database, networking, security, serverless |
-| Azure | [`cloud-platforms/azure`](skills/cloud-platforms/azure/SKILL.md) | Compute, identity, hybrid, data platform, networking, security |
-| GCP | [`cloud-platforms/gcp`](skills/cloud-platforms/gcp/SKILL.md) | Compute, data/analytics, AI/ML, Kubernetes, networking, security |
-
-**Includes:** Cloud selection frameworks, cross-cloud service mapping, Well-Architected design principles, migration strategy (7 Rs), FinOps cost management, vendor-neutral strategic guidance.
-
----
-
-### 16. API & Real-Time — 8 Technologies
-
-Expert knowledge for data access protocols and real-time communication patterns.
-
-| Category | Technology | Skill Path | Focus |
-|---|---|---|---|
-| **Request/Response** | | | |
-| | GraphQL | [`api-realtime/graphql`](skills/api-realtime/graphql/SKILL.md) | Schema, resolvers, Apollo, Federation, Relay |
-| | gRPC | [`api-realtime/grpc`](skills/api-realtime/grpc/SKILL.md) | Protobuf, streaming, load balancing, 1.x |
-| | REST | [`api-realtime/rest`](skills/api-realtime/rest/SKILL.md) | OpenAPI 3.1, HTTP semantics, API gateways |
-| | OData | [`api-realtime/odata`](skills/api-realtime/odata/SKILL.md) | EDM, query options, Microsoft/SAP ecosystem, 4.x |
-| **Real-Time** | | | |
-| | SignalR | [`api-realtime/signalr`](skills/api-realtime/signalr/SKILL.md) | Hubs, scaling, Azure SignalR Service, .NET 8–10 |
-| | Socket.IO | [`api-realtime/socketio`](skills/api-realtime/socketio/SKILL.md) | Rooms, namespaces, adapters, 4.x |
-| | WebSocket | [`api-realtime/websocket`](skills/api-realtime/websocket/SKILL.md) | RFC 6455, native protocol, scaling patterns |
-| | Server-Sent Events | [`api-realtime/sse`](skills/api-realtime/sse/SKILL.md) | EventSource, LLM streaming, unidirectional |
-
-**Includes:** Protocol selection frameworks (REST vs GraphQL vs gRPC vs WebSocket), API design theory, authentication across protocols, versioning strategies, API gateway patterns, paradigm references (request/response, real-time).
-
----
-
-### 17. Messaging & Event Streaming — 8 Technologies
-
-Expert knowledge for asynchronous messaging, event streaming, and event-driven architecture.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| RabbitMQ | [`messaging/rabbitmq`](skills/messaging/rabbitmq/SKILL.md) | AMQP, exchanges, quorum queues, streams, Khepri, 4.x |
-| NATS | [`messaging/nats`](skills/messaging/nats/SKILL.md) | Core NATS, JetStream, KV/Object Store, 2.12 |
-| Azure Service Bus | [`messaging/azure-service-bus`](skills/messaging/azure-service-bus/SKILL.md) | Queues, topics, sessions, Premium tier |
-| AWS SQS / SNS | [`messaging/aws-sqs-sns`](skills/messaging/aws-sqs-sns/SKILL.md) | Standard/FIFO queues, fan-out, message filtering |
-| Google Cloud Pub/Sub | [`messaging/gcp-pubsub`](skills/messaging/gcp-pubsub/SKILL.md) | Ordering, exactly-once, BigQuery subscriptions |
-| Apache Pulsar | [`messaging/pulsar`](skills/messaging/pulsar/SKILL.md) | Multi-tenancy, geo-replication, tiered storage, 4.x |
-| Apache Kafka | [`messaging/kafka`](skills/messaging/kafka/SKILL.md) | Cross-ref to ETL/streaming Kafka |
-| Redis Streams | [`messaging/redis-streams`](skills/messaging/redis-streams/SKILL.md) | Cross-ref to database Redis |
-
-**Includes:** Messaging patterns (pub/sub, point-to-point, request/reply), delivery guarantees, event-driven architecture (event sourcing, CQRS, sagas), broker selection frameworks, paradigm references (traditional brokers, event streaming).
-
----
-
-### 18. Mail & Collaboration — 4 Technologies
-
-Expert knowledge for enterprise email infrastructure and collaboration platforms.
-
-| Technology | Skill Path | Focus |
-|---|---|---|
-| Microsoft Exchange | [`mail-collab/exchange`](skills/mail-collab/exchange/SKILL.md) | 2019, Exchange Online, hybrid, DAG, migration |
-| Microsoft 365 | [`mail-collab/m365`](skills/mail-collab/m365/SKILL.md) | Tenant admin, licensing, Purview, Conditional Access |
-| Google Workspace | [`mail-collab/google-workspace`](skills/mail-collab/google-workspace/SKILL.md) | Admin Console, Vault, GCDS, GAM |
-| Postfix | [`mail-collab/postfix`](skills/mail-collab/postfix/SKILL.md) | MTA config, TLS/DANE, anti-spam, milters, 3.9/3.10 |
-
-**Includes:** Email protocols (SMTP, IMAP, JMAP), DNS records (SPF, DKIM, DMARC, DANE, MTA-STS), mail flow architecture, migration patterns, compliance frameworks, paradigm references (on-prem, cloud).
-
----
-
-## Agents
-
-Subagents run in their own context window with preloaded skills. Claude auto-delegates based on the user's prompt — no manual routing needed. There are two layers: **domain specialists** (one per domain, aligned 1:1 with the skills library) and **task specialists** (cross-domain orchestration).
-
-### Domain Specialists
-
-Each specialist carries a precise knowledge map of its `skills/` domain tree. Instead of searching, it resolves exact file paths, reads the narrowest file that answers, prefers shipped scripts over improvised ones, and cites every technology-specific claim with a skill path. This reduces research overhead and token use while increasing answer accuracy.
-
-| Agent | Domain Coverage |
-|-------|----------------|
-| [**database-specialist**](agents/database-specialist.md) | 29 engines across relational, document, key-value, graph, search, time-series, OLAP |
-| [**os-specialist**](agents/os-specialist.md) | Windows Server/Client, RHEL, Rocky/Alma, Ubuntu, Debian, SLES, macOS |
-| [**networking-specialist**](agents/networking-specialist.md) | Routing/switching, firewalls, DNS, load balancing, VPN, SD-WAN, wireless, DC fabric, cloud networking |
-| [**security-specialist**](agents/security-specialist.md) | IAM, EDR, SIEM, secrets, cloud/app/network/email security, DLP, GRC, zero trust |
-| [**devops-specialist**](agents/devops-specialist.md) | CI/CD, IaC, config management, GitOps, version control |
-| [**containers-specialist**](agents/containers-specialist.md) | Kubernetes + managed distros, Helm, Docker/containerd/Podman, service mesh |
-| [**cloud-platforms-specialist**](agents/cloud-platforms-specialist.md) | AWS, Azure, GCP — architecture, migration, FinOps, cross-cloud mapping |
-| [**frontend-specialist**](agents/frontend-specialist.md) | React, Next.js, Vue, Nuxt, Angular, Svelte, Astro, Remix, Blazor, Gatsby, htmx |
-| [**backend-specialist**](agents/backend-specialist.md) | ASP.NET Core, Spring Boot, Django, Rails, Express, NestJS, FastAPI, Flask, Go, Rust |
-| [**monitoring-specialist**](agents/monitoring-specialist.md) | Prometheus, Grafana, ELK, OpenTelemetry, Datadog, New Relic, Dynatrace, Splunk, PagerDuty |
-| [**storage-specialist**](agents/storage-specialist.md) | Enterprise arrays, software-defined storage, cloud object storage |
-| [**virtualization-specialist**](agents/virtualization-specialist.md) | VMware, Proxmox, KVM, Nutanix, Citrix, cloud VMs |
-| [**cli-scripting-specialist**](agents/cli-scripting-specialist.md) | PowerShell, Bash, Python, Node.js, AWS/Azure CLI, kubectl |
-| [**etl-specialist**](agents/etl-specialist.md) | Airflow, SSIS, dbt, Spark, Kafka pipelines, ADF, Glue, Fivetran, NiFi, Talend |
-| [**analytics-specialist**](agents/analytics-specialist.md) | Power BI, Tableau, Looker, Qlik, SSAS, SSRS, Grafana, Superset, Metabase, ThoughtSpot |
-| [**api-realtime-specialist**](agents/api-realtime-specialist.md) | REST, GraphQL, gRPC, OData, WebSocket, SSE, SignalR, Socket.IO |
-| [**messaging-specialist**](agents/messaging-specialist.md) | Kafka, RabbitMQ, Pulsar, NATS, Redis Streams, SQS/SNS, Service Bus, Pub/Sub |
-| [**mail-collab-specialist**](agents/mail-collab-specialist.md) | Exchange, Microsoft 365, Google Workspace, Postfix |
-
-### Task Specialists
-
-| Agent | What It Does | Triggers On |
-|-------|-------------|-------------|
-| [**architecture-consultant**](agents/architecture-consultant.md) | Technology selection, capacity planning, architecture decisions | "which database", "recommend a stack", "compare technologies", "architecture review" |
-| [**troubleshooting-agent**](agents/troubleshooting-agent.md) | Systematic diagnostic triage with version-specific scripts and queries | "slow", "CPU high", "error", "timeout", "diagnose", "not working" |
-| [**migration-expert**](agents/migration-expert.md) | Cross-technology migration planning with feature compatibility mapping | "migrate from X to Y", "switch from", "feature mapping", "compatibility" |
-| [**iac-consultant**](agents/iac-consultant.md) | Infrastructure-as-code generation (Terraform, CloudFormation, Bicep, Pulumi) | "create Terraform", "provision", "IaC for", "deploy to cloud" |
-| [**data-expert**](agents/data-expert.md) | Data governance, classification, privacy, encryption, agent data access | "GDPR", "data classification", "PII", "data masking", "agent data access" |
-| [**security-expert**](agents/security-expert.md) | Hardening, IAM, secrets management, agent security profiles, compliance | "harden", "CIS benchmark", "IAM", "agent permissions", "SOC2", "NIST" |
-
-### How Agents Work
-
-Each agent:
-- Runs in its **own isolated context window** with a custom system prompt
-- Has **restricted tool access** (e.g., troubleshooting-agent gets Read/Grep/Glob/Bash, not Write/Edit)
-- **Preloads specific skills** via the `skills` frontmatter field (e.g., migration-expert loads database + backend + cloud-platforms + devops)
-- Uses **project memory** to persist decisions and findings across sessions
-- Returns results to the main conversation when done
-
-### Skills vs Agents
-
-| | Skill | Agent |
-|---|---|---|
-| **Answers** | "What do I know about X?" | "Help me accomplish Y" |
-| **Runs in** | Main conversation context | Own isolated context |
-| **Scope** | Single technology or domain | Cross-domain orchestration |
-| **Contains** | Facts, references, diagnostic queries | Persona, workflow, output format |
-
----
-
-## Project Structure
-
-```
-domain-expert/
-├── .claude-plugin/plugin.json    # Plugin manifest
-├── agents/                       # Subagent definitions (.md files)
-│   ├── architecture-consultant.md
-│   ├── troubleshooting-agent.md
-│   ├── migration-expert.md
-│   ├── iac-consultant.md
-│   ├── data-expert.md
-│   └── security-expert.md
-├── skills/                       # Knowledge library (SKILL.md hierarchy)
-│   ├── database/                 # 29 technologies
-│   ├── security/                 # 14 technologies
-│   ├── devops/                   # 17 technologies
-│   └── [15 more domains]
-├── CLAUDE.md                     # Plugin entry point
-└── README.md
-```
-
-### Skill Structure
-
-Every technology follows the same pattern:
-
-```
-technology/
-├── SKILL.md              # Core expertise and routing logic
+plugins/database/skills/postgresql/
+├── SKILL.md                    # 200–500 lines: core expertise + when-to-read pointers
 ├── references/
-│   ├── architecture.md   # How the technology works internally
-│   ├── best-practices.md # Operational best practices
-│   └── diagnostics.md    # Troubleshooting guides
-├── scripts/              # Diagnostic scripts (SQL, PowerShell, Bash)
-│   └── 01-health.ps1
-├── configs/              # Configuration references (Frontend domain)
-│   └── tsconfig.json
-├── patterns/             # Code patterns (Frontend domain)
-│   └── data-fetching.md
-└── version/              # Version-specific knowledge
-    └── SKILL.md
+│   ├── versions/14.md … 18.md  # per-version features, deprecations, upgrade nuances
+│   └── *.md                    # deep-dive docs, loaded only when needed
+├── scripts/                    # runnable diagnostics (scripts/versions/<v>/ when version-specific)
+└── assets/                     # config templates used in output
 ```
 
-### Cross-References
+Skills follow a strict quality bar (see [CLAUDE.md](CLAUDE.md)): descriptions state what the skill covers, when to use it, and when **not** to (negative triggers against overlapping skills); bodies stay in the 200–500 line sweet spot with detail pushed to references; instructions are directives, not essays. Every plugin ships `evals/trigger-evals.json` — a positive and a hard near-miss prompt per skill — so trigger accuracy is testable.
 
-Technologies that span multiple domains use cross-references instead of duplication:
-- **Hyper-V** lives in `os/windows-server/hyper-v/` and is cross-referenced from virtualization
-- **Podman** lives in `os/rhel/podman/` and is cross-referenced from containers
-- **SELinux** lives in `os/rhel/selinux/` and is cross-referenced from security
-- **Redis** covers database use cases in `database/redis/` and messaging patterns are cross-referenced
+## Usage
 
----
+Just describe what you need. Knowledge questions trigger the matching technology skill; single-domain work auto-delegates to that domain's specialist agent; cross-domain tasks go to a task agent from `domain-expert-core`. Advanced users can invoke directly: `/database:postgresql`, `/security:iam`, or `@database-specialist`.
 
-## Repository Statistics
+## Keeping Plugins Up to Date
 
-| Domain | Technologies | Files | Lines |
-|---|---|---|---|
-| Database | 29 | 238 | 119,694 |
-| Security | 14 | 227 | 77,043 |
-| Operating System | 8 | 261 | 49,452 |
-| Networking | 12 | 192 | 42,609 |
-| Backend | 10 | 54 | 26,770 |
-| Frontend | 11 | 116 | 25,844 |
-| DevOps | 17 | 81 | 14,257 |
-| Containers | 3 | 45 | 13,539 |
-| CLI / Scripting | 7 | 57 | 12,153 |
-| Monitoring | 11 | 50 | 9,882 |
-| ETL / Data Integration | 14 | 75 | 17,596 |
-| Virtualization | 5 | 41 | 8,997 |
-| Storage | 12 | 60 | 6,497 |
-| Data Analytics / BI | 11 | 55 | 14,271 |
-| Cloud Platforms | 3 | 30 | 5,797 |
-| API & Real-Time | 8 | 36 | 7,232 |
-| Messaging | 8 | 30 | 4,881 |
-| Mail & Collaboration | 4 | 20 | 5,084 |
-| **Total** | **187** | **1,668** | **461,598** |
+Ask Claude (the `update-plugin` skill in `domain-expert-core` handles it):
 
----
+```
+> Update my domain-expert plugins to the latest version.
+```
 
-## Version Currency
+Or manually:
 
-All skills reflect technology versions current as of **April 2026**. Each skill notes:
-- Support status (Active, LTS, Maintenance, EOL)
-- End-of-life dates where applicable
-- Migration guidance for nearing-EOL versions
+```bash
+claude plugin marketplace update domain-expert
+claude plugin update database@domain-expert
+```
 
----
+> Restart Claude Code after updating — the running session keeps the version it started with.
+
+## Other Platforms
+
+The skills are standard `SKILL.md` bundles, so they work anywhere Agent Skills are supported. For GitHub Copilot CLI, OpenAI Codex CLI, or Gemini CLI, copy the skill folders of the domains you want into that tool's skills directory, e.g.:
+
+```bash
+git clone https://github.com/chrishuffman5/domain-expert.git
+cp -r domain-expert/plugins/database/skills/* ~/.codex/skills/
+```
+
+Subagents and the marketplace/update flows are Claude Code-specific.
+
+## Evals
+
+Two layers:
+
+- **Repo-level agent suites** (`evals/`) — measure each domain specialist's accuracy against a no-tools baseline; results feed the [dashboard](https://chrishuffman5.github.io/domain-expert/).
+- **Per-plugin trigger evals** (`plugins/<domain>/evals/trigger-evals.json`) — positive + near-miss prompts per skill to catch missed triggers and false fires.
+
+## Contributing / Development
+
+```bash
+claude plugin validate .                    # marketplace catalog
+claude plugin validate ./plugins/database   # any plugin you touch
+claude --plugin-dir ./plugins/database      # test a plugin locally without installing
+```
+
+Conventions are enforced per [CLAUDE.md](CLAUDE.md). Each plugin versions independently via its `plugin.json` — bump `version` on every release or users won't receive updates.
 
 ## License
 
-MIT — See [LICENSE](LICENSE) for full terms, including the AI agent liability disclaimer.
+MIT — see [LICENSE](LICENSE).

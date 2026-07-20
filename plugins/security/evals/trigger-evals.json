@@ -1,0 +1,1649 @@
+{
+  "plugin": "security",
+  "cases": [
+    {
+      "id": "overview-pos",
+      "skill": "overview",
+      "prompt": "We're building out a zero trust architecture for our hybrid environment and need to map defense-in-depth layers against MITRE ATT&CK -- where do we even start?",
+      "should_trigger": true
+    },
+    {
+      "id": "overview-neg",
+      "skill": "overview",
+      "prompt": "How do I set up Conditional Access policies in Entra ID so unmanaged devices get blocked from our zero trust rollout?",
+      "should_trigger": false
+    },
+    {
+      "id": "iam-pos",
+      "skill": "iam",
+      "prompt": "We need to redesign our SSO and MFA strategy company-wide and pick a federation approach that works across our cloud and on-prem apps -- what's a sane cross-platform IAM architecture?",
+      "should_trigger": true
+    },
+    {
+      "id": "iam-neg",
+      "skill": "iam",
+      "prompt": "How do I configure SCIM provisioning in Okta so terminated employees in our HR system get deprovisioned automatically?",
+      "should_trigger": false
+    },
+    {
+      "id": "ad-ds-pos",
+      "skill": "ad-ds",
+      "prompt": "dcdiag is throwing replication errors on our new branch-office domain controller and I can't tell which FSMO role holder is out of sync, how do I fix this with repadmin?",
+      "should_trigger": true
+    },
+    {
+      "id": "ad-ds-neg",
+      "skill": "ad-ds",
+      "prompt": "Certify is flagging one of our certificate templates as vulnerable to ESC1 -- how do we lock down the enrollment permissions on the CA?",
+      "should_trigger": false
+    },
+    {
+      "id": "ad-cs-pos",
+      "skill": "ad-cs",
+      "prompt": "Certipy found our enterprise CA is vulnerable to ESC8 because web enrollment is exposed over HTTP -- what's the remediation for NTLM relay against AD CS?",
+      "should_trigger": true
+    },
+    {
+      "id": "ad-cs-neg",
+      "skill": "ad-cs",
+      "prompt": "Our AD FS relying party trust to a SaaS vendor broke after we rotated the token signing certificate, users are getting stuck at the WAP proxy -- how do I fix the trust?",
+      "should_trigger": false
+    },
+    {
+      "id": "ad-fs-pos",
+      "skill": "ad-fs",
+      "prompt": "SSO to our SAML relying party is failing right after we rotated the AD FS token signing certificate -- the WAP proxy shows a trust error, how do I resolve it?",
+      "should_trigger": true
+    },
+    {
+      "id": "ad-fs-neg",
+      "skill": "ad-fs",
+      "prompt": "We want laptops to auto-enroll for certificates via GPO -- how do we configure the certificate template to allow autoenrollment?",
+      "should_trigger": false
+    },
+    {
+      "id": "entra-id-pos",
+      "skill": "entra-id",
+      "prompt": "Conditional Access is blocking passkey sign-ins for our field techs even though their devices show compliant in Intune -- how do I debug the CA policy evaluation?",
+      "should_trigger": true
+    },
+    {
+      "id": "entra-id-neg",
+      "skill": "entra-id",
+      "prompt": "Our Okta Universal Directory sync keeps erroring out when it tries to provision new hires from Workday -- any idea what's wrong?",
+      "should_trigger": false
+    },
+    {
+      "id": "okta-pos",
+      "skill": "okta",
+      "prompt": "Our Okta Workflows automation for deprovisioning terminated employees isn't firing on the HR trigger -- how do I debug the flow?",
+      "should_trigger": true
+    },
+    {
+      "id": "okta-neg",
+      "skill": "okta",
+      "prompt": "We need Conditional Access policies to block legacy authentication protocols across our M365 tenant -- how do we set that up?",
+      "should_trigger": false
+    },
+    {
+      "id": "auth0-pos",
+      "skill": "auth0",
+      "prompt": "Our Auth0 Universal Login custom domain started throwing SSL handshake errors after we added a second tenant -- what's misconfigured?",
+      "should_trigger": true
+    },
+    {
+      "id": "auth0-neg",
+      "skill": "auth0",
+      "prompt": "We're evaluating Keycloak's Organizations feature for a multi-tenant B2B customer portal -- is it mature enough to use yet?",
+      "should_trigger": false
+    },
+    {
+      "id": "keycloak-pos",
+      "skill": "keycloak",
+      "prompt": "Our Keycloak realm's identity brokering with an external SAML IdP keeps failing with an invalid signature error, running on the Quarkus distribution -- how do I fix the broker config?",
+      "should_trigger": true
+    },
+    {
+      "id": "keycloak-neg",
+      "skill": "keycloak",
+      "prompt": "We need Auth0 Actions to enforce a custom step-up MFA rule during login for our SaaS app -- how do I write that?",
+      "should_trigger": false
+    },
+    {
+      "id": "ping-identity-pos",
+      "skill": "ping-identity",
+      "prompt": "PingFederate is throwing an OAuth token exchange error partway through our DaVinci orchestration flow -- what's likely misconfigured in the connector?",
+      "should_trigger": true
+    },
+    {
+      "id": "ping-identity-neg",
+      "skill": "ping-identity",
+      "prompt": "Okta ThreatInsight is blocking legitimate login attempts from our office VPN egress range -- how do I whitelist that network?",
+      "should_trigger": false
+    },
+    {
+      "id": "sailpoint-pos",
+      "skill": "sailpoint",
+      "prompt": "Our SailPoint IdentityNow access certification campaign isn't picking up new entitlements from the Workday connector -- how do I troubleshoot the aggregation?",
+      "should_trigger": true
+    },
+    {
+      "id": "sailpoint-neg",
+      "skill": "sailpoint",
+      "prompt": "We want Okta Lifecycle Management to auto-deactivate an account the moment someone is terminated in Workday -- how do we wire that up?",
+      "should_trigger": false
+    },
+    {
+      "id": "aws-iam-pos",
+      "skill": "aws-iam",
+      "prompt": "A Lambda function is getting AccessDenied when it tries to assume a cross-account role even though the trust policy looks correct -- how do I debug the IAM role chain?",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-iam-neg",
+      "skill": "aws-iam",
+      "prompt": "We want our CI pipeline to authenticate to Google Cloud using Workload Identity Federation instead of a downloaded service account key -- how do we set that up?",
+      "should_trigger": false
+    },
+    {
+      "id": "gcp-iam-pos",
+      "skill": "gcp-iam",
+      "prompt": "Our VPC Service Controls perimeter is blocking a legit BigQuery query from a service in a different project -- how do I add the right access level to the perimeter?",
+      "should_trigger": true
+    },
+    {
+      "id": "gcp-iam-neg",
+      "skill": "gcp-iam",
+      "prompt": "We need cross-account IAM roles so our security team's account can assume read-only roles into all our other AWS accounts -- what's the trust policy pattern?",
+      "should_trigger": false
+    },
+    {
+      "id": "edr-pos",
+      "skill": "edr",
+      "prompt": "We're evaluating EDR platforms for a 5,000-endpoint fleet -- what's the practical difference between IOA-based and IOC-based detection when picking a vendor?",
+      "should_trigger": true
+    },
+    {
+      "id": "edr-neg",
+      "skill": "edr",
+      "prompt": "Our CrowdStrike RTR session keeps disconnecting mid-way when I try to pull a suspicious file off a Windows host -- what's causing the timeout?",
+      "should_trigger": false
+    },
+    {
+      "id": "crowdstrike-pos",
+      "skill": "crowdstrike",
+      "prompt": "Our CrowdStrike Falcon RTR session keeps timing out whenever I try to pull files from a remote Windows host -- what's going on?",
+      "should_trigger": true
+    },
+    {
+      "id": "crowdstrike-neg",
+      "skill": "crowdstrike",
+      "prompt": "SentinelOne's 1-click rollback isn't restoring encrypted files after a ransomware detection fired -- what would cause the rollback to fail?",
+      "should_trigger": false
+    },
+    {
+      "id": "defender-endpoint-pos",
+      "skill": "defender-endpoint",
+      "prompt": "Our Defender for Endpoint ASR rule 'Block credential stealing from LSASS' is quarantining a legit backup agent -- how do I scope an exclusion without weakening the rule everywhere?",
+      "should_trigger": true
+    },
+    {
+      "id": "defender-endpoint-neg",
+      "skill": "defender-endpoint",
+      "prompt": "CrowdStrike's Falcon sensor install is failing silently on our new Windows Server 2022 hosts -- what logs should I check?",
+      "should_trigger": false
+    },
+    {
+      "id": "sentinelone-pos",
+      "skill": "sentinelone",
+      "prompt": "SentinelOne's Storyline keeps auto-quarantining our internal PowerShell deployment script as malicious -- how do I write a STAR rule exception for it?",
+      "should_trigger": true
+    },
+    {
+      "id": "sentinelone-neg",
+      "skill": "sentinelone",
+      "prompt": "I need to write a KQL advanced hunting query in Defender to find lateral movement via WMI across our device fleet -- can you help build it?",
+      "should_trigger": false
+    },
+    {
+      "id": "cortex-xdr-pos",
+      "skill": "cortex-xdr",
+      "prompt": "Cortex XDR's Causality View isn't correlating alerts from our Palo Alto NGFW with the endpoint process tree anymore -- how do I fix the data source integration?",
+      "should_trigger": true
+    },
+    {
+      "id": "cortex-xdr-neg",
+      "skill": "cortex-xdr",
+      "prompt": "We need to write EQL detection rules in Elastic Security to catch process injection into explorer.exe -- what's the syntax?",
+      "should_trigger": false
+    },
+    {
+      "id": "carbon-black-pos",
+      "skill": "carbon-black",
+      "prompt": "Our CB Enterprise EDR watchlist using Lucene query syntax isn't matching hashes from our custom IOC feed -- what's wrong with the query?",
+      "should_trigger": true
+    },
+    {
+      "id": "carbon-black-neg",
+      "skill": "carbon-black",
+      "prompt": "I need Live Terminal access in Cortex XDR to investigate a possibly compromised host in real time -- how do I open a session?",
+      "should_trigger": false
+    },
+    {
+      "id": "elastic-defend-pos",
+      "skill": "elastic-defend",
+      "prompt": "Elastic Agent shows 'unhealthy' in Fleet right after we pushed a new Elastic Defend policy with ransomware prevention turned on -- how do I troubleshoot the agent status?",
+      "should_trigger": true
+    },
+    {
+      "id": "elastic-defend-neg",
+      "skill": "elastic-defend",
+      "prompt": "We need to do process tree investigation in Carbon Black Enterprise EDR for a suspicious binary that spawned cmd.exe -- how does that view work?",
+      "should_trigger": false
+    },
+    {
+      "id": "sophos-pos",
+      "skill": "sophos",
+      "prompt": "Sophos Intercept X's CryptoGuard keeps rolling back file changes made by our legitimate backup software, flagging it as ransomware -- how do I exclude that process safely?",
+      "should_trigger": true
+    },
+    {
+      "id": "sophos-neg",
+      "skill": "sophos",
+      "prompt": "SentinelOne's deep learning model is throwing a lot of false positives on our internal build tools -- how do I tune the detection engine?",
+      "should_trigger": false
+    },
+    {
+      "id": "wazuh-pos",
+      "skill": "wazuh",
+      "prompt": "Wazuh FIM isn't picking up changes to /etc/passwd on our Linux agents even though I configured the syscheck block in ossec.conf -- what am I missing?",
+      "should_trigger": true
+    },
+    {
+      "id": "wazuh-neg",
+      "skill": "wazuh",
+      "prompt": "We want Sophos Central to manage our EDR fleet across a mix of Windows and Linux endpoints -- how does the unified console handle policy differences?",
+      "should_trigger": false
+    },
+    {
+      "id": "secrets-pos",
+      "skill": "secrets",
+      "prompt": "We're trying to pick a secrets management strategy across our multi-cloud AWS and Azure footprint, with HSM-backed rotation as a requirement -- what should we be weighing?",
+      "should_trigger": true
+    },
+    {
+      "id": "secrets-neg",
+      "skill": "secrets",
+      "prompt": "Vault's KV v2 engine is returning permission denied when our AppRole tries to read a path, even though the policy looks correct -- what's wrong?",
+      "should_trigger": false
+    },
+    {
+      "id": "vault-pos",
+      "skill": "vault",
+      "prompt": "Vault's KV v2 engine keeps returning permission denied when our AppRole tries to read a secret path, even though the attached policy looks correct -- what am I missing?",
+      "should_trigger": true
+    },
+    {
+      "id": "vault-neg",
+      "skill": "vault",
+      "prompt": "CyberArk's CPM isn't auto-rotating our Windows service account password and PVWA is showing a reconciliation failure -- how do I fix the rotation?",
+      "should_trigger": false
+    },
+    {
+      "id": "cyberark-pos",
+      "skill": "cyberark",
+      "prompt": "CyberArk's CPM isn't auto-rotating a Windows service account password and PVWA shows a reconciliation account failure -- how do I troubleshoot that?",
+      "should_trigger": true
+    },
+    {
+      "id": "cyberark-neg",
+      "skill": "cyberark",
+      "prompt": "Our CI pipeline's Vault AppRole authentication started failing with permission denied when requesting a token -- what's the fix?",
+      "should_trigger": false
+    },
+    {
+      "id": "aws-secrets-pos",
+      "skill": "aws-secrets",
+      "prompt": "AWS Secrets Manager's native RDS rotation Lambda is failing right at the setSecret step -- how do I debug what's going wrong in the rotation function?",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-secrets-neg",
+      "skill": "aws-secrets",
+      "prompt": "Azure Key Vault's soft-delete is stopping us from recreating a secret with the same name, and purge protection is blocking the usual workaround -- how do we get around this?",
+      "should_trigger": false
+    },
+    {
+      "id": "azure-key-vault-pos",
+      "skill": "azure-key-vault",
+      "prompt": "Azure Key Vault's soft-delete is preventing us from recreating a secret with the same name, and purge protection is blocking the usual workaround -- what's the right way to handle this?",
+      "should_trigger": true
+    },
+    {
+      "id": "azure-key-vault-neg",
+      "skill": "azure-key-vault",
+      "prompt": "AWS Secrets Manager's multi-region replication isn't syncing our just-rotated secret over to the us-west-2 replica -- what would cause that lag?",
+      "should_trigger": false
+    },
+    {
+      "id": "1password-secrets-pos",
+      "skill": "1password-secrets",
+      "prompt": "Our self-hosted 1Password Connect Server keeps returning 401s when the Kubernetes operator tries to sync a vault item -- how do I fix the service account token scope?",
+      "should_trigger": true
+    },
+    {
+      "id": "1password-secrets-neg",
+      "skill": "1password-secrets",
+      "prompt": "Doppler's Kubernetes operator isn't syncing our config down into a Kubernetes secret, it just sits in a pending state -- what's going wrong?",
+      "should_trigger": false
+    },
+    {
+      "id": "doppler-pos",
+      "skill": "doppler",
+      "prompt": "`doppler run` isn't injecting our staging environment variables into the container at all -- I think the service token might be scoped to the wrong config, how do I check?",
+      "should_trigger": true
+    },
+    {
+      "id": "doppler-neg",
+      "skill": "doppler",
+      "prompt": "1Password's op CLI isn't authenticating with our service account when it runs inside a GitHub Actions workflow -- what am I missing in the setup?",
+      "should_trigger": false
+    },
+    {
+      "id": "infisical-pos",
+      "skill": "infisical",
+      "prompt": "Infisical's Kubernetes operator isn't pulling dynamic secrets from our self-hosted instance down into the pod -- what's misconfigured?",
+      "should_trigger": true
+    },
+    {
+      "id": "infisical-neg",
+      "skill": "infisical",
+      "prompt": "Doppler's native AWS sync integration stopped pushing our updated secrets over to Systems Manager Parameter Store -- how do I debug the sync?",
+      "should_trigger": false
+    },
+    {
+      "id": "sops-pos",
+      "skill": "sops",
+      "prompt": "`sops -d` is failing with 'no matching creation rule' on our Kubernetes secrets YAML after we rotated our age key -- how do I fix the .sops.yaml config?",
+      "should_trigger": true
+    },
+    {
+      "id": "sops-neg",
+      "skill": "sops",
+      "prompt": "We want to use Infisical's internal PKI feature to issue short-lived TLS certs to our microservices -- how does that work?",
+      "should_trigger": false
+    },
+    {
+      "id": "pki-pos",
+      "skill": "pki",
+      "prompt": "We're designing our CA hierarchy from scratch for a new internal PKI -- should we go two-tier or three-tier, and how does ACME fit alongside manual enrollment?",
+      "should_trigger": true
+    },
+    {
+      "id": "pki-neg",
+      "skill": "pki",
+      "prompt": "cert-manager's ClusterIssuer for Let's Encrypt keeps failing the DNS-01 challenge on our Kubernetes cluster -- the TXT record never seems to propagate in time, how do I fix it?",
+      "should_trigger": false
+    },
+    {
+      "id": "cert-manager-pos",
+      "skill": "cert-manager",
+      "prompt": "cert-manager's ClusterIssuer for Let's Encrypt keeps failing the DNS-01 challenge on our cluster -- the TXT record never propagates before it times out, how do I fix the solver?",
+      "should_trigger": true
+    },
+    {
+      "id": "cert-manager-neg",
+      "skill": "cert-manager",
+      "prompt": "We're designing our overall PKI CA hierarchy from scratch and trying to decide between a two-tier and three-tier CA model before we automate anything -- any guidance?",
+      "should_trigger": false
+    },
+    {
+      "id": "digicert-pos",
+      "skill": "digicert",
+      "prompt": "DigiCert CertCentral's auto-renewal for our EV certificate didn't trigger before expiry and now our checkout page is throwing a cert warning -- how do I fix the renewal rule?",
+      "should_trigger": true
+    },
+    {
+      "id": "digicert-neg",
+      "skill": "digicert",
+      "prompt": "cert-manager's ClusterIssuer pointed at our internal CA keeps failing to issue certs to newly created pods -- what's wrong with the issuer config?",
+      "should_trigger": false
+    },
+    {
+      "id": "ejbca-pos",
+      "skill": "ejbca",
+      "prompt": "We're standing up an internal enterprise CA hierarchy in EJBCA with a root CA and two issuing CAs, and need to integrate an HSM for the root key. Can you help design the CA hierarchy and PKCS#11 config?",
+      "should_trigger": true
+    },
+    {
+      "id": "ejbca-neg",
+      "skill": "ejbca",
+      "prompt": "We just need something quick to auto-issue TLS certs for our internal dev VMs using OIDC-based short-lived certs off our IdP, nothing enterprise-grade with HSMs or a full CA hierarchy.",
+      "should_trigger": false
+    },
+    {
+      "id": "lets-encrypt-pos",
+      "skill": "lets-encrypt",
+      "prompt": "certbot keeps failing on our nginx box with 'Failed authorization procedure... urn:ietf:params:acme:error:unauthorized' during the HTTP-01 challenge, cert renewal is broken for prod.example.com.",
+      "should_trigger": true
+    },
+    {
+      "id": "lets-encrypt-neg",
+      "skill": "lets-encrypt",
+      "prompt": "We want to run our own internal step-ca server so our Kubernetes pods can get short-lived TLS certs automatically via ACME, without hitting a public CA at all.",
+      "should_trigger": false
+    },
+    {
+      "id": "smallstep-pos",
+      "skill": "smallstep",
+      "prompt": "Setting up step-ca for internal service-to-service mTLS, and want short-lived SSH host certificates issued off our OIDC provider too. How do I configure the step CLI for both cert types?",
+      "should_trigger": true
+    },
+    {
+      "id": "smallstep-neg",
+      "skill": "smallstep",
+      "prompt": "Our certbot renewal cron job for our public-facing site failed last night, getting rate limited because we accidentally pointed it at the Let's Encrypt production endpoint instead of staging while testing.",
+      "should_trigger": false
+    },
+    {
+      "id": "venafi-pos",
+      "skill": "venafi",
+      "prompt": "We have thousands of certs scattered across the org with zero visibility, need Venafi TLS Protect to run certificate discovery and enforce policy on key lengths and approved CAs enterprise-wide.",
+      "should_trigger": true
+    },
+    {
+      "id": "venafi-neg",
+      "skill": "venafi",
+      "prompt": "Need to design a 3-tier CA hierarchy from scratch \u2014 root, policy, and issuing CAs \u2014 with an HSM-backed root key for a brand new internal PKI.",
+      "should_trigger": false
+    },
+    {
+      "id": "siem-pos",
+      "skill": "siem",
+      "prompt": "We're evaluating SIEM platforms for a 500-person org and trying to decide between a couple of options \u2014 want to understand SIGMA rule portability and log ingestion cost models before we commit to one.",
+      "should_trigger": true
+    },
+    {
+      "id": "siem-neg",
+      "skill": "siem",
+      "prompt": "Our Splunk indexers are falling behind on ingestion and the search head CPU is pegged during peak hours, need to fix a line-breaking issue in props.conf.",
+      "should_trigger": false
+    },
+    {
+      "id": "sentinel-pos",
+      "skill": "sentinel",
+      "prompt": "Writing a KQL analytics rule in Microsoft Sentinel to detect impossible-travel logins off SigninLogs, and want to tune the ASIM normalization for it too.",
+      "should_trigger": true
+    },
+    {
+      "id": "sentinel-neg",
+      "skill": "sentinel",
+      "prompt": "Need to build a Logic Apps playbook in Sentinel that auto-isolates a VM when a high-severity incident fires, authenticating with a managed identity instead of a service principal.",
+      "should_trigger": false
+    },
+    {
+      "id": "splunk-pos",
+      "skill": "splunk",
+      "prompt": "Our Splunk search head is timing out on a SPL query joining CIM-normalized auth data models, and the indexers show SmartStore cache misses spiking \u2014 think props.conf needs retuning.",
+      "should_trigger": true
+    },
+    {
+      "id": "splunk-neg",
+      "skill": "splunk",
+      "prompt": "We use Splunk purely for infra observability dashboards and ITSI service health scores, want to set up predictive alerting on service KPIs \u2014 nothing security related, just ops metrics.",
+      "should_trigger": false
+    },
+    {
+      "id": "splunk-es-pos",
+      "skill": "splunk-es",
+      "prompt": "In Splunk ES our risk-based alerting is generating way too many notable events from the same correlation search, need to tune the risk score thresholds and the adaptive response actions.",
+      "should_trigger": true
+    },
+    {
+      "id": "splunk-es-neg",
+      "skill": "splunk-es",
+      "prompt": "Just need to write a plain SPL search against our firewall index and save it as a scheduled search with an email alert action \u2014 no ES app involved.",
+      "should_trigger": false
+    },
+    {
+      "id": "elastic-security-pos",
+      "skill": "elastic-security",
+      "prompt": "Writing an EQL sequence rule in Elastic Security to catch process injection followed by outbound C2 beaconing, and need help mapping the fields to ECS correctly.",
+      "should_trigger": true
+    },
+    {
+      "id": "elastic-security-neg",
+      "skill": "elastic-security",
+      "prompt": "We use Kibana and Elasticsearch purely for app log dashboards and APM tracing, no detection rules involved, just want faster query performance on our cluster.",
+      "should_trigger": false
+    },
+    {
+      "id": "qradar-pos",
+      "skill": "qradar",
+      "prompt": "Need to write an AQL query in QRadar to pull offenses tied to a specific reference set, and also tune a DSM for a custom log source that's misparsing events.",
+      "should_trigger": true
+    },
+    {
+      "id": "qradar-neg",
+      "skill": "qradar",
+      "prompt": "We're trying to decide between QRadar and Splunk ES for our new SOC build-out \u2014 budget and analyst headcount are the main constraints, haven't picked a platform yet.",
+      "should_trigger": false
+    },
+    {
+      "id": "chronicle-pos",
+      "skill": "chronicle",
+      "prompt": "Writing a YARA-L 2.0 rule in Chronicle to detect lateral movement using the UDM, and want to enable retroactive matching against the last 12 months of ingested data.",
+      "should_trigger": true
+    },
+    {
+      "id": "chronicle-neg",
+      "skill": "chronicle",
+      "prompt": "Need generic guidance on writing detection rules that could translate across multiple SIEMs using SIGMA syntax \u2014 we haven't committed to a specific platform yet.",
+      "should_trigger": false
+    },
+    {
+      "id": "logscale-pos",
+      "skill": "logscale",
+      "prompt": "Our Falcon LogScale LQL query is timing out over 90 days of high-volume DNS logs \u2014 want to understand the index-free streaming architecture and bloom filter tuning to speed it up.",
+      "should_trigger": true
+    },
+    {
+      "id": "logscale-neg",
+      "skill": "logscale",
+      "prompt": "Our CrowdStrike Falcon sensor flagged a process as malicious but didn't auto-quarantine it \u2014 need to check the detection/prevention policy config on the endpoint itself.",
+      "should_trigger": false
+    },
+    {
+      "id": "xsiam-pos",
+      "skill": "xsiam",
+      "prompt": "Building an XQL correlation query in Cortex XSIAM to cluster related alerts using the ML-based correlation engine, and want the Investigation Graph to auto-populate from it.",
+      "should_trigger": true
+    },
+    {
+      "id": "xsiam-neg",
+      "skill": "xsiam",
+      "prompt": "Need to write a Cortex XSOAR playbook in YAML/Python that enriches an indicator via TIM and posts the results to the war room.",
+      "should_trigger": false
+    },
+    {
+      "id": "soar-pos",
+      "skill": "soar",
+      "prompt": "We're comparing SOAR platforms \u2014 Tines vs XSOAR vs Splunk SOAR \u2014 trying to figure out an automation maturity model and which one fits a small 3-person SOC.",
+      "should_trigger": true
+    },
+    {
+      "id": "soar-neg",
+      "skill": "soar",
+      "prompt": "Need to build a no-code Tines story with an HTTP action and a Transform block to pull phishing emails from our mailbox and auto-triage them.",
+      "should_trigger": false
+    },
+    {
+      "id": "sentinel-playbooks-pos",
+      "skill": "sentinel-playbooks",
+      "prompt": "Need an automation rule in Sentinel that triggers a Logic Apps playbook on incident creation to post a Teams message and tag the entity, using managed identity instead of a service principal.",
+      "should_trigger": true
+    },
+    {
+      "id": "sentinel-playbooks-neg",
+      "skill": "sentinel-playbooks",
+      "prompt": "Writing a KQL detection rule for Sentinel to flag anomalous Azure AD sign-ins using UEBA, and want to tune the Fusion ML sensitivity.",
+      "should_trigger": false
+    },
+    {
+      "id": "splunk-soar-pos",
+      "skill": "splunk-soar",
+      "prompt": "Building a visual playbook in Splunk SOAR (Phantom) that pulls a container from a notable event in ES and runs a VirusTotal lookup app action automatically.",
+      "should_trigger": true
+    },
+    {
+      "id": "splunk-soar-neg",
+      "skill": "splunk-soar",
+      "prompt": "Trying to decide between Splunk SOAR, XSOAR, and Tines for our automation platform, want a comparison of app ecosystem maturity before we commit.",
+      "should_trigger": false
+    },
+    {
+      "id": "tines-pos",
+      "skill": "tines",
+      "prompt": "Building a Tines story with a webhook Trigger, an HTTP action to call our EDR API, and a Transform action to reshape the JSON before sending a Slack alert \u2014 trying to stay on the free team edition.",
+      "should_trigger": true
+    },
+    {
+      "id": "tines-neg",
+      "skill": "tines",
+      "prompt": "Need to set up an AI-powered case management workflow in Torq where SOC Copilot auto-suggests remediation steps on incoming alerts.",
+      "should_trigger": false
+    },
+    {
+      "id": "torq-pos",
+      "skill": "torq",
+      "prompt": "Setting up a Torq hyperautomation workflow where SOC Copilot auto-suggests remediation steps and the visual builder routes cases to the right analyst based on severity.",
+      "should_trigger": true
+    },
+    {
+      "id": "torq-neg",
+      "skill": "torq",
+      "prompt": "Need to wire up a simple no-code Tines story connecting our ticketing system webhook to a Slack notification, trying to keep it within the free tier.",
+      "should_trigger": false
+    },
+    {
+      "id": "xsoar-pos",
+      "skill": "xsoar",
+      "prompt": "Writing a Cortex XSOAR playbook in Python that enriches an indicator through TIM, posts results to the war room, and installs a content pack from the marketplace.",
+      "should_trigger": true
+    },
+    {
+      "id": "xsoar-neg",
+      "skill": "xsoar",
+      "prompt": "Need to configure XQL queries and Automation Center playbooks inside Cortex XSIAM, want the AI-driven SOC to auto-correlate related alerts for me.",
+      "should_trigger": false
+    },
+    {
+      "id": "network-security-pos",
+      "skill": "network-security",
+      "prompt": "Trying to decide whether we need a NAC solution plus a network IDS/IPS for east-west visibility \u2014 evaluating options across a few vendors before we pick specific products.",
+      "should_trigger": true
+    },
+    {
+      "id": "network-security-neg",
+      "skill": "network-security",
+      "prompt": "Our Suricata sensor is dropping packets at like 40% during peak traffic, EVE JSON logs show af-packet drops climbing, need to fix the capture config.",
+      "should_trigger": false
+    },
+    {
+      "id": "cisco-ise-pos",
+      "skill": "cisco-ise",
+      "prompt": "Configuring 802.1X with EAP-TLS on Cisco ISE, need a RADIUS policy set with TrustSec SGT tagging across our PSN nodes, and endpoint profiling isn't classifying our IP phones correctly.",
+      "should_trigger": true
+    },
+    {
+      "id": "cisco-ise-neg",
+      "skill": "cisco-ise",
+      "prompt": "Need to set up OnGuard posture assessment and a captive portal for guest access on our Aruba ClearPass deployment.",
+      "should_trigger": false
+    },
+    {
+      "id": "clearpass-pos",
+      "skill": "clearpass",
+      "prompt": "Aruba ClearPass OnGuard agent isn't reporting posture correctly for our Windows laptops, and CPPM's device fingerprinting is misclassifying printers as unknown \u2014 need help with the profiling policy.",
+      "should_trigger": true
+    },
+    {
+      "id": "clearpass-neg",
+      "skill": "clearpass",
+      "prompt": "Configuring TrustSec SGT-based segmentation and pxGrid integration across our Cisco ISE PAN/MnT/PSN distributed deployment.",
+      "should_trigger": false
+    },
+    {
+      "id": "fortinac-pos",
+      "skill": "fortinac",
+      "prompt": "FortiNAC isn't discovering our OT devices on the plant floor network, agentless profiling keeps timing them out, and we want FortiGate Security Fabric integration to auto-quarantine rogue devices.",
+      "should_trigger": true
+    },
+    {
+      "id": "fortinac-neg",
+      "skill": "fortinac",
+      "prompt": "Need to write a FortiGate firewall policy to block inter-VLAN traffic between our guest and corp segments \u2014 just a straightforward firewall rule, no NAC involved.",
+      "should_trigger": false
+    },
+    {
+      "id": "illumio-pos",
+      "skill": "illumio",
+      "prompt": "Setting up ring-fencing policy in Illumio PCE using label-based rules (role/app/env/location), and the VEN agents on our app-tier workloads aren't reporting flow data to the application dependency map.",
+      "should_trigger": true
+    },
+    {
+      "id": "illumio-neg",
+      "skill": "illumio",
+      "prompt": "Evaluating Akamai Guardicore Centra's deception honeypots and process-level segmentation for east-west visibility as an alternative to our current agent-based tool.",
+      "should_trigger": false
+    },
+    {
+      "id": "guardicore-pos",
+      "skill": "guardicore",
+      "prompt": "Deploying Guardicore Centra agentless collectors for east-west traffic analysis, and want to set up deception honeypots plus label-based policy for our PCI segment.",
+      "should_trigger": true
+    },
+    {
+      "id": "guardicore-neg",
+      "skill": "guardicore",
+      "prompt": "Need to configure enforcement boundaries and ring-fencing with label-based policy in Illumio PCE, and the VEN agent install is failing on our RHEL workloads.",
+      "should_trigger": false
+    },
+    {
+      "id": "snort-pos",
+      "skill": "snort",
+      "prompt": "Writing a Snort 3 rule with sticky buffers and the service keyword to detect a specific HTTP exploit pattern, and want to enable OpenAppID with hyperscan for performance.",
+      "should_trigger": true
+    },
+    {
+      "id": "snort-neg",
+      "skill": "snort",
+      "prompt": "Our Suricata IPS inline mode is dropping legitimate traffic \u2014 EVE JSON shows a rule over-matching on JA3 fingerprints, need to tune it down.",
+      "should_trigger": false
+    },
+    {
+      "id": "suricata-pos",
+      "skill": "suricata",
+      "prompt": "Our Suricata sensor is dropping packets at like 40% during peak traffic, EVE JSON logs show af-packet drops climbing, and I need to tune suricata.yaml for better capture performance.",
+      "should_trigger": true
+    },
+    {
+      "id": "suricata-neg",
+      "skill": "suricata",
+      "prompt": "Porting a Talos rule from Snort 2 syntax to Snort 3 with sticky buffers, and want to enable OpenAppID for app detection while we're at it.",
+      "should_trigger": false
+    },
+    {
+      "id": "zeek-pos",
+      "skill": "zeek",
+      "prompt": "Zeek's conn.log isn't populating the service field correctly for a custom protocol \u2014 need to write a Spicy parser and an event-driven script to classify the traffic properly across our cluster.",
+      "should_trigger": true
+    },
+    {
+      "id": "zeek-neg",
+      "skill": "zeek",
+      "prompt": "Need our IDS in inline blocking mode so it actively drops malicious packets instead of just logging them \u2014 want true IPS behavior, not passive monitoring.",
+      "should_trigger": false
+    },
+    {
+      "id": "cloud-security-pos",
+      "skill": "cloud-security",
+      "prompt": "We're evaluating CNAPP platforms \u2014 trying to understand where CSPM, CWPP, and CIEM coverage overlap, and want a vendor-neutral comparison across Wiz, Prisma Cloud, and Orca before picking one.",
+      "should_trigger": true
+    },
+    {
+      "id": "cloud-security-neg",
+      "skill": "cloud-security",
+      "prompt": "Wiz Security Graph found a toxic combination linking a public S3 bucket, an over-privileged IAM role, and a critical CVE \u2014 need help walking the attack path and remediating it in Wiz specifically.",
+      "should_trigger": false
+    },
+    {
+      "id": "wiz-pos",
+      "skill": "wiz",
+      "prompt": "Wiz Security Graph flagged a toxic combination \u2014 an internet-exposed VM with a critical CVE plus admin-level cloud IAM permissions \u2014 need help walking the attack path and building a custom policy to catch this pattern going forward.",
+      "should_trigger": true
+    },
+    {
+      "id": "wiz-neg",
+      "skill": "wiz",
+      "prompt": "Orca's agentless SideScanning found a critical vuln on an EC2 instance and we want to understand its risk score prioritization and how to wire shift-left scanning into CI/CD to catch it earlier.",
+      "should_trigger": false
+    },
+    {
+      "id": "prisma-cloud-pos",
+      "skill": "prisma-cloud",
+      "prompt": "Prisma Cloud's CWPP Defender agent won't deploy on our EKS nodes, and we need to wire up AppDNA for code-to-cloud risk correlation on a Terraform-provisioned app.",
+      "should_trigger": true
+    },
+    {
+      "id": "prisma-cloud-neg",
+      "skill": "prisma-cloud",
+      "prompt": "Microsoft Defender for Cloud's secure score dropped after we enabled Defender for Containers, and JIT VM access policies aren't working as expected on our Azure Arc-connected servers.",
+      "should_trigger": false
+    },
+    {
+      "id": "orca-pos",
+      "skill": "orca",
+      "prompt": "Orca's agentless SideScanning keeps flagging a base image vulnerability across dozens of containers \u2014 want to add shift-left scanning in CI/CD so it's caught before deploy, and tune the risk prioritization scoring.",
+      "should_trigger": true
+    },
+    {
+      "id": "orca-neg",
+      "skill": "orca",
+      "prompt": "Wiz's Security Graph is showing an attack path through a toxic combination of a public-facing workload and excessive IAM permissions \u2014 need help with the remediation policy inside Wiz.",
+      "should_trigger": false
+    },
+    {
+      "id": "defender-cloud-pos",
+      "skill": "defender-cloud",
+      "prompt": "Our Microsoft Defender for Cloud secure score tanked after we enabled Defender for Servers, the regulatory compliance dashboard shows we're failing CIS controls, and we also need JIT VM access configured properly.",
+      "should_trigger": true
+    },
+    {
+      "id": "defender-cloud-neg",
+      "skill": "defender-cloud",
+      "prompt": "Prisma Cloud's CWPP Defender agents aren't reporting runtime protection status for our Kubernetes workloads, need to troubleshoot the agent deployment through Cortex Cloud.",
+      "should_trigger": false
+    },
+    {
+      "id": "aws-security-hub-pos",
+      "skill": "aws-security-hub",
+      "prompt": "Security Hub isn't aggregating GuardDuty and Inspector findings from our member accounts in the cross-account setup, and we want an EventBridge rule to auto-remediate CIS AWS Foundations failures.",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-security-hub-neg",
+      "skill": "aws-security-hub",
+      "prompt": "GuardDuty just flagged an EC2 instance for crypto-mining behavior via suspicious DNS lookups \u2014 need to dig into the actual finding details and figure out if the instance is compromised.",
+      "should_trigger": false
+    },
+    {
+      "id": "container-security-pos",
+      "skill": "container-security",
+      "prompt": "We're trying to design a Kubernetes security strategy from scratch covering image scanning, admission control, and RBAC. What's the right layered approach and where do OPA Gatekeeper and Kyverno fit in?",
+      "should_trigger": true
+    },
+    {
+      "id": "container-security-neg",
+      "skill": "container-security",
+      "prompt": "Our Aqua Enforcer keeps blocking legit pods with a DTA policy violation on a new microservice rollout, how do I tune the vShield rule without disabling drift prevention entirely?",
+      "should_trigger": false
+    },
+    {
+      "id": "aqua-pos",
+      "skill": "aqua",
+      "prompt": "Aqua Enforcer is flagging drift on our production pods and blocking new processes from spawning, is there a way to let the vShield virtual patch permit this specific behavior without disabling drift prevention?",
+      "should_trigger": true
+    },
+    {
+      "id": "aqua-neg",
+      "skill": "aqua",
+      "prompt": "What's the actual difference between OPA Gatekeeper and Kyverno for our admission control layer, and which one should we standardize on?",
+      "should_trigger": false
+    },
+    {
+      "id": "falco-pos",
+      "skill": "falco",
+      "prompt": "I wrote a custom Falco rule to detect a shell spawned inside a container but it's not firing even though I can see the syscall show up in strace output, is my condition syntax wrong?",
+      "should_trigger": true
+    },
+    {
+      "id": "falco-neg",
+      "skill": "falco",
+      "prompt": "Sysdig Secure is telling us a CVE is 'in use' at runtime but I don't understand what data source it's using to make that in-use determination.",
+      "should_trigger": false
+    },
+    {
+      "id": "sysdig-pos",
+      "skill": "sysdig",
+      "prompt": "Sysdig Secure flagged 200 vulnerabilities as critical but only 12 are marked 'in use' at runtime, how does that in-use risk prioritization actually work under the hood?",
+      "should_trigger": true
+    },
+    {
+      "id": "sysdig-neg",
+      "skill": "sysdig",
+      "prompt": "I need to write a Falco rule that detects a reverse shell being spawned in a container, what's the correct syntax for the condition field?",
+      "should_trigger": false
+    },
+    {
+      "id": "vulnerability-management-pos",
+      "skill": "vulnerability-management",
+      "prompt": "We're building our VM program from scratch and need to decide on remediation SLAs for critical vs high findings, plus whether CVSS or EPSS should drive prioritization, what's the standard approach?",
+      "should_trigger": true
+    },
+    {
+      "id": "vulnerability-management-neg",
+      "skill": "vulnerability-management",
+      "prompt": "Our Qualys TruRisk score jumped overnight for one asset group even though no new CVEs were published against those hosts, what would cause that?",
+      "should_trigger": false
+    },
+    {
+      "id": "qualys-pos",
+      "skill": "qualys",
+      "prompt": "I'm trying to write a QQL query in Qualys VMDR to find all Cloud Agent assets with a TruRisk score above 700 that haven't reported in 30 days, what's the syntax?",
+      "should_trigger": true
+    },
+    {
+      "id": "qualys-neg",
+      "skill": "qualys",
+      "prompt": "We're deciding between Tenable and Qualys for our new VM program, what are the real differences in scanner architecture and licensing?",
+      "should_trigger": false
+    },
+    {
+      "id": "tenable-pos",
+      "skill": "tenable",
+      "prompt": "Our Nessus Agent is reporting a different VPR score than what shows up in Tenable.io for the same plugin ID, which one should I trust for prioritization?",
+      "should_trigger": true
+    },
+    {
+      "id": "tenable-neg",
+      "skill": "tenable",
+      "prompt": "How do I write a QQL query in Qualys to filter TruRisk score by asset tag and last scan date?",
+      "should_trigger": false
+    },
+    {
+      "id": "rapid7-pos",
+      "skill": "rapid7",
+      "prompt": "InsightVM's Active Risk score for one of our web servers spiked after the last scan even though the CVE count on it didn't change, what factors actually go into that score?",
+      "should_trigger": true
+    },
+    {
+      "id": "rapid7-neg",
+      "skill": "rapid7",
+      "prompt": "What's the practical difference between VPR and EPSS scoring in Tenable.io when they disagree on the same CVE?",
+      "should_trigger": false
+    },
+    {
+      "id": "snyk-pos",
+      "skill": "snyk",
+      "prompt": "We're setting up Snyk Container to scan our base images in ECR with auto base-image-upgrade PRs, and want that feeding into our Snyk AppRisk score for the whole application, how do these pieces connect?",
+      "should_trigger": true
+    },
+    {
+      "id": "snyk-neg",
+      "skill": "snyk",
+      "prompt": "Snyk Code flagged a data flow issue in our Java servlet as high severity but I think it's a false positive since the input is sanitized upstream, how do I confirm that in the IDE plugin?",
+      "should_trigger": false
+    },
+    {
+      "id": "asm-pos",
+      "skill": "asm",
+      "prompt": "We just found out a whole subdomain from an acquired company has been sitting exposed to the internet for months with nobody monitoring it, how do we build an EASM program to catch this kind of shadow IT going forward?",
+      "should_trigger": true
+    },
+    {
+      "id": "asm-neg",
+      "skill": "asm",
+      "prompt": "Censys Search keeps showing an open Elasticsearch instance under a TLS cert we don't recognize, how do I pivot from the certificate to identify the owning organization?",
+      "should_trigger": false
+    },
+    {
+      "id": "censys-pos",
+      "skill": "censys",
+      "prompt": "I'm trying to write a Censys Search query to find hosts serving a specific outdated TLS cert issuer alongside an open port 9200, what's the correct query syntax?",
+      "should_trigger": true
+    },
+    {
+      "id": "censys-neg",
+      "skill": "censys",
+      "prompt": "Our Defender EASM inventory has 40 unattributed assets stuck in the 'requires review' state, what's the right workflow to triage and either confirm or reject them?",
+      "should_trigger": false
+    },
+    {
+      "id": "defender-easm-pos",
+      "skill": "defender-easm",
+      "prompt": "We want to correlate our Defender EASM findings with Microsoft Sentinel incidents so external exposures show up alongside internal alerts, how do we wire that integration up?",
+      "should_trigger": true
+    },
+    {
+      "id": "defender-easm-neg",
+      "skill": "defender-easm",
+      "prompt": "Falcon Surface is showing an exposed RDP port on a host that also has a CrowdStrike sensor a few versions behind with an active detection, how does that correlation actually get surfaced?",
+      "should_trigger": false
+    },
+    {
+      "id": "falcon-surface-pos",
+      "skill": "falcon-surface",
+      "prompt": "Falcon Surface discovered a legacy dev server that's also showing an outdated CrowdStrike sensor version with an active detection, how do I use that correlation to prioritize remediation over our other exposures?",
+      "should_trigger": true
+    },
+    {
+      "id": "falcon-surface-neg",
+      "skill": "falcon-surface",
+      "prompt": "Cortex Xpanse found a newly exposed service and I want it to automatically kick off an XSOAR playbook to open a ticket, how do I wire up that automated remediation?",
+      "should_trigger": false
+    },
+    {
+      "id": "xpanse-pos",
+      "skill": "xpanse",
+      "prompt": "We want Cortex Xpanse to automatically trigger an XSOAR playbook whenever it discovers a newly exposed RDP service, what's the right way to configure that automated remediation?",
+      "should_trigger": true
+    },
+    {
+      "id": "xpanse-neg",
+      "skill": "xpanse",
+      "prompt": "Falcon Surface flagged an exposed asset that also shows up with an outdated CrowdStrike sensor version in EDR, is there a built-in way to correlate that inside the platform?",
+      "should_trigger": false
+    },
+    {
+      "id": "appsec-pos",
+      "skill": "appsec",
+      "prompt": "We're building out our secure SDLC and need to figure out where SAST, DAST, and SCA each fit in the pipeline stages, plus how to layer in threat modeling early, what's the standard shift-left approach?",
+      "should_trigger": true
+    },
+    {
+      "id": "appsec-neg",
+      "skill": "appsec",
+      "prompt": "Our Checkmarx CxQL custom rule isn't detecting a tainted input pattern in our Spring MVC controller, what's wrong with the query I wrote?",
+      "should_trigger": false
+    },
+    {
+      "id": "sast-pos",
+      "skill": "sast",
+      "prompt": "We're trying to decide between running SAST on every commit vs only at PR time because our false positive rate is causing serious developer pushback, what's the standard way to tune a CI security gate?",
+      "should_trigger": true
+    },
+    {
+      "id": "sast-neg",
+      "skill": "sast",
+      "prompt": "Semgrep's metavariable isn't matching the same variable across an assignment and a later function call in one pattern, what's the correct pattern-matching syntax to link them?",
+      "should_trigger": false
+    },
+    {
+      "id": "checkmarx-pos",
+      "skill": "checkmarx",
+      "prompt": "I need to write a CxQL query in Checkmarx One to flag any use of MD5 for password hashing across our incremental scan results, what's the query structure?",
+      "should_trigger": true
+    },
+    {
+      "id": "checkmarx-neg",
+      "skill": "checkmarx",
+      "prompt": "We're deciding whether SonarQube or Checkmarx is the better fit for our quality gate policy given we mostly care about Clean Code taxonomy rather than just security findings.",
+      "should_trigger": false
+    },
+    {
+      "id": "semgrep-pos",
+      "skill": "semgrep",
+      "prompt": "I wrote a Semgrep rule using taint tracking to catch unsanitized input reaching a SQL query, but it's not firing across the function boundary, is there a way to do interprocedural taint tracking?",
+      "should_trigger": true
+    },
+    {
+      "id": "semgrep-neg",
+      "skill": "semgrep",
+      "prompt": "We're trying to decide whether SAST should run at every commit or just at PR time given our false positive rate is causing pushback from devs, what's the standard tradeoff?",
+      "should_trigger": false
+    },
+    {
+      "id": "snyk-code-pos",
+      "skill": "snyk-code",
+      "prompt": "Snyk Code's DeepCode engine is flagging a data flow vulnerability in our Python Flask route but I think the sanitizer function isn't being recognized, how do I get it to see through to the sanitization step?",
+      "should_trigger": true
+    },
+    {
+      "id": "snyk-code-neg",
+      "skill": "snyk-code",
+      "prompt": "Snyk found a critical vulnerability in a transitive dependency in our package-lock.json that we can't upgrade without breaking the build, what's the right remediation path?",
+      "should_trigger": false
+    },
+    {
+      "id": "sonarqube-pos",
+      "skill": "sonarqube",
+      "prompt": "Our SonarQube quality gate keeps failing on 'new code' coverage even though the overall project coverage is fine, how does the new code period actually determine what counts?",
+      "should_trigger": true
+    },
+    {
+      "id": "sonarqube-neg",
+      "skill": "sonarqube",
+      "prompt": "Checkmarx's CxQL isn't flagging a hardcoded secret pattern I added as a custom query in CxOne, what's wrong with how I wrote it?",
+      "should_trigger": false
+    },
+    {
+      "id": "veracode-pos",
+      "skill": "veracode",
+      "prompt": "Veracode's Policy Scan flagged our build as non-compliant because of a bytecode-level issue that doesn't show up in Pipeline Scan at all, why would the two scan types disagree?",
+      "should_trigger": true
+    },
+    {
+      "id": "veracode-neg",
+      "skill": "veracode",
+      "prompt": "We need an SBOM out of our Java build for a customer audit and I'm wondering if Black Duck's binary analysis handles that better than a manifest-based scan.",
+      "should_trigger": false
+    },
+    {
+      "id": "dast-pos",
+      "skill": "dast",
+      "prompt": "We're setting up a DAST program and need to decide between active scanning in staging vs passive scanning against production, plus how to handle scans behind a login wall, what's the right approach?",
+      "should_trigger": true
+    },
+    {
+      "id": "dast-neg",
+      "skill": "dast",
+      "prompt": "Burp Suite's Intruder is throwing 429s halfway through a payload set against our staging API, how do I throttle the attack to avoid getting rate limited?",
+      "should_trigger": false
+    },
+    {
+      "id": "burp-suite-pos",
+      "skill": "burp-suite",
+      "prompt": "I'm using Burp Suite's Repeater to replay a request with a modified JWT but the server keeps rejecting it with a signature mismatch even after I re-signed it, any idea what I'm missing in the workflow?",
+      "should_trigger": true
+    },
+    {
+      "id": "burp-suite-neg",
+      "skill": "burp-suite",
+      "prompt": "Our StackHawk scan in the GitHub Actions pipeline is timing out on an authenticated GraphQL endpoint, how do I configure the auth block in stackhawk.yml?",
+      "should_trigger": false
+    },
+    {
+      "id": "stackhawk-pos",
+      "skill": "stackhawk",
+      "prompt": "Our HawkScan Docker run in GitHub Actions keeps failing to authenticate against our API before the scan even starts, how do I configure the auth section in stackhawk.yml correctly?",
+      "should_trigger": true
+    },
+    {
+      "id": "stackhawk-neg",
+      "skill": "stackhawk",
+      "prompt": "I want to run an OWASP ZAP baseline scan against our staging site nightly through a GitHub Action, what's the right zap-baseline-scan Docker command?",
+      "should_trigger": false
+    },
+    {
+      "id": "zap-pos",
+      "skill": "zap",
+      "prompt": "I'm running zap-full-scan.py against our test environment in Docker but the AJAX spider isn't crawling past the login page, how do I configure it to handle our React SPA properly?",
+      "should_trigger": true
+    },
+    {
+      "id": "zap-neg",
+      "skill": "zap",
+      "prompt": "Our StackHawk config keeps failing to authenticate before HawkScan starts scanning our API, what exactly goes in the stackhawk.yml auth block?",
+      "should_trigger": false
+    },
+    {
+      "id": "sca-pos",
+      "skill": "sca",
+      "prompt": "We need to generate an SBOM for a customer security questionnaire and I'm not sure whether to pull it from our dependency scanner or generate it separately, what's the standard approach in an SCA program?",
+      "should_trigger": true
+    },
+    {
+      "id": "sca-neg",
+      "skill": "sca",
+      "prompt": "Dependabot keeps opening a dozen separate PRs for patch-level updates every week and it's overwhelming the team, how do I group them into a single PR?",
+      "should_trigger": false
+    },
+    {
+      "id": "black-duck-pos",
+      "skill": "black-duck",
+      "prompt": "We're a medical device company and need to generate a SOUP list from our firmware build using Black Duck's binary analysis since we don't have source for a couple of third-party libraries, how does BDBA handle that?",
+      "should_trigger": true
+    },
+    {
+      "id": "black-duck-neg",
+      "skill": "black-duck",
+      "prompt": "Mend keeps flagging a copyleft license on a transitive dependency we don't actually ship in our final artifact, how do I mark that as a false positive in policy?",
+      "should_trigger": false
+    },
+    {
+      "id": "dependabot-pos",
+      "skill": "dependabot",
+      "prompt": "Dependabot opened a security update PR for a transitive dependency but our lockfile isn't getting updated correctly alongside it, what's going on with grouped updates in dependabot.yml?",
+      "should_trigger": true
+    },
+    {
+      "id": "dependabot-neg",
+      "skill": "dependabot",
+      "prompt": "Renovate through Mend is opening PRs but not respecting our semantic versioning range in package.json, how do I fix that config?",
+      "should_trigger": false
+    },
+    {
+      "id": "mend-pos",
+      "skill": "mend",
+      "prompt": "We're using Mend for license compliance and it flagged a GPL-licensed transitive dependency that legal wants auto-blocked going forward, how do I set that policy in Mend?",
+      "should_trigger": true
+    },
+    {
+      "id": "mend-neg",
+      "skill": "mend",
+      "prompt": "Dependabot's security updates keep opening PRs that fail CI because the auto-merge rule doesn't wait for our required status checks, how do I fix that?",
+      "should_trigger": false
+    },
+    {
+      "id": "snyk-oss-pos",
+      "skill": "snyk-oss",
+      "prompt": "snyk test keeps flagging a transitive dependency in our yarn.lock that we can't upgrade directly without breaking the build, is there a way to get snyk fix to handle indirect deps like this?",
+      "should_trigger": true
+    },
+    {
+      "id": "snyk-oss-neg",
+      "skill": "snyk-oss",
+      "prompt": "Snyk Code is flagging a potential path traversal in our Node upload handler but I think the sanitization function it's tracing through isn't being recognized, how do I confirm that in the IDE plugin?",
+      "should_trigger": false
+    },
+    {
+      "id": "waf-pos",
+      "skill": "waf",
+      "prompt": "We're getting hit with a low-and-slow Layer 7 DDoS and need to decide between rate-based rules and a full bot management product, what's the right architectural approach across our perimeter?",
+      "should_trigger": true
+    },
+    {
+      "id": "waf-neg",
+      "skill": "waf",
+      "prompt": "Our Cloudflare WAF custom rule using the Wireshark-style expression language keeps blocking legitimate traffic from a specific ASN, how do I scope the rule down?",
+      "should_trigger": false
+    },
+    {
+      "id": "akamai-waf-pos",
+      "skill": "akamai-waf",
+      "prompt": "Akamai's Adaptive Security Engine keeps auto-tuning a rule in our App & API Protector policy and now it's letting through traffic we want blocked, how does that adaptive tuning actually decide when to loosen a rule?",
+      "should_trigger": true
+    },
+    {
+      "id": "akamai-waf-neg",
+      "skill": "akamai-waf",
+      "prompt": "Our AWS WAF Bot Control managed rule group is blocking a legitimate internal health check bot, how do I add an exception for it in the WebACL?",
+      "should_trigger": false
+    },
+    {
+      "id": "aws-waf-pos",
+      "skill": "aws-waf",
+      "prompt": "I'm writing a WebACL in Terraform using aws_wafv2_web_acl to attach AWS Managed Rules plus a rate-based rule for our ALB, but the rate limit isn't triggering even under load test, what am I missing?",
+      "should_trigger": true
+    },
+    {
+      "id": "aws-waf-neg",
+      "skill": "aws-waf",
+      "prompt": "We want to enable Akamai's Bot Manager Premier to challenge suspicious bots hitting our login page instead of outright blocking them, how is that configured?",
+      "should_trigger": false
+    },
+    {
+      "id": "cloudflare-waf-pos",
+      "skill": "cloudflare-waf",
+      "prompt": "I need a Cloudflare custom rule using the Wireshark-style expression syntax to block requests missing a specific header on our API Shield-protected endpoint, without breaking our legitimate mobile client traffic, how do I scope this?",
+      "should_trigger": true
+    },
+    {
+      "id": "cloudflare-waf-neg",
+      "skill": "cloudflare-waf",
+      "prompt": "We're deciding whether to add AWS WAF Fraud Control ATP in front of our login endpoint on API Gateway to stop credential stuffing, is that the right managed rule group to use?",
+      "should_trigger": false
+    },
+    {
+      "id": "f5-waf-pos",
+      "skill": "f5-waf",
+      "prompt": "F5 Advanced WAF's behavioral DoS protection is flagging a legitimate traffic spike from a marketing campaign as an attack, how do I tune the behavioral baseline in BIG-IP ASM without disabling the protection entirely?",
+      "should_trigger": true
+    },
+    {
+      "id": "f5-waf-neg",
+      "skill": "f5-waf",
+      "prompt": "We want Cloudflare's Bot Management to stop credential stuffing attempts against our login form without blocking legitimate mobile app traffic, how do we configure that?",
+      "should_trigger": false
+    },
+    {
+      "id": "dlp-pos",
+      "skill": "dlp",
+      "prompt": "We keep having reps paste customer SSNs into random Slack channels, need to get some kind of DLP program going across email, endpoints and cloud apps - where do I even start?",
+      "should_trigger": true
+    },
+    {
+      "id": "dlp-neg",
+      "skill": "dlp",
+      "prompt": "We're on Microsoft Purview and need to build a custom sensitive info type for our internal case number format - how do I set the pattern and confidence level?",
+      "should_trigger": false
+    },
+    {
+      "id": "purview-dlp-pos",
+      "skill": "purview-dlp",
+      "prompt": "Our M365 endpoint DLP policy isn't catching credit card numbers pasted into Notepad even though the sensitivity label is applied - what's misconfigured?",
+      "should_trigger": true
+    },
+    {
+      "id": "purview-dlp-neg",
+      "skill": "purview-dlp",
+      "prompt": "What's the general framework for rolling out a DLP program across our USB ports, email gateway, and cloud apps before we've even picked a vendor?",
+      "should_trigger": false
+    },
+    {
+      "id": "symantec-dlp-pos",
+      "skill": "symantec-dlp",
+      "prompt": "Enforce Platform keeps showing incidents from Network Prevent but the Endpoint Prevent agent isn't reporting in - any idea why the two aren't syncing?",
+      "should_trigger": true
+    },
+    {
+      "id": "symantec-dlp-neg",
+      "skill": "symantec-dlp",
+      "prompt": "We want DLP policies to get stricter automatically as a user's behavioral risk score climbs, tied into dynamic data protection - is that something our current DLP tool does out of the box?",
+      "should_trigger": false
+    },
+    {
+      "id": "forcepoint-pos",
+      "skill": "forcepoint",
+      "prompt": "Trying to set up dynamic data protection in Forcepoint so a user's DLP policy tightens automatically after they get flagged as high risk - how do I wire the behavioral analytics into the policy engine?",
+      "should_trigger": true
+    },
+    {
+      "id": "forcepoint-neg",
+      "skill": "forcepoint",
+      "prompt": "We need Exact Data Matching against our HR database and Indexed Document Matching for engineering docs, plus Vector Machine Learning for detecting source code leaks - what's the setup?",
+      "should_trigger": false
+    },
+    {
+      "id": "digital-guardian-pos",
+      "skill": "digital-guardian",
+      "prompt": "The Digital Guardian kernel agent is causing BSODs on a batch of Windows 11 laptops after the last agent update, and ARC isn't showing any new events from those endpoints - troubleshooting steps?",
+      "should_trigger": true
+    },
+    {
+      "id": "digital-guardian-neg",
+      "skill": "digital-guardian",
+      "prompt": "We need a DLP tool with real-time data lineage so we can see exactly which sensitive file a leaked snippet originated from, even after it's been copy-pasted through five different apps",
+      "should_trigger": false
+    },
+    {
+      "id": "cyberhaven-pos",
+      "skill": "cyberhaven",
+      "prompt": "Someone on the team pasted a chunk of our proprietary pricing model into ChatGPT and I need to trace exactly which source file that came from and get alerted next time - what's the setup in Cyberhaven?",
+      "should_trigger": true
+    },
+    {
+      "id": "cyberhaven-neg",
+      "skill": "cyberhaven",
+      "prompt": "We need indexed document matching to fingerprint our engineering drawings and block them from leaving through the network prevent appliance",
+      "should_trigger": false
+    },
+    {
+      "id": "email-security-pos",
+      "skill": "email-security",
+      "prompt": "Our DMARC record is set to p=none and we keep getting spoofed - what's the right rollout plan to get to p=reject without breaking legit mail?",
+      "should_trigger": true
+    },
+    {
+      "id": "email-security-neg",
+      "skill": "email-security",
+      "prompt": "Abnormal Security keeps missing a vendor email compromise attempt even though it's fully integrated via API with no MX changes - what detection signals should I check?",
+      "should_trigger": false
+    },
+    {
+      "id": "proofpoint-pos",
+      "skill": "proofpoint",
+      "prompt": "Proofpoint TAP is flagging a bunch of internal-to-internal emails as phishing and it's driving my helpdesk crazy, how do I tune this?",
+      "should_trigger": true
+    },
+    {
+      "id": "proofpoint-neg",
+      "skill": "proofpoint",
+      "prompt": "Our Mimecast DMARC Analyzer shows a spike in unauthenticated senders from a lookalike domain - how do I turn that into a takedown request?",
+      "should_trigger": false
+    },
+    {
+      "id": "mimecast-pos",
+      "skill": "mimecast",
+      "prompt": "Mimecast continuity kicked in during our Exchange Online outage yesterday, but users say mail sent during that window never showed up once we failed back - what happened?",
+      "should_trigger": true
+    },
+    {
+      "id": "mimecast-neg",
+      "skill": "mimecast",
+      "prompt": "TRAP keeps pulling phishing emails out of inboxes after delivery but I want it to also auto-report to our SOC via a SIEM webhook - how is that configured?",
+      "should_trigger": false
+    },
+    {
+      "id": "abnormal-pos",
+      "skill": "abnormal",
+      "prompt": "We integrated Abnormal Security via API with no MX record changes but it's still not catching a vendor email compromise attempt where the attacker used a lookalike domain - what behavioral signals should be triggering on this?",
+      "should_trigger": true
+    },
+    {
+      "id": "abnormal-neg",
+      "skill": "abnormal",
+      "prompt": "We want to stand up a secure email gateway that changes our MX records and does traditional signature and reputation-based filtering before mail hits Exchange Online",
+      "should_trigger": false
+    },
+    {
+      "id": "defender-o365-pos",
+      "skill": "defender-o365",
+      "prompt": "Safe Links keeps rewriting URLs in a way that's breaking our vendor's SSO login flow embedded in emails - how do I exclude that domain without disabling Safe Links org-wide?",
+      "should_trigger": true
+    },
+    {
+      "id": "defender-o365-neg",
+      "skill": "defender-o365",
+      "prompt": "We want messages that get reclassified as malicious after delivery to be auto-pulled from inboxes and reported to our SOC through Proofpoint TRAP - how do we set that up?",
+      "should_trigger": false
+    },
+    {
+      "id": "sublime-pos",
+      "skill": "sublime",
+      "prompt": "I want to write a custom MQL detection rule that catches lookalike domain spoofing using homoglyphs in the display name, without waiting on vendor signature updates - how do I structure that in Sublime?",
+      "should_trigger": true
+    },
+    {
+      "id": "sublime-neg",
+      "skill": "sublime",
+      "prompt": "We want to build custom anti-phishing policies with impersonation protection for our exec team inside Microsoft's cloud email platform",
+      "should_trigger": false
+    },
+    {
+      "id": "zero-trust-pos",
+      "skill": "zero-trust",
+      "prompt": "We're trying to figure out our overall zero trust strategy and whether to consolidate SWG, CASB and ZTNA into a single SASE platform or keep them separate - what does the NIST 800-207 approach say here?",
+      "should_trigger": true
+    },
+    {
+      "id": "zero-trust-neg",
+      "skill": "zero-trust",
+      "prompt": "We picked Zscaler for our SASE rollout and now App Connector deployment for ZPA is failing to establish tunnels to our internal app servers - what's the fix?",
+      "should_trigger": false
+    },
+    {
+      "id": "zscaler-pos",
+      "skill": "zscaler",
+      "prompt": "App Connector deployment for ZPA is failing to establish tunnels to our internal app servers, and ZIA is showing the traffic as blocked upstream - what's going on?",
+      "should_trigger": true
+    },
+    {
+      "id": "zscaler-neg",
+      "skill": "zscaler",
+      "prompt": "We're evaluating Netskope's NewEdge infrastructure against another vendor for CASB coverage of our 40,000+ shadow IT apps - how does the inline architecture compare?",
+      "should_trigger": false
+    },
+    {
+      "id": "netskope-pos",
+      "skill": "netskope",
+      "prompt": "Netskope's ML-powered DLP keeps false-positiving on engineering CAD files getting uploaded to a sanctioned cloud app - how do I tune the inline CASB policy without disabling ZTNA Next entirely?",
+      "should_trigger": true
+    },
+    {
+      "id": "netskope-neg",
+      "skill": "netskope",
+      "prompt": "We're deciding between Zscaler and another vendor for ZIA-style internet access, since Zscaler's 150+ data centers should give us lower latency for remote users",
+      "should_trigger": false
+    },
+    {
+      "id": "prisma-access-pos",
+      "skill": "prisma-access",
+      "prompt": "GlobalProtect keeps dropping ZTNA 2.0 sessions for remote users after about 20 minutes idle, and ADEM isn't showing any experience degradation logged - what should I check in Prisma Access?",
+      "should_trigger": true
+    },
+    {
+      "id": "prisma-access-neg",
+      "skill": "prisma-access",
+      "prompt": "We want a single-pass cloud engine with SD-WAN, SWG and FWaaS all from one vendor instead of stitching together point products across five consoles",
+      "should_trigger": false
+    },
+    {
+      "id": "cloudflare-zt-pos",
+      "skill": "cloudflare-zt",
+      "prompt": "Cloudflare Access is throwing constant re-auth prompts for our internal admin tools behind Gateway, and Browser Isolation seems to be adding noticeable lag - how do I diagnose this?",
+      "should_trigger": true
+    },
+    {
+      "id": "cloudflare-zt-neg",
+      "skill": "cloudflare-zt",
+      "prompt": "We want GlobalProtect-based ZTNA 2.0 with deep packet inspection for east-west traffic between branch offices, tied into our existing Panorama management",
+      "should_trigger": false
+    },
+    {
+      "id": "cato-pos",
+      "skill": "cato",
+      "prompt": "We want a single-vendor SASE cloud that handles SD-WAN, SWG, ZTNA and FWaaS all through one single-pass engine instead of stitching together five vendors - is Cato's socket deployment model good for a 40-site retail chain?",
+      "should_trigger": true
+    },
+    {
+      "id": "cato-neg",
+      "skill": "cato",
+      "prompt": "We're deciding whether Cloudflare's 300+ city anycast network with Magic WAN would give us better latency than our current SD-WAN setup",
+      "should_trigger": false
+    },
+    {
+      "id": "threat-intel-pos",
+      "skill": "threat-intel",
+      "prompt": "We're trying to mature our threat intel program from just consuming IOC feeds to actually producing operational and strategic intelligence using the diamond model - what's a good roadmap and STIX/TAXII setup?",
+      "should_trigger": true
+    },
+    {
+      "id": "threat-intel-neg",
+      "skill": "threat-intel",
+      "prompt": "MISP keeps failing to correlate attributes between two events that clearly share the same C2 infrastructure - what's wrong with our correlation engine config?",
+      "should_trigger": false
+    },
+    {
+      "id": "misp-pos",
+      "skill": "misp",
+      "prompt": "MISP keeps failing to correlate attributes between two events that clearly share the same C2 infrastructure even though the IPs match - is this a correlation engine config issue or do I need a custom warninglist?",
+      "should_trigger": true
+    },
+    {
+      "id": "misp-neg",
+      "skill": "misp",
+      "prompt": "We're evaluating a commercial threat intel platform with AI-driven risk scoring and Intelligence Cards instead of running our own open-source sharing instance",
+      "should_trigger": false
+    },
+    {
+      "id": "recorded-future-pos",
+      "skill": "recorded-future",
+      "prompt": "Our risk score for a vendor's IP range jumped overnight in Recorded Future but the Intelligence Card doesn't explain why - how do I drill into what changed in Collective Insights?",
+      "should_trigger": true
+    },
+    {
+      "id": "recorded-future-neg",
+      "skill": "recorded-future",
+      "prompt": "We're setting up our own open-source MISP instance and want to pull in community feeds via misp-modules for enrichment instead of paying for a commercial feed",
+      "should_trigger": false
+    },
+    {
+      "id": "mandiant-pos",
+      "skill": "mandiant",
+      "prompt": "Google's Mandiant Advantage flagged activity matching UNC3944 TTPs in our environment - how do I validate this against their APT tracking and pull in the relevant breach analytics?",
+      "should_trigger": true
+    },
+    {
+      "id": "mandiant-neg",
+      "skill": "mandiant",
+      "prompt": "We need a TIP that also runs SOAR playbooks and has a Collective Analytics Layer score baked into every indicator we ingest",
+      "should_trigger": false
+    },
+    {
+      "id": "threatconnect-pos",
+      "skill": "threatconnect",
+      "prompt": "We built a visual playbook in ThreatConnect to auto-enrich indicators with CAL scoring but it's not triggering case management workflows when an indicator crosses a threshold - what's misconfigured?",
+      "should_trigger": true
+    },
+    {
+      "id": "threatconnect-neg",
+      "skill": "threatconnect",
+      "prompt": "We need APT and UNC group attribution tied to Google's breach analytics, and want it to plug into our Chronicle/SecOps instance",
+      "should_trigger": false
+    },
+    {
+      "id": "grc-pos",
+      "skill": "grc",
+      "prompt": "We're starting our SOC 2 Type II journey from scratch and need to figure out which compliance automation platform fits us before we even pick evidence collection tooling - what's the landscape look like?",
+      "should_trigger": true
+    },
+    {
+      "id": "grc-neg",
+      "skill": "grc",
+      "prompt": "Vanta's automated evidence collection isn't picking up our AWS config changes even though the integration shows as connected and green - what's broken?",
+      "should_trigger": false
+    },
+    {
+      "id": "vanta-pos",
+      "skill": "vanta",
+      "prompt": "Vanta's automated evidence collection isn't picking up our AWS config changes even though the integration shows connected and green - what's broken?",
+      "should_trigger": true
+    },
+    {
+      "id": "vanta-neg",
+      "skill": "vanta",
+      "prompt": "We're comparing Drata's Autopilot automated testing against another platform's continuous monitoring approach for our SOC 2 renewal - which has better coverage for our stack?",
+      "should_trigger": false
+    },
+    {
+      "id": "drata-pos",
+      "skill": "drata",
+      "prompt": "Drata's Autopilot marked our MFA control as failing even though we verified MFA is enforced org-wide in Okta - how do I figure out which of the 1,200 automated tests is misreading the integration?",
+      "should_trigger": true
+    },
+    {
+      "id": "drata-neg",
+      "skill": "drata",
+      "prompt": "We're deciding between Vanta's 400+ integrations and another platform's automated evidence collection for our first SOC 2 audit",
+      "should_trigger": false
+    },
+    {
+      "id": "onetrust-pos",
+      "skill": "onetrust",
+      "prompt": "We're getting flooded with DSAR requests since expanding into the EU and need to automate the intake-to-fulfillment workflow along with our RoPA data mapping - how do we configure that in OneTrust?",
+      "should_trigger": true
+    },
+    {
+      "id": "onetrust-neg",
+      "skill": "onetrust",
+      "prompt": "We need a risk register and control framework mapping tool for our SOC 2 audit, nothing privacy or consent-specific, just general governance and risk tracking",
+      "should_trigger": false
+    },
+    {
+      "id": "archer-pos",
+      "skill": "archer",
+      "prompt": "We're on RSA Archer and need to build a custom application in the data model to track third-party risk assessments tied to our vendor questionnaire scores - how do I configure the relationships without breaking the operational risk module?",
+      "should_trigger": true
+    },
+    {
+      "id": "archer-neg",
+      "skill": "archer",
+      "prompt": "We want vendor risk management and continuous control monitoring built natively into our existing ITSM platform so risk tickets flow straight into our incident process",
+      "should_trigger": false
+    },
+    {
+      "id": "servicenow-grc-pos",
+      "skill": "servicenow-grc",
+      "prompt": "We already run ITSM and SecOps on the Now Platform and want Continuous Authorization and Monitoring wired into our existing incident workflows instead of a separate GRC tool - how do we configure Policy and Compliance Management in ServiceNow?",
+      "should_trigger": true
+    },
+    {
+      "id": "servicenow-grc-neg",
+      "skill": "servicenow-grc",
+      "prompt": "We need a quantitative risk management platform with a fully custom data model for our audit and operational risk program, on-prem deployment preferred",
+      "should_trigger": false
+    },
+    {
+      "id": "backup-security-pos",
+      "skill": "backup-security",
+      "prompt": "We got hit with ransomware last year and want to make sure our backup strategy actually follows 3-2-1-1-0 with true air-gapped immutability before we pick which vendor to standardize on - what should the architecture look like?",
+      "should_trigger": true
+    },
+    {
+      "id": "backup-security-neg",
+      "skill": "backup-security",
+      "prompt": "Our Veeam SureBackup jobs are passing but Secure Restore keeps flagging false positive malware detections on legitimate VM backups - how do I tune that?",
+      "should_trigger": false
+    },
+    {
+      "id": "veeam-pos",
+      "skill": "veeam",
+      "prompt": "Our Veeam SureBackup jobs are passing but Secure Restore keeps flagging false positive malware detections on legitimate VM backups - how do I tune the antivirus scan without disabling 4-eyes authorization?",
+      "should_trigger": true
+    },
+    {
+      "id": "veeam-neg",
+      "skill": "veeam",
+      "prompt": "We're evaluating Rubrik's Polaris GPS policy engine and its native threat hunting with YARA rules against our current backup vendor's approach",
+      "should_trigger": false
+    },
+    {
+      "id": "rubrik-pos",
+      "skill": "rubrik",
+      "prompt": "Rubrik's anomaly detection flagged a spike in file changes on one of our file shares but the threat hunting YARA scan came back clean - is this a false positive, or should I dig deeper before doing a Live Mount recovery?",
+      "should_trigger": true
+    },
+    {
+      "id": "rubrik-neg",
+      "skill": "rubrik",
+      "prompt": "We're comparing Cohesity's FortKnox cyber vault and DataLock WORM immutability against our current platform for our air-gapped recovery strategy",
+      "should_trigger": false
+    },
+    {
+      "id": "commvault-pos",
+      "skill": "commvault",
+      "prompt": "Cloud Rewind is supposed to give us full-stack recovery of our AWS environment after a ransomware event but it's only restoring the VMs, not the networking and IAM config - is that a Commvault limitation or a setup issue with Metallic?",
+      "should_trigger": true
+    },
+    {
+      "id": "commvault-neg",
+      "skill": "commvault",
+      "prompt": "We need a hardened Linux repository with immutability and SOBR tiering for our on-prem VM backups, plus 4-eyes authorization before anyone can delete a backup job",
+      "should_trigger": false
+    },
+    {
+      "id": "cohesity-pos",
+      "skill": "cohesity",
+      "prompt": "We want to spin up FortKnox as an isolated cyber vault fed from our on-prem Cohesity cluster, with DataLock WORM snapshots that even an admin can't delete early - how do I set the minimum retention lock?",
+      "should_trigger": true
+    },
+    {
+      "id": "cohesity-neg",
+      "skill": "cohesity",
+      "prompt": "We need CommServe orchestrating backups across VM, physical, SaaS and Kubernetes workloads all from a single console, plus Metallic for our SaaS backup tier",
+      "should_trigger": false
+    }
+  ]
+}

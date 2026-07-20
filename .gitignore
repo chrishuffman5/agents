@@ -12,7 +12,8 @@
 # Pending cleanup
 deleteme/
 
+# Local training material (not for the public repo)
+training/
+
 # Research workspaces (intermediate research used to build skills)
-skills/api-realtime/research/
-skills/messaging/research/
-skills/mail-collab/research/
+research/
