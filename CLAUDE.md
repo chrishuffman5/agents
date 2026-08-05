@@ -20,7 +20,7 @@ plugins/
 │           │   └── versions/<v>.md ← version-specific nuances (new/deprecated features)
 │           ├── scripts/            ← runnable diagnostics (scripts/versions/<v>/ for version-specific)
 │           └── assets/             ← templates/config files used in output
-└── domain-expert-core/             ← cross-domain task agents + update-plugin skill
+└── domain-expert-core/             ← cross-domain task agents + update-plugin & ultimate-tech-stack skills
 docs/    evals/                     ← eval dashboard and harness (repo-level)
 ```
 
