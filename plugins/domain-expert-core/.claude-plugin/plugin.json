@@ -1,7 +1,7 @@
 {
   "name": "domain-expert-core",
-  "description": "Cross-domain task agents — architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening — that orchestrate the installed domain plugins. Includes the ultimate-tech-stack skill: curated open-source default picks for every domain.",
-  "version": "1.1.0",
+  "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model.",
+  "version": "1.2.0",
   "author": {
     "name": "Christopher Huffman",
     "email": "50709169+chrishuffman5@users.noreply.github.com"
@@ -19,6 +19,9 @@
     "orchestration",
     "cross-domain",
     "tech-stack",
-    "open-source"
+    "open-source",
+    "security-first",
+    "secure-by-default",
+    "greenfield"
   ]
 }

@@ -1,6 +1,6 @@
 {"plugin": "domain-expert-core", "cases": [
   {"id": "update-plugin-pos", "skill": "update-plugin", "prompt": "I set this up months ago, is there a new version of the domain-expert plugin available? Can you update it for me and make sure it actually installs.", "should_trigger": true},
   {"id": "update-plugin-neg", "skill": "update-plugin", "prompt": "I've never installed anything from this marketplace before -- how do I add the domain-expert marketplace and install the database plugin for the first time?", "should_trigger": false},
-  {"id": "ultimate-tech-stack-pos", "skill": "ultimate-tech-stack", "prompt": "I've got an idea for a new SaaS app -- what database, backend framework, and message broker should we default to? We want the whole stack to be open source.", "should_trigger": true},
-  {"id": "ultimate-tech-stack-neg", "skill": "ultimate-tech-stack", "prompt": "Our stack is already settled on PostgreSQL and FastAPI -- can you help me debug why my async SQLAlchemy session is deadlocking under load?", "should_trigger": false}
+  {"id": "ultimate-tech-stack-pos", "skill": "ultimate-tech-stack", "prompt": "Design the default stack for a greenfield SaaS that will handle customer PII. Choose open-source components where they meet the security bar and give us a secure-by-default baseline for identity, secrets, CI/CD, network boundaries, observability, and recovery.", "should_trigger": true},
+  {"id": "ultimate-tech-stack-neg", "skill": "ultimate-tech-stack", "prompt": "We already run Next.js, FastAPI, PostgreSQL, and Kubernetes. Threat-model the environment, map its controls to PCI DSS, and produce a prioritized hardening plan.", "should_trigger": false}
 ]}

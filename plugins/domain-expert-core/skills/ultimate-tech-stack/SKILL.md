@@ -1,274 +1,283 @@
 ---
 name: ultimate-tech-stack
-description: "The curated default open-source technology stack — one best-in-class, OSI-licensed pick per IT domain (PostgreSQL, FastAPI, Next.js, Kubernetes, RabbitMQ, Airflow + dbt, Superset, Prometheus/Grafana, Keycloak, GitLab + OpenTofu + Argo CD, Nginx, Ceph, Proxmox, Ubuntu, Python, Postfix). Use at the start of any new app or greenfield build to make each domain decision instantly instead of re-running a bake-off. WHEN: \"new app idea\", \"what stack should we use\", \"default tech stack\", \"our usual stack\", \"open-source stack\", \"greenfield project\", \"just pick a database / framework / broker / orchestrator for me\", \"set up the standard stack\". Do NOT use for implementation depth on an already-chosen technology (use the matching domain skill, e.g. /database:postgresql), for bespoke multi-candidate trade-off analysis or proprietary/managed-service evaluation (use the architecture-consultant agent or a domain overview skill), or for replatforming an existing production stack (use the migration-expert agent)."
+description: "Security-first, open-source-preferred defaults for new applications and greenfield platforms. Applies a security hard gate before license and popularity, starts with Django/PostgreSQL/rootless Podman, and adds FastAPI, Next.js, Keycloak, OpenBao, RabbitMQ, Kubernetes, Forgejo/Woodpecker, OpenTofu, Argo CD, Prometheus/Grafana, Airflow/dbt, Superset, or Ceph only when requirements earn them. WHEN: \"new app idea\", \"what stack should we use\", \"default tech stack\", \"secure open-source stack\", \"security-first architecture\", \"greenfield project\", \"just pick a database / framework / broker / orchestrator\", \"standard stack\". Do NOT use for depth on an already-selected technology, existing-environment hardening/compliance, replatforming, incident response, or a bespoke proprietary/managed-service bake-off; use the relevant domain skill, security-expert, migration-expert, troubleshooting-agent, or architecture-consultant."
 license: MIT
 ---
 
-# The Ultimate Open-Source Tech Stack
+# Security-First Open-Source Tech Stack
 
-One default pick per domain of the domain-expert marketplace, selected from each domain's own technology catalog. **Rule zero: every pick carries an OSI-approved license.** Source-available licenses (BSL, SSPL, ELv2, Commons Clause, "fair-code") do not qualify — that rule alone rewrote several "obvious" answers (Terraform, Vault, MinIO, Linkerd).
+Choose the smallest stack the team can patch, isolate, observe, back up, and restore. **Security is the hard gate. Open source is the preference among candidates that clear it.** Popularity, feature count, and ideological purity never compensate for an unsafe deployment model or an operating burden the team cannot carry.
 
-When an app idea shows up and a domain decision is needed, use that domain's default and move on. The value of a default is not that it wins every comparison — it is that the comparison no longer has to happen.
+If no open-source candidate clears the security floor for the stated threat model and operating capacity, return **no safe default**. Recommend a narrowly scoped managed or proprietary exception, document the exit path, and route the decision to `architecture-consultant`. Do not silently lower the security bar to preserve an all-open-source answer.
 
-## How to Apply These Defaults
+## Apply the Stack
 
-- **Always start from the default.** State the pick and its one-line rationale; do not re-run a bake-off per project. Consistency compounds: shared runbooks, shared expertise, one upgrade treadmill per domain.
-- **Never present the default as a mandate when real constraints exist.** An existing estate, a vendor mandate, deep team expertise elsewhere, or a compliance regime overrides a default. That conversation belongs to the `architecture-consultant` agent (Steps 1–5, decision matrix), not to this table.
-- **Never adopt a component before a concrete pain names it.** Every running component is an operational liability. Start from the [Minimum Viable Stack](#minimum-viable-stack) and grow domain by domain.
-- **Always re-verify the license before a new adoption.** Relicensing is now routine (Terraform 2023, Redis 2024, MinIO 2025). If a pick has left its OSI license since this file was written, promote its listed fallback to default and update this skill.
-- **Route depth to the domain plugins.** Every pick maps to a skill in its domain plugin (`/plugin install <domain>@domain-expert`, then `/<domain>:<skill>`). If the plugin is not installed, continue from general knowledge and say the recommendation is not grounded in the skills library.
+1. **Classify before selecting.** Establish internet exposure, data sensitivity and tenancy, regulatory obligations, identity boundaries, untrusted-code paths, RTO/RPO, and the team's patch/on-call capacity. Do not infer “low risk” from “MVP.”
+2. **Run the Security Gate.** Reject any candidate that cannot meet every hard requirement below in this deployment. A secure product operated badly does not pass.
+3. **Prefer open source among survivors.** Use the weighted decision model for close calls. Record open-core boundaries and any managed exception.
+4. **Start with the Minimum Viable Secure Stack.** Every additional service adds identities, ports, images, secrets, backups, alerts, and upgrades.
+5. **State conditions, not absolutes.** Give the default, why it fits, its mandatory controls, and the condition that earns the next component.
+6. **Route implementation depth.** Use the named domain skill. If it is unavailable, continue from general knowledge and disclose that the guidance was not grounded in that plugin.
 
-## The Stack at a Glance
+For regulated, high-impact, hostile multi-tenant, safety-critical, or untrusted-code systems, seed the recommendation from this skill but require `architecture-consultant` and `security-expert` review before implementation.
 
-| Domain | Default | License | Why it wins |
+## Security Gate
+
+A candidate passes only when the proposed deployment can satisfy all of these:
+
+1. **Supported and patchable:** supported release, public security process, actionable advisories, predictable updates, and an owner with a patch-time objective.
+2. **Least privilege and isolation:** non-root where possible, deny-by-default access, scoped service identities, separated control/data planes, and no shared privileged execution for untrusted work.
+3. **Safe exposure model:** authenticated administration, TLS for every untrusted hop, private management/metrics endpoints, bounded input and resource use, and no default credentials.
+4. **Supply-chain integrity:** pinned dependencies and images, secret and vulnerability scanning, an SBOM, trusted build provenance, artifact signing, and policy enforcement before production.
+5. **Data and key protection:** data classification drives the at-rest/field-level decision; encryption keys have explicit custody, decryption boundaries, rotation, revocation, backup, and recovery procedures.
+6. **Detection and response:** protected security audit events, synchronized time, actionable alerts, a named response owner, and rehearsed investigation/containment paths.
+7. **Recoverability:** encrypted and access-controlled backups, tested restores, upgrade/rollback procedures, and failure domains aligned to RTO/RPO.
+8. **Operational fit:** the team can monitor, patch, rotate credentials, investigate, and recover the component without relying on undocumented heroics.
+
+Among candidates that pass, score with evidence rather than intuition:
+
+| Criterion | Weight |
+|---|---:|
+| Security architecture and secure defaults | 30% |
+| Vulnerability response and supported lifecycle | 20% |
+| Supply-chain integrity and release provenance | 15% |
+| Operability, recoverability, and blast-radius control | 15% |
+| Open governance and license durability | 10% |
+| Portability and credible exit path | 10% |
+
+The table below is a starting hypothesis, not a deployment certification. A candidate is not verified for a real deployment until its evidence record is completed against that topology and threat model. Read [references/security-verification.md](references/security-verification.md) before adoption, when refreshing a default, when evaluating a challenger, or for any high-risk recommendation.
+
+## Defaults at a Glance
+
+| Domain | Security-first default | Add or change when | Mandatory condition |
 |---|---|---|---|
-| **frontend** | Next.js (React) | MIT | Largest ecosystem and hiring pool; routing/SSR/RSC full-stack in one framework |
-| **backend** | FastAPI | MIT | Typed async Python, OpenAPI docs for free, best AI/ML library adjacency |
-| **database** | PostgreSQL | PostgreSQL | Relational + JSONB + pgvector + PostGIS + full-text — one engine covers most needs |
-| **api-realtime** | REST + OpenAPI | Open standards | Universally consumable, contract-first tooling everywhere; per-interface escalations below |
-| **messaging** | RabbitMQ | MPL-2.0 | Queues, pub/sub, DLQs, streams — right-sized for application messaging |
-| **etl** | Apache Airflow + dbt Core | Apache-2.0 | The orchestration standard plus the SQL transformation standard |
-| **analytics** | Apache Superset | Apache-2.0 | Most capable open-source BI, neutral ASF governance |
-| **monitoring** | Prometheus + Grafana, via OpenTelemetry | Apache-2.0 / AGPLv3 | CNCF-graduated metrics standard + the de-facto dashboard layer |
-| **containers** | Kubernetes | Apache-2.0 | The orchestration standard; every vendor and tool meets you there |
-| **devops** | GitLab CE + OpenTofu + Argo CD + Ansible | MIT / MPL-2.0 / Apache-2.0 / GPLv3 | Self-hostable VCS+CI/CD platform with open IaC, GitOps, and config management |
-| **security** | Keycloak | Apache-2.0 | Full OIDC/OAuth2/SAML identity provider — never roll your own auth |
-| **networking** | Nginx | BSD-2 | Battle-tested edge: reverse proxy, TLS termination, load balancing, static serving |
-| **storage** | Ceph | LGPL-2.1/3.0 | Unified block, file, and S3-compatible object storage at any scale |
-| **virtualization** | Proxmox VE | AGPLv3 | KVM + LXC + HA + backups behind one UI; the post-VMware default |
-| **os** | Ubuntu Server LTS | GPL + FOSS | Free 5-year LTS, broadest package/tooling/documentation coverage |
-| **cli-scripting** | Python (+ Bash for glue) | PSF / GPLv3 | Readable automation with the deepest library bench |
-| **mail-collab** | Postfix | EPL-2.0 / IPL-1.0 | The proven open-source MTA; the domain's only qualifying technology |
-| **cloud-platforms** | — no qualifying pick | — | AWS/Azure/GCP are proprietary services; the stack stays provider-agnostic |
+| Application | Supported Django LTS + server-rendered templates/htmx | FastAPI for API/AI services; Next.js for a proven SPA/SSR/RSC need | Framework security middleware retained; dependencies pinned and patched |
+| Database | PostgreSQL | A measured workload requires a specialist | Private network, TLS, scoped roles, PITR, tested restore |
+| API | REST + OpenAPI | gRPC/SSE/WebSocket/GraphQL only for the interface need below | Object-level authorization, schemas, limits, timeouts, abuse controls |
+| Jobs/messaging | PostgreSQL job table | RabbitMQ for durable queueing/fan-out; Kafka for retained event streams | Idempotency, bounded retries, DLQ/replay controls |
+| Data workflows | SQL/dbt Core | Airflow only when orchestration complexity is real | DAG authors are trusted code authors; control plane is private |
+| Analytics | SQL and reviewed exports | Superset for recurring governed self-service BI | SSO, least-privilege read-only data roles, private/admin-protected UI |
+| Runtime | Rootless Podman + Compose/Quadlet | Kubernetes only for multi-node scheduling/platform needs | No privileged containers or host socket; immutable images |
+| Delivery | Existing trusted Git/CI with enforced review | Forgejo + Woodpecker when self-hosting is justified; GitLab CE only with compensating controls; Argo CD when Kubernetes exists | Required review; ephemeral isolated runners; scoped deploy identity |
+| Infrastructure | OpenTofu + Ansible | Argo CD for cluster delivery | Remote encrypted state, review, policy, drift detection |
+| Identity | Framework sessions plus verified MFA/throttling controls | Keycloak at second client, federation, SSO, or delegated administration | MFA for privileged access; secure cookies; throttled login/recovery; session revocation |
+| Secrets | sops + age for deployment config | OpenBao for dynamic/high-assurance secrets; Infisical for simpler team workflows | No plaintext in Git/images/logs; rotation and break-glass tested |
+| Observability | Structured logs + health/metrics endpoints | OpenTelemetry + Prometheus/Grafana at first SLO or multiple services | Telemetry private, authenticated, redacted, and retention-limited |
+| Edge | Caddy | Nginx/HAProxy for specialized routing, tuning, or existing expertise | Automatic/managed TLS, admin endpoint private, explicit trust proxies |
+| Storage | Local filesystem/OpenZFS + restic or BorgBackup | Ceph for multi-node block/file/object scale with dedicated operators | Encryption/access controls, integrity checks, off-site copy, restore test |
+| Virtualization | None for an app already on trusted infrastructure | Proxmox VE for an operated on-prem virtualization platform | Separate management network, MFA, patching, backup, quorum design |
+| OS | Ubuntu Server LTS minimal install | Debian or RHEL-compatible family for policy/estate fit | Verify repository security coverage; unattended updates are controlled |
+| Automation | Python; Bash only for small glue | PowerShell for Windows; Node.js in a TypeScript estate | Locked dependencies, tests, safe subprocess/secrets handling |
+| Mail | Postfix as internal relay | Managed delivery for internet reputation/abuse handling | Authenticated relay, TLS, SPF/DKIM/DMARC, no open relay |
+| Cloud | No universal provider default | Select by threat model, jurisdiction, service controls, and team skill | Treat provider choice and shared-responsibility controls as architecture decisions |
 
-## Application Layer
+Catalog gaps are explicit: Forgejo, Woodpecker, Caddy, OpenBao, OpenZFS, restic, BorgBackup, OpenStack, and Apache CloudStack may not yet have dedicated domain skills. Their absence from the catalog is not a security or license verdict; route implementation details through the closest overview skill and flag the gap.
 
-### frontend → Next.js (React)
+## Minimum Viable Secure Stack
 
-- **Why:** React remains the largest frontend ecosystem by components, tooling, and hiring pool; Next.js turns it into a full framework (file routing, SSR/SSG, React Server Components, API routes) without leaving MIT-licensed ground.
-- **Self-host by default:** build with `output: 'standalone'` into a container. Never assume Vercel — the framework is open source; the hosting platform is not.
-- **Runners-up:** Svelte/SvelteKit when bundle size and simplicity dominate; Astro for content-heavy, mostly-static sites; htmx when the backend renders HTML and a SPA is overkill.
-- **Walk away when:** an established .NET team ships faster in Blazor — also open source, also in the catalog.
-- **Deeper:** `frontend` plugin — `nextjs`, `nextjs-app-router`, `react`, `react-server-components` skills.
+For a typical internet-facing application with moderate sensitivity and no unusual regulatory constraint, begin here:
 
-### backend → FastAPI
-
-- **Why:** typed Python with Pydantic validation, async-first, OpenAPI schema and docs generated from the code, and first-class adjacency to the Python AI/ML ecosystem — the most likely integration any new app will need.
-- **Runners-up:** NestJS for a single-language TypeScript stack with the Next.js frontend; Django when admin/ORM/auth batteries beat micro-flexibility; Go (`go-web`) for small, high-throughput services.
-- **Walk away when:** the org is a JVM or .NET shop — Spring Boot and ASP.NET Core are both open source and both fine defaults there.
-- **The framework is rarely the bottleneck.** The database is. Do not pick a backend for hello-world benchmarks.
-- **Deeper:** `backend` plugin — `fastapi` skill (`overview` for cross-framework comparisons).
-
-### api-realtime → REST + OpenAPI
-
-Defaults are per interface type, not one global transport:
-
-| Interface | Default | Why |
+| Layer | Start with | Required from day one |
 |---|---|---|
-| Public / partner API | REST + OpenAPI contract | Universally consumable; generators and gateways everywhere |
-| Internal service-to-service | gRPC | Typed contracts, streaming, an order of magnitude less serialization overhead |
-| Server push (feeds, notifications, LLM token streams) | SSE | Plain HTTP, auto-reconnect, no upgrade dance — most "we need WebSockets" cases are SSE |
-| True bidirectional (chat, collaborative editing, games) | WebSocket | The only default that earns full duplex |
-| Many heterogeneous clients shaping divergent queries | GraphQL | Only then — it imports resolver and caching complexity |
+| App | Django LTS + templates/htmx | CSRF/XSS/clickjacking protections, secure cookies, validation, authorization and cross-tenant tests |
+| Data | PostgreSQL | Private access, tenant-isolation model, classified at-rest decision, separate roles, PITR and restore test |
+| Identity | Django sessions plus a verified MFA/throttling add-on, or an IdP | MFA for administrators, rate-limited login/recovery, password hashing, session revocation |
+| Edge | Caddy, or hardened Nginx where Caddy is not supportable | HTTPS redirect, modern TLS, bounded requests, protected admin/diagnostic routes |
+| Runtime | Rootless Podman on supported Ubuntu LTS | Non-root UID, read-only filesystem where possible, dropped capabilities, resource limits |
+| Delivery | Existing trusted Git/CI platform | Required branch review, protected tags, isolated ephemeral runners, signed release artifacts |
+| Observability | Structured redacted logs, health/metrics, protected security audit events | Time synchronization; alert on auth/privilege/config/deploy/backup/update failures; defined retention |
+| Response | Named security incident owner and contact path | Tested triage, containment, evidence-preservation, credential-rotation, and recovery runbook |
+| Recovery | Encrypted versioned backup in a separate failure domain | Immutable/append-only copy, separate deletion identity, key recovery, automated verification, timed restore rehearsal |
 
-- **Never expose gRPC publicly by default** — browser and tooling friction outweighs the win; front it with REST or gRPC-gateway.
-- **Deeper:** `api-realtime` plugin — `rest`, `grpc`, `sse`, `websocket`, `graphql` skills.
+Add a component only when a written requirement earns it:
 
-### cli-scripting → Python
+- Add **FastAPI** when the product is primarily an API, async I/O, or Python AI/ML service and Django's integrated surface is unnecessary.
+- Add **Next.js** when rich client state, React ecosystem requirements, or SSR/RSC materially improve the product. Its server is another backend: patch it promptly, constrain server-side fetches, validate authorization at the data boundary, and never treat UI checks as authorization.
+- Add **Keycloak** for multiple clients, federation, SSO, delegated identity administration, or centralized policy. Keep it patched and highly available; identity is a critical dependency.
+- Add **RabbitMQ** for durable broker semantics, routing, or fan-out. Add **Kafka** only for retained replayable event streams and an operations team prepared to run it.
+- Add **Kubernetes** for multi-node scheduling, platform tenancy, or ecosystem integration—not merely because deployment uses containers.
+- Add **Airflow**, **Superset**, **Ceph**, and a service mesh only after their security boundary and operating owner are explicit.
 
-- **Why:** the default for any script beyond ~50 lines, all tooling, and all automation — readable, testable, batteries included, PSF-licensed.
-- **Bash for glue:** one-liners, pipelines, CI steps. **Always rewrite Bash in Python once it grows data structures, error handling, or exceeds ~50 lines** — that script is now software.
-- **PowerShell (MIT — genuinely open source) when driving Windows estates; Node.js when the repo is already TypeScript end-to-end.**
-- **Deeper:** `cli-scripting` plugin — `python`, `bash`, `powershell` skills.
+## Application and Data Decisions
 
-## Data Layer
+### Django first; FastAPI and Next.js by requirement
 
-### database → PostgreSQL
+Django's integrated ORM, migrations, authentication, sessions, CSRF protection, security middleware, and admin reduce the number of independent security decisions for a conventional business application. Use server-rendered templates with htmx until client complexity proves a SPA is warranted.
 
-- **Why:** the most capable general-purpose open-source database, under a permissive license and community governance no single vendor can relicense. JSONB covers document workloads, `pgvector` covers embeddings/AI, PostGIS covers geospatial, built-in full-text covers basic search.
-- **PostgreSQL until it hurts.** Default every new persistence need to Postgres first; reach for a specialist only when a measured limit names it:
+Django core does not provide MFA or login throttling. Select and verify maintained add-ons for both controls, or use Keycloak/a managed IdP when the team cannot support those dependencies. Test enrollment, recovery, lockout/abuse resistance, administrator step-up, and session revocation.
 
-| Need (measured, not imagined) | Specialist default | License |
+For multi-tenant systems, choose and document the isolation model—separate database, schema, or rigorously enforced row scope—before schema design. Centralize tenant context, deny unscoped access, and add negative cross-tenant tests for HTTP handlers, ORM queries, background jobs, caches, search, exports, support tools, and administrator paths.
+
+FastAPI remains the default for focused API and AI/ML services. Define authentication and authorization architecture explicitly; generated OpenAPI is not an access-control system. Next.js remains a qualified frontend choice, not the universal application baseline. Self-host it in a minimal container and follow its security advisories like any other internet-facing server.
+
+Use established team skill as a security input: a well-supported Spring Boot or ASP.NET Core team can be safer than a first-time Django team. Route a language-estate override to `architecture-consultant` rather than forcing consistency with this table.
+
+**Deeper:** `backend:django`, `backend:fastapi`, `frontend:htmx`, `frontend:nextjs`, `frontend:react`.
+
+### Interface defaults
+
+| Interface | Default | Security note |
 |---|---|---|
-| Hot cache / sessions / rate limits | Redis (AGPLv3 since 8.0 — open source again; Valkey BSD-3 is the drop-in if AGPL is banned) | AGPLv3 |
-| Search / log analytics | OpenSearch (Apache-2.0, Linux Foundation; Elasticsearch is AGPL-licensed again and also qualifies) | Apache-2.0 |
-| OLAP at scale (columnar, sub-second aggregates over billions of rows) | ClickHouse | Apache-2.0 |
-| Embedded / single-node analytics | DuckDB | MIT |
+| Public/partner | REST + OpenAPI | Authenticate clients; authorize every object/action; rate-limit and version contracts |
+| Internal service | REST first; gRPC when typed streaming/performance is measured | “Internal” is not trusted; use workload identity and authenticated encryption |
+| One-way server push | SSE | Bound connections, authorize subscriptions, prevent cross-tenant event leakage |
+| True bidirectional | WebSocket | Authenticate upgrades and messages; enforce size/rate/time limits |
+| Divergent client query shapes | GraphQL | Depth/cost limits, persisted queries where useful, resolver-level authorization |
 
-- **Never use Redis as a durable message broker or primary store** — that job belongs to the messaging domain or Postgres.
-- **Deeper:** `database` plugin — `postgresql`, `redis`, `opensearch`, `clickhouse`, `duckdb` skills.
+### PostgreSQL until a measured limit
 
-### messaging → RabbitMQ
+PostgreSQL is the durable system-of-record default. JSONB, full-text search, PostGIS, and extensions cover many early specialist needs without another networked service. Use distinct owner, migration, runtime, read-only, and backup roles; disallow public exposure; monitor connection exhaustion and replica/backup health.
 
-- **Why:** the right-sized default for application messaging — work queues, RPC, pub/sub, dead-letter handling, and (since 4.x) streams, with mature client libraries in every language.
-- **Escalate to Kafka (Apache-2.0)** when the need is genuinely event streaming: replayable retained logs, multiple independent consumer groups, or six-figure messages/second pipelines feeding the data platform.
-- **NATS (Apache-2.0)** when a single-binary, edge/IoT-weight bus fits better than a broker cluster.
-- **Start with a Postgres job table** (`SKIP LOCKED`) for low-volume background jobs — a broker is not a day-one component.
-- **Deeper:** `messaging` plugin — `rabbitmq`, `kafka`, `nats` skills (`overview` for the queue-vs-stream decision).
+Escalate only with evidence: Valkey/Redis for ephemeral cache and rate limits, OpenSearch for search/log analytics, ClickHouse for large analytical workloads, and DuckDB for embedded or single-node analytics. Never promote a cache to an unplanned system of record.
 
-### etl → Apache Airflow + dbt Core
+**Deeper:** `database:postgresql`, `database:redis`, `database:opensearch`, `database:clickhouse`, `database:duckdb`.
 
-- **Why:** Airflow is the de-facto orchestration standard (ASF-governed, huge operator ecosystem); dbt Core is the SQL transformation standard — both Apache-2.0. dbt Core remains Apache-2.0 after the Fivetran/dbt Labs merger, and the new Fusion engine was open-sourced with dbt Core v2.
-- **Processing engines:** DuckDB first for single-node transformation (most "big data" is not); Spark (Apache-2.0) when data genuinely exceeds one machine.
-- **ELT over ETL:** land raw data, transform in the warehouse with dbt — pipelines stay debuggable and replayable.
-- **Deeper:** `etl` plugin — `airflow`, `dbt-core`, `spark`, `duckdb` skills.
+### Data platforms are privileged execution environments
 
-### analytics → Apache Superset
+- **Airflow DAG authors can execute code.** Limit authoring to trusted users, separate environments, keep the web/control plane private, use a secrets backend, and isolate task credentials and networks.
+- **dbt Core** should use environment-specific least-privilege warehouse roles; review generated SQL and packages like application code.
+- **Superset** belongs behind SSO and an authenticated proxy. Disable public examples/debug features, use read-only datasource credentials, restrict SQL Lab and exports, and apply row-level controls at the database when the boundary matters.
 
-- **Why:** the most capable open-source BI platform (SQL Lab, 40+ chart types, dashboards, row-level security), governed by the ASF — no open-core feature ransom.
-- **Runner-up:** Metabase (AGPLv3) when non-technical self-serve simplicity matters more than power — setup-to-first-dashboard is minutes.
-- **Grafana is not the BI answer** — it is the operational dashboard default in monitoring. Keep business analytics in Superset.
-- **Deeper:** `analytics` plugin — `superset`, `metabase` skills.
+**Deeper:** `etl:airflow`, `etl:dbt-core`, `analytics:superset`.
 
-## Delivery and Operations
+## Delivery, Runtime, and Observability
 
-### devops → GitLab CE + OpenTofu + Argo CD + Ansible
+### Rootless containers before Kubernetes
 
-One platform plus three category standards:
+Use rootless Podman with Compose or Quadlet for local development and a small single-host deployment. Do not mount the host container socket into application or CI containers. Pin images by digest for releases, use minimal bases, drop capabilities, set resource limits, and keep secrets out of layers and environment dumps.
 
-| Category | Default | License | Note |
-|---|---|---|---|
-| VCS hosting + CI/CD + registry | GitLab CE | MIT (open core) | The full loop, self-hostable; the CE core passes the gate |
-| Infrastructure as Code | OpenTofu | MPL-2.0 | Terraform has been BSL since 1.6 — not open source. OpenTofu: Linux Foundation, state encryption, drop-in |
-| GitOps delivery | Argo CD | Apache-2.0 | CNCF-graduated; the cluster pulls from git — CI never holds prod credentials |
-| Config management / ad-hoc automation | Ansible | GPLv3 | Agentless, readable YAML, unmatched module breadth |
+When Kubernetes is earned, require at minimum:
 
-- **Always deliver to Kubernetes via GitOps (Argo CD), not CI push.** Auditability and rollback come free.
-- **Jenkins (MIT)** only for existing estates — the controller/agent model and plugin treadmill are legacy weight, not a greenfield choice.
-- **Deeper:** `devops` plugin — `gitlab-ci`, `opentofu`, `argocd`, `ansible` skills (`gitops`, `iac` for concepts).
+- supported releases and rapid patch ownership;
+- Pod Security Admission at `restricted` where workloads permit;
+- default-deny ingress and egress with explicit NetworkPolicy allowances;
+- non-root workloads, `allowPrivilegeEscalation: false`, `seccompProfile: RuntimeDefault`, dropped capabilities, and read-only roots where possible;
+- tightly scoped RBAC/service accounts, encrypted secrets at rest, protected audit logs, and isolated administrative access;
+- admission policy (for example Kyverno) for image provenance and workload controls;
+- tested control-plane/data backup and restore.
 
-### containers → Kubernetes
+Use Istio only when written mTLS/traffic-policy requirements justify a mesh. Linkerd remains Apache-2.0 and open source; availability/support of current stable community artifacts is an operational evaluation, not a license disqualification.
 
-- **Why:** the orchestration standard, CNCF-graduated, with the entire cloud-native ecosystem built against its API. Portability across providers is the stack's cloud strategy.
-- **Supporting picks:** containerd (runtime), Helm (packaging), Podman (local dev — Docker Engine is Apache-2.0 but Docker Desktop is proprietary; Podman Desktop is not), k3s (Apache-2.0) for edge, homelab, and small on-prem clusters.
-- **Never add a service mesh until mTLS or traffic-policy requirements are written down.** Then: Istio (Apache-2.0, Ambient mode) — Linkerd's stable releases moved behind Buoyant's paywall in 2024.
-- **Compose (Podman or Docker) is the correct dev-loop and single-host default** — Kubernetes is not a day-one requirement.
-- **Deeper:** `containers` plugin — `kubernetes`, `helm`, `podman`, `containerd`, `istio`, `rancher` skills.
+**Deeper:** `containers:podman`, `containers:kubernetes`, `containers:helm`, `containers:istio`.
 
-### monitoring → Prometheus + Grafana, instrumented via OpenTelemetry
+### CI/CD is an untrusted-code boundary
 
-- **Why:** Prometheus (Apache-2.0, CNCF-graduated) is the metrics and alerting standard; Grafana (AGPLv3 — open source, fine to run) is the visualization layer everything integrates with.
-- **Always instrument application code with OpenTelemetry SDKs, never a vendor SDK.** OTLP keeps every backend — including future proprietary ones — a config change, not a code change.
-- **Logs:** ship to OpenSearch (Apache-2.0). **Alerting:** Prometheus Alertmanager. Start with the RED metrics per service; dashboards grow from incidents, not upfront.
-- **Deeper:** `monitoring` plugin — `prometheus`, `grafana`, `opentelemetry`, `elk` skills.
+Prefer an already trusted Git/CI service for a small team; operating source control plus hostile-code runners is a substantial security commitment. Forgejo is the preferred fully open-source self-hosted option when residency, control, or an existing operations team justifies that commitment because its branch protection can require a specific number of pull-request approvals. Pair it with Woodpecker CI only after hardening its permissive edges: require approval for every untrusted pull request, allowlist clone/plugins by immutable digest, provide no secrets to untrusted events, disable privileged/trusted repositories by default, and place agents in disposable VMs or equivalently isolated workers with no production network or credentials. Enable and verify TLS for server-agent gRPC (`WOODPECKER_GRPC_SECURE=true`, `WOODPECKER_GRPC_VERIFY=true`), issue a unique token per agent rather than a system-wide token, and disable user agent registration unless explicitly required.
 
-### security → Keycloak
+GitLab CE is a conditional open-core alternative when its integration and existing operational maturity win. GitLab Free approvals are optional and do not prevent an unapproved merge; required approval rules and important audit capabilities are paid-tier boundaries. Do not claim CE enforces review. Add an independently enforced approval/promotion control and external audit trail, or record the paid/managed edition as a security exception.
 
-Identity first — it is the security decision every app hits in week one:
+For every CI engine, never share a privileged runner or host container socket with untrusted branches/forks. Separate build and deployment identities, protect environments/branches/tags, and keep production credentials out of general CI.
 
-- **Never roll your own auth.** Keycloak (Apache-2.0, CNCF) gives OIDC, OAuth2, SAML, MFA, and user federation self-hosted. Framework session auth is acceptable only until the second client or the first SSO request.
+OpenTofu is the IaC default. Protect and encrypt remote state, pin providers/modules, plan in CI, require review for apply, and constrain the execution identity. Argo CD becomes useful with Kubernetes, but GitOps does not make auditability or rollback free: protect the source repository, verify artifacts, scope projects/repositories/destinations, restrict cluster credentials, require promotion approval, and test rollback paths.
 
-| Category | Default | License |
+**Deeper:** `devops:gitlab-ci`, `devops:opentofu`, `devops:argocd`, `devops:ansible`, `devops:gitops`.
+
+### Keep observability off the public attack surface
+
+Instrument with OpenTelemetry and use Prometheus, Alertmanager, and Grafana when SLOs or multiple services justify them. Bind collectors and metrics endpoints to private networks; require TLS and SSO at user-facing gateways; restrict Grafana datasource permissions; redact secrets, tokens, personal data, and high-cardinality identifiers; and treat alert routes/webhooks as credentials.
+
+Prometheus and its exporters generally trust HTTP input and are not designed as hostile multi-tenant boundaries. Do not expose them directly to the internet. Use OpenSearch for logs only when its cluster and dashboards are likewise private, authenticated, and least-privileged.
+
+Keep security audit events distinct from debug telemetry. Send identity, privilege/admin, configuration, deployment, secret/key, and sensitive-data access events to an access-separated, tamper-resistant sink with synchronized timestamps and retention aligned to response/legal needs. Name the response owner and rehearse triage, containment, evidence preservation, credential rotation, and recovery.
+
+**Deeper:** `monitoring:opentelemetry`, `monitoring:prometheus`, `monitoring:grafana`, `monitoring:elk`.
+
+## Security Control Plane and Supply Chain
+
+### Identity and secrets
+
+Framework sessions are safer than introducing an identity platform the team cannot operate for a single application. Keycloak becomes the default identity provider when centralized OIDC/OAuth2/SAML, federation, multiple clients, or delegated administration is required. Separate administrator accounts, require MFA, restrict redirect URIs, rotate signing keys deliberately, and design for outage/recovery.
+
+Use **sops + age** for encrypted deployment configuration. Choose **OpenBao** for dynamic credentials, leases, PKI, audit devices, and a high-assurance open-governance secrets service. Choose **Infisical** when a smaller team needs a simpler UI/workflow and its MIT-licensed core provides every required production control; explicitly inventory features under its proprietary `ee` tree before adoption. Do not call an open-core boundary “fully open source.”
+
+Do not prescribe database transparent encryption universally. Classify the data and threat first, then choose filesystem/volume, database, column, or application-layer protection. For `age`, backup, signing, TLS, and application encryption keys, document custodians, authorized decryption locations, separation from ciphertext, rotation/revocation triggers, escrow/recovery, and the test proving old data remains recoverable when intended.
+
+### Required software-supply-chain controls
+
+Use controls as pipeline gates, not as a pile of dashboards:
+
+| Control | Open-source default | Minimum policy |
 |---|---|---|
-| Runtime secrets management | Infisical (Vault has been BSL since 2023 — disqualified; OpenBao is the off-catalog fork) | MIT |
-| Secrets in git | sops (+ age) | MPL-2.0 |
-| TLS certificates | cert-manager + Let's Encrypt | Apache-2.0 |
-| SAST / code scanning | Semgrep CE | LGPL-2.1 engine |
-| DAST | OWASP ZAP | Apache-2.0 |
-| Runtime / container threat detection | Falco | Apache-2.0 |
-| Host security + SIEM/XDR | Wazuh | GPLv2 |
-| Network IDS | Suricata | GPLv2 |
+| Dependency updates | Renovate | Small reviewed updates; urgent security path; lockfiles required |
+| Secret detection | Gitleaks | Pre-commit plus CI; revoke leaked credentials, never merely delete them |
+| Vulnerability/misconfiguration scan | Trivy | Scan source, IaC, image, and SBOM; defined severity/exception SLA |
+| SBOM generation | Syft or an ecosystem-native generator | Emit CycloneDX or SPDX per release; attest, retain, and link to artifact digest |
+| Dependency risk inventory | Dependency-Track | Track exploitable exposure and remediation ownership |
+| Signing and provenance | Sigstore Cosign | Verify at promotion/deploy; protect signing identity and transparency evidence |
+| Repository posture | OpenSSF Scorecard | Investigate high-signal failures; do not use one aggregate score as proof |
+| Kubernetes admission (only when Kubernetes is selected) | Kyverno | Enforce trusted registries/signatures and restricted workload settings |
 
-- **Never commit a plaintext secret; never bake one into an image.** Runtime injection from Infisical, or sops-encrypted files in git — nothing else.
-- **Deeper:** `security` plugin — `keycloak`, `infisical`, `sops`, `cert-manager`, `semgrep`, `zap`, `falco`, `wazuh`, `suricata` skills.
+Add Semgrep CE for SAST and OWASP ZAP for DAST where applicable. Falco, Wazuh, and Suricata are detection options after prevention, logs, owners, and response procedures exist. Detection without someone authorized and prepared to respond is theater.
 
-## Infrastructure Layer
+**Deeper:** `security:keycloak`, `security:infisical`, `security:sops`, `security:cert-manager`, `security:semgrep`, `security:zap`, `security:falco`, `security:wazuh`, `security:suricata`.
 
-### networking → Nginx
+## Infrastructure Decisions
 
-- **Why:** the default edge for any app — reverse proxy, TLS termination, load balancing, static serving — BSD-licensed, boring, and everywhere.
+### Edge and networking
 
-| Category | Default | License |
+Caddy is the ordinary application-edge default because automatic HTTPS and safe certificate renewal reduce configuration-sensitive failure. Keep its admin API private and restrict trusted proxy ranges. Use Nginx when its mature routing/tuning ecosystem or existing operational expertise wins; use HAProxy for a dedicated high-control L4/L7 load balancer; use Envoy when an application/platform genuinely needs its service-proxy model.
+
+Default-deny at every meaningful boundary. WireGuard is the remote/site tunnel default; CoreDNS is the cluster DNS default; NetBox is the source-of-truth option for a network estate. DNS, VPN, and firewall control planes require separate administrative access and configuration backup.
+
+**Deeper:** `networking:nginx`, `networking:haproxy`, `networking:envoy`, `networking:coredns`, `networking:wireguard`, `networking:opnsense`, `networking:netbox`.
+
+### Storage and backup
+
+Do not deploy Ceph for one application server. Use a local filesystem—OpenZFS where supported—with restic or BorgBackup to an encrypted, access-separated, off-site target. Snapshots are not backups; keep an immutable or append-only copy with a deletion identity unavailable to the protected workload, and test full and granular restores. For the highest-impact tier, add an offline or logically air-gapped copy.
+
+Use Ceph only for multi-node block/file/object requirements, hardware sized for failure and recovery, and operators who can maintain quorum, capacity headroom, upgrades, and repair. An S3-compatible API reduces application changes but does not make migrations automatic: verify authentication, policy, versioning, locking, consistency, metadata, multipart, and lifecycle semantics, then test data integrity.
+
+**Deeper:** `storage:ceph`, `storage:overview`.
+
+### OS, virtualization, mail, and cloud
+
+- **Ubuntu Server LTS:** install minimally and verify which repositories receive the required security coverage. The standard five-year guarantee is not equivalent across every package; use `ubuntu-security-status` and decide whether Ubuntu Pro or a different package source is required.
+- **Proxmox VE:** use for a staffed on-prem virtualization platform, not as an automatic application dependency. Separate management, storage, tenant, and backup networks; require MFA and tested cluster/backup recovery.
+- **Postfix:** prefer an authenticated internal relay. Internet delivery security includes abuse handling and reputation as well as SPF, DKIM, DMARC, TLS, queue controls, and bounce processing; a managed delivery exception can be safer.
+- **Cloud:** there is no universal provider default. OpenStack and Apache CloudStack are qualifying open-source private-IaaS options, but operating a cloud is not automatically safer than consuming one. Containers, OpenTofu, and open formats improve portability only at chosen layers; provider identity, policy, networking, data, and managed services still create migration work.
+
+**Deeper:** `os:ubuntu`, `virtualization:proxmox`, `mail-collab:postfix`, `cloud-platforms:overview`.
+
+## Open-Source Preference Gate
+
+Apply this after the Security Gate:
+
+1. **OSI-approved production license.** Apache-2.0, MIT, BSD, MPL, LGPL, GPL, AGPL, PostgreSQL, and CDDL qualify. BSL, SSPL, ELv2, Commons Clause, and similar source-available terms do not.
+2. **Production boundary is explicit.** Record which HA, SSO, policy, backup, audit, and administration features are outside the open-source edition. Open core is a risk to evaluate, not an automatic pass or failure.
+3. **Governance and continuity are credible.** Prefer neutral foundations, multiple maintainers/vendors, public security reporting, reproducible releases, and a practical fork or migration path.
+4. **Interfaces and data are portable.** Prefer documented standards and export formats, but verify semantics. “Compatible” is not “identical,” and migration is never assumed free.
+5. **License obligations are reviewed in context.** AGPL is OSI-approved, but network-interaction and modification/distribution questions are fact-specific. Flag it for legal review; do not reduce it to “running is always fine” or “AGPL is unsafe.”
+
+## Replacements, Exceptions, and Cautions
+
+| Technology | Current treatment | Reason / preferred direction |
 |---|---|---|
-| Edge / reverse proxy / LB | Nginx (HAProxy GPLv2 for dedicated L4/L7 balancing) | BSD-2 |
-| Service proxy (gRPC-aware, mesh data plane) | Envoy | Apache-2.0 |
-| DNS in-cluster | CoreDNS | Apache-2.0 |
-| DNS authoritative / recursive | PowerDNS / Unbound | GPLv2 / BSD-3 |
-| VPN | WireGuard | GPLv2 |
-| Firewall / edge router | OPNsense (preferred over stagnant pfSense CE) | BSD-2 |
-| Network source of truth / IPAM | NetBox | Apache-2.0 |
+| Terraform | Do not adopt as an open-source default | BSL-licensed; use OpenTofu |
+| HashiCorp Vault | Do not adopt as an open-source default | BSL-licensed; evaluate OpenBao, or Infisical for simpler needs |
+| MinIO Community Edition | Do not use as the default | Project distribution/maintenance changes require fresh verification; use local backup storage or evaluate Ceph/managed object storage by scale |
+| Linkerd | Eligible, conditional | Apache-2.0; verify current community artifact/support model as an operational constraint |
+| GitLab CE | Eligible, conditional open core | Free approvals are not merge-blocking; add independent enforcement/audit or use an approved paid exception; isolate runners regardless of tier |
+| Infisical | Eligible, conditional open core | MIT core plus proprietary `ee` code; inventory the exact deployed feature set |
+| Grafana / Redis / Metabase / Proxmox | Eligible with AGPL obligations | AGPL is open source; record legal and distribution/network-use analysis where relevant |
+| Docker Desktop | Proprietary exception | Docker Engine remains open source; prefer Podman for a fully open local toolchain |
+| Public cloud / managed email / managed databases | Managed exception, when justified | Security capability and shared responsibility may outweigh self-hosting; document controls, data path, cost, and exit |
 
-- **Deeper:** `networking` plugin — `nginx`, `haproxy`, `envoy`, `coredns`, `powerdns`, `unbound`, `wireguard`, `opnsense`, `netbox` skills.
+## Recommendation Output
 
-### storage → Ceph
+For each greenfield request, return:
 
-- **Why:** one LGPL-licensed system for block (RBD), file (CephFS), and S3-compatible object (RGW) storage, proven at exabyte scale, deployed on Kubernetes via Rook.
-- **MinIO is no longer eligible:** its Community Edition was feature-stripped in 2025 and archived in April 2026 — AGPL source remains, maintenance does not. Migrate existing installs to Ceph RGW; the S3 API makes that a data move, not a rewrite.
-- **In cloud, use the provider's object store** (S3/Blob/GCS) as a conscious managed-service exception — portability lives in the S3 API and open data formats, not in self-hosting object storage you don't operate at scale.
-- **Deeper:** `storage` plugin — `ceph` skill (`overview` for SAN/NAS/object selection).
+1. **Risk classification and assumptions** — exposure, data, tenancy, compliance, trust boundaries, recovery, operator capacity.
+2. **Minimum stack** — only components needed now.
+3. **Mandatory controls** — identities, network boundaries, supply chain, telemetry, backup/restore, and patch ownership.
+4. **Earned escalations** — what requirement would add FastAPI/Next.js, Keycloak, RabbitMQ, Kubernetes, Airflow, Superset, Ceph, or a mesh.
+5. **Exceptions and open-core boundaries** — why each is safer than the open-source alternative for this context, its owner, review date, and exit path.
+6. **Verification record** — official sources and `verified_at` date for volatile license, lifecycle, security, and artifact claims.
 
-### virtualization → Proxmox VE
-
-- **Why:** KVM/QEMU and LXC with clustering, HA, live migration, integrated Ceph, and Proxmox Backup Server behind one web UI — AGPLv3, no license keys, the industry's post-Broadcom VMware exit ramp.
-- **Runners-up:** plain KVM/QEMU + libvirt when a platform is unwanted; cloud VMs when workloads already live in a provider.
-- **Deeper:** `virtualization` plugin — `proxmox`, `kvm` skills.
-
-### os → Ubuntu Server LTS
-
-- **Why:** free five-year LTS, the broadest package/driver/documentation coverage, and the default target for nearly every tool in this stack. Standardize on one distro family — heterogeneous fleets multiply patching and automation cost.
-- **Runners-up:** Debian when purist community governance and stability outweigh cadence; Rocky/Alma when RHEL compatibility is contractual.
-- **Containers shrink this decision** to the base-image line of a Dockerfile — which is where it belongs.
-- **Deeper:** `os` plugin — `ubuntu`, `debian`, `rocky-alma` skills.
-
-### mail-collab → Postfix
-
-- **Why:** the proven, secure open-source MTA — and the only technology in this domain's catalog that passes the license gate (Exchange, M365, Google Workspace are proprietary).
-- **The real work is authentication:** SPF, DKIM, and DMARC records before the first message, or nothing lands in an inbox.
-- **High-volume transactional delivery** usually justifies a managed sending service — a conscious proprietary exception, flagged as such, with Postfix still owning internal relay.
-- **Deeper:** `mail-collab` plugin — `postfix` skill.
-
-### cloud-platforms → no qualifying pick
-
-- AWS, Azure, and GCP are proprietary service platforms; nothing in this domain passes the open-source gate — so the domain gets **no default, by design**.
-- **The stack is provider-agnostic by construction:** Kubernetes + OpenTofu + containerized open-source components make the provider (or bare metal via Proxmox) an implementation detail.
-- Choosing a provider anyway is a cost/region/compliance decision — run it through the `architecture-consultant` agent, not this table.
-- **Deeper:** `cloud-platforms` plugin — `overview` skill for provider selection when that conversation happens.
-
-## Minimum Viable Stack
-
-Defaults say what to use — not that you need it yet. Day one for a new app:
-
-| Layer | Start with | Add later, when |
-|---|---|---|
-| App | Next.js + FastAPI + PostgreSQL | — |
-| Auth | Framework sessions | Keycloak at the second client or first SSO ask |
-| Background jobs | Postgres job table (`SKIP LOCKED`) | RabbitMQ when queue depth or fan-out is real |
-| Dev/run | Podman/Docker Compose on Ubuntu, Nginx at the edge | Kubernetes (k3s first) past a handful of services |
-| CI/CD | GitLab CE pipeline building one image | Argo CD when Kubernetes arrives |
-| Observability | Structured logs + `/metrics` endpoint | Prometheus + Grafana at the second service or first SLO |
-| Data platform | Nightly `pg_dump` + SQL | Airflow + dbt + Superset when someone asks for reports weekly |
-
-**Never deploy Kafka, Kubernetes, Istio, or Airflow on day one of an MVP.** Each earns its way in by a named, measured pain.
-
-## The Open-Source Gate
-
-Every current and future pick must clear all six. This is how the stack was chosen and how challengers get evaluated:
-
-1. **OSI-approved license** on every component you run in production. Apache-2.0, MIT, BSD, MPL, LGPL, GPL, AGPL all qualify. BSL, SSPL, ELv2, Commons Clause, and "source-available" do not — regardless of marketing.
-2. **AGPL is open source.** Running it is fine; obligations trigger only when you modify the component and serve *it* to others. Flag it, don't fear it — unless org counsel bans it (then use the listed fallback, e.g. Valkey for Redis).
-3. **No feature-gated operational core.** If HA, SSO, backups, or the admin UI live only in the paid tier, treat the product as proprietary in practice (the "SSO tax" test — MinIO CE failed exactly this way before it was archived).
-4. **Governance you can trust:** foundation-hosted (CNCF, ASF, Linux Foundation) or genuinely multi-vendor preferred. Single-vendor open source carries relicensing risk — every disqualification below started there. A credible fork exit (OpenTofu, OpenBao, Valkey) is the insurance policy.
-5. **Active health:** releases within six months, a security-response process, a documented upgrade path.
-6. **Exit path via open interfaces:** SQL, S3 API, AMQP, OTLP, OCI, OpenAPI. Any component you can only leave by rewrite was never a safe default.
-
-## Disqualified and Replaced
-
-The license events that shaped this stack — treat this table as precedent when a vendor announces a "license evolution":
-
-| Ruled out | Event | Default instead |
-|---|---|---|
-| Terraform | BSL 1.1 since Aug 2023 (now IBM-owned) | OpenTofu (MPL-2.0, Linux Foundation) |
-| HashiCorp Vault | BSL 1.1 since Aug 2023 | Infisical (MIT); sops for git-encrypted secrets |
-| MinIO Community Edition | Admin UI stripped 2025; repo archived Apr 2026 | Ceph RGW |
-| Linkerd | Stable release binaries paywalled since 2024 | Istio (Apache-2.0) |
-| Elasticsearch | SSPL era 2021–2024 (AGPL option restored — eligible again) | OpenSearch stays default: Apache-2.0 + neutral foundation |
-| Redis | RSAL/SSPL Mar 2024 → **AGPLv3 restored with 8.0** | Redis stays in; Valkey (BSD-3) if AGPL is banned |
-| Docker Desktop | Proprietary (Engine remains Apache-2.0) | Podman + Podman Desktop |
-| GitHub Actions / Azure DevOps | Proprietary services (fine, but not open source) | GitLab CE |
-| AWS / Azure / GCP | Proprietary platforms | No default — provider-agnostic stack |
+Do not answer a security-first stack request with a long shopping list. A smaller defensible system is the default outcome.
 
 ## Keeping This Current
 
-- **Re-verify the license of any single-vendor pick before each new adoption**, and sweep the whole table roughly quarterly — this file records the state as of August 2026.
-- When a catalog technology overtakes a default (or a default is relicensed), update the pick here, keep the old one in [Disqualified and Replaced](#disqualified-and-replaced), and bump the `domain-expert-core` plugin version — unreleased updates never reach users.
-- A challenger enters only through the [Open-Source Gate](#the-open-source-gate), and only with a reason a default stopped being one.
+- Re-run the Security Gate before every new adoption and after a critical advisory, end-of-support notice, license change, artifact/distribution change, or major architecture shift.
+- Verify single-vendor and open-core projects quarterly; verify all defaults at least twice yearly. This selection was revised in August 2026, but the source record—not this date—is authoritative.
+- Update [references/security-verification.md](references/security-verification.md), this skill, trigger evals, and the `domain-expert-core` plugin version together when a default changes.
+- A challenger becomes a default only when evidence shows the current default no longer wins for the baseline threat model. Preserve the decision rationale and migration implications.
