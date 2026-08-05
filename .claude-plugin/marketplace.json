@@ -138,9 +138,9 @@
     {
       "name": "ai",
       "source": "./plugins/ai",
-      "description": "AI engineering — agent harnesses (Claude Code), Agent SDK, Claude API, MCP, Agent Skills, model selection, AI security, enterprise agent sandboxing, Unsloth fine-tuning, training datasets, and evals — with an ai-specialist agent.",
+      "description": "AI engineering, vendor-balanced — harnesses (Claude Code, Codex, Copilot, Cursor, pi), agent SDKs (Claude/OpenAI/Google), model APIs and inference providers (Bedrock, Vertex, Azure, OpenRouter), MCP, Agent Skills, plugins/marketplaces, AI security, sandboxing, Unsloth fine-tuning, datasets, and evals — with an ai-specialist agent.",
       "category": "development",
-      "keywords": ["ai", "agents", "claude-code", "mcp", "llm-security", "sandboxing", "fine-tuning", "evals"]
+      "keywords": ["ai", "agents", "claude-code", "codex", "copilot", "cursor", "mcp", "llm-security", "sandboxing", "fine-tuning", "evals", "inference"]
     },
     {
       "name": "domain-expert-core",

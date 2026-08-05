@@ -26,15 +26,87 @@
       "should_trigger": false
     },
     {
-      "id": "agent-sdk-pos",
-      "skill": "agent-sdk",
+      "id": "codex-pos",
+      "skill": "codex",
+      "prompt": "Our Codex CLI runs in CI keep behaving differently than on developer laptops, and one job silently succeeded even though its MCP server never started. How should I set up config.toml, approval_policy and sandbox_mode for codex exec so runs are reproducible?",
+      "should_trigger": true
+    },
+    {
+      "id": "codex-neg",
+      "skill": "codex",
+      "prompt": "Our repo already has an AGENTS.md that our team maintains. How do I get Claude Code to pick it up instead of maintaining a separate CLAUDE.md, and put the settings in the right scope?",
+      "should_trigger": false
+    },
+    {
+      "id": "github-copilot-pos",
+      "skill": "github-copilot",
+      "prompt": "I assigned a GitHub issue to Copilot and the coding agent keeps failing during dependency install \u2014 I added a .github/workflows/copilot-setup-steps.yml with an npm ci step and we're on self-hosted runners. What's wrong?",
+      "should_trigger": true
+    },
+    {
+      "id": "github-copilot-neg",
+      "skill": "github-copilot",
+      "prompt": "How do I configure OpenAI Codex cloud tasks and its AGENTS.md so the Codex CLI runs our test suite before opening a PR?",
+      "should_trigger": false
+    },
+    {
+      "id": "cursor-pos",
+      "skill": "cursor",
+      "prompt": "My .cursor/rules file isn't being picked up by the agent \u2014 I have a rule with globs set to src/**/*.tsx but Cursor never applies it. How does the rule format actually work, and can I enforce it so it always loads?",
+      "should_trigger": true
+    },
+    {
+      "id": "cursor-neg",
+      "skill": "cursor",
+      "prompt": "My Claude Code hooks aren't firing \u2014 I put a PreToolUse matcher in .claude/settings.json but it never runs before Bash. How do I debug the hook precedence? (routes to `claude-code`)",
+      "should_trigger": false
+    },
+    {
+      "id": "pi-pos",
+      "skill": "pi",
+      "prompt": "We're piloting pi from pi.dev on a few repos. Two things: my .pi/extensions aren't loading in one project, and security is asking whether we can force a confirmation prompt before the bash tool runs anything. Also what do reserveTokens and keepRecentTokens actually control?",
+      "should_trigger": true
+    },
+    {
+      "id": "pi-neg",
+      "skill": "pi",
+      "prompt": "I want to block the Bash tool before it executes when the command matches `rm *`, and my config lives in .claude/settings.json \u2014 how do I wire up the PreToolUse matcher so it's enforced every time? (near-miss: same \"block a tool pre-execution\" shape as pi's `tool_call` event, but this is Claude Code \u2014 routes to the `claude-code` sibling)",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-agent-sdk-pos",
+      "skill": "claude-agent-sdk",
       "prompt": "I'm building a Python service with claude-agent-sdk that runs one agent per customer request. How do I define a custom tool with @tool and create_sdk_mcp_server, pre-approve it so it doesn't hit a permission prompt, and resume the same session after my worker process restarts?",
       "should_trigger": true
     },
     {
-      "id": "agent-sdk-neg",
-      "skill": "agent-sdk",
+      "id": "claude-agent-sdk-neg",
+      "skill": "claude-agent-sdk",
       "prompt": "I want Claude Code to refuse edits to .env in my repo \u2014 how do I add a PreToolUse hook to .claude/settings.json and check it's actually firing? (should route to the `claude-code` sibling: harness configuration, not SDK `options.hooks`)",
+      "should_trigger": false
+    },
+    {
+      "id": "openai-agents-sdk-pos",
+      "skill": "openai-agents-sdk",
+      "prompt": "I'm building a triage agent with the OpenAI Agents SDK in Python that hands off to a refunds specialist. How do I add an input guardrail that blocks off-topic requests before any tokens are spent, and gate the refund tool behind human approval so the run pauses and can be resumed later?",
+      "should_trigger": true
+    },
+    {
+      "id": "openai-agents-sdk-neg",
+      "skill": "openai-agents-sdk",
+      "prompt": "How do I run OpenAI Codex in the cloud from the CLI and have it open a PR against my repo? (should route to `codex`, not `openai-agents-sdk`)",
+      "should_trigger": false
+    },
+    {
+      "id": "google-adk-pos",
+      "skill": "google-adk",
+      "prompt": "My Google ADK ParallelAgent runs three researcher sub-agents but the downstream synthesizer can't read their output_key state \u2014 and separately my LoopAgent never stops. How do I fix both?",
+      "should_trigger": true
+    },
+    {
+      "id": "google-adk-neg",
+      "skill": "google-adk",
+      "prompt": "I'm composing a multi-agent system with the OpenAI Agents SDK \u2014 how do handoffs pass conversation context between agents, and where do I put input guardrails?",
       "should_trigger": false
     },
     {
@@ -47,6 +119,30 @@
       "id": "claude-api-neg",
       "skill": "claude-api",
       "prompt": "We're picking a model for a high-volume summarization product \u2014 how do Claude Opus 5, OpenAI's latest GPT, and Gemini compare on reasoning quality and cost per capability tier?",
+      "should_trigger": false
+    },
+    {
+      "id": "openai-api-pos",
+      "skill": "openai-api",
+      "prompt": "We're still on client.chat.completions.create with response_format schemas and a hand-rolled tool loop. What actually changes if we port to the Responses API, and why is our cached_tokens still 0 after moving the system prompt around?",
+      "should_trigger": true
+    },
+    {
+      "id": "openai-api-neg",
+      "skill": "openai-api",
+      "prompt": "We need to serve GPT-5.6 through Azure AI Foundry behind a private endpoint \u2014 how do deployment names, regional quota, and failover to a second region work?",
+      "should_trigger": false
+    },
+    {
+      "id": "inference-providers-pos",
+      "skill": "inference-providers",
+      "prompt": "Our EU subsidiary needs Claude running on Bedrock with data staying in Europe. Do we use the `global.` or the `eu.` inference profile prefix, what does that cost us, and does it stop us from buying Provisioned Throughput?",
+      "should_trigger": true
+    },
+    {
+      "id": "inference-providers-neg",
+      "skill": "inference-providers",
+      "prompt": "Point the Claude Code CLI at our AWS Bedrock account for the whole engineering team \u2014 which environment variables do I set in settings.json?",
       "should_trigger": false
     },
     {
@@ -71,6 +167,18 @@
       "id": "agent-skills-neg",
       "skill": "agent-skills",
       "prompt": "Set up a PostToolUse hook in settings.json so our repo runs prettier after every Edit, and lock down Bash permissions for the team. (Should route to the `claude-code` sibling \u2014 harness configuration, not skill authoring.)",
+      "should_trigger": false
+    },
+    {
+      "id": "plugins-pos",
+      "skill": "plugins",
+      "prompt": "We ship an internal Claude Code plugin marketplace, but nobody on the team is getting our latest fixes \u2014 we set `version` in both plugin.json and the marketplace.json entry. How should we structure the catalog and roll it out through extraKnownMarketplaces and enabledPlugins?",
+      "should_trigger": true
+    },
+    {
+      "id": "plugins-neg",
+      "skill": "plugins",
+      "prompt": "I'm writing the SKILL.md for one of the skills inside my plugin \u2014 how long should the body be, and how do I word the description and use progressive disclosure so it actually triggers? (Near-miss: routes to the `agent-skills` sibling, which owns SKILL.md authoring; `plugins` owns only the packaging/distribution shell around it.)",
       "should_trigger": false
     },
     {

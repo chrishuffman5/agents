@@ -1,6 +1,16 @@
 # The agent-harness landscape (2026-08-05)
 
-Read this when selecting, comparing, or migrating between coding-agent harnesses, or when you need Codex CLI / Gemini CLI specifics. Claude Code depth beyond the comparison grid lives in the `claude-code` sibling skill.
+Read this when selecting, comparing, or migrating between coding-agent harnesses.
+
+**Dedicated sibling skills now own operational depth.** Everything below is kept at comparison depth for selection and migration questions; when the question is how to install, configure, or run a given harness, go to its skill instead of extending this file:
+
+- Claude Code → `claude-code`
+- OpenAI Codex (CLI, cloud, IDE extension) → `codex`
+- GitHub Copilot (IDE, coding agent, CLI, enterprise policies) → `github-copilot`
+- Cursor (editor and its agents) → `cursor`
+- pi (pi.dev) → `pi`
+
+Google's Gemini CLI has no dedicated skill by maintainer decision — the Gemini CLI material in this file is its only coverage, so keep it here.
 
 ## What "agent harness" means here
 

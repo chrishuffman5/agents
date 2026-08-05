@@ -1,6 +1,6 @@
 ---
 name: overview
-description: "Cross-technology entry point for agentic AI: choosing the implementation layer (harness vs Agent SDK vs raw model API vs managed agents), workflow-vs-agent architecture and the five workflow patterns, multi-agent orchestration, context engineering, the coding-agent harness landscape (Claude Code, OpenAI Codex CLI, Google Gemini CLI), and enterprise agent rollout. WHEN: \"how should we build this agent\", \"agent or workflow\", \"agent architecture\", \"prompt chaining\", \"orchestrator-workers\", \"evaluator-optimizer\", \"multi-agent orchestration\", \"handoffs vs agents-as-tools\", \"context engineering\", \"context rot\", \"compaction\", \"Claude Code vs Codex CLI vs Gemini CLI\", \"which coding agent should we standardize on\", \"rolling out AI agents across the enterprise\". NOT for: configuring Claude Code itself (claude-code), the Claude Agent SDK (agent-sdk), Messages API mechanics (claude-api), the MCP spec or servers (mcp), authoring SKILL.md files (agent-skills), picking a model (model-selection), prompt injection and AI governance (ai-security), isolation/egress mechanics (sandboxing), model tuning or datasets (fine-tuning, training-datasets), or eval harnesses (evals)."
+description: "Cross-technology entry point for agentic AI: choosing the implementation layer (harness vs Agent SDK vs raw model API vs managed agents), workflow-vs-agent architecture and the five workflow patterns, multi-agent orchestration, context engineering, comparing the coding-agent harness landscape (Claude Code, OpenAI Codex, GitHub Copilot, Cursor, pi, Google Gemini CLI), and enterprise agent rollout. WHEN: \"how should we build this agent\", \"agent or workflow\", \"agent architecture\", \"prompt chaining\", \"orchestrator-workers\", \"evaluator-optimizer\", \"multi-agent orchestration\", \"handoffs vs agents-as-tools\", \"context engineering\", \"context rot\", \"compaction\", \"Claude Code vs Codex vs Copilot vs Cursor vs Gemini CLI\", \"which coding agent should we standardize on\", \"rolling out AI agents across the enterprise\". NOT for operating or configuring any one harness — Claude Code (claude-code), OpenAI Codex (codex), GitHub Copilot (github-copilot), Cursor (cursor), pi (pi). NOT for building on a specific agent SDK — Claude Agent SDK (claude-agent-sdk), OpenAI Agents SDK (openai-agents-sdk), Google ADK (google-adk). NOT for Messages API mechanics (claude-api), the MCP spec or servers (mcp), authoring SKILL.md files (agent-skills), picking a model (model-selection), prompt injection and AI governance (ai-security), isolation/egress mechanics (sandboxing), model tuning or datasets (fine-tuning, training-datasets), or eval harnesses (evals)."
 license: MIT
 ---
 
@@ -8,14 +8,20 @@ license: MIT
 
 The routing skill for cross-cutting "how should we build this with AI agents?" questions. It owns four decisions that come *before* any product-specific work: which layer to build on, whether the thing is a workflow or an agent, how to orchestrate multiple agents, and how to budget context. It also carries the cross-vendor harness comparison and enterprise rollout guidance.
 
-Always answer the layer and workflow-vs-agent questions first, then hand off to the specific sibling skill. Never re-derive a sibling's depth here — this skill is the map, not the territory.
+Always answer the layer and workflow-vs-agent questions first, then hand off to the specific sibling skill. Never re-derive a sibling's depth here — this skill is the map, not the territory. Comparison and selection are what this skill owns; the moment a question becomes "how do I configure/run *this* tool", route it to that tool's own skill.
 
 ## Routing map
 
 | The question is about… | Go to |
 |---|---|
 | Configuring/deploying the Claude Code harness (settings, permissions, hooks, subagents, plugins, headless CI) | `claude-code` |
-| Building a custom agent in TypeScript/Python on the Claude Agent SDK | `agent-sdk` |
+| Operating OpenAI Codex — CLI, `config.toml`, approvals/sandbox, `codex exec`, Codex cloud | `codex` |
+| Operating GitHub Copilot — IDE/agent mode, the coding agent, Copilot CLI, enterprise policies | `github-copilot` |
+| Operating Cursor — modes, rules, permissions, hooks, cloud/background agents, `cursor-agent` | `cursor` |
+| Operating pi (pi.dev) — TUI/print/RPC/SDK modes, settings, extensions, provider switching | `pi` |
+| Building a custom agent in TypeScript/Python on the Claude Agent SDK | `claude-agent-sdk` |
+| Building an agent on the OpenAI Agents SDK (Python `openai-agents` / TS `@openai/agents`) | `openai-agents-sdk` |
+| Building an agent on Google ADK (LlmAgent, workflow agents, tools, sessions) | `google-adk` |
 | Raw Messages API — model IDs, tool use, streaming, caching, batches, structured outputs | `claude-api` |
 | MCP itself — spec, transports, primitives, OAuth, writing or consuming servers | `mcp` |
 | Writing a `SKILL.md`, progressive disclosure, skill authoring | `agent-skills` |
@@ -120,7 +126,9 @@ Read `references/context-engineering.md` for the full principles plus how a ship
 
 ## Harness landscape
 
-Three major coding-agent harnesses as of 2026-08-05. They have converged on the same shape — a memory/instruction file, a layered config file, MCP for external tools, a sandbox plus approval policy, a headless mode, and admin-managed enterprise overrides — so evaluate on that grid rather than on feature lists.
+This section is the comparison grid only. Operational depth for each harness lives in its own skill — `claude-code`, `codex`, `github-copilot`, `cursor`, `pi` — so answer "which one / how do they differ" here and route "how do I configure or run it" there. Gemini CLI has no dedicated skill; its coverage below and in `references/harness-landscape.md` is its only home.
+
+Three major CLI coding-agent harnesses are compared below as of 2026-08-05. They have converged on the same shape — a memory/instruction file, a layered config file, MCP for external tools, a sandbox plus approval policy, a headless mode, and admin-managed enterprise overrides — so evaluate on that grid rather than on feature lists.
 
 | Axis | Claude Code | OpenAI Codex CLI | Google Gemini CLI |
 |---|---|---|---|
@@ -138,7 +146,7 @@ Directives:
 - Never run any harness with sandboxing and approvals both disabled (`--yolo`, `danger-full-access`, YOLO mode) outside an already-hardened, disposable environment. Running arbitrary model-generated shell commands requires sandboxing, resource limits, command filtering, and logging before production use.
 - Nested instruction files beat root ones in both Codex and Gemini (later in the concatenation wins), so scope overrides by directory rather than growing one large file.
 
-Read `references/harness-landscape.md` for per-harness install, auth, config keys, sandbox mechanisms, headless flags, and enterprise controls. For Claude Code depth beyond the comparison grid, go to `claude-code`.
+Read `references/harness-landscape.md` for per-harness install, auth, config keys, sandbox mechanisms, headless flags, and enterprise controls — at comparison depth. Beyond the grid, go to the owning skill: `claude-code`, `codex`, `github-copilot`, `cursor`, or `pi`.
 
 ## Enterprise adoption
 
@@ -166,7 +174,7 @@ Read `references/enterprise-adoption.md` before advising on rollout governance; 
 - `references/workflow-patterns.md` — the five workflow patterns in detail, agent implementation principles, tool/agent-computer-interface design rules. Read when designing the control flow.
 - `references/orchestration.md` — dynamic workflows, the six Claude Code orchestration patterns, OpenAI handoffs vs manager pattern, multi-agent context budgets. Read when one agent is not enough.
 - `references/context-engineering.md` — context rot, system-prompt strategy, JIT retrieval, compaction, note-taking, subagent summaries, and how Claude Code enforces skill-content token budgets. Read for token-budget and long-horizon-task questions.
-- `references/harness-landscape.md` — Claude Code, Codex CLI, and Gemini CLI: install, auth, config format, memory files, MCP wiring, sandbox/approval models, headless mode, enterprise controls. Read for harness selection or migration.
+- `references/harness-landscape.md` — Claude Code, Codex CLI, and Gemini CLI: install, auth, config format, memory files, MCP wiring, sandbox/approval models, headless mode, enterprise controls. Read for harness selection or migration, not for operating a harness — `claude-code`, `codex`, `github-copilot`, `cursor`, and `pi` own that depth.
 - `references/enterprise-adoption.md` — enterprise rollout pillars, production lessons, and explicitly flagged coverage gaps. Read for org-level adoption advice.
 
 ## Diagnostic scripts
