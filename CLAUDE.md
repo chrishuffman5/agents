@@ -5,7 +5,7 @@ This repository is a **Claude Code plugin marketplace**: one plugin per IT domai
 ## Repository layout
 
 ```
-.claude-plugin/marketplace.json     ← the marketplace catalog (pluginRoot: ./plugins)
+.claude-plugin/marketplace.json     ← the marketplace catalog (sources are repo-root-relative ./plugins/<domain>; never set metadata.pluginRoot — hosts that honor it would double-resolve the path)
 plugins/
 ├── <domain>/                       ← one plugin per domain (database, os, security, …)
 │   ├── .claude-plugin/plugin.json
