@@ -42,7 +42,7 @@ Based on the gathered requirements, identify 2-4 candidate technologies. For eac
 - Known concerns (which requirements it may struggle with)
 - Maturity and ecosystem health
 
-**Greenfield fast path:** when the user wants opinionated defaults for a new build ("just pick for me", "our usual stack", "all open source") rather than a bespoke bake-off, read this plugin's `skills/ultimate-tech-stack/SKILL.md` and seed the candidate list with its per-domain defaults. Its picks satisfy an open-source-only constraint by construction. Still run Steps 4-5 whenever Step 1 surfaced real constraints that could overturn a default.
+**Greenfield fast path:** when the user wants opinionated defaults for a new build ("just pick for me", "our usual stack", "secure open source") rather than a bespoke bake-off, read this plugin's `skills/ultimate-tech-stack/SKILL.md`. Before seeding candidates, capture internet exposure, data sensitivity and tenancy, compliance duties, trust boundaries, recovery objectives, and operator capacity. The skill applies a security hard gate and then prefers open source; it may return no safe open-source default or a documented managed exception. Still run Steps 4-5 whenever Step 1 surfaced constraints that could overturn a default.
 
 ### Step 3: Consult Domain Knowledge
 

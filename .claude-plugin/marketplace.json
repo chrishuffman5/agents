@@ -135,9 +135,9 @@
     {
       "name": "domain-expert-core",
       "source": "./plugins/domain-expert-core",
-      "description": "Cross-domain task agents — architecture consulting, troubleshooting, migration planning, IaC generation, data governance, and security hardening — that orchestrate the installed domain plugins. Includes the ultimate-tech-stack skill: curated open-source default picks for every domain.",
+      "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model.",
       "category": "productivity",
-      "keywords": ["architecture", "troubleshooting", "migration", "iac", "governance", "hardening", "tech-stack", "open-source"]
+      "keywords": ["architecture", "troubleshooting", "migration", "iac", "data-governance", "security-hardening", "orchestration", "cross-domain", "tech-stack", "open-source", "security-first", "secure-by-default", "greenfield"]
     }
   ],
   "renames": {
