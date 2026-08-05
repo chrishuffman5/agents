@@ -136,6 +136,13 @@
       "keywords": ["exchange", "m365", "google-workspace", "postfix", "email", "dmarc"]
     },
     {
+      "name": "ai",
+      "source": "./plugins/ai",
+      "description": "AI engineering — agent harnesses (Claude Code), Agent SDK, Claude API, MCP, Agent Skills, model selection, AI security, enterprise agent sandboxing, Unsloth fine-tuning, training datasets, and evals — with an ai-specialist agent.",
+      "category": "development",
+      "keywords": ["ai", "agents", "claude-code", "mcp", "llm-security", "sandboxing", "fine-tuning", "evals"]
+    },
+    {
       "name": "domain-expert-core",
       "source": "./plugins/domain-expert-core",
       "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model.",

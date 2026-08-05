@@ -1,0 +1,149 @@
+{
+  "plugin": "ai",
+  "cases": [
+    {
+      "id": "overview-pos",
+      "skill": "overview",
+      "prompt": "We're building an internal assistant that triages incoming support tickets and drafts fixes. Should that be a workflow with a routing step or an actual agent, and do we build it on a CLI harness, the Agent SDK, or just call the API and run the tool loop ourselves?",
+      "should_trigger": true
+    },
+    {
+      "id": "overview-neg",
+      "skill": "overview",
+      "prompt": "How do I add a PreToolUse hook in Claude Code that blocks `rm -rf`, and limit which tools my code-reviewer subagent can use? (\u2192 claude-code)",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-code-pos",
+      "skill": "claude-code",
+      "prompt": "Our security team wants Claude Code locked down across the org \u2014 block bypassPermissions, force a deny list on .env and curl, and run an audit hook after every edit. We're on Enterprise but have no MDM. How do I roll that out, and will developers be able to override it in their project settings.json?",
+      "should_trigger": true
+    },
+    {
+      "id": "claude-code-neg",
+      "skill": "claude-code",
+      "prompt": "I'm building a TypeScript service that spawns Claude agents programmatically with custom tools and a canUseTool permission callback \u2014 what's the right way to structure the query loop and handle streaming input? (should route to the `agent-sdk` sibling skill)",
+      "should_trigger": false
+    },
+    {
+      "id": "agent-sdk-pos",
+      "skill": "agent-sdk",
+      "prompt": "I'm building a Python service with claude-agent-sdk that runs one agent per customer request. How do I define a custom tool with @tool and create_sdk_mcp_server, pre-approve it so it doesn't hit a permission prompt, and resume the same session after my worker process restarts?",
+      "should_trigger": true
+    },
+    {
+      "id": "agent-sdk-neg",
+      "skill": "agent-sdk",
+      "prompt": "I want Claude Code to refuse edits to .env in my repo \u2014 how do I add a PreToolUse hook to .claude/settings.json and check it's actually firing? (should route to the `claude-code` sibling: harness configuration, not SDK `options.hooks`)",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-api-pos",
+      "skill": "claude-api",
+      "prompt": "We upgraded our Messages API calls from claude-sonnet-4-6 to claude-opus-5 and now every request 400s on the thinking block. Also our prompt cache hit rate dropped to zero and the bill went up \u2014 what changed and what should the request body look like now?",
+      "should_trigger": true
+    },
+    {
+      "id": "claude-api-neg",
+      "skill": "claude-api",
+      "prompt": "We're picking a model for a high-volume summarization product \u2014 how do Claude Opus 5, OpenAI's latest GPT, and Gemini compare on reasoning quality and cost per capability tier?",
+      "should_trigger": false
+    },
+    {
+      "id": "mcp-pos",
+      "skill": "mcp",
+      "prompt": "Our remote MCP server keeps dropping sessions and clients say auth fails intermittently. Walk me through the Streamable HTTP session-ID rules and what the 2025-11-25 spec requires for OAuth discovery and the resource parameter.",
+      "should_trigger": true
+    },
+    {
+      "id": "mcp-neg",
+      "skill": "mcp",
+      "prompt": "Claude Code keeps asking me to approve every Bash command \u2014 how do I set up permission rules and a PreToolUse hook in settings.json so it stops prompting? (should route to the `claude-code` sibling skill)",
+      "should_trigger": false
+    },
+    {
+      "id": "agent-skills-pos",
+      "skill": "agent-skills",
+      "prompt": "I'm writing a SKILL.md for an internal skill that keeps failing to auto-trigger, and I also need to package it so it works both in Claude Code and as an upload to the Skills API \u2014 what should the frontmatter and description look like?",
+      "should_trigger": true
+    },
+    {
+      "id": "agent-skills-neg",
+      "skill": "agent-skills",
+      "prompt": "Set up a PostToolUse hook in settings.json so our repo runs prettier after every Edit, and lock down Bash permissions for the team. (Should route to the `claude-code` sibling \u2014 harness configuration, not skill authoring.)",
+      "should_trigger": false
+    },
+    {
+      "id": "model-selection-pos",
+      "skill": "model-selection",
+      "prompt": "We're running our summarization pipeline on gpt-5.6-terra and it's costing about $9k/month. What would the equivalent Claude and Gemini tiers cost at the same context size, and is there a cheaper model that keeps a 1M context window?",
+      "should_trigger": true
+    },
+    {
+      "id": "model-selection-neg",
+      "skill": "model-selection",
+      "prompt": "My prompt cache isn't hitting \u2014 where exactly do I put cache_control breakpoints across the system prompt and tool definitions so the Messages API reuses them across turns? (should route to `claude-api`)",
+      "should_trigger": false
+    },
+    {
+      "id": "ai-security-pos",
+      "skill": "ai-security",
+      "prompt": "We're about to let an internal agent read customer support tickets and call our billing API. Walk me through the threat model \u2014 prompt injection risk, what OWASP calls out, and what controls we need before this goes live.",
+      "should_trigger": true
+    },
+    {
+      "id": "ai-security-neg",
+      "skill": "ai-security",
+      "prompt": "How do I configure the Claude Code sandbox so bash can't reach the network except our internal artifact registry, and where do the denyRead rules go?",
+      "should_trigger": false
+    },
+    {
+      "id": "sandboxing-pos",
+      "skill": "sandboxing",
+      "prompt": "We're rolling Claude Code out to 400 engineers and security wants agents fully isolated. What's the right sandbox boundary, and how do I lock down network egress and stop the agent from reading ~/.aws and ~/.ssh?",
+      "should_trigger": true
+    },
+    {
+      "id": "sandboxing-neg",
+      "skill": "sandboxing",
+      "prompt": "A teammate pasted a GitHub issue into our agent and it started trying to exfiltrate repo contents. Walk me through prompt injection defenses and where this lands in the OWASP LLM Top 10. (\u2192 ai-security)",
+      "should_trigger": false
+    },
+    {
+      "id": "fine-tuning-pos",
+      "skill": "fine-tuning",
+      "prompt": "I want to fine-tune Llama 3.1 8B on our support transcripts with Unsloth on a single 24GB GPU \u2014 what LoRA rank and alpha should I use, and how do I export it so Ollama can serve it?",
+      "should_trigger": true
+    },
+    {
+      "id": "fine-tuning-neg",
+      "skill": "fine-tuning",
+      "prompt": "We have 4,000 raw support transcripts. How should I structure them into training examples \u2014 what JSONL schema, how many do I need, and should I generate synthetic variations to fill gaps? (routes to training-datasets)",
+      "should_trigger": false
+    },
+    {
+      "id": "training-datasets-pos",
+      "skill": "training-datasets",
+      "prompt": "I've got about 3,000 support-ticket transcripts I want to turn into a fine-tuning set. What exact JSONL should I write for an OpenAI SFT job vs a local TRL/Unsloth run, and how do I dedupe and hold out a test split before I train?",
+      "should_trigger": true
+    },
+    {
+      "id": "training-datasets-neg",
+      "skill": "training-datasets",
+      "prompt": "My QLoRA run on Llama 3.1 8B keeps OOMing at rank 64 with 4-bit quantization \u2014 what LoRA rank, gradient accumulation, and batch size should I use on a single 24GB card?",
+      "should_trigger": false
+    },
+    {
+      "id": "evals-pos",
+      "skill": "evals",
+      "prompt": "Our support agent passes every test we wrote but users still complain. How should I build a real eval suite for it \u2014 what grader do I use for multi-turn tool calls, and is pass@k or pass^k the right metric here?",
+      "should_trigger": true
+    },
+    {
+      "id": "evals-neg",
+      "skill": "evals",
+      "prompt": "I want to LoRA-tune Qwen on our support transcripts with Unsloth \u2014 what rank and learning rate should I use, and how do I read the training loss curve?",
+      "should_trigger": false
+    }
+  ]
+}

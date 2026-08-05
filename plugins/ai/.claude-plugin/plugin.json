@@ -1,0 +1,10 @@
+{
+  "name": "ai",
+  "description": "AI engineering across 12 disciplines -- agent harnesses (Claude Code), Claude Agent SDK, Claude API, MCP, Agent Skills authoring, frontier model selection, AI/agent security (OWASP GenAI, prompt injection), enterprise agent sandboxing, fine-tuning with Unsloth, training-dataset construction, and evals for models, agents, and skills.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["ai", "agents", "claude-code", "mcp", "agent-skills", "llm-security", "sandboxing", "fine-tuning", "unsloth", "evals"]
+}
