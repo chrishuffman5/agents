@@ -5,9 +5,6 @@
     "name": "Christopher Huffman",
     "email": "50709169+chrishuffman5@users.noreply.github.com"
   },
-  "metadata": {
-    "pluginRoot": "./plugins"
-  },
   "plugins": [
     {
       "name": "database",
