@@ -1,6 +1,6 @@
 # Evaluation Dashboard
 
-A static dashboard showing the 18 domain specialists, their shipped diagnostic-script coverage, and the latest eval
+A static dashboard showing the 19 domain specialists, their shipped diagnostic-script coverage, and the latest eval
 results (agent vs. no-tools baseline). Built to be served with **GitHub Pages**.
 
 ## Files

@@ -44,9 +44,10 @@ DOMAINS = {
     "backend":         ("Backend", "ASP.NET Core, Spring Boot, Django, Rails, Express, FastAPI, Go, Rust", "Application"),
     "frontend":        ("Frontend", "React, Next.js, Vue, Angular, Svelte, Astro, Blazor", "Application"),
     "mail-collab":     ("Mail & Collaboration", "Exchange, Microsoft 365, Google Workspace, Postfix", "Application"),
+    "ai":              ("AI Engineering", "Harnesses (Claude Code, Codex, Copilot, Cursor, pi), agent SDKs, APIs, MCP, security, sandboxing, fine-tuning, evals", "Development"),
 }
 
-SCRIPT_EXTS = {".sql", ".ps1", ".sh", ".js"}
+SCRIPT_EXTS = {".sql", ".ps1", ".sh", ".js", ".py", ".mjs"}
 
 
 def num(v):
