@@ -82,7 +82,7 @@ Before v1.0 this repository was a single `domain-expert` plugin. The marketplace
 | **virtualization** | 7 | VMware vSphere, Proxmox, KVM/QEMU, Nutanix, Citrix, cloud VMs | virtualization-specialist |
 | **mail-collab** | 5 | Exchange, Microsoft 365, Google Workspace, Postfix | mail-collab-specialist |
 | **cloud-platforms** | 4 | AWS, Azure, GCP architecture, Well-Architected, migration, FinOps | cloud-platforms-specialist |
-| **domain-expert-core** | 2 | Cross-domain task agents (below) + update-plugin and security-first ultimate-tech-stack skills | — |
+| **domain-expert-core** | 3 | Cross-domain task agents (below) + update-plugin, security-first ultimate-tech-stack, and skill-builder (multi-agent research → curated skill pipeline) skills | — |
 
 Overlapping technologies are deliberately split by angle, with each skill's description excluding the others — e.g. Kafka broker ops (`messaging`) vs Kafka pipelines (`etl`), Grafana observability (`monitoring`) vs Grafana BI (`analytics`), Splunk platform ops (`monitoring`) vs Splunk SIEM (`security`), DuckDB engine (`database`) vs ETL (`etl`) vs BI (`analytics`). The `ai` plugin follows the same discipline internally (21 skills with mutual negative triggers) and defers SIEM/EDR platform depth to `security` and container runtime depth to `containers`. Uniquely, every `ai` skill file is distilled from official vendor docs fetched at build time and ends with a `## Sources` section (URLs + fetch date), since this domain changes faster than any other.
 
