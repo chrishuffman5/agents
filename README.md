@@ -11,7 +11,7 @@ A **Claude Code plugin marketplace** with one plugin per IT domain. Each domain 
 
 Install only the domains you work with. A DBA might install `database` and `os`; a platform team might add `containers`, `devops`, and `monitoring`.
 
-**19 plugins | 18 domains | 420 skills | 190+ version references | ~390 diagnostic scripts | 24 agents**
+**20 plugins | 19 domains | 441 skills | 210+ version references | ~415 diagnostic scripts | 25 agents**
 
 📊 **[Live Evaluation Dashboard](https://chrishuffman5.github.io/domain-expert/)** — per-domain accuracy, script coverage, and agent-vs-baseline results.
 
@@ -30,6 +30,7 @@ Then install the domain plugins you need:
 ```
 /plugin install database@domain-expert
 /plugin install security@domain-expert
+/plugin install ai@domain-expert                   # AI engineering: harnesses, SDKs, MCP, sandboxing, evals
 /plugin install domain-expert-core@domain-expert   # cross-domain task agents
 ```
 
@@ -44,6 +45,7 @@ Ask something that should trigger a skill or agent:
 > Our SQL Server 2022 instance has had CPU at 95% since last night.
 > What changed in PostgreSQL 18 that affects our upgrade from 16?
 > Harden our Entra ID conditional access policies.
+> Design an egress-allowlisted sandbox for unattended Claude Code runs in CI.
 ```
 
 ### Upgrading from the old monolithic plugin
@@ -65,6 +67,7 @@ Before v1.0 this repository was a single `domain-expert` plugin. The marketplace
 | **security** | 137 | IAM (Entra ID, Okta, AD DS…), EDR (CrowdStrike…), SIEM (Sentinel, Splunk…), secrets (Vault…), AppSec, DLP, GRC, zero trust | security-specialist |
 | **networking** | 68 | Routing/switching, firewalls (PAN-OS, FortiOS…), DNS, load balancing, VPN, SD-WAN, wireless, IPAM, automation | networking-specialist |
 | **devops** | 22 | GitHub Actions, GitLab CI, Jenkins, Terraform, Bicep, Ansible, ArgoCD, Flux, GitHub | devops-specialist |
+| **ai** | 21 | Harnesses (Claude Code, Codex, Copilot, Cursor, pi), agent SDKs (Claude/OpenAI/Google), model APIs + inference providers (Bedrock, Vertex, Azure, OpenRouter), MCP, Agent Skills, plugins, AI security, sandboxing, Unsloth fine-tuning, datasets, evals | ai-specialist |
 | **os** | 20 | Windows Server/Client, RHEL, Ubuntu, Debian, SLES, Rocky/Alma, macOS + Hyper-V, SELinux, WSL, failover clustering | os-specialist |
 | **etl** | 19 | Airflow, dbt, Spark, Kafka (pipelines), SSIS, ADF, Glue, Fivetran, NiFi, DuckDB | etl-specialist |
 | **containers** | 17 | Kubernetes, EKS/AKS/GKE, Helm, OpenShift, Docker, Podman, containerd, Istio, Linkerd, Consul | containers-specialist |
@@ -81,7 +84,7 @@ Before v1.0 this repository was a single `domain-expert` plugin. The marketplace
 | **cloud-platforms** | 4 | AWS, Azure, GCP architecture, Well-Architected, migration, FinOps | cloud-platforms-specialist |
 | **domain-expert-core** | 2 | Cross-domain task agents (below) + update-plugin and security-first ultimate-tech-stack skills | — |
 
-Overlapping technologies are deliberately split by angle, with each skill's description excluding the others — e.g. Kafka broker ops (`messaging`) vs Kafka pipelines (`etl`), Grafana observability (`monitoring`) vs Grafana BI (`analytics`), Splunk platform ops (`monitoring`) vs Splunk SIEM (`security`), DuckDB engine (`database`) vs ETL (`etl`) vs BI (`analytics`).
+Overlapping technologies are deliberately split by angle, with each skill's description excluding the others — e.g. Kafka broker ops (`messaging`) vs Kafka pipelines (`etl`), Grafana observability (`monitoring`) vs Grafana BI (`analytics`), Splunk platform ops (`monitoring`) vs Splunk SIEM (`security`), DuckDB engine (`database`) vs ETL (`etl`) vs BI (`analytics`). The `ai` plugin follows the same discipline internally (21 skills with mutual negative triggers) and defers SIEM/EDR platform depth to `security` and container runtime depth to `containers`. Uniquely, every `ai` skill file is distilled from official vendor docs fetched at build time and ends with a `## Sources` section (URLs + fetch date), since this domain changes faster than any other.
 
 ### Cross-domain task agents (`domain-expert-core`)
 

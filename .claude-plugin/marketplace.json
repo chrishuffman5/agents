@@ -133,6 +133,13 @@
       "keywords": ["exchange", "m365", "google-workspace", "postfix", "email", "dmarc"]
     },
     {
+      "name": "ai",
+      "source": "./plugins/ai",
+      "description": "AI engineering, vendor-balanced — harnesses (Claude Code, Codex, Copilot, Cursor, pi), agent SDKs (Claude/OpenAI/Google), model APIs and inference providers (Bedrock, Vertex, Azure, OpenRouter), MCP, Agent Skills, plugins/marketplaces, AI security, sandboxing, Unsloth fine-tuning, datasets, and evals — with an ai-specialist agent.",
+      "category": "development",
+      "keywords": ["ai", "agents", "claude-code", "codex", "copilot", "cursor", "mcp", "llm-security", "sandboxing", "fine-tuning", "evals", "inference"]
+    },
+    {
       "name": "domain-expert-core",
       "source": "./plugins/domain-expert-core",
       "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model.",

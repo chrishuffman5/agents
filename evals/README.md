@@ -90,7 +90,7 @@ Grader types:
 
 ## Roadmap
 
-- [x] Suites for all 18 domains
+- [x] Suites for all 19 domains (incl. `ai`)
 - [ ] LLM-judge grader type for free-form answers (rubric + judge model)
 - [ ] Path-citation check: verify the agent cited real skill paths (files exist)
 - [ ] Trend tracking across runs (before/after each `feat/scripts-<domain>` PR — see `docs/scripts-standard.md` rollout)

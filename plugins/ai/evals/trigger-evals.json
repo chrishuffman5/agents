@@ -1,0 +1,257 @@
+{
+  "plugin": "ai",
+  "cases": [
+    {
+      "id": "overview-pos",
+      "skill": "overview",
+      "prompt": "We're building an internal assistant that triages incoming support tickets and drafts fixes. Should that be a workflow with a routing step or an actual agent, and do we build it on a CLI harness, the Agent SDK, or just call the API and run the tool loop ourselves?",
+      "should_trigger": true
+    },
+    {
+      "id": "overview-neg",
+      "skill": "overview",
+      "prompt": "How do I add a PreToolUse hook in Claude Code that blocks `rm -rf`, and limit which tools my code-reviewer subagent can use? (\u2192 claude-code)",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-code-pos",
+      "skill": "claude-code",
+      "prompt": "Our security team wants Claude Code locked down across the org \u2014 block bypassPermissions, force a deny list on .env and curl, and run an audit hook after every edit. We're on Enterprise but have no MDM. How do I roll that out, and will developers be able to override it in their project settings.json?",
+      "should_trigger": true
+    },
+    {
+      "id": "claude-code-neg",
+      "skill": "claude-code",
+      "prompt": "I'm building a TypeScript service that spawns Claude agents programmatically with custom tools and a canUseTool permission callback \u2014 what's the right way to structure the query loop and handle streaming input? (should route to the `agent-sdk` sibling skill)",
+      "should_trigger": false
+    },
+    {
+      "id": "codex-pos",
+      "skill": "codex",
+      "prompt": "Our Codex CLI runs in CI keep behaving differently than on developer laptops, and one job silently succeeded even though its MCP server never started. How should I set up config.toml, approval_policy and sandbox_mode for codex exec so runs are reproducible?",
+      "should_trigger": true
+    },
+    {
+      "id": "codex-neg",
+      "skill": "codex",
+      "prompt": "Our repo already has an AGENTS.md that our team maintains. How do I get Claude Code to pick it up instead of maintaining a separate CLAUDE.md, and put the settings in the right scope?",
+      "should_trigger": false
+    },
+    {
+      "id": "github-copilot-pos",
+      "skill": "github-copilot",
+      "prompt": "I assigned a GitHub issue to Copilot and the coding agent keeps failing during dependency install \u2014 I added a .github/workflows/copilot-setup-steps.yml with an npm ci step and we're on self-hosted runners. What's wrong?",
+      "should_trigger": true
+    },
+    {
+      "id": "github-copilot-neg",
+      "skill": "github-copilot",
+      "prompt": "How do I configure OpenAI Codex cloud tasks and its AGENTS.md so the Codex CLI runs our test suite before opening a PR?",
+      "should_trigger": false
+    },
+    {
+      "id": "cursor-pos",
+      "skill": "cursor",
+      "prompt": "My .cursor/rules file isn't being picked up by the agent \u2014 I have a rule with globs set to src/**/*.tsx but Cursor never applies it. How does the rule format actually work, and can I enforce it so it always loads?",
+      "should_trigger": true
+    },
+    {
+      "id": "cursor-neg",
+      "skill": "cursor",
+      "prompt": "My Claude Code hooks aren't firing \u2014 I put a PreToolUse matcher in .claude/settings.json but it never runs before Bash. How do I debug the hook precedence? (routes to `claude-code`)",
+      "should_trigger": false
+    },
+    {
+      "id": "pi-pos",
+      "skill": "pi",
+      "prompt": "We're piloting pi from pi.dev on a few repos. Two things: my .pi/extensions aren't loading in one project, and security is asking whether we can force a confirmation prompt before the bash tool runs anything. Also what do reserveTokens and keepRecentTokens actually control?",
+      "should_trigger": true
+    },
+    {
+      "id": "pi-neg",
+      "skill": "pi",
+      "prompt": "I want to block the Bash tool before it executes when the command matches `rm *`, and my config lives in .claude/settings.json \u2014 how do I wire up the PreToolUse matcher so it's enforced every time? (near-miss: same \"block a tool pre-execution\" shape as pi's `tool_call` event, but this is Claude Code \u2014 routes to the `claude-code` sibling)",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-agent-sdk-pos",
+      "skill": "claude-agent-sdk",
+      "prompt": "I'm building a Python service with claude-agent-sdk that runs one agent per customer request. How do I define a custom tool with @tool and create_sdk_mcp_server, pre-approve it so it doesn't hit a permission prompt, and resume the same session after my worker process restarts?",
+      "should_trigger": true
+    },
+    {
+      "id": "claude-agent-sdk-neg",
+      "skill": "claude-agent-sdk",
+      "prompt": "I want Claude Code to refuse edits to .env in my repo \u2014 how do I add a PreToolUse hook to .claude/settings.json and check it's actually firing? (should route to the `claude-code` sibling: harness configuration, not SDK `options.hooks`)",
+      "should_trigger": false
+    },
+    {
+      "id": "openai-agents-sdk-pos",
+      "skill": "openai-agents-sdk",
+      "prompt": "I'm building a triage agent with the OpenAI Agents SDK in Python that hands off to a refunds specialist. How do I add an input guardrail that blocks off-topic requests before any tokens are spent, and gate the refund tool behind human approval so the run pauses and can be resumed later?",
+      "should_trigger": true
+    },
+    {
+      "id": "openai-agents-sdk-neg",
+      "skill": "openai-agents-sdk",
+      "prompt": "How do I run OpenAI Codex in the cloud from the CLI and have it open a PR against my repo? (should route to `codex`, not `openai-agents-sdk`)",
+      "should_trigger": false
+    },
+    {
+      "id": "google-adk-pos",
+      "skill": "google-adk",
+      "prompt": "My Google ADK ParallelAgent runs three researcher sub-agents but the downstream synthesizer can't read their output_key state \u2014 and separately my LoopAgent never stops. How do I fix both?",
+      "should_trigger": true
+    },
+    {
+      "id": "google-adk-neg",
+      "skill": "google-adk",
+      "prompt": "I'm composing a multi-agent system with the OpenAI Agents SDK \u2014 how do handoffs pass conversation context between agents, and where do I put input guardrails?",
+      "should_trigger": false
+    },
+    {
+      "id": "claude-api-pos",
+      "skill": "claude-api",
+      "prompt": "We upgraded our Messages API calls from claude-sonnet-4-6 to claude-opus-5 and now every request 400s on the thinking block. Also our prompt cache hit rate dropped to zero and the bill went up \u2014 what changed and what should the request body look like now?",
+      "should_trigger": true
+    },
+    {
+      "id": "claude-api-neg",
+      "skill": "claude-api",
+      "prompt": "We're picking a model for a high-volume summarization product \u2014 how do Claude Opus 5, OpenAI's latest GPT, and Gemini compare on reasoning quality and cost per capability tier?",
+      "should_trigger": false
+    },
+    {
+      "id": "openai-api-pos",
+      "skill": "openai-api",
+      "prompt": "We're still on client.chat.completions.create with response_format schemas and a hand-rolled tool loop. What actually changes if we port to the Responses API, and why is our cached_tokens still 0 after moving the system prompt around?",
+      "should_trigger": true
+    },
+    {
+      "id": "openai-api-neg",
+      "skill": "openai-api",
+      "prompt": "We need to serve GPT-5.6 through Azure AI Foundry behind a private endpoint \u2014 how do deployment names, regional quota, and failover to a second region work?",
+      "should_trigger": false
+    },
+    {
+      "id": "inference-providers-pos",
+      "skill": "inference-providers",
+      "prompt": "Our EU subsidiary needs Claude running on Bedrock with data staying in Europe. Do we use the `global.` or the `eu.` inference profile prefix, what does that cost us, and does it stop us from buying Provisioned Throughput?",
+      "should_trigger": true
+    },
+    {
+      "id": "inference-providers-neg",
+      "skill": "inference-providers",
+      "prompt": "Point the Claude Code CLI at our AWS Bedrock account for the whole engineering team \u2014 which environment variables do I set in settings.json?",
+      "should_trigger": false
+    },
+    {
+      "id": "mcp-pos",
+      "skill": "mcp",
+      "prompt": "Our remote MCP server keeps dropping sessions and clients say auth fails intermittently. Walk me through the Streamable HTTP session-ID rules and what the 2025-11-25 spec requires for OAuth discovery and the resource parameter.",
+      "should_trigger": true
+    },
+    {
+      "id": "mcp-neg",
+      "skill": "mcp",
+      "prompt": "Claude Code keeps asking me to approve every Bash command \u2014 how do I set up permission rules and a PreToolUse hook in settings.json so it stops prompting? (should route to the `claude-code` sibling skill)",
+      "should_trigger": false
+    },
+    {
+      "id": "agent-skills-pos",
+      "skill": "agent-skills",
+      "prompt": "I'm writing a SKILL.md for an internal skill that keeps failing to auto-trigger, and I also need to package it so it works both in Claude Code and as an upload to the Skills API \u2014 what should the frontmatter and description look like?",
+      "should_trigger": true
+    },
+    {
+      "id": "agent-skills-neg",
+      "skill": "agent-skills",
+      "prompt": "Set up a PostToolUse hook in settings.json so our repo runs prettier after every Edit, and lock down Bash permissions for the team. (Should route to the `claude-code` sibling \u2014 harness configuration, not skill authoring.)",
+      "should_trigger": false
+    },
+    {
+      "id": "plugins-pos",
+      "skill": "plugins",
+      "prompt": "We ship an internal Claude Code plugin marketplace, but nobody on the team is getting our latest fixes \u2014 we set `version` in both plugin.json and the marketplace.json entry. How should we structure the catalog and roll it out through extraKnownMarketplaces and enabledPlugins?",
+      "should_trigger": true
+    },
+    {
+      "id": "plugins-neg",
+      "skill": "plugins",
+      "prompt": "I'm writing the SKILL.md for one of the skills inside my plugin \u2014 how long should the body be, and how do I word the description and use progressive disclosure so it actually triggers? (Near-miss: routes to the `agent-skills` sibling, which owns SKILL.md authoring; `plugins` owns only the packaging/distribution shell around it.)",
+      "should_trigger": false
+    },
+    {
+      "id": "model-selection-pos",
+      "skill": "model-selection",
+      "prompt": "We're running our summarization pipeline on gpt-5.6-terra and it's costing about $9k/month. What would the equivalent Claude and Gemini tiers cost at the same context size, and is there a cheaper model that keeps a 1M context window?",
+      "should_trigger": true
+    },
+    {
+      "id": "model-selection-neg",
+      "skill": "model-selection",
+      "prompt": "My prompt cache isn't hitting \u2014 where exactly do I put cache_control breakpoints across the system prompt and tool definitions so the Messages API reuses them across turns? (should route to `claude-api`)",
+      "should_trigger": false
+    },
+    {
+      "id": "ai-security-pos",
+      "skill": "ai-security",
+      "prompt": "We're about to let an internal agent read customer support tickets and call our billing API. Walk me through the threat model \u2014 prompt injection risk, what OWASP calls out, and what controls we need before this goes live.",
+      "should_trigger": true
+    },
+    {
+      "id": "ai-security-neg",
+      "skill": "ai-security",
+      "prompt": "How do I configure the Claude Code sandbox so bash can't reach the network except our internal artifact registry, and where do the denyRead rules go?",
+      "should_trigger": false
+    },
+    {
+      "id": "sandboxing-pos",
+      "skill": "sandboxing",
+      "prompt": "We're rolling Claude Code out to 400 engineers and security wants agents fully isolated. What's the right sandbox boundary, and how do I lock down network egress and stop the agent from reading ~/.aws and ~/.ssh?",
+      "should_trigger": true
+    },
+    {
+      "id": "sandboxing-neg",
+      "skill": "sandboxing",
+      "prompt": "A teammate pasted a GitHub issue into our agent and it started trying to exfiltrate repo contents. Walk me through prompt injection defenses and where this lands in the OWASP LLM Top 10. (\u2192 ai-security)",
+      "should_trigger": false
+    },
+    {
+      "id": "fine-tuning-pos",
+      "skill": "fine-tuning",
+      "prompt": "I want to fine-tune Llama 3.1 8B on our support transcripts with Unsloth on a single 24GB GPU \u2014 what LoRA rank and alpha should I use, and how do I export it so Ollama can serve it?",
+      "should_trigger": true
+    },
+    {
+      "id": "fine-tuning-neg",
+      "skill": "fine-tuning",
+      "prompt": "We have 4,000 raw support transcripts. How should I structure them into training examples \u2014 what JSONL schema, how many do I need, and should I generate synthetic variations to fill gaps? (routes to training-datasets)",
+      "should_trigger": false
+    },
+    {
+      "id": "training-datasets-pos",
+      "skill": "training-datasets",
+      "prompt": "I've got about 3,000 support-ticket transcripts I want to turn into a fine-tuning set. What exact JSONL should I write for an OpenAI SFT job vs a local TRL/Unsloth run, and how do I dedupe and hold out a test split before I train?",
+      "should_trigger": true
+    },
+    {
+      "id": "training-datasets-neg",
+      "skill": "training-datasets",
+      "prompt": "My QLoRA run on Llama 3.1 8B keeps OOMing at rank 64 with 4-bit quantization \u2014 what LoRA rank, gradient accumulation, and batch size should I use on a single 24GB card?",
+      "should_trigger": false
+    },
+    {
+      "id": "evals-pos",
+      "skill": "evals",
+      "prompt": "Our support agent passes every test we wrote but users still complain. How should I build a real eval suite for it \u2014 what grader do I use for multi-turn tool calls, and is pass@k or pass^k the right metric here?",
+      "should_trigger": true
+    },
+    {
+      "id": "evals-neg",
+      "skill": "evals",
+      "prompt": "I want to LoRA-tune Qwen on our support transcripts with Unsloth \u2014 what rank and learning rate should I use, and how do I read the training loss curve?",
+      "should_trigger": false
+    }
+  ]
+}

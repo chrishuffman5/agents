@@ -3,8 +3,8 @@
 window.DASHBOARD_DATA = {
   "generated": "",
   "totals": {
-    "domains": 18,
-    "scripts": 273,
+    "domains": 19,
+    "scripts": 307,
     "agent": {
       "suites": 0,
       "tasks": 0,
@@ -226,9 +226,11 @@ window.DASHBOARD_DATA = {
       "category": "Operations",
       "technologies": 8,
       "taskCount": 8,
-      "scripts": 13,
+      "scripts": 21,
       "scriptTechs": [
+        "python (4)",
         "powershell (4)",
+        "nodejs (4)",
         "bash (4)",
         "kubectl (3)",
         "azure-cli (1)",
@@ -329,6 +331,39 @@ window.DASHBOARD_DATA = {
       "scriptTechs": [
         "postfix (2)",
         "m365 (1)"
+      ],
+      "agent": null,
+      "baseline": null
+    },
+    {
+      "slug": "ai",
+      "title": "AI Engineering",
+      "description": "Harnesses (Claude Code, Codex, Copilot, Cursor, pi), agent SDKs, APIs, MCP, security, sandboxing, fine-tuning, evals",
+      "category": "Development",
+      "technologies": 21,
+      "taskCount": 10,
+      "scripts": 26,
+      "scriptTechs": [
+        "openai-api (3)",
+        "sandboxing (2)",
+        "openai-agents-sdk (2)",
+        "inference-providers (2)",
+        "claude-api (2)",
+        "training-datasets (1)",
+        "plugins (1)",
+        "pi (1)",
+        "overview (1)",
+        "model-selection (1)",
+        "mcp (1)",
+        "google-adk (1)",
+        "github-copilot (1)",
+        "fine-tuning (1)",
+        "evals (1)",
+        "cursor (1)",
+        "codex (1)",
+        "claude-code (1)",
+        "claude-agent-sdk (1)",
+        "agent-skills (1)"
       ],
       "agent": null,
       "baseline": null

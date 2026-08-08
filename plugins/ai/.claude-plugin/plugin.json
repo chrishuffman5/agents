@@ -1,0 +1,10 @@
+{
+  "name": "ai",
+  "description": "AI engineering across 21 disciplines, vendor-balanced -- agent harnesses (Claude Code, OpenAI Codex, GitHub Copilot, Cursor, pi), agent SDKs (Claude Agent SDK, OpenAI Agents SDK, Google ADK), model APIs (Claude Messages, OpenAI Responses) and inference providers (Bedrock, Vertex AI, Azure AI Foundry, OpenRouter), MCP, Agent Skills authoring, Claude Code plugin/marketplace engineering, model selection, AI/agent security (OWASP GenAI/MCP), enterprise agent sandboxing, fine-tuning with Unsloth, training datasets, and evals. All content distilled from official vendor docs with per-file source URLs and fetch dates.",
+  "version": "1.0.0",
+  "author": { "name": "Christopher Huffman", "email": "50709169+chrishuffman5@users.noreply.github.com" },
+  "homepage": "https://github.com/chrishuffman5/domain-expert",
+  "repository": "https://github.com/chrishuffman5/domain-expert",
+  "license": "MIT",
+  "keywords": ["ai", "agents", "claude-code", "codex", "github-copilot", "cursor", "mcp", "agent-skills", "llm-security", "sandboxing", "fine-tuning", "unsloth", "evals", "bedrock", "openrouter"]
+}

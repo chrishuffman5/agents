@@ -1,0 +1,66 @@
+{
+  "domain": "ai",
+  "agent": "domain-expert:ai-specialist",
+  "tasks": [
+    {
+      "id": "mcp-spec-revisions",
+      "prompt": "Which MCP spec revisions have dedicated version reference files in the skills library? Give the revision identifiers.",
+      "expected": { "type": "contains_all", "value": ["2025-11-25", "2026-07-28"] },
+      "notes": "Ground truth: plugins/ai/skills/mcp/references/versions/ contains 2025-11-25.md and 2026-07-28.md"
+    },
+    {
+      "id": "harness-skills",
+      "prompt": "Which five coding-agent harnesses have their own dedicated skills in the ai plugin? Give the skill names.",
+      "expected": { "type": "contains_all", "value": ["claude-code", "codex", "github-copilot", "cursor", "pi"] },
+      "notes": "Ground truth: plugins/ai/skills/ has claude-code, codex, github-copilot, cursor, pi harness skills; also listed in plugins/ai/agents/ai-specialist.md knowledge map"
+    },
+    {
+      "id": "gemini-cli-coverage",
+      "prompt": "A teammate asks where Gemini CLI is covered in the ai plugin. Which skill covers it, and does it have a dedicated skill of its own?",
+      "expected": { "type": "regex", "value": "(?i)overview[\\s\\S]*(no dedicated skill|comparison|only home|does not|doesn't)" },
+      "notes": "Ground truth: plugins/ai/skills/overview/SKILL.md \"Gemini CLI has no dedicated skill; its coverage below and in references/harness-landscape.md is its only home.\""
+    },
+    {
+      "id": "agent-sdk-skills",
+      "prompt": "Which three agent SDKs have dedicated skills in the ai plugin? Give the skill names.",
+      "expected": { "type": "contains_all", "value": ["claude-agent-sdk", "openai-agents-sdk", "google-adk"] },
+      "notes": "Ground truth: plugins/ai/skills/ contains claude-agent-sdk, openai-agents-sdk, google-adk"
+    },
+    {
+      "id": "sandbox-os-mechanisms",
+      "prompt": "Which OS-level mechanism enforces Claude Code's Bash sandbox on macOS, and which one on Linux/WSL2?",
+      "expected": { "type": "contains_all", "value": ["Seatbelt", "bubblewrap"] },
+      "notes": "Ground truth: plugins/ai/skills/sandboxing/SKILL.md \"OS-enforced per-Bash-command isolation: Seatbelt on macOS, bubblewrap on Linux/WSL2\""
+    },
+    {
+      "id": "sandbox-apparmor-sysctl",
+      "prompt": "On Ubuntu 24.04+, which sysctl key do you check to see whether the default AppArmor policy will block bubblewrap's user namespaces for Claude Code's sandbox?",
+      "expected": { "type": "contains_all", "value": ["kernel.apparmor_restrict_unprivileged_userns"] },
+      "notes": "Ground truth: plugins/ai/skills/sandboxing/SKILL.md Layer 1 section: check sysctl kernel.apparmor_restrict_unprivileged_userns, add /etc/apparmor.d/bwrap profile if 1"
+    },
+    {
+      "id": "codex-sandbox-modes",
+      "prompt": "In OpenAI Codex CLI, what is the configuration file called, and name the sandbox_mode value that grants writes to the workspace and the one that removes all restrictions.",
+      "expected": { "type": "contains_all", "value": ["config.toml", "workspace-write", "danger-full-access"] },
+      "notes": "Ground truth: plugins/ai/skills/codex/SKILL.md description and references/approvals-and-sandbox.md: config.toml, sandbox_mode workspace-write / danger-full-access"
+    },
+    {
+      "id": "pi-modes",
+      "prompt": "The pi harness (pi.dev) has four operating modes. Name them.",
+      "expected": { "type": "regex", "value": "(?i)TUI[\\s\\S]*(print|-p )[\\s\\S]*rpc[\\s\\S]*SDK" },
+      "notes": "Ground truth: plugins/ai/skills/pi/SKILL.md modes table: Interactive TUI, Print (pi -p / --mode json), RPC (--mode rpc), embedded SDK"
+    },
+    {
+      "id": "assistants-sunset",
+      "prompt": "What is the full sunset date for OpenAI's Assistants API, and is Chat Completions itself deprecated?",
+      "expected": { "type": "regex", "value": "2026-08-26|August 26,? 2026" },
+      "notes": "Ground truth: plugins/ai/skills/openai-api/SKILL.md \"Assistants API full sunset: 2026-08-26\" and references/migrate-from-chat-completions.md (Chat Completions is NOT deprecated — answer should not claim it is)"
+    },
+    {
+      "id": "inference-provider-refs",
+      "prompt": "The inference-providers skill has one deep-dive reference file per provider. Which four providers are they?",
+      "expected": { "type": "contains_all", "value": ["bedrock", "vertex", "azure", "openrouter"] },
+      "notes": "Ground truth: plugins/ai/skills/inference-providers/references/ contains bedrock.md, vertex-ai.md, azure-foundry.md, openrouter.md"
+    }
+  ]
+}
