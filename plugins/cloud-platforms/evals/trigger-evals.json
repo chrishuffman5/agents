@@ -1,8 +1,8 @@
 {"plugin": "cloud-platforms", "cases": [
   {"id": "overview-pos", "skill": "overview", "prompt": "We're a startup with no existing cloud footprint picking a primary cloud for a new data-heavy analytics product -- AWS, Azure, or GCP, and why?", "should_trigger": true},
   {"id": "overview-neg", "skill": "overview", "prompt": "Should we use RDS or Aurora for our new Postgres database on AWS, and what's the ballpark monthly cost difference?", "should_trigger": false},
-  {"id": "aws-pos", "skill": "aws", "prompt": "Should I use RDS or Aurora for our new Postgres database on AWS, and what's the ballpark monthly cost?", "should_trigger": true},
-  {"id": "aws-neg", "skill": "aws", "prompt": "What's the AWS CLI command to describe an RDS instance's endpoint and port?", "should_trigger": false},
+  {"id": "aws-pos", "skill": "aws", "prompt": "We're standing up a new AWS landing zone for about 40 accounts -- what OU structure should we use, and how do I make CostCenter tags actually mandatory?", "should_trigger": true},
+  {"id": "aws-neg", "skill": "aws", "prompt": "Write the Terraform module that provisions our AWS Organizations OUs and attaches the SCPs.", "should_trigger": false},
   {"id": "azure-pos", "skill": "azure", "prompt": "We're moving off on-prem SQL Server and already own Windows Server + SQL Server licenses -- should we use Azure SQL Database or Managed Instance, and does Hybrid Benefit apply?", "should_trigger": true},
   {"id": "azure-neg", "skill": "azure", "prompt": "Write the Bicep template to deploy an Azure SQL Managed Instance with VNet integration and a private endpoint.", "should_trigger": false},
   {"id": "gcp-pos", "skill": "gcp", "prompt": "Our GKE Autopilot bill is way higher than expected for a stateless API -- should we switch that workload to Cloud Run instead?", "should_trigger": true},

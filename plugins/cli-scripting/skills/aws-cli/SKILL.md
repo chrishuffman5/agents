@@ -16,9 +16,12 @@ The `aws` client for every AWS service. This skill owns CLI mechanics: authentic
 | Least privilege, key rotation, credential audit, Access Analyzer, policy simulation, boundaries | `references/iam-security.md` |
 | Output formats, `--query`/JMESPath, pagination, pager, waiters, retry and config settings | `references/core.md` |
 | Per-service command syntax (IAM, S3, Lambda, RDS, CloudFormation, ECS, EKS, CloudWatch, SSM, Route 53, STS, VPC) | `references/commands.md` |
+| Applying and querying tags, cross-service tag inventory, tag-compliance reporting | `references/commands.md` |
 | Idempotent create, batch loops, provisioning and teardown scripts | `references/patterns.md` |
 
 Always verify identity before any mutating command: `aws sts get-caller-identity`. It requires no permissions and cannot be denied by policy, so it is the one reliable "which account and principal am I?" probe.
+
+Tagging *strategy* — which tag categories to standardize on, tag-policy design, SCP-based enforcement, cost-allocation activation — is the `aws` skill in the `cloud-platforms` plugin. This skill owns the commands that read and write tags.
 
 ## Authenticate without long-lived keys
 
@@ -201,6 +204,7 @@ Or omit the version flag and let the service pick its current default. EKS minor
 - https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html
 - https://docs.aws.amazon.com/cli/latest/reference/s3api/create-bucket.html
 - https://docs.aws.amazon.com/cli/latest/reference/ec2/wait/index.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
 - https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
 - https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Concepts.General.DBVersions.html
 - https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html

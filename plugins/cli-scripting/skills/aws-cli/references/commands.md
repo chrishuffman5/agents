@@ -8,6 +8,104 @@ Verified command syntax with flags, defaults, and the constraints that bite. Aut
 
 ---
 
+## Tagging (cross-service)
+
+Tagging **strategy** — which tag categories to standardize on, tag-policy design, SCP-based enforcement, cost-allocation activation — belongs to the `aws` skill in the `cloud-platforms` plugin. This section is the CLI surface for querying, applying, and reporting on tags.
+
+### `aws resourcegroupstaggingapi` — cross-service tag operations
+
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+
+Subcommands: `get-resources`, `tag-resources`, `untag-resources`, `get-tag-keys`, `get-tag-values`, `get-compliance-summary`, `list-required-tags`, `start-report-creation`, `describe-report-creation`.
+
+```bash
+# Inventory by tag — the primary query
+aws resourcegroupstaggingapi get-resources \
+  --tag-filters Key=Environment,Values=Production Key=CostCenter \
+  --resource-type-filters ec2:instance s3:bucket \
+  --query 'ResourceTagMappingList[].ResourceARN' -o json
+
+# Apply / remove tags across services in one call
+aws resourcegroupstaggingapi tag-resources \
+  --resource-arn-list arn:aws:s3:::my-bucket arn:aws:ec2:us-east-1:123456789012:instance/i-abc \
+  --tags Environment=Production,CostCenter=1234
+aws resourcegroupstaggingapi untag-resources \
+  --resource-arn-list arn:aws:s3:::my-bucket --tag-keys Environment CostCenter
+
+# Discover what's actually in use (region- and account-scoped, not org-wide)
+aws resourcegroupstaggingapi get-tag-keys
+aws resourcegroupstaggingapi get-tag-values --key Environment
+```
+
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-resources.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/tag-resources.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/untag-resources.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-tag-keys.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-tag-values.html
+
+- **`--tag-filters` semantics**: AND across distinct keys, OR across values within one key, and a key given with no `Values` matches any value. Limits: up to 50 keys, up to 20 values per key. `--resource-type-filters` takes `service[:resourceType]` strings; a bare `service` matches every resource type under it.
+- **`get-resources` does not return untagged resources.** AWS's documented redirect for that case is Resource Explorer with a `tag:none` query — a tag-coverage audit built only on `get-resources` silently reports 100% coverage.
+- `--resource-arn-list` on `get-resources` is a distinct "look up exactly these ARNs" mode: up to 100 ARNs, and **mutually exclusive** with `--tag-filters`, `--resource-type-filters`, and every pagination parameter.
+- **`tag-resources`/`untag-resources` are not all-or-nothing.** Max 20 ARNs and 50 tags (or 50 tag keys) per call; the response carries a `FailedResourcesMap` keyed by ARN with `{StatusCode, ErrorCode, ErrorMessage}`, **empty on full success**. A script that ignores it will report success on a partial failure — check it, and batch ARNs in twenties.
+- `get-tag-keys`/`get-tag-values` report only what is in use in the **calling account and region**; both paginate via `PaginationToken`.
+- Prefer `--page-size` over `get-resources`' `--tags-per-page` (AWS's own recommendation). Extract under pagination from `ResourceTagMappingList`.
+
+### Tag-policy compliance reporting
+
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-compliance-summary.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/list-required-tags.html
+
+```bash
+# Hard restriction: management account, us-east-1 only, tag policies enabled in the org
+aws resourcegroupstaggingapi get-compliance-summary --region us-east-1 \
+  --target-id-filters 123456789012 --group-by RESOURCE_TYPE REGION
+
+# Pre-flight: which tag keys does the effective tag policy expect for this resource type?
+aws resourcegroupstaggingapi list-required-tags \
+  --query 'RequiredTags[].{Type:ResourceType,Keys:ReportingTagKeys}' -o json
+```
+
+`get-compliance-summary` returns a `SummaryList` of `{LastUpdated, TargetId, TargetIdType (ACCOUNT|OU|ROOT), Region, ResourceType, NonCompliantResources}`; `--group-by` accepts `TARGET_ID`, `REGION`, `RESOURCE_TYPE`. Per-resource compliance status is also available inline on `get-resources --include-compliance-details`, and `--exclude-compliant-resources` narrows to noncompliant resources only — it is usable **only** alongside `--include-compliance-details`.
+
+### `aws resource-explorer-2 search` — including untagged resources
+
+> Source: https://docs.aws.amazon.com/cli/latest/reference/resource-explorer-2/search.html
+
+```bash
+aws resource-explorer-2 search --query-string "tag:none resourcetype:ec2:instance" \
+  --query 'Resources[].Arn' -o json
+```
+
+- `--query-string` is required and case-insensitive; an empty string returns everything up to the cap.
+- **Hard ceiling of 1,000 results — an absolute cap, not a pagination default.** `Count.Complete` is `false` when the search hit it, so check that field before treating results as a complete inventory.
+- `--view-arn` defaults to the region's default view. If no default view exists, or the caller cannot use it, the call **fails with 401 Unauthorized** rather than returning nothing — do not read that failure as "no resources."
+- Pagination tokens expire after 24 hours. Results carry `Arn`, `OwningAccountId`, `Region`, `ResourceType`, `Service`, `CfnResourceType`, `LastReportedAt`, and `Properties`; `LastReportedAt` reflects an eventually-consistent index, not live state.
+
+### Tag-on-create vs tag-after
+
+> Source: https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html
+> Source: https://docs.aws.amazon.com/cli/latest/reference/ec2/create-tags.html
+> Source: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+
+**Tag on create whenever the API allows it.** EC2 documents that "if tags cannot be applied during resource creation, we roll back the resource creation process… no resources are left untagged at any time." Tagging afterwards necessarily leaves a window in which the resource exists untagged, and a script that dies between the two calls leaves it that way permanently.
+
+```bash
+# Tag-on-create — repeat the ResourceType block per resource type in the same call
+aws ec2 run-instances --image-id "$AMI_ID" --instance-type t3.micro \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Environment,Value=Production}]' \
+                       'ResourceType=volume,Tags=[{Key=Environment,Value=Production}]'
+
+# Tag-after — the fallback for resources that can't be tagged at creation
+aws ec2 create-tags --resources ami-1a2b3c4d i-1234567890abcdef0 \
+  --tags Key=webserver,Value= Key=Stack,Value=Production
+```
+
+- `run-instances --tag-specifications` covers **only** instances, volumes, Spot Instance requests, and network interfaces — anything else that call creates still needs a follow-up `create-tags`.
+- `ec2 create-tags` accepts up to 1,000 resource IDs per call (AWS recommends smaller batches) and produces **no output** on success. Each resource holds a maximum of 50 tags. Tag keys and values are case-sensitive, values run to 256 Unicode characters, and keys may not begin with `aws:`.
+- `Key=webserver,Value=` is valid: `--tags` requires the `value` parameter, and supplying it empty sets an empty-string value rather than erroring.
+
+---
+
 ## IAM
 
 > Source: https://docs.aws.amazon.com/cli/latest/reference/iam/index.html
@@ -520,6 +618,17 @@ aws ec2 authorize-security-group-ingress --group-id "$SG_ID" --protocol tcp --po
 
 ## Sources
 
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/tag-resources.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/untag-resources.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-resources.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-tag-keys.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-tag-values.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/get-compliance-summary.html
+- https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/list-required-tags.html
+- https://docs.aws.amazon.com/cli/latest/reference/resource-explorer-2/search.html
+- https://docs.aws.amazon.com/cli/latest/reference/ec2/create-tags.html
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 - https://docs.aws.amazon.com/cli/latest/reference/iam/index.html
 - https://docs.aws.amazon.com/cli/latest/reference/iam/create-login-profile.html
 - https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html

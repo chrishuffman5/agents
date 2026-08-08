@@ -1,194 +1,169 @@
 # AWS Messaging Reference
 
-> SQS, SNS, EventBridge, Kinesis, Step Functions. Prices are US East (N. Virginia).
+> SQS, SNS, EventBridge, Kinesis Data Streams, Step Functions selection. Prices are US East (N. Virginia) and PRICE-VOLATILE; quotas are structural facts.
 
 ---
 
 ## Service Selection Decision Tree
 
+> Source: https://aws.amazon.com/kinesis/data-streams/faqs/ (official)
+
 ```
-Need async communication between services?
-  Simple queue (decouple producer/consumer) ── SQS
-    Need ordering + exactly-once? ── SQS FIFO ($0.50/M)
-    At-least-once OK? ── SQS Standard ($0.40/M, nearly unlimited TPS)
-  Fan-out to multiple consumers ── SNS ($0.50/M publishes)
-    Common: SNS -> multiple SQS queues (fan-out + buffering)
-  Complex event routing / filtering / third-party ── EventBridge ($1.00/M)
-    Content-based filtering, schema registry, archive & replay
-  Real-time ordered streaming, multiple consumers ── Kinesis Data Streams
-    High-throughput, ordered by partition key, replay up to 365 days
-  Workflow orchestration ── Step Functions ($0.025/1000 transitions)
+Need asynchronous communication between services?
+  Decouple one producer from one consumer ------------ SQS
+    Strict ordering + deduplication needed? ---------- SQS FIFO
+    At-least-once with best-effort ordering OK? ------ SQS Standard (near-unlimited TPS)
+  Fan out one message to many consumers -------------- SNS
+    Canonical pattern: SNS -> multiple SQS queues (fan-out plus per-consumer buffering)
+  Content-based routing, schema registry, SaaS events  EventBridge
+  Ordered stream, multiple independent consumers,
+    replay window measured in days ------------------- Kinesis Data Streams
+  Workflow orchestration ---------------------------- Step Functions
 ```
+
+AWS's own Kinesis-vs-SQS split: use Kinesis when you need "routing related records to the same record processor," "ordering of records," or "ability for multiple applications to consume the same stream concurrently." Use SQS when you need per-message acknowledgement and failure semantics, per-message delay, or transparent scaling with no capacity decision.
 
 ---
 
-## SQS Deep Dive
+## SQS
 
-### Standard Queue
+> Source: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html (official)
 
-- $0.40/M requests (first 1M/mo free)
-- Nearly unlimited TPS
-- At-least-once delivery (design for idempotency)
-- Best-effort ordering (not guaranteed)
-- Message retention: 1-14 days (default 4)
-- Max message size: 256 KB (use S3 Extended Client Library for larger)
+### Quotas — corrected
 
-### FIFO Queue
+| Quota | Value |
+|---|---|
+| **Maximum message size** | **1,048,576 bytes (1 MiB)** — not 256 KB. Use the S3 Extended Client Library beyond that, up to 2 GB. |
+| **Message retention** | **60 seconds minimum**, 14 days maximum, **4 days default** |
+| Visibility timeout | 30 s default, 0 s minimum, 12 h maximum |
+| FIFO throughput (standard mode) | 300 TPS per API action without batching; up to 3,000 messages/second with 10-message batches |
 
-- $0.50/M requests
-- 300 msg/sec without batching, 3,000/sec with batching (10 msg/batch)
-- Exactly-once processing (deduplication within 5-minute window)
-- Strict ordering within message group
-- Use MessageGroupId to parallelize: each group processed in order independently
+### FIFO High Throughput Mode
 
-### Cost Example (10M Messages/Month)
+Strict ordering no longer forces you off FIFO at scale. High throughput mode raises FIFO limits far above the classic 300/3,000 ceiling — up to **70,000 TPS non-batched / 700,000 messages per second batched** in us-east-1, us-west-2, and eu-west-1, with lower but still much higher tiers elsewhere (19,000/190,000 in us-east-2 and eu-central-1; 9,000/90,000 in several APAC Regions; 4,500/45,000 in eu-west-2 and sa-east-1; 2,400/24,000 by default elsewhere).
 
-- Standard: 10 x $0.40 = **$4.00/mo**
-- FIFO: 10 x $0.50 = **$5.00/mo**
-- Both extremely cheap. Choose based on ordering/dedup needs, not cost.
+**Directive:** when a design needs both ordering and high throughput, enable high throughput mode and distribute load across `MessageGroupId` values before considering a move to Standard queues or Kinesis.
 
-### Cost Optimization
+### Pricing model
 
-**Long polling:** Set `ReceiveMessageWaitTimeSeconds: 20` to reduce empty receives. Short polling returns immediately even if queue is empty, generating billable requests.
+> Source: https://aws.amazon.com/sqs/pricing/, https://aws.amazon.com/sqs/faqs/, https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-pricing.html (official)
 
-**Batch operations:** `SendMessageBatch` and `ReceiveMessage` with `MaxNumberOfMessages: 10` -- 10 messages per request = 10x cost reduction.
+**The billing model is the answer here; the per-million rates are not published in any fetchable form.** SQS bills **per request plus data transfer** — "cost of Amazon SQS is calculated per request, plus data transfer charges" — with **Standard and FIFO priced separately and FIFO priced higher**, and **the first 1 million SQS requests per month free for all customers**. AWS's rate table renders client-side and yielded no dollar figures across three independent fetch attempts on three official surfaces, so no per-million digit is stated here by design. Read a current figure off the console pricing page or the AWS Pricing Calculator when you need one.
 
-**Dead-letter queues:** Configure `maxReceiveCount` (e.g., 3). After N failed processing attempts, messages move to DLQ for investigation. Prevents poison messages from consuming capacity.
+This is rarely the deciding factor anyway: at realistic volumes SQS is cheap enough that **ordering and deduplication requirements, not price, should decide Standard versus FIFO.**
 
-**Visibility timeout:** Set to 6x your average processing time. Too short = duplicate processing. Too long = delays on failures.
+### Cost and reliability levers
+
+- **Long polling.** Set `ReceiveMessageWaitTimeSeconds: 20`. Short polling returns immediately on an empty queue and bills for the empty receive.
+- **Batching.** `SendMessageBatch` and `ReceiveMessage` with `MaxNumberOfMessages: 10` cut request count roughly tenfold.
+- **Dead-letter queues.** Set `maxReceiveCount` (3 is a reasonable start) so poison messages stop consuming capacity.
+- **Visibility timeout** around 6x average processing time. Too short causes duplicate processing; too long delays retries after a consumer failure.
 
 ---
 
-## SNS vs EventBridge
+## SNS
 
-### SNS -- Simple Pub/Sub
+> Source: https://docs.aws.amazon.com/general/latest/gr/sns.html and https://aws.amazon.com/sns/faqs/ (official)
 
-- $0.50/M publishes
-- Delivery to SQS/Lambda is free; HTTP is $0.60/M
-- Filter policies on message attributes (basic filtering)
-- Up to 12.5M subscriptions per topic
-- Use for: simple fan-out, alerts, notifications
+- **Subscriptions per topic: 12,500,000** for Standard topics; **FIFO topics cap at 100 subscriptions per topic.**
+- Pricing: **$0.50 per 1 million SNS requests**; **$0.60 per 1 million HTTP notification deliveries** ($0.06 per 100,000). Free tier: first 1 million requests and first 100,000 HTTP notifications per month.
+- **Delivery to SQS and Lambda carries no per-message delivery charge** — AWS charges only for data transferred. This is what makes SNS-to-SQS fan-out cheap.
+- Filter policies operate on **message attributes**, which is the key limitation versus EventBridge.
 
-### EventBridge -- Smart Event Bus
+### SNS versus EventBridge
 
-- $1.00/M events put on event bus
-- Content-based filtering with rules (any JSON field, including nested)
-- Schema registry and discovery
-- Archive and replay events
-- Third-party SaaS integrations (Shopify, Zendesk, Auth0)
-- Cross-account and cross-region routing
-- Use for: event-driven architectures, microservice integration, complex routing
+Choose **EventBridge** when you need to filter on the event **body** rather than attributes, archive and replay events, a schema registry for event contracts, third-party SaaS event sources, or cross-account/cross-Region routing with content-based target selection. Choose **SNS** for straightforward fan-out, alerting, and mobile/email/SMS notification, where its lower per-message price and enormous subscription ceiling win.
 
-### When EventBridge Over SNS
-
-- Need to filter on event body content (not just attributes)
-- Need event archive and replay for debugging
-- Need schema registry for event contracts
-- Integrating with third-party SaaS events
-- Complex routing: 1 event bus -> different targets based on content
+EventBridge custom-bus publishing is billed per million events; **same-account delivery is free**, cross-account delivery is billed at the same per-million rate as publishing.
 
 ---
 
 ## Kinesis Data Streams
 
-### Pricing
+> Source: https://aws.amazon.com/kinesis/data-streams/pricing/ and https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html (official)
 
-- **On-Demand:** $0.08/GB ingested, $0.04/hr per stream (auto-scales shards)
-- **Provisioned:** $0.015/shard-hour + $0.014/M PUT payload units (25 KB each)
-  - 1 shard = 1 MB/s in, 2 MB/s out, 1,000 records/sec in
+### Capacity and limits (confirmed)
 
-### Cost Example (1 GB/hr Ingestion)
+- One shard: **1 MB/s and 1,000 records/second in, 2 MB/s out.**
+- Retention: **24 hours minimum, 8,760 hours (365 days) maximum.**
+- On-Demand: **$0.08/GB ingested plus $0.04/hour per stream.**
+- Provisioned: **$0.015/shard-hour plus $0.014 per million PUT payload units** (25 KB each).
+- Enhanced Fan-Out: **$0.015 per consumer-shard-hour plus $0.013/GB retrieved.** Dedicated 2 MB/s per consumer instead of a shared 2 MB/s. Worth it only above two consumers per shard.
 
-- On-Demand: $0.08 x 730 GB/mo + $0.04 x 730 = **$87.60/mo**
-- Provisioned (1 shard): $0.015 x 730 + $0.014/M x records = **~$15-25/mo**
-- Provisioned is significantly cheaper for predictable throughput.
+### On-Demand Advantage mode
 
-### Kinesis vs SQS
+A third capacity mode with lower per-GB rates — **$0.032/GB in and $0.016/GB out** versus $0.08/$0.04 for standard On-Demand — in exchange for a **25 MB/s minimum throughput commitment on both ingest and retrieval**. Evaluate it before defaulting a sustained high-volume stream to standard On-Demand or to Provisioned.
 
-| Aspect | Kinesis | SQS |
-|--------|---------|-----|
-| Model | Event log (ordered, replay) | Task queue (consumed once) |
-| Consumers | Multiple replay same data | One per message |
-| Ordering | Per-shard (partition key) | Best-effort (Standard) or per-group (FIFO) |
-| Retention | 24 hrs - 365 days | 1-14 days |
-| Throughput | 1 MB/s per shard (scale by adding shards) | Nearly unlimited |
-| Complexity | Higher (shard management) | Lower |
+Provisioned remains cheaper than standard On-Demand for predictable throughput; the decision is forecastability, not raw volume.
 
-**Decision:** Multiple services need to process same events in order -> Kinesis. One service processes work items consumed once -> SQS.
+### Kinesis versus SQS
 
-### Enhanced Fan-Out
-
-- $0.015/consumer-shard-hour + $0.013/GB retrieved
-- Dedicated 2 MB/s throughput per consumer (vs shared 2 MB/s without)
-- Use only when >2 consumers per shard need real-time data
+| Aspect | Kinesis Data Streams | SQS |
+|---|---|---|
+| Model | Ordered event log with replay | Task queue, consumed once |
+| Consumers | Many, each replaying the same data | One per message |
+| Ordering | Per shard (by partition key) | Best-effort (Standard) or per message group (FIFO) |
+| Retention | 24 hours - 365 days | 60 seconds - 14 days |
+| Throughput | 1 MB/s per shard, scale by adding shards | Near-unlimited |
+| Operational complexity | Higher (shard or capacity-mode management) | Lower |
 
 ---
 
-## Cost Comparison at 10M Messages/Month
+## Cost Shape at Volume
 
-| Service | Monthly Cost | Ordering | Consumers |
-|---------|-------------|----------|-----------|
-| SQS Standard | $4.00 | Best-effort | 1 per message |
-| SQS FIFO | $5.00 | Strict (per group) | 1 per message |
-| SNS + 3 SQS | $5.00 + $12.00 | Per-topic | Fan-out |
-| EventBridge | $10.00 | Per-rule | Content-routed |
-| Kinesis (1 shard) | ~$15-25 | Per-shard | Multiple (replay) |
+> Source: https://aws.amazon.com/sns/faqs/, https://aws.amazon.com/eventbridge/pricing/, https://aws.amazon.com/kinesis/data-streams/pricing/ (official)
 
----
-
-## Messaging Cost Optimization
-
-1. **SQS:** Always enable long polling (`WaitTimeSeconds: 20`)
-2. **SQS:** Use batch operations (10 messages/request = 10x savings)
-3. **SNS:** Use message filtering to avoid delivering messages consumers ignore
-4. **EventBridge:** Archive only events needed for replay ($0.10/GB stored)
-5. **Kinesis:** Right-size shards. Enhanced Fan-Out only with >2 consumers/shard
-6. **General:** Use SQS over Kinesis when you don't need ordering or replay -- simpler and cheaper
-
----
+At 10 million messages per month, SQS and SNS are both trivially cheap; EventBridge is roughly an order of magnitude more per event than SNS; Kinesis is dominated by shard-hours rather than message count, so it is cheapest at high sustained volume and most expensive at low volume. **Choose on semantics — ordering, replay, fan-out shape, filtering — and treat cost as a tiebreaker except at very high volume, where Kinesis's shard economics and EventBridge's per-event charge start to matter.**
 
 ## Common Integration Patterns
 
-### Fan-Out Pattern (SNS + SQS)
+### Fan-out (SNS + SQS)
 
 ```
-Producer -> SNS Topic -> SQS Queue A (Service A)
-                      -> SQS Queue B (Service B)
-                      -> SQS Queue C (Service C)
+Producer -> SNS topic -+-> SQS queue A -> Service A
+                       +-> SQS queue B -> Service B
+                       +-> SQS queue C -> Service C
 ```
 
-Each service gets its own queue (buffering, independent processing rate). SNS message filtering reduces unnecessary deliveries. SQS provides retry and DLQ per consumer.
+Each consumer gets its own buffer, retry policy, and DLQ, and can process at its own rate. SNS filter policies stop unwanted deliveries at the topic.
 
-### Event-Driven Microservices (EventBridge)
-
-```
-Service A -> Custom Event Bus -> Rule 1 -> Lambda (Service B)
-                              -> Rule 2 -> SQS (Service C)
-                              -> Rule 3 -> Step Functions (Workflow D)
-```
-
-Content-based routing. Schema registry for event contracts. Archive for debugging and replay.
-
-### Stream Processing (Kinesis + Lambda)
+### Event-driven microservices (EventBridge)
 
 ```
-Producers -> Kinesis Data Stream -> Lambda Consumer (batch processing)
-                                -> Lambda Consumer (real-time analytics)
-                                -> Firehose -> S3 (data lake archival)
+Service A -> custom event bus -+-> rule 1 -> Lambda (Service B)
+                               +-> rule 2 -> SQS (Service C)
+                               +-> rule 3 -> Step Functions (Workflow D)
 ```
 
-Multiple consumers read same ordered stream. Lambda event source mapping handles batching and checkpointing.
+Content-based routing on the event body, schema registry for contracts, archive for replay.
 
-### Saga Pattern (Step Functions + SQS)
+### Stream processing (Kinesis + Lambda)
 
 ```
-Step Functions orchestrates:
-  1. Reserve Inventory (Lambda)
-  2. Process Payment (Lambda)
-  3. Ship Order (Lambda)
-  On failure at any step:
-  -> Compensating transactions (rollback previous steps)
-  -> Send failure to DLQ for manual review
+Producers -> Kinesis Data Stream -+-> Lambda (batch processing)
+                                  +-> Lambda (real-time analytics)
+                                  +-> Data Firehose -> S3 (data lake)
 ```
 
-Step Functions handles retries, timeouts, and compensation logic. Use Standard Workflows for visibility and exactly-once semantics.
+Multiple consumers read the same ordered stream; the Lambda event source mapping handles batching and checkpointing.
+
+### Saga (Step Functions)
+
+Step Functions orchestrates the happy path and compensating transactions on failure, with retries, timeouts, and a DLQ for unrecoverable cases. Use Standard workflows for exactly-once semantics and visible execution history.
+
+## Sources
+
+- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html
+- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-pricing.html
+- https://aws.amazon.com/sqs/pricing/
+- https://aws.amazon.com/sqs/faqs/
+- https://docs.aws.amazon.com/general/latest/gr/sns.html
+- https://aws.amazon.com/sns/pricing/
+- https://aws.amazon.com/sns/faqs/
+- https://aws.amazon.com/eventbridge/pricing/
+- https://aws.amazon.com/kinesis/data-streams/pricing/
+- https://aws.amazon.com/kinesis/data-streams/faqs/
+- https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html
+- https://aws.amazon.com/step-functions/pricing/
+
+Fetched: 2026-08-08
