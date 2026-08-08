@@ -142,9 +142,9 @@
     {
       "name": "domain-expert-core",
       "source": "./plugins/domain-expert-core",
-      "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model. Also includes skill-builder: a multi-agent pipeline where parallel Sonnet researchers build a source-cited corpus and an Opus curator distills it into new marketplace skills.",
+      "description": "Cross-domain task agents for architecture, troubleshooting, migrations, IaC, data governance, and security hardening. Includes ultimate-tech-stack: security-gated, open-source-preferred greenfield defaults with explicit exceptions when open source cannot safely meet the threat model. Also includes skill-builder: a multi-agent pipeline where parallel Sonnet researchers build a source-cited corpus and an Opus curator distills it into new marketplace skills. And plugin-builder: an interactive architecture pipeline one level above skill-builder that interviews the user on intent, strategizes which skills, agents, and hooks a plugin should ship, and remodels skills repos into plugin or marketplace repos.",
       "category": "productivity",
-      "keywords": ["architecture", "troubleshooting", "migration", "iac", "data-governance", "security-hardening", "orchestration", "cross-domain", "tech-stack", "open-source", "security-first", "secure-by-default", "greenfield", "skill-builder", "deep-research", "skill-curation"]
+      "keywords": ["architecture", "troubleshooting", "migration", "iac", "data-governance", "security-hardening", "orchestration", "cross-domain", "tech-stack", "open-source", "security-first", "secure-by-default", "greenfield", "skill-builder", "deep-research", "skill-curation", "plugin-builder", "plugin-architecture", "remodel"]
     }
   ],
   "renames": {
