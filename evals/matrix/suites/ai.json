@@ -1,0 +1,573 @@
+{
+  "suite": "ai",
+  "description": "Cross-harness matrix suite for every skill in the ai plugin (plugins/ai/skills). Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in that skill's SKILL.md on 2026-08-05. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, niche, or a specific dated figure); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "agent-skills-name-constraints",
+      "skill": "agent-skills",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "When writing a SKILL.md file's frontmatter, what is the maximum character length allowed for the name field, and which company name must never appear inside it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["64", "Anthropic"] },
+      "notes": "plugins/ai/skills/agent-skills/SKILL.md - name field: <=64 chars, lowercase letters/numbers/hyphens only, must not contain anthropic or claude"
+    },
+    {
+      "id": "agent-skills-body-line-target",
+      "skill": "agent-skills",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "Roughly how many lines should the body of a SKILL.md file stay under, according to progressive disclosure guidance for Agent Skills? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["500"] },
+      "notes": "plugins/ai/skills/agent-skills/SKILL.md - Keep the SKILL.md body under 500 lines"
+    },
+    {
+      "id": "agent-skills-container-skills-limit",
+      "skill": "agent-skills",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "When using Agent Skills through the Claude Messages API's container.skills feature, what is the maximum number of skills you can attach to a single request? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["8"] },
+      "notes": "plugins/ai/skills/agent-skills/SKILL.md - container.skills, up to 8 per request"
+    },
+    {
+      "id": "ai-security-redteam-exfiltration",
+      "skill": "ai-security",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "In an internal Anthropic red-team test where the attacker controlled the prompt content via phishing, in how many out of 25 attempts did the attacker succeed at exfiltrating AWS credentials before environmental egress controls were applied? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["24"] },
+      "notes": "plugins/ai/skills/ai-security/SKILL.md - internal red team exfiltrated AWS credentials via a phished prompt in 24 of 25 attempts"
+    },
+    {
+      "id": "ai-security-adaptive-attack-rate",
+      "skill": "ai-security",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "Roughly what attack success rate did Anthropic measure against Claude Opus 4.5 using an internal adaptive Best-of-N jailbreak attacker running 100 attempts per environment? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)~?\\s?1\\s?%" },
+      "notes": "plugins/ai/skills/ai-security/SKILL.md - measured attack success rate against Claude Opus 4.5 is ~1% as of 2026-08-05"
+    },
+    {
+      "id": "ai-security-owasp-2025-risk-movement",
+      "skill": "ai-security",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In the OWASP Top 10 for LLM Applications 2025 edition, which risk category moved up from 6th place to 2nd place? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Sensitive", "Disclosure"] },
+      "notes": "plugins/ai/skills/ai-security/SKILL.md - Sensitive Information Disclosure risen from 6th to 2nd"
+    },
+    {
+      "id": "claude-agent-sdk-node-python-min",
+      "skill": "claude-agent-sdk",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What are the minimum Node.js and Python versions required to use the Claude Agent SDK? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["18", "3.10"] },
+      "notes": "plugins/ai/skills/claude-agent-sdk/SKILL.md - Prerequisites: Node.js 18+ or Python 3.10+"
+    },
+    {
+      "id": "claude-agent-sdk-v2-session-removed",
+      "skill": "claude-agent-sdk",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "The experimental V2 session API in the Claude Agent SDK, using createSession with send and stream, was removed as of which TypeScript SDK version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["0.3.142"] },
+      "notes": "plugins/ai/skills/claude-agent-sdk/SKILL.md - removed in TypeScript Agent SDK 0.3.142"
+    },
+    {
+      "id": "claude-agent-sdk-capacity-disk",
+      "skill": "claude-agent-sdk",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "When capacity planning to host Claude Agent SDK sessions, what starting resource allocation per agent is recommended for RAM, disk, and CPU? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)1\\s*gi?b.{0,40}5\\s*gi?b.{0,40}1\\s*cpu" },
+      "notes": "plugins/ai/skills/claude-agent-sdk/SKILL.md - Start capacity planning at 1 GiB RAM, 5 GiB disk, 1 CPU per agent"
+    },
+    {
+      "id": "claude-api-anthropic-version",
+      "skill": "claude-api",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What value must the anthropic-version header carry on every request to the Claude Messages API? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2023-06-01"] },
+      "notes": "plugins/ai/skills/claude-api/SKILL.md - Send x-api-key, anthropic-version: 2023-06-01, and content-type on every call"
+    },
+    {
+      "id": "claude-api-cache-breakpoints",
+      "skill": "claude-api",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "When using explicit block-level prompt caching breakpoints in the Claude Messages API, what is the maximum number of breakpoints allowed in a single request? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4"] },
+      "notes": "plugins/ai/skills/claude-api/SKILL.md - explicit block-level breakpoints, max 4 breakpoints"
+    },
+    {
+      "id": "claude-api-tokenizer-shift",
+      "skill": "claude-api",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "When migrating a prompt from a pre-4.7 Claude model to Claude Opus 4.7 or later, roughly what percentage increase in token count should you expect for the same text, due to the newer tokenizer? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)~?\\s?30\\s?%" },
+      "notes": "plugins/ai/skills/claude-api/SKILL.md - newer tokenizer produces ~30% more tokens for the same text"
+    },
+    {
+      "id": "claude-code-auth-precedence",
+      "skill": "claude-code",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Claude Code's authentication precedence order, which one wins when both an ANTHROPIC_AUTH_TOKEN and an ANTHROPIC_API_KEY are set in the environment? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)AUTH_TOKEN" },
+      "notes": "plugins/ai/skills/claude-code/SKILL.md - ANTHROPIC_AUTH_TOKEN ranks above ANTHROPIC_API_KEY in the auth precedence list"
+    },
+    {
+      "id": "claude-code-oauth-token-lifetime",
+      "skill": "claude-code",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "For CI use, how long is the token minted by claude setup-token valid for? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(one.year|1.year|12.month)" },
+      "notes": "plugins/ai/skills/claude-code/SKILL.md - mint a one-year token with claude setup-token"
+    },
+    {
+      "id": "claude-code-mcp-output-limits",
+      "skill": "claude-code",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "In Claude Code, at what token count does MCP tool output trigger a warning, and at what token count does it get truncated? Answer concisely with both numbers.",
+      "expected": { "type": "regex", "value": "(?i)10,?000.{0,60}25,?000" },
+      "notes": "plugins/ai/skills/claude-code/SKILL.md - output warns at 10,000 tokens and truncates at 25,000 (MAX_MCP_OUTPUT_TOKENS)"
+    },
+    {
+      "id": "codex-gpt54-retirement",
+      "skill": "codex",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "According to guidance on OpenAI Codex model choice, when are the GPT-5.4 model variants scheduled to retire? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026-08-31"] },
+      "notes": "plugins/ai/skills/codex/SKILL.md - GPT-5.4 variants are scheduled to retire 2026-08-31"
+    },
+    {
+      "id": "codex-agents-md-max-bytes",
+      "skill": "codex",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "In OpenAI Codex, what is the default maximum size in KiB for a single AGENTS.md file before the tail of its content is silently lost? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["32"] },
+      "notes": "plugins/ai/skills/codex/SKILL.md - project_doc_max_bytes defaults to 32 KiB"
+    },
+    {
+      "id": "codex-review-severity",
+      "skill": "codex",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "When someone comments @codex review on a GitHub pull request, which severity levels of issues does the posted review cover? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["P0", "P1"] },
+      "notes": "plugins/ai/skills/codex/SKILL.md - @codex review posts a review covering only P0 and P1 severity issues"
+    },
+    {
+      "id": "cursor-mdc-extension",
+      "skill": "cursor",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Cursor, what file extension must rule files inside the .cursor/rules directory use in order to actually be recognized by the editor? Answer concisely.",
+      "expected": { "type": "contains_all", "value": [".mdc"] },
+      "notes": "plugins/ai/skills/cursor/SKILL.md - Always spell rule files *.mdc, never *.md, inside .cursor/rules"
+    },
+    {
+      "id": "cursor-always-approve-actions",
+      "skill": "cursor",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Cursor, name the three kinds of actions that always require approval no matter which Run Mode is active. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["browser", "deletion", "workspace"] },
+      "notes": "plugins/ai/skills/cursor/SKILL.md - browser tool execution, file deletion, and modifying files outside the workspace always require approval"
+    },
+    {
+      "id": "cursor-fable-data-retention",
+      "skill": "cursor",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "Under Cursor's Privacy Mode, which Claude model is the exception that needs explicit admin dashboard approval because Anthropic retains its inputs and outputs for safety review? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Fable"] },
+      "notes": "plugins/ai/skills/cursor/SKILL.md - Exception: Claude Fable 5 requires data retention and needs explicit admin approval"
+    },
+    {
+      "id": "evals-test-composition",
+      "skill": "evals",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "For a well-composed AI eval test set, what rough percentage breakdown does Anthropic recommend across core or typical cases, edge cases, and adversarial cases? Answer concisely with the three ranges.",
+      "expected": { "type": "contains_all", "value": ["60", "30", "10"] },
+      "notes": "plugins/ai/skills/evals/SKILL.md - composition target 60-70% core, 20-30% edge, 5-10% adversarial cases"
+    },
+    {
+      "id": "evals-pass-at-k-vs-pass-hat-k",
+      "skill": "evals",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In agent evaluation, what is the difference between the pass at k metric and the pass hat k metric? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(at least one).{0,80}(all\\s*k|every\\s*attempt)" },
+      "notes": "plugins/ai/skills/evals/SKILL.md - pass@k = at least one success in k attempts; pass^k = all k attempts succeed"
+    },
+    {
+      "id": "evals-skill-request-limit",
+      "skill": "evals",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "How many Agent Skills can be attached to a single Claude API request, per guidance on watching recall as skill count grows? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["8"] },
+      "notes": "plugins/ai/skills/evals/SKILL.md - API requests support a maximum of 8 Skills per request"
+    },
+    {
+      "id": "fine-tuning-7b-vram",
+      "skill": "fine-tuning",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "Roughly how much VRAM does QLoRA fine-tuning of a 7B parameter model require, per the documented sizing table? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)5\\s*gb" },
+      "notes": "plugins/ai/skills/fine-tuning/SKILL.md - 7B QLoRA (4-bit) requires 5 GB"
+    },
+    {
+      "id": "fine-tuning-grpo-min-steps",
+      "skill": "fine-tuning",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What is the documented recommended minimum value for max_steps when running a GRPO reinforcement learning training run? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["300"] },
+      "notes": "plugins/ai/skills/fine-tuning/SKILL.md - Use max_steps >= 300 (the docs' recommended minimum)"
+    },
+    {
+      "id": "fine-tuning-openai-status",
+      "skill": "fine-tuning",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "As of this guidance, is OpenAI's hosted fine-tuning platform open to new users? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|closed|wound down|not open)" },
+      "notes": "plugins/ai/skills/fine-tuning/SKILL.md - fine-tuning platform is being wound down: closed to new users"
+    },
+    {
+      "id": "github-copilot-session-cap",
+      "skill": "github-copilot",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What is the maximum duration of a single GitHub Copilot cloud coding agent session? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["59"] },
+      "notes": "plugins/ai/skills/github-copilot/SKILL.md - 59 minutes maximum per session, cannot be extended"
+    },
+    {
+      "id": "github-copilot-setup-job-name",
+      "skill": "github-copilot",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "In the copilot-setup-steps.yml workflow file that customizes the GitHub Copilot cloud agent's environment, what must the job itself be named for GitHub to recognize it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["copilot-setup-steps"] },
+      "notes": "plugins/ai/skills/github-copilot/SKILL.md - must contain a single job named copilot-setup-steps"
+    },
+    {
+      "id": "github-copilot-audit-log-retention",
+      "skill": "github-copilot",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "How many days of history does the GitHub Copilot enterprise audit log retain before you need to stream it elsewhere for longer history? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["180"] },
+      "notes": "plugins/ai/skills/github-copilot/SKILL.md - 180-day retention on the audit log"
+    },
+    {
+      "id": "google-adk-default-metrics",
+      "skill": "google-adk",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Google ADK's adk eval command, what are the two default metric thresholds when none are specified - the tool trajectory average score and the response match score? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["1.0", "0.8"] },
+      "notes": "plugins/ai/skills/google-adk/SKILL.md - default metrics tool_trajectory_avg_score at 1.0 and response_match_score at 0.8"
+    },
+    {
+      "id": "google-adk-python-ga-date",
+      "skill": "google-adk",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "On what date did Google ADK's Python line reach GA for version 2.0? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026-05-19"] },
+      "notes": "plugins/ai/skills/google-adk/SKILL.md - Python 2.0 (GA 2026-05-19)"
+    },
+    {
+      "id": "google-adk-docs-redirect",
+      "skill": "google-adk",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "The canonical Google ADK documentation used to live at google.github.io/adk-docs. Where does that URL redirect to now? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["adk.dev"] },
+      "notes": "plugins/ai/skills/google-adk/SKILL.md - google.github.io/adk-docs now 301-redirects to adk.dev"
+    },
+    {
+      "id": "inference-providers-payload-caps",
+      "skill": "inference-providers",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What are the maximum request payload sizes for Amazon Bedrock versus Google Vertex AI when calling Claude through each? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["20", "30"] },
+      "notes": "plugins/ai/skills/inference-providers/SKILL.md - Bedrock caps request payloads at 20 MB; Vertex payload cap is 30 MB"
+    },
+    {
+      "id": "inference-providers-openrouter-byok-fee",
+      "skill": "inference-providers",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "When using OpenRouter's BYOK feature to bring your own provider credentials, what percentage fee does OpenRouter charge on top of the underlying cost, and under what monthly request volume is that fee waived? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)5\\s?%.{0,80}1,?000,?000" },
+      "notes": "plugins/ai/skills/inference-providers/SKILL.md - BYOK is 5% of the equivalent OpenRouter cost, waived under 1,000,000 BYOK requests/month"
+    },
+    {
+      "id": "inference-providers-foundry-devtier",
+      "skill": "inference-providers",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "On Microsoft Foundry, how long after deployment does a DeveloperTier model deployment automatically delete itself? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["24"] },
+      "notes": "plugins/ai/skills/inference-providers/SKILL.md - DeveloperTier deployments auto-delete after 24 hours"
+    },
+    {
+      "id": "mcp-current-spec-revision",
+      "skill": "mcp",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "As of current guidance, what is the latest stable Model Context Protocol specification revision date? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2025-11-25"] },
+      "notes": "plugins/ai/skills/mcp/SKILL.md - 2025-11-25 is Stable, the default revision"
+    },
+    {
+      "id": "mcp-protocol-version-fallback",
+      "skill": "mcp",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "If an MCP client sends no MCP-Protocol-Version header on a post-initialization HTTP request, which protocol version should the server assume? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2025-03-26"] },
+      "notes": "plugins/ai/skills/mcp/SKILL.md - a server seeing no MCP-Protocol-Version header SHOULD assume 2025-03-26"
+    },
+    {
+      "id": "mcp-elicitation-form-mode-rule",
+      "skill": "mcp",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In MCP's elicitation form mode, what kinds of information must a server never request from the user, such as passwords or access tokens? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(password|credential|payment)" },
+      "notes": "plugins/ai/skills/mcp/SKILL.md - never request passwords, API keys, access tokens, or payment credentials in form mode"
+    },
+    {
+      "id": "model-selection-sonnet-price-change",
+      "skill": "model-selection",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "When does Claude Sonnet 5's introductory input pricing of 2 dollars per million tokens end, and what does the input price become after that date? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)2026-08-31.{0,60}\\$?3" },
+      "notes": "plugins/ai/skills/model-selection/SKILL.md - Sonnet 5 $2/$10 through Aug 31 2026, $3/$15 after Sep 1 2026"
+    },
+    {
+      "id": "model-selection-opus41-retirement",
+      "skill": "model-selection",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What is the retirement date for the Claude model ID claude-opus-4-1-20250805? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026-08-05"] },
+      "notes": "plugins/ai/skills/model-selection/SKILL.md - claude-opus-4-1-20250805 retired 2026-08-05"
+    },
+    {
+      "id": "model-selection-anthropic-notice-period",
+      "skill": "model-selection",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What is Anthropic's minimum advance notice period before deprecating a publicly released Claude model? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["60"] },
+      "notes": "plugins/ai/skills/model-selection/SKILL.md - Anthropic notice period >=60 days for publicly released models"
+    },
+    {
+      "id": "openai-agents-sdk-python-min",
+      "skill": "openai-agents-sdk",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Python version required to install the openai-agents package? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.10"] },
+      "notes": "plugins/ai/skills/openai-agents-sdk/SKILL.md - Python requires 3.10+"
+    },
+    {
+      "id": "openai-agents-sdk-default-model",
+      "skill": "openai-agents-sdk",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "If you create an Agent in the OpenAI Agents SDK without specifying a model, which model does it default to? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["gpt-5.4-mini"] },
+      "notes": "plugins/ai/skills/openai-agents-sdk/SKILL.md - model unset, defaults to gpt-5.4-mini"
+    },
+    {
+      "id": "openai-agents-sdk-js-max-turns",
+      "skill": "openai-agents-sdk",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In the OpenAI Agents SDK for TypeScript, what is the default value of maxTurns before a run throws a MaxTurnsExceededError? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["10"] },
+      "notes": "plugins/ai/skills/openai-agents-sdk/SKILL.md - cap max_turns / maxTurns (JS default 10)"
+    },
+    {
+      "id": "openai-api-assistants-sunset",
+      "skill": "openai-api",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "By what date is the OpenAI Assistants API scheduled for full sunset? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026-08-26"] },
+      "notes": "plugins/ai/skills/openai-api/SKILL.md - Assistants API full sunset: 2026-08-26"
+    },
+    {
+      "id": "openai-api-batch-caps",
+      "skill": "openai-api",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What are the request-count and file-size caps for a single OpenAI Batch API submission? Answer concisely with both numbers.",
+      "expected": { "type": "regex", "value": "(?i)50,?000.{0,60}200\\s?mb" },
+      "notes": "plugins/ai/skills/openai-api/SKILL.md - Caps: 50,000 requests and 200 MB per batch"
+    },
+    {
+      "id": "openai-api-code-interpreter-idle",
+      "skill": "openai-api",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "How long can an OpenAI code interpreter container sit idle before it is terminated and its data is lost? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["20"] },
+      "notes": "plugins/ai/skills/openai-api/SKILL.md - Container dies after 20 minutes idle"
+    },
+    {
+      "id": "overview-workflow-patterns",
+      "skill": "overview",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "Name the five workflow patterns for agentic system design, listed in ascending order of autonomy, per the building-effective-agents framework. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["chaining", "orchestrator", "evaluator"] },
+      "notes": "plugins/ai/skills/overview/SKILL.md - prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer"
+    },
+    {
+      "id": "overview-three-failure-modes",
+      "skill": "overview",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What are the three documented failure modes that justify splitting a single AI agent into multiple agents with separate context windows? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["laziness", "preferential", "drift"] },
+      "notes": "plugins/ai/skills/overview/SKILL.md - agentic laziness, self-preferential bias, goal drift"
+    },
+    {
+      "id": "overview-enterprise-rollout-shape",
+      "skill": "overview",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What rollout timeframe does vendor guidance suggest for a phased deployment of a platform like Claude Cowork, instead of an enterprise-wide big-bang? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)six.month" },
+      "notes": "plugins/ai/skills/overview/SKILL.md - a structured six-month rollout is the vendor-suggested shape for a platform like Claude Cowork"
+    },
+    {
+      "id": "pi-design-exclusions",
+      "skill": "pi",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "Name the six features that the pi coding agent harness deliberately omits from its design. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["MCP", "Plan", "popups"] },
+      "notes": "plugins/ai/skills/pi/SKILL.md - six exclusions: MCP, Sub-agents, Plan mode, Permission popups, Built-in to-dos, Background bash"
+    },
+    {
+      "id": "pi-compaction-defaults",
+      "skill": "pi",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What are pi's default reserveTokens and keepRecentTokens values used to trigger automatic context compaction? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["16384", "20000"] },
+      "notes": "plugins/ai/skills/pi/SKILL.md - defaults: reserveTokens 16384, keepRecentTokens 20000"
+    },
+    {
+      "id": "pi-install-flag",
+      "skill": "pi",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What flag does pi's documented npm install command pass to disable dependency lifecycle scripts for supply-chain safety? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["--ignore-scripts"] },
+      "notes": "plugins/ai/skills/pi/SKILL.md - npm install -g --ignore-scripts is the documented install form"
+    },
+    {
+      "id": "plugins-version-resolution-order",
+      "skill": "plugins",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Claude Code plugin versioning, if both plugin.json and the marketplace entry declare a version, which one takes effect? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["plugin.json"] },
+      "notes": "plugins/ai/skills/plugins/SKILL.md - Never set version in both plugin.json and the marketplace entry: plugin.json wins silently"
+    },
+    {
+      "id": "plugins-renames-min-version",
+      "skill": "plugins",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Claude Code version required for the marketplace.json renames field to actually take effect? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.1.193"] },
+      "notes": "plugins/ai/skills/plugins/SKILL.md - add a top-level renames entry, v2.1.193+"
+    },
+    {
+      "id": "plugins-strict-marketplaces-lockdown",
+      "skill": "plugins",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "In Claude Code managed settings, what value of strictKnownMarketplaces produces total lockdown, blocking even the official marketplace from being added? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(empty\\s*array|empty\\s*list|\\[\\s*\\])" },
+      "notes": "plugins/ai/skills/plugins/SKILL.md - strictKnownMarketplaces: [] = total lockdown incl. the official marketplace"
+    },
+    {
+      "id": "sandboxing-governing-rule",
+      "skill": "sandboxing",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What two kinds of isolation does effective agent sandboxing require together, per the governing rule stated for coding agent sandboxing? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["filesystem", "network"] },
+      "notes": "plugins/ai/skills/sandboxing/SKILL.md - effective sandboxing requires both filesystem and network isolation"
+    },
+    {
+      "id": "sandboxing-firecracker-boot-time",
+      "skill": "sandboxing",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "How quickly do Firecracker microVMs boot, and roughly how much memory overhead do they add? Answer concisely with both figures.",
+      "expected": { "type": "regex", "value": "(?i)125\\s*ms.{0,60}5\\s*mi?b" },
+      "notes": "plugins/ai/skills/sandboxing/SKILL.md - Firecracker microVMs boot in under 125 ms with <5 MiB overhead"
+    },
+    {
+      "id": "sandboxing-gvisor-io-overhead",
+      "skill": "sandboxing",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "What is gVisor's documented performance overhead range for heavy file I/O workloads, compared to near-zero overhead for CPU-bound work? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)10.{0,5}200x" },
+      "notes": "plugins/ai/skills/sandboxing/SKILL.md - gVisor at ~0% overhead for CPU-bound work but up to 10-200x on heavy file I/O"
+    },
+    {
+      "id": "training-datasets-openai-sft-floor",
+      "skill": "training-datasets",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "What is OpenAI's hard minimum number of examples to submit a supervised fine-tuning job, and what count do they recommend starting at instead? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["10", "50"] },
+      "notes": "plugins/ai/skills/training-datasets/SKILL.md - OpenAI SFT: 10 examples hard minimum, start at 50"
+    },
+    {
+      "id": "training-datasets-unsloth-floor",
+      "skill": "training-datasets",
+      "plugin": "ai",
+      "knowledge": "stable",
+      "prompt": "According to documented guidance, how many training rows does Unsloth need for reasonable fine-tuning results, and how many rows are preferred? Answer concisely with both numbers.",
+      "expected": { "type": "regex", "value": "(?i)100.{0,60}1,?000" },
+      "notes": "plugins/ai/skills/training-datasets/SKILL.md - Unsloth: 100 rows for reasonable results, over 1,000 preferred"
+    },
+    {
+      "id": "training-datasets-gemini-tuning-status",
+      "skill": "training-datasets",
+      "plugin": "ai",
+      "knowledge": "recent",
+      "prompt": "Is fine-tuning still offered through the Gemini API or AI Studio, according to current guidance on building training datasets? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not offered|no longer)" },
+      "notes": "plugins/ai/skills/training-datasets/SKILL.md - fine-tuning is no longer offered through the Gemini API or AI Studio"
+    }
+  ]
+}

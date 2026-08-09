@@ -1,0 +1,411 @@
+{
+  "suite": "frontend",
+  "description": "Cross-harness matrix suite for the frontend plugin's 15 skills (angular, angular-signals, astro, blazor, gatsby, htmx, nextjs, nextjs-app-router, nuxt, overview, react, react-server-components, remix, svelte, vue). Prompts are deliberately neutral (no mention of a skills library or docs) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md as of 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche version detail); 'stable' = long-standing fact a strong bare model may already know.",
+  "tasks": [
+    {
+      "id": "angular-onpush-strategy",
+      "skill": "angular",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In Angular, which single change detection strategy is described as the highest-impact performance optimization to set on every component? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["OnPush"] },
+      "notes": "plugins/frontend/skills/angular/SKILL.md - Always use ChangeDetectionStrategy.OnPush, the single highest-impact performance optimization"
+    },
+    {
+      "id": "angular-21-test-runner",
+      "skill": "angular",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "As of Angular 21, which test runner became the default, replacing the older Karma-based setup? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Vitest"] },
+      "notes": "plugins/frontend/skills/angular/SKILL.md - version table: Angular 21 makes Vitest the default test runner"
+    },
+    {
+      "id": "angular-21-hammerjs-removed",
+      "skill": "angular",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Angular 21 removed a long-standing library that had been used for touch and gesture handling. Which library was removed? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["HammerJS"] },
+      "notes": "plugins/frontend/skills/angular/SKILL.md - version table: Angular 21 - HammerJS removed"
+    },
+    {
+      "id": "angular-signals-v16-preview",
+      "skill": "angular-signals",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Angular first shipped signal, computed, and effect as a developer preview in which major version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["16"] },
+      "notes": "plugins/frontend/skills/angular-signals/SKILL.md - Version History table: v16 Developer Preview of signal(), computed(), effect()"
+    },
+    {
+      "id": "angular-signals-resource-v19",
+      "skill": "angular-signals",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In Angular signals, which major version first introduced the resource and rxResource APIs for async data? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["19"] },
+      "notes": "plugins/frontend/skills/angular-signals/SKILL.md - Version History table: v19 introduced resource()/rxResource()"
+    },
+    {
+      "id": "angular-signals-resource-status",
+      "skill": "angular-signals",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In an Angular resource, once the loader has finished and data is available without error, what status value does the resource report? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bresolved\\b" },
+      "notes": "plugins/frontend/skills/angular-signals/SKILL.md - Status values: idle, loading, reloading, resolved, error, local"
+    },
+    {
+      "id": "astro-client-visible-directive",
+      "skill": "astro",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In Astro, which client hydration directive waits until the component scrolls into the viewport before hydrating it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["client:visible"] },
+      "notes": "plugins/frontend/skills/astro/SKILL.md - directive table: client:visible hydrates when element enters viewport"
+    },
+    {
+      "id": "astro-v5-content-config-path",
+      "skill": "astro",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In Astro 5, at what file path do you define content collection configuration, replacing the old version 4 location? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["content.config.ts"] },
+      "notes": "plugins/frontend/skills/astro/SKILL.md - pitfall 3: Astro 5 uses src/content.config.ts, not src/content/config.ts from v4"
+    },
+    {
+      "id": "astro-server-islands-key",
+      "skill": "astro",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "For Astro Server Islands, what environment variable name should you set to keep prop encryption stable across separate deployments? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["ASTRO_KEY"] },
+      "notes": "plugins/frontend/skills/astro/SKILL.md - Server Islands section: use ASTRO_KEY for stable encryption across deployments"
+    },
+    {
+      "id": "blazor-wasm-baseline-download",
+      "skill": "blazor",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Roughly how large, in compressed megabytes, is the baseline Blazor WebAssembly runtime download before any app code is added? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)2\\s*mb" },
+      "notes": "plugins/frontend/skills/blazor/SKILL.md - WebAssembly Runtime section: Baseline WASM download is ~2 MB compressed"
+    },
+    {
+      "id": "blazor-dotnet10-bundle-shrink",
+      "skill": "blazor",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Dot NET 10 shipped a much smaller JavaScript bundle for Blazor Interactive Server circuits. By roughly what percentage did the bundle shrink? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["76"] },
+      "notes": "plugins/frontend/skills/blazor/SKILL.md - version table: .NET 10 - 76% smaller JS bundle"
+    },
+    {
+      "id": "blazor-dotnet10-persistent-state-attribute",
+      "skill": "blazor",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Which new attribute did dot NET 10 add to Blazor for persisting component state across the prerender-to-interactive handoff? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["PersistentState"] },
+      "notes": "plugins/frontend/skills/blazor/SKILL.md - version table and pitfall 1: [PersistentState] attribute added in .NET 10"
+    },
+    {
+      "id": "gatsby-netlify-acquired",
+      "skill": "gatsby",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Which company acquired Gatsby Inc in February 2023? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Netlify"] },
+      "notes": "plugins/frontend/skills/gatsby/SKILL.md - Status section: Feb 2023 Netlify acquired Gatsby Inc"
+    },
+    {
+      "id": "gatsby-node18-eol-date",
+      "skill": "gatsby",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Gatsby 5 requires Node.js 18. When did Node.js 18 reach end of life? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["April", "2025"] },
+      "notes": "plugins/frontend/skills/gatsby/SKILL.md - Status section: Node.js 18 (required by Gatsby 5) reached EOL April 2025"
+    },
+    {
+      "id": "gatsby-migration-target-content",
+      "skill": "gatsby",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "For a mostly static, content-focused site currently built on Gatsby, which modern framework is recommended as the migration target to minimize JavaScript? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Astro"] },
+      "notes": "plugins/frontend/skills/gatsby/SKILL.md - Migration Targets: Astro for content/docs sites, minimal interactivity"
+    },
+    {
+      "id": "htmx-input-default-trigger",
+      "skill": "htmx",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In HTMX, absent an explicit hx-trigger attribute, what event by default triggers a request from a text input element? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bchange\\b" },
+      "notes": "plugins/frontend/skills/htmx/SKILL.md - hx-trigger section: default is change for inputs"
+    },
+    {
+      "id": "htmx-selfrequestsonly-default",
+      "skill": "htmx",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In HTMX 2.0, is the selfRequestsOnly configuration option true or false by default? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\btrue\\b" },
+      "notes": "plugins/frontend/skills/htmx/SKILL.md - Security section and pitfall 4: selfRequestsOnly default true in 2.0"
+    },
+    {
+      "id": "htmx-delete-params-2.0",
+      "skill": "htmx",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In HTMX 2.0, how does a DELETE request send its parameters, compared with HTMX 1.x which put them in the request body? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)query param" },
+      "notes": "plugins/frontend/skills/htmx/SKILL.md - pitfall 6: DELETE sends URL/query parameters in 2.0, body in 1.x"
+    },
+    {
+      "id": "nextjs-v15-fetch-caching-default",
+      "skill": "nextjs",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Starting with Next.js 15, is a plain fetch call inside a Server Component cached by default, or not cached by default? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(no-?store|not cach)" },
+      "notes": "plugins/frontend/skills/nextjs/SKILL.md - Caching Model: v15+ does NOT cache by default (no-store)"
+    },
+    {
+      "id": "nextjs-v16-proxy-runtime",
+      "skill": "nextjs",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In Next.js 16, which file replaces middleware.ts, and what runtime does it execute on instead of the Edge Runtime? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["proxy.ts", "Node.js"] },
+      "notes": "plugins/frontend/skills/nextjs/SKILL.md - Middleware and Proxy table: v16 uses proxy.ts on the Node.js Runtime"
+    },
+    {
+      "id": "nextjs-async-api-codemod",
+      "skill": "nextjs",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Next.js provides an automated codemod to migrate synchronous access to cookies, headers, and params to the new async APIs. What is the codemod named? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["next-async-request-api"] },
+      "notes": "plugins/frontend/skills/nextjs/SKILL.md - pitfall 2: run the codemod npx @next/codemod@canary next-async-request-api ."
+    },
+    {
+      "id": "nextjs-app-router-error-boundary-file",
+      "skill": "nextjs-app-router",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In the Next.js App Router, which special file acts as a React Error Boundary for a route segment and must itself be a Client Component? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["error.tsx"] },
+      "notes": "plugins/frontend/skills/nextjs-app-router/SKILL.md - file conventions table: error.tsx is the Error Boundary, must be Client Component"
+    },
+    {
+      "id": "nextjs-app-router-intercept-root-prefix",
+      "skill": "nextjs-app-router",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In the Next.js App Router intercepting routes syntax, which folder prefix intercepts relative to the application root, as opposed to one or two levels up? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["(...)"] },
+      "notes": "plugins/frontend/skills/nextjs-app-router/SKILL.md - Intercepting Routes prefix table: (...) intercepts relative to application root"
+    },
+    {
+      "id": "nextjs-app-router-parallel-default-file",
+      "skill": "nextjs-app-router",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In the Next.js App Router, what file must you add inside a parallel route slot to prevent a full page 404 when that slot has no match for the current URL? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["default.tsx"] },
+      "notes": "plugins/frontend/skills/nextjs-app-router/SKILL.md - Parallel Routes section: default.tsx required for unmatched slots"
+    },
+    {
+      "id": "nuxt-server-route-method-source",
+      "skill": "nuxt",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In Nuxt, for a server handler file like hello.post.ts under the server api directory, what part of the filename tells Nitro which HTTP method to register? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)suffix" },
+      "notes": "plugins/frontend/skills/nuxt/SKILL.md - Nitro Server Engine: HTTP method is inferred from filename suffix"
+    },
+    {
+      "id": "nuxt-v4-shallowref-default",
+      "skill": "nuxt",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In Nuxt 4, what does the framework use as the default ref behavior in place of the deep reactive refs from Nuxt 3? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["shallowRef"] },
+      "notes": "plugins/frontend/skills/nuxt/SKILL.md - version table and intro: Nuxt 4 makes shallowRef the default"
+    },
+    {
+      "id": "nuxt-nitro-hosting-targets",
+      "skill": "nuxt",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Roughly how many hosting targets can a Nuxt Nitro build output be deployed to? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["15"] },
+      "notes": "plugins/frontend/skills/nuxt/SKILL.md - Nitro Server Engine: portable across 15+ hosting targets"
+    },
+    {
+      "id": "overview-islands-model",
+      "skill": "overview",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Which rendering model, used primarily by Astro, serves static HTML by default and hydrates only the components that need interactivity? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)island" },
+      "notes": "plugins/frontend/skills/overview/SKILL.md - Rendering Models table: Islands row, framework support Astro"
+    },
+    {
+      "id": "overview-vue-reactivity-model",
+      "skill": "overview",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Per general frontend guidance, which framework uses a proxy-based reactivity system that tracks property access on reactive objects, as distinct from virtual DOM diffing or a compiler-driven approach? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bvue\\b" },
+      "notes": "plugins/frontend/skills/overview/SKILL.md - Reactivity Systems table: Proxy-based row, Vue 3"
+    },
+    {
+      "id": "overview-rsc-requirements",
+      "skill": "overview",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Per general frontend guidance, which specific React version paired with which routing system is currently needed to run React Server Components in a production app? Answer concisely with both.",
+      "expected": { "type": "contains_all", "value": ["19", "Next.js"] },
+      "notes": "plugins/frontend/skills/overview/SKILL.md - Rendering Models table: RSC row, framework support React 19 + Next.js App Router"
+    },
+    {
+      "id": "react-error-boundary-class-only",
+      "skill": "react",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In React, which single capability still has no hook equivalent and requires a class component? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)error boundar" },
+      "notes": "plugins/frontend/skills/react/SKILL.md - Core Expertise bullets: Error boundaries (class-only API)"
+    },
+    {
+      "id": "react-19-render-removed",
+      "skill": "react",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In React 19, has the legacy ReactDOM.render API been removed, or is it still supported alongside createRoot? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)remov" },
+      "notes": "plugins/frontend/skills/react/SKILL.md - Concurrent Features: ReactDOM.render is removed in 19"
+    },
+    {
+      "id": "react-19-optimistic-hook",
+      "skill": "react",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In React 19, what is the name of the new hook that lets you show an optimistic UI state while an async action is still pending? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["useOptimistic"] },
+      "notes": "plugins/frontend/skills/react/SKILL.md - React 19 hooks list: useActionState, useOptimistic, useFormStatus, use()"
+    },
+    {
+      "id": "rsc-client-import-server-forbidden",
+      "skill": "react-server-components",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Can a Client Component directly import a Server Component as a module dependency, or does that fail to build? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(cannot|build error|\\bno\\b)" },
+      "notes": "plugins/frontend/skills/react-server-components/SKILL.md - Boundary rules: Client Component CANNOT import Server Components (build error)"
+    },
+    {
+      "id": "rsc-stable-react-version",
+      "skill": "react-server-components",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "React Server Components became stable starting in which major version of React? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["19"] },
+      "notes": "plugins/frontend/skills/react-server-components/SKILL.md - intro: RSC, stable in React 19"
+    },
+    {
+      "id": "rsc-server-action-directive",
+      "skill": "react-server-components",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Which directive do you place on a function to mark it as a Server Action that is callable from Client Components? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["use server"] },
+      "notes": "plugins/frontend/skills/react-server-components/SKILL.md - Directive Summary table: use server marks Server Actions"
+    },
+    {
+      "id": "remix-missing-action-status",
+      "skill": "remix",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "If a Form with method post targets a route module that exports no action function, what HTTP status code results? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["405"] },
+      "notes": "plugins/frontend/skills/remix/SKILL.md - pitfall 1: missing action export gives 405 Method Not Allowed"
+    },
+    {
+      "id": "remix-rebrand-year",
+      "skill": "remix",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In what year did Remix v2 rebrand into React Router v7, keeping the same team and the same API? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2024"] },
+      "notes": "plugins/frontend/skills/remix/SKILL.md - intro: Remix v2 rebranded to React Router v7 in late 2024"
+    },
+    {
+      "id": "remix-root-errorboundary-full-doc",
+      "skill": "remix",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Why does the root level ErrorBoundary in React Router v7 or Remix need to render a complete document, unlike error boundaries on nested routes? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)html" },
+      "notes": "plugins/frontend/skills/remix/SKILL.md - pitfall 6: root ErrorBoundary must render full html document since no layout wraps it"
+    },
+    {
+      "id": "svelte-no-virtual-dom",
+      "skill": "svelte",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "Does Svelte 5 use a virtual DOM at runtime to apply updates, or does it compile components into direct DOM mutation code? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(no virtual dom|compil)" },
+      "notes": "plugins/frontend/skills/svelte/SKILL.md - Compiler Model: Svelte is a compiler, no virtual DOM"
+    },
+    {
+      "id": "svelte-static-adapter-spa-fallback",
+      "skill": "svelte",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "To support SPA-style client-side routing with SvelteKit's static adapter and avoid 404s on direct URL access, what fallback file name do you configure? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["200.html"] },
+      "notes": "plugins/frontend/skills/svelte/SKILL.md - pitfall 9: adapter fallback 200.html needed for SPA routing"
+    },
+    {
+      "id": "svelte-bindable-prop-rune",
+      "skill": "svelte",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "In Svelte 5 runes mode, which rune must a child component use to declare a prop that the parent can bind to two-way? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["bindable"] },
+      "notes": "plugins/frontend/skills/svelte/SKILL.md - Runes System and pitfall 4: bindable prop declared with the bindable rune"
+    },
+    {
+      "id": "vue-definemodel-macro",
+      "skill": "vue",
+      "plugin": "frontend",
+      "knowledge": "stable",
+      "prompt": "In Vue Single File Components, which compiler macro lets you set up two-way v-model binding without manually writing a separate prop and emit pair? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["defineModel"] },
+      "notes": "plugins/frontend/skills/vue/SKILL.md - Single-File Components: defineModel compiler macro"
+    },
+    {
+      "id": "vue-3.5-memory-reduction",
+      "skill": "vue",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Vue 3.5 shipped a new reactivity engine. By roughly what percentage did it cut memory usage? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["56"] },
+      "notes": "plugins/frontend/skills/vue/SKILL.md - Reactivity System: 56% memory reduction in the new engine"
+    },
+    {
+      "id": "vue-vapor-alien-signals-engine",
+      "skill": "vue",
+      "plugin": "frontend",
+      "knowledge": "recent",
+      "prompt": "Vue's Vapor Mode, in beta as of version 3.6, is built on which named reactivity engine? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Alien Signals"] },
+      "notes": "plugins/frontend/skills/vue/SKILL.md - Vapor Mode section: Uses the Alien Signals reactivity engine"
+    }
+  ]
+}

@@ -1,0 +1,2679 @@
+{
+  "suite": "networking",
+  "description": "Cross-harness matrix suite for the networking plugin's 68 technology skills (routing/switching, firewall, DNS/IPAM, load balancing, VPN, SD-WAN, wireless, DC fabric, cloud networking, and network automation/monitoring vendors). Prompts are deliberately neutral (no reference to a skills library or documentation) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md or references/ files as of 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, version-gated, or niche); 'stable' = long-standing fact a strong bare model may already know.",
+  "tasks": [
+    {
+      "id": "ansible-network-python-control-node",
+      "skill": "ansible-network",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For network automation playbooks running on ansible-core 2.18, what is the minimum Python version required on the control node? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.11"
+        ]
+      },
+      "notes": "plugins/networking/skills/ansible-network/references/versions/2.18.md - control node requires Python 3.11+ (3.10 deprecated)"
+    },
+    {
+      "id": "ansible-network-ios-enable-mode",
+      "skill": "ansible-network",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "When pushing configuration to a Cisco IOS device with Ansible, what ansible_become_method value must you set to enter privileged EXEC mode before config tasks run? Answer concisely with just the method name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\benable\\b"
+      },
+      "notes": "plugins/networking/skills/ansible-network/SKILL.md - IOS requires ansible_become: yes and ansible_become_method: enable for privilege escalation"
+    },
+    {
+      "id": "ansible-network-junos-connection",
+      "skill": "ansible-network",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which Ansible connection plugin is used almost universally for managing Juniper Junos devices, since every Junos module relies on it? Answer with just the plugin name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bnetconf\\b"
+      },
+      "notes": "plugins/networking/skills/ansible-network/SKILL.md - netconf (NETCONF/XML) is preferred for Junos, all modules use NETCONF"
+    },
+    {
+      "id": "arista-eos-cluster-load-balancing",
+      "skill": "arista-eos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Arista EOS 4.35 added a Cluster Load Balancing feature for optimizing RoCE traffic between GPU servers in AI clusters. Which switch platform family does this feature require? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7060DX4"
+        ]
+      },
+      "notes": "plugins/networking/skills/arista-eos/references/versions/4.35.md - Cluster Load Balancing requires compatible 7060DX4 or similar platforms"
+    },
+    {
+      "id": "arista-eos-4-30-eoss",
+      "skill": "arista-eos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For Arista EOS, when does the 4.30.x release train reach end of software support? Answer concisely with the date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)april\\s*14,?\\s*2026"
+      },
+      "notes": "plugins/networking/skills/arista-eos/references/versions/4.35.md - Running 4.30.x: Upgrade immediately, EoSS April 14, 2026"
+    },
+    {
+      "id": "arista-eos-vxlan-mtu",
+      "skill": "arista-eos",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "On an Arista EOS VXLAN fabric, what MTU should you configure on spine-leaf and MLAG peer-link interfaces to account for VXLAN encapsulation overhead? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9214"
+        ]
+      },
+      "notes": "plugins/networking/skills/arista-eos/SKILL.md - MTU not 9214: VXLAN adds 50 bytes, all spine-leaf and peer-link interfaces must be MTU 9214"
+    },
+    {
+      "id": "aruba-aoscx-cx10000-dpu",
+      "skill": "aruba-aoscx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "The Aruba CX 10000 switch integrates a DPU on each line card to offload stateful firewall, NAT, and micro-segmentation at line rate. Which vendor makes this DPU? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Pensando"
+        ]
+      },
+      "notes": "plugins/networking/skills/aruba-aoscx/SKILL.md - Integrated AMD Pensando DPU per line card offloads stateful firewall, NAT, and micro-segmentation to hardware"
+    },
+    {
+      "id": "aruba-aoscx-srv6-preview",
+      "skill": "aruba-aoscx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Aruba AOS-CX 10.15 introduced a preview implementation of IPv6 Segment Routing. Which two switch platform families support this preview? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9300",
+          "10000"
+        ]
+      },
+      "notes": "plugins/networking/skills/aruba-aoscx/references/versions/10.15.md - Early SRv6 support on CX 9300 and CX 10000 platforms, preview/beta status"
+    },
+    {
+      "id": "aruba-aoscx-vsx-l3",
+      "skill": "aruba-aoscx",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an Aruba AOS-CX VSX pair, do the two switches share a single Layer 3 routing table, or does each maintain its own? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(own|independent|not shared|separate)"
+      },
+      "notes": "plugins/networking/skills/aruba-aoscx/SKILL.md - Layer 3 NOT shared, each switch maintains its own routing table"
+    },
+    {
+      "id": "aruba-wireless-ap730-wifi7",
+      "skill": "aruba-wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which HPE Aruba access point model is the first to support Wi-Fi 7 (802.11be), including Multi-Link Operation? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "730"
+        ]
+      },
+      "notes": "plugins/networking/skills/aruba-wireless/SKILL.md - AP 730 | Wi-Fi 7 (802.11be) | Flagship; MLO support"
+    },
+    {
+      "id": "aruba-wireless-airmatch-cadence",
+      "skill": "aruba-wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Aruba AirMatch computes a network-wide optimal RF channel and power plan. How often does it push this updated plan out to the access points? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(once\\s*(a|per)\\s*day|daily|24\\s*hour)"
+      },
+      "notes": "plugins/networking/skills/aruba-wireless/SKILL.md - Pushes optimized plan to APs once per day during off-peak hours to minimize disruption"
+    },
+    {
+      "id": "aruba-wireless-6ghz-wpa3",
+      "skill": "aruba-wireless",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "For an SSID broadcast in the 6 GHz band on Aruba access points, what wireless security protocol is mandatory? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)wpa3"
+      },
+      "notes": "plugins/networking/skills/aruba-wireless/SKILL.md - 6 GHz without WPA3: 6 GHz SSIDs require WPA3"
+    },
+    {
+      "id": "aws-lb-nlb-weighted-tg",
+      "skill": "aws-lb",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "AWS Network Load Balancer added support for weighted target groups, enabling blue and green deployments for TCP services. Around when was this capability added? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)nov(ember)?\\s*2025"
+      },
+      "notes": "plugins/networking/skills/aws-lb/SKILL.md - Weighted target groups | Blue/green for TCP services (Nov 2025)"
+    },
+    {
+      "id": "aws-lb-alb-target-optimizer",
+      "skill": "aws-lb",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "AWS Application Load Balancer has a Target Optimizer feature aimed at AI and ML inference workloads that routes requests with single-task concurrency. What specific problem does this prevent? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(gpu\\s*contention|contention)"
+      },
+      "notes": "plugins/networking/skills/aws-lb/SKILL.md - Target Optimizer routes AI/ML workloads requiring single-task concurrency to appropriate targets, prevents GPU contention"
+    },
+    {
+      "id": "aws-lb-gwlb-geneve-port",
+      "skill": "aws-lb",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "AWS Gateway Load Balancer encapsulates traffic to security appliances using the GENEVE protocol. What UDP port does GENEVE use? Answer concisely with just the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6081"
+        ]
+      },
+      "notes": "plugins/networking/skills/aws-lb/SKILL.md - Wraps original packets in GENEVE (UDP 6081)"
+    },
+    {
+      "id": "aws-vpc-tgw-attachments",
+      "skill": "aws-vpc",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "5,?000"
+      },
+      "notes": "plugins/networking/skills/aws-vpc/SKILL.md - Up to 5,000 attachments per TGW"
+    },
+    {
+      "id": "aws-vpc-cross-az-cost",
+      "skill": "aws-vpc",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount.",
+      "expected": {
+        "type": "regex",
+        "value": "0\\.01"
+      },
+      "notes": "plugins/networking/skills/aws-vpc/SKILL.md - Every cross-AZ packet incurs 0.01 USD/GB each direction (0.02 USD/GB round trip)"
+    },
+    {
+      "id": "aws-vpc-sg-stateful",
+      "skill": "aws-vpc",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an AWS VPC, are Security Groups stateful or stateless with respect to return traffic? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)stateful"
+      },
+      "notes": "plugins/networking/skills/aws-vpc/SKILL.md - Security Groups: Stateful packet filtering at the ENI level"
+    },
+    {
+      "id": "azure-appgw-v1-eol",
+      "skill": "azure-appgw",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "When is Azure Application Gateway V1 scheduled to reach end of life? Answer concisely with the date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)april\\s*28,?\\s*2026"
+      },
+      "notes": "plugins/networking/skills/azure-appgw/SKILL.md - Azure Application Gateway V1 EOL: April 28, 2026"
+    },
+    {
+      "id": "azure-appgw-keyvault-rotation",
+      "skill": "azure-appgw",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Azure Application Gateway V2 can automatically rotate TLS certificates stored in Key Vault. How often does it poll Key Vault to check for a new certificate version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*hours?"
+      },
+      "notes": "plugins/networking/skills/azure-appgw/SKILL.md - App Gateway polls Key Vault every 4 hours, rotates certificate when new version detected"
+    },
+    {
+      "id": "azure-appgw-subnet-size",
+      "skill": "azure-appgw",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What is the minimum dedicated subnet size required for deploying Azure Application Gateway V2? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/24"
+        ]
+      },
+      "notes": "plugins/networking/skills/azure-appgw/SKILL.md - V2 requires a dedicated subnet with minimum size /24"
+    },
+    {
+      "id": "azure-dns-forwarding-ruleset-limit",
+      "skill": "azure-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "1,?000"
+      },
+      "notes": "plugins/networking/skills/azure-dns/SKILL.md - Up to 1,000 forwarding rules per ruleset, ruleset linkable to multiple VNets"
+    },
+    {
+      "id": "azure-dns-autoreg-single-zone",
+      "skill": "azure-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Azure Private DNS, can a single VNet have auto-registration enabled for more than one private DNS zone at the same time? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|only one|single zone)"
+      },
+      "notes": "plugins/networking/skills/azure-dns/SKILL.md - Auto-registration conflict: a VNet can only have auto-registration enabled for one private DNS zone, linking a second fails"
+    },
+    {
+      "id": "azure-dns-dnssec-public-only",
+      "skill": "azure-dns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does Azure DNS support DNSSEC on private DNS zones, or only on public zones? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(public|not.{0,20}private)"
+      },
+      "notes": "plugins/networking/skills/azure-dns/SKILL.md - DNSSEC is NOT supported on private zones"
+    },
+    {
+      "id": "azure-vnet-idps-signatures",
+      "skill": "azure-vnet",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Azure Firewall Premium ships its IDPS intrusion detection and prevention feature with roughly how many signatures? Answer concisely with the approximate number.",
+      "expected": {
+        "type": "regex",
+        "value": "58,?000"
+      },
+      "notes": "plugins/networking/skills/azure-vnet/SKILL.md - IDPS (Premium only): Yes (58,000+ signatures)"
+    },
+    {
+      "id": "azure-vnet-fastpath-sku",
+      "skill": "azure-vnet",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "To enable Azure ExpressRoute FastPath, bypassing the gateway for data plane traffic, which gateway SKU tiers are required? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "UltraPerformance",
+          "ErGw3AZ"
+        ]
+      },
+      "notes": "plugins/networking/skills/azure-vnet/SKILL.md - FastPath requires UltraPerformance or ErGw3AZ gateway SKU"
+    },
+    {
+      "id": "azure-vnet-firewall-subnet-size",
+      "skill": "azure-vnet",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What is the minimum subnet size required for the AzureFirewallSubnet when deploying Azure Firewall? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/26"
+        ]
+      },
+      "notes": "plugins/networking/skills/azure-vnet/SKILL.md - Azure Firewall | AzureFirewallSubnet | /26"
+    },
+    {
+      "id": "bind-920-qptrie",
+      "skill": "bind",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "BIND 9.20 replaced the RBTDB database engine as its default data structure. What is the new default engine called? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)qp-trie"
+      },
+      "notes": "plugins/networking/skills/bind/references/versions/9.20.md - QP-Trie Database replaces RBTDB as default, 4-7% authoritative performance improvement"
+    },
+    {
+      "id": "bind-autodnssec-removed",
+      "skill": "bind",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "The auto-dnssec option in named.conf now causes BIND to refuse to start if present. Which BIND version removed it, and what feature should you use instead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9.20",
+          "dnssec-policy"
+        ]
+      },
+      "notes": "plugins/networking/skills/bind/references/versions/9.20.md - auto-dnssec causes startup failure in 9.20, use dnssec-policy (KASP) instead"
+    },
+    {
+      "id": "bind-views-all-zones",
+      "skill": "bind",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In BIND named.conf, once you define even a single view, must every zone -- including localhost and root hints -- be placed inside a view? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\byes\\b"
+      },
+      "notes": "plugins/networking/skills/bind/SKILL.md - Rules: once any view is defined, ALL zones must be inside a view, first match wins"
+    },
+    {
+      "id": "checkpoint-ai-copilot-take",
+      "skill": "checkpoint",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "To use the AI Copilot feature in Check Point desktop SmartConsole on R82, what is the minimum Take (build) number required? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1027"
+        ]
+      },
+      "notes": "plugins/networking/skills/checkpoint/references/versions/r82.md - AI Copilot available from Take 1027 (desktop SmartConsole) and Take 125 (Web SmartConsole)"
+    },
+    {
+      "id": "checkpoint-pqc-kyber",
+      "skill": "checkpoint",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Check Point R82 introduced Post-Quantum VPN using a hybrid key exchange of classical IKE plus a NIST-certified post-quantum algorithm. Which algorithm is it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)kyber"
+      },
+      "notes": "plugins/networking/skills/checkpoint/references/versions/r82.md - NIST-certified Kyber (ML-KEM / CRYSTALS-Kyber) integrated into IPsec VPN"
+    },
+    {
+      "id": "checkpoint-maestro-scale",
+      "skill": "checkpoint",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Check Point Maestro hyperscale orchestration, what is the maximum number of physical gateways a single Security Group can scale to? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "52"
+        ]
+      },
+      "notes": "plugins/networking/skills/checkpoint/SKILL.md - Scale: 2 to 52 gateways per group, add members without downtime"
+    },
+    {
+      "id": "cisco-aci-esg-min-version",
+      "skill": "cisco-aci",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Cisco ACI's Endpoint Security Groups segmentation construct requires a minimum APIC software version. What is it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.0"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-aci/SKILL.md - Version matters for feature availability (ESGs require 6.0+, Cloud ACI requires 5.0+)"
+    },
+    {
+      "id": "cisco-aci-bgp-multihop-version",
+      "skill": "cisco-aci",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Cisco ACI added eBGP multihop peering support for L3Out logical node profiles starting in which APIC release? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.1"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-aci/SKILL.md - BGP multi-hop support (APIC 6.1+)"
+    },
+    {
+      "id": "cisco-aci-apic-quorum",
+      "skill": "cisco-aci",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In a Cisco ACI fabric, what is the minimum number of APIC controllers required for a production quorum deployment, and how many can you scale up to for larger fabrics? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3",
+          "9"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-aci/SKILL.md - Production: 3 physical APICs in separate availability zones, up to 9 for scale"
+    },
+    {
+      "id": "cisco-asa-context-limit",
+      "skill": "cisco-asa",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On the Cisco ASA 5585-X platform, what is the maximum number of security contexts supported in multiple context mode? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "250"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-asa/SKILL.md - Context limits: up to 250 on ASA 5585-X"
+    },
+    {
+      "id": "cisco-asa-sustaining-mode",
+      "skill": "cisco-asa",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "As of 2026, is Cisco ASA 9.x software still receiving new features, or only security vulnerability patches and critical bug fixes? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(no new feature|sustaining|only.{0,40}(patch|fix))"
+      },
+      "notes": "plugins/networking/skills/cisco-asa/SKILL.md - ASA 9.x status (2024-2026): Sustaining engineering mode, no new features, security patches and critical bug fixes only"
+    },
+    {
+      "id": "cisco-asa-security-level-inside",
+      "skill": "cisco-asa",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "On a Cisco ASA, what numeric security level does the inside interface typically get by default, indicating the highest trust? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-asa/SKILL.md - 100 (inside): Highest trust, traffic to lower levels permitted by default"
+    },
+    {
+      "id": "cisco-ftd-2100-deprecation",
+      "skill": "cisco-ftd",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Starting with which Cisco FTD software version are Firepower 2100 series appliances (2110/2120/2130/2140) no longer supported? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.6"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-ftd/SKILL.md - Firepower 2100 deprecation: 2100 series not supported on FTD 7.6+"
+    },
+    {
+      "id": "cisco-ftd-fmc-api-rate-limit",
+      "skill": "cisco-ftd",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Cisco FTD 7.6, what is the FMC REST API rate limit, expressed in requests per minute? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-ftd/references/versions/7.6.md - FMC REST API rate limit: 300 req/min (up from 120)"
+    },
+    {
+      "id": "cisco-ftd-sftunnel-port",
+      "skill": "cisco-ftd",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Cisco FTD devices communicate with FMC over an encrypted tunnel called sftunnel. What TCP port does this use? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8305"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-ftd/SKILL.md - sftunnel: Encrypted tunnel over TCP 8305 for FMC-FTD communication"
+    },
+    {
+      "id": "cisco-ios-xe-gnmi-port",
+      "skill": "cisco-ios-xe",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On a Cisco Catalyst 9000 running IOS-XE, what TCP port does the gNMI agent listen on for gRPC-based streaming telemetry and configuration? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9339"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-ios-xe/SKILL.md - gNMI interface uses gRPC transport on port 9339"
+    },
+    {
+      "id": "cisco-ios-xe-1718-codename",
+      "skill": "cisco-ios-xe",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Cisco IOS-XE 17.18 is the current Extended Maintenance LTS release family, spanning 17.16 through 17.18. What is the code name of this release family? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Fuentes"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-ios-xe/references/versions/17.18.md - IOS-XE 17.18 (Fuentes LTS), the Fuentes family (17.16-17.18)"
+    },
+    {
+      "id": "cisco-ios-xe-stackwise-members",
+      "skill": "cisco-ios-xe",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2\\b"
+      },
+      "notes": "plugins/networking/skills/cisco-ios-xe/SKILL.md - StackWise vs StackWise Virtual table lists Max members: StackWise Virtual = 2"
+    },
+    {
+      "id": "cisco-nxos-105-date",
+      "skill": "cisco-nxos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the release date of Cisco NX-OS 10.5(5)M, the current recommended production baseline for Nexus 9000? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "March",
+          "2026"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-nxos/references/versions/10.5.md - Release date: March 16, 2026"
+    },
+    {
+      "id": "cisco-nxos-checkpoint-max",
+      "skill": "cisco-nxos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b10\\b"
+      },
+      "notes": "plugins/networking/skills/cisco-nxos/SKILL.md - Maximum 10 user checkpoints per device"
+    },
+    {
+      "id": "cisco-nxos-vpc-keepalive-port",
+      "skill": "cisco-nxos",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "On Cisco NX-OS, what UDP port does vPC peer-keepalive traffic use by default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3200"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-nxos/SKILL.md - Peer-keepalive: heartbeat via management VRF (UDP 3200)"
+    },
+    {
+      "id": "cisco-sdwan-omp-graceful-restart",
+      "skill": "cisco-sdwan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Cisco Catalyst SD-WAN, if the SD-WAN Controller (vSmart) becomes unavailable, for how long do WAN Edge routers keep the data plane up using cached OMP routes via graceful restart, by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)12\\s*hours?"
+      },
+      "notes": "plugins/networking/skills/cisco-sdwan/SKILL.md - OMP graceful restart caches routes for 12 hours default"
+    },
+    {
+      "id": "cisco-sdwan-2015-pairing",
+      "skill": "cisco-sdwan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Cisco Catalyst SD-WAN Manager release 20.15 LTS is paired with which IOS-XE WAN Edge release train? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.15"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-sdwan/references/versions/20.15.md - Paired WAN Edge Release: IOS-XE 17.15.x"
+    },
+    {
+      "id": "cisco-sdwan-tloc-tuple",
+      "skill": "cisco-sdwan",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Cisco Catalyst SD-WAN, a TLOC (Transport Locator) that identifies a WAN Edge tunnel endpoint is made up of which three attributes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "System-IP",
+          "Color",
+          "Encapsulation"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-sdwan/SKILL.md - TLOC = (System-IP, Color, Encapsulation)"
+    },
+    {
+      "id": "cisco-secure-client-version",
+      "skill": "cisco-secure-client",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the current shipping version of Cisco Secure Client, including its maintenance release label? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5.1.14.145"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-secure-client/SKILL.md - Current version (as of 2026): 5.1.14.145 (MR14)"
+    },
+    {
+      "id": "cisco-secure-client-dtls-gain",
+      "skill": "cisco-secure-client",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how much of a throughput improvement does DTLS give over a TLS-only connection for Cisco Secure Client VPN sessions? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30.{0,8}50"
+      },
+      "notes": "plugins/networking/skills/cisco-secure-client/SKILL.md - DTLS gives about 30-50% throughput improvement over TLS-only"
+    },
+    {
+      "id": "cisco-secure-client-tnd-headend",
+      "skill": "cisco-secure-client",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does enabling Trusted Network Detection for Cisco Secure Client require any extra configuration on the ASA or FTD headend? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/networking/skills/cisco-secure-client/SKILL.md - TND is client-side only (no ASA/FTD config needed)"
+    },
+    {
+      "id": "cisco-wireless-mlo-version",
+      "skill": "cisco-wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which Cisco IOS-XE wireless release first introduced Wi-Fi 7 Multi-Link Operation support on the Catalyst 9800 WLC? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.15"
+        ]
+      },
+      "notes": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - first release to introduce Wi-Fi 7 MLO on Catalyst 9800"
+    },
+    {
+      "id": "cisco-wireless-320mhz-channels",
+      "skill": "cisco-wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b3\\b"
+      },
+      "notes": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - Only 3 non-overlapping 320 MHz channels in the 6 GHz band"
+    },
+    {
+      "id": "cisco-wireless-cw9170-standard",
+      "skill": "cisco-wireless",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What Wi-Fi standard do the Cisco CW9170 and CW9178 access points support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(wi-?fi\\s*7|802\\.11be)"
+      },
+      "notes": "plugins/networking/skills/cisco-wireless/SKILL.md - CW9170/9172/9176/9178 = Wi-Fi 7 (802.11be)"
+    },
+    {
+      "id": "cloud-networking-tgw-max-attach",
+      "skill": "cloud-networking",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "5,?000"
+      },
+      "notes": "plugins/networking/skills/cloud-networking/SKILL.md - Max attachments: 5,000 per TGW"
+    },
+    {
+      "id": "cloud-networking-interaz-cost",
+      "skill": "cloud-networking",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how much does AWS charge per gigabyte for inter-AZ data transfer within the same region, per direction? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0.01"
+        ]
+      },
+      "notes": "plugins/networking/skills/cloud-networking/SKILL.md - AWS charges for inter-AZ data transfer ($0.01/GB each direction)"
+    },
+    {
+      "id": "cloud-networking-gcp-vpc-scope",
+      "skill": "cloud-networking",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Is a GCP VPC network scoped globally or regionally, compared with AWS VPCs and Azure VNets which are regional? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)global"
+      },
+      "notes": "plugins/networking/skills/cloud-networking/SKILL.md - Virtual Network Fundamentals table: GCP VPC Scope = Global"
+    },
+    {
+      "id": "cloudflare-dns-secondary-xfer-speed",
+      "skill": "cloudflare-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For Cloudflare Secondary DNS, roughly how fast does a zone transfer complete at the P99 percentile? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)800\\s*ms"
+      },
+      "notes": "plugins/networking/skills/cloudflare-dns/SKILL.md - Zone transfer completion: ~800ms at P99"
+    },
+    {
+      "id": "cloudflare-dns-families-ip",
+      "skill": "cloudflare-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For Cloudflare's 1.1.1.1 for Families resolver, which IPv4 address blocks both malware and adult content, as opposed to malware only? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.1.1.3"
+        ]
+      },
+      "notes": "plugins/networking/skills/cloudflare-dns/SKILL.md - Families (malware+adult): 1.1.1.3, 1.0.0.3"
+    },
+    {
+      "id": "cloudflare-dns-proxied-ttl",
+      "skill": "cloudflare-dns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "When a DNS record is proxied, orange cloud, through Cloudflare, what TTL value does it display regardless of the value you configured? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "notes": "plugins/networking/skills/cloudflare-dns/SKILL.md - DNS TTL appears as 300 regardless of configured value"
+    },
+    {
+      "id": "containerlab-reconfigure-flag",
+      "skill": "containerlab",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Containerlab, what flag do you add to the clab deploy command to force it to re-apply node startup configurations on an already-running lab? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "reconfigure"
+        ]
+      },
+      "notes": "plugins/networking/skills/containerlab/SKILL.md - clab deploy -t topology.clab.yml --reconfigure re-applies startup configs"
+    },
+    {
+      "id": "containerlab-server-sizing",
+      "skill": "containerlab",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "As a rule of thumb, what server specs, cpu cores and RAM, does Containerlab guidance suggest for running a 4-spine, 8-leaf fabric using native container images? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16",
+          "64"
+        ]
+      },
+      "notes": "plugins/networking/skills/containerlab/SKILL.md - A 16-core, 64 GB RAM server can run a 4-spine, 8-leaf fabric with native container images"
+    },
+    {
+      "id": "containerlab-root-required",
+      "skill": "containerlab",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does deploying a Containerlab topology require root privileges on the host, since it manipulates network namespaces? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|root|sudo)"
+      },
+      "notes": "plugins/networking/skills/containerlab/SKILL.md - Containerlab requires root privileges for network namespace manipulation"
+    },
+    {
+      "id": "coredns-nodelocal-ip",
+      "skill": "coredns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What link-local IP address does Kubernetes NodeLocal DNSCache use for its per-node cache listener? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "169.254.20.10"
+        ]
+      },
+      "notes": "plugins/networking/skills/coredns/SKILL.md - Each node has local cache at link-local IP 169.254.20.10"
+    },
+    {
+      "id": "coredns-113-doh3",
+      "skill": "coredns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which experimental encrypted DNS transport, layered over QUIC and HTTP/3, did CoreDNS 1.13 add support for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(doh3|http/?3)"
+      },
+      "notes": "plugins/networking/skills/coredns/SKILL.md - CoreDNS 1.13 Features: DoH3 (DNS over HTTP/3), experimental QUIC/HTTP3 transport support"
+    },
+    {
+      "id": "coredns-default-since",
+      "skill": "coredns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Since which Kubernetes version has CoreDNS been the default cluster DNS server, replacing kube-dns? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.13"
+        ]
+      },
+      "notes": "plugins/networking/skills/coredns/SKILL.md - serves as the default DNS service for Kubernetes (since 1.13)"
+    },
+    {
+      "id": "dc-fabric-min-mtu",
+      "skill": "dc-fabric",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In a spine-leaf VXLAN or EVPN data center fabric, what is the minimum recommended MTU on all fabric links to account for VXLAN encapsulation overhead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9214"
+        ]
+      },
+      "notes": "plugins/networking/skills/dc-fabric/SKILL.md - Minimum fabric MTU: 9214 bytes"
+    },
+    {
+      "id": "dc-fabric-oversubscription-ratio",
+      "skill": "dc-fabric",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For a two-tier spine-leaf fabric carrying general enterprise workloads, what oversubscription ratio is typically targeted as the maximum acceptable? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3:1"
+        ]
+      },
+      "notes": "plugins/networking/skills/dc-fabric/SKILL.md - Target: 3:1 or better for general workloads; 1:1 for storage/HPC"
+    },
+    {
+      "id": "dc-fabric-nsx-overlay",
+      "skill": "dc-fabric",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What overlay encapsulation protocol does VMware NSX use for its data plane, as opposed to Cisco ACI and open EVPN fabrics which use VXLAN? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Geneve"
+        ]
+      },
+      "notes": "plugins/networking/skills/dc-fabric/SKILL.md - Architecture Comparison table: NSX Overlay protocol = Geneve"
+    },
+    {
+      "id": "dent-codename",
+      "skill": "dent",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the code name of DentOS 3.0, the current release of the DENT open-source enterprise edge networking NOS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Cynthia"
+        ]
+      },
+      "notes": "plugins/networking/skills/dent/SKILL.md - Current version: DentOS 3.0 Cynthia"
+    },
+    {
+      "id": "dent-poe-bt-power",
+      "skill": "dent",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In DENT PoE device classification, what is the power delivery range in watts for IEEE 802.3bt, compared with 802.3af and 802.3at? Answer concisely with the watt figures for 802.3bt.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "60",
+          "90"
+        ]
+      },
+      "notes": "plugins/networking/skills/dent/SKILL.md - Device classification: IEEE 802.3af (15.4W), 802.3at (30W), 802.3bt (60/90W)"
+    },
+    {
+      "id": "dent-switchdev-model",
+      "skill": "dent",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does DENT, DentOS, use the Linux kernel switchdev driver model, or the SAI vendor abstraction library that SONiC uses? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)switchdev"
+      },
+      "notes": "plugins/networking/skills/dent/SKILL.md - DENT uses the Linux kernel switchdev driver model, not SAI"
+    },
+    {
+      "id": "dns-bind-dot-version",
+      "skill": "dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Starting with which version does BIND include a built-in DNS-over-TLS server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9.18"
+        ]
+      },
+      "notes": "plugins/networking/skills/dns/SKILL.md - DoH/DoT feature matrix row: BIND DoT server (9.18+)"
+    },
+    {
+      "id": "dns-windows-doh-year",
+      "skill": "dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In which year did Windows Server DNS gain a DNS-over-HTTPS server capability, currently in preview? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025"
+        ]
+      },
+      "notes": "plugins/networking/skills/dns/SKILL.md - DoH/DoT feature matrix row: Windows DNS DoH server (2025 preview)"
+    },
+    {
+      "id": "dns-single-server-risk",
+      "skill": "dns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "For production DNS redundancy, is it acceptable to run just a single authoritative DNS server for a zone? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/networking/skills/dns/SKILL.md - Single DNS server: always deploy at least 2 DNS servers per zone; single-server DNS is a critical single point of failure"
+    },
+    {
+      "id": "efficientip-dnsblast-virtual-qps",
+      "skill": "efficientip",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On virtual instances, not dedicated hardware appliances, roughly what queries-per-second figure does EfficientIP cite for its DNS Blast engine? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(million|m\\b)"
+      },
+      "notes": "plugins/networking/skills/efficientip/SKILL.md - Performance: tens of millions QPS on dedicated hardware; 2M+ QPS on virtual instances"
+    },
+    {
+      "id": "efficientip-guardian-sizing",
+      "skill": "efficientip",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "When sizing EfficientIP appliances for DNS Guardian protection, what multiple of normal query volume should you provision for to absorb volumetric DNS attacks? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "10\\s*x"
+      },
+      "notes": "plugins/networking/skills/efficientip/SKILL.md - Size appliances for 10x normal QPS to handle volumetric attacks"
+    },
+    {
+      "id": "efficientip-ha-model",
+      "skill": "efficientip",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does EfficientIP SOLIDserver use a distributed Grid model like Infoblox, or a primary and secondary appliance pair model for high availability? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)primary.{0,20}secondary"
+      },
+      "notes": "plugins/networking/skills/efficientip/SKILL.md - Primary/Secondary appliance pairs with replicated database; simpler topology than Infoblox Grid"
+    },
+    {
+      "id": "envoy-circuit-breaker-default",
+      "skill": "envoy",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is Envoy's default max_connections circuit breaker threshold per cluster when it is not explicitly configured? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1024"
+        ]
+      },
+      "notes": "plugins/networking/skills/envoy/SKILL.md - Circuit breaker defaults too low: default max_connections is 1024"
+    },
+    {
+      "id": "envoy-gateway-version",
+      "skill": "envoy",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the current version of Envoy Gateway as of early 2026? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.5.3"
+        ]
+      },
+      "notes": "plugins/networking/skills/envoy/SKILL.md - Current version: Envoy Gateway v1.5.3 (March 2026)"
+    },
+    {
+      "id": "envoy-router-filter-order",
+      "skill": "envoy",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an Envoy HTTP filter chain, which filter must always be placed last? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "router"
+        ]
+      },
+      "notes": "plugins/networking/skills/envoy/SKILL.md - Router filter not last: the router filter must be the last HTTP filter in the chain"
+    },
+    {
+      "id": "f5-bigip-mgmt-tls-min",
+      "skill": "f5-bigip",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On F5 BIG-IP 17.1 and later, what is the minimum TLS version enforced for management interfaces like the Configuration Utility GUI and iControl REST? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)tls\\s*1\\.2"
+      },
+      "notes": "plugins/networking/skills/f5-bigip/references/versions/17.5.md - BIG-IP 17.1+ enforces TLS 1.2 as the minimum protocol version for all management interfaces"
+    },
+    {
+      "id": "f5-bigip-fips-level",
+      "skill": "f5-bigip",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On BIG-IP 17.x hardware platforms equipped with a FIPS HSM (r-series, i-series), what FIPS 140 compliance level do they support? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "140-2",
+          "Level 2"
+        ]
+      },
+      "notes": "plugins/networking/skills/f5-bigip/references/versions/17.5.md - BIG-IP 17.x FIPS-equipped platforms support FIPS 140-2 Level 2, up from Level 1 in 15.x/16.x"
+    },
+    {
+      "id": "f5-bigip-client-accepted-event",
+      "skill": "f5-bigip",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an F5 BIG-IP iRule, which event fires the moment a new TCP connection from the client is accepted, before any HTTP parsing occurs? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CLIENT_ACCEPTED"
+        ]
+      },
+      "notes": "plugins/networking/skills/f5-bigip/SKILL.md - iRules event model table lists CLIENT_ACCEPTED as the trigger for a new TCP connection from client"
+    },
+    {
+      "id": "firewall-zone-count-guideline",
+      "skill": "firewall",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "As a rule of thumb for minimizing zone sprawl, roughly how many security zones should cover most enterprise firewall deployments? Answer concisely with a number range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*(-|to)\\s*8"
+      },
+      "notes": "plugins/networking/skills/firewall/SKILL.md - Design Rules state minimize zone sprawl, 5-8 zones covers most deployments"
+    },
+    {
+      "id": "firewall-panos-nat-prenat",
+      "skill": "firewall",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On PAN-OS, when you write a security policy rule for a destination NAT scenario, should the destination address in that rule match the pre-NAT public IP or the post-NAT private IP? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)pre-?nat"
+      },
+      "notes": "plugins/networking/skills/firewall/references/concepts.md - on PAN-OS security policy matches pre-NAT IP addresses but post-NAT zones"
+    },
+    {
+      "id": "firewall-stateful-return-traffic",
+      "skill": "firewall",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In a stateful firewall, once a session is established and permitted, does the return traffic need its own explicit matching rule? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/networking/skills/firewall/references/concepts.md - return traffic is automatically permitted based on session state, no explicit rule needed for replies"
+    },
+    {
+      "id": "fortinet-sdwan-passive-health-check-version",
+      "skill": "fortinet-sdwan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Starting with which minimum FortiOS version can SD-WAN health checks derive SLA metrics passively from real application traffic instead of active probing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.4.1"
+        ]
+      },
+      "notes": "plugins/networking/skills/fortinet-sdwan/SKILL.md - passive health checks introduced in FortiOS 7.4.1+, derive SLA metrics from actual application traffic"
+    },
+    {
+      "id": "fortinet-sdwan-advpn-shortcut-before-76",
+      "skill": "fortinet-sdwan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Before FortiOS 7.6, how many concurrent ADVPN 2.0 shortcut tunnels could exist between a single pair of spokes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bone\\b|\\b1\\b|single)"
+      },
+      "notes": "plugins/networking/skills/fortinet-sdwan/references/versions/7.6.md - before 7.6 ADVPN 2.0 supported a single optimal shortcut per spoke-pair; 7.6 adds multiple shortcuts"
+    },
+    {
+      "id": "fortinet-sdwan-minimum-sla-strategy",
+      "skill": "fortinet-sdwan",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which FortiGate SD-WAN steering strategy keeps traffic on its current link and only reroutes when that link actually violates its SLA thresholds, to avoid unnecessary path switching? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Minimum SLA"
+        ]
+      },
+      "notes": "plugins/networking/skills/fortinet-sdwan/SKILL.md - Minimum SLA strategy stays on current link unless SLA violated, minimizes reroutes"
+    },
+    {
+      "id": "fortios-np7-max-throughput",
+      "skill": "fortios",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the maximum throughput of Fortinet's NP7 network processor used for hardware-accelerated forwarding on FortiGate appliances? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "200 Gbps"
+        ]
+      },
+      "notes": "plugins/networking/skills/fortios/references/architecture.md - NP7 max throughput 200 Gbps (dual 100GigE)"
+    },
+    {
+      "id": "fortios-fgcp-failover-time",
+      "skill": "fortios",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In FortiGate FGCP active-passive high availability, roughly how fast does failover occur for new sessions? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(under|less than|<)\\s*1\\s*second"
+      },
+      "notes": "plugins/networking/skills/fortios/SKILL.md - FGCP failover time under 1 second for new sessions"
+    },
+    {
+      "id": "fortios-proxy-based-inspection",
+      "skill": "fortios",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which FortiOS UTM inspection mode fully buffers and reconstructs content, giving the best detection of evasive techniques like chunked encoding at the cost of higher latency? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)proxy[- ]based"
+      },
+      "notes": "plugins/networking/skills/fortios/SKILL.md - proxy-based inspection uses full content buffering and reconstruction, best for evasive content, higher latency"
+    },
+    {
+      "id": "gcp-vpc-cloudnat-default-ports",
+      "skill": "gcp-vpc",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "By default, how many ports does GCP Cloud NAT allocate per VM instance for outbound connections? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b64\\b"
+      },
+      "notes": "plugins/networking/skills/gcp-vpc/SKILL.md - Cloud NAT default port allocation is 64 ports per VM"
+    },
+    {
+      "id": "gcp-vpc-havpn-tunnel-throughput",
+      "skill": "gcp-vpc",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "On GCP, what is the throughput cap of a single HA VPN tunnel? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3 Gbps"
+        ]
+      },
+      "notes": "plugins/networking/skills/gcp-vpc/SKILL.md - each HA VPN tunnel supports up to 3 Gbps"
+    },
+    {
+      "id": "gcp-vpc-global-by-default",
+      "skill": "gcp-vpc",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does a Google Cloud VPC network span a single region only, or does it span all regions globally by default? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)global"
+      },
+      "notes": "plugins/networking/skills/gcp-vpc/SKILL.md - GCP VPC is global by default, a single VPC spans all regions simultaneously"
+    },
+    {
+      "id": "haproxy-stick-sync-throughput",
+      "skill": "haproxy",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In HAProxy 3.2 LTS, the new dedicated stick-table peer-sync thread can handle up to roughly how many updates per second on a 128-thread system? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(8\\s*million|8,000,000|5-8\\s*million|five\\s*to\\s*eight\\s*million)"
+      },
+      "notes": "plugins/networking/skills/haproxy/references/versions/3.2.md - dedicated sync thread handles 5-8 million updates/second on 128-thread systems, up from 500k-1M pre-3.2"
+    },
+    {
+      "id": "haproxy-gpc-array-version",
+      "skill": "haproxy",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Starting in which HAProxy version can General Purpose Counters and General Purpose Tags in a stick table use array syntax like gpc(5) instead of only gpc0 and gpc1? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\.2\\b"
+      },
+      "notes": "plugins/networking/skills/haproxy/references/versions/3.2.md - HAProxy 3.2 introduces array data types for GPT and GPC"
+    },
+    {
+      "id": "haproxy-health-check-rise-fall-defaults",
+      "skill": "haproxy",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an HAProxy backend server health check, what are the default rise and fall counts, meaning consecutive successes to mark a server UP and consecutive failures to mark it DOWN? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b2\\b)(?=.*\\b3\\b)"
+      },
+      "notes": "plugins/networking/skills/haproxy/SKILL.md - rise default 2 (consecutive successes to mark UP), fall default 3 (consecutive failures to mark DOWN)"
+    },
+    {
+      "id": "infoblox-wapi-current-version",
+      "skill": "infoblox",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the current WAPI REST API version supported on Infoblox NIOS 9.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.13"
+        ]
+      },
+      "notes": "plugins/networking/skills/infoblox/SKILL.md - current WAPI version is 2.13+ (NIOS 9.0)"
+    },
+    {
+      "id": "infoblox-pdns-retention",
+      "skill": "infoblox",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many months of historical DNS resolution data does Infoblox BloxOne Passive DNS typically retain for threat hunting? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)12\\+?[\\s-]*months?"
+      },
+      "notes": "plugins/networking/skills/infoblox/references/architecture.md - PDNS retention is 12+ months of resolution history"
+    },
+    {
+      "id": "infoblox-gmc-auto-promotion",
+      "skill": "infoblox",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an Infoblox NIOS Grid, if the Grid Master becomes unreachable, does the Grid Master Candidate promote itself automatically, or does it require manual intervention? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)automat"
+      },
+      "notes": "plugins/networking/skills/infoblox/references/architecture.md - automatic promotion: if GM becomes unreachable, GMC promotes to GM automatically"
+    },
+    {
+      "id": "ipam-ddi-guest-wifi-lease-time",
+      "skill": "ipam-ddi",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What DHCP lease time is recommended for guest WiFi networks as a DDI best practice? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30\\s*min"
+      },
+      "notes": "plugins/networking/skills/ipam-ddi/SKILL.md - DHCP design considerations table recommends 30 min lease time for guest"
+    },
+    {
+      "id": "ipam-ddi-cgn-rfc-number",
+      "skill": "ipam-ddi",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which RFC defines the 100.64.0.0/10 address block used for Carrier-Grade NAT and shared address space? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6598"
+        ]
+      },
+      "notes": "plugins/networking/skills/ipam-ddi/references/concepts.md - RFC 6598 defines 100.64.0.0/10 for Carrier-Grade NAT (CGN)"
+    },
+    {
+      "id": "ipam-ddi-dora-process",
+      "skill": "ipam-ddi",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What do the four steps in the DHCP DORA process stand for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*discover)(?=.*offer)(?=.*request)(?=.*ack)"
+      },
+      "notes": "plugins/networking/skills/ipam-ddi/references/concepts.md - DHCP process DORA: DISCOVER, OFFER, REQUEST, ACK"
+    },
+    {
+      "id": "ipsec-cnsa-pfs-min-group",
+      "skill": "ipsec",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For CNSA 1.0 compliant IPsec IKEv2 deployments today, what is the minimum Diffie-Hellman group required for Perfect Forward Secrecy? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Group 20"
+        ]
+      },
+      "notes": "plugins/networking/skills/ipsec/references/best-practices.md - CNSA 1.0 DH Group 20 (ECP-384) minimum, PFS always enabled at Group 20"
+    },
+    {
+      "id": "ipsec-cnsa2-pqc-algorithm",
+      "skill": "ipsec",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which post-quantum key exchange algorithm does CNSA 2.0 specify for IPsec IKEv2, used hybrid with ECP-384 during the transition period? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ML-KEM"
+        ]
+      },
+      "notes": "plugins/networking/skills/ipsec/references/best-practices.md - CNSA 2.0 key exchange is ML-KEM-1024 (FIPS 203), hybrid with ECP-384 during transition"
+    },
+    {
+      "id": "ipsec-natt-udp-ports",
+      "skill": "ipsec",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which two UDP ports need to be open through firewalls and NAT devices for IPsec IKEv2 with NAT Traversal enabled? Answer concisely with both port numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b500\\b)(?=.*\\b4500\\b)"
+      },
+      "notes": "plugins/networking/skills/ipsec/SKILL.md - reachability requires UDP/500 and UDP/4500 open for NAT-T"
+    },
+    {
+      "id": "juniper-junos-rollback-history-count",
+      "skill": "juniper-junos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many previous configurations does Junos retain in its rollback history by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b50\\b"
+      },
+      "notes": "plugins/networking/skills/juniper-junos/SKILL.md - up to 50 rollback configurations stored"
+    },
+    {
+      "id": "juniper-junos-isis-classic-metric-max",
+      "skill": "juniper-junos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Junos IS-IS, what is the maximum value of a classic narrow interface metric, which is why wide-metrics-only should be enabled for modern designs? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b63\\b"
+      },
+      "notes": "plugins/networking/skills/juniper-junos/references/best-practices.md - classic IS-IS metrics are limited to 63, enable wide-metrics-only"
+    },
+    {
+      "id": "juniper-junos-commit-confirmed",
+      "skill": "juniper-junos",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Junos, which commit variant activates the candidate configuration but automatically rolls it back if you do not reconfirm within a set number of minutes, protecting against remote lockout? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "commit confirmed"
+        ]
+      },
+      "notes": "plugins/networking/skills/juniper-junos/SKILL.md - commit confirmed <minutes>: auto-rollback if not re-confirmed, prevents lockout"
+    },
+    {
+      "id": "juniper-mist-marvis-mttr-reduction",
+      "skill": "juniper-mist",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how much does Marvis AI cross-domain correlation reduce Mean Time to Repair compared to manual troubleshooting, according to Juniper Mist? Answer concisely with a percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)50\\s*-?\\s*(to)?\\s*80\\s*%?"
+      },
+      "notes": "plugins/networking/skills/juniper-mist/SKILL.md - Marvis correlation reduces Mean Time to Repair (MTTR) by 50-80% compared to manual troubleshooting"
+    },
+    {
+      "id": "juniper-mist-vble-antenna-elements",
+      "skill": "juniper-mist",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many elements does the BLE antenna array in each Juniper Mist access point have, enabling directional vBLE location? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b16\\b"
+      },
+      "notes": "plugins/networking/skills/juniper-mist/references/architecture.md - each Mist AP contains a 16-element BLE antenna array for software-defined beamforming"
+    },
+    {
+      "id": "juniper-mist-ap32-wifi6e",
+      "skill": "juniper-mist",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which Juniper Mist access point model was the first tri-band model supporting Wi-Fi 6E across 2.4, 5, and 6 GHz? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AP32"
+        ]
+      },
+      "notes": "plugins/networking/skills/juniper-mist/SKILL.md - AP family table lists AP32 as Wi-Fi 6E indoor tri-band, first 6 GHz Mist AP"
+    },
+    {
+      "id": "kentik-rest-api-base-url",
+      "skill": "kentik",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the base URL, including version path, for Kentik's REST API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "api.kentik.com",
+          "v5"
+        ]
+      },
+      "notes": "plugins/networking/skills/kentik/SKILL.md - REST API base URL is https://api.kentik.com/api/v5/"
+    },
+    {
+      "id": "kentik-rtbh-prefix-length",
+      "skill": "kentik",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In Kentik's automated DDoS mitigation using RTBH (Remote Triggered Black Hole), what prefix length is announced via BGP community to null-route the attacked destination? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/32"
+        ]
+      },
+      "notes": "plugins/networking/skills/kentik/SKILL.md - RTBH: announce /32 route to null via BGP community"
+    },
+    {
+      "id": "kentik-flow-protocols-supported",
+      "skill": "kentik",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Name at least three flow export protocols or formats that Kentik ingests for network traffic analytics. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "NetFlow",
+          "sFlow",
+          "IPFIX"
+        ]
+      },
+      "notes": "plugins/networking/skills/kentik/SKILL.md - ingestion supports NetFlow v5/v9, IPFIX, sFlow, VPC Flow Logs, eBPF agent"
+    },
+    {
+      "id": "librenms-rrdcached-scale-threshold",
+      "skill": "librenms",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "At approximately what device count should a LibreNMS deployment enable rrdcached to avoid RRDtool write performance problems? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b500\\b"
+      },
+      "notes": "plugins/networking/skills/librenms/SKILL.md - enable rrdcached for any deployment over 500 devices"
+    },
+    {
+      "id": "librenms-device-library-size",
+      "skill": "librenms",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how many device definitions are included in the LibreNMS device library? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10,?000"
+      },
+      "notes": "plugins/networking/skills/librenms/SKILL.md - device library has 10,000+ device definitions (YAML-based)"
+    },
+    {
+      "id": "librenms-tech-stack",
+      "skill": "librenms",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What PHP framework and primary database engine does LibreNMS run on? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Laravel",
+          "MySQL"
+        ]
+      },
+      "notes": "plugins/networking/skills/librenms/SKILL.md - PHP 8.x/Laravel framework, MySQL/MariaDB backend"
+    },
+    {
+      "id": "load-balancing-tls13-ssl-session-persistence",
+      "skill": "load-balancing",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Does SSL Session ID based load balancer persistence remain fully reliable under TLS 1.3, or does something about it change? Answer in one or two sentences.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(less reliable|session ticket)"
+      },
+      "notes": "plugins/networking/skills/load-balancing/references/concepts.md - SSL Session ID Persistence is less reliable with TLS 1.3 since session tickets change behavior"
+    },
+    {
+      "id": "load-balancing-power-of-two-choices",
+      "skill": "load-balancing",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What load balancing algorithm picks two servers at random and then routes the request to whichever of the two currently has fewer active connections? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)two\\s*choices"
+      },
+      "notes": "plugins/networking/skills/load-balancing/references/concepts.md - Random with Two Choices (Power of Two) picks two random servers, selects the less loaded one"
+    },
+    {
+      "id": "load-balancing-dsr-response-path",
+      "skill": "load-balancing",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Direct Server Return (DSR) load balancing, does the response traffic flow back through the load balancer, or does it go directly from the server to the client? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)directly"
+      },
+      "notes": "plugins/networking/skills/load-balancing/references/concepts.md - in DSR the response goes directly from the server to the client, bypassing the load balancer"
+    },
+    {
+      "id": "meraki-action-batch-limits",
+      "skill": "meraki",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "When using Meraki Dashboard action batches for bulk API operations, how many actions can a single batch contain when run synchronously, and how many when run asynchronously? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b100\\b)(?=.*\\b1000\\b)"
+      },
+      "notes": "plugins/networking/skills/meraki/SKILL.md - Action Batches: up to 100 actions (synchronous) or 1000 actions (asynchronous)"
+    },
+    {
+      "id": "meraki-license-grace",
+      "skill": "meraki",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "If a Cisco Meraki organization's licenses expire and are not renewed, how many days pass before the devices become non-functional? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(30\\s*days|thirty\\s*days)"
+      },
+      "notes": "plugins/networking/skills/meraki/SKILL.md - License Expiration: Meraki devices become non-functional 30 days after license expiration"
+    },
+    {
+      "id": "meraki-autovpn-protocol",
+      "skill": "meraki",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What VPN protocol suite does Cisco Meraki AutoVPN use to automatically build tunnels between MX security appliances? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)ipsec"
+      },
+      "notes": "plugins/networking/skills/meraki/SKILL.md - AutoVPN: Automated IPsec VPN between MX appliances"
+    },
+    {
+      "id": "netbox-python-versions",
+      "skill": "netbox",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "NetBox v4.5 requires a newer Python baseline than earlier releases. Which Python versions does it require, and which previously-supported Python version got dropped? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.12",
+          "3.11"
+        ]
+      },
+      "notes": "plugins/networking/skills/netbox/references/versions/4.5.md - Required: Python 3.12, 3.13, or 3.14; Dropped: Python 3.11 support"
+    },
+    {
+      "id": "netbox-cursor-pagination",
+      "skill": "netbox",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "As of which NetBox point release did the GraphQL API gain cursor-based pagination for large datasets, rather than only offset-based pagination? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.5.2"
+        ]
+      },
+      "notes": "plugins/networking/skills/netbox/references/versions/4.5.md - GraphQL Cursor-Based Pagination (v4.5.2)"
+    },
+    {
+      "id": "netbox-graphql-readonly",
+      "skill": "netbox",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Can you create or update NetBox objects through its GraphQL API, or is that API limited to read operations only? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(read-?only|\\bno\\b)"
+      },
+      "notes": "plugins/networking/skills/netbox/SKILL.md - GraphQL is read-only. Use REST API for write operations."
+    },
+    {
+      "id": "netscaler-license-eol",
+      "skill": "netscaler",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "By what date must Citrix NetScaler customers migrate off file-based licensing before it reaches end of life? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2026"
+        ]
+      },
+      "notes": "plugins/networking/skills/netscaler/SKILL.md - Licensing Alert: File-based licensing EOL April 15, 2026"
+    },
+    {
+      "id": "netscaler-mep-port",
+      "skill": "netscaler",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which TCP port must be open between data centers for NetScaler GSLB sites to exchange health and load metrics over MEP? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3011"
+        ]
+      },
+      "notes": "plugins/networking/skills/netscaler/references/architecture.md - MEP (Metric Exchange Protocol) uses TCP port 3011"
+    },
+    {
+      "id": "netscaler-cs-priority",
+      "skill": "netscaler",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "On a NetScaler content switching virtual server with multiple policies that could match a request, does the policy with the lowest priority number or the highest priority number win? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)lowest"
+      },
+      "notes": "plugins/networking/skills/netscaler/SKILL.md - Common Pitfalls: CS policies evaluate by priority number (lowest first), first match wins"
+    },
+    {
+      "id": "network-automation-maturity-levels",
+      "skill": "network-automation",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In a typical network automation maturity model that runs from manual CLI changes up through self-healing, closed-loop networks, how many maturity levels are usually defined? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b5\\b|\\bfive\\b)"
+      },
+      "notes": "plugins/networking/skills/network-automation/references/concepts.md - Network Automation Maturity Model defines Level 1 through Level 5"
+    },
+    {
+      "id": "network-automation-batfish",
+      "skill": "network-automation",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What free, open-source tool is commonly used to parse network device configurations offline and analyze reachability, routing correctness, and ACL behavior before a change is deployed? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Batfish"
+        ]
+      },
+      "notes": "plugins/networking/skills/network-automation/references/concepts.md - Batfish (Offline Analysis): parses device configs offline and analyzes reachability, routing, ACLs"
+    },
+    {
+      "id": "network-automation-ansible-no-state",
+      "skill": "network-automation",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Unlike Terraform, does Ansible maintain a persistent state file that tracks what infrastructure or configuration it has previously deployed? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/networking/skills/network-automation/SKILL.md - Ansible Considerations: No state file, does not track what it has deployed (re-reads device state each run)"
+    },
+    {
+      "id": "network-monitoring-snmp-scale",
+      "skill": "network-monitoring",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how many devices can a single SNMP-based NMS polling instance typically handle before an organization needs to add distributed pollers? Answer concisely with the approximate range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)500.{0,15}2,?000"
+      },
+      "notes": "plugins/networking/skills/network-monitoring/references/concepts.md - SNMP scalability: a single NMS poller typically handles 500-2,000 devices"
+    },
+    {
+      "id": "network-monitoring-64bit-counters",
+      "skill": "network-monitoring",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "When polling a 10 Gbps or faster network interface via SNMP, why should you use the 64-bit ifXTable counters instead of the standard 32-bit interface counters? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)wrap"
+      },
+      "notes": "plugins/networking/skills/network-monitoring/references/concepts.md - 32-bit counters wrap too quickly on high-speed interfaces; use ifXTable (ifHCInOctets/ifHCOutOctets) for 1 Gbps+"
+    },
+    {
+      "id": "network-monitoring-snmpv3",
+      "skill": "network-monitoring",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which version of SNMP is considered the production standard because it adds real authentication and encryption instead of a cleartext community string? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(v(ersion)?\\s*3|snmpv3)"
+      },
+      "notes": "plugins/networking/skills/network-monitoring/references/concepts.md - SNMP Versions table: v3 (USM username/auth, DES/AES encryption) is the production standard"
+    },
+    {
+      "id": "nginx-ingress-retirement",
+      "skill": "nginx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Is the community ingress-nginx Kubernetes Ingress Controller project still actively maintained, or was it retired? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)retir"
+      },
+      "notes": "plugins/networking/skills/nginx/SKILL.md - the community ingress-nginx project was retired in November 2025; use the official F5 NGINX Ingress Controller"
+    },
+    {
+      "id": "nginx-plus-r35-api-version",
+      "skill": "nginx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "NGINX Plus R35 shipped an updated version of its live activity monitoring REST API. What API version number does R35 introduce? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(version\\s*9|\\bv9\\b)"
+      },
+      "notes": "plugins/networking/skills/nginx/references/versions/plus-r35.md - NGINX Plus R35 includes API version 9"
+    },
+    {
+      "id": "nginx-keepalive-per-worker",
+      "skill": "nginx",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In an NGINX upstream block, does the keepalive directive set the maximum idle keepalive connections for the whole server, or per worker process? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)per\\s*worker"
+      },
+      "notes": "plugins/networking/skills/nginx/SKILL.md - Common Pitfalls: keepalive sets max idle keepalive connections PER WORKER, not total"
+    },
+    {
+      "id": "opnsense-suricata-inline-version",
+      "skill": "opnsense",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Starting in which OPNsense release did Suricata gain true inline IPS mode using FreeBSD divert sockets, letting it drop and modify packets instead of only alerting? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "26.1"
+        ]
+      },
+      "notes": "plugins/networking/skills/opnsense/SKILL.md - OPNsense 26.1 uses FreeBSD divert sockets for true inline operation; Suricata v8 inline requires 26.1+"
+    },
+    {
+      "id": "opnsense-hostwatch-default",
+      "skill": "opnsense",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Is OPNsense's passive host discovery feature, hostwatch, enabled by default in version 26.1? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|enabled by default)"
+      },
+      "notes": "plugins/networking/skills/opnsense/SKILL.md - Host Discovery (hostwatch): Enabled by default in 26.1"
+    },
+    {
+      "id": "opnsense-hardenedbsd-base",
+      "skill": "opnsense",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What security-hardened FreeBSD fork serves as the base operating system for OPNsense? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "HardenedBSD"
+        ]
+      },
+      "notes": "plugins/networking/skills/opnsense/SKILL.md - OPNsense uses HardenedBSD (security-hardened FreeBSD fork)"
+    },
+    {
+      "id": "overview-three-tier-endpoints",
+      "skill": "overview",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Up to roughly how many endpoints is a traditional three-tier core/distribution/access network architecture generally considered a good fit for, before other designs become more appropriate? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10,?000|10k)"
+      },
+      "notes": "plugins/networking/skills/overview/SKILL.md - Three-tier architecture: Campus networks, <10K endpoints"
+    },
+    {
+      "id": "overview-spine-leaf-dc",
+      "skill": "overview",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "For a data center fabric with heavy east-west traffic between servers, is a three-tier architecture or a spine-leaf Clos fabric generally the better fit? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)spine-?leaf"
+      },
+      "notes": "plugins/networking/skills/overview/SKILL.md - Spine-leaf (Clos fabric): Best for data centers, high east-west traffic"
+    },
+    {
+      "id": "overview-rfc1918",
+      "skill": "overview",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Which three IP address ranges are reserved by RFC 1918 for private, internal network addressing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10.0.0.0",
+          "172.16.0.0",
+          "192.168.0.0"
+        ]
+      },
+      "notes": "plugins/networking/skills/overview/SKILL.md - IP Addressing Strategy: use RFC 1918 private addressing (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)"
+    },
+    {
+      "id": "panos-pqc-hardware",
+      "skill": "panos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which Palo Alto Networks PAN-OS hardware series, introduced alongside version 12.1, is needed to decrypt and inspect post-quantum-encrypted traffic at line rate? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "PA-5500"
+        ]
+      },
+      "notes": "plugins/networking/skills/panos/references/versions/12.1.md - PQC Traffic Inspection requires PA-5500 Series or compatible hardware"
+    },
+    {
+      "id": "panos-support-lifecycle",
+      "skill": "panos",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Under Palo Alto's newer support policy introduced with PAN-OS 12.1, how many total months of standard plus extended support does a release receive? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b48\\b"
+      },
+      "notes": "plugins/networking/skills/panos/references/versions/12.1.md - 48-Month Support Policy: Standard Support 36 months + Extended Support 12 months"
+    },
+    {
+      "id": "panos-nat-matching",
+      "skill": "panos",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In PAN-OS, when a security policy rule evaluates a NAT'd flow, does it match on the pre-NAT or post-NAT source and destination IP addresses? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)pre-?nat"
+      },
+      "notes": "plugins/networking/skills/panos/SKILL.md - Critical NAT/policy interaction: Security policy matches pre-NAT source/destination IPs but post-NAT zones"
+    },
+    {
+      "id": "pfsense-carp-min-ips",
+      "skill": "pfsense",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In a pfSense CARP high-availability pair, what is the minimum number of IP addresses needed per interface once you count both physical nodes and the shared virtual IP? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bthree\\b|\\b3\\b)"
+      },
+      "notes": "plugins/networking/skills/pfsense/SKILL.md - CARP Design Rules: Three IPs per interface minimum: node1, node2, CARP VIP"
+    },
+    {
+      "id": "pfsense-altq-limitation",
+      "skill": "pfsense",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Does pfSense's legacy ALTQ traffic shaping framework work with modern multi-queue network interface cards? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not)"
+      },
+      "notes": "plugins/networking/skills/pfsense/SKILL.md - Common Pitfalls: ALTQ does not work with multi-queue NICs"
+    },
+    {
+      "id": "pfsense-freebsd-base",
+      "skill": "pfsense",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What open-source operating system does pfSense build on, using its pf engine as the underlying firewall? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "FreeBSD"
+        ]
+      },
+      "notes": "plugins/networking/skills/pfsense/SKILL.md - pfSense builds on FreeBSD, using pf (packet filter) as the underlying firewall engine"
+    },
+    {
+      "id": "powerdns-versions",
+      "skill": "powerdns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What are the current major version numbers of the three PowerDNS suite products: Authoritative Server, Recursor, and DNSdist? Answer concisely with all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5.0",
+          "5.4",
+          "2.0"
+        ]
+      },
+      "notes": "plugins/networking/skills/powerdns/SKILL.md - PowerDNS suite: Authoritative Server 5.0, Recursor 5.4, and DNSdist 2.0"
+    },
+    {
+      "id": "powerdns-serve-stale",
+      "skill": "powerdns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Can PowerDNS Recursor keep answering queries using expired cache entries when the upstream authoritative servers become unreachable? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|serve-?stale|serve-?expired)"
+      },
+      "notes": "plugins/networking/skills/powerdns/SKILL.md - Serve-Stale/Serve-Expired: Return expired cache entries when upstream unreachable; essential for DNS resilience"
+    },
+    {
+      "id": "powerdns-auth-no-recursion",
+      "skill": "powerdns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Can the PowerDNS Authoritative Server perform recursive DNS lookups on behalf of clients? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not)"
+      },
+      "notes": "plugins/networking/skills/powerdns/SKILL.md - PowerDNS Auth does NOT perform recursive lookups; it answers only for zones it is authoritative for"
+    },
+    {
+      "id": "prtg-free-tier-sensors",
+      "skill": "prtg",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How many sensors does PRTG Network Monitor's free licensing tier include? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b100\\b"
+      },
+      "notes": "plugins/networking/skills/prtg/SKILL.md - Licensing Tiers: Free tier = 100 sensors"
+    },
+    {
+      "id": "prtg-remote-probe-port",
+      "skill": "prtg",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What TCP port do PRTG remote probes use to connect outbound to the PRTG Core Server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "23560"
+        ]
+      },
+      "notes": "plugins/networking/skills/prtg/SKILL.md - Common Pitfalls: Remote probes need outbound TLS (port 23560) to Core Server"
+    },
+    {
+      "id": "prtg-core-os-windows",
+      "skill": "prtg",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Is the on-premises PRTG Core Server a Windows-based product or a Linux-based product? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)windows"
+      },
+      "notes": "plugins/networking/skills/prtg/SKILL.md - On-Premises Architecture: Core Server runs on Windows Server (2016/2019/2022)"
+    },
+    {
+      "id": "route53-dnssec-ksk-region",
+      "skill": "route53",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For Route 53 DNSSEC signing, in which AWS region must the KMS key used for the key-signing key reside, no matter where the hosted zone itself is served from? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "us-east-1"
+        ]
+      },
+      "notes": "plugins/networking/skills/route53/SKILL.md - DNSSEC: KSK customer-managed via AWS KMS (must be in us-east-1, ECC_NIST_P256)"
+    },
+    {
+      "id": "route53-multivalue-max",
+      "skill": "route53",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "With Route 53 multivalue answer routing, what is the maximum number of healthy records it will return in response to a single DNS query? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\b"
+      },
+      "notes": "plugins/networking/skills/route53/SKILL.md - Multivalue Answer: Up to 8 healthy records per query"
+    },
+    {
+      "id": "route53-cname-apex",
+      "skill": "route53",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Can you create a CNAME record at the zone apex, such as the bare domain example.com, in Route 53? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not allow)"
+      },
+      "notes": "plugins/networking/skills/route53/SKILL.md - Common Pitfalls: CNAME at zone apex - Route 53 does not allow CNAME at zone apex. Use Alias record instead"
+    },
+    {
+      "id": "routing-switching-vxlan-mtu",
+      "skill": "routing-switching",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In a data center spine-leaf fabric running VXLAN, how many bytes of overhead does VXLAN encapsulation add, and what MTU should you set on the fabric links so encapsulated frames are not fragmented or dropped? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50",
+          "9214"
+        ]
+      },
+      "notes": "plugins/networking/skills/routing-switching/SKILL.md - Common Pitfalls: VXLAN adds 50 bytes overhead; set fabric links to MTU 9214"
+    },
+    {
+      "id": "routing-switching-stackwise-max",
+      "skill": "routing-switching",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "For Cisco Catalyst 9200/9300 campus access switches using StackWise physical stacking, what is the maximum number of switches you can join into a single stack? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\b"
+      },
+      "notes": "plugins/networking/skills/routing-switching/SKILL.md - Redundancy Technologies Comparison: StackWise (IOS-XE Cat 9200/9300) max members 8"
+    },
+    {
+      "id": "routing-switching-eigrp-arista",
+      "skill": "routing-switching",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does Arista EOS support the EIGRP routing protocol the way Cisco IOS-XE and NX-OS do? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not (available|supported)|cisco-only|cisco proprietary)"
+      },
+      "notes": "plugins/networking/skills/routing-switching/SKILL.md - EIGRP: Cisco-only (IOS-XE and NX-OS). Not available on Arista EOS"
+    },
+    {
+      "id": "sd-wan-cost-savings",
+      "skill": "sd-wan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly what percentage cost savings does a broadband-plus-SD-WAN overlay typically deliver compared to keeping MPLS circuits? Answer concisely with a percentage range.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "40",
+          "60"
+        ]
+      },
+      "notes": "plugins/networking/skills/sd-wan/SKILL.md - When SD-WAN Makes Sense: broadband + SD-WAN overlay often 40-60% cheaper than MPLS"
+    },
+    {
+      "id": "sd-wan-eaar-version",
+      "skill": "sd-wan",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Cisco Catalyst SD-WAN (IOS-XE) release train that introduced Enhanced Application-Aware Routing (EAAR) for sub-second path switching? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.12"
+        ]
+      },
+      "notes": "plugins/networking/skills/sd-wan/SKILL.md - Cisco Catalyst SD-WAN Strengths: Enhanced AAR (EAAR) for sub-second path switching (17.12+)"
+    },
+    {
+      "id": "sd-wan-bigbang",
+      "skill": "sd-wan",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "When migrating a multi-site WAN from MPLS to SD-WAN, is it advisable to cut every site over simultaneously in a single big-bang migration? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|never|not advis|avoid|anti-pattern)"
+      },
+      "notes": "plugins/networking/skills/sd-wan/SKILL.md - Migration Anti-Patterns: Big-bang cutover -- Never migrate all sites simultaneously"
+    },
+    {
+      "id": "solarwinds-npm-api-port",
+      "skill": "solarwinds-npm",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the SolarWinds Orion Information Service REST API listen on by default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17778"
+        ]
+      },
+      "notes": "plugins/networking/skills/solarwinds-npm/SKILL.md - Orion SDK / REST API: Base URL https://orion-server:17778/SolarWinds/InformationService/v3/Json/"
+    },
+    {
+      "id": "solarwinds-npm-2025-thinap",
+      "skill": "solarwinds-npm",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which SolarWinds NPM release added the ability to discover and manage individual thin access points as their own SNMP nodes, instead of only at the wireless controller level? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025.2"
+        ]
+      },
+      "notes": "plugins/networking/skills/solarwinds-npm/SKILL.md - NPM 2025.2 Features: Thin AP Management (previously WLC-level only)"
+    },
+    {
+      "id": "solarwinds-npm-sql-backend",
+      "skill": "solarwinds-npm",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does SolarWinds Orion (NPM) require a Microsoft SQL Server backend to store its configuration and polling data? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|requires|sql server)"
+      },
+      "notes": "plugins/networking/skills/solarwinds-npm/SKILL.md - Orion Platform Architecture: SQL Server Backend, Microsoft SQL Server stores all configuration, polling data, events"
+    },
+    {
+      "id": "sonic-dash-acronym",
+      "skill": "sonic",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In the SONiC ecosystem, what does the acronym DASH stand for, and which major cloud provider implements it for SmartNIC offload? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Disaggregated",
+          "Azure"
+        ]
+      },
+      "notes": "plugins/networking/skills/sonic/SKILL.md - SONiC-DASH: Disaggregated API for SONiC Hosts; Implemented by Microsoft Azure (SmartNICs for Azure SDN)"
+    },
+    {
+      "id": "sonic-config-reload",
+      "skill": "sonic",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "If you hand-edit /etc/sonic/config_db.json directly on a SONiC switch, does that change take effect immediately, or must you run another command to apply it? Name the command in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(config reload|config load)"
+      },
+      "notes": "plugins/networking/skills/sonic/SKILL.md - Common Pitfalls: Editing config_db.json without config reload -- changes not applied until config reload or config load"
+    },
+    {
+      "id": "sonic-sai-acronym",
+      "skill": "sonic",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In SONiC, what does the acronym SAI stand for? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Abstraction",
+          "Interface"
+        ]
+      },
+      "notes": "plugins/networking/skills/sonic/SKILL.md - SAI (Switch Abstraction Interface): Hardware abstraction, vendor libsai implementations"
+    },
+    {
+      "id": "sophos-firewall-v22-kernel",
+      "skill": "sophos-firewall",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What Linux kernel version baseline does the Sophos Firewall v22 hardened kernel use? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.6"
+        ]
+      },
+      "notes": "plugins/networking/skills/sophos-firewall/SKILL.md - v22 Specific Features: Hardened Kernel, Linux kernel 6.6+ (LTS)"
+    },
+    {
+      "id": "sophos-firewall-api-port",
+      "skill": "sophos-firewall",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the Sophos Firewall local WebAdmin API (APIController) use? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4444"
+        ]
+      },
+      "notes": "plugins/networking/skills/sophos-firewall/SKILL.md - Local API: Base URL https://firewall-ip:4444/webconsole/APIController"
+    },
+    {
+      "id": "sophos-firewall-heartbeat-red",
+      "skill": "sophos-firewall",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Sophos Synchronized Security, what single-word color does the Security Heartbeat use to signal an active threat on an endpoint, triggering automatic network isolation? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bred\\b"
+      },
+      "notes": "plugins/networking/skills/sophos-firewall/SKILL.md - Security Heartbeat: Red (active threat) -- isolate endpoint"
+    },
+    {
+      "id": "terraform-network-panos-provider",
+      "skill": "terraform-network",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the exact Terraform provider identifier (organization slash name) used to manage Palo Alto Networks PAN-OS firewalls? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "paloaltonetworks",
+          "panos"
+        ]
+      },
+      "notes": "plugins/networking/skills/terraform-network/SKILL.md - Provider Reference: paloaltonetworks/panos (Palo Alto PAN-OS)"
+    },
+    {
+      "id": "terraform-network-bigip-provider",
+      "skill": "terraform-network",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the exact Terraform provider identifier (organization slash name) used to manage F5 BIG-IP load balancer resources? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "F5Networks",
+          "bigip"
+        ]
+      },
+      "notes": "plugins/networking/skills/terraform-network/SKILL.md - Provider Reference: F5Networks/bigip (F5 BIG-IP)"
+    },
+    {
+      "id": "terraform-network-state-locking",
+      "skill": "terraform-network",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "For a Terraform S3 remote state backend managing network infrastructure, what AWS service is commonly paired with it to provide state locking so two engineers cannot run terraform apply at the same time? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DynamoDB"
+        ]
+      },
+      "notes": "plugins/networking/skills/terraform-network/SKILL.md - State Management: State locking, DynamoDB table prevents concurrent applies"
+    },
+    {
+      "id": "thousandeyes-vantage-cities",
+      "skill": "thousandeyes",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Across roughly how many cities worldwide does Cisco ThousandEyes deploy its Cloud Agent vantage points? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b271\\b"
+      },
+      "notes": "plugins/networking/skills/thousandeyes/SKILL.md - Cloud Agents: 1,057+ globally distributed vantage points across 271 cities"
+    },
+    {
+      "id": "thousandeyes-api-version",
+      "skill": "thousandeyes",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the base URL, including its version number, for the Cisco ThousandEyes REST API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "api.thousandeyes.com",
+          "v7"
+        ]
+      },
+      "notes": "plugins/networking/skills/thousandeyes/SKILL.md - REST API Base URL: https://api.thousandeyes.com/v7/"
+    },
+    {
+      "id": "thousandeyes-bgp-agent",
+      "skill": "thousandeyes",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "To run BGP route monitoring tests in ThousandEyes, do you need Enterprise Agents, or only Cloud Agents? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bcloud\\b"
+      },
+      "notes": "plugins/networking/skills/thousandeyes/SKILL.md - Test Types table: BGP test type available on Cloud (BGP monitors) only"
+    },
+    {
+      "id": "unbound-doh-version",
+      "skill": "unbound",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Unbound version required to run as an incoming DNS-over-HTTPS (DoH) server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.17"
+        ]
+      },
+      "notes": "plugins/networking/skills/unbound/SKILL.md - DNS over TLS (DoT) upstream forwarding and incoming DoH server (1.17+)"
+    },
+    {
+      "id": "unbound-pihole-port",
+      "skill": "unbound",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "When running Unbound alongside Pi-hole on the same box, what non-standard port should Unbound listen on so it does not conflict with Pi-hole's use of port 53? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5335"
+        ]
+      },
+      "notes": "plugins/networking/skills/unbound/SKILL.md - Pi-hole + Unbound Stack: port 5335 (non-standard port for Pi-hole)"
+    },
+    {
+      "id": "unbound-rrset-cache-ratio",
+      "skill": "unbound",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "In Unbound performance tuning, roughly how many times larger than msg-cache-size should you set rrset-cache-size? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(2x|two\\s*times|twice|double)"
+      },
+      "notes": "plugins/networking/skills/unbound/SKILL.md - Common Pitfalls: rrset-cache-size should be approximately 2x message cache"
+    },
+    {
+      "id": "vmware-nsx-gwfw-rule-limit",
+      "skill": "vmware-nsx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In NSX 4.2's vDefend Gateway Firewall, how many rules per section can you configure before hitting the alarm notification threshold? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2,?500"
+      },
+      "notes": "plugins/networking/skills/vmware-nsx/references/versions/4.2.md - vDefend Gateway Firewall: up to 2,500 rules per section with alarm notification"
+    },
+    {
+      "id": "vmware-nsx-vsphere-min",
+      "skill": "vmware-nsx",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the minimum vSphere version required to run NSX 4.2.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.0",
+          "U3"
+        ]
+      },
+      "notes": "plugins/networking/skills/vmware-nsx/references/versions/4.2.md - NSX 4.2 with vSphere Compatibility table: NSX 4.2.0 minimum vSphere 7.0 U3"
+    },
+    {
+      "id": "vmware-nsx-manager-cluster",
+      "skill": "vmware-nsx",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "For a production VMware NSX deployment, how many NSX Manager nodes should the cluster have? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bthree\\b|\\b3\\b)"
+      },
+      "notes": "plugins/networking/skills/vmware-nsx/SKILL.md - NSX Manager Cluster: Minimum 1 node (lab only); Production 3-node cluster"
+    },
+    {
+      "id": "vpn-cnsa2-deadline",
+      "skill": "vpn",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "By what year does CNSA 2.0 guidance require full transition to post-quantum algorithms like ML-KEM-1024 for VPN key exchange? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2033",
+          "ML-KEM"
+        ]
+      },
+      "notes": "plugins/networking/skills/vpn/SKILL.md - Post-Quantum Transition (CNSA 2.0, by 2033): Key Exchange ML-KEM-1024 (FIPS 203)"
+    },
+    {
+      "id": "vpn-wireguard-loc",
+      "skill": "vpn",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Roughly how many lines of kernel code make up the WireGuard implementation, according to the simplicity comparison used when evaluating VPN technologies? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4,?000"
+      },
+      "notes": "plugins/networking/skills/vpn/SKILL.md - WireGuard Strengths: Simplest configuration of any VPN technology (~4,000 lines of kernel code)"
+    },
+    {
+      "id": "vpn-weak-dh-groups",
+      "skill": "vpn",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Should you use Diffie-Hellman Groups 1, 2, or 5 for a new IPsec/IKE VPN configuration today? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|avoid|weak|broken|should not)"
+      },
+      "notes": "plugins/networking/skills/vpn/SKILL.md - Avoid: DH Groups 1, 2, 5, 22, 23, 24 (all weak/broken)"
+    },
+    {
+      "id": "windows-dns-scavenge-days",
+      "skill": "windows-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "With default Windows DNS Server aging and scavenging settings, how many total days pass before a stale dynamically-registered record becomes eligible for scavenging? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b14\\b"
+      },
+      "notes": "plugins/networking/skills/windows-dns/SKILL.md - Aging and Scavenging: total record lifetime = no-refresh (7 days) + refresh (7 days) = 14 days"
+    },
+    {
+      "id": "windows-dns-doh-kb",
+      "skill": "windows-dns",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which Microsoft KB update introduced public-preview server-side DNS-over-HTTPS support for the Windows Server 2025 DNS Server role? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "KB5075899"
+        ]
+      },
+      "notes": "plugins/networking/skills/windows-dns/references/versions/2025.md - Server-side DoH added via KB5075899 (February 10, 2026)"
+    },
+    {
+      "id": "windows-dns-policies-gui",
+      "skill": "windows-dns",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Can Windows DNS Policies, introduced in Server 2016, be configured through the graphical DNS Manager console, or only via PowerShell? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(powershell.{0,30}only|only.{0,20}powershell|no gui|not.{0,20}gui)"
+      },
+      "notes": "plugins/networking/skills/windows-dns/SKILL.md - DNS Policies (Server 2016+): PowerShell only -- no GUI"
+    },
+    {
+      "id": "wireguard-key-rotation",
+      "skill": "wireguard",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "How often does WireGuard automatically rotate session keys to provide forward secrecy? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b180\\b"
+      },
+      "notes": "plugins/networking/skills/wireguard/SKILL.md - Fixed Cryptography: Session key rotation every 180 seconds automatically (forward secrecy)"
+    },
+    {
+      "id": "wireguard-boringtun",
+      "skill": "wireguard",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "Which company created BoringTun, a Rust-based userspace implementation of WireGuard? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Cloudflare"
+        ]
+      },
+      "notes": "plugins/networking/skills/wireguard/references/architecture.md - Implementations table: BoringTun, Cross-platform (Rust), Cloudflare userspace"
+    },
+    {
+      "id": "wireguard-mtu",
+      "skill": "wireguard",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "What MTU value is commonly recommended for a WireGuard interface running over a standard 1500-byte Ethernet path? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1420"
+        ]
+      },
+      "notes": "plugins/networking/skills/wireguard/SKILL.md - MTU Calculation: Standard Ethernet 1500 - 60 = 1420 (recommended default)"
+    },
+    {
+      "id": "wireless-wifi7-specs",
+      "skill": "wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "What is the maximum PHY data rate for Wi-Fi 7 (802.11be), and what is the widest channel width it supports? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "46",
+          "320"
+        ]
+      },
+      "notes": "plugins/networking/skills/wireless/SKILL.md - Wi-Fi Standards Overview: 802.11be / Wi-Fi 7, Max PHY Rate 46 Gbps, 320 MHz channels"
+    },
+    {
+      "id": "wireless-rssi-targets",
+      "skill": "wireless",
+      "plugin": "networking",
+      "knowledge": "recent",
+      "prompt": "In enterprise Wi-Fi site surveys, what target RSSI values in dBm are typically used for voice and video coverage versus general data coverage? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "67",
+          "72"
+        ]
+      },
+      "notes": "plugins/networking/skills/wireless/SKILL.md - Survey Best Practices: target RSSI -67 dBm for voice/video, -72 dBm for data"
+    },
+    {
+      "id": "wireless-6ghz-wpa3",
+      "skill": "wireless",
+      "plugin": "networking",
+      "knowledge": "stable",
+      "prompt": "Does the 6 GHz Wi-Fi band permit legacy WPA2 security, or does it require WPA3? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bwpa3\\b"
+      },
+      "notes": "plugins/networking/skills/wireless/SKILL.md - Security escalation: 6 GHz band requires WPA3 -- no legacy WPA2 permitted"
+    }
+  ]
+}

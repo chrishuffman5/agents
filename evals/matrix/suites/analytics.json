@@ -1,0 +1,330 @@
+{
+  "suite": "analytics",
+  "description": "Cross-harness matrix suite for the analytics plugin's 12 skills (duckdb, grafana, looker, metabase, overview, power-bi, qlik-sense, ssas, ssrs, superset, tableau, thoughtspot). Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md on 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "duckdb-superset-connection",
+      "skill": "duckdb",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "When Apache Superset connects to DuckDB as a data source, what Python package provides the native SQLAlchemy dialect for it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["duckdb-engine"] },
+      "notes": "plugins/analytics/skills/duckdb/SKILL.md - BI Tool Integration table: Superset connects via SQLAlchemy (duckdb://), native DuckDB dialect via the duckdb-engine Python package."
+    },
+    {
+      "id": "duckdb-warehouse-threshold",
+      "skill": "duckdb",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Below roughly what data volume does DuckDB on a single machine tend to outperform a cloud data warehouse while costing nothing? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)200\\s*GB" },
+      "notes": "plugins/analytics/skills/duckdb/SKILL.md - Why DuckDB for Analytics: small-to-medium data warehouse replacement for datasets under ~200 GB."
+    },
+    {
+      "id": "duckdb-powerbi-query-modes",
+      "skill": "duckdb",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "When Power BI connects to DuckDB through the ODBC driver, what two query modes are available? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["DirectQuery", "Import"] },
+      "notes": "plugins/analytics/skills/duckdb/SKILL.md - BI Tool Integration table: Power BI | ODBC | DuckDB ODBC driver; DirectQuery or Import mode."
+    },
+    {
+      "id": "grafana-tabs-version",
+      "skill": "grafana",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Which minor release of Grafana 12 first introduced dashboard tabs and conditional rendering, and in what year did it ship? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["12.0", "2025"] },
+      "notes": "plugins/analytics/skills/grafana/SKILL.md - Dashboard Architecture: Tabs (12.0+), Conditional rendering (12.0+); Grafana 12.x Key Features table: 12.0 (May 2025)."
+    },
+    {
+      "id": "grafana-mute-timing-inheritance",
+      "skill": "grafana",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Grafana alerting, does a mute timing set on a parent notification policy automatically apply to its child policies? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not inherited|do(es)? not)" },
+      "notes": "plugins/analytics/skills/grafana/SKILL.md - Anti-Patterns table: Mute timings are NOT inherited from parent notification policies; apply at each relevant policy level."
+    },
+    {
+      "id": "grafana-lgtm-benchmark",
+      "skill": "grafana",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "According to a GrafanaCON 2025 benchmark, roughly how many times faster was the LGTM stack's P99 query latency than the ELK stack? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(7\\s*x|seven\\s*times|7\\s*times)" },
+      "notes": "plugins/analytics/skills/grafana/SKILL.md - Performance Benchmarks (GrafanaCON 2025): LGTM stack query P99 85ms vs ELK stack 650ms (7x faster)."
+    },
+    {
+      "id": "looker-ai-hosting-requirement",
+      "skill": "looker",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "Can a customer-hosted, self-managed Looker deployment use the Gemini-powered Conversational Analytics and LookML Assistant features? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|cannot|can not|require.{0,40}hosted)" },
+      "notes": "plugins/analytics/skills/looker/SKILL.md - AI Features: AI features require Looker-hosted instances (Google Cloud Core). Customer-hosted deployments cannot use Gemini features."
+    },
+    {
+      "id": "looker-datagroup-trigger-precedence",
+      "skill": "looker",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "In a Looker datagroup, if both sql_trigger and interval_trigger are configured, which one takes precedence? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)interval" },
+      "notes": "plugins/analytics/skills/looker/SKILL.md - Datagroups and Caching: Cannot combine sql_trigger and interval_trigger (interval takes precedence)."
+    },
+    {
+      "id": "looker-studio-pro-license",
+      "skill": "looker",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Does every Looker license come bundled with a Looker Studio license tier, and if so which one? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)looker studio pro" },
+      "notes": "plugins/analytics/skills/looker/SKILL.md - Looker vs Looker Studio: Each Looker license includes one Looker Studio Pro license."
+    },
+    {
+      "id": "metabase-model-version-history",
+      "skill": "metabase",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Metabase, how many previous versions of a model does the platform retain for change tracking and reversion? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b15\\b" },
+      "notes": "plugins/analytics/skills/metabase/SKILL.md - Models and Semantic Layer: Version history retains 15 previous versions with change tracking and reversion."
+    },
+    {
+      "id": "metabase-sql-disabled-sandboxed",
+      "skill": "metabase",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Metabase, if even a single table in a database is blocked or sandboxed, what happens to native SQL access for the rest of that database? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(disabled|turn(ed)? off|no longer)" },
+      "notes": "plugins/analytics/skills/metabase/SKILL.md - Permissions Model critical rules: if any table is blocked/sandboxed, native SQL access is disabled for the entire database."
+    },
+    {
+      "id": "metabase-current-version",
+      "skill": "metabase",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "What is the current major version number of Metabase as of March 2026? Answer concisely with just the version number.",
+      "expected": { "type": "regex", "value": "(?i)\\bv?59\\b" },
+      "notes": "plugins/analytics/skills/metabase/SKILL.md - intro: The current version is Metabase v59 (March 2026), with v60 in beta."
+    },
+    {
+      "id": "overview-mixing-grains-mistake",
+      "skill": "overview",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In dimensional modeling, what is described as the number-one mistake a team can make when defining a fact table? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)mix(ing)?\\s+grains?" },
+      "notes": "plugins/analytics/skills/overview/SKILL.md - Dimensional Modeling: Mixing grains in a single fact table is the number-one dimensional modeling mistake."
+    },
+    {
+      "id": "overview-galaxy-schema",
+      "skill": "overview",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "What term describes a dimensional model with multiple fact tables that share conformed dimensions? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(galaxy schema|fact constellation)" },
+      "notes": "plugins/analytics/skills/overview/SKILL.md - Dimensional Modeling: Galaxy schema (fact constellation) -- multiple fact tables sharing conformed dimensions."
+    },
+    {
+      "id": "overview-adhoc-sql-tools",
+      "skill": "overview",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "For a data team doing ad-hoc SQL querying directly against warehouses, which three analytics tools are named as strong candidates? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["DuckDB", "Superset", "Metabase"] },
+      "notes": "plugins/analytics/skills/overview/SKILL.md - Decision Framework Step 1 table: Ad-hoc SQL | DuckDB, Superset, Metabase."
+    },
+    {
+      "id": "power-bi-direct-lake-ga",
+      "skill": "power-bi",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "When did the Direct Lake storage mode in Power BI reach general availability? Answer concisely with month and year.",
+      "expected": { "type": "contains_all", "value": ["March", "2026"] },
+      "notes": "plugins/analytics/skills/power-bi/SKILL.md - Storage Modes: Direct Lake (GA March 2026) reads Delta tables directly from OneLake."
+    },
+    {
+      "id": "power-bi-fsku-premium-features",
+      "skill": "power-bi",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Fabric F-SKU that includes full Power BI Premium capability such as paginated reports, XMLA endpoints, deployment pipelines, and unlimited viewers? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bF64\\b" },
+      "notes": "plugins/analytics/skills/power-bi/SKILL.md - Licensing: F2-F32 SKUs do NOT include Power BI Premium features; F64 is the minimum for full Power BI Premium capability."
+    },
+    {
+      "id": "power-bi-calculate-function",
+      "skill": "power-bi",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Power BI DAX, which single function is described as the most important because it modifies filter context before a calculation runs? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["CALCULATE"] },
+      "notes": "plugins/analytics/skills/power-bi/SKILL.md - DAX Fundamentals: CALCULATE -- The Core Function; it is the most important DAX function."
+    },
+    {
+      "id": "qlik-sense-cloud-update-cadence",
+      "skill": "qlik-sense",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Roughly how many days apart does Qlik Cloud ship its continuous platform updates? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\b5\\b|five)" },
+      "notes": "plugins/analytics/skills/qlik-sense/SKILL.md - Product Suite Overview, Qlik Cloud: Continuous updates (~every 5 days)."
+    },
+    {
+      "id": "qlik-sense-qvd-speed",
+      "skill": "qlik-sense",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "Roughly how much faster is reading from a QVD file compared to querying the source database directly in a Qlik Sense load script? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)10.{0,4}100" },
+      "notes": "plugins/analytics/skills/qlik-sense/SKILL.md - Anti-Patterns: skipping the QVD intermediate layer is slow; QVD reads are 10-100x faster than database queries."
+    },
+    {
+      "id": "qlik-sense-set-vs-if",
+      "skill": "qlik-sense",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Qlik Sense, is set analysis evaluated before or after aggregation, compared to an equivalent If() function used inside an aggregation? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)before" },
+      "notes": "plugins/analytics/skills/qlik-sense/SKILL.md - Set Analysis vs If(): set analysis is evaluated before aggregation, making it faster than equivalent If() conditions."
+    },
+    {
+      "id": "ssas-standard-ram-limit",
+      "skill": "ssas",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "On SQL Server Standard edition, what is the model RAM limit for an on-premises SSAS Tabular instance? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)16\\s*GB" },
+      "notes": "plugins/analytics/skills/ssas/SKILL.md - Platform Variants, On-Premises SSAS: Standard edition 16 GB model RAM limit; Enterprise unlimited."
+    },
+    {
+      "id": "ssas-vertipaq-segment-size",
+      "skill": "ssas",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In the SSAS VertiPaq engine, roughly how many rows make up each column segment used for parallel scanning? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)8\\s*million|\\b8m\\b" },
+      "notes": "plugins/analytics/skills/ssas/SKILL.md - VertiPaq (xVelocity) Engine: column partitions divided into ~8M-row segments for parallel scanning."
+    },
+    {
+      "id": "ssas-migration-effort",
+      "skill": "ssas",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "When migrating an SSAS Multidimensional model to Tabular, roughly what percentage of the original development time should be budgeted, since it requires a full redesign rather than a conversion? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)60.{0,3}80\\s*%?" },
+      "notes": "plugins/analytics/skills/ssas/SKILL.md - SSAS and Power BI Convergence: migration from Multidimensional to Tabular requires complete redesign, expect 60-80% of original development time."
+    },
+    {
+      "id": "ssrs-2022-patch-end",
+      "skill": "ssrs",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Through what month and year will SSRS 2022, the final standalone SSRS release, continue receiving security patches? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2033", "January"] },
+      "notes": "plugins/analytics/skills/ssrs/SKILL.md - Future Direction: SSRS 2022 receives security patches through January 2033."
+    },
+    {
+      "id": "ssrs-pbirs-update-cadence",
+      "skill": "ssrs",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Roughly how often does Power BI Report Server ship updates, compared to SSRS which is tied to SQL Server release cycles? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(4\\s*months|four\\s*months)" },
+      "notes": "plugins/analytics/skills/ssrs/SKILL.md - SSRS vs Power BI Report Server table: update cadence for PBIRS is roughly every 4 months."
+    },
+    {
+      "id": "ssrs-tempdb-restart",
+      "skill": "ssrs",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "Does the ReportServerTempDB catalog database survive a server restart, unlike a regular SQL Server tempdb? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\byes\\b|survive|does survive)" },
+      "notes": "plugins/analytics/skills/ssrs/SKILL.md - Dual Database Architecture: ReportServerTempDB survives restarts (unlike SQL Server tempdb)."
+    },
+    {
+      "id": "superset-6-release-date",
+      "skill": "superset",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "On what exact date was Apache Superset 6.0.0 released? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["December", "2025"] },
+      "notes": "plugins/analytics/skills/superset/SKILL.md - Platform Overview, Current Version: Apache Superset 6.0.0 (December 4, 2025)."
+    },
+    {
+      "id": "superset-celery-k8s-pool",
+      "skill": "superset",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "On Kubernetes, what Celery worker pool should Apache Superset use instead of the default prefork pool to avoid OOMKilled restarts? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(solo|gevent)" },
+      "notes": "plugins/analytics/skills/superset/SKILL.md - Anti-Patterns: Celery prefork pool on Kubernetes causes OOMKilled restarts; use --pool solo or --pool gevent."
+    },
+    {
+      "id": "superset-gunicorn-worker-recycle",
+      "skill": "superset",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "What Gunicorn setting should you configure so Apache Superset periodically respawns workers and avoids memory fragmentation growth? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["max-requests"] },
+      "notes": "plugins/analytics/skills/superset/SKILL.md - Anti-Patterns: set --max-requests=1000 --max-requests-jitter=50 to periodically respawn Gunicorn workers."
+    },
+    {
+      "id": "tableau-semantics-ga",
+      "skill": "tableau",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Since when has Tableau Semantics, the platform's semantic layer for consistent metric definitions, been generally available? Answer concisely with month and year.",
+      "expected": { "type": "contains_all", "value": ["February", "2025"] },
+      "notes": "plugins/analytics/skills/tableau/SKILL.md - AI and Insights: Tableau Semantics GA since February 2025."
+    },
+    {
+      "id": "tableau-uat-version",
+      "skill": "tableau",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "Starting in which Tableau version were Unified Access Tokens introduced for embedding authentication? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2025.3"] },
+      "notes": "plugins/analytics/skills/tableau/SKILL.md - Embedding, Authentication Methods table: Unified Access Tokens (UATs) via Cloud Manager, version 2025.3+."
+    },
+    {
+      "id": "tableau-fixed-lod-filter-order",
+      "skill": "tableau",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "In Tableau, does a FIXED level-of-detail expression respect an ordinary dimension filter in the view unless that filter is promoted to a context filter? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|ignore|does not respect)" },
+      "notes": "plugins/analytics/skills/tableau/SKILL.md - Filter Interaction with LOD: FIXED ignores dimension filters unless a context filter is promoted."
+    },
+    {
+      "id": "thoughtspot-spotter-usage-growth",
+      "skill": "thoughtspot",
+      "plugin": "analytics",
+      "knowledge": "recent",
+      "prompt": "By what percentage did ThoughtSpot platform usage grow year-over-year by the end of fiscal 2025? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)133\\s*%" },
+      "notes": "plugins/analytics/skills/thoughtspot/SKILL.md - Platform Overview: platform usage surging 133% year-over-year (end of fiscal 2025)."
+    },
+    {
+      "id": "thoughtspot-spotcache-engine",
+      "skill": "thoughtspot",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "What open-source database engine is ThoughtSpot's SpotCache caching layer built on? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["DuckDB"] },
+      "notes": "plugins/analytics/skills/thoughtspot/SKILL.md - SpotCache: caching layer built on DuckDB for high-performance columnar storage."
+    },
+    {
+      "id": "thoughtspot-spotcache-security",
+      "skill": "thoughtspot",
+      "plugin": "analytics",
+      "knowledge": "stable",
+      "prompt": "Does ThoughtSpot SpotCache automatically inherit row-level and column-level security from the source data warehouse? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not inherit|manually)" },
+      "notes": "plugins/analytics/skills/thoughtspot/SKILL.md - SpotCache: security must be applied manually (not inherited from source warehouse)."
+    }
+  ]
+}

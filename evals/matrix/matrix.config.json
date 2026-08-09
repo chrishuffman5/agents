@@ -11,7 +11,13 @@
     { "file": "suites/messaging.json", "profile": "campaign" },
     { "file": "suites/virtualization.json", "profile": "campaign" },
     { "file": "suites/storage.json", "profile": "campaign" },
-    { "file": "suites/monitoring.json", "profile": "campaign" }
+    { "file": "suites/monitoring.json", "profile": "campaign" },
+    { "file": "suites/etl.json", "profile": "campaign" },
+    { "file": "suites/domain-expert-core.json", "profile": "campaign" },
+    { "file": "suites/mail-collab.json", "profile": "campaign" },
+    { "file": "suites/api-realtime.json", "profile": "campaign" },
+    { "file": "suites/ai.json", "profile": "campaign" },
+    { "file": "suites/analytics.json", "profile": "campaign" }
   ],
   "profiles": {
     "_comment": "campaign trims cells for marketplace-wide scale: efforts E1+E3 (intersects to E1 on local lanes), flagship+small cloud tiers, one local weights-set. Pilot suites keep the full matrix via profile 'full'.",

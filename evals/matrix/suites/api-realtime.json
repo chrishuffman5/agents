@@ -1,0 +1,249 @@
+{
+  "suite": "api-realtime",
+  "description": "Cross-harness matrix suite for the api-realtime plugin's nine skills (graphql, grpc, odata, overview, rest, signalr, socketio, sse, websocket). Prompts are deliberately neutral (no mention of a skills library or docs) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md as of 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, versioned, or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "graphql-mercurius-throughput",
+      "skill": "graphql",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "For a JIT-compiled Mercurius GraphQL server running on Node.js with Fastify, what throughput in requests per second does it reach as the highest-throughput Node.js GraphQL server option? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)70,?000" },
+      "notes": "plugins/api-realtime/skills/graphql/SKILL.md - Key Server Implementations table: Mercurius (Node.js/Fastify) 70,000+ req/s (JIT), highest throughput Node.js server"
+    },
+    {
+      "id": "graphql-deprecation-window",
+      "skill": "graphql",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Before removing a field from a GraphQL schema that has been marked deprecated, how many days of migration period should you generally allow? Answer concisely with the range.",
+      "expected": { "type": "regex", "value": "(?i)90.{0,5}180" },
+      "notes": "plugins/api-realtime/skills/graphql/SKILL.md - anti-pattern 6: use @deprecated(reason) with a 90-180 day migration period before removal"
+    },
+    {
+      "id": "graphql-dataloader-scope",
+      "skill": "graphql",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Should a single DataLoader instance in a GraphQL server be shared across multiple incoming requests, or created fresh for each request? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(per.request|each request|new (instance|dataloader)|not.{0,15}shar)" },
+      "notes": "plugins/api-realtime/skills/graphql/SKILL.md - anti-pattern 2: DataLoaders must be per-request; sharing causes stale data and security leaks"
+    },
+    {
+      "id": "grpc-status-code-count",
+      "skill": "grpc",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "How many distinct status codes make up the gRPC error model, from OK through UNAUTHENTICATED? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["17"] },
+      "notes": "plugins/api-realtime/skills/grpc/SKILL.md - Status Codes: 17 codes: OK(0) ... UNAUTHENTICATED(16)"
+    },
+    {
+      "id": "grpc-k8s-probe-version",
+      "skill": "grpc",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Starting with which Kubernetes version can a workload use a native built-in gRPC probe for liveness and readiness checks, instead of a sidecar or exec probe? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)1\\.24" },
+      "notes": "plugins/api-realtime/skills/grpc/SKILL.md - anti-pattern 7: Kubernetes 1.24+ supports native gRPC probes"
+    },
+    {
+      "id": "grpc-max-message-size",
+      "skill": "grpc",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "What is the default maximum size for a single gRPC message, and what pattern should be used instead when transferring larger data? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)4\\s?mb" },
+      "notes": "plugins/api-realtime/skills/grpc/SKILL.md - anti-pattern 5: default max message size is 4MB; use streaming for large data transfers"
+    },
+    {
+      "id": "odata-current-draft-version",
+      "skill": "odata",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "As of the most recent committee draft, what version number has OData reached, and in what year was that draft published? Answer concisely with both details.",
+      "expected": { "type": "contains_all", "value": ["4.02", "2024"] },
+      "notes": "plugins/api-realtime/skills/odata/SKILL.md - Current versions: OData 4.0 (2014), 4.01 (2020), 4.02 (committee draft 2024)"
+    },
+    {
+      "id": "odata-function-vs-action",
+      "skill": "odata",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "In OData, when an operation is free of side effects and simply returns data, should it be modeled as a Function or an Action? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bfunctions?\\b" },
+      "notes": "plugins/api-realtime/skills/odata/SKILL.md - anti-pattern 6: side-effect-free operations should be Functions (GET), not Actions (POST)"
+    },
+    {
+      "id": "odata-standards-body",
+      "skill": "odata",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Which international standards organization maintains and governs the OData specification? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["OASIS"] },
+      "notes": "plugins/api-realtime/skills/odata/SKILL.md - OData (Open Data Protocol), the OASIS standard for RESTful data services"
+    },
+    {
+      "id": "overview-sse-autoreconnect",
+      "skill": "overview",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Comparing WebSocket and Server-Sent Events, which of the two provides automatic reconnection built in, without the application writing its own reconnect logic? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bsse\\b|server.sent" },
+      "notes": "plugins/api-realtime/skills/overview/SKILL.md - Technology Comparison table: Auto-reconnect row, SSE Yes (built-in) vs WebSocket No (manual)"
+    },
+    {
+      "id": "overview-ws-latency-range",
+      "skill": "overview",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "For sub-10ms message delivery requirements handled over WebSocket after the handshake completes, what typical latency range in milliseconds is cited for it? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)0\\.5.{0,5}10\\s*ms" },
+      "notes": "plugins/api-realtime/skills/overview/SKILL.md - Step 3 latency table: WebSocket (post-handshake) typical latency 0.5-10ms"
+    },
+    {
+      "id": "overview-microservice-graphql-overkill",
+      "skill": "overview",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "For internal microservice-to-service communication, which protocol is called out as overkill compared to gRPC or REST: GraphQL or OData? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)graphql" },
+      "notes": "plugins/api-realtime/skills/overview/SKILL.md - Step 2 client table: internal microservice, avoid GraphQL (overkill for service-to-service)"
+    },
+    {
+      "id": "rest-openapi-jsonschema-version",
+      "skill": "rest",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Which specific JSON Schema draft version does OpenAPI 3.1 now fully align with? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2020-12"] },
+      "notes": "plugins/api-realtime/skills/rest/SKILL.md - OpenAPI 3.1 key features: Full JSON Schema 2020-12 alignment"
+    },
+    {
+      "id": "rest-problem-details-rfc",
+      "skill": "rest",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Which RFC number defines the Problem Details format commonly used for structured REST API error responses? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["9457"] },
+      "notes": "plugins/api-realtime/skills/rest/SKILL.md - core knowledge list: Error handling (RFC 9457 Problem Details)"
+    },
+    {
+      "id": "rest-cors-wildcard-credentials",
+      "skill": "rest",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Is it valid to combine a wildcard value for Access-Control-Allow-Origin with Access-Control-Allow-Credentials set to true on the same response? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|cannot|incompatib|not compatible|not valid)" },
+      "notes": "plugins/api-realtime/skills/rest/SKILL.md - anti-pattern 8: wildcard CORS with credentials is incompatible with Allow-Credentials true"
+    },
+    {
+      "id": "signalr-native-aot-hub",
+      "skill": "signalr",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Is the strongly typed Hub of T feature in ASP.NET Core SignalR compatible with Native AOT compilation on .NET 9 and later? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not compatible|incompatible)" },
+      "notes": "plugins/api-realtime/skills/signalr/SKILL.md - anti-pattern 8: strongly typed hubs (Hub<T>) not compatible with Native AOT (.NET 9+)"
+    },
+    {
+      "id": "signalr-messagepack-savings",
+      "skill": "signalr",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Roughly how much smaller are MessagePack-encoded SignalR payloads compared to the default JSON hub protocol? Answer concisely with the percentage range.",
+      "expected": { "type": "regex", "value": "(?i)30.{0,6}40\\s*%?" },
+      "notes": "plugins/api-realtime/skills/signalr/SKILL.md - Hub Protocols: MessagePack (~30-40% smaller payloads, faster parsing)"
+    },
+    {
+      "id": "signalr-transport-priority",
+      "skill": "signalr",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "In ASP.NET Core SignalR transport negotiation, what is the fallback order of transports from most to least preferred? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["WebSocket", "Polling"] },
+      "notes": "plugins/api-realtime/skills/signalr/SKILL.md - Transport Negotiation: Priority WebSocket (preferred) > SSE > Long Polling"
+    },
+    {
+      "id": "socketio-latest-version",
+      "skill": "socketio",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "As of current guidance, what is the latest stable release line of Socket.IO? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.8"] },
+      "notes": "plugins/api-realtime/skills/socketio/SKILL.md - Socket.IO 4.x (latest stable: 4.8.x)"
+    },
+    {
+      "id": "socketio-heartbeat-timing",
+      "skill": "socketio",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "In Socket.IO's Engine.IO transport layer, how often does the server send a ping heartbeat, and how many seconds does the client have to answer with a pong? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["25", "20"] },
+      "notes": "plugins/api-realtime/skills/socketio/SKILL.md - Engine.IO Transport Layer: server sends ping every 25s; client responds with pong within 20s"
+    },
+    {
+      "id": "socketio-state-recovery-version",
+      "skill": "socketio",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Starting with which Socket.IO version was connection state recovery, which restores socket ID, rooms, and missed packets after a brief disconnect, introduced? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.6"] },
+      "notes": "plugins/api-realtime/skills/socketio/SKILL.md - Connection State Recovery (v4.6+)"
+    },
+    {
+      "id": "sse-204-close",
+      "skill": "sse",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "What HTTP status code can a Server-Sent Events endpoint return to tell the browser to permanently stop trying to reconnect the stream? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["204"] },
+      "notes": "plugins/api-realtime/skills/sse/SKILL.md - Key Features: server sends 204 No Content to permanently close stream"
+    },
+    {
+      "id": "sse-nginx-buffering-header",
+      "skill": "sse",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "For a Server-Sent Events endpoint running behind Nginx, which response header must be set to stop Nginx from buffering the stream? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["X-Accel-Buffering"] },
+      "notes": "plugins/api-realtime/skills/sse/SKILL.md - anti-pattern 4: no X-Accel-Buffering: no behind Nginx prevents streaming"
+    },
+    {
+      "id": "sse-keepalive-interval",
+      "skill": "sse",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "To stop proxies from killing an idle Server-Sent Events connection after 60 to 120 seconds of inactivity, roughly how often should the server send a keepalive comment line? Answer concisely with the recommended interval.",
+      "expected": { "type": "regex", "value": "(?i)15.{0,6}30" },
+      "notes": "plugins/api-realtime/skills/sse/SKILL.md - anti-pattern 2: send a keepalive comment every 15-30 seconds"
+    },
+    {
+      "id": "websocket-1006-close-code",
+      "skill": "websocket",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "In the WebSocket protocol, which close code indicates an abnormal closure where no close frame was ever received, such as the TCP connection just dropping? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1006"] },
+      "notes": "plugins/api-realtime/skills/websocket/SKILL.md - Close Codes table: 1006 Abnormal closure (no close frame -- TCP dropped)"
+    },
+    {
+      "id": "websocket-client-frame-masking",
+      "skill": "websocket",
+      "plugin": "api-realtime",
+      "knowledge": "stable",
+      "prompt": "Under RFC 6455, are WebSocket frames sent from the client to the server required to be masked? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\byes\\b|always|must|require)" },
+      "notes": "plugins/api-realtime/skills/websocket/SKILL.md - Frame Format: client-to-server frames are ALWAYS masked; server-to-client NEVER masked"
+    },
+    {
+      "id": "websocket-permessage-deflate-rfc",
+      "skill": "websocket",
+      "plugin": "api-realtime",
+      "knowledge": "recent",
+      "prompt": "Which RFC number defines the permessage-deflate compression extension used by WebSocket? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["7692"] },
+      "notes": "plugins/api-realtime/skills/websocket/SKILL.md - core knowledge list: Extensions: permessage-deflate (RFC 7692)"
+    }
+  ]
+}
