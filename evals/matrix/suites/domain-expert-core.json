@@ -8,7 +8,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In the domain-expert Claude Code marketplace, how many plugins total are there when you count every IT domain plugin plus domain-expert-core? Answer concisely with the number.",
-      "expected": { "type": "contains_all", "value": ["19"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "19"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - Look for the @domain-expert suffix to see which of the 19 plugins (18 domains + domain-expert-core) the user has"
     },
     {
@@ -17,7 +22,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "How many cross-domain task agents does the domain-expert-core plugin bundle? Answer concisely with the number.",
-      "expected": { "type": "regex", "value": "(?i)\\b(six|6)\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(six|6)\\b"
+      },
       "notes": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - domain-expert-core, which holds the six cross-domain task agents (architecture-consultant, troubleshooting-agent, migration-expert, iac-consultant, data-expert, security-expert) and this skill"
     },
     {
@@ -26,7 +34,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "After a Claude Code plugin update command succeeds, does the change apply to the session that is currently running, or only starting from the next session? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)next.{0,15}session" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)next.{0,15}session"
+      },
       "notes": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - Plugin updates take effect on the next Claude Code session. The currently running session keeps the version it started with."
     },
     {
@@ -35,7 +46,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In the domain-expert marketplace's security-first tech stack scoring model, what percentage weight is assigned to security architecture and secure defaults when comparing candidate technologies that already passed the security gate? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["30"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md scoring table - Security architecture and secure defaults | 30%"
     },
     {
@@ -44,7 +60,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "Between Terraform and OpenTofu, which one does the domain-expert marketplace's security-first tech stack guidance recommend adopting as the open-source infrastructure-as-code default? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["OpenTofu"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OpenTofu"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md Replacements table - Terraform: Do not adopt as an open-source default, BSL-licensed; use OpenTofu"
     },
     {
@@ -53,7 +74,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "According to the domain-expert marketplace's security-first tech stack defaults, which web application framework is the starting default for a conventional business application, before FastAPI or Next.js is earned by a specific requirement? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["Django"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Django"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md Defaults at a Glance table - Application | Supported Django LTS + server-rendered templates/htmx"
     },
     {
@@ -62,7 +88,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "How many mandatory checkpoints requiring a direct user answer does the plugin-builder pipeline's interview-first contract call for? Answer concisely with the number.",
-      "expected": { "type": "regex", "value": "(?i)\\b(three|3)\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(three|3)\\b"
+      },
       "notes": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md - Three mandatory checkpoints, each requiring a user answer: (0) the intent interview, (2) architecture sign-off before any file moves, (3) explicit confirmation before destructive migration steps"
     },
     {
@@ -71,7 +100,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "When the plugin-builder pipeline's intent interview uses AskUserQuestion to gather answers, what is the maximum number of questions it should batch into a single call? Answer concisely with the number.",
-      "expected": { "type": "contains_all", "value": ["4"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md - Batch questions with AskUserQuestion, up to 4 per call, concrete options plus the built-in free-text escape"
     },
     {
@@ -80,7 +114,12 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In plugin-builder's component placement guide, which Claude Code component type should you choose for behavior that must happen every time, deterministically, on a lifecycle event? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["Hook"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Hook"
+        ]
+      },
       "notes": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md component table - Behavior that must happen every time, deterministically, on a lifecycle event | Hook (hooks/hooks.json)"
     },
     {
@@ -89,7 +128,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In the skill-builder pipeline's curation standards, at how many lines does a skill body's length become a hard fail rather than merely above target? Answer concisely with the number.",
-      "expected": { "type": "regex", "value": "\\b1,?000\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1,?000\\b"
+      },
       "notes": "plugins/domain-expert-core/skills/skill-builder/SKILL.md - Body. 200-500 lines is the target; 1,000 is a hard fail."
     },
     {
@@ -98,7 +140,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In the skill-builder pipeline, which model tier does the single curator agent that writes the finished skill run on? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)\\bopus\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bopus\\b"
+      },
       "notes": "plugins/domain-expert-core/skills/skill-builder/SKILL.md - the curator runs model: opus (the strongest reasoning model the harness offers)"
     },
     {
@@ -107,7 +152,10 @@
       "plugin": "domain-expert-core",
       "knowledge": "stable",
       "prompt": "In skill-builder's frontmatter guidance, what character count is treated as the absolute ceiling for a skill's description field, even when overlap disambiguation genuinely demands extra length? Answer concisely with the number.",
-      "expected": { "type": "regex", "value": "\\b1,?500\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1,?500\\b"
+      },
       "notes": "plugins/domain-expert-core/skills/skill-builder/SKILL.md - repo median is ~530 characters, p90 ~890. Stay under ~900 unless overlap disambiguation genuinely demands more; treat 1,500 as the ceiling."
     }
   ]

@@ -1,7 +1,7 @@
 {
   "skill": "azure-dns",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "1,?000"
+        "value": "(?i)1,?000"
       },
       "source": "plugins/networking/skills/azure-dns/SKILL.md - Up to 1,000 forwarding rules per ruleset, ruleset linkable to multiple VNets"
     },

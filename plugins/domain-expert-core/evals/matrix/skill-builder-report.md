@@ -1,6 +1,6 @@
 # skill-builder — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `domain-expert-core` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `domain-expert-core` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,9 +8,9 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| skill-builder-line-hard-fail | stable | In the skill-builder pipeline's curation standards, at how many lines does a skill body's length become a hard fail rather than merely above target? Answer concisely with the number. | regex: `\b1,?000\b` |
+| skill-builder-line-hard-fail | stable | In the skill-builder pipeline's curation standards, at how many lines does a skill body's length become a hard fail rather than merely above target? Answer concisely with the number. | regex: `(?i)\b1,?000\b` |
 | skill-builder-curator-model | stable | In the skill-builder pipeline, which model tier does the single curator agent that writes the finished skill run on? Answer concisely. | regex: `(?i)\bopus\b` |
-| skill-builder-description-ceiling | stable | In skill-builder's frontmatter guidance, what character count is treated as the absolute ceiling for a skill's description field, even when overlap disambiguation genuinely demands extra length? Answer concisely with the number. | regex: `\b1,?500\b` |
+| skill-builder-description-ceiling | stable | In skill-builder's frontmatter guidance, what character count is treated as the absolute ceiling for a skill's description field, even when overlap disambiguation genuinely demands extra length? Answer concisely with the number. | regex: `(?i)\b1,?500\b` |
 
 ## Skill vs no-skill — overall
 

@@ -1,7 +1,7 @@
 {
   "skill": "zabbix",
   "plugin": "monitoring",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "What TCP port does the Zabbix agent listen on for passive checks initiated by the server? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b10050\\b"
+        "value": "(?i)\\b10050\\b"
       },
       "source": "plugins/monitoring/skills/zabbix/SKILL.md - Key Ports table, Agent listens on port 10050 for passive checks from the server"
     },
@@ -32,7 +32,7 @@
       "prompt": "Above roughly how many monitored hosts does Zabbix guidance recommend switching to TimescaleDB? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "5,?000"
+        "value": "(?i)5,?000"
       },
       "source": "plugins/monitoring/skills/zabbix/SKILL.md - intro paragraph, always recommend TimescaleDB for deployments exceeding 5,000 hosts"
     }

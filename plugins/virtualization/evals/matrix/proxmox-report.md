@@ -1,6 +1,6 @@
 # proxmox — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -10,7 +10,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 |---|---|---|---|
 | proxmox-pbs-encryption | stable | What client side encryption algorithm does Proxmox Backup Server use to protect backup data? Answer concisely. | contains_all: `AES-256` |
 | proxmox-9-firewall-backend | recent | Starting with Proxmox VE 9.x, which packet filtering framework fully replaces iptables as the firewall backend? Answer concisely. | contains_all: `nftables` |
-| proxmox-quorum | stable | In a 3 node Proxmox VE cluster, how many node votes are needed to maintain quorum? Answer concisely with a number. | regex: `\b2\b|\btwo\b` |
+| proxmox-quorum | stable | In a 3 node Proxmox VE cluster, how many node votes are needed to maintain quorum? Answer concisely with a number. | regex: `(?i)\b2\b|\btwo\b` |
 
 ## Skill vs no-skill — overall
 

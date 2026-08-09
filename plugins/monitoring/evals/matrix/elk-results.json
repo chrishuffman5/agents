@@ -1,7 +1,7 @@
 {
   "skill": "elk",
   "plugin": "monitoring",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -38,7 +38,7 @@
       "prompt": "In Elastic Stack 9.x, roughly what percentage storage reduction does the Logsdb index mode provide for logs versus standard indexing? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b65\\b"
+        "value": "(?i)\\b65\\b"
       },
       "source": "plugins/monitoring/skills/elk/SKILL.md - Core Expertise bullet and Top 10 Operational Rules number 6, Logsdb provides about 65% storage reduction in 9.x"
     }

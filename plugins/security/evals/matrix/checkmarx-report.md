@@ -1,6 +1,6 @@
 # checkmarx — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,9 +8,9 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| checkmarx-kics-rule-count | recent | As of 2026, approximately how many queries does KICS, Checkmarx's open-source infrastructure-as-code scanner, include across all supported platforms? Answer concisely. | regex: `2,?400` |
+| checkmarx-kics-rule-count | recent | As of 2026, approximately how many queries does KICS, Checkmarx's open-source infrastructure-as-code scanner, include across all supported platforms? Answer concisely. | regex: `(?i)2,?400` |
 | checkmarx-not-exploitable-persistence | recent | In Checkmarx One, once a SAST finding is triaged and marked Not Exploitable, will that same false positive resurface as a New finding in the next scan? Answer concisely. | regex: `(?i)\b(no|not|won't|will not)\b` |
-| checkmarx-sast-language-count | stable | Approximately how many programming languages does the Checkmarx One SAST engine support? Answer concisely. | regex: `35\+?` |
+| checkmarx-sast-language-count | stable | Approximately how many programming languages does the Checkmarx One SAST engine support? Answer concisely. | regex: `(?i)35\+?` |
 
 ## Skill vs no-skill — overall
 

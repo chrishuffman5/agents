@@ -1,7 +1,7 @@
 {
   "skill": "cisco-ios-xe",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -36,7 +36,7 @@
       "prompt": "What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\b"
+        "value": "(?i)\\b2\\b"
       },
       "source": "plugins/networking/skills/cisco-ios-xe/SKILL.md - StackWise vs StackWise Virtual table lists Max members: StackWise Virtual = 2"
     }

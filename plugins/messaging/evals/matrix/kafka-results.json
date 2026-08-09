@@ -1,7 +1,7 @@
 {
   "skill": "kafka",
   "plugin": "messaging",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 48,
   "runsPlanned": 132,
@@ -12,7 +12,7 @@
       "prompt": "In which Apache Kafka release did Share Groups, providing queue-like semantics without partition binding, reach general availability? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b4\\.2\\b"
+        "value": "(?i)\\b4\\.2\\b"
       },
       "source": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
     },
@@ -22,7 +22,7 @@
       "prompt": "Before Share Groups became generally available in Kafka, in which earlier release were they available as a preview feature? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b4\\.1\\b"
+        "value": "(?i)\\b4\\.1\\b"
       },
       "source": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
     },

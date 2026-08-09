@@ -1,6 +1,6 @@
 # dynatrace — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| dynatrace-host-units | recent | In Dynatrace full-stack monitoring, how many Host Units does OneAgent consume when monitoring a host with 64 GB of RAM? Answer concisely. | regex: `\b8\b` |
+| dynatrace-host-units | recent | In Dynatrace full-stack monitoring, how many Host Units does OneAgent consume when monitoring a host with 64 GB of RAM? Answer concisely. | regex: `(?i)\b8\b` |
 | dynatrace-davis-deterministic | stable | Is the causation logic behind Dynatrace Davis AI problem detection deterministic or based on probabilistic machine learning? Answer in one sentence. | regex: `(?i)determin` |
 | dynatrace-purepath-threshold | recent | By default, what is the minimum method timing threshold that Dynatrace PurePath captures as contributing to latency? Answer concisely. | regex: `(?i)1\s*ms|1\s*millisecond` |
 

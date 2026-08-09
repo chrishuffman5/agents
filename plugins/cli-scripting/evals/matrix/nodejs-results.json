@@ -1,7 +1,7 @@
 {
   "skill": "nodejs",
   "plugin": "cli-scripting",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": false,
   "runsDone": 256,
   "runsPlanned": 256,
@@ -12,7 +12,7 @@
       "prompt": "Starting with which Node.js version does the Temporal global date and time API become enabled by default without needing an experimental flag? Answer with just the version number.",
       "expected": {
         "type": "regex",
-        "value": "\\b26\\b"
+        "value": "(?i)\\b26\\b"
       },
       "source": "plugins/cli-scripting/skills/nodejs/references/versions/26.md - Temporal enabled by default (no flag) in Node 26"
     },
@@ -22,7 +22,7 @@
       "prompt": "In Node.js 26, native addons like better-sqlite3 must be rebuilt after upgrading because NODE_MODULE_VERSION was bumped to what number? Answer with just the number.",
       "expected": {
         "type": "regex",
-        "value": "\\b147\\b"
+        "value": "(?i)\\b147\\b"
       },
       "source": "plugins/cli-scripting/skills/nodejs/references/versions/26.md - NODE_MODULE_VERSION bumped to 147 in Node 26; native modules must rebuild"
     },

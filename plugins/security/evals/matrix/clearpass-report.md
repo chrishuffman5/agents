@@ -1,6 +1,6 @@
 # clearpass — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | clearpass-onguard-modes | stable | What are the three deployment modes for Aruba ClearPass's OnGuard posture agent? Answer concisely. | contains_all: `Persistent``, ``Dissolvable``, ``Web-based` |
-| clearpass-tacacs-privilege-level | stable | In a ClearPass TACACS+ shell profile granting full administrative access on a network device, what privilege level is typically assigned? Answer concisely. | regex: `\b15\b` |
+| clearpass-tacacs-privilege-level | stable | In a ClearPass TACACS+ shell profile granting full administrative access on a network device, what privilege level is typically assigned? Answer concisely. | regex: `(?i)\b15\b` |
 | clearpass-dhcp-profiling-options | recent | Which two DHCP option numbers does ClearPass primarily rely on for device profiling, corresponding to the parameter request list and the vendor class? Answer concisely. | contains_all: `55``, ``60` |
 
 ## Skill vs no-skill — overall

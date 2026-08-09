@@ -1,7 +1,7 @@
 {
   "skill": "redshift",
   "plugin": "database",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number.",
       "expected": {
         "type": "regex",
-        "value": "\\b60\\b"
+        "value": "(?i)\\b60\\b"
       },
       "source": "plugins/database/skills/redshift/references/architecture.md - Redshift Serverless Architecture > Auto-Scaling Behavior: billed only for RPU-seconds consumed, with a minimum of 60 seconds per query"
     },

@@ -1,7 +1,7 @@
 {
   "skill": "overview",
   "plugin": "cli-scripting",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 928,
   "runsPlanned": 1633,
@@ -179,7 +179,7 @@
       "prompt": "In general database design guidance, denormalization becomes worth considering once the read to write ratio exceeds what threshold? Answer with the exact ratio.",
       "expected": {
         "type": "regex",
-        "value": "100\\s*:\\s*1"
+        "value": "(?i)100\\s*:\\s*1"
       },
       "source": "plugins/database/skills/overview/SKILL.md - Normalization vs. Denormalization: denormalization triggers include when read:write ratio exceeds 100:1"
     },
@@ -266,7 +266,7 @@
       "prompt": "For a Proxmox or a KVM and libvirt cluster to support HA without adding a QDevice, how many physical nodes are recommended as the minimum? Answer concisely with a number.",
       "expected": {
         "type": "regex",
-        "value": "\\b3\\b|\\bthree\\b"
+        "value": "(?i)\\b3\\b|\\bthree\\b"
       },
       "source": "plugins/virtualization/skills/overview/SKILL.md - High Availability and Fault Tolerance table: Proxmox and KVM/libvirt minimum nodes for HA = 3 (2 + QDevice)"
     },
@@ -354,7 +354,7 @@
       "prompt": "Observability spend can reach what percentage of total infrastructure cost, according to general cost guidance? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b30\\b"
+        "value": "(?i)\\b30\\b"
       },
       "source": "plugins/monitoring/skills/overview/SKILL.md - How to Approach Tasks number 4, observability spend can exceed 30 percent of infrastructure cost"
     },
@@ -400,7 +400,7 @@
       "prompt": "When migrating an on-premises Exchange organization to Exchange Online, at what mailbox count does a full hybrid deployment become the recommended approach instead of a simple cutover migration? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b150\\b"
+        "value": "(?i)\\b150\\b"
       },
       "source": "plugins/mail-collab/skills/overview/SKILL.md - Migration path table: Exchange on-prem to Exchange Online: Full Hybrid (>150 mailboxes), Cutover (<150)."
     },
@@ -410,7 +410,7 @@
       "prompt": "Ahead of a mail platform cutover, what TTL value in seconds should you lower your MX records to, so DNS changes propagate quickly during the transition? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b300\\b"
+        "value": "(?i)\\b300\\b"
       },
       "source": "plugins/mail-collab/skills/overview/SKILL.md - DNS Cutover Checklist #1: Lower MX TTL to 300 seconds at least 48 hours before cutover."
     },
@@ -420,7 +420,7 @@
       "prompt": "Roughly what is the list price per user per month for Microsoft 365 E3, in US dollars, based on current enterprise pricing benchmarks? Answer concisely with an approximate figure.",
       "expected": {
         "type": "regex",
-        "value": "\\b36\\b"
+        "value": "(?i)\\b36\\b"
       },
       "source": "plugins/mail-collab/skills/overview/SKILL.md - Step 2 table, Pricing (enterprise) row: E3 ~36 dollars/user/mo, E5 ~60 dollars/user/mo."
     },

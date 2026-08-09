@@ -1,6 +1,6 @@
 # cloudflare-zt — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,9 +8,9 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| cloudflare-zt-free-tier-users | recent | How many users does the free tier of Cloudflare Zero Trust support with full Access and Gateway functionality? Answer concisely. | regex: `\b50\b` |
-| cloudflare-zt-area1-acquisition-year | recent | In what year did Cloudflare acquire Area 1 Security, which became its email security product? Answer concisely. | regex: `\b2022\b` |
-| cloudflare-zt-anycast-cities | stable | Approximately how many cities does Cloudflare's anycast network span? Answer concisely. | regex: `300\+?` |
+| cloudflare-zt-free-tier-users | recent | How many users does the free tier of Cloudflare Zero Trust support with full Access and Gateway functionality? Answer concisely. | regex: `(?i)\b50\b` |
+| cloudflare-zt-area1-acquisition-year | recent | In what year did Cloudflare acquire Area 1 Security, which became its email security product? Answer concisely. | regex: `(?i)\b2022\b` |
+| cloudflare-zt-anycast-cities | stable | Approximately how many cities does Cloudflare's anycast network span? Answer concisely. | regex: `(?i)300\+?` |
 
 ## Skill vs no-skill — overall
 

@@ -1,6 +1,6 @@
 # azure-service-bus — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | azure-service-bus-max-delivery | stable | In Azure Service Bus, what is the default maximum delivery count for a queue before a message is automatically dead-lettered? Answer concisely. | regex: `(?i)\b10\b` |
-| azure-service-bus-topic-subs | recent | What is the maximum number of subscriptions a single Azure Service Bus topic can have? Answer concisely. | regex: `\b2,?000\b` |
+| azure-service-bus-topic-subs | recent | What is the maximum number of subscriptions a single Azure Service Bus topic can have? Answer concisely. | regex: `(?i)\b2,?000\b` |
 | azure-service-bus-premium-message-size | recent | On the Premium tier of Azure Service Bus, using AMQP, what is the maximum message size supported? Answer concisely. | regex: `(?i)100\s*mb` |
 
 ## Skill vs no-skill — overall

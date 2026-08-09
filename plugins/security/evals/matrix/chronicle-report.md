@@ -1,6 +1,6 @@
 # chronicle — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,8 +9,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | chronicle-pricing-model | stable | How does Chronicle's (Google Security Operations) pricing model fundamentally differ from most traditional SIEM pricing? Answer concisely. | regex: `(?i)flat.*per.?user` |
-| chronicle-retroactive-window | recent | Chronicle's retroactive rule matching lets analysts hunt across at least how many months of historical data? Answer concisely. | regex: `12\+?\s*month` |
-| chronicle-yaral-version | recent | What version number of YARA-L, Chronicle's detection rule language, is currently used? Answer concisely. | regex: `\b2\.0\b` |
+| chronicle-retroactive-window | recent | Chronicle's retroactive rule matching lets analysts hunt across at least how many months of historical data? Answer concisely. | regex: `(?i)12\+?\s*month` |
+| chronicle-yaral-version | recent | What version number of YARA-L, Chronicle's detection rule language, is currently used? Answer concisely. | regex: `(?i)\b2\.0\b` |
 
 ## Skill vs no-skill — overall
 

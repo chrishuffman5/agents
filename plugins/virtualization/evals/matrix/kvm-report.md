@@ -1,6 +1,6 @@
 # kvm — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| kvm-numa-penalty | recent | In KVM and libvirt, when a VM's vCPU count exceeds a single NUMA node's core count and the VM ends up spanning multiple NUMA nodes, roughly what memory latency penalty results? Answer concisely with a percentage range. | regex: `30.{0,6}40` |
+| kvm-numa-penalty | recent | In KVM and libvirt, when a VM's vCPU count exceeds a single NUMA node's core count and the VM ends up spanning multiple NUMA nodes, roughly what memory latency penalty results? Answer concisely with a percentage range. | regex: `(?i)30.{0,6}40` |
 | kvm-rhel9-daemon | stable | On RHEL 9 and newer, and on Fedora 36 and newer, which modular libvirt daemon is the default for managing KVM and QEMU, replacing the older monolithic libvirtd? Answer concisely. | contains_all: `virtqemud` |
 | kvm-hugepage-threshold | stable | In KVM and libvirt performance tuning guidance, at what minimum VM memory size do 1 GB hugepages start providing a significant benefit? Answer concisely. | regex: `(?i)\b8\+?\s*gb` |
 

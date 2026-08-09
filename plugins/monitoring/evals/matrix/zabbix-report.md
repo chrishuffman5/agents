@@ -1,6 +1,6 @@
 # zabbix — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,8 +9,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | zabbix-timescaledb-compression | recent | Using TimescaleDB compression with Zabbix history tables, what compression ratio should you expect? Answer concisely. | regex: `(?i)5.{0,6}10` |
-| zabbix-agent-port | stable | What TCP port does the Zabbix agent listen on for passive checks initiated by the server? Answer concisely. | regex: `\b10050\b` |
-| zabbix-timescaledb-threshold | recent | Above roughly how many monitored hosts does Zabbix guidance recommend switching to TimescaleDB? Answer concisely. | regex: `5,?000` |
+| zabbix-agent-port | stable | What TCP port does the Zabbix agent listen on for passive checks initiated by the server? Answer concisely. | regex: `(?i)\b10050\b` |
+| zabbix-timescaledb-threshold | recent | Above roughly how many monitored hosts does Zabbix guidance recommend switching to TimescaleDB? Answer concisely. | regex: `(?i)5,?000` |
 
 ## Skill vs no-skill — overall
 

@@ -1,6 +1,6 @@
 # overview — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **928 / 1633** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `cli-scripting` · runs: **928 / 1633** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -23,7 +23,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | overview-selinux-family | stable | Across the RHEL family of distributions and SLES, which mandatory access control mechanism handles security enforcement, as opposed to AppArmor on Ubuntu and Debian? Answer concisely. | regex: `(?i)\bSELinux\b` |
 | overview-test-first | stable | Across every platform covered, Linux mandatory access control, Windows Group Policy, macOS MDM profiles, what universal hyphenated testing principle should precede switching any hardening control into full enforcement? Give the term used. | regex: `(?i)test[- ]first` |
 | overview-cap-cassandra-classification | stable | Under CAP theorem classification, are Cassandra and DynamoDB typically categorized as CP systems or AP systems during a network partition? Answer with the two-letter classification. | regex: `(?i)\bap\b` |
-| overview-denormalization-ratio | stable | In general database design guidance, denormalization becomes worth considering once the read to write ratio exceeds what threshold? Answer with the exact ratio. | regex: `100\s*:\s*1` |
+| overview-denormalization-ratio | stable | In general database design guidance, denormalization becomes worth considering once the read to write ratio exceeds what threshold? Answer with the exact ratio. | regex: `(?i)100\s*:\s*1` |
 | overview-mongodb-doc-size-limit | stable | When deciding whether to embed or reference child data in a document database such as MongoDB, what document size limit is commonly cited as the threshold favoring embedding? Answer with the exact size. | regex: `(?i)\b16\s*mb\b` |
 | overview-ci-pipeline-speed | recent | According to DevOps pipeline design guidance, roughly how fast should a CI pipeline run so it does not reduce merge frequency and increase batch sizes? Answer concisely with a number. | contains_all: `10``, ``minute` |
 | overview-trunk-branch-lifespan | recent | In the trunk-based development guidance here, how short should feature branches ideally be kept before merging back to trunk? Answer concisely. | regex: `(?i)(1\s*day|one\s*day|24\s*hours)` |
@@ -31,7 +31,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | overview-exactly-once-practicality | stable | For event-driven architectures spanning a message broker and external systems, is achieving true exactly-once delivery generally considered practical? Answer in one sentence. | regex: `(?i)(impractical|not\s*practical)` |
 | overview-gcp-native-queue | recent | Among the major cloud providers, does Google Cloud offer a distinct native point-to-point queue service separate from its pub/sub offering? Answer in one sentence. | regex: `(?i)\bno\b` |
 | overview-latency-nats-core | stable | For a workload that needs sub-millisecond, fire-and-forget message delivery, which messaging technology is typically recommended? Answer concisely. | contains_all: `NATS` |
-| overview-quorum-min-nodes | stable | For a Proxmox or a KVM and libvirt cluster to support HA without adding a QDevice, how many physical nodes are recommended as the minimum? Answer concisely with a number. | regex: `\b3\b|\bthree\b` |
+| overview-quorum-min-nodes | stable | For a Proxmox or a KVM and libvirt cluster to support HA without adding a QDevice, how many physical nodes are recommended as the minimum? Answer concisely with a number. | regex: `(?i)\b3\b|\bthree\b` |
 | overview-cpu-vendor-migration | stable | Across major hypervisor platforms, is live migration of a running VM directly between an Intel based host and an AMD based host supported? Answer in one sentence. | regex: `(?i)(\bno\b|not\s+supported|cannot)` |
 | overview-gpu-partitioning | recent | General virtualization platform comparisons note a VMware feature introduced in 2025 for partitioning a single physical GPU across multiple VMs, alongside vGPU and DDA. What is that feature called? Answer concisely. | contains_all: `GPU-P` |
 | overview-object-storage-db | stable | For database or VM storage workloads that need block access, should a team choose object storage such as S3 or MinIO instead? Answer with yes or no and a brief reason. | regex: `(?i)\b(no|avoid)\b` |
@@ -39,13 +39,13 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | overview-minio-licensing-change | recent | According to current guidance comparing software-defined object storage options, what changed about MinIO licensing as of February 2026? Answer concisely. | contains_all: `commercial` |
 | overview-use-method-creator | stable | Who is credited with creating the USE method (Utilization, Saturation, Errors) for monitoring system resources? Answer concisely. | contains_all: `Gregg` |
 | overview-red-method-creator | recent | Who created the RED method (Rate, Errors, Duration) for monitoring services? Answer concisely. | contains_all: `Wilkie` |
-| overview-obs-spend-pct | recent | Observability spend can reach what percentage of total infrastructure cost, according to general cost guidance? Answer concisely. | regex: `\b30\b` |
+| overview-obs-spend-pct | recent | Observability spend can reach what percentage of total infrastructure cost, according to general cost guidance? Answer concisely. | regex: `(?i)\b30\b` |
 | overview-large-scale-stack | stable | For data platforms handling more than 10 terabytes with a dedicated platform team, which combination of technologies does cross-platform ETL guidance recommend? Answer concisely. | contains_all: `Spark``, ``Kafka``, ``Airflow` |
 | overview-small-scale-stack | stable | For a small team working with under 10 gigabytes of data, which lightweight technology combination does cross-platform ETL guidance recommend? Answer concisely. | contains_all: `DuckDB` |
 | overview-first-principle | stable | Among the core data integration principles for building ETL pipelines, which property is described as non-negotiable, requiring every pipeline to produce the same result no matter how many times it is rerun with the same input? Answer with the single term used. | regex: `(?i)\bidempoten` |
-| overview-hybrid-mailbox-threshold | stable | When migrating an on-premises Exchange organization to Exchange Online, at what mailbox count does a full hybrid deployment become the recommended approach instead of a simple cutover migration? Answer concisely. | regex: `\b150\b` |
-| overview-mx-ttl | stable | Ahead of a mail platform cutover, what TTL value in seconds should you lower your MX records to, so DNS changes propagate quickly during the transition? Answer concisely. | regex: `\b300\b` |
-| overview-e3-pricing | recent | Roughly what is the list price per user per month for Microsoft 365 E3, in US dollars, based on current enterprise pricing benchmarks? Answer concisely with an approximate figure. | regex: `\b36\b` |
+| overview-hybrid-mailbox-threshold | stable | When migrating an on-premises Exchange organization to Exchange Online, at what mailbox count does a full hybrid deployment become the recommended approach instead of a simple cutover migration? Answer concisely. | regex: `(?i)\b150\b` |
+| overview-mx-ttl | stable | Ahead of a mail platform cutover, what TTL value in seconds should you lower your MX records to, so DNS changes propagate quickly during the transition? Answer concisely. | regex: `(?i)\b300\b` |
+| overview-e3-pricing | recent | Roughly what is the list price per user per month for Microsoft 365 E3, in US dollars, based on current enterprise pricing benchmarks? Answer concisely with an approximate figure. | regex: `(?i)\b36\b` |
 | overview-sse-autoreconnect | stable | Comparing WebSocket and Server-Sent Events, which of the two provides automatic reconnection built in, without the application writing its own reconnect logic? Answer concisely. | regex: `(?i)\bsse\b|server.sent` |
 | overview-ws-latency-range | recent | For sub-10ms message delivery requirements handled over WebSocket after the handshake completes, what typical latency range in milliseconds is cited for it? Answer concisely. | regex: `(?i)0\.5.{0,5}10\s*ms` |
 | overview-microservice-graphql-overkill | stable | For internal microservice-to-service communication, which protocol is called out as overkill compared to gRPC or REST: GraphQL or OData? Answer concisely. | regex: `(?i)graphql` |

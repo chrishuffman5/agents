@@ -1,6 +1,6 @@
 # gcp-pubsub — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | gcp-pubsub-max-retention | recent | What is the maximum message retention duration you can configure on a Google Cloud Pub/Sub topic? Answer concisely. | regex: `(?i)31\s*day` |
-| gcp-pubsub-dlt-attempts | stable | For a Pub/Sub dead-letter topic, what is the maximum number of delivery attempts you can configure before a message is forwarded to it? Answer concisely. | regex: `\b100\b` |
+| gcp-pubsub-dlt-attempts | stable | For a Pub/Sub dead-letter topic, what is the maximum number of delivery attempts you can configure before a message is forwarded to it? Answer concisely. | regex: `(?i)\b100\b` |
 | gcp-pubsub-ordering-throughput | recent | When publishing to a Pub/Sub topic using an ordering key, what is the per-key publish throughput limit that can create a hot-key bottleneck? Answer concisely. | regex: `(?i)1\s*mb` |
 
 ## Skill vs no-skill — overall

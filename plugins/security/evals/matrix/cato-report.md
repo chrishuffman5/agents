@@ -1,6 +1,6 @@
 # cato — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| cato-founding-year | stable | In what year was Cato Networks founded, notably before Gartner coined the term SASE? Answer concisely. | regex: `\b2015\b` |
+| cato-founding-year | stable | In what year was Cato Networks founded, notably before Gartner coined the term SASE? Answer concisely. | regex: `(?i)\b2015\b` |
 | cato-socket-x1700-throughput | recent | What is the maximum throughput supported by the Cato Socket X1700 model for large sites? Answer concisely. | regex: `(?i)1\s*gbps` |
 | cato-failover-time | recent | With Cato Socket active-active dual WAN bonding, how fast does failover occur when one link degrades? Answer concisely. | regex: `(?i)(sub[- ]?second|<\s*1\s*second|less than 1 second)` |
 

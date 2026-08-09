@@ -1,7 +1,7 @@
 {
   "skill": "efficientip",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "When sizing EfficientIP appliances for DNS Guardian protection, what multiple of normal query volume should you provision for to absorb volumetric DNS attacks? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "10\\s*x"
+        "value": "(?i)10\\s*x"
       },
       "source": "plugins/networking/skills/efficientip/SKILL.md - Size appliances for 10x normal QPS to handle volumetric attacks"
     },

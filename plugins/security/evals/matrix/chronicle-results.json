@@ -1,7 +1,7 @@
 {
   "skill": "chronicle",
   "plugin": "security",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "Chronicle's retroactive rule matching lets analysts hunt across at least how many months of historical data? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "12\\+?\\s*month"
+        "value": "(?i)12\\+?\\s*month"
       },
       "source": "plugins/security/skills/chronicle/SKILL.md - Retroactive Rule Matching: Historical search, search across 12+ months of retained data"
     },
@@ -32,7 +32,7 @@
       "prompt": "What version number of YARA-L, Chronicle's detection rule language, is currently used? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\.0\\b"
+        "value": "(?i)\\b2\\.0\\b"
       },
       "source": "plugins/security/skills/chronicle/SKILL.md - Core Expertise: YARA-L 2.0 is Chronicle's detection rule language"
     }

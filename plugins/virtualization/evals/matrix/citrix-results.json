@@ -1,7 +1,7 @@
 {
   "skill": "citrix",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "On XenServer NFS and ext storage repositories, snapshots build VHD parent-child chains. Beyond how many chain levels does read performance start to degrade? Answer concisely with a number.",
       "expected": {
         "type": "regex",
-        "value": "\\b10\\b"
+        "value": "(?i)\\b10\\b"
       },
       "source": "plugins/virtualization/skills/citrix/SKILL.md - Common Pitfalls #2: chains deeper than 10 levels degrade read performance"
     },

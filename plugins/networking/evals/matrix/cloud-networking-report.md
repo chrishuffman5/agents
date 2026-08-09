@@ -1,6 +1,6 @@
 # cloud-networking — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| cloud-networking-tgw-max-attach | recent | How many attachments can a single AWS Transit Gateway support? Answer concisely. | regex: `5,?000` |
+| cloud-networking-tgw-max-attach | recent | How many attachments can a single AWS Transit Gateway support? Answer concisely. | regex: `(?i)5,?000` |
 | cloud-networking-interaz-cost | recent | Roughly how much does AWS charge per gigabyte for inter-AZ data transfer within the same region, per direction? Answer concisely. | contains_all: `0.01` |
 | cloud-networking-gcp-vpc-scope | stable | Is a GCP VPC network scoped globally or regionally, compared with AWS VPCs and Azure VNets which are regional? Answer concisely. | regex: `(?i)global` |
 

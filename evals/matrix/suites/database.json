@@ -798,7 +798,7 @@
       "prompt": "In general database design guidance, denormalization becomes worth considering once the read to write ratio exceeds what threshold? Answer with the exact ratio.",
       "expected": {
         "type": "regex",
-        "value": "100\\s*:\\s*1"
+        "value": "(?i)100\\s*:\\s*1"
       },
       "notes": "plugins/database/skills/overview/SKILL.md - Normalization vs. Denormalization: denormalization triggers include when read:write ratio exceeds 100:1"
     },
@@ -905,7 +905,7 @@
       "prompt": "In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number.",
       "expected": {
         "type": "regex",
-        "value": "\\b60\\b"
+        "value": "(?i)\\b60\\b"
       },
       "notes": "plugins/database/skills/redshift/references/architecture.md - Redshift Serverless Architecture > Auto-Scaling Behavior: billed only for RPU-seconds consumed, with a minimum of 60 seconds per query"
     },

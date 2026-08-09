@@ -1,6 +1,6 @@
 # nats — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | nats-dedup-window | stable | In NATS JetStream, what is the default duration of the message deduplication window used to detect duplicate publishes? Answer concisely. | regex: `(?i)2\s*min` |
-| nats-atomic-batch-version | recent | Which NATS server release introduced atomic batch publish and distributed counters? Answer concisely. | regex: `\b2\.12\b` |
+| nats-atomic-batch-version | recent | Which NATS server release introduced atomic batch publish and distributed counters? Answer concisely. | regex: `(?i)\b2\.12\b` |
 | nats-cluster-nodes | stable | For a NATS cluster, why should you use an odd number of nodes such as 3 or 5 rather than an even number? Answer in one sentence. | regex: `(?i)split.?brain` |
 
 ## Skill vs no-skill — overall

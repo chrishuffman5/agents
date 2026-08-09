@@ -1,7 +1,7 @@
 {
   "skill": "aws-vpc",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "5,?000"
+        "value": "(?i)5,?000"
       },
       "source": "plugins/networking/skills/aws-vpc/SKILL.md - Up to 5,000 attachments per TGW"
     },
@@ -22,7 +22,7 @@
       "prompt": "In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount.",
       "expected": {
         "type": "regex",
-        "value": "0\\.01"
+        "value": "(?i)0\\.01"
       },
       "source": "plugins/networking/skills/aws-vpc/SKILL.md - Every cross-AZ packet incurs 0.01 USD/GB each direction (0.02 USD/GB round trip)"
     },

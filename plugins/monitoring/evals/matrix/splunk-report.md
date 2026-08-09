@@ -1,6 +1,6 @@
 # splunk — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **45 / 132** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **45 / 132** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| splunk-license-violations | recent | After how many daily license volume violations within a rolling 30 day window does Splunk disable search on non-internal indexes? Answer concisely. | regex: `\b5\b` |
-| splunk-subsearch-limit | recent | What is the default maximum result count for a Splunk subsearch before results are silently truncated? Answer concisely. | regex: `10,?000` |
+| splunk-license-violations | recent | After how many daily license volume violations within a rolling 30 day window does Splunk disable search on non-internal indexes? Answer concisely. | regex: `(?i)\b5\b` |
+| splunk-subsearch-limit | recent | What is the default maximum result count for a Splunk subsearch before results are silently truncated? Answer concisely. | regex: `(?i)10,?000` |
 | splunk-tstats-speed | stable | Using tstats against an accelerated data model in Splunk, roughly how much faster is it compared to a raw search? Answer concisely. | regex: `(?i)10.{0,6}100` |
 | splunk-join-alternative | stable | In Splunk SPL, which command should you use instead of join when combining result sets by shared keys, since join is memory-limited? Answer concisely. | regex: `(?i)\bstats\b` |
 | splunk-spl2-version | recent | Starting with which major Splunk platform version does SPL2 become available? Answer concisely with the version number. | regex: `(?i)\b10(\.0)?\b` |

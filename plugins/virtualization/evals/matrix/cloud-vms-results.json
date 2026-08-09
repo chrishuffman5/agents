@@ -1,7 +1,7 @@
 {
   "skill": "cloud-vms",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -34,7 +34,7 @@
       "prompt": "Roughly what maximum percentage discount off pay as you go pricing can Azure Spot VMs offer? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b80\\b"
+        "value": "(?i)\\b80\\b"
       },
       "source": "plugins/virtualization/skills/cloud-vms/SKILL.md - Key Conceptual Differences table: Preemptible/Spot row, Azure Spot VMs (~80% off)"
     }

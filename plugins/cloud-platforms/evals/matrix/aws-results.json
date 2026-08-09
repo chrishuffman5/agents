@@ -1,7 +1,7 @@
 {
   "skill": "aws",
   "plugin": "cloud-platforms",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": false,
   "runsDone": 389,
   "runsPlanned": 389,
@@ -42,12 +42,12 @@
     {
       "id": "aws-ou-depth",
       "knowledge": "stable",
-      "prompt": "In AWS Organizations, how many levels deep can you nest organizational units under the root? Answer concisely.",
+      "prompt": "In AWS Organizations, how many levels deep can organizational units be nested, counting the root as the first level? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b5\\b|\\bfive\\b"
+        "value": "(?i)\\b5\\b|\\bfive\\b"
       },
-      "source": "plugins/cloud-platforms/skills/aws/references/multi-account.md - OU nesting 5 levels deep including root"
+      "source": "plugins/cloud-platforms/skills/aws/references/multi-account.md - OU nesting 5 levels deep including root (prompt aligned to source framing 2026-08-09 after a skill-arm answer correctly gave the including-root nuance and was penalized)"
     },
     {
       "id": "aws-enforced-for",
@@ -73,21 +73,21 @@
   "overall": {
     "skill": {
       "runs": 197,
-      "pass": 141,
-      "accuracy": 71.6,
+      "pass": 144,
+      "accuracy": 73.1,
       "meanWallMs": 23264,
       "meanTokensOut": 356,
       "totalCostUsd": 13.5114,
-      "costPerCorrect": 0.0958
+      "costPerCorrect": 0.0938
     },
     "no-skill": {
       "runs": 192,
-      "pass": 126,
-      "accuracy": 65.6,
+      "pass": 132,
+      "accuracy": 68.8,
       "meanWallMs": 12626,
       "meanTokensOut": 241,
       "totalCostUsd": 7.8362,
-      "costPerCorrect": 0.0622
+      "costPerCorrect": 0.0594
     }
   },
   "byHarness": [
@@ -95,42 +95,42 @@
       "harness": "claude",
       "skill": {
         "runs": 83,
-        "pass": 61,
-        "accuracy": 73.5,
+        "pass": 62,
+        "accuracy": 74.7,
         "meanWallMs": 24024,
         "meanTokensOut": 388,
         "totalCostUsd": 10.5913,
-        "costPerCorrect": 0.1736
+        "costPerCorrect": 0.1708
       },
       "noskill": {
         "runs": 78,
-        "pass": 51,
-        "accuracy": 65.4,
+        "pass": 54,
+        "accuracy": 69.2,
         "meanWallMs": 11665,
         "meanTokensOut": 241,
         "totalCostUsd": 6.4159,
-        "costPerCorrect": 0.1258
+        "costPerCorrect": 0.1188
       }
     },
     {
       "harness": "codex",
       "skill": {
         "runs": 78,
-        "pass": 65,
-        "accuracy": 83.3,
+        "pass": 67,
+        "accuracy": 85.9,
         "meanWallMs": 11676,
         "meanTokensOut": 322,
         "totalCostUsd": 2.9201,
-        "costPerCorrect": 0.0449
+        "costPerCorrect": 0.0436
       },
       "noskill": {
         "runs": 78,
-        "pass": 61,
-        "accuracy": 78.2,
+        "pass": 63,
+        "accuracy": 80.8,
         "meanWallMs": 9585,
         "meanTokensOut": 241,
         "totalCostUsd": 1.4204,
-        "costPerCorrect": 0.0233
+        "costPerCorrect": 0.0225
       }
     },
     {
@@ -146,8 +146,8 @@
       },
       "noskill": {
         "runs": 36,
-        "pass": 14,
-        "accuracy": 38.9,
+        "pass": 15,
+        "accuracy": 41.7,
         "meanWallMs": 21299,
         "meanTokensOut": null,
         "totalCostUsd": 0.0,
@@ -183,21 +183,21 @@
       "lane": "cloud",
       "skill": {
         "runs": 18,
-        "pass": 17,
-        "accuracy": 94.4,
+        "pass": 18,
+        "accuracy": 100.0,
         "meanWallMs": 14675,
         "meanTokensOut": 530,
         "totalCostUsd": 3.0373,
-        "costPerCorrect": 0.1787
+        "costPerCorrect": 0.1687
       },
       "noskill": {
         "runs": 18,
-        "pass": 15,
-        "accuracy": 83.3,
+        "pass": 17,
+        "accuracy": 94.4,
         "meanWallMs": 8512,
         "meanTokensOut": 249,
         "totalCostUsd": 1.228,
-        "costPerCorrect": 0.0819
+        "costPerCorrect": 0.0722
       }
     },
     {
@@ -214,12 +214,12 @@
       },
       "noskill": {
         "runs": 18,
-        "pass": 15,
-        "accuracy": 83.3,
+        "pass": 16,
+        "accuracy": 88.9,
         "meanWallMs": 4964,
         "meanTokensOut": 69,
         "totalCostUsd": 0.7242,
-        "costPerCorrect": 0.0483
+        "costPerCorrect": 0.0453
       }
     },
     {
@@ -271,12 +271,12 @@
       "lane": "cloud",
       "skill": {
         "runs": 18,
-        "pass": 17,
-        "accuracy": 94.4,
+        "pass": 18,
+        "accuracy": 100.0,
         "meanWallMs": 10917,
         "meanTokensOut": 275,
         "totalCostUsd": 0.0673,
-        "costPerCorrect": 0.004
+        "costPerCorrect": 0.0037
       },
       "noskill": {
         "runs": 18,
@@ -293,12 +293,12 @@
       "lane": "cloud",
       "skill": {
         "runs": 18,
-        "pass": 17,
-        "accuracy": 94.4,
+        "pass": 18,
+        "accuracy": 100.0,
         "meanWallMs": 15376,
         "meanTokensOut": 277,
         "totalCostUsd": 2.2528,
-        "costPerCorrect": 0.1325
+        "costPerCorrect": 0.1252
       },
       "noskill": {
         "runs": 18,
@@ -324,12 +324,12 @@
       },
       "noskill": {
         "runs": 18,
-        "pass": 16,
-        "accuracy": 88.9,
+        "pass": 18,
+        "accuracy": 100.0,
         "meanWallMs": 8817,
         "meanTokensOut": 127,
         "totalCostUsd": 0.3484,
-        "costPerCorrect": 0.0218
+        "costPerCorrect": 0.0194
       }
     },
     {
@@ -368,8 +368,8 @@
       },
       "noskill": {
         "runs": 12,
-        "pass": 5,
-        "accuracy": 41.7,
+        "pass": 6,
+        "accuracy": 50.0,
         "meanWallMs": 4954,
         "meanTokensOut": null,
         "totalCostUsd": 0.0,
@@ -511,12 +511,12 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 4,
-        "accuracy": 66.7,
+        "pass": 5,
+        "accuracy": 83.3,
         "meanWallMs": 6326,
         "meanTokensOut": 88,
         "totalCostUsd": 0.3446,
-        "costPerCorrect": 0.0862
+        "costPerCorrect": 0.0689
       }
     },
     {
@@ -541,12 +541,12 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 9995,
         "meanTokensOut": 340,
         "totalCostUsd": 0.5227,
-        "costPerCorrect": 0.1045
+        "costPerCorrect": 0.0871
       }
     },
     {
@@ -586,12 +586,12 @@
       "mode": "skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 20658,
         "meanTokensOut": 939,
         "totalCostUsd": 1.4848,
-        "costPerCorrect": 0.297
+        "costPerCorrect": 0.2475
       }
     },
     {
@@ -661,12 +661,12 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 4,
-        "accuracy": 66.7,
+        "pass": 5,
+        "accuracy": 83.3,
         "meanWallMs": 4842,
         "meanTokensOut": 71,
         "totalCostUsd": 0.3099,
-        "costPerCorrect": 0.0775
+        "costPerCorrect": 0.062
       }
     },
     {
@@ -991,12 +991,12 @@
       "mode": "skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 11419,
         "meanTokensOut": 288,
         "totalCostUsd": 0.0234,
-        "costPerCorrect": 0.0047
+        "costPerCorrect": 0.0039
       }
     },
     {
@@ -1111,12 +1111,12 @@
       "mode": "skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 16714,
         "meanTokensOut": 340,
         "totalCostUsd": 0.836,
-        "costPerCorrect": 0.1672
+        "costPerCorrect": 0.1393
       }
     },
     {
@@ -1156,12 +1156,12 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 9284,
         "meanTokensOut": 126,
         "totalCostUsd": 0.1152,
-        "costPerCorrect": 0.023
+        "costPerCorrect": 0.0192
       }
     },
     {
@@ -1186,12 +1186,12 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 8894,
         "meanTokensOut": 128,
         "totalCostUsd": 0.1162,
-        "costPerCorrect": 0.0232
+        "costPerCorrect": 0.0194
       }
     },
     {
@@ -1306,8 +1306,8 @@
       "mode": "no-skill",
       "agg": {
         "runs": 6,
-        "pass": 5,
-        "accuracy": 83.3,
+        "pass": 6,
+        "accuracy": 100.0,
         "meanWallMs": 9031,
         "meanTokensOut": null,
         "totalCostUsd": 0.0,

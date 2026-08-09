@@ -1,7 +1,7 @@
 {
   "skill": "vmware",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In vSphere HA, heartbeats are exchanged every second. After how many seconds of missed heartbeats is a host declared failed? Answer concisely with a number.",
       "expected": {
         "type": "regex",
-        "value": "\\b12\\b|\\btwelve\\b"
+        "value": "(?i)\\b12\\b|\\btwelve\\b"
       },
       "source": "plugins/virtualization/skills/vmware/SKILL.md - vSphere HA: heartbeats every second, host declared failed after 12 seconds of missed heartbeats"
     },

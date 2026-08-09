@@ -1,6 +1,6 @@
 # aws-vpc — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| aws-vpc-tgw-attachments | recent | How many attachments can a single AWS Transit Gateway support? Answer concisely with the number. | regex: `5,?000` |
-| aws-vpc-cross-az-cost | recent | In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount. | regex: `0\.01` |
+| aws-vpc-tgw-attachments | recent | How many attachments can a single AWS Transit Gateway support? Answer concisely with the number. | regex: `(?i)5,?000` |
+| aws-vpc-cross-az-cost | recent | In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount. | regex: `(?i)0\.01` |
 | aws-vpc-sg-stateful | stable | In an AWS VPC, are Security Groups stateful or stateless with respect to return traffic? Answer in one word. | regex: `(?i)stateful` |
 
 ## Skill vs no-skill — overall

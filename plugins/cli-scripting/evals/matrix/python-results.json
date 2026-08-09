@@ -1,7 +1,7 @@
 {
   "skill": "python",
   "plugin": "cli-scripting",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": false,
   "runsDone": 256,
   "runsPlanned": 256,
@@ -12,7 +12,7 @@
       "prompt": "In Python 3.14, what PEP number introduced template string literals, the t-string syntax that produces Template objects instead of plain strings? Answer with just the PEP number.",
       "expected": {
         "type": "regex",
-        "value": "\\b750\\b"
+        "value": "(?i)\\b750\\b"
       },
       "source": "plugins/cli-scripting/skills/python/references/versions/3.14.md - Template Strings (PEP 750)"
     },
@@ -22,7 +22,7 @@
       "prompt": "In Python 3.14, what PEP number introduced deferred evaluation of annotations by default, so annotations are stored as strings and evaluated lazily rather than at class creation time? Answer with just the PEP number.",
       "expected": {
         "type": "regex",
-        "value": "\\b749\\b"
+        "value": "(?i)\\b749\\b"
       },
       "source": "plugins/cli-scripting/skills/python/references/versions/3.14.md - Deferred Annotation Evaluation (PEP 749)"
     },

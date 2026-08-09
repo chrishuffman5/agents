@@ -1,7 +1,7 @@
 {
   "skill": "skill-builder",
   "plugin": "domain-expert-core",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In the skill-builder pipeline's curation standards, at how many lines does a skill body's length become a hard fail rather than merely above target? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "\\b1,?000\\b"
+        "value": "(?i)\\b1,?000\\b"
       },
       "source": "plugins/domain-expert-core/skills/skill-builder/SKILL.md - Body. 200-500 lines is the target; 1,000 is a hard fail."
     },
@@ -32,7 +32,7 @@
       "prompt": "In skill-builder's frontmatter guidance, what character count is treated as the absolute ceiling for a skill's description field, even when overlap disambiguation genuinely demands extra length? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "\\b1,?500\\b"
+        "value": "(?i)\\b1,?500\\b"
       },
       "source": "plugins/domain-expert-core/skills/skill-builder/SKILL.md - repo median is ~530 characters, p90 ~890. Stay under ~900 unless overlap disambiguation genuinely demands more; treat 1,500 as the ceiling."
     }

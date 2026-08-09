@@ -1,6 +1,6 @@
 # citrix — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | citrix-dom0-sizing | recent | On Citrix Hypervisor XenServer, dom0 ships with a small default memory allocation that is not enough for hosts running many VMs. What memory range should you increase dom0 RAM to in order to prevent dom0 memory pressure from degrading guest I/O? Answer concisely. | regex: `(?i)4\s*(-|to)\s*8` |
-| citrix-vhd-chain-depth | recent | On XenServer NFS and ext storage repositories, snapshots build VHD parent-child chains. Beyond how many chain levels does read performance start to degrade? Answer concisely with a number. | regex: `\b10\b` |
+| citrix-vhd-chain-depth | recent | On XenServer NFS and ext storage repositories, snapshots build VHD parent-child chains. Beyond how many chain levels does read performance start to degrade? Answer concisely with a number. | regex: `(?i)\b10\b` |
 | citrix-cpu-vendor | stable | In a Citrix Hypervisor XenServer resource pool, can you mix hosts with Intel CPUs and hosts with AMD CPUs in the same pool? Answer in one sentence. | regex: `(?i)(\bno\b|cannot|not\s+be\s+mixed|same\s+vendor)` |
 
 ## Skill vs no-skill — overall

@@ -1,6 +1,6 @@
 # kafka — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `messaging` · runs: **48 / 132** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `messaging` · runs: **48 / 132** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| kafka-share-groups-ga | recent | In which Apache Kafka release did Share Groups, providing queue-like semantics without partition binding, reach general availability? Answer concisely. | regex: `\b4\.2\b` |
-| kafka-share-groups-preview | recent | Before Share Groups became generally available in Kafka, in which earlier release were they available as a preview feature? Answer concisely. | regex: `\b4\.1\b` |
+| kafka-share-groups-ga | recent | In which Apache Kafka release did Share Groups, providing queue-like semantics without partition binding, reach general availability? Answer concisely. | regex: `(?i)\b4\.2\b` |
+| kafka-share-groups-preview | recent | Before Share Groups became generally available in Kafka, in which earlier release were they available as a preview feature? Answer concisely. | regex: `(?i)\b4\.1\b` |
 | kafka-message-priority | stable | Does Apache Kafka natively support message priority the way some traditional brokers do? Answer in one sentence. | regex: `(?i)(\bno\b|not support|does not)` |
 | kafka-etl-zk-removed | stable | Apache Kafka removed ZooKeeper entirely starting in which major version, becoming KRaft-only? Answer concisely. | contains_all: `4.0` |
 | kafka-etl-batch-size-default | stable | What is the default value in bytes of the Kafka producer batch.size configuration parameter? Answer concisely. | regex: `(?i)16,?384` |

@@ -1,7 +1,7 @@
 {
   "skill": "cloud-security",
   "plugin": "security",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In what year did Gartner coin the term CNAPP for the converged cloud security platform category? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2021\\b"
+        "value": "(?i)\\b2021\\b"
       },
       "source": "plugins/security/skills/cloud-security/references/concepts.md - CNAPP: Definition and History: Gartner coined CNAPP in 2021"
     },

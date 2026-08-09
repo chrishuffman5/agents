@@ -1,6 +1,6 @@
 # newrelic — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,8 +9,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | newrelic-free-tier-gb | recent | How many gigabytes per month of data ingest does the New Relic forever-free tier include? Answer concisely. | contains_all: `100` |
-| newrelic-log-retention | recent | By default, how many days does New Relic retain ingested log data? Answer concisely. | regex: `\b30\b` |
-| newrelic-facet-default-limit | stable | In an NRQL query, if you do not specify a LIMIT clause on a FACET, how many results are returned by default? Answer concisely. | regex: `\b10\b` |
+| newrelic-log-retention | recent | By default, how many days does New Relic retain ingested log data? Answer concisely. | regex: `(?i)\b30\b` |
+| newrelic-facet-default-limit | stable | In an NRQL query, if you do not specify a LIMIT clause on a FACET, how many results are returned by default? Answer concisely. | regex: `(?i)\b10\b` |
 
 ## Skill vs no-skill — overall
 

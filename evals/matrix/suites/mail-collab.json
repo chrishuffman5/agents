@@ -8,7 +8,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "In Microsoft Exchange, what is the default retention period, in days, for delivered messages kept by the Safety Net feature so they can be resubmitted after a database failover? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)\\b2\\s*day" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\s*day"
+      },
       "notes": "plugins/mail-collab/skills/exchange/SKILL.md - Safety Net: Retains delivered messages for 2 days (default). Enables resubmission after database failover."
     },
     {
@@ -17,7 +20,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "For a properly architected Exchange Database Availability Group, how many total copies of each mailbox database does Microsoft recommend maintaining? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)\\b4\\b|\\bfour\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\b|\\bfour\\b"
+      },
       "notes": "plugins/mail-collab/skills/exchange/SKILL.md - Preferred Architecture: 4 copies per database (2 per datacenter), 3 HA copies + 1 lagged copy."
     },
     {
@@ -26,7 +32,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "When does mainstream support end for Exchange Server 2019, after which organizations must rely on Extended Security Updates to stay protected? Answer concisely with the month and year.",
-      "expected": { "type": "regex", "value": "(?i)(october\\s*2025|oct\\.?\\s*2025|10/2025)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(october\\s*2025|oct\\.?\\s*2025|10/2025)"
+      },
       "notes": "plugins/mail-collab/skills/exchange/SKILL.md - Exchange 2019 (end-of-support October 2025, ESU available); Version Matrix support status row confirms Oct 2025."
     },
     {
@@ -35,7 +44,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "In Google Workspace, what is the maximum number of domains, combining primary, alias, and secondary domains, that a single account can have? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b600\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b600\\b"
+      },
       "notes": "plugins/mail-collab/skills/google-workspace/SKILL.md - Account Model: Up to 600 domains (primary + alias + secondary)."
     },
     {
@@ -44,7 +56,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "When generating a new DKIM signing key for a domain in the Google Workspace Admin Console, what key length in bits is recommended? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b2048\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2048\\b"
+      },
       "notes": "plugins/mail-collab/skills/google-workspace/SKILL.md - DKIM Configuration: Click Generate new record (2048-bit recommended)."
     },
     {
@@ -53,7 +68,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "When migrating from Google Workspace to Microsoft 365 with a tool like GWMME, does the migration bring over Google Chat history and Meet recordings along with email, calendar, and contacts? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|does not|doesn't|won't|not\\b)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not|doesn't|won't|not\\b)"
+      },
       "notes": "plugins/mail-collab/skills/google-workspace/SKILL.md - Migration > Google Workspace to M365: Migrates email/calendar/contacts. Does NOT migrate: Chat history, Meet recordings, Google Sites."
     },
     {
@@ -62,7 +80,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "Under Microsoft 365 E1 licensing, what is the Exchange Online mailbox storage limit? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)50\\s*gb" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)50\\s*gb"
+      },
       "notes": "plugins/mail-collab/skills/m365/SKILL.md - Enterprise Plans table: Exchange mailbox row, E1 = 50 GB."
     },
     {
@@ -71,7 +92,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "As of 2026, does the Microsoft 365 E3 license include Defender for Office 365 Plan 1? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)\\byes\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\byes\\b"
+      },
       "notes": "plugins/mail-collab/skills/m365/SKILL.md - Enterprise Plans table: Defender for O365 row shows E3 = Plan 1 (2026)."
     },
     {
@@ -80,7 +104,13 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "Among the essential Conditional Access policies recommended for a Microsoft 365 tenant, which legacy authentication protocols should be blocked entirely? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["IMAP", "POP3"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "IMAP",
+          "POP3"
+        ]
+      },
       "notes": "plugins/mail-collab/skills/m365/SKILL.md - Essential policies #3: Block legacy authentication (IMAP, POP3, SMTP AUTH)."
     },
     {
@@ -89,7 +119,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "Which Postfix release first added support for TLSRPT reporting under RFC 8460? Answer concisely with the version number.",
-      "expected": { "type": "regex", "value": "\\b3\\.10\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\.10\\b"
+      },
       "notes": "plugins/mail-collab/skills/postfix/SKILL.md - Key differences: 3.10 added TLSRPT support; Version Differences table row TLSRPT (RFC 8460): No / New."
     },
     {
@@ -98,7 +131,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "In Postfix, is the smtpd_forbid_unauth_pipelining protection enabled by default starting in version 3.10, compared to version 3.9 where it was merely available as an option? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\byes\\b|default)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|default)"
+      },
       "notes": "plugins/mail-collab/skills/postfix/SKILL.md - Version Differences table: smtpd_forbid_unauth_pipelining is Available in 3.9, Default enabled in 3.10."
     },
     {
@@ -107,7 +143,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "In Postfix configuration, is it acceptable to list the same domain in both mydestination and virtual_mailbox_domains at the same time? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|never|not\\b)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|never|not\\b)"
+      },
       "notes": "plugins/mail-collab/skills/postfix/SKILL.md - Virtual Domains: Critical rule: Never list the same domain in both mydestination and virtual_mailbox_domains."
     },
     {
@@ -116,7 +155,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "When migrating an on-premises Exchange organization to Exchange Online, at what mailbox count does a full hybrid deployment become the recommended approach instead of a simple cutover migration? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b150\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b150\\b"
+      },
       "notes": "plugins/mail-collab/skills/overview/SKILL.md - Migration path table: Exchange on-prem to Exchange Online: Full Hybrid (>150 mailboxes), Cutover (<150)."
     },
     {
@@ -125,7 +167,10 @@
       "plugin": "mail-collab",
       "knowledge": "stable",
       "prompt": "Ahead of a mail platform cutover, what TTL value in seconds should you lower your MX records to, so DNS changes propagate quickly during the transition? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b300\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b300\\b"
+      },
       "notes": "plugins/mail-collab/skills/overview/SKILL.md - DNS Cutover Checklist #1: Lower MX TTL to 300 seconds at least 48 hours before cutover."
     },
     {
@@ -134,7 +179,10 @@
       "plugin": "mail-collab",
       "knowledge": "recent",
       "prompt": "Roughly what is the list price per user per month for Microsoft 365 E3, in US dollars, based on current enterprise pricing benchmarks? Answer concisely with an approximate figure.",
-      "expected": { "type": "regex", "value": "\\b36\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b36\\b"
+      },
       "notes": "plugins/mail-collab/skills/overview/SKILL.md - Step 2 table, Pricing (enterprise) row: E3 ~36 dollars/user/mo, E5 ~60 dollars/user/mo."
     }
   ]

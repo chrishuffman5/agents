@@ -1,6 +1,6 @@
 # python — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| python-tstring-pep | recent | In Python 3.14, what PEP number introduced template string literals, the t-string syntax that produces Template objects instead of plain strings? Answer with just the PEP number. | regex: `\b750\b` |
-| python-deferred-annotations-pep | recent | In Python 3.14, what PEP number introduced deferred evaluation of annotations by default, so annotations are stored as strings and evaluated lazily rather than at class creation time? Answer with just the PEP number. | regex: `\b749\b` |
+| python-tstring-pep | recent | In Python 3.14, what PEP number introduced template string literals, the t-string syntax that produces Template objects instead of plain strings? Answer with just the PEP number. | regex: `(?i)\b750\b` |
+| python-deferred-annotations-pep | recent | In Python 3.14, what PEP number introduced deferred evaluation of annotations by default, so annotations are stored as strings and evaluated lazily rather than at class creation time? Answer with just the PEP number. | regex: `(?i)\b749\b` |
 | python-match-case-version | stable | Which Python version first introduced the match and case keywords for structural pattern matching? Answer with the version number. | contains_all: `3.10` |
 | python-mutable-default-arg | stable | In Python, why is defining a function with a mutable default argument such as an empty list considered risky? Answer in one sentence. | regex: `(?i)\bshare(d|s)?\b` |
 

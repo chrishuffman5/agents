@@ -1,6 +1,6 @@
 # nutanix — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| nutanix-nearsync-rpo | recent | For Nutanix AHV NearSync replication, what is the internal replication interval, in seconds, that underlies its near one minute RPO? Answer concisely. | regex: `\b20\s*-?\s*sec` |
-| nutanix-rf3-failures | stable | On a Nutanix storage container configured with Replication Factor 3, how many simultaneous failures can the data tolerate? Answer concisely with a number. | regex: `\b2\b|\btwo\b` |
+| nutanix-nearsync-rpo | recent | For Nutanix AHV NearSync replication, what is the internal replication interval, in seconds, that underlies its near one minute RPO? Answer concisely. | regex: `(?i)\b20\s*-?\s*sec` |
+| nutanix-rf3-failures | stable | On a Nutanix storage container configured with Replication Factor 3, how many simultaneous failures can the data tolerate? Answer concisely with a number. | regex: `(?i)\b2\b|\btwo\b` |
 | nutanix-cvm-ram | stable | On production Nutanix nodes, what is the typical memory allocation range, in GB, reserved for the Controller VM? Answer concisely with both numbers. | contains_all: `32``, ``48` |
 
 ## Skill vs no-skill — overall

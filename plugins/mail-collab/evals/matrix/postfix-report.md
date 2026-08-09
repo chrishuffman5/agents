@@ -1,6 +1,6 @@
 # postfix — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `mail-collab` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `mail-collab` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| postfix-tlsrpt-version | recent | Which Postfix release first added support for TLSRPT reporting under RFC 8460? Answer concisely with the version number. | regex: `\b3\.10\b` |
+| postfix-tlsrpt-version | recent | Which Postfix release first added support for TLSRPT reporting under RFC 8460? Answer concisely with the version number. | regex: `(?i)\b3\.10\b` |
 | postfix-pipelining-default | recent | In Postfix, is the smtpd_forbid_unauth_pipelining protection enabled by default starting in version 3.10, compared to version 3.9 where it was merely available as an option? Answer in one sentence. | regex: `(?i)(\byes\b|default)` |
 | postfix-virtual-domain-conflict | stable | In Postfix configuration, is it acceptable to list the same domain in both mydestination and virtual_mailbox_domains at the same time? Answer in one sentence. | regex: `(?i)(\bno\b|never|not\b)` |
 

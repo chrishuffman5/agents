@@ -1,7 +1,7 @@
 {
   "skill": "newrelic",
   "plugin": "monitoring",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -24,7 +24,7 @@
       "prompt": "By default, how many days does New Relic retain ingested log data? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b30\\b"
+        "value": "(?i)\\b30\\b"
       },
       "source": "plugins/monitoring/skills/newrelic/SKILL.md - Pricing Overview section, default retention lists Logs 30 days"
     },
@@ -34,7 +34,7 @@
       "prompt": "In an NRQL query, if you do not specify a LIMIT clause on a FACET, how many results are returned by default? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b10\\b"
+        "value": "(?i)\\b10\\b"
       },
       "source": "plugins/monitoring/skills/newrelic/SKILL.md - Common Pitfalls number 4, FACET queries default to 10 results"
     }

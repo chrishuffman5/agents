@@ -1,7 +1,7 @@
 {
   "skill": "kvm",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In KVM and libvirt, when a VM's vCPU count exceeds a single NUMA node's core count and the VM ends up spanning multiple NUMA nodes, roughly what memory latency penalty results? Answer concisely with a percentage range.",
       "expected": {
         "type": "regex",
-        "value": "30.{0,6}40"
+        "value": "(?i)30.{0,6}40"
       },
       "source": "plugins/virtualization/skills/kvm/SKILL.md - Common Pitfalls #5: over-allocating vCPUs beyond NUMA node causes 30-40% memory latency penalty"
     },

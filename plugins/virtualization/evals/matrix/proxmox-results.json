@@ -1,7 +1,7 @@
 {
   "skill": "proxmox",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -36,7 +36,7 @@
       "prompt": "In a 3 node Proxmox VE cluster, how many node votes are needed to maintain quorum? Answer concisely with a number.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\b|\\btwo\\b"
+        "value": "(?i)\\b2\\b|\\btwo\\b"
       },
       "source": "plugins/virtualization/skills/proxmox/SKILL.md - Clustering: Quorum requires majority of votes; 3 nodes = quorum at 2"
     }

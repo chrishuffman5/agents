@@ -1,6 +1,6 @@
 # censys — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -10,7 +10,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 |---|---|---|---|
 | censys-zmap-scan-time | recent | Roughly how long does it take for ZMap, the high-speed scanner developed at Censys, to scan the entire IPv4 address space? Answer concisely. | regex: `(?i)45\s*min` |
 | censys-ipv4-address-count | stable | Approximately how many IPv4 addresses does Censys index through its internet-wide scanning? Answer concisely. | regex: `(?i)4\.3\s*(billion|bn)` |
-| censys-asm-onboarding-time | recent | After providing seeds during Censys ASM onboarding, how long does it typically take before initial results are available? Answer concisely. | regex: `4\D{1,5}8\s*hours` |
+| censys-asm-onboarding-time | recent | After providing seeds during Censys ASM onboarding, how long does it typically take before initial results are available? Answer concisely. | regex: `(?i)4\D{1,5}8\s*hours` |
 
 ## Skill vs no-skill — overall
 

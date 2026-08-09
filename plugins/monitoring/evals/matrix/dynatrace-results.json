@@ -1,7 +1,7 @@
 {
   "skill": "dynatrace",
   "plugin": "monitoring",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "In Dynatrace full-stack monitoring, how many Host Units does OneAgent consume when monitoring a host with 64 GB of RAM? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b8\\b"
+        "value": "(?i)\\b8\\b"
       },
       "source": "plugins/monitoring/skills/dynatrace/SKILL.md - How to Approach Tasks number 3 and Common Pitfalls number 1, a 64 GB host consumes 8 Host Units in full-stack mode"
     },

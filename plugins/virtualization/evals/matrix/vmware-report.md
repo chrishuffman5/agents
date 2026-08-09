@@ -1,6 +1,6 @@
 # vmware — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| vmware-ha-failure-detection | stable | In vSphere HA, heartbeats are exchanged every second. After how many seconds of missed heartbeats is a host declared failed? Answer concisely with a number. | regex: `\b12\b|\btwelve\b` |
+| vmware-ha-failure-detection | stable | In vSphere HA, heartbeats are exchanged every second. After how many seconds of missed heartbeats is a host declared failed? Answer concisely with a number. | regex: `(?i)\b12\b|\btwelve\b` |
 | vmware-vcsa-xlarge | stable | What is the maximum number of ESXi hosts that a vCenter Server Appliance X-Large deployment size is rated to manage? Answer concisely with a number. | regex: `(?i)2,?500` |
 | vmware-9-licensing | recent | As of vSphere 9.x, did Broadcom move VMware licensing to a subscription only, per core model? Answer in one sentence. | regex: `(?i)(\byes\b|subscription-only|per-core)` |
 

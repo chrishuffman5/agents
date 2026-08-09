@@ -62,8 +62,14 @@ Field by field:
   - `contains_all` — every value must appear as a case-insensitive substring of the answer.
     Values are chosen to be distinctive tokens (version numbers, exact names ≥4 chars) —
     never short words like "all" or "no" that would substring-match almost anything.
-  - `regex` — a single .NET regex, usually `(?i)` with `\b` word boundaries, written to accept
-    reasonable phrasings of the same fact (e.g. `(?i)(1\s*hour|one\s*hour|3,?600)`).
+  - `regex` — a single .NET regex with `\b` word boundaries, written to accept reasonable
+    phrasings of the same fact (e.g. `(?i)(1\s*hour|one\s*hour|3,?600)`). **Every regex spec
+    must start with `(?i)`** — .NET regex is case-sensitive by default, and a bare `\bfive\b`
+    silently fails against "Five" (this bit us: a correct skill-arm answer graded `fail` until
+    a 66-spec audit prepended `(?i)` everywhere and `regrade.ps1` rescued the stored answers).
+    Also keep the prompt's framing aligned with the cited source's framing — the same incident
+    exposed a prompt asking "levels *under* the root" against a source stating "5 levels
+    *including* root": the skill taught the nuance and was penalized for it.
 - **`knowledge`** — a task classification used in reporting, not grading:
   - `recent` — a fact plausibly *newer or nichier than a model's training data* (version-gated
     features from `references/versions/`, post-cutoff service changes). These are where a skill
@@ -109,6 +115,7 @@ evals/matrix/
 ├── timing-pass.ps1            ← serial re-timing of headline cells (median of N repeats)
 ├── build-report.ps1           ← aggregates the DB into report/results.js
 ├── export-plugin-results.ps1  ← writes per-skill results + reports into each plugin's evals/matrix/
+├── regrade.ps1                ← re-grades stored answers against CURRENT suite specs (no tokens spent)
 ├── pilot-status.ps1           ← one-line status for external monitors
 ├── report/index.html          ← local results dashboard (synthetic-sample fallback until real data exists)
 ├── backup/                    ← zstd parquet dumps of the DB (gitignored)
@@ -344,9 +351,29 @@ Invoke-SqliteQuery -DataSource $db -Query "UPDATE runs SET status='running' WHER
 pwsh -NoProfile -File .\invoke-run.ps1 -Database $db -RunId $runId    # prints DONE/ERROR/REFUSAL line
 ```
 
-**Reproduce a run completely by hand** — the row is self-describing: set the `env_json`
-variables in a fresh shell, `cd` to the row's `workspace`, and paste the row's `command`.
-What you see is exactly what `invoke-run` saw.
+**Reproduce a run completely by hand — the `env_json` gotcha.** The row is self-describing:
+set the `env_json` variables in a fresh shell, `cd` to the row's `workspace`, and paste the
+row's `command`. What you see is exactly what `invoke-run` saw.
+
+The part people miss: **for codex, the skill arm is carried entirely by `CODEX_HOME`** —
+codex has no `--skill` flag; it discovers skills from `$CODEX_HOME\skills\`. Paste a codex
+skill-arm command into a plain shell without first setting
+`$env:CODEX_HOME = 'C:\evals\codex-homes\<plugin>'` and you are silently running under your
+**real** `~/.codex` — recognizable by three tells: a "skill descriptions were shortened to fit
+the 2% skills context budget" item (your real home carries every installed plugin), a
+`models cache` load error (your real home's stale cache), and inflated input tokens. The same
+applies to claude-local cells (`ANTHROPIC_BASE_URL`) and claude cloud cells
+(`CLAUDE_CONFIG_DIR`). When in doubt, don't paste commands — run
+`pwsh -File .\invoke-run.ps1 -Database <db> -RunId <id>`, which applies `env_json` for you.
+
+Proof that a pipeline run actually loaded its skill is in `raw-output.txt`: codex emits
+`command_execution` items when it reads skill files (you'll see it `Get-Content` the skill's
+`references\*.md`), and the skill arm's `input_tokens` are visibly larger than the bare arm's.
+
+**Re-grade without re-running** — suites are the grading source of truth, so after fixing an
+`expected` spec (or a prompt), `./regrade.ps1` re-applies the current specs to every stored
+answer and updates grades in place. `-WhatIf` previews. This is why grade disputes cost zero
+tokens to resolve.
 
 **"Is anything running right now?"**
 
@@ -371,6 +398,19 @@ Invoke-SqliteQuery -DataSource $db -Query "SELECT status, COUNT(*) n FROM runs G
 | Local runs 3–5× slower than usual, RAM pressure | Model too big for VRAM (the qwen3.6:27b failure mode). Keep local weights within GPU memory; check `ollama ps` for the resident size. |
 | Local timings look bimodal | A cold load leaked into the clock — only possible if the warm-up call failed (it logs `WARN: warm-up failed`). Quoted numbers should come from `timing-pass.ps1` medians anyway. |
 | Same-second log lines interleaved oddly in `cloud-dispatch.log` | Normal: pool completions are harvested in batches; per-line timestamps order them. |
+| Manual rerun behaves differently from the pipeline run | `env_json` not applied — you ran under your real harness home (see "the `env_json` gotcha" above). |
+| A correct-looking answer graded `fail` | Suite spec bug: check the regex for a missing `(?i)` or a prompt/source framing mismatch; fix the suite JSON and run `./regrade.ps1`. |
+
+**Known confound — codex web search.** The eval codex homes inherit the operator's
+`config.toml`, which leaves `web_search` at its default (enabled): codex cells in **both arms**
+can and do answer questions from live web search (observed directly — a rerun answered the OU
+question from `docs.aws.amazon.com`). Parity holds (both arms have it), so skill-vs-no-skill
+deltas remain valid, but absolute no-skill accuracy is inflated on "recent" tasks for codex —
+this is the likely explanation for GPT-5.6 Luna's near-perfect no-skill scores. For a
+knowledge-pure experiment, set `web_search = "disabled"` in every eval codex home's
+`config.toml` (a `setup-workspaces.ps1` change) — but that redefines the experiment and breaks
+comparability with data collected before the change, so it's a deliberate decision, not a
+default.
 
 **Log hygiene** — dispatcher logs append forever; truncate between campaigns
 (`Clear-Content C:\evals\logs\*`). If a log balloons, read the last lines first: the

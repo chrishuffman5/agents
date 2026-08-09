@@ -1,6 +1,6 @@
 # redshift — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| redshift-serverless-min-billing-seconds | recent | In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number. | regex: `\b60\b` |
+| redshift-serverless-min-billing-seconds | recent | In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number. | regex: `(?i)\b60\b` |
 | redshift-concurrency-scaling-free-credit | recent | How many free hours of Redshift concurrency scaling credit does a cluster earn per 24-hour period that it is active? Answer with the exact number. | regex: `(?i)(1\s*hour|one\s*hour)` |
 | redshift-columnar-block-size | stable | In Amazon Redshift's columnar storage engine, what is the fixed size of each immutable block that a column's data is broken into on disk? Answer with the exact size. | regex: `(?i)\b1\s*mb\b` |
 

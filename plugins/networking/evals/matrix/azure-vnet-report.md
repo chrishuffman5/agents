@@ -1,6 +1,6 @@
 # azure-vnet — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| azure-vnet-idps-signatures | recent | Azure Firewall Premium ships its IDPS intrusion detection and prevention feature with roughly how many signatures? Answer concisely with the approximate number. | regex: `58,?000` |
+| azure-vnet-idps-signatures | recent | Azure Firewall Premium ships its IDPS intrusion detection and prevention feature with roughly how many signatures? Answer concisely with the approximate number. | regex: `(?i)58,?000` |
 | azure-vnet-fastpath-sku | recent | To enable Azure ExpressRoute FastPath, bypassing the gateway for data plane traffic, which gateway SKU tiers are required? Answer concisely. | contains_all: `UltraPerformance``, ``ErGw3AZ` |
 | azure-vnet-firewall-subnet-size | stable | What is the minimum subnet size required for the AzureFirewallSubnet when deploying Azure Firewall? Answer concisely. | contains_all: `/26` |
 

@@ -8,7 +8,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "On Citrix Hypervisor XenServer, dom0 ships with a small default memory allocation that is not enough for hosts running many VMs. What memory range should you increase dom0 RAM to in order to prevent dom0 memory pressure from degrading guest I/O? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)4\\s*(-|to)\\s*8" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*(-|to)\\s*8"
+      },
       "notes": "plugins/virtualization/skills/citrix/SKILL.md - Common Pitfalls #1: default dom0 RAM (2-4 GB) insufficient; increase to 4-8 GB"
     },
     {
@@ -17,7 +20,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "On XenServer NFS and ext storage repositories, snapshots build VHD parent-child chains. Beyond how many chain levels does read performance start to degrade? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "\\b10\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
       "notes": "plugins/virtualization/skills/citrix/SKILL.md - Common Pitfalls #2: chains deeper than 10 levels degrade read performance"
     },
     {
@@ -26,7 +32,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "In a Citrix Hypervisor XenServer resource pool, can you mix hosts with Intel CPUs and hosts with AMD CPUs in the same pool? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|cannot|not\\s+be\\s+mixed|same\\s+vendor)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|not\\s+be\\s+mixed|same\\s+vendor)"
+      },
       "notes": "plugins/virtualization/skills/citrix/SKILL.md - Common Pitfalls #4: pools require CPUs from the same vendor"
     },
     {
@@ -35,7 +44,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "On Microsoft Azure, if you run the command to stop a VM without deallocating it, does compute billing for that VM actually stop? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|continues?|remains?\\s+allocated|still\\s+(be\\s+)?bill)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|continues?|remains?\\s+allocated|still\\s+(be\\s+)?bill)"
+      },
       "notes": "plugins/virtualization/skills/cloud-vms/SKILL.md - Key Billing Differences: az vm stop halts OS but keeps VM allocated, billing continues; must use az vm deallocate"
     },
     {
@@ -44,7 +56,12 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "On Google Compute Engine, what is the storage capacity of a single local SSD device you can attach to an instance? Answer concisely with the number of GB.",
-      "expected": { "type": "contains_all", "value": ["375"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "375"
+        ]
+      },
       "notes": "plugins/virtualization/skills/cloud-vms/SKILL.md - Storage table: Ephemeral row, GCP Local SSD (375 GB each)"
     },
     {
@@ -53,7 +70,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "Roughly what maximum percentage discount off pay as you go pricing can Azure Spot VMs offer? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b80\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b80\\b"
+      },
       "notes": "plugins/virtualization/skills/cloud-vms/SKILL.md - Key Conceptual Differences table: Preemptible/Spot row, Azure Spot VMs (~80% off)"
     },
     {
@@ -62,7 +82,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "In KVM and libvirt, when a VM's vCPU count exceeds a single NUMA node's core count and the VM ends up spanning multiple NUMA nodes, roughly what memory latency penalty results? Answer concisely with a percentage range.",
-      "expected": { "type": "regex", "value": "30.{0,6}40" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30.{0,6}40"
+      },
       "notes": "plugins/virtualization/skills/kvm/SKILL.md - Common Pitfalls #5: over-allocating vCPUs beyond NUMA node causes 30-40% memory latency penalty"
     },
     {
@@ -71,7 +94,12 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "On RHEL 9 and newer, and on Fedora 36 and newer, which modular libvirt daemon is the default for managing KVM and QEMU, replacing the older monolithic libvirtd? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["virtqemud"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "virtqemud"
+        ]
+      },
       "notes": "plugins/virtualization/skills/kvm/SKILL.md - libvirt Management table: virtqemud is the modular daemon, default on RHEL 9+, Fedora 36+"
     },
     {
@@ -80,7 +108,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "In KVM and libvirt performance tuning guidance, at what minimum VM memory size do 1 GB hugepages start providing a significant benefit? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)\\b8\\+?\\s*gb" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\+?\\s*gb"
+      },
       "notes": "plugins/virtualization/skills/kvm/SKILL.md - Common Pitfalls #6: VMs with 8+ GB RAM benefit significantly from 1 GB hugepages"
     },
     {
@@ -89,7 +120,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "For Nutanix AHV NearSync replication, what is the internal replication interval, in seconds, that underlies its near one minute RPO? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b20\\s*-?\\s*sec" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b20\\s*-?\\s*sec"
+      },
       "notes": "plugins/virtualization/skills/nutanix/SKILL.md - Data Protection table: NearSync 1 minute RPO (20-sec internal), shadow clone-based change tracking"
     },
     {
@@ -98,7 +132,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "On a Nutanix storage container configured with Replication Factor 3, how many simultaneous failures can the data tolerate? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "\\b2\\b|\\btwo\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\b|\\btwo\\b"
+      },
       "notes": "plugins/virtualization/skills/nutanix/SKILL.md - DSF table: Replication Factor RF3 (3 copies, 2 failures)"
     },
     {
@@ -107,7 +144,13 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "On production Nutanix nodes, what is the typical memory allocation range, in GB, reserved for the Controller VM? Answer concisely with both numbers.",
-      "expected": { "type": "contains_all", "value": ["32", "48"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "32",
+          "48"
+        ]
+      },
       "notes": "plugins/virtualization/skills/nutanix/SKILL.md - Node Architecture: CVM typically 32-48 GB RAM on production nodes"
     },
     {
@@ -116,7 +159,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "For a Proxmox or a KVM and libvirt cluster to support HA without adding a QDevice, how many physical nodes are recommended as the minimum? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "\\b3\\b|\\bthree\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\b|\\bthree\\b"
+      },
       "notes": "plugins/virtualization/skills/overview/SKILL.md - High Availability and Fault Tolerance table: Proxmox and KVM/libvirt minimum nodes for HA = 3 (2 + QDevice)"
     },
     {
@@ -125,7 +171,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "Across major hypervisor platforms, is live migration of a running VM directly between an Intel based host and an AMD based host supported? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not\\s+supported|cannot)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not\\s+supported|cannot)"
+      },
       "notes": "plugins/virtualization/skills/overview/SKILL.md - Common Pitfalls #2: Intel-to-AMD live migration is not supported on any platform"
     },
     {
@@ -134,7 +183,12 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "General virtualization platform comparisons note a VMware feature introduced in 2025 for partitioning a single physical GPU across multiple VMs, alongside vGPU and DDA. What is that feature called? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["GPU-P"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "GPU-P"
+        ]
+      },
       "notes": "plugins/virtualization/skills/overview/SKILL.md - Technology Comparison table: GPU passthrough row, VMware column lists vGPU, DDA, GPU-P (2025)"
     },
     {
@@ -143,7 +197,12 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "What client side encryption algorithm does Proxmox Backup Server use to protect backup data? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["AES-256"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AES-256"
+        ]
+      },
       "notes": "plugins/virtualization/skills/proxmox/SKILL.md - Backup section: PBS client-side encryption with AES-256-GCM"
     },
     {
@@ -152,7 +211,12 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "Starting with Proxmox VE 9.x, which packet filtering framework fully replaces iptables as the firewall backend? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["nftables"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "nftables"
+        ]
+      },
       "notes": "plugins/virtualization/skills/proxmox/SKILL.md - Version Notes: Proxmox VE 9.x - Full nftables firewall backend (replaces iptables)"
     },
     {
@@ -161,7 +225,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "In a 3 node Proxmox VE cluster, how many node votes are needed to maintain quorum? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "\\b2\\b|\\btwo\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\b|\\btwo\\b"
+      },
       "notes": "plugins/virtualization/skills/proxmox/SKILL.md - Clustering: Quorum requires majority of votes; 3 nodes = quorum at 2"
     },
     {
@@ -170,7 +237,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "In vSphere HA, heartbeats are exchanged every second. After how many seconds of missed heartbeats is a host declared failed? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "\\b12\\b|\\btwelve\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b12\\b|\\btwelve\\b"
+      },
       "notes": "plugins/virtualization/skills/vmware/SKILL.md - vSphere HA: heartbeats every second, host declared failed after 12 seconds of missed heartbeats"
     },
     {
@@ -179,7 +249,10 @@
       "plugin": "virtualization",
       "knowledge": "stable",
       "prompt": "What is the maximum number of ESXi hosts that a vCenter Server Appliance X-Large deployment size is rated to manage? Answer concisely with a number.",
-      "expected": { "type": "regex", "value": "(?i)2,?500" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2,?500"
+      },
       "notes": "plugins/virtualization/skills/vmware/SKILL.md - vCenter Server: deployment sizes from Tiny (10 hosts/100 VMs) to X-Large (2,500 hosts/35,000 VMs)"
     },
     {
@@ -188,7 +261,10 @@
       "plugin": "virtualization",
       "knowledge": "recent",
       "prompt": "As of vSphere 9.x, did Broadcom move VMware licensing to a subscription only, per core model? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\byes\\b|subscription-only|per-core)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|subscription-only|per-core)"
+      },
       "notes": "plugins/virtualization/skills/vmware/SKILL.md - Version-specific guidance table: vSphere 9.x - Broadcom licensing changes (subscription-only, per-core)"
     }
   ]

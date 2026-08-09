@@ -1,6 +1,6 @@
 # prometheus — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | prometheus-series-ram-cost | recent | Roughly how much RAM does each active Prometheus time series cost? Answer concisely. | regex: `(?i)3.{0,6}6\s*kb` |
-| prometheus-alertmanager-cluster-size | stable | How many nodes are recommended when running Alertmanager as a cluster in production? Answer concisely. | regex: `\b3\b` |
+| prometheus-alertmanager-cluster-size | stable | How many nodes are recommended when running Alertmanager as a cluster in production? Answer concisely. | regex: `(?i)\b3\b` |
 | prometheus-default-retention | stable | What is the default local TSDB retention period for Prometheus if you do not configure it otherwise? Answer concisely. | regex: `(?i)15[\s-]*(day|d\b)` |
 
 ## Skill vs no-skill — overall

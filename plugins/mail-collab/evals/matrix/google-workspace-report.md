@@ -1,6 +1,6 @@
 # google-workspace — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `mail-collab` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `mail-collab` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| google-workspace-domain-cap | stable | In Google Workspace, what is the maximum number of domains, combining primary, alias, and secondary domains, that a single account can have? Answer concisely. | regex: `\b600\b` |
-| google-workspace-dkim-bit | stable | When generating a new DKIM signing key for a domain in the Google Workspace Admin Console, what key length in bits is recommended? Answer concisely. | regex: `\b2048\b` |
+| google-workspace-domain-cap | stable | In Google Workspace, what is the maximum number of domains, combining primary, alias, and secondary domains, that a single account can have? Answer concisely. | regex: `(?i)\b600\b` |
+| google-workspace-dkim-bit | stable | When generating a new DKIM signing key for a domain in the Google Workspace Admin Console, what key length in bits is recommended? Answer concisely. | regex: `(?i)\b2048\b` |
 | google-workspace-gwmme-gap | recent | When migrating from Google Workspace to Microsoft 365 with a tool like GWMME, does the migration bring over Google Chat history and Meet recordings along with email, calendar, and contacts? Answer in one sentence. | regex: `(?i)(\bno\b|does not|doesn't|won't|not\b)` |
 
 ## Skill vs no-skill — overall

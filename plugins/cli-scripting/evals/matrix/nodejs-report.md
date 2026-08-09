@@ -1,6 +1,6 @@
 # nodejs — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
 
 ## The exact prompts used
 
@@ -8,8 +8,8 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| nodejs-temporal-default | recent | Starting with which Node.js version does the Temporal global date and time API become enabled by default without needing an experimental flag? Answer with just the version number. | regex: `\b26\b` |
-| nodejs-module-version-147 | recent | In Node.js 26, native addons like better-sqlite3 must be rebuilt after upgrading because NODE_MODULE_VERSION was bumped to what number? Answer with just the number. | regex: `\b147\b` |
+| nodejs-temporal-default | recent | Starting with which Node.js version does the Temporal global date and time API become enabled by default without needing an experimental flag? Answer with just the version number. | regex: `(?i)\b26\b` |
+| nodejs-module-version-147 | recent | In Node.js 26, native addons like better-sqlite3 must be rebuilt after upgrading because NODE_MODULE_VERSION was bumped to what number? Answer with just the number. | regex: `(?i)\b147\b` |
 | nodejs-sqlite-builtin | stable | Which Node.js built-in module, stabilized in Node 24, provides a synchronous SQLite database API without needing a third-party package like better-sqlite3? Answer with the module's exact name. | contains_all: `node:sqlite` |
 | nodejs-watch-flag | stable | Since Node.js 20, which built-in command-line flag automatically restarts your script whenever a watched file changes, removing the need for a tool like nodemon? Answer with the exact flag. | contains_all: `--watch` |
 

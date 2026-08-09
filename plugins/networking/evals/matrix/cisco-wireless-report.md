@@ -1,6 +1,6 @@
 # cisco-wireless — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | cisco-wireless-mlo-version | recent | Which Cisco IOS-XE wireless release first introduced Wi-Fi 7 Multi-Link Operation support on the Catalyst 9800 WLC? Answer concisely. | contains_all: `17.15` |
-| cisco-wireless-320mhz-channels | recent | In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely. | regex: `\b3\b` |
+| cisco-wireless-320mhz-channels | recent | In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely. | regex: `(?i)\b3\b` |
 | cisco-wireless-cw9170-standard | stable | What Wi-Fi standard do the Cisco CW9170 and CW9178 access points support? Answer concisely. | regex: `(?i)(wi-?fi\s*7|802\.11be)` |
 
 ## Skill vs no-skill — overall

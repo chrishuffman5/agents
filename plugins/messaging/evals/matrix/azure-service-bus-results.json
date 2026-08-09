@@ -1,7 +1,7 @@
 {
   "skill": "azure-service-bus",
   "plugin": "messaging",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "What is the maximum number of subscriptions a single Azure Service Bus topic can have? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2,?000\\b"
+        "value": "(?i)\\b2,?000\\b"
       },
       "source": "plugins/messaging/skills/azure-service-bus/SKILL.md - Topics and Subscriptions section: up to 2,000 subscriptions per topic"
     },

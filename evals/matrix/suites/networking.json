@@ -205,7 +205,7 @@
       "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "5,?000"
+        "value": "(?i)5,?000"
       },
       "notes": "plugins/networking/skills/aws-vpc/SKILL.md - Up to 5,000 attachments per TGW"
     },
@@ -217,7 +217,7 @@
       "prompt": "In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount.",
       "expected": {
         "type": "regex",
-        "value": "0\\.01"
+        "value": "(?i)0\\.01"
       },
       "notes": "plugins/networking/skills/aws-vpc/SKILL.md - Every cross-AZ packet incurs 0.01 USD/GB each direction (0.02 USD/GB round trip)"
     },
@@ -279,7 +279,7 @@
       "prompt": "In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number.",
       "expected": {
         "type": "regex",
-        "value": "1,?000"
+        "value": "(?i)1,?000"
       },
       "notes": "plugins/networking/skills/azure-dns/SKILL.md - Up to 1,000 forwarding rules per ruleset, ruleset linkable to multiple VNets"
     },
@@ -315,7 +315,7 @@
       "prompt": "Azure Firewall Premium ships its IDPS intrusion detection and prevention feature with roughly how many signatures? Answer concisely with the approximate number.",
       "expected": {
         "type": "regex",
-        "value": "58,?000"
+        "value": "(?i)58,?000"
       },
       "notes": "plugins/networking/skills/azure-vnet/SKILL.md - IDPS (Premium only): Yes (58,000+ signatures)"
     },
@@ -588,7 +588,7 @@
       "prompt": "What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\b"
+        "value": "(?i)\\b2\\b"
       },
       "notes": "plugins/networking/skills/cisco-ios-xe/SKILL.md - StackWise vs StackWise Virtual table lists Max members: StackWise Virtual = 2"
     },
@@ -615,7 +615,7 @@
       "prompt": "On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b10\\b"
+        "value": "(?i)\\b10\\b"
       },
       "notes": "plugins/networking/skills/cisco-nxos/SKILL.md - Maximum 10 user checkpoints per device"
     },
@@ -735,7 +735,7 @@
       "prompt": "In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b3\\b"
+        "value": "(?i)\\b3\\b"
       },
       "notes": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - Only 3 non-overlapping 320 MHz channels in the 6 GHz band"
     },
@@ -759,7 +759,7 @@
       "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "5,?000"
+        "value": "(?i)5,?000"
       },
       "notes": "plugins/networking/skills/cloud-networking/SKILL.md - Max attachments: 5,000 per TGW"
     },
@@ -1053,7 +1053,7 @@
       "prompt": "When sizing EfficientIP appliances for DNS Guardian protection, what multiple of normal query volume should you provision for to absorb volumetric DNS attacks? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "10\\s*x"
+        "value": "(?i)10\\s*x"
       },
       "notes": "plugins/networking/skills/efficientip/SKILL.md - Size appliances for 10x normal QPS to handle volumetric attacks"
     },

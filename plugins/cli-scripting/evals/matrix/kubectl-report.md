@@ -1,6 +1,6 @@
 # kubectl — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| kubectl-oomkilled-exit-code | recent | In Kubernetes, when a container is OOMKilled, what numeric exit code does the pod report? Answer with just the number. | regex: `\b137\b` |
+| kubectl-oomkilled-exit-code | recent | In Kubernetes, when a container is OOMKilled, what numeric exit code does the pod report? Answer with just the number. | regex: `(?i)\b137\b` |
 | kubectl-ephemeral-debug-version | recent | The kubectl debug command's ephemeral container feature, used to attach a debugging container to an already-running pod, became available starting with which Kubernetes version? Answer with the version number. | contains_all: `1.23` |
 | kubectl-drain-ignore-daemonsets | stable | Which flag must you pass to kubectl drain to avoid it failing on a node that runs DaemonSet pods, since those pods cannot be evicted normally? Answer with the exact flag. | contains_all: `--ignore-daemonsets` |
 | kubectl-logs-previous-flag | stable | When a container has crashed and restarted, so a plain kubectl logs command shows nothing useful, which flag lets you view the logs from before the crash? Answer with the exact flag. | contains_all: `--previous` |

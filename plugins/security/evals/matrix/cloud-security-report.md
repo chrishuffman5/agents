@@ -1,6 +1,6 @@
 # cloud-security — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| cloud-security-cnapp-origin-year | recent | In what year did Gartner coin the term CNAPP for the converged cloud security platform category? Answer concisely. | regex: `\b2021\b` |
+| cloud-security-cnapp-origin-year | recent | In what year did Gartner coin the term CNAPP for the converged cloud security platform category? Answer concisely. | regex: `(?i)\b2021\b` |
 | cloud-security-cspm-deployment | stable | Does CSPM (Cloud Security Posture Management) typically require agents installed inside the cloud workloads it assesses, or does it work agentlessly? Answer concisely. | regex: `(?i)agentless` |
 | cloud-security-cis-benchmark-levels | recent | What are the three levels of the CIS AWS Foundations Benchmark called, from basic to most stringent? Answer concisely. | contains_all: `Level 1``, ``Level 2``, ``Level 3` |
 

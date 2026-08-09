@@ -1,6 +1,6 @@
 # azure-dns — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -8,7 +8,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | id | knowledge | prompt | expected |
 |---|---|---|---|
-| azure-dns-forwarding-ruleset-limit | recent | In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number. | regex: `1,?000` |
+| azure-dns-forwarding-ruleset-limit | recent | In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number. | regex: `(?i)1,?000` |
 | azure-dns-autoreg-single-zone | recent | In Azure Private DNS, can a single VNet have auto-registration enabled for more than one private DNS zone at the same time? Answer in one sentence. | regex: `(?i)(\bno\b|cannot|only one|single zone)` |
 | azure-dns-dnssec-public-only | stable | Does Azure DNS support DNSSEC on private DNS zones, or only on public zones? Answer in one sentence. | regex: `(?i)(public|not.{0,20}private)` |
 

@@ -8,7 +8,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "For an SQS FIFO queue running in high throughput mode, what is the maximum number of transactions per second the queue can handle? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)70,?000" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)70,?000"
+      },
       "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SQS FIFO section: High-throughput mode up to 70,000 transactions/s"
     },
     {
@@ -17,7 +20,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "What is the maximum number of in-flight, not yet deleted, messages a single standard SQS queue supports? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)120,?000" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)120,?000"
+      },
       "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SQS Standard section: 120,000 in-flight message limit"
     },
     {
@@ -26,7 +32,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "Can an SNS FIFO topic deliver messages to a standard, non-FIFO SQS queue as a subscriber? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)\\bno\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
       "notes": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SNS FIFO Topics: strict ordering and exactly-once to SQS FIFO subscriptions only"
     },
     {
@@ -35,7 +44,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "In Azure Service Bus, what is the default maximum delivery count for a queue before a message is automatically dead-lettered? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)\\b10\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
       "notes": "plugins/messaging/skills/azure-service-bus/SKILL.md - Queues section: Max delivery count default 10"
     },
     {
@@ -44,7 +56,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "What is the maximum number of subscriptions a single Azure Service Bus topic can have? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b2,?000\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2,?000\\b"
+      },
       "notes": "plugins/messaging/skills/azure-service-bus/SKILL.md - Topics and Subscriptions section: up to 2,000 subscriptions per topic"
     },
     {
@@ -53,7 +68,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "On the Premium tier of Azure Service Bus, using AMQP, what is the maximum message size supported? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)100\\s*mb" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100\\s*mb"
+      },
       "notes": "plugins/messaging/skills/azure-service-bus/SKILL.md - Premium Tier section: messages up to 100 MB (AMQP only)"
     },
     {
@@ -62,7 +80,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "What is the maximum message retention duration you can configure on a Google Cloud Pub/Sub topic? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)31\\s*day" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)31\\s*day"
+      },
       "notes": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Topics section: message retention (10 min to 31 days)"
     },
     {
@@ -71,7 +92,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "For a Pub/Sub dead-letter topic, what is the maximum number of delivery attempts you can configure before a message is forwarded to it? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b100\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b100\\b"
+      },
       "notes": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Dead-Letter Topics section: forwarded after 5-100 delivery attempts"
     },
     {
@@ -80,7 +104,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "When publishing to a Pub/Sub topic using an ordering key, what is the per-key publish throughput limit that can create a hot-key bottleneck? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)1\\s*mb" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*mb"
+      },
       "notes": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Anti-Patterns table: hot keys block progress, 1 MBps per key limit"
     },
     {
@@ -89,7 +116,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "In which Apache Kafka release did Share Groups, providing queue-like semantics without partition binding, reach general availability? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b4\\.2\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\.2\\b"
+      },
       "notes": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
     },
     {
@@ -98,7 +128,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "Before Share Groups became generally available in Kafka, in which earlier release were they available as a preview feature? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b4\\.1\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\.1\\b"
+      },
       "notes": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
     },
     {
@@ -107,7 +140,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "Does Apache Kafka natively support message priority the way some traditional brokers do? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not support|does not)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not support|does not)"
+      },
       "notes": "plugins/messaging/skills/kafka/SKILL.md - Kafka vs Traditional Brokers table: Message priority Not supported for Kafka"
     },
     {
@@ -116,7 +152,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "In NATS JetStream, what is the default duration of the message deduplication window used to detect duplicate publishes? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)2\\s*min" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*min"
+      },
       "notes": "plugins/messaging/skills/nats/SKILL.md - Anti-Patterns table: keep Duplicates window as short as practical, default 2min"
     },
     {
@@ -125,7 +164,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "Which NATS server release introduced atomic batch publish and distributed counters? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b2\\.12\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\.12\\b"
+      },
       "notes": "plugins/messaging/skills/nats/SKILL.md - version gates list: atomic batch publish, distributed counters, delayed scheduling, mirror promotion (2.12)"
     },
     {
@@ -134,7 +176,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "For a NATS cluster, why should you use an odd number of nodes such as 3 or 5 rather than an even number? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)split.?brain" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)split.?brain"
+      },
       "notes": "plugins/messaging/skills/nats/SKILL.md - Anti-Patterns table: even-sized clusters risk split-brain; use odd node counts (3 or 5)"
     },
     {
@@ -143,7 +188,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "For event-driven architectures spanning a message broker and external systems, is achieving true exactly-once delivery generally considered practical? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)(impractical|not\\s*practical)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(impractical|not\\s*practical)"
+      },
       "notes": "plugins/messaging/skills/overview/SKILL.md - Messaging Principles 1: true exactly-once across broker and external systems is impractical"
     },
     {
@@ -152,7 +200,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "Among the major cloud providers, does Google Cloud offer a distinct native point-to-point queue service separate from its pub/sub offering? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)\\bno\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
       "notes": "plugins/messaging/skills/overview/SKILL.md - Cloud provider alignment table: GCP native queue column is blank; Pub/Sub handles both queue and pub/sub patterns"
     },
     {
@@ -161,7 +212,12 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "For a workload that needs sub-millisecond, fire-and-forget message delivery, which messaging technology is typically recommended? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["NATS"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "NATS"
+        ]
+      },
       "notes": "plugins/messaging/skills/overview/SKILL.md - Decision Framework Step 5: sub-millisecond, fire-and-forget -> NATS Core"
     },
     {
@@ -170,7 +226,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "Which Apache Pulsar subscription type delivers messages to many consumers while preserving ordering per key, with individual acknowledgment? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)key.?shared" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)key.?shared"
+      },
       "notes": "plugins/messaging/skills/pulsar/SKILL.md - Subscription Types table: Key_Shared, many consumers per-key, individual ack, per-entity ordering"
     },
     {
@@ -179,7 +238,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "For a non-persistent topic in Apache Pulsar, where is the message data actually stored? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)(broker\\s*memory|memory\\s*only|in.?memory)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(broker\\s*memory|memory\\s*only|in.?memory)"
+      },
       "notes": "plugins/messaging/skills/pulsar/SKILL.md - Topic Types section: Non-persistent topics are broker memory only"
     },
     {
@@ -188,7 +250,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "What does the Pulsar feature called KoP provide? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)kafka" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)kafka"
+      },
       "notes": "plugins/messaging/skills/pulsar/SKILL.md - intro bullet list: KoP (Kafka-on-Pulsar protocol compatibility)"
     },
     {
@@ -197,7 +262,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "As of which RabbitMQ release does Khepri become the default metadata store for brand-new deployments? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b4\\.2\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\.2\\b"
+      },
       "notes": "plugins/messaging/skills/rabbitmq/SKILL.md - Khepri Metadata Store section: default for new deployments in 4.2"
     },
     {
@@ -206,7 +274,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "What is the default delivery limit, meaning number of redeliveries, before a RabbitMQ quorum queue dead-letters a message? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b20\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b20\\b"
+      },
       "notes": "plugins/messaging/skills/rabbitmq/SKILL.md - Quorum Queue Essentials section: default delivery limit 20 redeliveries before dead-lettering"
     },
     {
@@ -215,7 +286,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "In a 7-node RabbitMQ cluster, how many replicas does a quorum queue get by default? Do all 7 nodes hold a copy? Answer concisely.",
-      "expected": { "type": "regex", "value": "\\b3\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\b"
+      },
       "notes": "plugins/messaging/skills/rabbitmq/SKILL.md - Quorum Queue Essentials table: 7 cluster nodes -> default replicas 3 (not all 7)"
     },
     {
@@ -224,7 +298,10 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "Does Redis Streams provide exactly-once processing guarantees out of the box? Answer in one sentence.",
-      "expected": { "type": "regex", "value": "(?i)\\bno\\b" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
       "notes": "plugins/messaging/skills/redis-streams/SKILL.md - comparison table: Exactly-once No (at-least-once with XACK) for Redis Streams"
     },
     {
@@ -233,7 +310,13 @@
       "plugin": "messaging",
       "knowledge": "stable",
       "prompt": "In a Redis Streams consumer group, what is the name of the internal structure that tracks messages delivered but not yet acknowledged? Answer concisely.",
-      "expected": { "type": "contains_all", "value": ["Pending", "Entries"] },
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Pending",
+          "Entries"
+        ]
+      },
       "notes": "plugins/messaging/skills/redis-streams/SKILL.md - Redis Streams as a Message Broker section: unacknowledged messages tracked in Pending Entries List (PEL)"
     },
     {
@@ -242,7 +325,10 @@
       "plugin": "messaging",
       "knowledge": "recent",
       "prompt": "Which Redis Streams command would you use to reassign messages that are stuck pending on a consumer that has failed? Answer concisely.",
-      "expected": { "type": "regex", "value": "(?i)(xautoclaim|xclaim)" },
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(xautoclaim|xclaim)"
+      },
       "notes": "plugins/messaging/skills/redis-streams/SKILL.md - Redis Streams as a Message Broker section: XCLAIM and XAUTOCLAIM reassign stuck messages from failed consumers"
     }
   ]

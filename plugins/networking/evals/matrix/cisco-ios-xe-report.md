@@ -1,6 +1,6 @@
 # cisco-ios-xe — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -10,7 +10,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 |---|---|---|---|
 | cisco-ios-xe-gnmi-port | recent | On a Cisco Catalyst 9000 running IOS-XE, what TCP port does the gNMI agent listen on for gRPC-based streaming telemetry and configuration? Answer concisely. | contains_all: `9339` |
 | cisco-ios-xe-1718-codename | recent | Cisco IOS-XE 17.18 is the current Extended Maintenance LTS release family, spanning 17.16 through 17.18. What is the code name of this release family? Answer concisely. | contains_all: `Fuentes` |
-| cisco-ios-xe-stackwise-members | stable | What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely. | regex: `\b2\b` |
+| cisco-ios-xe-stackwise-members | stable | What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely. | regex: `(?i)\b2\b` |
 
 ## Skill vs no-skill — overall
 

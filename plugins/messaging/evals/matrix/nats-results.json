@@ -1,7 +1,7 @@
 {
   "skill": "nats",
   "plugin": "messaging",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -22,7 +22,7 @@
       "prompt": "Which NATS server release introduced atomic batch publish and distributed counters? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\.12\\b"
+        "value": "(?i)\\b2\\.12\\b"
       },
       "source": "plugins/messaging/skills/nats/SKILL.md - version gates list: atomic batch publish, distributed counters, delayed scheduling, mirror promotion (2.12)"
     },

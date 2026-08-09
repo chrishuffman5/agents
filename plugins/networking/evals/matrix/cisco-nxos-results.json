@@ -1,7 +1,7 @@
 {
   "skill": "cisco-nxos",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -25,7 +25,7 @@
       "prompt": "On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b10\\b"
+        "value": "(?i)\\b10\\b"
       },
       "source": "plugins/networking/skills/cisco-nxos/SKILL.md - Maximum 10 user checkpoints per device"
     },

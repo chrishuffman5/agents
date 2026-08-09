@@ -1,7 +1,7 @@
 {
   "skill": "postfix",
   "plugin": "mail-collab",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "Which Postfix release first added support for TLSRPT reporting under RFC 8460? Answer concisely with the version number.",
       "expected": {
         "type": "regex",
-        "value": "\\b3\\.10\\b"
+        "value": "(?i)\\b3\\.10\\b"
       },
       "source": "plugins/mail-collab/skills/postfix/SKILL.md - Key differences: 3.10 added TLSRPT support; Version Differences table row TLSRPT (RFC 8460): No / New."
     },

@@ -1,6 +1,6 @@
 # elk — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -10,7 +10,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 |---|---|---|---|
 | elk-disk-watermarks | stable | What are the default Elasticsearch disk watermark percentages for the low, high, and flood stages in the Elastic Stack? Answer concisely with all three numbers. | contains_all: `85``, ``90``, ``95` |
 | elk-esql-ga | recent | As of which Elastic Stack version number did ES|QL become generally available? Answer concisely. | contains_all: `8.11` |
-| elk-logsdb-reduction | recent | In Elastic Stack 9.x, roughly what percentage storage reduction does the Logsdb index mode provide for logs versus standard indexing? Answer concisely. | regex: `\b65\b` |
+| elk-logsdb-reduction | recent | In Elastic Stack 9.x, roughly what percentage storage reduction does the Logsdb index mode provide for logs versus standard indexing? Answer concisely. | regex: `(?i)\b65\b` |
 
 ## Skill vs no-skill — overall
 

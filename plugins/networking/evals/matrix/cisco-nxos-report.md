@@ -1,6 +1,6 @@
 # cisco-nxos — cross-harness eval report
 
-Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T12:03:50.1490234-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -9,7 +9,7 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 | id | knowledge | prompt | expected |
 |---|---|---|---|
 | cisco-nxos-105-date | recent | What is the release date of Cisco NX-OS 10.5(5)M, the current recommended production baseline for Nexus 9000? Answer concisely. | contains_all: `March``, ``2026` |
-| cisco-nxos-checkpoint-max | recent | On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely. | regex: `\b10\b` |
+| cisco-nxos-checkpoint-max | recent | On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely. | regex: `(?i)\b10\b` |
 | cisco-nxos-vpc-keepalive-port | stable | On Cisco NX-OS, what UDP port does vPC peer-keepalive traffic use by default? Answer concisely. | contains_all: `3200` |
 
 ## Skill vs no-skill — overall

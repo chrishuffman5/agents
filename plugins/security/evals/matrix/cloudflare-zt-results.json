@@ -1,7 +1,7 @@
 {
   "skill": "cloudflare-zt",
   "plugin": "security",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "How many users does the free tier of Cloudflare Zero Trust support with full Access and Gateway functionality? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b50\\b"
+        "value": "(?i)\\b50\\b"
       },
       "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Free Tier: Up to 50 users, full Access + Gateway functionality"
     },
@@ -22,7 +22,7 @@
       "prompt": "In what year did Cloudflare acquire Area 1 Security, which became its email security product? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b2022\\b"
+        "value": "(?i)\\b2022\\b"
       },
       "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Email Security (Area 1): Cloudflare acquired Area 1 Security in 2022"
     },
@@ -32,7 +32,7 @@
       "prompt": "Approximately how many cities does Cloudflare's anycast network span? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "300\\+?"
+        "value": "(?i)300\\+?"
       },
       "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Network Foundation: Cloudflare operates in 300+ cities"
     }

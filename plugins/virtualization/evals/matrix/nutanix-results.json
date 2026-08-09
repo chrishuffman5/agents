@@ -1,7 +1,7 @@
 {
   "skill": "nutanix",
   "plugin": "virtualization",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 24,
   "runsPlanned": 66,
@@ -12,7 +12,7 @@
       "prompt": "For Nutanix AHV NearSync replication, what is the internal replication interval, in seconds, that underlies its near one minute RPO? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b20\\s*-?\\s*sec"
+        "value": "(?i)\\b20\\s*-?\\s*sec"
       },
       "source": "plugins/virtualization/skills/nutanix/SKILL.md - Data Protection table: NearSync 1 minute RPO (20-sec internal), shadow clone-based change tracking"
     },
@@ -22,7 +22,7 @@
       "prompt": "On a Nutanix storage container configured with Replication Factor 3, how many simultaneous failures can the data tolerate? Answer concisely with a number.",
       "expected": {
         "type": "regex",
-        "value": "\\b2\\b|\\btwo\\b"
+        "value": "(?i)\\b2\\b|\\btwo\\b"
       },
       "source": "plugins/virtualization/skills/nutanix/SKILL.md - DSF table: Replication Factor RF3 (3 copies, 2 failures)"
     },

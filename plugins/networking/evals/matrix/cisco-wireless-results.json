@@ -1,7 +1,7 @@
 {
   "skill": "cisco-wireless",
   "plugin": "networking",
-  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "generated": "2026-08-09T12:03:50.1490234-05:00",
   "partial": true,
   "runsDone": 21,
   "runsPlanned": 66,
@@ -24,7 +24,7 @@
       "prompt": "In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely.",
       "expected": {
         "type": "regex",
-        "value": "\\b3\\b"
+        "value": "(?i)\\b3\\b"
       },
       "source": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - Only 3 non-overlapping 320 MHz channels in the 6 GHz band"
     },
