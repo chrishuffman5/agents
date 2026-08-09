@@ -1,0 +1,114 @@
+{
+  "suite": "cloud-platforms",
+  "description": "Cross-harness matrix suite for the cloud-platforms:azure, cloud-platforms:gcp, and cloud-platforms:overview skills (aws is covered separately in aws.json). Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in these three skills as of 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, niche, or a specific number); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "azure-firewall-idle-cost",
+      "skill": "azure",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "In a hub and spoke Azure network design, if you deploy Azure Firewall Standard and it sits completely idle with zero traffic, does it still generate a bill, and roughly how much per month in dollars? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b912\\b" },
+      "notes": "plugins/cloud-platforms/skills/azure/references/cost.md - Forgotten Azure Firewall trap: 1.25/hr = 912/month even with zero traffic (also stated in references/networking.md)"
+    },
+    {
+      "id": "azure-cobalt-arm",
+      "skill": "azure",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "Microsoft's new Arm based Azure VM series such as Dpsv6 runs on a custom Microsoft designed processor. What is that processor called? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Cobalt 100"] },
+      "notes": "plugins/cloud-platforms/skills/azure/references/compute.md - Arm-Based VMs (Dpsv6 / Cobalt 100): Azure's Arm64 VMs based on Microsoft's custom Cobalt 100 processor, 20-30% savings vs x64 D-series"
+    },
+    {
+      "id": "azure-aks-standard-sla",
+      "skill": "azure",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "When you choose the Standard pricing tier for the Azure Kubernetes Service control plane instead of the Free tier, what SLA percentage does Microsoft guarantee when the cluster spans availability zones? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["99.95"] },
+      "notes": "plugins/cloud-platforms/skills/azure/references/compute.md - AKS Tier Selection table: Standard tier ~73/mo, SLA 99.95% (AZ) / 99.9%"
+    },
+    {
+      "id": "azure-entra-p1-conditional-access",
+      "skill": "azure",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "Which tier of Microsoft Entra ID licensing is the minimum required to enable Conditional Access policies, such as requiring multi factor authentication from untrusted networks? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bP1\\b" },
+      "notes": "plugins/cloud-platforms/skills/azure/references/security.md - License Tiers table: Conditional Access is No on Free, Yes on P1 and P2; P1 is essential for production"
+    },
+    {
+      "id": "gcp-bigquery-cud-discount",
+      "skill": "gcp",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "For BigQuery capacity commitments under the editions pricing model, approximately what percentage discount off the on demand edition rate does a 3 year committed use discount provide? Answer concisely with just the percentage.",
+      "expected": { "type": "regex", "value": "(?i)55\\s*(%|percent)" },
+      "notes": "plugins/cloud-platforms/skills/gcp/references/database.md - BigQuery Pricing Models table: CUD (3yr) ~55% off edition pricing (CUD 1yr ~37%)"
+    },
+    {
+      "id": "gcp-alloydb-analytical-speed",
+      "skill": "gcp",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "How many times faster is Google's AlloyDB for PostgreSQL compared to standard PostgreSQL specifically for analytical query workloads, as opposed to transactional workloads? Answer with just the multiplier, for example a number followed by the letter x.",
+      "expected": { "type": "regex", "value": "(?i)100\\s*(x\\b|times)" },
+      "notes": "plugins/cloud-platforms/skills/gcp/references/database.md - AlloyDB for PostgreSQL: 4x faster than standard PostgreSQL for transactional, 100x faster for analytical queries"
+    },
+    {
+      "id": "gcp-cloudrun-concurrency",
+      "skill": "gcp",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "In Cloud Run's request based concurrency model, what is the maximum number of concurrent requests a single container instance can be configured to handle, as opposed to AWS Lambda which allows only one request per instance at a time? Answer with just the number.",
+      "expected": { "type": "contains_all", "value": ["1000"] },
+      "notes": "plugins/cloud-platforms/skills/gcp/references/compute.md - Cloud Run Concurrency Model: single instance handles up to 1000 concurrent requests (configurable 1-1000), vs Lambda's 1 invocation per instance"
+    },
+    {
+      "id": "gcp-spanner-truetime",
+      "skill": "gcp",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "Besides GPS receivers, what other hardware time source does Cloud Spanner's TrueTime API use to synchronize clocks across regions and provide external consistency? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["atomic clock"] },
+      "notes": "plugins/cloud-platforms/skills/gcp/references/database.md - Cloud Spanner: TrueTime (GPS + atomic clocks) enables external consistency across continents"
+    },
+    {
+      "id": "overview-migration-r-count",
+      "skill": "overview",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "In cloud migration planning, application portfolios are typically assessed against a set of standard strategies often nicknamed by a letter, covering options such as retire, rehost, and refactor. How many distinct strategies does this framework include in total? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b(seven|7)\\b" },
+      "notes": "plugins/cloud-platforms/skills/overview/references/migration.md - The 7 Rs Framework: Retire, Retain, Rehost, Relocate, Replatform, Refactor, Repurchase"
+    },
+    {
+      "id": "overview-relocate-vmware",
+      "skill": "overview",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "In the cloud migration strategy framework, one strategy called Relocate refers specifically to moving workloads without changing the underlying hypervisor platform. Which specific virtualization technology does Relocate usually refer to moving between cloud provider environments? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["VMware"] },
+      "notes": "plugins/cloud-platforms/skills/overview/references/migration.md - Relocate (Hypervisor-Level Lift and Shift): move VMware VMs to cloud VMware environment without re-platforming"
+    },
+    {
+      "id": "overview-finops-phases",
+      "skill": "overview",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "The FinOps Foundation framework breaks cloud financial management into three iterative phases that organizations cycle through continuously rather than complete once. Name all three phases in order. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Inform", "Optimize", "Operate"] },
+      "notes": "plugins/cloud-platforms/skills/overview/references/finops.md - FinOps Foundation Framework: Phase 1 Inform, Phase 2 Optimize, Phase 3 Operate"
+    },
+    {
+      "id": "overview-gcp-labels-tags",
+      "skill": "overview",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "When applying consistent cost allocation tagging across a multi cloud environment that includes Google Cloud, practitioners sometimes get tripped up because GCP uses two different terms for similar sounding concepts. Which term does GCP reserve specifically for the key value metadata used in billing and cost allocation: labels or tags? Answer concisely with just the correct term.",
+      "expected": { "type": "regex", "value": "(?i)\\blabels\\b" },
+      "notes": "plugins/cloud-platforms/skills/overview/references/finops.md - GCP Labeling Note: GCP distinguishes labels (billing/cost allocation) from tags (firewall rule targeting); for cost allocation, use labels"
+    }
+  ]
+}
