@@ -21,6 +21,7 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
 # pwsh -File binds "a,b,c" as ONE string (no array conversion) — normalize either style
 if ($OnlySuites) { $OnlySuites = @($OnlySuites | ForEach-Object { $_ -split ',' } | Where-Object { $_ }) }
+function Write-Log { param([string]$Message) Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Message" }
 Import-Module PSSQLite
 Import-Module (Join-Path $PSScriptRoot 'MatrixRunner.psm1') -Force
 $cfg = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
@@ -30,7 +31,7 @@ $launched = 0
 
 if ($ResetStale) {
     $n = Reset-StaleRuns -Database $DbPath -OlderThanMinutes $timeoutMin
-    Write-Host "reset $n stale running rows back to queued"
+    Write-Log "reset $n stale running rows back to queued"
     return
 }
 
@@ -55,16 +56,17 @@ function Invoke-CloudPool {
     $cfg.throttle.PSObject.Properties | ForEach-Object { $caps[$_.Name] = [int]$_.Value }
     if ($OnlyProvider) { foreach ($k in @($caps.Keys)) { if ($k -ne $OnlyProvider) { $caps.Remove($k) } } }
     $jobs = @{}
+    $refusalStreak = @{}   # provider -> consecutive quota refusals; threshold halts that provider
     while ($true) {
         if (-not $script:stopLaunching) {
             foreach ($p in @($caps.Keys)) {
                 $active = @($jobs.Values | Where-Object { $_.Provider -eq $p })
                 for ($i = $active.Count; $i -lt $caps[$p]; $i++) {
                     if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { $script:stopLaunching = $true; break }
-                    $run = Claim-NextRun -Database $DbPath -Lane cloud -Provider $p -Harness $OnlyHarness -Suites $OnlySuites
+                    $run = Request-NextRun -Database $DbPath -Lane cloud -Provider $p -Harness $OnlyHarness -Suites $OnlySuites
                     if (-not $run) { break }
                     $script:launched++
-                    Write-Host "▶ $($run.run_id)"
+                    Write-Log "▶ $($run.run_id)"
                     $jobs[$run.run_id] = @{ Provider = $p; Started = Get-Date
                         Job = Start-ThreadJob -ArgumentList $invoker, $DbPath, $run.run_id {
                             param($inv, $db, $id)
@@ -78,17 +80,26 @@ function Invoke-CloudPool {
             if ($e.Job.State -in 'Completed', 'Failed') {
                 $out = (Receive-Job $e.Job -ErrorAction SilentlyContinue | Out-String).Trim()
                 Remove-Job $e.Job -Force
-                Write-Host "✔ $out"
+                Write-Log "✔ $out"
+                # Quota backoff: N consecutive refusals on one provider -> stop claiming for it.
+                if ($out -match 'REFUSAL ') {
+                    $refusalStreak[$e.Provider] = 1 + $(if ($refusalStreak.ContainsKey($e.Provider)) { $refusalStreak[$e.Provider] } else { 0 })
+                    if ($refusalStreak[$e.Provider] -ge 8 -and $caps.ContainsKey($e.Provider)) {
+                        $caps.Remove($e.Provider)
+                        Write-Log "WARN: QUOTA EXHAUSTED for provider '$($e.Provider)' ($($refusalStreak[$e.Provider]) consecutive refusals) — halting its launches. Requeue refusals and re-dispatch after the quota window resets."
+                    }
+                } elseif ($out -match 'DONE ') { $refusalStreak[$e.Provider] = 0 }
                 $jobs.Remove($id)
             } elseif (((Get-Date) - $e.Started).TotalMinutes -gt $timeoutMin) {
                 Stop-Job $e.Job -ErrorAction SilentlyContinue; Remove-Job $e.Job -Force
-                Fail-Run -Database $DbPath -RunId $id -Reason "timeout ${timeoutMin}m (dispatcher)"
-                Write-Host "✖ $id timeout"
+                Set-RunError -Database $DbPath -RunId $id -Reason "timeout ${timeoutMin}m (dispatcher)"
+                Write-Log "✖ $id timeout"
                 $jobs.Remove($id)
             }
         }
         $depth = Get-QueueDepth -Database $DbPath -Lane cloud
         Write-Progress -Activity 'cloud sweep' -Status "$depth queued · $($jobs.Count) running · $script:launched launched"
+        if ($jobs.Count -eq 0 -and $caps.Count -eq 0) { Write-Log 'WARN: all providers quota-halted — exiting cloud pool'; break }
         if ($jobs.Count -eq 0 -and ($depth -eq 0 -or $script:stopLaunching)) { break }
         Start-Sleep -Milliseconds 400
     }
@@ -102,7 +113,7 @@ function Invoke-LocalSerial {
     if (Test-Path $lockPath) {
         $owner = Get-Content $lockPath -ErrorAction SilentlyContinue
         if ($owner -and (Get-Process -Id $owner -ErrorAction SilentlyContinue)) {
-            Write-Warning "local lane already running under PID $owner — skipping local phase. Re-run dispatch -Lane local after it finishes."
+            Write-Log "WARN: local lane already running under PID $owner — skipping local phase. Re-run dispatch -Lane local after it finishes."
             return
         }
         Remove-Item $lockPath -Force   # stale lock from a dead process
@@ -124,16 +135,16 @@ function Invoke-LocalSerial {
     foreach ($g in $byTag) {
         if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
         $tag = $g.Name
-        Write-Host "── local weights $tag ($(@($g.Group).Count) harness model ids) : warm-up"
-        try { & ollama run $tag --keepalive 45m 'ok' 2>&1 | Out-Null } catch { Write-Warning "warm-up failed for $tag : $_" }
+        Write-Log "── local weights $tag ($(@($g.Group).Count) harness model ids) : warm-up"
+        try { & ollama run $tag --keepalive 45m 'ok' 2>&1 | Out-Null } catch { Write-Log "WARN: warm-up failed for $tag : $_" }
         foreach ($m in $g.Group) {
-            while ($run = Claim-NextRun -Database $DbPath -Lane local -Model $m -Suites $OnlySuites) {
+            while ($run = Request-NextRun -Database $DbPath -Lane local -Model $m -Suites $OnlySuites) {
                 $script:launched++
-                Write-Host "▶ $($run.run_id)"
+                Write-Log "▶ $($run.run_id)"
                 $sw = [System.Diagnostics.Stopwatch]::StartNew()
                 $out = & pwsh -NoProfile -File $invoker -Database $DbPath -RunId $run.run_id 2>&1 | Out-String
                 $sw.Stop()
-                Write-Host "✔ $($out.Trim())  [outer $([int]$sw.ElapsedMilliseconds)ms]"
+                Write-Log "✔ $($out.Trim())  [outer $([int]$sw.ElapsedMilliseconds)ms]"
                 if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
             }
             if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
@@ -150,4 +161,5 @@ if ($Lane -in 'local', 'all') { Invoke-LocalSerial }
 
 Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT status, COUNT(*) n FROM runs GROUP BY status" |
     Format-Table -AutoSize | Out-String | Write-Host
-Write-Host "dispatch finished: $script:launched runs launched this session. Re-run build-report.ps1 to refresh the report."
+Write-Log "dispatch finished: $script:launched runs launched this session. Re-run build-report.ps1 to refresh the report."
+

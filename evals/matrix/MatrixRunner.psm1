@@ -57,7 +57,7 @@ function Get-QueueDepth {
     (Invoke-SqliteQuery -DataSource $Database -Query $q -SqlParameters @{ lane = $Lane }).n
 }
 
-function Claim-NextRun {
+function Request-NextRun {
     <#
       Atomically claims the next queued run (status -> running). Uses
       UPDATE-then-check-changes() because the bundled SQLite may predate RETURNING.
@@ -130,11 +130,23 @@ function Resolve-RunEnv {
     $out
 }
 
-function Fail-Run {
+function Set-RunError {
     param([Parameter(Mandatory)][string]$Database, [Parameter(Mandatory)][string]$RunId, [string]$Reason)
     Invoke-SqliteQuery -DataSource $Database -Query "
         UPDATE runs SET status='error', finished_at=@now, answer=@r WHERE run_id=@id" `
         -SqlParameters @{ id = $RunId; r = $Reason; now = (Get-Date).ToString('o') } | Out-Null
+}
+
+function Get-RefusalReason {
+    <#
+      Quota/rate-limit refusal detection. ONLY called when normal parsing produced no answer —
+      an answer that merely discusses rate limits can therefore never be misclassified.
+    #>
+    param([string]$Raw)
+    if ($Raw -match '(?i)(usage limit|rate.?limit(ed)?|too many requests|\b429\b|insufficient[_ ]quota|quota exceeded|limit reached|overloaded_error|credit balance|resource[_ ]exhausted)') {
+        return $Matches[1]
+    }
+    return $null
 }
 
 function Read-RunResult {
@@ -144,35 +156,54 @@ function Read-RunResult {
         codex  --json                -> JSONL events; tokens from last turn.completed; answer from -o file
         pi     --mode json           -> typed events; answer from last message_end (message_update is delta-only)
       Codex exit codes are undocumented — grade from the answer artifact, never $LASTEXITCODE.
+      All field access is null-safe: a refusal/error payload missing `usage` must yield a parsed
+      result with `refusal` set (when quota markers are present), never a parser crash.
     #>
     param([Parameter(Mandatory)]$Run, [string]$Raw)
+    $out = @{ answer = $null; tokens_in = $null; tokens_out = $null
+              tokens_cache_read = $null; cost_usd = $null; refusal = $null }
     switch ($Run.harness) {
         'claude' {
-            $j = $Raw | ConvertFrom-Json
-            @{ answer = $j.result
-               tokens_in = $j.usage.input_tokens; tokens_out = $j.usage.output_tokens
-               tokens_cache_read = $j.usage.cache_read_input_tokens
-               cost_usd = $j.total_cost_usd }
+            $j = $null; try { $j = $Raw | ConvertFrom-Json } catch {}
+            if ($j -and $j.PSObject.Properties['result']) { $out.answer = $j.result }
+            if ($j -and $j.PSObject.Properties['usage'] -and $j.usage) {
+                $u = $j.usage
+                if ($u.PSObject.Properties['input_tokens'])            { $out.tokens_in = $u.input_tokens }
+                if ($u.PSObject.Properties['output_tokens'])           { $out.tokens_out = $u.output_tokens }
+                if ($u.PSObject.Properties['cache_read_input_tokens']) { $out.tokens_cache_read = $u.cache_read_input_tokens }
+            }
+            if ($j -and $j.PSObject.Properties['total_cost_usd']) { $out.cost_usd = $j.total_cost_usd }
         }
         'codex' {
             $turn = $Raw -split "`n" | Where-Object { $_ } | ForEach-Object {
                         try { $_ | ConvertFrom-Json } catch {} } |
-                    Where-Object { $_.type -eq 'turn.completed' } | Select-Object -Last 1
+                    Where-Object { $_ -and $_.PSObject.Properties['type'] -and $_.type -eq 'turn.completed' } |
+                    Select-Object -Last 1
             $ansFile = Join-Path $Run.workspace 'last_message.txt'
-            @{ answer = if (Test-Path $ansFile) { Get-Content $ansFile -Raw } else { $null }
-               tokens_in = $turn.usage.input_tokens; tokens_out = $turn.usage.output_tokens
-               tokens_cache_read = $turn.usage.cached_input_tokens; cost_usd = $null }
+            if (Test-Path $ansFile) { $out.answer = Get-Content $ansFile -Raw }
+            if ($turn -and $turn.PSObject.Properties['usage'] -and $turn.usage) {
+                $u = $turn.usage
+                if ($u.PSObject.Properties['input_tokens'])        { $out.tokens_in = $u.input_tokens }
+                if ($u.PSObject.Properties['output_tokens'])       { $out.tokens_out = $u.output_tokens }
+                if ($u.PSObject.Properties['cached_input_tokens']) { $out.tokens_cache_read = $u.cached_input_tokens }
+            }
         }
         'pi' {
             $end = $Raw -split "`n" | Where-Object { $_ } | ForEach-Object {
                        try { $_ | ConvertFrom-Json } catch {} } |
-                   Where-Object { $_.type -eq 'message_end' } | Select-Object -Last 1
-            $text = if ($end.message.content -is [array]) {
-                        ($end.message.content | Where-Object { $_.type -eq 'text' } | ForEach-Object text) -join "`n"
-                    } else { [string]$end.message.content }
-            @{ answer = $text; tokens_in = $null; tokens_out = $null; tokens_cache_read = $null; cost_usd = $null }
+                   Where-Object { $_ -and $_.PSObject.Properties['type'] -and $_.type -eq 'message_end' } |
+                   Select-Object -Last 1
+            if ($end -and $end.PSObject.Properties['message'] -and $end.message -and
+                $end.message.PSObject.Properties['content']) {
+                $out.answer = if ($end.message.content -is [array]) {
+                    ($end.message.content | Where-Object { $_.PSObject.Properties['type'] -and $_.type -eq 'text' } |
+                        ForEach-Object text) -join "`n"
+                } else { [string]$end.message.content }
+            }
         }
     }
+    if (-not $out.answer) { $out.refusal = Get-RefusalReason -Raw $Raw }
+    $out
 }
 
 function Test-ExpectedSpec {
@@ -195,5 +226,6 @@ function Test-ExpectedSpec {
     }
 }
 
-Export-ModuleMember -Function New-CellCommand, Initialize-EvalDb, Get-QueueDepth, Claim-NextRun,
-    Complete-Run, Fail-Run, Read-RunResult, Test-ExpectedSpec, Reset-StaleRuns, Resolve-RunEnv
+Export-ModuleMember -Function New-CellCommand, Initialize-EvalDb, Get-QueueDepth, Request-NextRun,
+    Complete-Run, Set-RunError, Read-RunResult, Test-ExpectedSpec, Reset-StaleRuns, Resolve-RunEnv,
+    Get-RefusalReason

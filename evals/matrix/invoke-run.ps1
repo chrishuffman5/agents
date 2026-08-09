@@ -44,6 +44,19 @@ try {
     $parsed = Read-RunResult -Run $run -Raw $raw
     if (-not $parsed) { $parsed = @{} }
 
+    # Quota/rate-limit refusal: distinct error class (requeueable, never graded as a failure).
+    # Emits REFUSAL so the dispatcher can back off instead of churning the queue.
+    if ($parsed['refusal']) {
+        Set-RunError -Database $Database -RunId $RunId -Reason ("QUOTA-REFUSAL: " + $parsed.refusal)
+        Write-Output ("REFUSAL {0} {1}" -f $RunId, $parsed.refusal)
+        exit 0
+    }
+    if (-not $parsed['answer']) {
+        Set-RunError -Database $Database -RunId $RunId -Reason "no answer parsed (raw at $rawPath)"
+        Write-Output ("ERROR {0} no answer parsed" -f $RunId)
+        exit 0
+    }
+
     # Cost: harness-reported when present (claude); otherwise estimated from config pricing
     # rates ([input, cached, output] USD/Mtok). Local lane costs $0. No rates -> stays NULL.
     if ($null -eq $parsed.cost_usd -or $parsed.cost_usd -is [System.DBNull]) {
@@ -79,7 +92,7 @@ try {
                  -Parsed $parsed -Grade $grade -GradedBy $gradedBy -OutputPath $rawPath
     Write-Output ("DONE {0} {1} {2}ms" -f $RunId, $grade, $sw.ElapsedMilliseconds)
 } catch {
-    if (-not $TimingOnly) { Fail-Run -Database $Database -RunId $RunId -Reason $_.Exception.Message }
+    if (-not $TimingOnly) { Set-RunError -Database $Database -RunId $RunId -Reason $_.Exception.Message }
     Write-Output ("ERROR {0} {1}" -f $RunId, $_.Exception.Message)
 }
 exit 0
