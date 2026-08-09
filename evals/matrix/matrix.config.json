@@ -33,12 +33,13 @@
   "paths": {
     "workRoot": "C:\\evals\\work",
     "pluginDir": "C:\\evals\\plugins",
+    "pluginSingleDir": "C:\\evals\\plugins-single",
     "skillsDir": "C:\\evals\\skills",
     "codexHomesRoot": "C:\\evals\\codex-homes",
     "codexHomeBare": "C:\\evals\\codex-home-bare",
     "secretsFile": "C:\\evals\\secrets.json"
   },
-  "_provisioning": "skill arm per harness: claude loads the owning PLUGIN (--plugin-dir <pluginDir>\\<plugin>); codex gets CODEX_HOME=<codexHomesRoot>\\<plugin> holding that plugin's skills (per-plugin homes keep codex's 8k-char skill-description budget intact); pi loads the single skill (--skill <skillsDir>\\<skill>). skill paths derive from suite task fields — no per-skill config needed.",
+  "_provisioning": "SINGLE-SKILL ARMS (2026-08-09): every harness's skill arm loads ONLY the skill under test — claude via a synthesized one-skill wrapper plugin (--plugin-dir <pluginSingleDir>\\<plugin>--<skill>), codex via CODEX_HOME=<codexHomesRoot>\\<plugin>\\<skill> holding exactly that skill, pi via --skill <skillsDir>\\<plugin>\\<skill>. Rationale: the matrix measures CONTENT value (routing/discovery is covered by each plugin's trigger-evals.json); plugin-level loading bloated context and handicapped skills in large plugins (137 sibling descriptions would blow codex's ~8k skills budget and truncate descriptions). Paths derive from suite task fields.",
   "throttle": { "anthropic": 4, "openai": 4 },
   "pricing": {
     "_comment": "USD per 1M tokens: [input, cached-input, output], as of 2026-08-05 per plugins/ai/skills/model-selection/SKILL.md (cached = 10x cheaper OpenAI, 0.1x Claude). claude reports cost_usd natively (used as-is; these rates are fallback). Sonnet 5 rate is the pre-Sep-1-2026 price.",

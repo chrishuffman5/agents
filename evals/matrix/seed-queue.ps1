@@ -80,7 +80,7 @@ foreach ($laneCfg in $laneSet) {
                             foreach ($kv in $laneCfg.env.PSObject.Properties) {
                                 $env[$kv.Name] = switch ($kv.Value) {
                                     '@skillmode:codexHome' {
-                                        if ($skillMode -eq 'skill') { Join-Path $cfg.paths.codexHomesRoot $task.plugin }
+                                        if ($skillMode -eq 'skill') { Join-Path $cfg.paths.codexHomesRoot (Join-Path $task.plugin $task.skill) }
                                         else                        { $cfg.paths.codexHomeBare } }
                                     default { $kv.Value }
                                 }
@@ -91,7 +91,8 @@ foreach ($laneCfg in $laneSet) {
                             harness = $laneCfg.harness; lane = $laneCfg.lane; model = $m.id
                             effortLiteral = $effortLiteral; skillMode = $skillMode
                             sandbox = $sandbox; workspace = $workspace; prompt = $task.prompt
-                            pluginDirs = @(Join-Path $cfg.paths.pluginDir $task.plugin)
+                            # single-skill wrapper plugin, not the full plugin (see _provisioning)
+                            pluginDirs = @(Join-Path $cfg.paths.pluginSingleDir "$($task.plugin)--$($task.skill)")
                             # plugin-nested: both pilot plugins ship a skill named 'overview'
                             skillPath = Join-Path $cfg.paths.skillsDir (Join-Path $task.plugin $task.skill)
                             codexProfile = if ($m.PSObject.Properties['profile']) { $m.profile } else { $null }

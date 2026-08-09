@@ -71,19 +71,40 @@ foreach ($dst in $codexHomes) {
         if (Test-Path $p) { Copy-Item $p $dst -Force } else { Write-Warning "codex home file missing: $f" }
     }
 }
-# per-plugin homes get ALL that plugin's skills under skills\<name>\
-# NOTE for scale-out: codex caps always-loaded skill name+description text at ~8k chars per
-# home; plugins with very large skill counts (database: 29) may exceed it — split or trim then.
-foreach ($plugin in $plugins) {
-    $skillsSrc = Join-Path $RepoRoot "plugins\$plugin\skills"
-    $dstRoot = Join-Path $EvalRoot "codex-homes\$plugin\skills"
-    if (Test-Path $dstRoot) { Remove-Item $dstRoot -Recurse -Force -Confirm:$false }
-    New-Item -ItemType Directory -Force $dstRoot | Out-Null
-    foreach ($sk in (Get-ChildItem $skillsSrc -Directory)) {
-        Copy-Fresh $sk.FullName (Join-Path $dstRoot $sk.Name)
+# SINGLE-SKILL codex homes: one CODEX_HOME per (plugin, skill), holding exactly the skill
+# under test. Loading a whole plugin's skills bloated context and — for large plugins
+# (security: 137) — blew codex's ~8k-char skills budget, truncating descriptions and
+# handicapping those skills. Routing/discovery is trigger-evals' job, not the matrix's.
+$pairList = @($taskPairs | Sort-Object plugin, skill -Unique)
+foreach ($pair in $pairList) {
+    $homeDir = Join-Path $EvalRoot "codex-homes\$($pair.plugin)\$($pair.skill)"
+    New-Item -ItemType Directory -Force $homeDir | Out-Null
+    foreach ($f in $keep) {
+        $p = Join-Path $codexSrc $f
+        if (Test-Path $p) { Copy-Item $p $homeDir -Force }
     }
-    Write-Host "codex   -> $EvalRoot\codex-homes\$plugin (+ $((Get-ChildItem $skillsSrc -Directory).Count) skills)"
+    Copy-Fresh (Join-Path $RepoRoot "plugins\$($pair.plugin)\skills\$($pair.skill)") (Join-Path $homeDir "skills\$($pair.skill)")
+    $codexHomes.Add($homeDir)
 }
+Write-Host "codex   -> $EvalRoot\codex-homes\<plugin>\<skill> ($($pairList.Count) single-skill homes)"
+# prune legacy per-plugin skills\ dirs so no home carries more than its one skill
+foreach ($plugin in $plugins) {
+    $legacySkills = Join-Path $EvalRoot "codex-homes\$plugin\skills"
+    if (Test-Path $legacySkills) { Remove-Item $legacySkills -Recurse -Force -Confirm:$false }
+}
+
+# SINGLE-SKILL claude wrapper plugins: a minimal one-skill plugin per (plugin, skill) for
+# --plugin-dir, so claude's skill arm loads only the skill under test instead of the whole
+# plugin's description set.
+foreach ($pair in $pairList) {
+    $wrap = Join-Path $EvalRoot "plugins-single\$($pair.plugin)--$($pair.skill)"
+    New-Item -ItemType Directory -Force (Join-Path $wrap '.claude-plugin') | Out-Null
+    @{ name = "eval-$($pair.plugin)-$($pair.skill)"; version = '0.0.1'
+       description = "single-skill eval wrapper: $($pair.plugin)/$($pair.skill)" } |
+        ConvertTo-Json | Set-Content (Join-Path $wrap '.claude-plugin\plugin.json') -Encoding utf8
+    Copy-Fresh (Join-Path $RepoRoot "plugins\$($pair.plugin)\skills\$($pair.skill)") (Join-Path $wrap "skills\$($pair.skill)")
+}
+Write-Host "claude  -> $EvalRoot\plugins-single\<plugin>--<skill> ($($pairList.Count) single-skill wrappers)"
 # legacy aws home keeps its two skills
 foreach ($legacy in @(@('cli-scripting','aws-cli'), @('cloud-platforms','aws'))) {
     $src = Join-Path $RepoRoot "plugins\$($legacy[0])\skills\$($legacy[1])"

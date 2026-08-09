@@ -197,9 +197,19 @@ presence — identical prompt, flags, isolation):
 
 | Harness | skill arm | no-skill arm |
 |---|---|---|
-| claude | `--plugin-dir C:\evals\plugins\<plugin>` | `--disable-slash-commands` |
-| codex | `CODEX_HOME=C:\evals\codex-homes\<plugin>` | `CODEX_HOME=C:\evals\codex-home-bare` |
+| claude | `--plugin-dir C:\evals\plugins-single\<plugin>--<skill>` (one-skill wrapper plugin) | `--disable-slash-commands` |
+| codex | `CODEX_HOME=C:\evals\codex-homes\<plugin>\<skill>` (one-skill home) | `CODEX_HOME=C:\evals\codex-home-bare` |
 | pi | `--skill C:\evals\skills\<plugin>\<skill>` | `--no-skills` |
+
+**Single-skill arms, by design (2026-08-09).** The skill arm loads *only* the skill under
+test — never its siblings. The matrix measures **content value**; routing/discovery ("does the
+right skill fire among its siblings?") is a separate property with its own test, each plugin's
+`evals/trigger-evals.json`. Loading whole plugins bloated every session's context (a security
+task would have carried 137 sibling descriptions), triggered codex's "2% skills context budget"
+truncation on large plugins — handicapping exactly those skills — and measurably burned input
+tokens: converting a codex cell from the multi-skill pilot home to a single-skill home dropped
+input tokens from ~58k to ~10.7k on the same task. Results are likewise recorded per plugin
+(`plugins/<plugin>/evals/matrix/`), never marketplace-wide.
 
 ### 4. Dispatch — `dispatch.ps1`
 
@@ -292,10 +302,11 @@ C:\evals\
 ├── plugins\<plugin>\             ← clean plugin copies (claude --plugin-dir skill arm)
 ├── skills\<plugin>\<skill>\      ← plugin-nested skill copies (pi --skill skill arm)
 │   └── aws-cli\, aws\            ← legacy flat copies from the pilot (older queued rows referenced them)
-├── codex-homes\<plugin>\         ← per-plugin CODEX_HOME: auth.json + config.toml + ollama-*.config.toml
-│   └── skills\<name>\            ←   + that plugin's skills (codex user-scope discovery)
+├── codex-homes\<plugin>\<skill>\ ← one CODEX_HOME per skill: auth.json + config.toml + ollama profiles
+│   └── skills\<skill>\           ←   + ONLY the skill under test (codex user-scope discovery)
+├── plugins-single\<plugin>--<skill>\ ← one-skill wrapper plugins for claude's --plugin-dir
 ├── codex-home-bare\              ← the no-skill CODEX_HOME: same auth/config, no skills\ dir
-├── codex-home-skills\            ← legacy pilot home (aws-cli + aws only); superseded by codex-homes\
+├── codex-home-skills\            ← legacy pilot home (multi-skill; historical rows only — do not reuse)
 ├── claude-home\                  ← scratch CLAUDE_CONFIG_DIR for subscription OAuth
 │   ├── .credentials.json         ←   copied from ~/.claude at setup; the ONLY thing that matters here
 │   └── sessions\, projects\, …   ←   residue claude creates per run; harmless, safe to purge
