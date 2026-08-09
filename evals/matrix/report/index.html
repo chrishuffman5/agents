@@ -230,8 +230,11 @@
   const modelShort = (m) => m.replace(/^(anthropic|openai|ollama)\//, "").replace(":q4_K_M-32k", "");
 
   if (data.sample) $("#banner").classList.add("on");
+  const inFlight = hasReal && (real.status.queued + (real.status.running || 0)) > 0;
   $("#genline").textContent = "suite: " + data.suite + " · generated: " + data.generated +
-    (hasReal && !hasData ? " · real queue present, no completed runs yet — analytic sections show the synthetic preview" : "");
+    (hasReal && !hasData ? " · real queue present, no completed runs yet — analytic sections show the synthetic preview" : "") +
+    (inFlight ? " · SWEEP LIVE — page auto-reloads every 90s (data refreshes when build-report.ps1 runs; the watcher loop runs it every 2 min)" : "");
+  if (inFlight) setTimeout(() => location.reload(), 90000);
 
   /* ---- tooltip layer ---- */
   const tt = $("#tooltip");

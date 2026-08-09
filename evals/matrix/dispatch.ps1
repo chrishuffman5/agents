@@ -106,20 +106,27 @@ function Invoke-LocalSerial {
     }
     Set-Content $lockPath -Value $PID
     try {
+    # Group by the UNDERLYING OLLAMA TAG, not the model string: pi names the same weights
+    # 'ollama/gemma4:12b' while claude/codex use 'gemma4:12b'. One load serves all three
+    # harnesses; warm-up precedes every timed run so cold loads never touch the clock.
     $models = Invoke-SqliteQuery -DataSource $DbPath -Query "
         SELECT DISTINCT model FROM runs WHERE status='queued' AND lane='local' ORDER BY model"
-    foreach ($m in @($models | ForEach-Object model)) {
+    $byTag = @($models | ForEach-Object model) | Group-Object { $_ -replace '^ollama/', '' }
+    foreach ($g in $byTag) {
         if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
-        $tag = $m -replace '^ollama/', ''
-        Write-Host "── local model $tag : warm-up"
+        $tag = $g.Name
+        Write-Host "── local weights $tag ($(@($g.Group).Count) harness model ids) : warm-up"
         try { & ollama run $tag --keepalive 45m 'ok' 2>&1 | Out-Null } catch { Write-Warning "warm-up failed for $tag : $_" }
-        while ($run = Claim-NextRun -Database $DbPath -Lane local -Model $m) {
-            $script:launched++
-            Write-Host "▶ $($run.run_id)"
-            $sw = [System.Diagnostics.Stopwatch]::StartNew()
-            $out = & pwsh -NoProfile -File $invoker -Database $DbPath -RunId $run.run_id 2>&1 | Out-String
-            $sw.Stop()
-            Write-Host "✔ $($out.Trim())  [outer $([int]$sw.ElapsedMilliseconds)ms]"
+        foreach ($m in $g.Group) {
+            while ($run = Claim-NextRun -Database $DbPath -Lane local -Model $m) {
+                $script:launched++
+                Write-Host "▶ $($run.run_id)"
+                $sw = [System.Diagnostics.Stopwatch]::StartNew()
+                $out = & pwsh -NoProfile -File $invoker -Database $DbPath -RunId $run.run_id 2>&1 | Out-String
+                $sw.Stop()
+                Write-Host "✔ $($out.Trim())  [outer $([int]$sw.ElapsedMilliseconds)ms]"
+                if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
+            }
             if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
         }
         try { & ollama stop $tag 2>&1 | Out-Null } catch {}
