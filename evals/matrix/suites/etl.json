@@ -1,0 +1,519 @@
+{
+  "suite": "etl",
+  "description": "Cross-harness matrix suite for the etl plugin's 19 technology skills (adf, airflow, aws-glue, dbt-cloud, dbt-core, duckdb, fivetran, informatica, integration, kafka, nifi, orchestration, overview, spark, ssis, streaming, synapse-pipelines, talend, transformation). Prompts are deliberately neutral (no mention of a skills library or documentation) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md on 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "adf-fabric-migration-assistant",
+      "skill": "adf",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Microsoft offers a migration assistant that helps move Azure Data Factory and Synapse pipelines to Microsoft Fabric. In what month and year did this assistant enter public preview? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["March", "2026"] },
+      "notes": "plugins/etl/skills/adf/SKILL.md - Migration assistant (ADF/Synapse to Fabric) entered public preview March 2026."
+    },
+    {
+      "id": "adf-shir-network",
+      "skill": "adf",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "An Azure Data Factory self-hosted integration runtime communicates with the cloud service using only outbound traffic on a single port, with no inbound ports required. What is that port number? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["443"] },
+      "notes": "plugins/etl/skills/adf/SKILL.md - Integration Runtime Types table: Self-hosted IR Network = Outbound HTTPS only (443), no inbound ports."
+    },
+    {
+      "id": "adf-wrangling-dataflow-deprecated",
+      "skill": "adf",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Azure Data Factory once offered Power Query-based wrangling data flows as an alternative to mapping data flows. In what year were wrangling data flows deprecated? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2024"] },
+      "notes": "plugins/etl/skills/adf/SKILL.md - Wrangling Data Flows (Power Query-based) were deprecated in 2024."
+    },
+    {
+      "id": "airflow-2x-eol",
+      "skill": "airflow",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Apache Airflow 2.x is being phased out in favor of the 3.x line. In what month and year does Airflow 2.x reach end of life? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["April", "2026"] },
+      "notes": "plugins/etl/skills/airflow/SKILL.md - Airflow 2.x reference row: TaskFlow API origin, smart sensors, datasets, grid view, EOL (April 2026) migration."
+    },
+    {
+      "id": "airflow-taskflow-min-version",
+      "skill": "airflow",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "The TaskFlow API using the @task decorator became the recommended way to write Airflow DAGs starting in which Airflow version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.0"] },
+      "notes": "plugins/etl/skills/airflow/SKILL.md - TaskFlow API: The recommended way to write DAGs in Airflow 2.0+ (and especially 3.x)."
+    },
+    {
+      "id": "airflow-xcom-size-limit",
+      "skill": "airflow",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "For reliable use of Airflow XCom to pass small values between tasks, under how many kilobytes should a value be kept? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["48"] },
+      "notes": "plugins/etl/skills/airflow/SKILL.md - XCom Patterns: Keep values small -- Under 48 KB for reliability; over 1 MB causes performance degradation."
+    },
+    {
+      "id": "awsglue-current-runtime",
+      "skill": "aws-glue",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "AWS Glue is a managed service whose runtime evolves through versioned releases. What Spark version ships with the current Glue runtime, version 5.1? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.5.6"] },
+      "notes": "plugins/etl/skills/aws-glue/SKILL.md - Current runtime (Glue 5.1): Spark 3.5.6, Python 3.11, Scala 2.12.18, Java 17."
+    },
+    {
+      "id": "awsglue-flex-savings",
+      "skill": "aws-glue",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "AWS Glue Flex execution is meant for non-urgent batch jobs that can tolerate delayed start times. What percentage cost reduction does Flex execution offer compared to standard execution? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["34"] },
+      "notes": "plugins/etl/skills/aws-glue/SKILL.md - Flex Execution: 34% cost reduction (0.29 dollars/DPU-hr vs 0.44 dollars)."
+    },
+    {
+      "id": "awsglue-crawler-classify",
+      "skill": "aws-glue",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "When an AWS Glue crawler scans a data store, how much of each file does it read in order to classify the file format before applying classifiers? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(first\\s*megabyte|1\\s*mb\\b|one\\s*megabyte)" },
+      "notes": "plugins/etl/skills/aws-glue/SKILL.md - Crawlers and Classifiers: Read first megabyte of each file to classify format."
+    },
+    {
+      "id": "dbtcloud-state-aware-savings",
+      "skill": "dbt-cloud",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "dbt Labs reported an internal compute cost reduction from combining the Fusion engine with state-aware orchestration in dbt Cloud. What percentage reduction did they report? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["64"] },
+      "notes": "plugins/etl/skills/dbt-cloud/SKILL.md - State-Aware Orchestration: dbt Labs reported 64% compute cost reduction internally using Fusion + state-aware orchestration."
+    },
+    {
+      "id": "dbtcloud-semantic-layer-engine",
+      "skill": "dbt-cloud",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What open-source engine powers the dbt Cloud Semantic Layer, generating optimized SQL from metric and dimension definitions? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["MetricFlow"] },
+      "notes": "plugins/etl/skills/dbt-cloud/SKILL.md - Semantic Layer Architecture: MetricFlow (open-source engine) powers the Semantic Layer."
+    },
+    {
+      "id": "dbtcloud-starter-models",
+      "skill": "dbt-cloud",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "On the dbt Cloud Starter licensing tier, how many models per month are included before overage? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)15,?000" },
+      "notes": "plugins/etl/skills/dbt-cloud/SKILL.md - Licensing Tiers table: Starter tier, 15,000 Models/Month."
+    },
+    {
+      "id": "dbtcore-current-version",
+      "skill": "dbt-core",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "As of the current coverage window, what is the current dbt Core release version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.11"] },
+      "notes": "plugins/etl/skills/dbt-core/SKILL.md - Coverage spans the current release (dbt Core 1.11) and recent major features (1.8-1.10)."
+    },
+    {
+      "id": "dbtcore-microbatch-version",
+      "skill": "dbt-core",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "The microbatch incremental materialization strategy in dbt Core, which processes large time-series tables in independent parallel batches, was introduced starting in which dbt Core version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.9"] },
+      "notes": "plugins/etl/skills/dbt-core/SKILL.md - Microbatch Model (1.9+) section heading."
+    },
+    {
+      "id": "dbtcore-deleteinsert-speed",
+      "skill": "dbt-core",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "For a large dbt Core incremental table with more than 100 million rows and a unique key, the delete+insert incremental strategy is recommended over merge. How much faster is delete+insert than merge at that scale? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.4"] },
+      "notes": "plugins/etl/skills/dbt-core/SKILL.md - Incremental Strategy Selection table: delete+insert is 3.4x faster than merge at scale."
+    },
+    {
+      "id": "duckdb-etl-spark-threshold",
+      "skill": "duckdb",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "As a Spark replacement for small-to-medium ETL workloads, up to roughly what data volume does DuckDB comfortably handle on a single machine before a distributed cluster becomes necessary? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["200"] },
+      "notes": "plugins/etl/skills/duckdb/SKILL.md - Why DuckDB for ETL: Datasets under ~200 GB do not need a distributed cluster."
+    },
+    {
+      "id": "duckdb-etl-production-warehouse-size",
+      "skill": "duckdb",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Using the dbt-duckdb adapter, DuckDB can serve as the production warehouse itself for datasets under roughly what size, with dbt managing the transformation layer? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["50"] },
+      "notes": "plugins/etl/skills/duckdb/SKILL.md - dbt-duckdb Integration: For datasets under ~50 GB, DuckDB can serve as the production warehouse itself."
+    },
+    {
+      "id": "duckdb-etl-copy-compression",
+      "skill": "duckdb",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In a typical DuckDB COPY statement that converts a CSV file to Parquet format in one step, which compression codec is used in the example format conversion pattern? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["ZSTD"] },
+      "notes": "plugins/etl/skills/duckdb/SKILL.md - Transformation Patterns: COPY (SELECT * FROM input.csv) TO output.parquet (FORMAT PARQUET, COMPRESSION ZSTD)."
+    },
+    {
+      "id": "fivetran-dbt-merger",
+      "skill": "fivetran",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Fivetran announced a major corporate combination with another data tooling company in the fall of 2025. Which company did Fivetran announce an all-stock merger with, and in what month and year? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["dbt", "October", "2025"] },
+      "notes": "plugins/etl/skills/fivetran/SKILL.md - Fivetran + dbt Labs Merger: In October 2025, Fivetran and dbt Labs announced an all-stock merger."
+    },
+    {
+      "id": "fivetran-base-charge",
+      "skill": "fivetran",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What is Fivetran's minimum monthly base charge per connection, covering up to 1 million Monthly Active Rows? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["$5"] },
+      "notes": "plugins/etl/skills/fivetran/SKILL.md - Pricing: Base charge: $5/connection/month (1 to 1M MAR)."
+    },
+    {
+      "id": "fivetran-hva-lineage",
+      "skill": "fivetran",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Fivetran's High-Volume Agent connector for enterprise database CDC is derived from technology acquired from which company? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["HVR"] },
+      "notes": "plugins/etl/skills/fivetran/SKILL.md - Connector types: HVA -- Enterprise database connectors with log-based CDC, running in customer infrastructure (HVR-derived engine)."
+    },
+    {
+      "id": "informatica-claire-acronym",
+      "skill": "informatica",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In Informatica IDMC, CLAIRE is the name of the AI engine. What does the acronym CLAIRE stand for? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)cloud.{0,2}scale.*real.{0,2}time.*execution" },
+      "notes": "plugins/etl/skills/informatica/SKILL.md - CLAIRE AI Engine: CLAIRE (Cloud-scale AI for Real-time Execution)."
+    },
+    {
+      "id": "informatica-pricing-metric",
+      "skill": "informatica",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What unified, usage-based pricing metric does Informatica IDMC use across all its services? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(IPU|informatica processing units)" },
+      "notes": "plugins/etl/skills/informatica/SKILL.md - Pricing Model: Informatica Processing Units (IPU) -- unified consumption-based metric across all IDMC services."
+    },
+    {
+      "id": "informatica-claire-agents-era",
+      "skill": "informatica",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Informatica introduced CLAIRE Agents, including Data Exploration Agents and Enterprise Discovery Agents, starting in which season and year? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Fall", "2025"] },
+      "notes": "plugins/etl/skills/informatica/SKILL.md - CLAIRE Agents (Fall 2025+): Data Exploration Agents, Enterprise Discovery Agents, ELT Agents."
+    },
+    {
+      "id": "integration-talend-connector-count",
+      "skill": "integration",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many connectors does Talend offer? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["900"] },
+      "notes": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: Talend 900+."
+    },
+    {
+      "id": "integration-nifi-connector-count",
+      "skill": "integration",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many processors does Apache NiFi offer as its connector equivalent? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["300"] },
+      "notes": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: NiFi 300+ processors."
+    },
+    {
+      "id": "integration-fivetran-connector-count",
+      "skill": "integration",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many pre-built connectors does Fivetran offer? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["500"] },
+      "notes": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: Fivetran 500+ pre-built."
+    },
+    {
+      "id": "kafka-etl-zk-removed",
+      "skill": "kafka",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Apache Kafka removed ZooKeeper entirely starting in which major version, becoming KRaft-only? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.0"] },
+      "notes": "plugins/etl/skills/kafka/SKILL.md - KRaft Consensus Timeline: KRaft production-ready in 3.3, ZooKeeper removed in 4.0."
+    },
+    {
+      "id": "kafka-etl-batch-size-default",
+      "skill": "kafka",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What is the default value in bytes of the Kafka producer batch.size configuration parameter? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)16,?384" },
+      "notes": "plugins/etl/skills/kafka/SKILL.md - Producer Patterns, Batching and Compression table: batch.size default 16,384 (16 KB)."
+    },
+    {
+      "id": "kafka-etl-share-groups-ga",
+      "skill": "kafka",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Kafka Share Groups, which provide queue-like consumption semantics, reached general availability in which Kafka version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.2"] },
+      "notes": "plugins/etl/skills/kafka/SKILL.md - Version-Specific Guidance table: Kafka 4.2 -- Share Groups GA, Streams DLQ, CLI standardization (current)."
+    },
+    {
+      "id": "nifi-java-version",
+      "skill": "nifi",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Apache NiFi 2.x requires which major Java version to run, a breaking change from the 1.x line which supported Java 8 or 11? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["21"] },
+      "notes": "plugins/etl/skills/nifi/SKILL.md - NiFi 2.x Modernization table: Java 21 required -- Breaking change from 1.x (Java 8/11)."
+    },
+    {
+      "id": "nifi-backpressure-defaults",
+      "skill": "nifi",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What are the default back pressure thresholds on a NiFi connection queue, in object count and data size? Answer concisely with both numbers.",
+      "expected": { "type": "regex", "value": "(?i)(10,?000.{0,60}1\\s*gb|1\\s*gb.{0,60}10,?000)" },
+      "notes": "plugins/etl/skills/nifi/SKILL.md - Connections: default back pressure thresholds (default: 10,000 objects, 1 GB data size)."
+    },
+    {
+      "id": "nifi-migration-path",
+      "skill": "nifi",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "When migrating an Apache NiFi 1.x cluster to NiFi 2.x, which specific 1.x version must you upgrade to first before moving to 2.x? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.27"] },
+      "notes": "plugins/etl/skills/nifi/SKILL.md - NiFi 2.x Modernization table: Migration path -- Must upgrade to 1.27.0 first, then to 2.x."
+    },
+    {
+      "id": "orchestration-airflow-scaling-model",
+      "skill": "orchestration",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "When comparing orchestration platforms, is Apache Airflow's scalability model characterized as horizontal or vertical? Answer in one word.",
+      "expected": { "type": "regex", "value": "(?i)\\bhorizontal\\b" },
+      "notes": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix: Airflow Scalability = Horizontal (Celery, Kubernetes, or edge executors)."
+    },
+    {
+      "id": "orchestration-ssis-scaling-model",
+      "skill": "orchestration",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "When comparing orchestration platforms, is SSIS scalability characterized as horizontal or vertical scaling? Answer in one word.",
+      "expected": { "type": "regex", "value": "(?i)\\bvertical\\b" },
+      "notes": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix: SSIS Scalability = Vertical (scale-up server), limited SSIS Scale Out."
+    },
+    {
+      "id": "orchestration-airflow-eol",
+      "skill": "orchestration",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "In orchestration tool comparisons, Airflow 2.x is noted as reaching end of life in which month and year? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["April", "2026"] },
+      "notes": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix Version row: Airflow 2.x (EOL April 2026), 3.x (current)."
+    },
+    {
+      "id": "overview-large-scale-stack",
+      "skill": "overview",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "For data platforms handling more than 10 terabytes with a dedicated platform team, which combination of technologies does cross-platform ETL guidance recommend? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Spark", "Kafka", "Airflow"] },
+      "notes": "plugins/etl/skills/overview/SKILL.md - Step 3 Data volume and team skills: greater than 10 TB, dedicated platform team -> Spark/Databricks + Kafka + Airflow + custom EL."
+    },
+    {
+      "id": "overview-small-scale-stack",
+      "skill": "overview",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "For a small team working with under 10 gigabytes of data, which lightweight technology combination does cross-platform ETL guidance recommend? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["DuckDB"] },
+      "notes": "plugins/etl/skills/overview/SKILL.md - Step 3: under 10 GB, small team -> DuckDB or dbt + managed EL (Fivetran)."
+    },
+    {
+      "id": "overview-first-principle",
+      "skill": "overview",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Among the core data integration principles for building ETL pipelines, which property is described as non-negotiable, requiring every pipeline to produce the same result no matter how many times it is rerun with the same input? Answer with the single term used.",
+      "expected": { "type": "regex", "value": "(?i)\\bidempoten" },
+      "notes": "plugins/etl/skills/overview/SKILL.md - Data Integration Principles item 1: Idempotency is non-negotiable."
+    },
+    {
+      "id": "spark-aqe-default-version",
+      "skill": "spark",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Adaptive Query Execution in Apache Spark has been enabled by default since which minor version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.2"] },
+      "notes": "plugins/etl/skills/spark/SKILL.md - AQE (Adaptive Query Execution): Enabled by default since 3.2."
+    },
+    {
+      "id": "spark-35-lts-eol",
+      "skill": "spark",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Apache Spark 3.5 is under extended long-term support. In what month and year does that extended support end? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)nov(ember)?.{0,3}2027" },
+      "notes": "plugins/etl/skills/spark/SKILL.md - Version-Specific Guidance table: 3.5 Extended LTS (EOL Nov 2027)."
+    },
+    {
+      "id": "spark-broadcast-join-threshold",
+      "skill": "spark",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "For Spark join strategy selection, a broadcast hash join is recommended when one side of the join is smaller than roughly what size? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["50"] },
+      "notes": "plugins/etl/skills/spark/SKILL.md - Join Strategy Selection table: One side < 50MB -> Broadcast hash join."
+    },
+    {
+      "id": "ssis-package-deployment-deprecated",
+      "skill": "ssis",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In SSIS, the legacy package deployment model using individual dtsx files and dtsConfig XML files was deprecated in which SSIS version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2025"] },
+      "notes": "plugins/etl/skills/ssis/SKILL.md - Deployment Models table: Package (legacy) Status = Deprecated in 2025."
+    },
+    {
+      "id": "ssis-buffer-defaults",
+      "skill": "ssis",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "What are the default values of the SSIS data flow properties DefaultBufferMaxRows and DefaultBufferSize? Answer concisely with both numbers.",
+      "expected": { "type": "regex", "value": "(?i)(10,?000.{0,80}10\\s*mb|10\\s*mb.{0,80}10,?000)" },
+      "notes": "plugins/etl/skills/ssis/SKILL.md - Buffer Tuning table: DefaultBufferMaxRows 10,000; DefaultBufferSize 10 MB."
+    },
+    {
+      "id": "ssis-2025-announcement-venue",
+      "skill": "ssis",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "SSIS 2025 was announced on a particular Microsoft blog that signaled a strategic shift. Which platform blog was it announced on, rather than the SQL Server blog? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Fabric"] },
+      "notes": "plugins/etl/skills/ssis/SKILL.md - SSIS Future and Deprecation Awareness: SSIS 2025 was announced on the Microsoft Fabric Blog, not the SQL Server blog."
+    },
+    {
+      "id": "streaming-kafka-40-change",
+      "skill": "streaming",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In streaming platform comparisons, which major Kafka version is described as KRaft-only after ZooKeeper removal, alongside a consumer group protocol rewrite? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.0"] },
+      "notes": "plugins/etl/skills/streaming/SKILL.md - Kafka Versions table: 4.0 KRaft-only (ZooKeeper removed), consumer group protocol rewrite."
+    },
+    {
+      "id": "streaming-ksqldb-role",
+      "skill": "streaming",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Within the Kafka ecosystem comparison, what SQL-based component provides a SQL interface over Kafka Streams for stream processing? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["ksqlDB"] },
+      "notes": "plugins/etl/skills/streaming/SKILL.md - Kafka Ecosystem Comparison table: ksqlDB -- SQL interface over Kafka Streams."
+    },
+    {
+      "id": "streaming-kafka-41-sharegroups",
+      "skill": "streaming",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Which Kafka version introduced share groups, adding queue-like semantics on top of topics? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.1"] },
+      "notes": "plugins/etl/skills/streaming/SKILL.md - Kafka Versions table: 4.1 Share groups (queue semantics on topics), improved KRaft."
+    },
+    {
+      "id": "synapse-fabric-growth",
+      "skill": "synapse-pipelines",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "According to the latest platform status assessment, roughly how many customers does Microsoft Fabric have, and what is its year-over-year growth rate? Answer concisely with both figures.",
+      "expected": { "type": "contains_all", "value": ["31,000", "60"] },
+      "notes": "plugins/etl/skills/synapse-pipelines/SKILL.md - Platform Status: Fabric surpassed 2 billion dollars ARR with 31,000+ customers, growing 60% YoY."
+    },
+    {
+      "id": "synapse-data-explorer-retired",
+      "skill": "synapse-pipelines",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Within Azure Synapse Analytics, one preview component was formally retired. Which component was it, and on what date was it retired? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)data explorer.{0,40}october\\s*7,?\\s*2025" },
+      "notes": "plugins/etl/skills/synapse-pipelines/SKILL.md - Platform Status: Retired component: Synapse Data Explorer (Preview) retired October 7, 2025."
+    },
+    {
+      "id": "synapse-no-ssis-ir",
+      "skill": "synapse-pipelines",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Does Azure Synapse Pipelines support the Azure-SSIS integration runtime for running SSIS packages natively, the way standalone Azure Data Factory does? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not support|does not)" },
+      "notes": "plugins/etl/skills/synapse-pipelines/SKILL.md - Synapse Pipelines vs ADF table: Azure-SSIS IR Not supported in Synapse Pipelines -- use standalone ADF."
+    },
+    {
+      "id": "talend-java17-mandatory",
+      "skill": "talend",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Talend made Java 17 a mandatory requirement for all builds and executions starting with which release designation? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["R2025-02"] },
+      "notes": "plugins/etl/skills/talend/SKILL.md - Qlik Acquisition and Current State: Java 17 mandatory (R2025-02): Java 8 support ended."
+    },
+    {
+      "id": "talend-openstudio-freetier-end",
+      "skill": "talend",
+      "plugin": "etl",
+      "knowledge": "recent",
+      "prompt": "Talend Open Studio's free tier was discontinued. On what exact date did the free tier end? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)january\\s*31,?\\s*2024" },
+      "notes": "plugins/etl/skills/talend/SKILL.md - Qlik Acquisition and Current State: Open Studio discontinued: Free tier ended January 31, 2024."
+    },
+    {
+      "id": "talend-gen2-heartbeat-timeout",
+      "skill": "talend",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "Talend Management Console considers a Remote Engine Gen2 connection broken after how many seconds without a heartbeat? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["180"] },
+      "notes": "plugins/etl/skills/talend/SKILL.md - Remote Engines: TMC considers Gen2 connection broken after 180 seconds without heartbeat."
+    },
+    {
+      "id": "transformation-duckdb-scale",
+      "skill": "transformation",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, DuckDB's practical scale limit on a single machine is described as roughly how many gigabytes? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["200"] },
+      "notes": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Scale row: DuckDB Single-machine (~200 GB)."
+    },
+    {
+      "id": "transformation-spark-testing-tools",
+      "skill": "transformation",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, since Apache Spark lacks dbt's built-in testing framework, which manual testing tools are named as options for testing Spark pipelines? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["pytest", "chispa", "deequ"] },
+      "notes": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Testing row: Spark Manual (pytest, chispa, deequ)."
+    },
+    {
+      "id": "transformation-dbtcore-current-version",
+      "skill": "transformation",
+      "plugin": "etl",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, what is listed as the current dbt Core version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.11"] },
+      "notes": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Version row: dbt Core 1.11 (current)."
+    }
+  ]
+}

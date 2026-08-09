@@ -8,10 +8,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Ansible, what is the default value of the forks setting that controls how many hosts are processed in parallel, before an administrator raises it in ansible.cfg? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\b5\\b|\\bfive\\b"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\b5\\b|\\bfive\\b" },
       "notes": "plugins/devops/skills/ansible/references/diagnostics.md and references/architecture.md - forks default is 5 (Too few forks - Default is 5; ansible.cfg comment Parallel host execution (default: 5))"
     },
     {
@@ -20,12 +17,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "In Ansible Automation Platform's Automation Mesh built on Receptor, all communication between control, hop, and execution nodes flows over one single TCP port. Which port number is it? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "27199"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["27199"] },
       "notes": "plugins/devops/skills/ansible/references/aap-platform.md - All mesh communication uses port 27199/TCP (TLS-encrypted); this is the only port required between mesh nodes"
     },
     {
@@ -34,10 +26,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Starting with ansible-core 2.20, if a playbook task calls a builtin module by its short name instead of the fully qualified collection name, does ansible-core still just print a warning, or does the run now fail? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(error|fail)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(error|fail)" },
       "notes": "plugins/devops/skills/ansible/references/versions/2.20.md - Non-FQCN module references now produce errors by default (previously warnings)"
     },
     {
@@ -46,10 +35,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "When automated sync is enabled without a configured Git webhook, roughly how often does the ArgoCD application controller poll the source repository for changes by default? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(3\\s*-?\\s*min|three\\s*min)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(3\\s*-?\\s*min|three\\s*min)" },
       "notes": "plugins/devops/skills/argocd/references/architecture.md - reconciliation flow diagram: Poll/Webhook Every 3 min (default) or on Git webhook; best-practices.md also references the 3-minute poll interval"
     },
     {
@@ -58,12 +44,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "ArgoCD's Application Health Insights feature introduced in the 3.2 release line assigns each application a numeric health score. What is the full numeric range of that score, from lowest to highest? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "0-100"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["0-100"] },
       "notes": "plugins/devops/skills/argocd/references/versions/3.2.md - Health score: Numeric health score (0-100) for applications based on resource health"
     },
     {
@@ -72,12 +53,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "As of the ArgoCD 3.3 release, which version is called out as the oldest release still supported within the 3.x line? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "3.1"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["3.1"] },
       "notes": "plugins/devops/skills/argocd/references/versions/3.3.md - ArgoCD 3.1 is the oldest supported version in the 3.x line - plan upgrades from 3.0 and earlier"
     },
     {
@@ -86,12 +62,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "On Azure DevOps Microsoft-hosted agent pools, the ubuntu-latest image currently maps to which Ubuntu release version? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "24.04"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["24.04"] },
       "notes": "plugins/devops/skills/azure-devops/references/architecture.md - Microsoft-Hosted Agents table: ubuntu-latest | Ubuntu 24.04"
     },
     {
@@ -100,10 +71,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "For a self-hosted Azure DevOps agent to keep working normally, how many major versions behind the Azure DevOps service version can its own agent version fall before that becomes a problem? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\b2\\b|\\btwo\\b"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\b2\\b|\\btwo\\b" },
       "notes": "plugins/devops/skills/azure-devops/references/diagnostics.md - Agent Not Available diagnosis step: Check agent version (must be within 2 major versions of service)"
     },
     {
@@ -112,10 +80,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Azure Pipelines variable precedence, when someone manually queues a run and overrides a variable at queue time, does that queue-time value win over a variable defined in the pipeline YAML, or does the YAML value take priority? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)queue"
-      },
+      "expected": { "type": "regex", "value": "(?i)queue" },
       "notes": "plugins/devops/skills/azure-devops/references/architecture.md - Variable Precedence (Highest to Lowest): 1. Queue-time variables (manual run with override), 2. Pipeline YAML variables, ..."
     },
     {
@@ -124,12 +89,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "In Bicep, which specific compiler error code is raised when a template references a symbol that has not actually been defined anywhere? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "BCP062"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["BCP062"] },
       "notes": "plugins/devops/skills/bicep/references/diagnostics.md - Bicep Compilation Errors list: BCP062: Referenced symbol is not defined"
     },
     {
@@ -138,10 +98,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "When you deploy a Bicep or ARM template without explicitly setting a deployment mode, does Azure Resource Manager default to Incremental mode or Complete mode? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)incremental"
-      },
+      "expected": { "type": "regex", "value": "(?i)incremental" },
       "notes": "plugins/devops/skills/bicep/references/architecture.md - Deployment Modes table: Incremental (default) - Add/update resources, leave existing resources untouched"
     },
     {
@@ -150,12 +107,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "For a typical Bicep parameter validating a storage account name with minLength and maxLength decorators, what character length range is commonly enforced? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "3-24"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["3-24"] },
       "notes": "plugins/devops/skills/bicep/references/best-practices.md - minLength(3) maxLength(24), description Storage account name (3-24 chars, lowercase and numbers only)"
     },
     {
@@ -164,10 +116,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Chef Infra's attribute precedence hierarchy, which attribute source always wins over every other level, including role override attributes? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(automatic|ohai)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(automatic|ohai)" },
       "notes": "plugins/devops/skills/chef/SKILL.md - Attribute Precedence list, level 8: Automatic (Ohai) attributes - always wins"
     },
     {
@@ -176,12 +125,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "What is the name of the Erlang-based API server component inside Chef Server that handles every client request? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Erchef"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Erchef"] },
       "notes": "plugins/devops/skills/chef/references/architecture.md - Chef Server Components table: Erchef - API server (Erlang) - handles all client requests"
     },
     {
@@ -190,12 +134,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "When writing a modern custom resource for Chef Infra 18.x, what property line is commonly set near the top of the resource file to enable unified mode? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "unified_mode"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["unified_mode"] },
       "notes": "plugins/devops/skills/chef/references/architecture.md - Custom Resources example, cookbooks/myapp/resources/deploy.rb opens with unified_mode true"
     },
     {
@@ -204,12 +143,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In a cross-platform CI/CD comparison, roughly how many plugins does the Jenkins ecosystem offer? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "1800"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["1800"] },
       "notes": "plugins/devops/skills/cicd/SKILL.md - Feature Matrix table, Marketplace/Plugins row: Jenkins 1800+ plugins"
     },
     {
@@ -218,10 +152,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In a CI/CD platform cost comparison, Azure DevOps offers its free tier for how many users before per-agent charges kick in? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\b5\\b|\\bfive\\b"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\b5\\b|\\bfive\\b" },
       "notes": "plugins/devops/skills/cicd/SKILL.md - Feature Matrix table, Cost row: Azure DevOps Free tier (5 users) + per-agent"
     },
     {
@@ -230,12 +161,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "What is the name of the Kubernetes-based tool commonly used to autoscale self-hosted GitHub Actions runners? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Runner Controller"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Runner Controller"] },
       "notes": "plugins/devops/skills/cicd/references/concepts.md - Autoscaling Runners table: GitHub Actions - Actions Runner Controller (ARC) on K8s"
     },
     {
@@ -244,10 +170,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "How many days does a CircleCI dependency cache normally stay valid before it automatically expires, assuming the cache key does not change? Answer concisely with the number of days.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)15\\s*days?"
-      },
+      "expected": { "type": "regex", "value": "(?i)15\\s*days?" },
       "notes": "plugins/devops/skills/circleci/references/architecture.md - Cache layer TTL is 15 days (or until key changes); diagnostics.md restates caches expire after 15 days"
     },
     {
@@ -256,10 +179,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "After a CircleCI job finishes running with SSH rerun enabled, for how long afterward can you still SSH into the container or VM to debug? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)2\\s*hours?"
-      },
+      "expected": { "type": "regex", "value": "(?i)2\\s*hours?" },
       "notes": "plugins/devops/skills/circleci/references/diagnostics.md - SSH Debugging section: available for 2 hours after job completes, not available for self-hosted runners"
     },
     {
@@ -268,14 +188,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In CircleCI's resource class table, what are the vCPU count, RAM in GB, and per-minute credit cost of the 2xlarge resource class? Answer concisely with all three numbers.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "16",
-          "32",
-          "80"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["16", "32", "80"] },
       "notes": "plugins/devops/skills/circleci/SKILL.md - Resource Classes table: 2xlarge = 16 vCPU, 32 GB, 80 credits/min"
     },
     {
@@ -284,13 +197,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In an AWS CloudFormation template that uses AWS SAM syntax, what exact value do you set for the top level Transform key to enable SAM resource expansion? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Serverless",
-          "2016-10-31"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Serverless", "2016-10-31"] },
       "notes": "plugins/devops/skills/cloudformation/references/architecture.md - Transform: AWS::Serverless-2016-10-31 expands AWS::Serverless::* resources"
     },
     {
@@ -299,10 +206,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "If Stack A exports an output value with an Export Name and Stack B imports it using ImportValue, can Stack A's export be deleted or changed while Stack B still imports it? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(\\bno\\b|cannot|can't|can not)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|cannot|can't|can not)" },
       "notes": "plugins/devops/skills/cloudformation/references/best-practices.md - Nested vs Cross-Stack table: exports can't be deleted while imported"
     },
     {
@@ -311,12 +215,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Instead of hardcoding an AMI ID in a CloudFormation template, what SSM public parameter path can you reference through the resolve ssm dynamic reference to automatically pick up the latest Amazon Linux 2023 AMI? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "al2023-ami-kernel-default-x86_64"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["al2023-ami-kernel-default-x86_64"] },
       "notes": "plugins/devops/skills/cloudformation/references/best-practices.md - Common Mistakes, hardcoded AMIs fix: resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
     },
     {
@@ -325,12 +224,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "Among Chef, Puppet, SaltStack, and Ansible, which one is licensed under GPL v3 while the other three use Apache 2.0? Answer with just the tool name.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Ansible"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Ansible"] },
       "notes": "plugins/devops/skills/config-mgmt/SKILL.md - Comparison Matrix License row: Chef/Puppet/SaltStack Apache 2.0, Ansible GPL v3"
     },
     {
@@ -339,10 +233,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "For Chef and Puppet's agent based continuous enforcement model, roughly how many minutes elapse between each agent run that checks for and reverts configuration drift? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)30\\s*min"
-      },
+      "expected": { "type": "regex", "value": "(?i)30\\s*min" },
       "notes": "plugins/devops/skills/config-mgmt/references/concepts.md - Drift Detection and Remediation table: continuous enforcement Chef (30 min), Puppet (30 min)"
     },
     {
@@ -351,12 +242,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In the configuration management testing pyramid comparison, which single tool does Ansible rely on for both unit level and integration level testing? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Molecule"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Molecule"] },
       "notes": "plugins/devops/skills/config-mgmt/references/concepts.md - Testing Patterns table: Ansible unit=Molecule, integration=Molecule"
     },
     {
@@ -365,10 +251,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "According to recommended Flux reconciliation intervals, how often should a HelmRepository source typically be reconciled, given that chart indexes do not change often? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)24\\s*h(ours?)?"
-      },
+      "expected": { "type": "regex", "value": "(?i)24\\s*h(ours?)?" },
       "notes": "plugins/devops/skills/flux/references/best-practices.md - Reconciliation Intervals table: HelmRepository recommended interval 24h"
     },
     {
@@ -377,13 +260,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "When configuring Git commit signature verification on a Flux GitRepository resource, which two providers can you set under spec.verify.provider? Name both.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "cosign",
-          "gpg"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["cosign", "gpg"] },
       "notes": "plugins/devops/skills/flux/references/best-practices.md - Git Commit Verification: verify.provider: cosign (or 'gpg')"
     },
     {
@@ -392,12 +269,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "A Flux GitRepository resource is already on the v1 API version. What API version does the OCIRepository source kind use instead? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "v1beta2"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["v1beta2"] },
       "notes": "plugins/devops/skills/flux/references/architecture.md - OCIRepository example apiVersion: source.toolkit.fluxcd.io/v1beta2, vs GitRepository at v1"
     },
     {
@@ -406,10 +278,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "What is the recommended maximum number of changed lines in a pull request, beyond which review quality and defect detection drop sharply? Answer with the approximate number.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)400"
-      },
+      "expected": { "type": "regex", "value": "(?i)400" },
       "notes": "plugins/devops/skills/github/references/pull-requests.md - PR Workflow: Size aim less than approximately 400 changed lines"
     },
     {
@@ -418,10 +287,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In a GitHub CODEOWNERS file, when multiple patterns match the same changed file, does the first listed pattern or the last listed pattern determine the owner? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)last"
-      },
+      "expected": { "type": "regex", "value": "(?i)last" },
       "notes": "plugins/devops/skills/github/references/pull-requests.md - CODEOWNERS section: Last matching pattern wins"
     },
     {
@@ -430,12 +296,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Unlike legacy branch protection, GitHub rulesets support a dry run mode where rules are evaluated without being enforced. What exact value do you set on the ruleset's enforcement field to turn on this evaluate only dry run mode? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "evaluate"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["evaluate"] },
       "notes": "plugins/devops/skills/github/references/pull-requests.md - Branch Protection vs Rulesets table: Dry run Yes via enforcement: evaluate, legacy branch protection has no dry run"
     },
     {
@@ -444,10 +305,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "In GitHub Actions, reusable workflows can call other reusable workflows. What is the maximum nesting depth allowed for these chained workflow_call references? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\b4\\b|\\bfour\\b"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\b4\\b|\\bfour\\b" },
       "notes": "plugins/devops/skills/github-actions/references/architecture.md - Limitations of Reusable Workflows lists max 4 levels of nesting"
     },
     {
@@ -456,10 +314,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "For GitHub-hosted Actions runners, using the 1x baseline cost of Linux runner minutes, what is the cost multiplier for macOS runner minutes? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(10x|10 x|ten times)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(10x|10 x|ten times)" },
       "notes": "plugins/devops/skills/github-actions/references/best-practices.md - Cost Optimization section states macOS costs 10x"
     },
     {
@@ -468,10 +323,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In GitHub Actions caching, what is the maximum size allowed for a single cache entry? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)10\\s*gb"
-      },
+      "expected": { "type": "regex", "value": "(?i)10\\s*gb" },
       "notes": "plugins/devops/skills/github-actions/references/diagnostics.md - Cache Size Limits: individual cache entry max 10 GB"
     },
     {
@@ -480,12 +332,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "As of GitLab CI 18.9, which is the oldest GitLab minor version still officially supported for upgrade paths? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "18.7"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["18.7"] },
       "notes": "plugins/devops/skills/gitlab-ci/references/versions/18.9.md - Migration Notes: GitLab 18.7 is the oldest supported version, plan upgrades from 18.6 and earlier"
     },
     {
@@ -494,10 +341,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In GitLab CI, how many characters long is the value of the CI_COMMIT_SHORT_SHA predefined variable? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\b8\\b|eight"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\b8\\b|eight" },
       "notes": "plugins/devops/skills/gitlab-ci/references/architecture.md - Key Predefined Variables table: CI_COMMIT_SHORT_SHA is short commit SHA, 8 chars"
     },
     {
@@ -506,12 +350,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "GitLab CI 18.9 added new cache compression options. Besides the default gzip, what faster compression algorithm can you choose for pipeline caching? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "zstd"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["zstd"] },
       "notes": "plugins/devops/skills/gitlab-ci/references/versions/18.9.md - Advanced Caching: compression options gzip default, zstd faster, or none"
     },
     {
@@ -520,12 +359,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Kubernetes GitOps setups, which secret management approach is generally recommended for most production deployments needing centralized secrets with automatic rotation across clusters? Answer concisely with the name of the tool or approach.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "External Secrets Operator"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["External Secrets Operator"] },
       "notes": "plugins/devops/skills/gitops/references/concepts.md - Secret Management options table recommendation: External Secrets Operator for most production setups"
     },
     {
@@ -534,10 +368,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Between ArgoCD and Flux, which one has the more mature built-in image automation for updating deployed image tags, given that the other tool relies on a separate add-on project for this? Answer concisely with the tool name.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)\\bflux\\b"
-      },
+      "expected": { "type": "regex", "value": "(?i)\\bflux\\b" },
       "notes": "plugins/devops/skills/gitops/SKILL.md - When to Choose table: Image auto-update row favors Flux, noting Image Automation is more mature than Argo Image Updater"
     },
     {
@@ -546,10 +377,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "For GitOps repository strategy, should application source code and Kubernetes deployment manifests be kept together in one monorepo, or split into separate repositories? Answer in one sentence with the recommendation.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)separate"
-      },
+      "expected": { "type": "regex", "value": "(?i)separate" },
       "notes": "plugins/devops/skills/gitops/references/concepts.md - App Repo vs Config Repo: recommendation is to use separate repos"
     },
     {
@@ -558,12 +386,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "The built-in terraform test command for unit testing modules became available starting in which Terraform minor version? Answer concisely with the version number.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "1.6"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["1.6"] },
       "notes": "plugins/devops/skills/iac/references/concepts.md - Testing IaC table, Unit tests row lists terraform test (1.6+)"
     },
     {
@@ -572,10 +395,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "What open source license governs Ansible? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)gpl\\s*v?3"
-      },
+      "expected": { "type": "regex", "value": "(?i)gpl\\s*v?3" },
       "notes": "plugins/devops/skills/iac/SKILL.md - Comparison Matrix Licensing row: Ansible is GPL v3 (Red Hat)"
     },
     {
@@ -584,10 +404,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Ansible, are the shell and command modules idempotent by default without any extra guard conditions? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(\\bno\\b|not idempotent|are not)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not idempotent|are not)" },
       "notes": "plugins/devops/skills/iac/references/concepts.md - Idempotency section: shell and command modules are NOT idempotent unless creates or removes guards are used"
     },
     {
@@ -596,12 +413,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "What Jenkins LTS version, or higher, is referenced as the current baseline? Answer concisely with the version number.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "2.541"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["2.541"] },
       "notes": "plugins/devops/skills/jenkins/SKILL.md - intro paragraph states current LTS is 2.541+"
     },
     {
@@ -610,12 +422,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In a Jenkins Declarative Pipeline, if you do not set a durabilityHint option, what is the default durability level? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "MAX_SURVIVABILITY"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["MAX_SURVIVABILITY"] },
       "notes": "plugins/devops/skills/jenkins/references/best-practices.md - Pipeline Durability section lists MAX_SURVIVABILITY as the default option"
     },
     {
@@ -624,10 +431,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "If a Jenkins JENKINS_HOME backup excludes the secrets directory, can the encrypted credentials still be recovered after a restore? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(\\bno\\b|unrecoverable|cannot|not recoverable)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|unrecoverable|cannot|not recoverable)" },
       "notes": "plugins/devops/skills/jenkins/references/best-practices.md - Backup Strategy notes secrets directory holds encryption keys; without these, credentials are unrecoverable"
     },
     {
@@ -636,12 +440,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "OpenTofu forked from which exact Terraform version, the last one released under the MPL license, and in what month and year did that fork happen? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "1.5.6"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["1.5.6"] },
       "notes": "plugins/devops/skills/opentofu/references/architecture.md - Fork History and Divergence: forked from Terraform v1.5.6 in September 2023"
     },
     {
@@ -650,10 +449,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "Are OpenTofu and Terraform state files interchangeable between the two tools? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(\\byes\\b|interchangeable|compatible)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(\\byes\\b|interchangeable|compatible)" },
       "notes": "plugins/devops/skills/opentofu/SKILL.md - Core Architecture, State file bullet: same format (version 4), state files are interchangeable between Terraform and OpenTofu"
     },
     {
@@ -662,12 +458,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Besides pbkdf2, aws_kms, and gcp_kms, OpenTofu supports a key provider built on a Vault fork for client-side state encryption. What is that key provider called? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "openbao"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["openbao"] },
       "notes": "plugins/devops/skills/opentofu/SKILL.md - State Encryption section lists key providers pbkdf2, aws_kms, gcp_kms, openbao (Vault fork)"
     },
     {
@@ -676,13 +467,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "According to DevOps pipeline design guidance, roughly how fast should a CI pipeline run so it does not reduce merge frequency and increase batch sizes? Answer concisely with a number.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "10",
-          "minute"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["10", "minute"] },
       "notes": "plugins/devops/skills/overview/references/concepts.md - Key principle: the CI pipeline must be fast (under 10 minutes ideally)"
     },
     {
@@ -691,10 +476,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "In the trunk-based development guidance here, how short should feature branches ideally be kept before merging back to trunk? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(1\\s*day|one\\s*day|24\\s*hours)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(1\\s*day|one\\s*day|24\\s*hours)" },
       "notes": "plugins/devops/skills/overview/references/concepts.md - Trunk-Based Development: short-lived feature branches (< 1 day ideally)"
     },
     {
@@ -703,12 +485,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "What DevOps anti-pattern is named for running Terraform without remote state and locking on a team, and what does the guidance say results from it?",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "corruption"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["corruption"] },
       "notes": "plugins/devops/skills/overview/SKILL.md - Anti-Patterns: IaC without state management -- Terraform without remote state + locking = guaranteed state corruption in teams"
     },
     {
@@ -717,12 +494,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "What is the minimum Go version required to use the Pulumi Go SDK per the language support requirements? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "1.21"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["1.21"] },
       "notes": "plugins/devops/skills/pulumi/SKILL.md - Language SDKs table: Go github.com/pulumi/pulumi/sdk/v3 minimum version Go 1.21+"
     },
     {
@@ -731,10 +503,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "When you run pulumi up without specifying the parallel flag, is there a default cap on how many resource operations run concurrently? Answer in one sentence.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(unlimited|no\\s*(default\\s*)?limit|not\\s*limited)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(unlimited|no\\s*(default\\s*)?limit|not\\s*limited)" },
       "notes": "plugins/devops/skills/pulumi/references/architecture.md - Parallelism: pulumi up --parallel 10 comment notes default is unlimited"
     },
     {
@@ -743,12 +512,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In Pulumi, what does the acronym URN stand for? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Uniform Resource Name"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Uniform Resource Name"] },
       "notes": "plugins/devops/skills/pulumi/references/architecture.md - section header URN (Uniform Resource Name)"
     },
     {
@@ -757,10 +521,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "By default, how often does a Puppet agent contact the Puppet Server over HTTPS to request and apply a new catalog? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(30\\s*min)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(30\\s*min)" },
       "notes": "plugins/devops/skills/puppet/SKILL.md - Core Architecture diagram: (HTTPS, every 30 min)"
     },
     {
@@ -769,12 +530,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "Facter is Puppet's system fact collector. Which equivalent fact-gathering tool from the Chef ecosystem is it directly compared to here? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "Ohai"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["Ohai"] },
       "notes": "plugins/devops/skills/puppet/SKILL.md - Key Concepts table: Facter -- System fact collector (like Ohai in Chef)"
     },
     {
@@ -783,10 +539,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "In the sample Hiera hierarchy shown for Puppet, which data source is checked first, before per-environment, per-OS, and common data? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)per-?node"
-      },
+      "expected": { "type": "regex", "value": "(?i)per-?node" },
       "notes": "plugins/devops/skills/puppet/SKILL.md - Hiera hierarchy example lists Per-node first, then Per-environment, Per-OS, Common"
     },
     {
@@ -795,13 +548,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "What two TCP ports does the Salt master use by default for its ZeroMQ publish and request event bus? Answer concisely with both numbers.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "4505",
-          "4506"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["4505", "4506"] },
       "notes": "plugins/devops/skills/saltstack/SKILL.md - Core Architecture diagram: Event Bus ZeroMQ pub/sub (port 4505/4506)"
     },
     {
@@ -810,12 +557,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Which Salt release line does current SaltStack guidance target, using its calendar-based version numbering? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "3007"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["3007"] },
       "notes": "plugins/devops/skills/saltstack/SKILL.md - intro: This skill covers SaltStack (Salt) 3007.x"
     },
     {
@@ -824,10 +566,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "Roughly how large a minion fleet is SaltStack described as excelling at managing with real-time execution? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)(10\\s*k|10,?000)"
-      },
+      "expected": { "type": "regex", "value": "(?i)(10\\s*k|10,?000)" },
       "notes": "plugins/devops/skills/saltstack/SKILL.md - intro: excels at managing large fleets (10K+ nodes) with real-time execution"
     },
     {
@@ -836,12 +575,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "Ephemeral resources reached full stabilization in Terraform 1.14. In which earlier minor version were they originally introduced? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "1.10"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["1.10"] },
       "notes": "plugins/devops/skills/terraform/references/versions/1.14.md - Ephemeral Resources section: (introduced in 1.10) are fully stabilized in 1.14"
     },
     {
@@ -850,10 +584,7 @@
       "plugin": "devops",
       "knowledge": "recent",
       "prompt": "As cited in Terraform 1.15 release guidance, what month and year is given as its current release date? Answer concisely.",
-      "expected": {
-        "type": "regex",
-        "value": "(?i)april\\s*2026"
-      },
+      "expected": { "type": "regex", "value": "(?i)april\\s*2026" },
       "notes": "plugins/devops/skills/terraform/references/versions/1.15.md - covers Terraform 1.15, the current release as of April 2026"
     },
     {
@@ -862,12 +593,7 @@
       "plugin": "devops",
       "knowledge": "stable",
       "prompt": "When Terraform uses an S3 bucket as its state backend, what AWS service is used to provide state locking? Answer concisely.",
-      "expected": {
-        "type": "contains_all",
-        "value": [
-          "DynamoDB"
-        ]
-      },
+      "expected": { "type": "contains_all", "value": ["DynamoDB"] },
       "notes": "plugins/devops/skills/terraform/references/architecture.md - Backend Architecture table: S3 | S3 bucket | DynamoDB table | SSE-S3 or SSE-KMS"
     }
   ]

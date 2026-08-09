@@ -1,0 +1,357 @@
+{
+  "suite": "storage",
+  "description": "Cross-harness matrix suite for the storage plugin's 13 skills (aws-s3, azure-blob, ceph, dell-powerstore, dell-unity, gcs, glusterfs, hpe-alletra, minio, netapp-ontap, overview, pure-storage, storage-spaces-direct). Prompts are deliberately neutral (no mention of a skills library or documentation) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "aws-s3-durability",
+      "skill": "aws-s3",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "What durability percentage does AWS specify for objects stored in the Amazon S3 Standard storage class? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["99.999999999"] },
+      "notes": "plugins/storage/skills/aws-s3/SKILL.md - Durability: 99.999999999% (11 nines) across minimum 3 AZs (Standard)"
+    },
+    {
+      "id": "aws-s3-sse-c-default",
+      "skill": "aws-s3",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Amazon S3 supports server-side encryption with customer-provided keys, SSE-C. As of the most current guidance, when is AWS disabling SSE-C by default? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["April", "2026"] },
+      "notes": "plugins/storage/skills/aws-s3/SKILL.md - Key Security Features: SSE-S3 default encryption (SSE-C disabled by default April 2026)"
+    },
+    {
+      "id": "aws-s3-glacier-deep-archive",
+      "skill": "aws-s3",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For Amazon S3 Glacier Deep Archive, how many days must an object sit before a lifecycle rule can transition it there, and roughly how long can retrieval take? Answer concisely with both figures.",
+      "expected": { "type": "contains_all", "value": ["180", "48"] },
+      "notes": "plugins/storage/skills/aws-s3/SKILL.md - Storage Classes table: Glacier Deep Archive min storage 180 days, retrieval 12-48 hours"
+    },
+    {
+      "id": "azure-blob-archive-tier",
+      "skill": "azure-blob",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "In Azure Blob Storage, if a blob sits in the Archive access tier, what is the minimum retention period in days, and roughly how long can rehydration retrieval take? Answer concisely with both figures.",
+      "expected": { "type": "contains_all", "value": ["180", "15"] },
+      "notes": "plugins/storage/skills/azure-blob/SKILL.md - Access Tiers table: Archive min retention 180 days, retrieval up to 15 hours"
+    },
+    {
+      "id": "azure-blob-ra-gzrs",
+      "skill": "azure-blob",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "Which Azure Storage redundancy option keeps six copies of data spread across three availability zones plus a paired region, while also allowing reads from the secondary region? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["RA-GZRS"] },
+      "notes": "plugins/storage/skills/azure-blob/SKILL.md - Redundancy table: RA-GZRS = 6 copies, 3 zones + paired region, secondary reads Yes"
+    },
+    {
+      "id": "azure-blob-adls-requirement",
+      "skill": "azure-blob",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "In Azure Storage, what capability must be enabled on a storage account before you can use NFS 3.0 or SFTP access? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(hierarchical namespace|adls gen2|\\bhns\\b)" },
+      "notes": "plugins/storage/skills/azure-blob/SKILL.md - ADLS Gen2 section: Enabled by hierarchical namespace (HNS); required for NFS 3.0 and SFTP"
+    },
+    {
+      "id": "ceph-pg-target",
+      "skill": "ceph",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "When sizing Ceph placement groups, what is the recommended target range of PGs per OSD across all pools? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["100", "200"] },
+      "notes": "plugins/storage/skills/ceph/SKILL.md - Placement Groups: Target 100-200 PGs per OSD"
+    },
+    {
+      "id": "ceph-replicated-pool",
+      "skill": "ceph",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For a Ceph replicated pool configured with size equal to 3, what percentage of raw capacity ends up usable? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["33"] },
+      "notes": "plugins/storage/skills/ceph/SKILL.md - Pool Types table: Replicated (size=3): 33% usable, tolerate 2 failures"
+    },
+    {
+      "id": "ceph-tentacle-fastec",
+      "skill": "ceph",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Which Ceph major release introduces FastEC erasure coding along with a management gateway and an integrated SMB Manager? Give the release name and version number. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Tentacle", "20.2"] },
+      "notes": "plugins/storage/skills/ceph/SKILL.md - Version-specific guidance: Tentacle 20.2: FastEC, mgmt-gateway, oauth2-proxy, certmgr, integrated SMB Manager"
+    },
+    {
+      "id": "dell-powerstore-drr-guarantee",
+      "skill": "dell-powerstore",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "Dell PowerStore guarantees a minimum data reduction ratio on PowerStore Prime without needing a pre-assessment. What is that guaranteed ratio? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["5:1"] },
+      "notes": "plugins/storage/skills/dell-powerstore/SKILL.md - Always-On Data Reduction: 5:1 guaranteed (PowerStore Prime, no pre-assessment)"
+    },
+    {
+      "id": "dell-powerstore-metro-distance",
+      "skill": "dell-powerstore",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For Dell PowerStore Metro Volume synchronous replication, what is the maximum supported distance between sites, in kilometers? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["96"] },
+      "notes": "plugins/storage/skills/dell-powerstore/SKILL.md - Metro Volume: Up to 96 km / 5ms RTT"
+    },
+    {
+      "id": "dell-powerstore-supportassist",
+      "skill": "dell-powerstore",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Dell discontinued one SupportAssist connectivity method for PowerStore. Which method, and roughly when? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Direct Connect", "2024"] },
+      "notes": "plugins/storage/skills/dell-powerstore/SKILL.md - Critical Operational Knowledge: SupportAssist Direct Connect discontinued Dec 2024; all clusters require Secure Connect Gateway (SCG)"
+    },
+    {
+      "id": "dell-unity-eos-date",
+      "skill": "dell-unity",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Dell Unity XT all-flash array models reached end-of-sale on what date? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["August", "2025"] },
+      "notes": "plugins/storage/skills/dell-unity/SKILL.md - Lifecycle Status table: AFA models end-of-sale August 1, 2025"
+    },
+    {
+      "id": "dell-unity-vsa-capacity",
+      "skill": "dell-unity",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "Dell UnityVSA ships in two editions with different capacity caps. What is the maximum capacity for the free Community Edition versus the Professional Edition? Answer concisely with both figures.",
+      "expected": { "type": "contains_all", "value": ["4 TB", "50 TB"] },
+      "notes": "plugins/storage/skills/dell-unity/SKILL.md - Core Architecture: UnityVSA Community Edition (4 TB) and Professional Edition (50 TB)"
+    },
+    {
+      "id": "dell-unity-fastcache-afa",
+      "skill": "dell-unity",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "In Dell Unity, is FAST Cache applicable to all-flash array pools? Answer with yes or no and a brief reason.",
+      "expected": { "type": "regex", "value": "(?i)\\b(no|not applicable)\\b" },
+      "notes": "plugins/storage/skills/dell-unity/SKILL.md - FAST Cache: Secondary SSD cache at 64 KB granularity, for hybrid pools only (not applicable for AFA)"
+    },
+    {
+      "id": "gcs-archive-min-duration",
+      "skill": "gcs",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For the Google Cloud Storage Archive storage class, what is the minimum storage duration in days before you avoid an early deletion fee? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["365"] },
+      "notes": "plugins/storage/skills/gcs/SKILL.md - Storage Classes table: Archive Min Duration 365 days"
+    },
+    {
+      "id": "gcs-turbo-replication",
+      "skill": "gcs",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Google Cloud Storage dual-region buckets offer a fast replication mode with an SLA-backed recovery point objective. What is that time objective, and what flag enables it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["15", "ASYNC_TURBO"] },
+      "notes": "plugins/storage/skills/gcs/SKILL.md - Bucket Locations: Turbo Replication: 15-minute RPO SLA (--rpo=ASYNC_TURBO)"
+    },
+    {
+      "id": "gcs-autoclass-min-size",
+      "skill": "gcs",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Under Google Cloud Storage Autoclass, objects smaller than what size always remain in the Standard storage class regardless of access pattern? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["128"] },
+      "notes": "plugins/storage/skills/gcs/SKILL.md - Autoclass: Objects < 128 KiB stay Standard"
+    },
+    {
+      "id": "glusterfs-stable-version",
+      "skill": "glusterfs",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "As of the latest guidance, what is the current stable release version number of GlusterFS? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["11.2"] },
+      "notes": "plugins/storage/skills/glusterfs/SKILL.md - This skill covers GlusterFS distributed filesystem (current stable: 11.2)"
+    },
+    {
+      "id": "glusterfs-rhgs-eol",
+      "skill": "glusterfs",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "When did Red Hat Gluster Storage reach end of life? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["December", "2024"] },
+      "notes": "plugins/storage/skills/glusterfs/SKILL.md - Project status: community-maintained, Red Hat Gluster Storage EOL Dec 2024"
+    },
+    {
+      "id": "glusterfs-xfs-isize",
+      "skill": "glusterfs",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "When formatting GlusterFS bricks with XFS, what isize value is required to properly store extended attributes? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["512"] },
+      "notes": "plugins/storage/skills/glusterfs/SKILL.md - Critical Rules: Format bricks with XFS and isize=512"
+    },
+    {
+      "id": "hpe-alletra-max-iops",
+      "skill": "hpe-alletra",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For the HPE Alletra 9000, what maximum IOPS figure is quoted for a 4-node 9080 configuration? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.1M"] },
+      "notes": "plugins/storage/skills/hpe-alletra/SKILL.md - Critical Numbers table: Max IOPS 2.1M (9000, 4-node 9080)"
+    },
+    {
+      "id": "hpe-alletra-csi-hostname-limit",
+      "skill": "hpe-alletra",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "When using the HPE CSI Driver for Kubernetes, what is the maximum number of characters allowed in a node hostname? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["27"] },
+      "notes": "plugins/storage/skills/hpe-alletra/SKILL.md - Critical Numbers table: K8s hostname limit 27 characters (CSI Driver)"
+    },
+    {
+      "id": "hpe-alletra-partnerships-discontinued",
+      "skill": "hpe-alletra",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "In November 2025, HPE discontinued several third-party storage software partnerships to focus on its own storage IP. Which partnerships were dropped? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Qumulo", "Scality", "WEKA"] },
+      "notes": "plugins/storage/skills/hpe-alletra/SKILL.md - Strategic Direction: In November 2025, HPE discontinued Qumulo, Scality, and WEKA partnerships"
+    },
+    {
+      "id": "minio-community-archive-date",
+      "skill": "minio",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "MinIO archived its open-source community edition repository on what date, and under what license did it remain available? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["13", "2026", "AGPLv3"] },
+      "notes": "plugins/storage/skills/minio/SKILL.md - Licensing table: Community (OSS) Archived Feb 13, 2026, AGPLv3"
+    },
+    {
+      "id": "minio-erasure-set-max-drives",
+      "skill": "minio",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "A MinIO erasure set traditionally supports up to 16 drives. What is the increased maximum drives per erasure set introduced in AIStor starting in 2026? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["32"] },
+      "notes": "plugins/storage/skills/minio/SKILL.md - Storage Hierarchy: Erasure Sets (4-16 drives, up to 32 in AIStor 2026+)"
+    },
+    {
+      "id": "minio-write-quorum",
+      "skill": "minio",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "In MinIO erasure coding, if an erasure set has N drives, what is the minimum number of drives required to accept a write, expressed as a formula in terms of N? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)n\\s*/\\s*2\\s*\\+\\s*1" },
+      "notes": "plugins/storage/skills/minio/SKILL.md - Erasure Coding table: Write minimum drives (N/2) + 1"
+    },
+    {
+      "id": "netapp-ontap-metrocluster-rto",
+      "skill": "netapp-ontap",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For NetApp ONTAP MetroCluster with automatic unplanned switchover, what recovery time objective, in seconds, is targeted? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["120"] },
+      "notes": "plugins/storage/skills/netapp-ontap/SKILL.md - Data Protection Stack table: MetroCluster RTO < 120 seconds (AUSO)"
+    },
+    {
+      "id": "netapp-ontap-9-18-features",
+      "skill": "netapp-ontap",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "ONTAP 9.18.1 introduces two security-hardening capabilities for the cluster back-end network and encryption. Name them. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["mTLS", "post-quantum"] },
+      "notes": "plugins/storage/skills/netapp-ontap/SKILL.md - Version-specific guidance: ONTAP 9.18.1: mTLS for cluster back-end network, post-quantum algorithm support"
+    },
+    {
+      "id": "netapp-ontap-volume-thresholds",
+      "skill": "netapp-ontap",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For NetApp ONTAP volume utilization monitoring, what are the warning and critical percentage thresholds? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["80", "90"] },
+      "notes": "plugins/storage/skills/netapp-ontap/SKILL.md - Key Operational Metrics table: Volume utilization Warning 80%, Critical 90%"
+    },
+    {
+      "id": "overview-object-storage-db",
+      "skill": "overview",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For database or VM storage workloads that need block access, should a team choose object storage such as S3 or MinIO instead? Answer with yes or no and a brief reason.",
+      "expected": { "type": "regex", "value": "(?i)\\b(no|avoid)\\b" },
+      "notes": "plugins/storage/skills/overview/SKILL.md - Anti-Patterns: 'Object storage for databases' - Object storage has high latency and no random write support; Decision Framework: Database/VM storage - Avoid object storage"
+    },
+    {
+      "id": "overview-scale-out-threshold",
+      "skill": "overview",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "At what data scale does storage architecture guidance recommend moving to scale-out platforms like Ceph or cloud object storage instead of traditional enterprise arrays? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b1\\s?pb\\b" },
+      "notes": "plugins/storage/skills/overview/SKILL.md - Step 3: Scale and performance: > 1 PB: Scale-out (Ceph, cloud object storage)"
+    },
+    {
+      "id": "overview-minio-licensing-change",
+      "skill": "overview",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "According to current guidance comparing software-defined object storage options, what changed about MinIO licensing as of February 2026? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["commercial"] },
+      "notes": "plugins/storage/skills/overview/SKILL.md - Technology Comparison table: MinIO trade-off: Object-only, commercial licensing since Feb 2026"
+    },
+    {
+      "id": "pure-storage-safemode-default",
+      "skill": "pure-storage",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "Pure Storage SafeMode locks immutable snapshots for a default retention period, extendable up to a maximum. What is the default number of hours, and what is the maximum number of days? Answer concisely with both.",
+      "expected": { "type": "contains_all", "value": ["24", "30"] },
+      "notes": "plugins/storage/skills/pure-storage/SKILL.md - SafeMode: Immutable snapshots locked for configurable period (24h default, up to 30 days)"
+    },
+    {
+      "id": "pure-storage-activecluster-rtt",
+      "skill": "pure-storage",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For Pure Storage ActiveCluster synchronous replication, what is the maximum round-trip time, in milliseconds, supported between sites? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["11"] },
+      "notes": "plugins/storage/skills/pure-storage/SKILL.md - Replication section: ActiveCluster: max 11 ms RTT"
+    },
+    {
+      "id": "pure-storage-everpure-rebrand",
+      "skill": "pure-storage",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Pure Storage FlashArray has been marketed under a new brand name since when? Give the name and roughly when the change took effect. Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Everpure", "2026"] },
+      "notes": "plugins/storage/skills/pure-storage/SKILL.md - This skill covers Pure Storage FlashArray (marketed as Everpure since February 2026)"
+    },
+    {
+      "id": "storage-spaces-direct-max-pool",
+      "skill": "storage-spaces-direct",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For Windows Storage Spaces Direct on Windows Server 2019 and later, what is the maximum storage pool size and the maximum capacity per server? Answer concisely with both figures.",
+      "expected": { "type": "contains_all", "value": ["4 PB", "400 TB"] },
+      "notes": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Key Limits table: WS2019+: Max pool 4 PB, Max per server 400 TB"
+    },
+    {
+      "id": "storage-spaces-direct-ws2025-nvmeof",
+      "skill": "storage-spaces-direct",
+      "plugin": "storage",
+      "knowledge": "recent",
+      "prompt": "Windows Server 2025 adds an NVMe-oF initiator to Storage Spaces Direct. What IOPS improvement does this deliver? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["90"] },
+      "notes": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Identify version: WS2025: NVMe-OF initiator (+90% IOPS)"
+    },
+    {
+      "id": "storage-spaces-direct-nested-mirror",
+      "skill": "storage-spaces-direct",
+      "plugin": "storage",
+      "knowledge": "stable",
+      "prompt": "For Storage Spaces Direct nested two-way mirror resiliency, what percentage of raw capacity ends up usable as storage efficiency? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["25%"] },
+      "notes": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Resiliency Options table: Nested two-way mirror: Efficiency 25%, Min Nodes 2 (exactly)"
+    }
+  ]
+}

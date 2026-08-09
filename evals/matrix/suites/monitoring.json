@@ -1,0 +1,330 @@
+{
+  "suite": "monitoring",
+  "description": "Cross-harness matrix suite for the monitoring plugin's twelve technology skills (datadog, dynatrace, elk, grafana, nagios, newrelic, opentelemetry, overview, pagerduty, prometheus, splunk, zabbix). Prompts are deliberately neutral (no reference to a skills library or documentation) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md as of 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, niche, or specific numeric detail); 'stable' = long-standing fact a strong bare model may already know.",
+  "tasks": [
+    {
+      "id": "datadog-trace-agent-port",
+      "skill": "datadog",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Which TCP port does the Datadog Agent Trace Agent component listen on to receive APM traces from tracing libraries? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["8126"] },
+      "notes": "plugins/monitoring/skills/datadog/SKILL.md - Key Reference table lists Trace Agent at port 8126 (HTTP)"
+    },
+    {
+      "id": "datadog-lambda-invocations",
+      "skill": "datadog",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "For Datadog Lambda APM billing, how many function invocations equal one APM host-equivalent? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["150"] },
+      "notes": "plugins/monitoring/skills/datadog/SKILL.md - Common Pitfalls number 3, Lambda functions billed per invocation, 150 invocations = 1 APM host-equivalent"
+    },
+    {
+      "id": "datadog-ust-tags",
+      "skill": "datadog",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "In Datadog Unified Service Tagging, which three environment variables get set on every container to enable cross-product correlation? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["DD_ENV", "DD_SERVICE", "DD_VERSION"] },
+      "notes": "plugins/monitoring/skills/datadog/SKILL.md - Unified Service Tagging section lists DD_ENV, DD_SERVICE, DD_VERSION as the reserved correlation tags"
+    },
+    {
+      "id": "dynatrace-host-units",
+      "skill": "dynatrace",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "In Dynatrace full-stack monitoring, how many Host Units does OneAgent consume when monitoring a host with 64 GB of RAM? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b8\\b" },
+      "notes": "plugins/monitoring/skills/dynatrace/SKILL.md - How to Approach Tasks number 3 and Common Pitfalls number 1, a 64 GB host consumes 8 Host Units in full-stack mode"
+    },
+    {
+      "id": "dynatrace-davis-deterministic",
+      "skill": "dynatrace",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Is the causation logic behind Dynatrace Davis AI problem detection deterministic or based on probabilistic machine learning? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)determin" },
+      "notes": "plugins/monitoring/skills/dynatrace/SKILL.md - Davis AI section states Davis is deterministic, not probabilistic, using the Smartscape dependency graph for causation"
+    },
+    {
+      "id": "dynatrace-purepath-threshold",
+      "skill": "dynatrace",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "By default, what is the minimum method timing threshold that Dynatrace PurePath captures as contributing to latency? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)1\\s*ms|1\\s*millisecond" },
+      "notes": "plugins/monitoring/skills/dynatrace/SKILL.md - PurePath section, method timings contributing to latency have a configurable threshold, default 1ms"
+    },
+    {
+      "id": "elk-disk-watermarks",
+      "skill": "elk",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "What are the default Elasticsearch disk watermark percentages for the low, high, and flood stages in the Elastic Stack? Answer concisely with all three numbers.",
+      "expected": { "type": "contains_all", "value": ["85", "90", "95"] },
+      "notes": "plugins/monitoring/skills/elk/SKILL.md - Common Pitfalls number 5, default watermarks 85% low, 90% high, 95% flood"
+    },
+    {
+      "id": "elk-esql-ga",
+      "skill": "elk",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "As of which Elastic Stack version number did ES|QL become generally available? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["8.11"] },
+      "notes": "plugins/monitoring/skills/elk/SKILL.md - Top 10 Operational Rules number 9, ES|QL has been GA since 8.11"
+    },
+    {
+      "id": "elk-logsdb-reduction",
+      "skill": "elk",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "In Elastic Stack 9.x, roughly what percentage storage reduction does the Logsdb index mode provide for logs versus standard indexing? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b65\\b" },
+      "notes": "plugins/monitoring/skills/elk/SKILL.md - Core Expertise bullet and Top 10 Operational Rules number 6, Logsdb provides about 65% storage reduction in 9.x"
+    },
+    {
+      "id": "grafana-table-refactor",
+      "skill": "grafana",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Grafana 12.x shipped a table panel refactor. What performance improvement percentage is cited for it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["97.8"] },
+      "notes": "plugins/monitoring/skills/grafana/SKILL.md - 12.x Features bullet list, table refactor (97.8% faster)"
+    },
+    {
+      "id": "grafana-panel-limit",
+      "skill": "grafana",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "What is the recommended maximum number of panels to include on a single Grafana dashboard? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b(20|30)\\b" },
+      "notes": "plugins/monitoring/skills/grafana/SKILL.md - Design Rules, target 20-30 panels maximum per dashboard"
+    },
+    {
+      "id": "grafana-mute-timings",
+      "skill": "grafana",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "In Grafana alerting, are mute timings recurring and policy-based, or one-time like silences? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)recurr" },
+      "notes": "plugins/monitoring/skills/grafana/SKILL.md - Top 10 Operational Rules number 7, mute timings are recurring and policy-based while silences are one-time"
+    },
+    {
+      "id": "nagios-nrpe-port",
+      "skill": "nagios",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the NRPE daemon listen on when running on a remote monitored host? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["5667"] },
+      "notes": "plugins/monitoring/skills/nagios/SKILL.md - Architecture Overview, NRPE daemon on remote hosts listens on port 5667"
+    },
+    {
+      "id": "nagios-return-code-critical",
+      "skill": "nagios",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "In a Nagios plugin, which service state does an exit code of 2 represent? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)critical" },
+      "notes": "plugins/monitoring/skills/nagios/SKILL.md - Plugin System Return Codes table, code 2 equals CRITICAL"
+    },
+    {
+      "id": "nagios-core-license",
+      "skill": "nagios",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Is Nagios Core free open-source software or a paid per-node commercial product? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(free|open.source|gpl)" },
+      "notes": "plugins/monitoring/skills/nagios/SKILL.md - intro paragraph and Core vs XI table, Nagios Core is open-source GPL v2 and free while Nagios XI is commercial per-node"
+    },
+    {
+      "id": "newrelic-free-tier-gb",
+      "skill": "newrelic",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "How many gigabytes per month of data ingest does the New Relic forever-free tier include? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["100"] },
+      "notes": "plugins/monitoring/skills/newrelic/SKILL.md - Pricing Overview table, free tier is 100 GB per month ingest plus 1 Full Platform user, forever free"
+    },
+    {
+      "id": "newrelic-log-retention",
+      "skill": "newrelic",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "By default, how many days does New Relic retain ingested log data? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b30\\b" },
+      "notes": "plugins/monitoring/skills/newrelic/SKILL.md - Pricing Overview section, default retention lists Logs 30 days"
+    },
+    {
+      "id": "newrelic-facet-default-limit",
+      "skill": "newrelic",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "In an NRQL query, if you do not specify a LIMIT clause on a FACET, how many results are returned by default? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b10\\b" },
+      "notes": "plugins/monitoring/skills/newrelic/SKILL.md - Common Pitfalls number 4, FACET queries default to 10 results"
+    },
+    {
+      "id": "opentelemetry-otlp-ports",
+      "skill": "opentelemetry",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "What are the default OTLP gRPC and HTTP port numbers used by the OpenTelemetry Collector? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["4317", "4318"] },
+      "notes": "plugins/monitoring/skills/opentelemetry/SKILL.md - OpenTelemetry Architecture Quick Reference diagram, OTLP gRPC port 4317 and HTTP port 4318"
+    },
+    {
+      "id": "opentelemetry-memory-limiter-first",
+      "skill": "opentelemetry",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Which OpenTelemetry Collector processor should always be configured first in every pipeline to avoid out of memory crashes? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["memory_limiter"] },
+      "notes": "plugins/monitoring/skills/opentelemetry/SKILL.md - Top 10 Operational Rules number 2 and How to Approach Tasks number 3, memory_limiter must be the first processor"
+    },
+    {
+      "id": "opentelemetry-spike-limit-percent",
+      "skill": "opentelemetry",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "When sizing the memory_limiter processor spike_limit_mib setting in the OpenTelemetry Collector, what percentage of limit_mib is recommended? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)20.{0,6}25" },
+      "notes": "plugins/monitoring/skills/opentelemetry/SKILL.md - Top 10 Operational Rules number 2, spike_limit_mib set to 20-25 percent of limit_mib"
+    },
+    {
+      "id": "overview-use-method-creator",
+      "skill": "overview",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Who is credited with creating the USE method (Utilization, Saturation, Errors) for monitoring system resources? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Gregg"] },
+      "notes": "plugins/monitoring/skills/overview/SKILL.md - USE Method heading credits Brendan Gregg"
+    },
+    {
+      "id": "overview-red-method-creator",
+      "skill": "overview",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Who created the RED method (Rate, Errors, Duration) for monitoring services? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Wilkie"] },
+      "notes": "plugins/monitoring/skills/overview/SKILL.md - RED Method heading credits Tom Wilkie"
+    },
+    {
+      "id": "overview-obs-spend-pct",
+      "skill": "overview",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Observability spend can reach what percentage of total infrastructure cost, according to general cost guidance? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b30\\b" },
+      "notes": "plugins/monitoring/skills/overview/SKILL.md - How to Approach Tasks number 4, observability spend can exceed 30 percent of infrastructure cost"
+    },
+    {
+      "id": "pagerduty-events-endpoint",
+      "skill": "pagerduty",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "What is the base API endpoint hostname and path used to send events into PagerDuty through Events API v2? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["events.pagerduty.com"] },
+      "notes": "plugins/monitoring/skills/pagerduty/SKILL.md - Events API v2 section, endpoint is events.pagerduty.com/v2/enqueue"
+    },
+    {
+      "id": "pagerduty-priority-levels",
+      "skill": "pagerduty",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "PagerDuty incident priority levels range from P1 down to which lowest level? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bP5\\b" },
+      "notes": "plugins/monitoring/skills/pagerduty/SKILL.md - Incident Lifecycle section, priority levels P1 Critical through P5 Informational"
+    },
+    {
+      "id": "pagerduty-dedup-key",
+      "skill": "pagerduty",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "In the PagerDuty Events API v2 payload, which field lets repeated trigger, acknowledge, and resolve calls update the same alert instead of creating duplicates? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["dedup_key"] },
+      "notes": "plugins/monitoring/skills/pagerduty/SKILL.md - Events API v2 section, the same dedup_key updates existing alert state; Common Pitfalls number 3 reinforces always setting dedup_key"
+    },
+    {
+      "id": "prometheus-series-ram-cost",
+      "skill": "prometheus",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Roughly how much RAM does each active Prometheus time series cost? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)3.{0,6}6\\s*kb" },
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md - Top 10 Operational Rules number 1, each series costs 3-6 KB RAM"
+    },
+    {
+      "id": "prometheus-alertmanager-cluster-size",
+      "skill": "prometheus",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "How many nodes are recommended when running Alertmanager as a cluster in production? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b3\\b" },
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md - Top 10 Operational Rules number 6, run Alertmanager as a cluster of 3 nodes"
+    },
+    {
+      "id": "prometheus-default-retention",
+      "skill": "prometheus",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "What is the default local TSDB retention period for Prometheus if you do not configure it otherwise? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)15[\\s-]*(day|d\\b)" },
+      "notes": "plugins/monitoring/skills/prometheus/SKILL.md - Common Pitfalls number 4 and Architecture Quick Reference, default retention is 15 days"
+    },
+    {
+      "id": "splunk-license-violations",
+      "skill": "splunk",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "After how many daily license volume violations within a rolling 30 day window does Splunk disable search on non-internal indexes? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b5\\b" },
+      "notes": "plugins/monitoring/skills/splunk/SKILL.md - Common Pitfalls number 1, after 5 daily volume violations in a rolling 30-day window Splunk disables search for non-internal indexes"
+    },
+    {
+      "id": "splunk-subsearch-limit",
+      "skill": "splunk",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "What is the default maximum result count for a Splunk subsearch before results are silently truncated? Answer concisely.",
+      "expected": { "type": "regex", "value": "10,?000" },
+      "notes": "plugins/monitoring/skills/splunk/SKILL.md - Common Pitfalls number 5, subsearch default is 10,000 results with a 60 second timeout"
+    },
+    {
+      "id": "splunk-tstats-speed",
+      "skill": "splunk",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "Using tstats against an accelerated data model in Splunk, roughly how much faster is it compared to a raw search? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)10.{0,6}100" },
+      "notes": "plugins/monitoring/skills/splunk/SKILL.md - Top 10 Cost Rules number 4, accelerated data models enable tstats which is 10-100x faster than raw search"
+    },
+    {
+      "id": "zabbix-timescaledb-compression",
+      "skill": "zabbix",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Using TimescaleDB compression with Zabbix history tables, what compression ratio should you expect? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)5.{0,6}10" },
+      "notes": "plugins/monitoring/skills/zabbix/SKILL.md - Top 10 Operational Rules number 6 and Common Pitfalls number 1, TimescaleDB compression achieves 5-10x compression on history data"
+    },
+    {
+      "id": "zabbix-agent-port",
+      "skill": "zabbix",
+      "plugin": "monitoring",
+      "knowledge": "stable",
+      "prompt": "What TCP port does the Zabbix agent listen on for passive checks initiated by the server? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b10050\\b" },
+      "notes": "plugins/monitoring/skills/zabbix/SKILL.md - Key Ports table, Agent listens on port 10050 for passive checks from the server"
+    },
+    {
+      "id": "zabbix-timescaledb-threshold",
+      "skill": "zabbix",
+      "plugin": "monitoring",
+      "knowledge": "recent",
+      "prompt": "Above roughly how many monitored hosts does Zabbix guidance recommend switching to TimescaleDB? Answer concisely.",
+      "expected": { "type": "regex", "value": "5,?000" },
+      "notes": "plugins/monitoring/skills/zabbix/SKILL.md - intro paragraph, always recommend TimescaleDB for deployments exceeding 5,000 hosts"
+    }
+  ]
+}
