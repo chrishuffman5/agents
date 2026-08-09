@@ -11,6 +11,7 @@ param(
     [string]$ConfigPath = (Join-Path $PSScriptRoot 'matrix.config.json'),
     [string]$DbPath     = (Join-Path $PSScriptRoot 'evalq.sqlite'),
     [string]$OnlyHarness,              # reseed just one harness: deletes its rows, keeps the rest
+    [switch]$Append,                   # add new rows only (INSERT OR IGNORE); existing rows untouched
     [switch]$Force,
     [switch]$WhatIfSummary
 )
@@ -20,13 +21,18 @@ $ErrorActionPreference = 'Stop'
 Import-Module PSSQLite
 Import-Module (Join-Path $PSScriptRoot 'MatrixRunner.psm1') -Force
 
-$cfg   = Get-Content $ConfigPath -Raw | ConvertFrom-Json
-$suite = Get-Content (Join-Path $PSScriptRoot $cfg.suite) -Raw | ConvertFrom-Json
-
-# Prompts must be double-quote-free: the command column embeds them verbatim.
-foreach ($t in $suite.tasks) {
-    if ($t.prompt -match '["`$]') { throw "Task $($t.id): prompt contains a forbidden character (double quote, backtick, or dollar sign)." }
+$cfg = Get-Content $ConfigPath -Raw | ConvertFrom-Json
+$allTasks = [System.Collections.Generic.List[object]]::new()
+foreach ($sf in $cfg.suites) {
+    $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+    foreach ($t in $s.tasks) {
+        # Prompts must be quote/backtick/dollar-free: the command column embeds them verbatim.
+        if ($t.prompt -match '["`$]') { throw "Task $($t.id): prompt contains a forbidden character (double quote, backtick, or dollar sign)." }
+        $allTasks.Add([pscustomobject]@{ suite = $s.suite; task = $t })
+    }
 }
+$dupes = $allTasks | Group-Object { $_.task.id } | Where-Object Count -gt 1
+if ($dupes) { throw "duplicate task ids across suites: $(($dupes | ForEach-Object Name) -join ', ')" }
 
 if ($Force -and -not $OnlyHarness -and (Test-Path $DbPath)) { Remove-Item $DbPath -Force }
 if ((Test-Path $DbPath) -and -not $WhatIfSummary) {
@@ -35,9 +41,9 @@ if ((Test-Path $DbPath) -and -not $WhatIfSummary) {
         $kept = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) n FROM runs WHERE harness=@h AND status='done'" -SqlParameters @{ h = $OnlyHarness }).n
         Invoke-SqliteQuery -DataSource $DbPath -Query "DELETE FROM runs WHERE harness=@h AND status != 'done'" -SqlParameters @{ h = $OnlyHarness } | Out-Null
         Write-Host "reseeding $OnlyHarness (kept $kept completed runs; re-inserts are INSERT OR IGNORE)"
-    } else {
+    } elseif (-not $Append) {
         $existing = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) AS n FROM runs").n
-        if ($existing -gt 0) { throw "evalq.sqlite already holds $existing runs. Use -Force to re-seed, -OnlyHarness <h> to replace one harness, or dispatch the existing queue." }
+        if ($existing -gt 0) { throw "evalq.sqlite already holds $existing runs. Use -Force to re-seed, -OnlyHarness <h> to replace one harness, -Append to add new rows, or dispatch the existing queue." }
     }
 }
 
@@ -50,19 +56,22 @@ foreach ($laneCfg in $laneSet) {
         foreach ($effortProp in $laneCfg.efforts.PSObject.Properties) {
             $effortNorm = $effortProp.Name; $effortLiteral = $effortProp.Value
             foreach ($skillMode in $cfg.skillModes) {
-                foreach ($task in $suite.tasks) {
+                foreach ($entry in $allTasks) {
+                    $task = $entry.task
                     for ($a = 1; $a -le $cfg.attempts; $a++) {
                         $modelSlug = $m.id -replace '[:/\\]', '-'
                         $runId = '{0}.{1}.{2}.{3}.{4}.a{5}' -f $laneCfg.harness, $modelSlug, $effortNorm, $skillMode, $task.id, $a
                         $workspace = Join-Path $cfg.paths.workRoot (Join-Path $laneCfg.harness $runId)
 
-                        # per-run env: resolve @skillmode tokens now; keep @secret tokens for dispatch
+                        # per-run env: @skillmode token resolves per the task's OWNING PLUGIN;
+                        # @secret tokens stay unresolved until dispatch
                         $env = @{}
                         if ($laneCfg.PSObject.Properties['env']) {
                             foreach ($kv in $laneCfg.env.PSObject.Properties) {
                                 $env[$kv.Name] = switch ($kv.Value) {
                                     '@skillmode:codexHome' {
-                                        if ($skillMode -eq 'skill') { $cfg.paths.codexHomeSkills } else { $cfg.paths.codexHomeBare } }
+                                        if ($skillMode -eq 'skill') { Join-Path $cfg.paths.codexHomesRoot $task.plugin }
+                                        else                        { $cfg.paths.codexHomeBare } }
                                     default { $kv.Value }
                                 }
                             }
@@ -73,7 +82,8 @@ foreach ($laneCfg in $laneSet) {
                             effortLiteral = $effortLiteral; skillMode = $skillMode
                             sandbox = $sandbox; workspace = $workspace; prompt = $task.prompt
                             pluginDirs = @(Join-Path $cfg.paths.pluginDir $task.plugin)
-                            skillPath = $cfg.skillPaths.($task.skill)
+                            # plugin-nested: both pilot plugins ship a skill named 'overview'
+                            skillPath = Join-Path $cfg.paths.skillsDir (Join-Path $task.plugin $task.skill)
                             codexProfile = if ($m.PSObject.Properties['profile']) { $m.profile } else { $null }
                         }
 
@@ -82,7 +92,7 @@ foreach ($laneCfg in $laneSet) {
                             harness = $laneCfg.harness; provider = $laneCfg.provider; model = $m.id
                             effort_norm = $effortNorm; effort_literal = $effortLiteral
                             skill_mode = $skillMode; lane = $laneCfg.lane; sandbox = $sandbox
-                            suite = $suite.suite; task_id = $task.id; skill = $task.skill
+                            suite = $entry.suite; task_id = $task.id; skill = $task.skill
                             knowledge = $task.knowledge; attempt = $a
                             command = New-CellCommand -Cell $cell
                             env_json = ($env | ConvertTo-Json -Compress)

@@ -1,0 +1,258 @@
+{
+  "suite": "cli-scripting",
+  "description": "Cross-harness matrix suite for the cli-scripting plugin's powershell, bash, python, nodejs, azure-cli, kubectl, and overview skills (aws-cli is covered separately in aws.json). Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in these skills on 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "powershell-psreadline-version",
+      "skill": "powershell",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "What PSReadLine module version ships with PowerShell 7.6 LTS? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.4.5"] },
+      "notes": "plugins/cli-scripting/skills/powershell/references/versions/7.6.md - PSReadLine 2.4.5 ships with PS 7.6 LTS"
+    },
+    {
+      "id": "powershell-threadjob-rename",
+      "skill": "powershell",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In PowerShell 7.6 LTS, the ThreadJob module that backs Start-ThreadJob was renamed for the LTS release. What is its new full module name? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Microsoft.PowerShell.ThreadJob"] },
+      "notes": "plugins/cli-scripting/skills/powershell/references/versions/7.6.md - ThreadJob module renamed to Microsoft.PowerShell.ThreadJob in 7.6"
+    },
+    {
+      "id": "powershell-json-depth",
+      "skill": "powershell",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In PowerShell, when converting a deeply nested object to JSON, what parameter must you specify to avoid silent truncation of nested levels, since the default only goes two levels deep? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bdepth\\b" },
+      "notes": "plugins/cli-scripting/skills/powershell/SKILL.md - Common Pitfalls #2: ConvertTo-Json default depth is 2; use -Depth 10 or higher"
+    },
+    {
+      "id": "powershell-null-array-eq",
+      "skill": "powershell",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In PowerShell, when comparing a variable that might hold an array against null, why should null be placed on the left side of the equality operator rather than the right? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)\\barray\\b" },
+      "notes": "plugins/cli-scripting/skills/powershell/SKILL.md - Common Pitfalls #3: variable -eq null on an array filters it instead of testing for null; always put null -eq variable"
+    },
+    {
+      "id": "bash-negative-index",
+      "skill": "bash",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Bash, using a negative index like arr[-1] to access the last element of an array requires at least which major.minor Bash version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.3"] },
+      "notes": "plugins/cli-scripting/skills/bash/references/language.md - Arrays section: negative indexing arr[-1] noted as bash 4.3+"
+    },
+    {
+      "id": "bash-nameref-term",
+      "skill": "bash",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Bash, what is the term for a variable created with declare -n that lets a function parameter act as an alias for a variable in the caller's scope, letting the function modify it by name? Answer with the single term used for this feature.",
+      "expected": { "type": "regex", "value": "(?i)nameref" },
+      "notes": "plugins/cli-scripting/skills/bash/references/language.md - Functions section: Namerefs (declare -n)"
+    },
+    {
+      "id": "bash-find-print0-xargs",
+      "skill": "bash",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In Bash, why is it recommended to use find with -print0 piped into xargs -0 rather than piping plain find output into xargs, when processing a list of filenames? Answer concisely, naming what kind of filenames this protects against.",
+      "expected": { "type": "regex", "value": "(?i)\\b(space|newline)s?\\b" },
+      "notes": "plugins/cli-scripting/skills/bash/SKILL.md - Common Pitfalls #7: find -print0 | xargs -0 for safe handling of filenames with spaces/newlines"
+    },
+    {
+      "id": "bash-flock-lock",
+      "skill": "bash",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "What Bash command-line utility is commonly used to implement file-based locking, so that only one instance of a script can run at a time? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["flock"] },
+      "notes": "plugins/cli-scripting/skills/bash/references/patterns.md - File Locking section uses flock as a script-level mutex"
+    },
+    {
+      "id": "python-tstring-pep",
+      "skill": "python",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Python 3.14, what PEP number introduced template string literals, the t-string syntax that produces Template objects instead of plain strings? Answer with just the PEP number.",
+      "expected": { "type": "regex", "value": "\\b750\\b" },
+      "notes": "plugins/cli-scripting/skills/python/references/versions/3.14.md - Template Strings (PEP 750)"
+    },
+    {
+      "id": "python-deferred-annotations-pep",
+      "skill": "python",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Python 3.14, what PEP number introduced deferred evaluation of annotations by default, so annotations are stored as strings and evaluated lazily rather than at class creation time? Answer with just the PEP number.",
+      "expected": { "type": "regex", "value": "\\b749\\b" },
+      "notes": "plugins/cli-scripting/skills/python/references/versions/3.14.md - Deferred Annotation Evaluation (PEP 749)"
+    },
+    {
+      "id": "python-match-case-version",
+      "skill": "python",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Which Python version first introduced the match and case keywords for structural pattern matching? Answer with the version number.",
+      "expected": { "type": "contains_all", "value": ["3.10"] },
+      "notes": "plugins/cli-scripting/skills/python/SKILL.md version table and references/versions/3.10.md - match/case added in Python 3.10"
+    },
+    {
+      "id": "python-mutable-default-arg",
+      "skill": "python",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In Python, why is defining a function with a mutable default argument such as an empty list considered risky? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)\\bshare(d|s)?\\b" },
+      "notes": "plugins/cli-scripting/skills/python/SKILL.md - Common Pitfalls #7: mutable default arguments share the list across calls"
+    },
+    {
+      "id": "nodejs-temporal-default",
+      "skill": "nodejs",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Starting with which Node.js version does the Temporal global date and time API become enabled by default without needing an experimental flag? Answer with just the version number.",
+      "expected": { "type": "regex", "value": "\\b26\\b" },
+      "notes": "plugins/cli-scripting/skills/nodejs/references/versions/26.md - Temporal enabled by default (no flag) in Node 26"
+    },
+    {
+      "id": "nodejs-module-version-147",
+      "skill": "nodejs",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Node.js 26, native addons like better-sqlite3 must be rebuilt after upgrading because NODE_MODULE_VERSION was bumped to what number? Answer with just the number.",
+      "expected": { "type": "regex", "value": "\\b147\\b" },
+      "notes": "plugins/cli-scripting/skills/nodejs/references/versions/26.md - NODE_MODULE_VERSION bumped to 147 in Node 26; native modules must rebuild"
+    },
+    {
+      "id": "nodejs-sqlite-builtin",
+      "skill": "nodejs",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Which Node.js built-in module, stabilized in Node 24, provides a synchronous SQLite database API without needing a third-party package like better-sqlite3? Answer with the module's exact name.",
+      "expected": { "type": "contains_all", "value": ["node:sqlite"] },
+      "notes": "plugins/cli-scripting/skills/nodejs/references/versions/24.md - node:sqlite stable in Node 24"
+    },
+    {
+      "id": "nodejs-watch-flag",
+      "skill": "nodejs",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Since Node.js 20, which built-in command-line flag automatically restarts your script whenever a watched file changes, removing the need for a tool like nodemon? Answer with the exact flag.",
+      "expected": { "type": "contains_all", "value": ["--watch"] },
+      "notes": "plugins/cli-scripting/skills/nodejs/SKILL.md - Common Pitfalls #10 and references/versions/20.md: built-in --watch mode replaces nodemon"
+    },
+    {
+      "id": "azurecli-config-dir-env",
+      "skill": "azure-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Which environment variable can be set to override the directory where the Azure CLI stores its token cache, configuration, and profile? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["AZURE_CONFIG_DIR"] },
+      "notes": "plugins/cli-scripting/skills/azure-cli/references/core.md - Config Location: AZURE_CONFIG_DIR overrides the config directory"
+    },
+    {
+      "id": "azurecli-nsg-persistent",
+      "skill": "azure-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Unlike Linux firewalld rules, do Azure Network Security Group rules created through the Azure CLI need an extra step to persist across restarts, or are they persistent by default? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)\\bpersistent\\b" },
+      "notes": "plugins/cli-scripting/skills/azure-cli/SKILL.md - Common Pitfalls #5: unlike Linux firewalld, Azure NSG rules are always persistent"
+    },
+    {
+      "id": "azurecli-device-code-login",
+      "skill": "azure-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Which az login flag lets you authenticate from a headless machine or over an SSH session by printing a code to enter in a browser on another device? Answer with the exact flag.",
+      "expected": { "type": "contains_all", "value": ["--use-device-code"] },
+      "notes": "plugins/cli-scripting/skills/azure-cli/references/core.md - az login --use-device-code for headless/SSH"
+    },
+    {
+      "id": "azurecli-no-wait-flag",
+      "skill": "azure-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Which global Azure CLI flag lets a long-running operation such as VM creation or resource group deletion return immediately instead of blocking until it finishes? Answer with the exact flag.",
+      "expected": { "type": "contains_all", "value": ["--no-wait"] },
+      "notes": "plugins/cli-scripting/skills/azure-cli/SKILL.md Common Pitfalls #3 and references/core.md Global Flags: --no-wait for async operations"
+    },
+    {
+      "id": "kubectl-oomkilled-exit-code",
+      "skill": "kubectl",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "In Kubernetes, when a container is OOMKilled, what numeric exit code does the pod report? Answer with just the number.",
+      "expected": { "type": "regex", "value": "\\b137\\b" },
+      "notes": "plugins/cli-scripting/skills/kubectl/references/debugging.md and SKILL.md - exit code 137 = OOMKilled (128 + signal 9)"
+    },
+    {
+      "id": "kubectl-ephemeral-debug-version",
+      "skill": "kubectl",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "The kubectl debug command's ephemeral container feature, used to attach a debugging container to an already-running pod, became available starting with which Kubernetes version? Answer with the version number.",
+      "expected": { "type": "contains_all", "value": ["1.23"] },
+      "notes": "plugins/cli-scripting/skills/kubectl/references/debugging.md - Ephemeral debug container (Kubernetes 1.23+)"
+    },
+    {
+      "id": "kubectl-drain-ignore-daemonsets",
+      "skill": "kubectl",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Which flag must you pass to kubectl drain to avoid it failing on a node that runs DaemonSet pods, since those pods cannot be evicted normally? Answer with the exact flag.",
+      "expected": { "type": "contains_all", "value": ["--ignore-daemonsets"] },
+      "notes": "plugins/cli-scripting/skills/kubectl/SKILL.md - Common Pitfalls #5: drain without --ignore-daemonsets fails on DaemonSet pods"
+    },
+    {
+      "id": "kubectl-logs-previous-flag",
+      "skill": "kubectl",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "When a container has crashed and restarted, so a plain kubectl logs command shows nothing useful, which flag lets you view the logs from before the crash? Answer with the exact flag.",
+      "expected": { "type": "contains_all", "value": ["--previous"] },
+      "notes": "plugins/cli-scripting/skills/kubectl/SKILL.md - Common Pitfalls #2: use --previous for crashed container logs"
+    },
+    {
+      "id": "overview-slowest-startup",
+      "skill": "overview",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Among Bash, PowerShell, and Python as scripting languages for CLI automation, which one has the slowest startup time when you launch a new script? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["PowerShell"] },
+      "notes": "plugins/cli-scripting/skills/overview/SKILL.md - Decision Matrix: startup time Bash=Fastest, PowerShell=Slow, Python=Fast"
+    },
+    {
+      "id": "overview-lowest-learning-curve",
+      "skill": "overview",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Among Bash, PowerShell, and Python as scripting languages for CLI automation, which one is rated as having the lowest learning curve? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Python"] },
+      "notes": "plugins/cli-scripting/skills/overview/SKILL.md - Decision Matrix: learning curve Bash=Medium, PowerShell=Medium, Python=Low"
+    },
+    {
+      "id": "overview-exit-code-zero",
+      "skill": "overview",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "Across Bash, PowerShell, and Python scripts, what does an exit code of zero from a completed process conventionally indicate? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bsuccess\\b" },
+      "notes": "plugins/cli-scripting/skills/overview/SKILL.md - Exit Codes: zero means success, non-zero means failure"
+    },
+    {
+      "id": "overview-python-returncode",
+      "skill": "overview",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In Python, when you call subprocess.run to run an external command and want to check its exit code, which attribute on the returned CompletedProcess object holds that code? Answer with the exact attribute name.",
+      "expected": { "type": "contains_all", "value": ["returncode"] },
+      "notes": "plugins/cli-scripting/skills/overview/SKILL.md - Exit Codes: Python subprocess.run returns CompletedProcess with .returncode"
+    }
+  ]
+}

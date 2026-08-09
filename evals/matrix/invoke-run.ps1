@@ -44,9 +44,13 @@ try {
     $parsed = Read-RunResult -Run $run -Raw $raw
     if (-not $parsed) { $parsed = @{} }
 
-    # deterministic grade against the suite's expected spec
-    $suite = Get-Content (Join-Path $PSScriptRoot $cfg.suite) -Raw | ConvertFrom-Json
-    $task  = $suite.tasks | Where-Object { $_.id -eq $run.task_id }
+    # deterministic grade against the expected spec (task looked up across all suites)
+    $task = $null
+    foreach ($sf in $cfg.suites) {
+        $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+        $task = $s.tasks | Where-Object { $_.id -eq $run.task_id }
+        if ($task) { break }
+    }
     $grade = 'ungraded'; $gradedBy = $null
     if ($task -and $parsed.answer) {
         $grade = if (Test-ExpectedSpec -Expected $task.expected -Answer $parsed.answer) { 'pass' } else { 'fail' }

@@ -19,9 +19,15 @@ param(
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
 Import-Module PSSQLite
-$cfg   = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
-$suite = Get-Content (Join-Path $PSScriptRoot $cfg.suite) -Raw | ConvertFrom-Json
-$now   = (Get-Date).ToString('o')
+$cfg = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
+$suiteNames = @(); $suiteTasks = [System.Collections.Generic.List[object]]::new()
+foreach ($sf in $cfg.suites) {
+    $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+    $suiteNames += $s.suite
+    foreach ($t in $s.tasks) { $suiteTasks.Add($t) }
+}
+$suite = [pscustomobject]@{ suite = ($suiteNames -join ' + '); tasks = $suiteTasks }
+$now = (Get-Date).ToString('o')
 
 $all  = Invoke-SqliteQuery -DataSource $DbPath -Query "
     SELECT skill, harness, provider, model, lane, effort_norm effort, skill_mode mode, status, grade,

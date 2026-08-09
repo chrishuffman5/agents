@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "suite": "suites/aws.json",
+  "version": 2,
+  "suites": ["suites/aws.json", "suites/cli-scripting.json", "suites/cloud-platforms.json"],
   "attempts": 1,
   "skillModes": ["skill", "no-skill"],
   "timeoutMinutes": 10,
@@ -8,14 +8,11 @@
     "workRoot": "C:\\evals\\work",
     "pluginDir": "C:\\evals\\plugins",
     "skillsDir": "C:\\evals\\skills",
-    "codexHomeSkills": "C:\\evals\\codex-home-skills",
+    "codexHomesRoot": "C:\\evals\\codex-homes",
     "codexHomeBare": "C:\\evals\\codex-home-bare",
     "secretsFile": "C:\\evals\\secrets.json"
   },
-  "skillPaths": {
-    "aws-cli": "C:\\evals\\skills\\aws-cli",
-    "aws": "C:\\evals\\skills\\aws"
-  },
+  "_provisioning": "skill arm per harness: claude loads the owning PLUGIN (--plugin-dir <pluginDir>\\<plugin>); codex gets CODEX_HOME=<codexHomesRoot>\\<plugin> holding that plugin's skills (per-plugin homes keep codex's 8k-char skill-description budget intact); pi loads the single skill (--skill <skillsDir>\\<skill>). skill paths derive from suite task fields — no per-skill config needed.",
   "throttle": { "anthropic": 4, "openai": 4 },
   "pricing": {
     "_comment": "USD per 1M tokens: [input, cached-input, output], as of 2026-08-05 per plugins/ai/skills/model-selection/SKILL.md (cached = 10x cheaper OpenAI, 0.1x Claude). claude reports cost_usd natively (used as-is; these rates are fallback). Sonnet 5 rate is the pre-Sep-1-2026 price.",
