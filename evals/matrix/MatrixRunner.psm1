@@ -16,8 +16,10 @@ function New-CellCommand {
         'claude' {
             $f = @('-p', '--bare', '--no-session-persistence', '--output-format', 'json',
                    '--model', $Cell.model, '--effort', $Cell.effortLiteral)
-            $f += if ($Cell.skillMode -eq 'skill') { @('--plugin-dir', $Cell.pluginDir) }
-                  else                             { '--disable-slash-commands' }
+            $f += if ($Cell.skillMode -eq 'skill') {
+                      # --plugin-dir is repeatable; load the plugin that owns the task's skill
+                      $Cell.pluginDirs | ForEach-Object { @('--plugin-dir', $_) }
+                  } else { '--disable-slash-commands' }
             "claude $($f -join ' ') $q"
         }
         'codex' {
@@ -80,14 +82,44 @@ function Claim-NextRun {
 
 function Complete-Run {
     param([Parameter(Mandatory)][string]$Database, [Parameter(Mandatory)][string]$RunId,
-          [int]$WallMs, [string]$Raw, [int]$ExitCode = 0, [hashtable]$Parsed)
+          [int]$WallMs, [int]$ExitCode = 0, [hashtable]$Parsed,
+          [string]$Grade, [string]$GradedBy, [string]$OutputPath)
     $p = @{ id = $RunId; wall = $WallMs; exit = $ExitCode; now = (Get-Date).ToString('o')
             ti = $Parsed.tokens_in; to = $Parsed.tokens_out; tc = $Parsed.tokens_cache_read
-            cost = $Parsed.cost_usd; ans = $Parsed.answer }
+            cost = $Parsed.cost_usd; ans = $Parsed.answer
+            grade = $Grade; gradedby = $GradedBy; outpath = $OutputPath }
     Invoke-SqliteQuery -DataSource $Database -Query "
         UPDATE runs SET status='done', finished_at=@now, wall_ms=@wall, exit_code=@exit,
-               tokens_in=@ti, tokens_out=@to, tokens_cache_read=@tc, cost_usd=@cost, answer=@ans
+               tokens_in=@ti, tokens_out=@to, tokens_cache_read=@tc, cost_usd=@cost,
+               answer=@ans, grade=@grade, graded_by=@gradedby, output_path=@outpath
         WHERE run_id=@id" -SqlParameters $p | Out-Null
+}
+
+function Reset-StaleRuns {
+    # Crash recovery: runs claimed but never finished go back to the queue.
+    param([Parameter(Mandatory)][string]$Database, [int]$OlderThanMinutes = 10)
+    $cutoff = (Get-Date).AddMinutes(-$OlderThanMinutes).ToString('o')
+    Invoke-SqliteQuery -DataSource $Database -Query "
+        UPDATE runs SET status='queued', claimed_by=NULL, started_at=NULL
+        WHERE status='running' AND started_at < @cutoff" -SqlParameters @{ cutoff = $cutoff } | Out-Null
+    (Invoke-SqliteQuery -DataSource $Database -Query "SELECT changes() n").n
+}
+
+function Resolve-RunEnv {
+    # env_json -> hashtable; @secret:name tokens resolved from the secrets file at dispatch time.
+    param([Parameter(Mandatory)][string]$EnvJson, [string]$SecretsFile)
+    $out = @{}
+    $map = $EnvJson | ConvertFrom-Json
+    $secrets = if ($SecretsFile -and (Test-Path $SecretsFile)) { Get-Content $SecretsFile -Raw | ConvertFrom-Json } else { $null }
+    foreach ($p in $map.PSObject.Properties) {
+        if ($p.Value -like '@secret:*') {
+            $name = $p.Value.Substring(8)
+            $val = if ($secrets) { $secrets.$name } else { $null }
+            if (-not $val) { throw "Secret '$name' missing or empty in $SecretsFile" }
+            $out[$p.Name] = $val
+        } else { $out[$p.Name] = $p.Value }
+    }
+    $out
 }
 
 function Fail-Run {
@@ -156,4 +188,4 @@ function Test-ExpectedSpec {
 }
 
 Export-ModuleMember -Function New-CellCommand, Initialize-EvalDb, Get-QueueDepth, Claim-NextRun,
-    Complete-Run, Fail-Run, Read-RunResult, Test-ExpectedSpec
+    Complete-Run, Fail-Run, Read-RunResult, Test-ExpectedSpec, Reset-StaleRuns, Resolve-RunEnv

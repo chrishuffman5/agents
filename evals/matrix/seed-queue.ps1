@@ -63,7 +63,7 @@ foreach ($laneCfg in $cfg.lanes) {
                             harness = $laneCfg.harness; lane = $laneCfg.lane; model = $m.id
                             effortLiteral = $effortLiteral; skillMode = $skillMode
                             sandbox = $sandbox; workspace = $workspace; prompt = $task.prompt
-                            pluginDir = $cfg.paths.pluginDir
+                            pluginDirs = @(Join-Path $cfg.paths.pluginDir $task.plugin)
                             skillPath = $cfg.skillPaths.($task.skill)
                             codexProfile = if ($m.PSObject.Properties['profile']) { $m.profile } else { $null }
                         }
