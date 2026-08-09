@@ -6,7 +6,8 @@
     { "file": "suites/cloud-platforms.json", "profile": "full" },
     { "file": "suites/containers.json", "profile": "campaign" },
     { "file": "suites/os.json", "profile": "campaign" },
-    { "file": "suites/database.json", "profile": "campaign" }
+    { "file": "suites/database.json", "profile": "campaign" },
+    { "file": "suites/devops.json", "profile": "campaign" }
   ],
   "profiles": {
     "_comment": "campaign trims cells for marketplace-wide scale: efforts E1+E3 (intersects to E1 on local lanes), flagship+small cloud tiers, one local weights-set. Pilot suites keep the full matrix via profile 'full'.",
