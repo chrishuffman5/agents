@@ -10,6 +10,7 @@
 param(
     [string]$ConfigPath = (Join-Path $PSScriptRoot 'matrix.config.json'),
     [string]$DbPath     = (Join-Path $PSScriptRoot 'evalq.sqlite'),
+    [string]$OnlyHarness,              # reseed just one harness: deletes its rows, keeps the rest
     [switch]$Force,
     [switch]$WhatIfSummary
 )
@@ -27,15 +28,23 @@ foreach ($t in $suite.tasks) {
     if ($t.prompt -match '["`$]') { throw "Task $($t.id): prompt contains a forbidden character (double quote, backtick, or dollar sign)." }
 }
 
-if ($Force -and (Test-Path $DbPath)) { Remove-Item $DbPath -Force }
+if ($Force -and -not $OnlyHarness -and (Test-Path $DbPath)) { Remove-Item $DbPath -Force }
 if ((Test-Path $DbPath) -and -not $WhatIfSummary) {
-    $existing = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) AS n FROM runs").n
-    if ($existing -gt 0) { throw "evalq.sqlite already holds $existing runs. Use -Force to re-seed, or dispatch the existing queue." }
+    if ($OnlyHarness) {
+        Import-Module PSSQLite
+        $n = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) n FROM runs WHERE harness=@h" -SqlParameters @{ h = $OnlyHarness }).n
+        Invoke-SqliteQuery -DataSource $DbPath -Query "DELETE FROM runs WHERE harness=@h" -SqlParameters @{ h = $OnlyHarness } | Out-Null
+        Write-Host "deleted $n existing $OnlyHarness runs (other harnesses untouched)"
+    } else {
+        $existing = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) AS n FROM runs").n
+        if ($existing -gt 0) { throw "evalq.sqlite already holds $existing runs. Use -Force to re-seed, -OnlyHarness <h> to replace one harness, or dispatch the existing queue." }
+    }
 }
 
 # ---- expand cells ----------------------------------------------------------
 $rows = [System.Collections.Generic.List[object]]::new()
-foreach ($laneCfg in $cfg.lanes) {
+$laneSet = if ($OnlyHarness) { $cfg.lanes | Where-Object { $_.harness -eq $OnlyHarness } } else { $cfg.lanes }
+foreach ($laneCfg in $laneSet) {
     $sandbox = if ($laneCfg.PSObject.Properties['sandbox']) { $laneCfg.sandbox } else { $null }
     foreach ($m in $laneCfg.models) {
         foreach ($effortProp in $laneCfg.efforts.PSObject.Properties) {

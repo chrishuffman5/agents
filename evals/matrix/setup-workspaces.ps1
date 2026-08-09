@@ -85,6 +85,19 @@ foreach ($homeName in 'codex-home-skills', 'codex-home-bare') {
     Write-Host "scrubbed domain-expert plugin config from $homeName\config.toml"
 }
 
+# ---- claude scratch config home (subscription OAuth, no API key) -----------
+# Empty config dir = no user plugins/CLAUDE.md/memory/hooks. Only the existing OAuth
+# credentials are copied in so `claude -p` authenticates against the subscription.
+$claudeHome = Join-Path $EvalRoot 'claude-home'
+New-Item -ItemType Directory -Force $claudeHome | Out-Null
+$credSrc = Join-Path $env:USERPROFILE '.claude\.credentials.json'
+if (Test-Path $credSrc) { Copy-Item $credSrc $claudeHome -Force }
+else { Write-Warning "no $credSrc — claude cells may fail auth; run claude /login once, then re-run setup." }
+if (-not (Test-Path (Join-Path $claudeHome 'settings.json'))) {
+    '{}' | Set-Content (Join-Path $claudeHome 'settings.json') -Encoding utf8
+}
+Write-Host "claude  -> $claudeHome (scratch config home, subscription OAuth)"
+
 # ---- work root + secrets template -----------------------------------------
 New-Item -ItemType Directory -Force (Join-Path $EvalRoot 'work') | Out-Null
 $secrets = Join-Path $EvalRoot 'secrets.json'

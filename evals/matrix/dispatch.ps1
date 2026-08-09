@@ -9,6 +9,8 @@
 [CmdletBinding()]
 param(
     [ValidateSet('cloud', 'local', 'all')][string]$Lane = 'all',
+    [string]$OnlyProvider,             # limit the cloud pool to one provider (smoke tests)
+    [string]$OnlyHarness,              # limit claims to one harness (smoke tests)
     [int]$MaxRuns = 0,                 # 0 = unlimited
     [switch]$DryRun,
     [switch]$ResetStale,
@@ -48,6 +50,7 @@ foreach ($t in $tokens) { Resolve-RunEnv -EnvJson $t.env_json -SecretsFile $cfg.
 function Invoke-CloudPool {
     $caps = @{}
     $cfg.throttle.PSObject.Properties | ForEach-Object { $caps[$_.Name] = [int]$_.Value }
+    if ($OnlyProvider) { foreach ($k in @($caps.Keys)) { if ($k -ne $OnlyProvider) { $caps.Remove($k) } } }
     $jobs = @{}
     while ($true) {
         if (-not $script:stopLaunching) {
@@ -55,7 +58,7 @@ function Invoke-CloudPool {
                 $active = @($jobs.Values | Where-Object { $_.Provider -eq $p })
                 for ($i = $active.Count; $i -lt $caps[$p]; $i++) {
                     if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { $script:stopLaunching = $true; break }
-                    $run = Claim-NextRun -Database $DbPath -Lane cloud -Provider $p
+                    $run = Claim-NextRun -Database $DbPath -Lane cloud -Provider $p -Harness $OnlyHarness
                     if (-not $run) { break }
                     $script:launched++
                     Write-Host "▶ $($run.run_id)"

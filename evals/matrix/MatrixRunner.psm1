@@ -14,7 +14,10 @@ function New-CellCommand {
     $q = '"' + $Cell.prompt + '"'
     switch ($Cell.harness) {
         'claude' {
-            $f = @('-p', '--bare', '--no-session-persistence', '--output-format', 'json',
+            # No --bare: it refuses subscription OAuth (API-key only). Isolation comes from a
+            # scratch CLAUDE_CONFIG_DIR (env_json) — empty home: no plugins/CLAUDE.md/memory/hooks —
+            # plus an empty per-run workspace (no project scope to discover).
+            $f = @('-p', '--no-session-persistence', '--output-format', 'json',
                    '--model', $Cell.model, '--effort', $Cell.effortLiteral)
             $f += if ($Cell.skillMode -eq 'skill') {
                       # --plugin-dir is repeatable; load the plugin that owns the task's skill
@@ -60,13 +63,14 @@ function Claim-NextRun {
       UPDATE-then-check-changes() because the bundled SQLite may predate RETURNING.
     #>
     param([Parameter(Mandatory)][string]$Database, [string]$Lane, [string]$Provider, [string]$Model,
-          [string]$Worker = "$env:COMPUTERNAME/$PID")
+          [string]$Harness, [string]$Worker = "$env:COMPUTERNAME/$PID")
     for ($try = 0; $try -lt 5; $try++) {
         $where = "status = 'queued'"
         $p = @{ worker = $Worker; now = (Get-Date).ToString('o') }
         if ($Lane)     { $where += " AND lane = @lane";         $p.lane = $Lane }
         if ($Provider) { $where += " AND provider = @provider"; $p.provider = $Provider }
         if ($Model)    { $where += " AND model = @model";       $p.model = $Model }
+        if ($Harness)  { $where += " AND harness = @harness";   $p.harness = $Harness }
         $cand = Invoke-SqliteQuery -DataSource $Database -Query "SELECT run_id FROM runs WHERE $where LIMIT 1" -SqlParameters $p
         if (-not $cand) { return $null }
         $p.id = $cand.run_id
