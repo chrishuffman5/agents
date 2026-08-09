@@ -1,6 +1,6 @@
 # influxdb — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **58.3%** | 22.7s | 1006 | $2.3129 | $0.3304 |
+| no-skill | 12 | **41.7%** | 22.2s | 646 | $0.8044 | $0.1609 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 58.3% | 41.7% | +16.6pp | 22.7s | 22.2s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 50% | 22.3s | $0.1181 |
+| claude-haiku-4-5 | no-skill | 16.7% | 23.8s | $0.2151 |
+| claude-opus-5 | skill | 66.7% | 23s | $0.4897 |
+| claude-opus-5 | no-skill | 66.7% | 20.5s | $0.1473 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `influxdb-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

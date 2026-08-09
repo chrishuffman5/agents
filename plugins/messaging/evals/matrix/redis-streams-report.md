@@ -1,6 +1,6 @@
 # redis-streams — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `messaging` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `messaging` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **100%** | 7.8s | 286 | $0.8298 | $0.0692 |
+| no-skill | 12 | **100%** | 8.3s | 242 | $0.4347 | $0.0362 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 100% | 100% | +0pp | 7.8s | 8.3s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 7.7s | $0.0224 |
+| claude-haiku-4-5 | no-skill | 100% | 7.8s | $0.0158 |
+| claude-opus-5 | skill | 100% | 7.9s | $0.1159 |
+| claude-opus-5 | no-skill | 100% | 8.8s | $0.0566 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `redis-streams-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

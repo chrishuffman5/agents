@@ -1,6 +1,6 @@
 # sles-ha-extension — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **12 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 6 | **100%** | 12.9s | 91 | $0.5663 | $0.0944 |
-| no-skill | 6 | **100%** | 7.2s | 62 | $0.3313 | $0.0552 |
+| skill | 18 | **100%** | 12.5s | 278 | $1.5063 | $0.0837 |
+| no-skill | 15 | **100%** | 7.1s | 160 | $0.5945 | $0.0396 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 7.7s | 4.8s |
-| codex | 100% | 100% | +0pp | 18s | 9.6s |
+| claude | 100% | 100% | +0pp | 10.5s | 6.5s |
+| codex | 100% | 100% | +0pp | 16.7s | 9.6s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
-| claude-opus-5 | skill | 100% | 7.7s | $0.1384 |
-| claude-opus-5 | no-skill | 100% | 4.8s | $0.0563 |
-| gpt-5.6-sol | skill | 100% | 18s | $0.0504 |
+| claude-haiku-4-5 | skill | 100% | 10.4s | $0.0243 |
+| claude-haiku-4-5 | no-skill | 100% | 7.8s | $0.0155 |
+| claude-opus-5 | skill | 100% | 10.5s | $0.1733 |
+| claude-opus-5 | no-skill | 100% | 5.3s | $0.0565 |
+| gpt-5.6-sol | skill | 100% | 16.7s | $0.0535 |
 | gpt-5.6-sol | no-skill | 100% | 9.6s | $0.0542 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `sles-ha-extension-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

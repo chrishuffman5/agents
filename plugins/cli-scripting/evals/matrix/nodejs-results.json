@@ -1,10 +1,10 @@
 {
   "skill": "nodejs",
   "plugin": "cli-scripting",
-  "generated": "2026-08-09T00:59:12.9209624-05:00",
-  "partial": true,
-  "runsDone": 144,
-  "runsPlanned": 288,
+  "generated": "2026-08-09T11:13:08.7746814-05:00",
+  "partial": false,
+  "runsDone": 256,
+  "runsPlanned": 256,
   "prompts": [
     {
       "id": "nodejs-temporal-default",
@@ -53,65 +53,86 @@
   ],
   "overall": {
     "skill": {
-      "runs": 72,
-      "pass": 60,
-      "accuracy": 83.3,
-      "meanWallMs": 12449,
-      "meanTokensOut": 288,
-      "totalCostUsd": 4.5876,
-      "costPerCorrect": 0.0765
+      "runs": 128,
+      "pass": 80,
+      "accuracy": 62.5,
+      "meanWallMs": 22642,
+      "meanTokensOut": 646,
+      "totalCostUsd": 12.3708,
+      "costPerCorrect": 0.1546
     },
     "no-skill": {
-      "runs": 72,
-      "pass": 48,
-      "accuracy": 66.7,
-      "meanWallMs": 10126,
-      "meanTokensOut": 195,
-      "totalCostUsd": 2.6463,
-      "costPerCorrect": 0.0551
+      "runs": 128,
+      "pass": 74,
+      "accuracy": 57.8,
+      "meanWallMs": 23100,
+      "meanTokensOut": 684,
+      "totalCostUsd": 7.5031,
+      "costPerCorrect": 0.1014
     }
   },
   "byHarness": [
     {
       "harness": "claude",
       "skill": {
-        "runs": 36,
-        "pass": 25,
-        "accuracy": 69.4,
-        "meanWallMs": 12332,
-        "meanTokensOut": 376,
-        "totalCostUsd": 3.5618,
-        "costPerCorrect": 0.1425
+        "runs": 52,
+        "pass": 30,
+        "accuracy": 57.7,
+        "meanWallMs": 24407,
+        "meanTokensOut": 568,
+        "totalCostUsd": 11.345,
+        "costPerCorrect": 0.3782
       },
       "noskill": {
-        "runs": 36,
-        "pass": 18,
+        "runs": 52,
+        "pass": 26,
         "accuracy": 50.0,
-        "meanWallMs": 10409,
-        "meanTokensOut": 302,
-        "totalCostUsd": 1.894,
-        "costPerCorrect": 0.1052
+        "meanWallMs": 18179,
+        "meanTokensOut": 384,
+        "totalCostUsd": 6.7508,
+        "costPerCorrect": 0.2596
       }
     },
     {
       "harness": "codex",
       "skill": {
-        "runs": 36,
-        "pass": 35,
-        "accuracy": 97.2,
-        "meanWallMs": 12566,
-        "meanTokensOut": 200,
+        "runs": 52,
+        "pass": 42,
+        "accuracy": 80.8,
+        "meanWallMs": 21271,
+        "meanTokensOut": 724,
         "totalCostUsd": 1.0258,
-        "costPerCorrect": 0.0293
+        "costPerCorrect": 0.0244
       },
       "noskill": {
-        "runs": 36,
-        "pass": 30,
-        "accuracy": 83.3,
-        "meanWallMs": 9843,
-        "meanTokensOut": 87,
+        "runs": 52,
+        "pass": 38,
+        "accuracy": 73.1,
+        "meanWallMs": 26112,
+        "meanTokensOut": 984,
         "totalCostUsd": 0.7523,
-        "costPerCorrect": 0.0251
+        "costPerCorrect": 0.0198
+      }
+    },
+    {
+      "harness": "pi",
+      "skill": {
+        "runs": 24,
+        "pass": 8,
+        "accuracy": 33.3,
+        "meanWallMs": 21788,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      },
+      "noskill": {
+        "runs": 24,
+        "pass": 10,
+        "accuracy": 41.7,
+        "meanWallMs": 27238,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
       }
     }
   ],
@@ -183,6 +204,50 @@
       }
     },
     {
+      "model": "gemma4:12b",
+      "lane": "local",
+      "skill": {
+        "runs": 16,
+        "pass": 6,
+        "accuracy": 37.5,
+        "meanWallMs": 54219,
+        "meanTokensOut": 2001,
+        "totalCostUsd": 1.7966,
+        "costPerCorrect": 0.2994
+      },
+      "noskill": {
+        "runs": 16,
+        "pass": 7,
+        "accuracy": 43.8,
+        "meanWallMs": 78543,
+        "meanTokensOut": 3020,
+        "totalCostUsd": 1.8,
+        "costPerCorrect": 0.2571
+      }
+    },
+    {
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "lane": "local",
+      "skill": {
+        "runs": 16,
+        "pass": 6,
+        "accuracy": 37.5,
+        "meanWallMs": 38211,
+        "meanTokensOut": 901,
+        "totalCostUsd": 5.9866,
+        "costPerCorrect": 0.9978
+      },
+      "noskill": {
+        "runs": 16,
+        "pass": 9,
+        "accuracy": 56.2,
+        "meanWallMs": 19835,
+        "meanTokensOut": 548,
+        "totalCostUsd": 3.0568,
+        "costPerCorrect": 0.3396
+      }
+    },
+    {
       "model": "gpt-5.6-luna",
       "lane": "cloud",
       "skill": {
@@ -246,6 +311,72 @@
         "meanTokensOut": 101,
         "totalCostUsd": 0.1939,
         "costPerCorrect": 0.0194
+      }
+    },
+    {
+      "model": "ollama/gemma4:12b",
+      "lane": "local",
+      "skill": {
+        "runs": 8,
+        "pass": 3,
+        "accuracy": 37.5,
+        "meanWallMs": 11459,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      },
+      "noskill": {
+        "runs": 8,
+        "pass": 4,
+        "accuracy": 50.0,
+        "meanWallMs": 24317,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "model": "ollama/glm-4.7-flash:q4_K_M-32k",
+      "lane": "local",
+      "skill": {
+        "runs": 8,
+        "pass": 3,
+        "accuracy": 37.5,
+        "meanWallMs": 17593,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      },
+      "noskill": {
+        "runs": 8,
+        "pass": 2,
+        "accuracy": 25.0,
+        "meanWallMs": 4276,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "model": "ollama/qwen3.6:27b",
+      "lane": "local",
+      "skill": {
+        "runs": 8,
+        "pass": 2,
+        "accuracy": 25.0,
+        "meanWallMs": 36312,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      },
+      "noskill": {
+        "runs": 8,
+        "pass": 4,
+        "accuracy": 50.0,
+        "meanWallMs": 53120,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
       }
     }
   ],
@@ -521,6 +652,246 @@
       }
     },
     {
+      "harness": "claude",
+      "model": "gemma4:12b",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 43242,
+        "meanTokensOut": 622,
+        "totalCostUsd": 0.7599,
+        "costPerCorrect": 0.7599
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "gemma4:12b",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 34759,
+        "meanTokensOut": 810,
+        "totalCostUsd": 0.9118,
+        "costPerCorrect": 0.9118
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "gemma4:12b",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 51312,
+        "meanTokensOut": 1148,
+        "totalCostUsd": 1.0401,
+        "costPerCorrect": 0.52
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "gemma4:12b",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 60555,
+        "meanTokensOut": 1640,
+        "totalCostUsd": 0.8848,
+        "costPerCorrect": 0.8848
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 29432,
+        "meanTokensOut": 333,
+        "totalCostUsd": 1.9781,
+        "costPerCorrect": 0.989
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 20230,
+        "meanTokensOut": 471,
+        "totalCostUsd": 0.9306,
+        "costPerCorrect": 0.4653
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 3,
+        "accuracy": 75.0,
+        "meanWallMs": 18665,
+        "meanTokensOut": 164,
+        "totalCostUsd": 1.0787,
+        "costPerCorrect": 0.3596
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 90756,
+        "meanTokensOut": 1076,
+        "totalCostUsd": 5.056,
+        "costPerCorrect": 5.056
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gemma4:12b",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 110404,
+        "meanTokensOut": 5261,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gemma4:12b",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 46675,
+        "meanTokensOut": 2160,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gemma4:12b",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 3,
+        "accuracy": 75.0,
+        "meanWallMs": 109212,
+        "meanTokensOut": 5048,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gemma4:12b",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 74888,
+        "meanTokensOut": 3394,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 6806,
+        "meanTokensOut": 387,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 11586,
+        "meanTokensOut": 540,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 24438,
+        "meanTokensOut": 1309,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 1,
+        "accuracy": 25.0,
+        "meanWallMs": 30271,
+        "meanTokensOut": 1516,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
       "harness": "codex",
       "model": "gpt-5.6-luna",
       "effort": "E1",
@@ -788,6 +1159,186 @@
         "meanTokensOut": 172,
         "totalCostUsd": 0.0839,
         "costPerCorrect": 0.021
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/gemma4:12b",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 868,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/gemma4:12b",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 911,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/gemma4:12b",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 4,
+        "accuracy": 100.0,
+        "meanWallMs": 47767,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/gemma4:12b",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 3,
+        "accuracy": 75.0,
+        "meanWallMs": 22008,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 922,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/glm-4.7-flash:q4_K_M-32k",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 932,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 7631,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/glm-4.7-flash:q4_K_M-32k",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 3,
+        "accuracy": 75.0,
+        "meanWallMs": 34254,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/qwen3.6:27b",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 897,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/qwen3.6:27b",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 0,
+        "accuracy": 0.0,
+        "meanWallMs": 887,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": null
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/qwen3.6:27b",
+      "effort": "E2",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 4,
+        "pass": 4,
+        "accuracy": 100.0,
+        "meanWallMs": 105344,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
+      }
+    },
+    {
+      "harness": "pi",
+      "model": "ollama/qwen3.6:27b",
+      "effort": "E2",
+      "mode": "skill",
+      "agg": {
+        "runs": 4,
+        "pass": 2,
+        "accuracy": 50.0,
+        "meanWallMs": 71736,
+        "meanTokensOut": null,
+        "totalCostUsd": 0.0,
+        "costPerCorrect": 0.0
       }
     }
   ],

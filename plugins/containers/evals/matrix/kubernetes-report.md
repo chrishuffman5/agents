@@ -1,6 +1,6 @@
 # kubernetes — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **36 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **77.8%** | 11.8s | 217 | $1.0125 | $0.1446 |
-| no-skill | 6 | **50%** | 12.4s | 134 | $0.3471 | $0.1157 |
+| skill | 18 | **66.7%** | 11.2s | 288 | $1.3343 | $0.1112 |
+| no-skill | 18 | **44.4%** | 10.8s | 238 | $0.8131 | $0.1016 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 66.7% | 33.3% | +33.4pp | 10.6s | 7.7s |
-| codex | 100% | 66.7% | +33.3pp | 14.1s | 17.1s |
+| claude | 50% | 33.3% | +16.7pp | 10.3s | 8.4s |
+| codex | 100% | 66.7% | +33.3pp | 12.8s | 15.5s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 33.3% | 10.1s | $0.0631 |
+| claude-haiku-4-5 | no-skill | 33.3% | 8.7s | $0.0545 |
 | claude-opus-5 | skill | 66.7% | 10.6s | $0.2094 |
-| claude-opus-5 | no-skill | 33.3% | 7.7s | $0.1671 |
-| gpt-5.6-sol | skill | 100% | 14.1s | $0.0584 |
-| gpt-5.6-sol | no-skill | 66.7% | 17.1s | $0.09 |
+| claude-opus-5 | no-skill | 33.3% | 8.1s | $0.1688 |
+| gpt-5.6-sol | skill | 100% | 12.8s | $0.0618 |
+| gpt-5.6-sol | no-skill | 66.7% | 15.5s | $0.0917 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `kubernetes-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

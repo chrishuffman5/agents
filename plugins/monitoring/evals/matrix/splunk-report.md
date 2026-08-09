@@ -1,6 +1,6 @@
 # splunk — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `monitoring` · runs: **0 / 132** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **45 / 132** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -19,13 +19,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 24 | **58.3%** | 10.1s | 427 | $1.7274 | $0.1234 |
+| no-skill | 21 | **61.9%** | 7.9s | 290 | $0.6285 | $0.0483 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 58.3% | 61.9% | +-3.6pp | 10.1s | 7.9s |
 
 ## By model — price to performance
 
@@ -33,5 +34,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 50% | 10.9s | $0.0405 |
+| claude-haiku-4-5 | no-skill | 44.4% | 8s | $0.0274 |
+| claude-opus-5 | skill | 66.7% | 9.4s | $0.1856 |
+| claude-opus-5 | no-skill | 75% | 7.8s | $0.0577 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `splunk-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

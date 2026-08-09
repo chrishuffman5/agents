@@ -1,6 +1,6 @@
 # grafana — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `monitoring` · runs: **0 / 132** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **48 / 132** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -19,13 +19,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 24 | **70.8%** | 14.5s | 466 | $2.5001 | $0.1471 |
+| no-skill | 24 | **41.7%** | 10.9s | 334 | $1.0898 | $0.109 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 70.8% | 41.7% | +29.1pp | 14.5s | 10.9s |
 
 ## By model — price to performance
 
@@ -33,5 +34,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 58.3% | 17.5s | $0.0668 |
+| claude-haiku-4-5 | no-skill | 25% | 12.2s | $0.0854 |
+| claude-opus-5 | skill | 83.3% | 11.5s | $0.2033 |
+| claude-opus-5 | no-skill | 58.3% | 9.6s | $0.1191 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `grafana-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

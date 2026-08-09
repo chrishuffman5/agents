@@ -1,6 +1,6 @@
 # rancher — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 8.7s | 177 | $1.0765 | $0.1196 |
-| no-skill | 6 | **66.7%** | 10.8s | 132 | $0.3232 | $0.0808 |
+| skill | 18 | **100%** | 10.9s | 257 | $1.4415 | $0.0801 |
+| no-skill | 15 | **80%** | 18.9s | 416 | $0.8589 | $0.0716 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 66.7% | +33.3pp | 7.9s | 4.7s |
-| codex | 100% | 66.7% | +33.3pp | 10.3s | 16.9s |
+| claude | 100% | 83.3% | +16.7pp | 9.4s | 19.4s |
+| codex | 100% | 66.7% | +33.3pp | 13.7s | 16.9s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 11s | $0.028 |
+| claude-haiku-4-5 | no-skill | 83.3% | 20.8s | $0.0392 |
 | claude-opus-5 | skill | 100% | 7.9s | $0.1464 |
-| claude-opus-5 | no-skill | 66.7% | 4.7s | $0.0829 |
-| gpt-5.6-sol | skill | 100% | 10.3s | $0.066 |
+| claude-opus-5 | no-skill | 83.3% | 18s | $0.1011 |
+| gpt-5.6-sol | skill | 100% | 13.7s | $0.0659 |
 | gpt-5.6-sol | no-skill | 66.7% | 16.9s | $0.0787 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `rancher-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

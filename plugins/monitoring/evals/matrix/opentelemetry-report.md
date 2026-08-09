@@ -1,6 +1,6 @@
 # opentelemetry — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `monitoring` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `monitoring` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **75%** | 8.1s | 308 | $0.9531 | $0.1059 |
+| no-skill | 12 | **66.7%** | 6.3s | 207 | $0.4176 | $0.0522 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 75% | 66.7% | +8.3pp | 8.1s | 6.3s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 7.4s | $0.0309 |
+| claude-haiku-4-5 | no-skill | 50% | 7s | $0.0295 |
+| claude-opus-5 | skill | 83.3% | 8.8s | $0.1659 |
+| claude-opus-5 | no-skill | 83.3% | 5.6s | $0.0658 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `opentelemetry-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

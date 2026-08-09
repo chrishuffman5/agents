@@ -1,6 +1,6 @@
 # aws-cli — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `cli-scripting` · runs: **264 / 432** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **390 / 390**
 
 ## The exact prompts used
 
@@ -19,15 +19,16 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 132 | **88.6%** | 15.5s | 453 | $9.6954 | $0.0829 |
-| no-skill | 132 | **80.3%** | 13.9s | 396 | $7.0816 | $0.0668 |
+| skill | 198 | **77.8%** | 21.4s | 428 | $14.42 | $0.0936 |
+| no-skill | 192 | **71.4%** | 14.2s | 388 | $9.5129 | $0.0694 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 84.8% | 71.2% | +13.6pp | 14.2s | 13.3s |
-| codex | 92.4% | 89.4% | +3pp | 16.8s | 14.6s |
+| claude | 85.7% | 71.8% | +13.9pp | 23.3s | 13.7s |
+| codex | 89.7% | 83.3% | +6.4pp | 15.4s | 13.7s |
+| pi | 33.3% | 44.4% | +-11.1pp | 29.8s | 16.1s |
 
 ## By model — price to performance
 
@@ -43,11 +44,20 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 | claude-sonnet-5 | no-skill | 77.8% | 5.5s | $0.065 |
 | gemma4:12b | skill | 58.3% | 33.7s | $0.1348 |
 | gemma4:12b | no-skill | 45.8% | 39.2s | $0.2415 |
+| glm-4.7-flash:q4_K_M-32k | skill | 79.2% | 15s | $0.1722 |
+| glm-4.7-flash:q4_K_M-32k | no-skill | 62.5% | 12.5s | $0.1621 |
 | gpt-5.6-luna | skill | 100% | 10.4s | $0.0037 |
 | gpt-5.6-luna | no-skill | 100% | 8.1s | $0.0014 |
 | gpt-5.6-sol | skill | 100% | 17.4s | $0.1087 |
 | gpt-5.6-sol | no-skill | 100% | 10.8s | $0.0602 |
 | gpt-5.6-terra | skill | 100% | 9.3s | $0.0252 |
 | gpt-5.6-terra | no-skill | 100% | 8s | $0.0181 |
+| ollama/gemma4:12b | skill | 33.3% | 6.7s | $0 |
+| ollama/gemma4:12b | no-skill | 41.7% | 8s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | skill | 33.3% | 6.4s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | no-skill | 50% | 7s | $0 |
+| ollama/qwen3.6:27b | skill | 33.3% | 76.4s | $0 |
+| ollama/qwen3.6:27b | no-skill | 41.7% | 33.3s | $0 |
+| qwen3.6:27b | skill | 100% | 125.8s | $0.242 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `aws-cli-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

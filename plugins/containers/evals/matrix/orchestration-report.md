@@ -1,6 +1,6 @@
 # orchestration — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 132** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **60 / 132** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -19,15 +19,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **88.9%** | 13.9s | 351 | $1.1195 | $0.1399 |
-| no-skill | 6 | **50%** | 13s | 228 | $0.4323 | $0.1441 |
+| skill | 30 | **86.7%** | 11.4s | 317 | $2.565 | $0.0987 |
+| no-skill | 30 | **70%** | 13.5s | 375 | $1.9817 | $0.0944 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 66.7% | +33.3pp | 11.7s | 10.3s |
-| codex | 66.7% | 33.3% | +33.4pp | 18.4s | 15.7s |
+| claude | 91.7% | 75% | +16.7pp | 10.1s | 11.7s |
+| codex | 66.7% | 50% | +16.7pp | 16.5s | 20.8s |
 
 ## By model — price to performance
 
@@ -35,9 +35,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
-| claude-opus-5 | skill | 100% | 11.7s | $0.1608 |
-| claude-opus-5 | no-skill | 66.7% | 10.3s | $0.1084 |
-| gpt-5.6-sol | skill | 66.7% | 18.4s | $0.0772 |
-| gpt-5.6-sol | no-skill | 33.3% | 15.7s | $0.2155 |
+| claude-haiku-4-5 | skill | 83.3% | 10.4s | $0.0313 |
+| claude-haiku-4-5 | no-skill | 58.3% | 9.7s | $0.0334 |
+| claude-opus-5 | skill | 100% | 9.8s | $0.1576 |
+| claude-opus-5 | no-skill | 91.7% | 13.7s | $0.0845 |
+| gpt-5.6-sol | skill | 66.7% | 16.5s | $0.0901 |
+| gpt-5.6-sol | no-skill | 50% | 20.8s | $0.2728 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `orchestration-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

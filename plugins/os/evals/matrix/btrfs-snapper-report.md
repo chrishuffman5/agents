@@ -1,6 +1,6 @@
 # btrfs-snapper — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **44.4%** | 13.2s | 334 | $1.4327 | $0.3582 |
-| no-skill | 6 | **33.3%** | 16.9s | 216 | $0.4157 | $0.2078 |
+| skill | 18 | **55.6%** | 13s | 358 | $1.8134 | $0.1813 |
+| no-skill | 15 | **26.7%** | 12.9s | 364 | $0.7139 | $0.1785 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 50% | 33.3% | +16.7pp | 11s | 10.9s |
-| codex | 33.3% | 33.3% | +0pp | 17.7s | 23s |
+| claude | 66.7% | 25% | +41.7pp | 11.4s | 10.4s |
+| codex | 33.3% | 33.3% | +0pp | 16.1s | 23s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 83.3% | 11.7s | $0.0351 |
+| claude-haiku-4-5 | no-skill | 16.7% | 9.3s | $0.1033 |
 | claude-opus-5 | skill | 50% | 11s | $0.4 |
-| claude-opus-5 | no-skill | 33.3% | 10.9s | $0.1812 |
-| gpt-5.6-sol | skill | 33.3% | 17.7s | $0.2326 |
+| claude-opus-5 | no-skill | 33.3% | 11.4s | $0.188 |
+| gpt-5.6-sol | skill | 33.3% | 16.1s | $0.2188 |
 | gpt-5.6-sol | no-skill | 33.3% | 23s | $0.2345 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `btrfs-snapper-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

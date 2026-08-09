@@ -1,6 +1,6 @@
 # istio — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **36 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 11.7s | 259 | $1.0194 | $0.1133 |
-| no-skill | 6 | **83.3%** | 10.2s | 142 | $0.3353 | $0.0671 |
+| skill | 18 | **83.3%** | 11.8s | 359 | $1.3809 | $0.0921 |
+| no-skill | 18 | **77.8%** | 9.8s | 239 | $0.7691 | $0.0549 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 10.9s | 8.1s |
-| codex | 100% | 66.7% | +33.3pp | 13.1s | 12.4s |
+| claude | 75% | 75% | +0pp | 11.5s | 8.1s |
+| codex | 100% | 83.3% | +16.7pp | 12.5s | 13.1s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 50% | 12s | $0.0473 |
+| claude-haiku-4-5 | no-skill | 50% | 7.8s | $0.0309 |
 | claude-opus-5 | skill | 100% | 10.9s | $0.1426 |
-| claude-opus-5 | no-skill | 100% | 8.1s | $0.0562 |
-| gpt-5.6-sol | skill | 100% | 13.1s | $0.0547 |
-| gpt-5.6-sol | no-skill | 66.7% | 12.4s | $0.0834 |
+| claude-opus-5 | no-skill | 100% | 8.4s | $0.0565 |
+| gpt-5.6-sol | skill | 100% | 12.5s | $0.0639 |
+| gpt-5.6-sol | no-skill | 83.3% | 13.1s | $0.0675 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `istio-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

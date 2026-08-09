@@ -60,11 +60,13 @@ function Get-Agg {
     $costs = @($Rows | ForEach-Object { Get-RunCost $_ } | Where-Object { $_ -ne $null })
     $costKnown = $costs.Count -eq $n
     $totalCost = if ($costKnown) { [math]::Round(($costs | Measure-Object -Sum).Sum, 4) } else { $null }
+    $wallAgg = $Rows | Where-Object { $_.wall_ms -isnot [System.DBNull] -and $null -ne $_.wall_ms } | Measure-Object wall_ms -Average
+    $tokAgg  = $Rows | Where-Object { $_.tokens_out -isnot [System.DBNull] -and $_.tokens_out } | Measure-Object tokens_out -Average
     [ordered]@{
         runs = $n; pass = $pass
         accuracy = [math]::Round(100.0 * $pass / $n, 1)
-        meanWallMs = [int](($Rows | Measure-Object wall_ms -Average).Average)
-        meanTokensOut = [int](($Rows | Where-Object { $_.tokens_out } | Measure-Object tokens_out -Average).Average)
+        meanWallMs = if ($wallAgg) { [int]$wallAgg.Average } else { $null }
+        meanTokensOut = if ($tokAgg) { [int]$tokAgg.Average } else { $null }
         totalCostUsd = $totalCost
         costPerCorrect = if ($costKnown -and $pass -gt 0) { [math]::Round($totalCost / $pass, 4) } else { $null }
     }

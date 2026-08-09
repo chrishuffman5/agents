@@ -1,6 +1,6 @@
 # neptune — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **91.7%** | 11s | 472 | $1.4136 | $0.1285 |
+| no-skill | 12 | **58.3%** | 8.5s | 350 | $0.4778 | $0.0683 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 91.7% | 58.3% | +33.4pp | 11s | 8.5s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 83.3% | 10.8s | $0.038 |
+| claude-haiku-4-5 | no-skill | 16.7% | 10.6s | $0.1358 |
+| claude-opus-5 | skill | 100% | 11.2s | $0.2039 |
+| claude-opus-5 | no-skill | 100% | 6.4s | $0.057 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `neptune-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

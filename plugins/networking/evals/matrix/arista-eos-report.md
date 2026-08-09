@@ -1,6 +1,6 @@
 # arista-eos — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `networking` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **16.7%** | 19.5s | 1430 | $1.9743 | $0.9872 |
+| no-skill | 9 | **11.1%** | 7.2s | 510 | $0.2881 | $0.2881 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 16.7% | 11.1% | +5.6pp | 19.5s | 7.2s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 0% | 3.7s | rates n/c |
+| claude-haiku-4-5 | no-skill | 0% | 3.2s | rates n/c |
+| claude-opus-5 | skill | 33.3% | 35.2s | $0.9872 |
+| claude-opus-5 | no-skill | 16.7% | 9.2s | $0.2881 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `arista-eos-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

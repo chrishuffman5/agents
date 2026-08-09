@@ -1,6 +1,6 @@
 # docker — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **17 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **36 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 11 | **90.9%** | 15.3s | 330 | $1.6098 | $0.161 |
-| no-skill | 6 | **50%** | 12.2s | 181 | $0.515 | $0.1717 |
+| skill | 18 | **72.2%** | 13.6s | 373 | $1.853 | $0.1425 |
+| no-skill | 18 | **44.4%** | 14.6s | 462 | $1.3614 | $0.1702 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 83.3% | 33.3% | +50pp | 15.1s | 7.3s |
-| codex | 100% | 66.7% | +33.3pp | 15.5s | 17.2s |
+| claude | 58.3% | 33.3% | +25pp | 12.3s | 11.1s |
+| codex | 100% | 66.7% | +33.3pp | 16.2s | 21.7s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 33.3% | 9.4s | $0.0766 |
+| claude-haiku-4-5 | no-skill | 33.3% | 8.8s | $0.0491 |
 | claude-opus-5 | skill | 83.3% | 15.1s | $0.2288 |
-| claude-opus-5 | no-skill | 33.3% | 7.3s | $0.1763 |
-| gpt-5.6-sol | skill | 100% | 15.5s | $0.0932 |
-| gpt-5.6-sol | no-skill | 66.7% | 17.2s | $0.1694 |
+| claude-opus-5 | no-skill | 33.3% | 13.4s | $0.241 |
+| gpt-5.6-sol | skill | 100% | 16.2s | $0.0926 |
+| gpt-5.6-sol | no-skill | 66.7% | 21.7s | $0.1953 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `docker-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

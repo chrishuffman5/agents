@@ -1,6 +1,6 @@
 # rocky-alma — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **13 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 7 | **100%** | 11s | 191 | $0.8342 | $0.1192 |
-| no-skill | 6 | **100%** | 14.1s | 262 | $0.5389 | $0.0898 |
+| skill | 18 | **83.3%** | 11.3s | 365 | $1.4251 | $0.095 |
+| no-skill | 15 | **86.7%** | 11.8s | 376 | $0.8817 | $0.0678 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 7.9s | 12.4s |
-| codex | 100% | 100% | +0pp | 15.1s | 15.8s |
+| claude | 75% | 83.3% | +-8.3pp | 9.7s | 10.8s |
+| codex | 100% | 100% | +0pp | 14.5s | 15.8s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
-| claude-opus-5 | skill | 100% | 7.9s | $0.1715 |
-| claude-opus-5 | no-skill | 100% | 12.4s | $0.0688 |
-| gpt-5.6-sol | skill | 100% | 15.1s | $0.0494 |
+| claude-haiku-4-5 | skill | 50% | 10.2s | $0.0435 |
+| claude-haiku-4-5 | no-skill | 66.7% | 7.9s | $0.0254 |
+| claude-opus-5 | skill | 100% | 9.2s | $0.1596 |
+| claude-opus-5 | no-skill | 100% | 13.6s | $0.0746 |
+| gpt-5.6-sol | skill | 100% | 14.5s | $0.0562 |
 | gpt-5.6-sol | no-skill | 100% | 15.8s | $0.1108 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `rocky-alma-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

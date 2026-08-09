@@ -1,6 +1,6 @@
 # dell-unity — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `storage` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `storage` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **100%** | 11.1s | 406 | $1.0659 | $0.0888 |
+| no-skill | 12 | **50%** | 10.6s | 389 | $0.5647 | $0.0941 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 100% | 50% | +50pp | 11.1s | 10.6s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 12.3s | $0.0274 |
+| claude-haiku-4-5 | no-skill | 33.3% | 8.9s | $0.0544 |
+| claude-opus-5 | skill | 100% | 9.8s | $0.1503 |
+| claude-opus-5 | no-skill | 66.7% | 12.3s | $0.114 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `dell-unity-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

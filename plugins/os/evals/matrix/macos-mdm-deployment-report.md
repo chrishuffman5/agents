@@ -1,6 +1,6 @@
 # macos-mdm-deployment — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 12.2s | 359 | $1.5165 | $0.1685 |
-| no-skill | 6 | **83.3%** | 13.6s | 234 | $0.4545 | $0.0909 |
+| skill | 18 | **100%** | 12.7s | 410 | $1.9311 | $0.1073 |
+| no-skill | 15 | **66.7%** | 13.6s | 490 | $0.8112 | $0.0811 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 66.7% | +33.3pp | 11.3s | 7.6s |
-| codex | 100% | 100% | +0pp | 14s | 19.6s |
+| claude | 100% | 58.3% | +41.7pp | 12.2s | 12.1s |
+| codex | 100% | 100% | +0pp | 13.8s | 19.6s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 13.1s | $0.036 |
+| claude-haiku-4-5 | no-skill | 50% | 11.4s | $0.0341 |
 | claude-opus-5 | skill | 100% | 11.3s | $0.2245 |
-| claude-opus-5 | no-skill | 66.7% | 7.6s | $0.0896 |
-| gpt-5.6-sol | skill | 100% | 14s | $0.0566 |
+| claude-opus-5 | no-skill | 66.7% | 12.9s | $0.1084 |
+| gpt-5.6-sol | skill | 100% | 13.8s | $0.0613 |
 | gpt-5.6-sol | no-skill | 100% | 19.6s | $0.0918 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `macos-mdm-deployment-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

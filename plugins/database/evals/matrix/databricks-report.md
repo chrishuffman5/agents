@@ -1,6 +1,6 @@
 # databricks — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **83.3%** | 9.6s | 432 | $1.0919 | $0.1092 |
+| no-skill | 12 | **91.7%** | 7.2s | 220 | $0.4338 | $0.0394 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 83.3% | 91.7% | +-8.4pp | 9.6s | 7.2s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 83.3% | 12.5s | $0.0441 |
+| claude-haiku-4-5 | no-skill | 83.3% | 9s | $0.022 |
+| claude-opus-5 | skill | 83.3% | 6.7s | $0.1742 |
+| claude-opus-5 | no-skill | 100% | 5.4s | $0.054 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `databricks-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

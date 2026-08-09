@@ -1,6 +1,6 @@
 # failover-clustering — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 12.8s | 341 | $1.3374 | $0.1486 |
-| no-skill | 6 | **100%** | 11.5s | 68 | $0.2706 | $0.0451 |
+| skill | 18 | **100%** | 12.7s | 370 | $1.8162 | $0.1009 |
+| no-skill | 15 | **93.3%** | 9s | 199 | $0.5456 | $0.039 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 12.1s | 5s |
-| codex | 100% | 100% | +0pp | 14.1s | 18.1s |
+| claude | 100% | 91.7% | +8.3pp | 11.7s | 6.8s |
+| codex | 100% | 100% | +0pp | 14.6s | 18.1s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 11.4s | $0.0331 |
+| claude-haiku-4-5 | no-skill | 83.3% | 7.6s | $0.0211 |
 | claude-opus-5 | skill | 100% | 12.1s | $0.1832 |
-| claude-opus-5 | no-skill | 100% | 5s | $0.0565 |
-| gpt-5.6-sol | skill | 100% | 14.1s | $0.0794 |
+| claude-opus-5 | no-skill | 100% | 5.9s | $0.0566 |
+| gpt-5.6-sol | skill | 100% | 14.6s | $0.0864 |
 | gpt-5.6-sol | no-skill | 100% | 18.1s | $0.0336 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `failover-clustering-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

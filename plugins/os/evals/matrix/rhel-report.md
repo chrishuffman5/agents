@@ -1,6 +1,6 @@
 # rhel — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 13s | 231 | $1.2211 | $0.1357 |
-| no-skill | 6 | **100%** | 9.2s | 106 | $0.2708 | $0.0451 |
+| skill | 18 | **100%** | 12s | 296 | $1.6502 | $0.0917 |
+| no-skill | 15 | **100%** | 8.4s | 198 | $0.5408 | $0.0361 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 8.6s | 6.5s |
-| codex | 100% | 100% | +0pp | 21.7s | 11.9s |
+| claude | 100% | 100% | +0pp | 8.7s | 7.5s |
+| codex | 100% | 100% | +0pp | 18.5s | 11.9s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 8.8s | $0.028 |
+| claude-haiku-4-5 | no-skill | 100% | 6.2s | $0.0151 |
 | claude-opus-5 | skill | 100% | 8.6s | $0.1618 |
-| claude-opus-5 | no-skill | 100% | 6.5s | $0.0531 |
-| gpt-5.6-sol | skill | 100% | 21.7s | $0.0833 |
+| claude-opus-5 | no-skill | 100% | 8.9s | $0.0565 |
+| gpt-5.6-sol | skill | 100% | 18.5s | $0.0852 |
 | gpt-5.6-sol | no-skill | 100% | 11.9s | $0.0371 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `rhel-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

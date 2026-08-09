@@ -1,6 +1,6 @@
 # azure-blob — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `storage` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `storage` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **100%** | 10.5s | 417 | $1.0004 | $0.0834 |
+| no-skill | 12 | **100%** | 8s | 258 | $0.4405 | $0.0367 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 100% | 100% | +0pp | 10.5s | 8s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 11s | $0.0266 |
+| claude-haiku-4-5 | no-skill | 100% | 9s | $0.0156 |
+| claude-opus-5 | skill | 100% | 10.1s | $0.1402 |
+| claude-opus-5 | no-skill | 100% | 6.9s | $0.0578 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `azure-blob-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

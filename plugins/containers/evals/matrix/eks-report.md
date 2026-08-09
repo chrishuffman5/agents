@@ -1,6 +1,6 @@
 # eks — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **36 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **88.9%** | 13.2s | 407 | $1.274 | $0.1592 |
-| no-skill | 6 | **33.3%** | 11.3s | 188 | $0.3792 | $0.1896 |
+| skill | 18 | **72.2%** | 12.9s | 438 | $1.8121 | $0.1394 |
+| no-skill | 18 | **33.3%** | 13.7s | 363 | $1.016 | $0.1693 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 33.3% | +66.7pp | 13.4s | 7.9s |
-| codex | 66.7% | 33.3% | +33.4pp | 12.8s | 14.6s |
+| claude | 75% | 33.3% | +41.7pp | 11.7s | 12.6s |
+| codex | 66.7% | 33.3% | +33.4pp | 15.2s | 15.8s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 50% | 9.9s | $0.0522 |
+| claude-haiku-4-5 | no-skill | 33.3% | 12.5s | $0.08 |
 | claude-opus-5 | skill | 100% | 13.4s | $0.1677 |
-| claude-opus-5 | no-skill | 33.3% | 7.9s | $0.2116 |
-| gpt-5.6-sol | skill | 66.7% | 12.8s | $0.1338 |
-| gpt-5.6-sol | no-skill | 33.3% | 14.6s | $0.1676 |
+| claude-opus-5 | no-skill | 33.3% | 12.6s | $0.2488 |
+| gpt-5.6-sol | skill | 66.7% | 15.2s | $0.1623 |
+| gpt-5.6-sol | no-skill | 33.3% | 15.8s | $0.1791 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `eks-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

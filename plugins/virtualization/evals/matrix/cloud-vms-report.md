@@ -1,6 +1,6 @@
 # cloud-vms — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `virtualization` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `virtualization` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **83.3%** | 8.7s | 316 | $1.0259 | $0.1026 |
+| no-skill | 12 | **83.3%** | 6.9s | 189 | $0.432 | $0.0432 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 83.3% | 83.3% | +0pp | 8.7s | 6.9s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 7.4s | $0.0308 |
+| claude-haiku-4-5 | no-skill | 100% | 6.9s | $0.0157 |
+| claude-opus-5 | skill | 100% | 9.9s | $0.1504 |
+| claude-opus-5 | no-skill | 66.7% | 7s | $0.0845 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `cloud-vms-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

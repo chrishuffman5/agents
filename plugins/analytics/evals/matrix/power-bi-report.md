@@ -1,6 +1,6 @@
 # power-bi — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `analytics` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `analytics` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **83.3%** | 11.9s | 485 | $1.2994 | $0.1299 |
+| no-skill | 12 | **50%** | 10s | 379 | $0.5015 | $0.0836 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 83.3% | 50% | +33.3pp | 11.9s | 10s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 11.5s | $0.0403 |
+| claude-haiku-4-5 | no-skill | 33.3% | 10.8s | $0.054 |
+| claude-opus-5 | skill | 100% | 12.3s | $0.1897 |
+| claude-opus-5 | no-skill | 66.7% | 9.2s | $0.0984 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `power-bi-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

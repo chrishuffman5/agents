@@ -1,6 +1,6 @@
 # elasticsearch — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **50%** | 13.3s | 525 | $1.389 | $0.2315 |
+| no-skill | 12 | **83.3%** | 16s | 435 | $0.5752 | $0.0575 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 50% | 83.3% | +-33.3pp | 13.3s | 16s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 16.7% | 13.9s | $0.2437 |
+| claude-haiku-4-5 | no-skill | 66.7% | 20.6s | $0.0406 |
+| claude-opus-5 | skill | 83.3% | 12.6s | $0.229 |
+| claude-opus-5 | no-skill | 100% | 11.3s | $0.0688 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `elasticsearch-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

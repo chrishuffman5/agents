@@ -1,6 +1,6 @@
 # adf — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `etl` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `etl` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **50%** | 12.6s | 416 | $1.3438 | $0.224 |
+| no-skill | 12 | **41.7%** | 10.9s | 367 | $0.6658 | $0.1332 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 50% | 41.7% | +8.3pp | 12.6s | 10.9s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 33.3% | 11.2s | $0.1006 |
+| claude-haiku-4-5 | no-skill | 33.3% | 11.3s | $0.0798 |
+| claude-opus-5 | skill | 66.7% | 13.9s | $0.2857 |
+| claude-opus-5 | no-skill | 50% | 10.6s | $0.1688 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `adf-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

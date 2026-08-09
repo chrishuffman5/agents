@@ -1,6 +1,6 @@
 # hyper-v — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `os` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `os` · runs: **33 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **100%** | 11.6s | 182 | $1.2496 | $0.1388 |
-| no-skill | 6 | **100%** | 9.2s | 44 | $0.3086 | $0.0514 |
+| skill | 18 | **100%** | 11.9s | 342 | $1.6674 | $0.0926 |
+| no-skill | 15 | **80%** | 8.5s | 179 | $0.5694 | $0.0474 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | 100% | +0pp | 8.3s | 4.4s |
-| codex | 100% | 100% | +0pp | 18.2s | 14s |
+| claude | 100% | 75% | +25pp | 10.5s | 7.1s |
+| codex | 100% | 100% | +0pp | 14.6s | 14s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 12.7s | $0.0395 |
+| claude-haiku-4-5 | no-skill | 50% | 9.1s | $0.0314 |
 | claude-opus-5 | skill | 100% | 8.3s | $0.1772 |
-| claude-opus-5 | no-skill | 100% | 4.4s | $0.0532 |
-| gpt-5.6-sol | skill | 100% | 18.2s | $0.0622 |
+| claude-opus-5 | no-skill | 100% | 5.1s | $0.0544 |
+| gpt-5.6-sol | skill | 100% | 14.6s | $0.0613 |
 | gpt-5.6-sol | no-skill | 100% | 14s | $0.0496 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `hyper-v-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

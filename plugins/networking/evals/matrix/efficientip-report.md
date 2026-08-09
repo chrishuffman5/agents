@@ -1,6 +1,6 @@
 # efficientip — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `networking` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `networking` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **50%** | 9.5s | 407 | $1.4365 | $0.2394 |
+| no-skill | 9 | **22.2%** | 6.8s | 390 | $0.2236 | $0.1118 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 50% | 22.2% | +27.8pp | 9.5s | 6.8s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 0% | 4.9s | rates n/c |
+| claude-haiku-4-5 | no-skill | 0% | 3.8s | rates n/c |
+| claude-opus-5 | skill | 100% | 14s | $0.2394 |
+| claude-opus-5 | no-skill | 33.3% | 8.3s | $0.1118 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `efficientip-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

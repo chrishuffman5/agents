@@ -1,9 +1,9 @@
 {
   "skill": "windows-server",
   "plugin": "os",
-  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "generated": "2026-08-09T11:13:08.7746814-05:00",
   "partial": true,
-  "runsDone": 12,
+  "runsDone": 33,
   "runsPlanned": 66,
   "prompts": [
     {
@@ -39,56 +39,56 @@
   ],
   "overall": {
     "skill": {
-      "runs": 6,
-      "pass": 6,
-      "accuracy": 100.0,
-      "meanWallMs": 12875,
-      "meanTokensOut": 164,
-      "totalCostUsd": 0.7227,
-      "costPerCorrect": 0.1204
+      "runs": 18,
+      "pass": 16,
+      "accuracy": 88.9,
+      "meanWallMs": 13467,
+      "meanTokensOut": 354,
+      "totalCostUsd": 1.731,
+      "costPerCorrect": 0.1082
     },
     "no-skill": {
-      "runs": 6,
-      "pass": 4,
-      "accuracy": 66.7,
-      "meanWallMs": 11141,
-      "meanTokensOut": 138,
-      "totalCostUsd": 0.4181,
-      "costPerCorrect": 0.1045
+      "runs": 15,
+      "pass": 9,
+      "accuracy": 60.0,
+      "meanWallMs": 11114,
+      "meanTokensOut": 398,
+      "totalCostUsd": 0.7773,
+      "costPerCorrect": 0.0864
     }
   },
   "byHarness": [
     {
       "harness": "claude",
       "skill": {
-        "runs": 3,
-        "pass": 3,
-        "accuracy": 100.0,
-        "meanWallMs": 8114,
-        "meanTokensOut": 116,
-        "totalCostUsd": 0.5023,
-        "costPerCorrect": 0.1674
+        "runs": 12,
+        "pass": 10,
+        "accuracy": 83.3,
+        "meanWallMs": 11158,
+        "meanTokensOut": 425,
+        "totalCostUsd": 1.2903,
+        "costPerCorrect": 0.129
       },
       "noskill": {
-        "runs": 3,
-        "pass": 2,
-        "accuracy": 66.7,
-        "meanWallMs": 6084,
-        "meanTokensOut": 84,
-        "totalCostUsd": 0.1724,
-        "costPerCorrect": 0.0862
+        "runs": 12,
+        "pass": 7,
+        "accuracy": 58.3,
+        "meanWallMs": 9843,
+        "meanTokensOut": 450,
+        "totalCostUsd": 0.5317,
+        "costPerCorrect": 0.076
       }
     },
     {
       "harness": "codex",
       "skill": {
-        "runs": 3,
-        "pass": 3,
+        "runs": 6,
+        "pass": 6,
         "accuracy": 100.0,
-        "meanWallMs": 17636,
+        "meanWallMs": 18085,
         "meanTokensOut": 212,
-        "totalCostUsd": 0.2204,
-        "costPerCorrect": 0.0735
+        "totalCostUsd": 0.4407,
+        "costPerCorrect": 0.0734
       },
       "noskill": {
         "runs": 3,
@@ -103,38 +103,60 @@
   ],
   "byModel": [
     {
+      "model": "claude-haiku-4-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 4,
+        "accuracy": 66.7,
+        "meanWallMs": 12664,
+        "meanTokensOut": 612,
+        "totalCostUsd": 0.1701,
+        "costPerCorrect": 0.0425
+      },
+      "noskill": {
+        "runs": 6,
+        "pass": 3,
+        "accuracy": 50.0,
+        "meanWallMs": 9572,
+        "meanTokensOut": 517,
+        "totalCostUsd": 0.1045,
+        "costPerCorrect": 0.0348
+      }
+    },
+    {
       "model": "claude-opus-5",
       "lane": "cloud",
       "skill": {
-        "runs": 3,
-        "pass": 3,
+        "runs": 6,
+        "pass": 6,
         "accuracy": 100.0,
-        "meanWallMs": 8114,
-        "meanTokensOut": 116,
-        "totalCostUsd": 0.5023,
-        "costPerCorrect": 0.1674
+        "meanWallMs": 9652,
+        "meanTokensOut": 238,
+        "totalCostUsd": 1.1202,
+        "costPerCorrect": 0.1867
       },
       "noskill": {
-        "runs": 3,
-        "pass": 2,
+        "runs": 6,
+        "pass": 4,
         "accuracy": 66.7,
-        "meanWallMs": 6084,
-        "meanTokensOut": 84,
-        "totalCostUsd": 0.1724,
-        "costPerCorrect": 0.0862
+        "meanWallMs": 10115,
+        "meanTokensOut": 383,
+        "totalCostUsd": 0.4272,
+        "costPerCorrect": 0.1068
       }
     },
     {
       "model": "gpt-5.6-sol",
       "lane": "cloud",
       "skill": {
-        "runs": 3,
-        "pass": 3,
+        "runs": 6,
+        "pass": 6,
         "accuracy": 100.0,
-        "meanWallMs": 17636,
+        "meanWallMs": 18085,
         "meanTokensOut": 212,
-        "totalCostUsd": 0.2204,
-        "costPerCorrect": 0.0735
+        "totalCostUsd": 0.4407,
+        "costPerCorrect": 0.0734
       },
       "noskill": {
         "runs": 3,
@@ -150,6 +172,66 @@
   "byCell": [
     {
       "harness": "claude",
+      "model": "claude-haiku-4-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 9424,
+        "meanTokensOut": 514,
+        "totalCostUsd": 0.0486,
+        "costPerCorrect": 0.0486
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-haiku-4-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12141,
+        "meanTokensOut": 546,
+        "totalCostUsd": 0.076,
+        "costPerCorrect": 0.0253
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-haiku-4-5",
+      "effort": "E3",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 9719,
+        "meanTokensOut": 519,
+        "totalCostUsd": 0.0559,
+        "costPerCorrect": 0.028
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-haiku-4-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 13188,
+        "meanTokensOut": 678,
+        "totalCostUsd": 0.0941,
+        "costPerCorrect": 0.0941
+      }
+    },
+    {
+      "harness": "claude",
       "model": "claude-opus-5",
       "effort": "E1",
       "mode": "no-skill",
@@ -176,6 +258,36 @@
         "meanTokensOut": 116,
         "totalCostUsd": 0.5023,
         "costPerCorrect": 0.1674
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 14146,
+        "meanTokensOut": 682,
+        "totalCostUsd": 0.2547,
+        "costPerCorrect": 0.1274
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11191,
+        "meanTokensOut": 361,
+        "totalCostUsd": 0.6179,
+        "costPerCorrect": 0.206
       }
     },
     {
@@ -206,6 +318,21 @@
         "meanTokensOut": 212,
         "totalCostUsd": 0.2204,
         "costPerCorrect": 0.0735
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18533,
+        "meanTokensOut": 212,
+        "totalCostUsd": 0.2203,
+        "costPerCorrect": 0.0734
       }
     }
   ],

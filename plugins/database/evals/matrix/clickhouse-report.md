@@ -1,6 +1,6 @@
 # clickhouse — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **75%** | 17s | 786 | $1.9533 | $0.217 |
+| no-skill | 12 | **75%** | 9.9s | 429 | $0.5583 | $0.062 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 75% | 75% | +0pp | 17s | 9.9s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 83.3% | 16.3s | $0.0683 |
+| claude-haiku-4-5 | no-skill | 66.7% | 9.6s | $0.0305 |
+| claude-opus-5 | skill | 66.7% | 17.7s | $0.4029 |
+| claude-opus-5 | no-skill | 83.3% | 10.2s | $0.0873 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `clickhouse-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

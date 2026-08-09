@@ -1,6 +1,6 @@
 # snyk-oss — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `security` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **50%** | 5.2s | 27 | $0.5536 | $0.0923 |
+| no-skill | 9 | **55.6%** | 4.2s | 47 | $0.1614 | $0.0323 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 50% | 55.6% | +-5.6pp | 5.2s | 4.2s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 33.3% | 5.2s | $0 |
+| claude-haiku-4-5 | no-skill | 33.3% | 3.2s | $0 |
+| claude-opus-5 | skill | 66.7% | 5.2s | $0.1384 |
+| claude-opus-5 | no-skill | 66.7% | 4.6s | $0.0403 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `snyk-oss-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

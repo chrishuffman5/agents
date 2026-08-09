@@ -1,6 +1,6 @@
 # netskope — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `security` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `security` · runs: **21 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **8.3%** | 4.6s | 185 | $0.6567 | $0.6567 |
+| no-skill | 9 | **11.1%** | 7.1s | 202 | $0.2083 | $0.2083 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 8.3% | 11.1% | +-2.8pp | 4.6s | 7.1s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 0% | 3.4s | rates n/c |
+| claude-haiku-4-5 | no-skill | 0% | 4.3s | rates n/c |
+| claude-opus-5 | skill | 16.7% | 5.7s | $0.6567 |
+| claude-opus-5 | no-skill | 16.7% | 8.5s | $0.2083 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `netskope-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

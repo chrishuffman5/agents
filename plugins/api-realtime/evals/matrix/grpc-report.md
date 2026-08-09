@@ -1,6 +1,6 @@
 # grpc — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `api-realtime` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `api-realtime` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **100%** | 14.2s | 507 | $0.9352 | $0.0779 |
+| no-skill | 12 | **100%** | 8.7s | 377 | $0.4595 | $0.0383 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 100% | 100% | +0pp | 14.2s | 8.7s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 100% | 12.7s | $0.0242 |
+| claude-haiku-4-5 | no-skill | 100% | 8.8s | $0.0159 |
+| claude-opus-5 | skill | 100% | 15.7s | $0.1316 |
+| claude-opus-5 | no-skill | 100% | 8.6s | $0.0607 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `grpc-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

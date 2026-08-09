@@ -1,6 +1,6 @@
 # overview — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `cli-scripting` · runs: **318 / 1698** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **928 / 1633** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -72,15 +72,16 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 162 | **89.5%** | 9.9s | 224 | $10.3689 | $0.0715 |
-| no-skill | 156 | **82.1%** | 7.7s | 121 | $4.2219 | $0.033 |
+| skill | 471 | **75.8%** | 12.6s | 372 | $36.0978 | $0.1011 |
+| no-skill | 457 | **68.5%** | 11.9s | 295 | $17.6779 | $0.0565 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 90.5% | 82.1% | +8.4pp | 8.4s | 7.5s |
-| codex | 88.5% | 82.1% | +6.4pp | 11.6s | 7.8s |
+| claude | 78.2% | 69.3% | +8.9pp | 12.4s | 12s |
+| codex | 83.6% | 78.8% | +4.8pp | 11.2s | 7.9s |
+| pi | 40.4% | 39.6% | +0.8pp | 16.9s | 20.3s |
 
 ## By model — price to performance
 
@@ -88,17 +89,27 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
-| claude-haiku-4-5 | skill | 87.5% | 9.6s | $0.0243 |
-| claude-haiku-4-5 | no-skill | 79.2% | 8s | $0.0191 |
-| claude-opus-5 | skill | 94.4% | 8.7s | $0.1457 |
-| claude-opus-5 | no-skill | 93.3% | 9.3s | $0.069 |
+| claude-haiku-4-5 | skill | 60.3% | 10.6s | $0.035 |
+| claude-haiku-4-5 | no-skill | 61.4% | 9.2s | $0.0244 |
+| claude-opus-5 | skill | 92.9% | 11.2s | $0.1838 |
+| claude-opus-5 | no-skill | 74.6% | 12.6s | $0.0874 |
 | claude-sonnet-5 | skill | 87.5% | 6.7s | $0.1061 |
 | claude-sonnet-5 | no-skill | 70.8% | 5s | $0.0743 |
+| gemma4:12b | skill | 84.4% | 25.6s | $0.1205 |
+| gemma4:12b | no-skill | 75% | 22.6s | $0.0974 |
+| glm-4.7-flash:q4_K_M-32k | skill | 75% | 12.5s | $0.1388 |
+| glm-4.7-flash:q4_K_M-32k | no-skill | 75% | 11.3s | $0.1439 |
 | gpt-5.6-luna | skill | 91.7% | 10.4s | $0.002 |
 | gpt-5.6-luna | no-skill | 75% | 5.7s | $0.0006 |
-| gpt-5.6-sol | skill | 86.7% | 13.3s | $0.0829 |
-| gpt-5.6-sol | no-skill | 83.3% | 8.4s | $0.0212 |
+| gpt-5.6-sol | skill | 83.3% | 13.4s | $0.0864 |
+| gpt-5.6-sol | no-skill | 78.8% | 8.1s | $0.0219 |
 | gpt-5.6-terra | skill | 87.5% | 10.8s | $0.0228 |
 | gpt-5.6-terra | no-skill | 87.5% | 9.2s | $0.0059 |
+| ollama/gemma4:12b | skill | 43.8% | 5.7s | $0 |
+| ollama/gemma4:12b | no-skill | 37.5% | 6s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | skill | 31.2% | 2.7s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | no-skill | 31.2% | 2.3s | $0 |
+| ollama/qwen3.6:27b | skill | 46.7% | 44.1s | $0 |
+| ollama/qwen3.6:27b | no-skill | 50% | 52.6s | $0 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `overview-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

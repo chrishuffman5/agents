@@ -1,6 +1,6 @@
 # mysql — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `database` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `database` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **66.7%** | 47s | 1032 | $2.0312 | $0.2539 |
+| no-skill | 12 | **41.7%** | 12.1s | 593 | $0.5881 | $0.1176 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 66.7% | 41.7% | +25pp | 47s | 12.1s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 72.9s | $0.1895 |
+| claude-haiku-4-5 | no-skill | 16.7% | 11.3s | $0.1349 |
+| claude-opus-5 | skill | 66.7% | 21.1s | $0.3183 |
+| claude-opus-5 | no-skill | 66.7% | 12.9s | $0.1133 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `mysql-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

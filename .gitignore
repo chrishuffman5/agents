@@ -21,3 +21,4 @@ research/
 # Cross-harness eval matrix run artifacts
 evals/matrix/*.sqlite
 evals/matrix/report/results.js
+evals/matrix/backup/

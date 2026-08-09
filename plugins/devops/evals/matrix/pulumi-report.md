@@ -1,6 +1,6 @@
 # pulumi — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `devops` · runs: **0 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `devops` · runs: **24 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,13 +16,14 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 12 | **75%** | 14.2s | 438 | $1.268 | $0.1409 |
+| no-skill | 12 | **83.3%** | 15.9s | 395 | $0.6217 | $0.0622 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 75% | 83.3% | +-8.3pp | 14.2s | 15.9s |
 
 ## By model — price to performance
 
@@ -30,5 +31,9 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 12.6s | $0.0503 |
+| claude-haiku-4-5 | no-skill | 66.7% | 16s | $0.0304 |
+| claude-opus-5 | skill | 83.3% | 15.8s | $0.2133 |
+| claude-opus-5 | no-skill | 100% | 15.8s | $0.0834 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `pulumi-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

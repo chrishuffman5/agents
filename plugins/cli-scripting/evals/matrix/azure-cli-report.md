@@ -1,6 +1,6 @@
 # azure-cli — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `cli-scripting` · runs: **144 / 288** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `cli-scripting` · runs: **256 / 256**
 
 ## The exact prompts used
 
@@ -17,15 +17,16 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 72 | **97.2%** | 10.7s | 220 | $3.8061 | $0.0544 |
-| no-skill | 72 | **97.2%** | 7.4s | 81 | $1.8461 | $0.0264 |
+| skill | 128 | **85.9%** | 11.6s | 230 | $7.1098 | $0.0646 |
+| no-skill | 128 | **87.5%** | 10.5s | 119 | $4.1851 | $0.0374 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 94.4% | 94.4% | +0pp | 7.4s | 6.1s |
-| codex | 100% | 100% | +0pp | 14.1s | 8.7s |
+| claude | 90.4% | 96.2% | +-5.8pp | 13.5s | 11s |
+| codex | 98.1% | 96.2% | +1.9pp | 11.6s | 8.1s |
+| pi | 50% | 50% | +0pp | 7.4s | 14.8s |
 
 ## By model — price to performance
 
@@ -39,11 +40,21 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 | claude-opus-5 | no-skill | 100% | 5.5s | $0.0548 |
 | claude-sonnet-5 | skill | 83.3% | 5.1s | $0.099 |
 | claude-sonnet-5 | no-skill | 83.3% | 4.6s | $0.063 |
+| gemma4:12b | skill | 93.8% | 21.5s | $0.0864 |
+| gemma4:12b | no-skill | 100% | 20s | $0.0725 |
+| glm-4.7-flash:q4_K_M-32k | skill | 81.2% | 11.7s | $0.1545 |
+| glm-4.7-flash:q4_K_M-32k | no-skill | 87.5% | 9s | $0.0842 |
 | gpt-5.6-luna | skill | 100% | 17.9s | $0.0023 |
 | gpt-5.6-luna | no-skill | 100% | 6.6s | $0.0008 |
 | gpt-5.6-sol | skill | 100% | 14.3s | $0.066 |
 | gpt-5.6-sol | no-skill | 100% | 7.8s | $0.0229 |
 | gpt-5.6-terra | skill | 100% | 10.1s | $0.0186 |
 | gpt-5.6-terra | no-skill | 100% | 11.6s | $0.0078 |
+| ollama/gemma4:12b | skill | 50% | 5.9s | $0 |
+| ollama/gemma4:12b | no-skill | 50% | 6.1s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | skill | 50% | 2.3s | $0 |
+| ollama/glm-4.7-flash:q4_K_M-32k | no-skill | 50% | 2.6s | $0 |
+| ollama/qwen3.6:27b | skill | 50% | 14.1s | $0 |
+| ollama/qwen3.6:27b | no-skill | 50% | 35.6s | $0 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `azure-cli-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

@@ -1,6 +1,6 @@
 # gke — cross-harness eval report
 
-Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `containers` · runs: **15 / 66** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T11:13:08.7746814-05:00 · plugin: `containers` · runs: **36 / 66** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -16,15 +16,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 9 | **88.9%** | 10.5s | 297 | $0.9659 | $0.1207 |
-| no-skill | 6 | **66.7%** | 11.5s | 125 | $0.3644 | $0.0911 |
+| skill | 18 | **88.9%** | 10.5s | 349 | $1.3333 | $0.0833 |
+| no-skill | 18 | **55.6%** | 10.2s | 253 | $0.8482 | $0.0848 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 83.3% | 100% | +-16.7pp | 11s | 8.6s |
-| codex | 100% | 33.3% | +66.7pp | 9.5s | 14.4s |
+| claude | 83.3% | 66.7% | +16.6pp | 10.4s | 9.1s |
+| codex | 100% | 33.3% | +66.7pp | 10.6s | 12.5s |
 
 ## By model — price to performance
 
@@ -32,9 +32,11 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 83.3% | 9.7s | $0.0312 |
+| claude-haiku-4-5 | no-skill | 50% | 6.7s | $0.0307 |
 | claude-opus-5 | skill | 83.3% | 11s | $0.164 |
-| claude-opus-5 | no-skill | 100% | 8.6s | $0.056 |
-| gpt-5.6-sol | skill | 100% | 9.5s | $0.0486 |
-| gpt-5.6-sol | no-skill | 33.3% | 14.4s | $0.1965 |
+| claude-opus-5 | no-skill | 83.3% | 11.5s | $0.0746 |
+| gpt-5.6-sol | skill | 100% | 10.6s | $0.0595 |
+| gpt-5.6-sol | no-skill | 33.3% | 12.5s | $0.1914 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `gke-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._
