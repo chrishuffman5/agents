@@ -1,0 +1,330 @@
+{
+  "suite": "backend",
+  "description": "Cross-harness matrix suite for the backend plugin's 12 skills (aspnet-core, aspnet-minimal-apis, django, express, fastapi, flask, go-web, nestjs, overview, rails, rust-web, spring-boot). Prompts are deliberately neutral (no mention of a skills library or docs) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md on 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff release, niche version detail, or exact benchmark figure); 'stable' = long-standing fact a strong bare model may already know.",
+  "tasks": [
+    {
+      "id": "aspnet-core-docker-port",
+      "skill": "aspnet-core",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "When you containerize an ASP.NET Core app starting with .NET 8, what non-root HTTP port does Kestrel listen on by default inside the container? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["8080"] },
+      "notes": "plugins/backend/skills/aspnet-core/SKILL.md - Docker default port changed to 8080 in .NET 8 (non-root). Use ASPNETCORE_HTTP_PORTS=8080."
+    },
+    {
+      "id": "aspnet-core-net10-eol",
+      "skill": "aspnet-core",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "For a project on the .NET 10 LTS release of ASP.NET Core, in what year does that release reach end of support? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2028"] },
+      "notes": "plugins/backend/skills/aspnet-core/SKILL.md - Version-specific guidance table: .NET 10 | LTS (Nov 2025 - Nov 2028)"
+    },
+    {
+      "id": "aspnet-core-captive-dependency",
+      "skill": "aspnet-core",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In ASP.NET Core dependency injection, is it safe practice to inject a Scoped or Transient service directly into a Singleton service? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bnever\\b|\\bno\\b|avoid|not\\s+safe|captive)" },
+      "notes": "plugins/backend/skills/aspnet-core/SKILL.md - Captive dependency trap: never inject Scoped/Transient into Singleton -- the short-lived service gets captured for the app's lifetime."
+    },
+    {
+      "id": "aspnet-minimal-apis-filter-order",
+      "skill": "aspnet-minimal-apis",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "When several endpoint filters are chained on one ASP.NET Core Minimal API route, what execution order do they follow going into the handler versus coming back out after it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["FIFO", "FILO"] },
+      "notes": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - Execution order: FIFO before handler, FILO after handler (like middleware)."
+    },
+    {
+      "id": "aspnet-minimal-apis-sse-version",
+      "skill": "aspnet-minimal-apis",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "Support for building Server-Sent Events endpoints via TypedResults arrived in ASP.NET Core Minimal APIs starting with which .NET version? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\bnet\\s*10\\b|\\b10\\b|\\bten\\b)" },
+      "notes": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - TypedResults.ServerSentEvents(asyncEnumerable) // SSE (.NET 10+); Version Feature Matrix marks Server-Sent Events (SSE) as starting at .NET 10"
+    },
+    {
+      "id": "aspnet-minimal-apis-asparameters-version",
+      "skill": "aspnet-minimal-apis",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "The AsParameters attribute for grouping multiple Minimal API parameters into one type became available starting with which .NET version? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\bnet\\s*7\\b|\\b7\\b|\\bseven\\b)" },
+      "notes": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - [AsParameters] (.NET 7+)"
+    },
+    {
+      "id": "django-select-related-join",
+      "skill": "django",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In the Django ORM, when you call select_related on a ForeignKey field, does that execute a SQL JOIN or a separate follow-up query? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bjoin\\b" },
+      "notes": "plugins/backend/skills/django/SKILL.md - .select_related(author) # JOIN for ForeignKey, .prefetch_related(tags) # separate query for M2M"
+    },
+    {
+      "id": "django-async-for-version",
+      "skill": "django",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "Full support for using async for to iterate over a Django QuerySet arrived in which Django release? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["5.0"] },
+      "notes": "plugins/backend/skills/django/SKILL.md - Async views since 3.1, async ORM interface since 4.1, full async for on QuerySets since 5.0"
+    },
+    {
+      "id": "django-background-tasks-module",
+      "skill": "django",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "Django introduced a built-in background task system in version 6.0. What is the name of that module? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)django\\.tasks" },
+      "notes": "plugins/backend/skills/django/SKILL.md - Cross-Version Feature Matrix: Background tasks (django.tasks) - No / No / Yes for 4.2 / 5.2 / 6.0"
+    },
+    {
+      "id": "express-error-handler-params",
+      "skill": "express",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "For Express to treat a middleware function as an error handler rather than a normal one, exactly how many parameters must its function signature declare? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\b4\\b|\\bfour\\b)" },
+      "notes": "plugins/backend/skills/express/SKILL.md - Error-handling middleware is distinguished solely by its 4-parameter signature. Express checks function.length to identify it."
+    },
+    {
+      "id": "express-5-node-minimum",
+      "skill": "express",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Node.js version required to run Express 5? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(\\b18\\b|node\\s*18)" },
+      "notes": "plugins/backend/skills/express/SKILL.md - Express 4 vs Express 5 table: Node.js minimum Node 10+ (v4) vs Node 18+ (v5)"
+    },
+    {
+      "id": "express-5-async-errors",
+      "skill": "express",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "In Express 5, if an async route handler throws or rejects, does it get forwarded to your error-handling middleware automatically, or do you still need an explicit call passing the error to next? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(automat|no\\s+longer|not\\s+require|no\\s+try)" },
+      "notes": "plugins/backend/skills/express/SKILL.md - Express 5: Async errors in route handlers are automatically forwarded to error middleware -- no try/catch or asyncHandler wrapper needed."
+    },
+    {
+      "id": "fastapi-openapi-version",
+      "skill": "fastapi",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "What version of the OpenAPI specification does FastAPI generate for its automatic interactive docs? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.1"] },
+      "notes": "plugins/backend/skills/fastapi/SKILL.md - FastAPI generates OpenAPI 3.1 specs from your code. Interactive docs at /docs (Swagger UI) and /redoc."
+    },
+    {
+      "id": "fastapi-worker-count",
+      "skill": "fastapi",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "Using the standard Gunicorn worker formula recommended for I O bound async FastAPI apps of two times the CPU count plus one, how many worker processes should you run on a 4 core machine? Answer with a number.",
+      "expected": { "type": "regex", "value": "(?i)(\\b9\\b|\\bnine\\b)" },
+      "notes": "plugins/backend/skills/fastapi/SKILL.md - Worker formula: (2 * CPU_COUNT) + 1 for I/O-bound async apps; on 4 cores that is 2*4+1=9"
+    },
+    {
+      "id": "fastapi-pydantic-v2-speed",
+      "skill": "fastapi",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "FastAPI relies on Pydantic v2, whose validation engine is written in which systems programming language, and roughly how many times faster is it than the Pydantic v1 engine at the high end? Answer concisely with both facts.",
+      "expected": { "type": "contains_all", "value": ["Rust", "50"] },
+      "notes": "plugins/backend/skills/fastapi/SKILL.md - The v2 engine is Rust-based (pydantic-core), providing 5-50x faster validation than v1."
+    },
+    {
+      "id": "flask-g-object",
+      "skill": "flask",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In Flask, which single-letter global object provides request-scoped scratch space for stashing data during one request, distinct from current_app? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bg\\b" },
+      "notes": "plugins/backend/skills/flask/SKILL.md - g | App context (per-request) | Request-scoped scratch space"
+    },
+    {
+      "id": "flask-python-minimum",
+      "skill": "flask",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Python version required to run Flask 3.1? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.10"] },
+      "notes": "plugins/backend/skills/flask/SKILL.md - Flask 3.1 runs on Python 3.10+ and supports async views via asgiref."
+    },
+    {
+      "id": "flask-async-thread-pool",
+      "skill": "flask",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "When you write an async view in Flask, does it actually run on a true asyncio event loop, or does Flask execute it somewhere else under the hood? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)thread\\s*pool" },
+      "notes": "plugins/backend/skills/flask/SKILL.md - Async views run in a thread pool, not on an event loop. Limitations: one request per thread, no true concurrency."
+    },
+    {
+      "id": "go-web-goroutine-stack",
+      "skill": "go-web",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "Roughly how much memory does a single goroutine consume for its initial stack in Go? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)8\\s*kb" },
+      "notes": "plugins/backend/skills/go-web/SKILL.md - handling tens of thousands of concurrent connections with modest memory (~8KB initial stack per goroutine)"
+    },
+    {
+      "id": "go-web-gorilla-mux-archived",
+      "skill": "go-web",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "The once-popular gorilla mux router for Go has been archived and unmaintained since when, making it a poor pick for new projects? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(dec(ember)?\\s*2022|2022)" },
+      "notes": "plugins/backend/skills/go-web/SKILL.md - Using gorilla/mux for new projects -- Archived since Dec 2022. Use net/http 1.22+, Chi, or Gin instead."
+    },
+    {
+      "id": "go-web-fiber-httptest",
+      "skill": "go-web",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "Can you exercise a Fiber web application's handlers directly with Go's standard net/http/httptest package? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|cannot|does\\s+not|app\\.test)" },
+      "notes": "plugins/backend/skills/go-web/SKILL.md - stdlib Compatibility Matrix: Fiber Works with httptest = No (app.Test()); fasthttp base is architecturally incompatible"
+    },
+    {
+      "id": "nestjs-lifecycle-order",
+      "skill": "nestjs",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In the NestJS request lifecycle, which runs first on an incoming request: guards or interceptors? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bguards?\\b" },
+      "notes": "plugins/backend/skills/nestjs/SKILL.md - Request Lifecycle: Middleware -> Guards -> Interceptors (before) -> Pipes -> Route Handler -> ..."
+    },
+    {
+      "id": "nestjs-fastify-throughput",
+      "skill": "nestjs",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "Swapping NestJS's default Express HTTP adapter for the Fastify adapter typically yields roughly what percentage throughput improvement? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)20.{0,10}30" },
+      "notes": "plugins/backend/skills/nestjs/SKILL.md - Fastify adapter -- ~20-30% throughput improvement"
+    },
+    {
+      "id": "nestjs-exception-filter-order",
+      "skill": "nestjs",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "When an unhandled exception occurs in a NestJS app, do exception filters run from route scope up to global scope, or from global scope down to route scope? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)route.{0,25}global" },
+      "notes": "plugins/backend/skills/nestjs/SKILL.md - Exception filters run in reverse scope order on error: Route -> Controller -> Global."
+    },
+    {
+      "id": "overview-rps-threshold",
+      "skill": "overview",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "At roughly what requests-per-second range do Go, Rust, or ASP.NET Core start to show a meaningful edge over other backend frameworks? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(10\\s*k|10,000).{0,20}(100\\s*k|100,000)" },
+      "notes": "plugins/backend/skills/overview/SKILL.md - Step 3: Scale expectations - 10K-100K RPS: Go, Rust, or ASP.NET Core have an edge."
+    },
+    {
+      "id": "overview-techempower-benchmark",
+      "skill": "overview",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "Do TechEmpower framework benchmarks actually measure real application performance, or do they measure hello world request throughput? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)hello.?world" },
+      "notes": "plugins/backend/skills/overview/SKILL.md - Anti-Patterns: TechEmpower benchmarks measure hello-world throughput, not real application performance."
+    },
+    {
+      "id": "overview-bottleneck-database",
+      "skill": "overview",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "When choosing a backend framework, what single component is repeatedly identified as the real performance bottleneck rather than the framework itself? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bdatabase\\b" },
+      "notes": "plugins/backend/skills/overview/SKILL.md - The database, not the framework, is the bottleneck. Database queries, network I/O, and architecture decisions dominate."
+    },
+    {
+      "id": "rails-after-commit-purpose",
+      "skill": "rails",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In Rails ActiveRecord callbacks, why would you use after_commit rather than after_save to trigger an external API call or send an email? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(commit|transaction)" },
+      "notes": "plugins/backend/skills/rails/SKILL.md - Use after_commit for side effects (emails, jobs, external APIs) to ensure the transaction has committed."
+    },
+    {
+      "id": "rails-destroy-status-code",
+      "skill": "rails",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "When a Rails controller destroy action redirects after deleting a record, which HTTP status code should it use for correct Turbo compatibility? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["303"] },
+      "notes": "plugins/backend/skills/rails/SKILL.md - redirect_to articles_path, status: :see_other # 303 for Turbo"
+    },
+    {
+      "id": "rails-8-ruby-minimum",
+      "skill": "rails",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Ruby version required to run Rails 8.0? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["3.2"] },
+      "notes": "plugins/backend/skills/rails/SKILL.md - Ruby Version Requirements table: Rails 8.0.x Minimum Ruby 3.2.0"
+    },
+    {
+      "id": "rust-web-extractor-order",
+      "skill": "rust-web",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In an Axum handler function signature, where must a body-consuming extractor like Json of T be positioned relative to extractors such as State or Path? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\blast\\b" },
+      "notes": "plugins/backend/skills/rust-web/SKILL.md - Extractors resolve left-to-right. Body-consuming extractors (Json<T>, Bytes) must be last."
+    },
+    {
+      "id": "rust-web-axum-vs-actix-throughput",
+      "skill": "rust-web",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "In raw throughput comparisons between the two major Rust web frameworks, Axum performs at roughly what percentage of Actix Web's performance? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b94\\b" },
+      "notes": "plugins/backend/skills/rust-web/SKILL.md - Framework Selection Guide table: Performance | Excellent (~94% of Actix) | Historically highest TechEmpower"
+    },
+    {
+      "id": "rust-web-error-crates",
+      "skill": "rust-web",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "For a Rust web service, which crate should define your structured application error enum in the domain layer, and which crate serves as the catch all for internal plumbing where you just need error propagation with context? Answer concisely with both crate names.",
+      "expected": { "type": "contains_all", "value": ["thiserror", "anyhow"] },
+      "notes": "plugins/backend/skills/rust-web/SKILL.md - Error Crate Roles: thiserror for structured error enums in libraries/domain layers, anyhow for catch-all application code plumbing"
+    },
+    {
+      "id": "spring-boot-mockitobean",
+      "skill": "spring-boot",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "In Spring Boot 4.0, which annotation replaces the removed MockBean annotation for mocking beans in tests? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["MockitoBean"] },
+      "notes": "plugins/backend/skills/spring-boot/SKILL.md - @MockBean = Boot 3.x (removed in 4.0, replaced by @MockitoBean)"
+    },
+    {
+      "id": "spring-boot-undertow-removed",
+      "skill": "spring-boot",
+      "plugin": "backend",
+      "knowledge": "recent",
+      "prompt": "Spring Boot 4.0 dropped support for one embedded servlet container because it lacks Servlet 6.1 support. Which server was removed? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Undertow"] },
+      "notes": "plugins/backend/skills/spring-boot/SKILL.md - Embedded Servers table: Undertow | Servlet | -- | Removed in Boot 4.0 (no Servlet 6.1 support)"
+    },
+    {
+      "id": "spring-boot-property-priority",
+      "skill": "spring-boot",
+      "plugin": "backend",
+      "knowledge": "stable",
+      "prompt": "In Spring Boot's configuration property resolution order, which takes precedence when both are set: command line arguments or environment variables? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)command.?line" },
+      "notes": "plugins/backend/skills/spring-boot/SKILL.md - Property priority (high to low): command-line args > system properties > env vars > profile-specific files > base application.yml > defaults."
+    }
+  ]
+}
