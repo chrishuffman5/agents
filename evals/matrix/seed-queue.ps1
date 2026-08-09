@@ -24,11 +24,13 @@ Import-Module (Join-Path $PSScriptRoot 'MatrixRunner.psm1') -Force
 $cfg = Get-Content $ConfigPath -Raw | ConvertFrom-Json
 $allTasks = [System.Collections.Generic.List[object]]::new()
 foreach ($sf in $cfg.suites) {
-    $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+    $file    = if ($sf -is [string]) { $sf } else { $sf.file }
+    $profile = if ($sf -is [string] -or -not $sf.PSObject.Properties['profile']) { 'full' } else { $sf.profile }
+    $s = Get-Content (Join-Path $PSScriptRoot $file) -Raw | ConvertFrom-Json
     foreach ($t in $s.tasks) {
         # Prompts must be quote/backtick/dollar-free: the command column embeds them verbatim.
         if ($t.prompt -match '["`$]') { throw "Task $($t.id): prompt contains a forbidden character (double quote, backtick, or dollar sign)." }
-        $allTasks.Add([pscustomobject]@{ suite = $s.suite; task = $t })
+        $allTasks.Add([pscustomobject]@{ suite = $s.suite; profile = $profile; task = $t })
     }
 }
 $dupes = $allTasks | Group-Object { $_.task.id } | Where-Object Count -gt 1
@@ -58,6 +60,14 @@ foreach ($laneCfg in $laneSet) {
             foreach ($skillMode in $cfg.skillModes) {
                 foreach ($entry in $allTasks) {
                     $task = $entry.task
+                    # campaign profile trims the matrix for marketplace-wide suites
+                    if ($entry.profile -ne 'full') {
+                        $prof = $cfg.profiles.($entry.profile)
+                        if ($prof.efforts -notcontains $effortNorm) { continue }
+                        if ($laneCfg.lane -eq 'local') {
+                            if ($prof.localTags -notcontains ($m.id -replace '^ollama/', '')) { continue }
+                        } elseif ($m.PSObject.Properties['tier'] -and $prof.modelTiers -notcontains $m.tier) { continue }
+                    }
                     for ($a = 1; $a -le $cfg.attempts; $a++) {
                         $modelSlug = $m.id -replace '[:/\\]', '-'
                         $runId = '{0}.{1}.{2}.{3}.{4}.a{5}' -f $laneCfg.harness, $modelSlug, $effortNorm, $skillMode, $task.id, $a

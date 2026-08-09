@@ -1,6 +1,14 @@
 {
-  "version": 2,
-  "suites": ["suites/aws.json", "suites/cli-scripting.json", "suites/cloud-platforms.json"],
+  "version": 3,
+  "suites": [
+    { "file": "suites/aws.json", "profile": "full" },
+    { "file": "suites/cli-scripting.json", "profile": "full" },
+    { "file": "suites/cloud-platforms.json", "profile": "full" }
+  ],
+  "profiles": {
+    "_comment": "campaign trims cells for marketplace-wide scale: efforts E1+E3 (intersects to E1 on local lanes), flagship+small cloud tiers, one local weights-set. Pilot suites keep the full matrix via profile 'full'.",
+    "campaign": { "efforts": ["E1", "E3"], "modelTiers": ["flagship", "small"], "localTags": ["gemma4:12b"] }
+  },
   "attempts": 1,
   "skillModes": ["skill", "no-skill"],
   "timeoutMinutes": 10,
@@ -27,9 +35,9 @@
     {
       "harness": "claude", "provider": "anthropic", "lane": "cloud",
       "models": [
-        { "id": "claude-opus-5" },
-        { "id": "claude-sonnet-5" },
-        { "id": "claude-haiku-4-5" }
+        { "id": "claude-opus-5", "tier": "flagship" },
+        { "id": "claude-sonnet-5", "tier": "mid" },
+        { "id": "claude-haiku-4-5", "tier": "small" }
       ],
       "efforts": { "E1": "low", "E2": "medium", "E3": "high" },
       "env": { "CLAUDE_CONFIG_DIR": "C:\\evals\\claude-home" }
@@ -37,9 +45,9 @@
     {
       "harness": "codex", "provider": "openai", "lane": "cloud",
       "models": [
-        { "id": "gpt-5.6-sol" },
-        { "id": "gpt-5.6-terra" },
-        { "id": "gpt-5.6-luna" }
+        { "id": "gpt-5.6-sol", "tier": "flagship" },
+        { "id": "gpt-5.6-terra", "tier": "mid" },
+        { "id": "gpt-5.6-luna", "tier": "small" }
       ],
       "efforts": { "E1": "low", "E2": "medium", "E3": "high" },
       "sandbox": "danger-full-access",

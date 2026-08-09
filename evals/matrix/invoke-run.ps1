@@ -64,7 +64,8 @@ try {
     # deterministic grade against the expected spec (task looked up across all suites)
     $task = $null
     foreach ($sf in $cfg.suites) {
-        $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+        $file = if ($sf -is [string]) { $sf } else { $sf.file }
+        $s = Get-Content (Join-Path $PSScriptRoot $file) -Raw | ConvertFrom-Json
         $task = $s.tasks | Where-Object { $_.id -eq $run.task_id }
         if ($task) { break }
     }

@@ -42,7 +42,9 @@ $tasks = Invoke-SqliteQuery -DataSource $DbPath -Query "
 $payload = [ordered]@{
     sample    = $false
     generated = (Get-Date).ToString('o')
-    suite     = (( Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json ).suites -join ' + ')
+    suite     = ((( Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json ).suites |
+                  ForEach-Object { if ($_ -is [string]) { $_ } else { $_.file } } |
+                  ForEach-Object { [IO.Path]::GetFileNameWithoutExtension($_) }) -join ' + ')
     status    = $status
     lanes     = @($lanes)
     cells     = @($cells)

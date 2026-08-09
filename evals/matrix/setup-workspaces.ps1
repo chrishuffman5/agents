@@ -22,7 +22,8 @@ $ErrorActionPreference = 'Stop'
 
 $cfg = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
 $taskPairs = foreach ($sf in $cfg.suites) {
-    $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+    $file = if ($sf -is [string]) { $sf } else { $sf.file }
+    $s = Get-Content (Join-Path $PSScriptRoot $file) -Raw | ConvertFrom-Json
     foreach ($t in $s.tasks) { [pscustomobject]@{ plugin = $t.plugin; skill = $t.skill } }
 }
 $plugins = $taskPairs | ForEach-Object plugin | Sort-Object -Unique

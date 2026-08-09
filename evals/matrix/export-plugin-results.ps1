@@ -22,7 +22,8 @@ Import-Module PSSQLite
 $cfg = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
 $suiteNames = @(); $suiteTasks = [System.Collections.Generic.List[object]]::new()
 foreach ($sf in $cfg.suites) {
-    $s = Get-Content (Join-Path $PSScriptRoot $sf) -Raw | ConvertFrom-Json
+    $file = if ($sf -is [string]) { $sf } else { $sf.file }
+    $s = Get-Content (Join-Path $PSScriptRoot $file) -Raw | ConvertFrom-Json
     $suiteNames += $s.suite
     foreach ($t in $s.tasks) { $suiteTasks.Add($t) }
 }
