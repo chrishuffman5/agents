@@ -63,7 +63,7 @@ function Claim-NextRun {
       UPDATE-then-check-changes() because the bundled SQLite may predate RETURNING.
     #>
     param([Parameter(Mandatory)][string]$Database, [string]$Lane, [string]$Provider, [string]$Model,
-          [string]$Harness, [string]$Worker = "$env:COMPUTERNAME/$PID")
+          [string]$Harness, [string[]]$Suites, [string]$Worker = "$env:COMPUTERNAME/$PID")
     for ($try = 0; $try -lt 5; $try++) {
         $where = "status = 'queued'"
         $p = @{ worker = $Worker; now = (Get-Date).ToString('o') }
@@ -71,6 +71,10 @@ function Claim-NextRun {
         if ($Provider) { $where += " AND provider = @provider"; $p.provider = $Provider }
         if ($Model)    { $where += " AND model = @model";       $p.model = $Model }
         if ($Harness)  { $where += " AND harness = @harness";   $p.harness = $Harness }
+        if ($Suites) {
+            $ph = @(); for ($i = 0; $i -lt $Suites.Count; $i++) { $ph += "@s$i"; $p["s$i"] = $Suites[$i] }
+            $where += " AND suite IN ($($ph -join ','))"
+        }
         $cand = Invoke-SqliteQuery -DataSource $Database -Query "SELECT run_id FROM runs WHERE $where LIMIT 1" -SqlParameters $p
         if (-not $cand) { return $null }
         $p.id = $cand.run_id

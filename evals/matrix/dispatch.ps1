@@ -11,6 +11,7 @@ param(
     [ValidateSet('cloud', 'local', 'all')][string]$Lane = 'all',
     [string]$OnlyProvider,             # limit the cloud pool to one provider (smoke tests)
     [string]$OnlyHarness,              # limit claims to one harness (smoke tests)
+    [string[]]$OnlySuites,             # limit claims to specific suites (e.g. pilot-first local runs)
     [int]$MaxRuns = 0,                 # 0 = unlimited
     [switch]$DryRun,
     [switch]$ResetStale,
@@ -58,7 +59,7 @@ function Invoke-CloudPool {
                 $active = @($jobs.Values | Where-Object { $_.Provider -eq $p })
                 for ($i = $active.Count; $i -lt $caps[$p]; $i++) {
                     if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { $script:stopLaunching = $true; break }
-                    $run = Claim-NextRun -Database $DbPath -Lane cloud -Provider $p -Harness $OnlyHarness
+                    $run = Claim-NextRun -Database $DbPath -Lane cloud -Provider $p -Harness $OnlyHarness -Suites $OnlySuites
                     if (-not $run) { break }
                     $script:launched++
                     Write-Host "▶ $($run.run_id)"
@@ -109,8 +110,14 @@ function Invoke-LocalSerial {
     # Group by the UNDERLYING OLLAMA TAG, not the model string: pi names the same weights
     # 'ollama/gemma4:12b' while claude/codex use 'gemma4:12b'. One load serves all three
     # harnesses; warm-up precedes every timed run so cold loads never touch the clock.
+    $suiteFilter = ""
+    $sp = @{}
+    if ($OnlySuites) {
+        $ph = @(); for ($i = 0; $i -lt $OnlySuites.Count; $i++) { $ph += "@s$i"; $sp["s$i"] = $OnlySuites[$i] }
+        $suiteFilter = " AND suite IN ($($ph -join ','))"
+    }
     $models = Invoke-SqliteQuery -DataSource $DbPath -Query "
-        SELECT DISTINCT model FROM runs WHERE status='queued' AND lane='local' ORDER BY model"
+        SELECT DISTINCT model FROM runs WHERE status='queued' AND lane='local'$suiteFilter ORDER BY model" -SqlParameters $sp
     $byTag = @($models | ForEach-Object model) | Group-Object { $_ -replace '^ollama/', '' }
     foreach ($g in $byTag) {
         if ($MaxRuns -gt 0 -and $script:launched -ge $MaxRuns) { break }
@@ -118,7 +125,7 @@ function Invoke-LocalSerial {
         Write-Host "── local weights $tag ($(@($g.Group).Count) harness model ids) : warm-up"
         try { & ollama run $tag --keepalive 45m 'ok' 2>&1 | Out-Null } catch { Write-Warning "warm-up failed for $tag : $_" }
         foreach ($m in $g.Group) {
-            while ($run = Claim-NextRun -Database $DbPath -Lane local -Model $m) {
+            while ($run = Claim-NextRun -Database $DbPath -Lane local -Model $m -Suites $OnlySuites) {
                 $script:launched++
                 Write-Host "▶ $($run.run_id)"
                 $sw = [System.Diagnostics.Stopwatch]::StartNew()
