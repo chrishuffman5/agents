@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AWS Skills — Cross-Harness Eval Report</title>
+<style>
+  /* ---- theme tokens: light on bare :root, dark under guarded media + data-theme ---- */
+  :root {
+    color-scheme: light;
+    --plane: #f9f9f7;         /* page */
+    --surface: #fcfcfb;       /* chart/card surface */
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --ring: rgba(11,11,11,0.10);
+    --skill: #2a78d6;         /* categorical slot 1 (blue)  = skill */
+    --noskill: #eb6834;       /* categorical slot 2 (orange) = no-skill */
+    --good: #0ca30c;
+    --good-text: #006300;
+    --critical: #d03b3b;
+    --warning: #fab219;
+    --wash-skill: rgba(42,120,214,0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --plane: #0d0d0d; --surface: #1a1a19;
+      --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+      --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+      --skill: #3987e5; --noskill: #d95926;
+      --good: #0ca30c; --good-text: #0ca30c; --critical: #d03b3b; --warning: #fab219;
+      --wash-skill: rgba(57,135,229,0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --skill: #3987e5; --noskill: #d95926;
+    --good: #0ca30c; --good-text: #0ca30c; --critical: #d03b3b; --warning: #fab219;
+    --wash-skill: rgba(57,135,229,0.12);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--plane); color: var(--ink);
+    font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; }
+  header { padding: 34px 0 18px; }
+  .eyebrow { font: 600 11px/1 ui-monospace, Consolas, monospace; letter-spacing: .12em;
+             text-transform: uppercase; color: var(--ink-2); margin: 0 0 10px; }
+  h1 { font-size: 24px; font-weight: 650; margin: 0 0 6px; letter-spacing: -.01em; }
+  .sub { color: var(--ink-2); margin: 0; max-width: 72ch; }
+  .genline { color: var(--muted); font: 12px/1.4 ui-monospace, Consolas, monospace; margin-top: 8px; }
+
+  .banner {
+    display: none; margin: 16px 0 0; padding: 10px 16px;
+    background: var(--surface); border: 1.5px solid var(--warning); border-radius: 6px;
+    font-weight: 600;
+  }
+  .banner.on { display: block; }
+  .banner span { font-weight: 400; color: var(--ink-2); }
+
+  section { margin-top: 34px; }
+  h2 { font-size: 16px; font-weight: 650; margin: 0 0 4px; }
+  .h2sub { color: var(--ink-2); font-size: 13px; margin: 0 0 14px; max-width: 80ch; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+  .tile {
+    background: var(--surface); border: 1px solid var(--ring); border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .tile .lbl { color: var(--ink-2); font-size: 12.5px; }
+  .tile .val { font-size: 27px; font-weight: 600; margin-top: 2px; }
+  .tile .delta { font-size: 12.5px; margin-top: 2px; }
+  .delta.up { color: var(--good-text); } .delta.down { color: var(--critical); }
+  .tile .note { color: var(--muted); font-size: 11.5px; margin-top: 4px; }
+
+  .hero { display: flex; gap: 26px; align-items: baseline; flex-wrap: wrap;
+          background: var(--surface); border: 1px solid var(--ring); border-radius: 8px;
+          padding: 18px 22px; margin-bottom: 14px; }
+  .hero .big { font-size: 52px; font-weight: 650; line-height: 1; }
+  .hero .cap { color: var(--ink-2); max-width: 52ch; }
+
+  .legend { display: flex; gap: 18px; align-items: center; margin: 0 0 10px; font-size: 12.5px; color: var(--ink-2); }
+  .key { display: inline-flex; gap: 6px; align-items: center; }
+  .key i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+  .key.skill i { background: var(--skill); } .key.noskill i { background: var(--noskill); }
+
+  .panelgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .panel { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 12px 14px 8px; }
+  .panel h3 { margin: 0; font-size: 12.5px; font-weight: 600; }
+  .panel .ph { color: var(--muted); font: 11px/1.3 ui-monospace, Consolas, monospace; margin: 1px 0 6px; }
+  .panel svg { display: block; width: 100%; height: auto; }
+
+  .hcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; }
+  .hcard { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 16px; }
+  .hcard .who { font: 600 11.5px/1.3 ui-monospace, Consolas, monospace; color: var(--ink-2); }
+  .hcard .big { font-size: 30px; font-weight: 650; margin: 6px 0 2px; }
+  .hcard .big.na { color: var(--muted); font-size: 20px; }
+  .hcard .rows { margin-top: 8px; display: grid; gap: 4px; font-size: 12.5px; }
+  .hcard .r { display: flex; justify-content: space-between; gap: 8px; }
+  .hcard .r b { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .dotk { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+  .tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th { text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+       color: var(--ink-2); padding: 9px 12px; border-bottom: 2px solid var(--baseline); white-space: nowrap; }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600;
+          padding: 1px 8px; border-radius: 10px; border: 1px solid var(--ring); }
+  .chip.pass { color: var(--good-text); } .chip.fail { color: var(--critical); }
+  .chip.pend { color: var(--muted); }
+  .meterwrap { background: var(--grid); border-radius: 3px; height: 6px; width: 120px; display: inline-block; vertical-align: middle; }
+  .meter { background: var(--skill); height: 6px; border-radius: 3px; }
+
+  .filters { display: flex; gap: 8px; margin: 0 0 10px; flex-wrap: wrap; }
+  .fbtn { font: inherit; font-size: 12.5px; padding: 4px 12px; border-radius: 14px;
+          border: 1px solid var(--ring); background: var(--surface); color: var(--ink-2); cursor: pointer; }
+  .fbtn[aria-pressed="true"] { color: var(--ink); border-color: var(--ink-2); font-weight: 600; }
+  .fbtn:focus-visible { outline: 2px solid var(--skill); outline-offset: 2px; }
+
+  #tooltip { position: fixed; pointer-events: none; display: none; z-index: 10;
+             background: var(--surface); border: 1px solid var(--ring); border-radius: 6px;
+             padding: 7px 10px; font-size: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.12); max-width: 260px; }
+  #tooltip .tt-t { font-weight: 600; margin-bottom: 2px; }
+  #tooltip .tt-r { display: flex; justify-content: space-between; gap: 12px; color: var(--ink-2); }
+  #tooltip .tt-r b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  .empty { background: var(--surface); border: 1px dashed var(--baseline); border-radius: 8px;
+           padding: 20px; color: var(--ink-2); }
+  footer { margin-top: 46px; border-top: 1px solid var(--grid); padding-top: 14px;
+           color: var(--muted); font-size: 12px; max-width: 90ch; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">domain-expert · cross-harness eval matrix · aws-cli + aws</p>
+  <h1>Skill vs no-skill: accuracy, speed, and effort across harnesses</h1>
+  <p class="sub">One-shot prompts from the aws matrix suite, run under Claude Code, Codex, and Pi
+     across cloud and local models at normalized effort levels E1–E3 — each cell twice: with the
+     skill provisioned, and bare.</p>
+  <p class="genline" id="genline"></p>
+  <div class="banner" id="banner">⚠ SYNTHETIC SAMPLE DATA <span>— layout preview only, generated from a fixed seed,
+      shaped like the hypothesis. Run <code>build-report.ps1</code> after a sweep to replace with real results.</span></div>
+</header>
+
+<section id="progress">
+  <h2>Run status</h2>
+  <p class="h2sub">Queue state from <code>evalq.sqlite</code>. A run is one prompt through one cell (harness × model × effort × mode).</p>
+  <div class="cards" id="statusTiles"></div>
+</section>
+
+<section id="headlineSec">
+  <h2>P1 · Iso-accuracy speedup</h2>
+  <p class="h2sub">Per harness × model: the best <b>no-skill</b> configuration (highest accuracy, any effort) against the
+     <b>fastest skill</b> configuration that matches or beats that accuracy. The big number is wall-clock saved at equal-or-better accuracy.</p>
+  <div class="hero" id="hero"></div>
+  <div class="hcards" id="hcards"></div>
+</section>
+
+<section id="collapseSec">
+  <h2>P2 · Effort-collapse</h2>
+  <p class="h2sub">Accuracy by effort level. The hypothesis: the skill line stays flat — low effort already knows —
+     while the no-skill line needs high effort to climb. Hover any point for detail.</p>
+  <div class="legend"><span class="key skill"><i></i>skill</span><span class="key noskill"><i></i>no-skill</span>
+    <span style="color:var(--muted)">y: pass rate 0–100% · x: E1 → E3</span></div>
+  <div class="panelgrid" id="collapse"></div>
+</section>
+
+<section id="taskSec">
+  <h2>Where the skill matters: per-task delta</h2>
+  <p class="h2sub">Pass rate per task across all cells — skill vs no-skill. Tasks are classed
+     <b>recent</b> (facts newer or nichier than typical model knowledge) and <b>stable</b> (long-standing facts).
+     The skill should dominate on recent knowledge; stable knowledge shows the floor.</p>
+  <div class="legend"><span class="key skill"><i></i>skill</span><span class="key noskill"><i></i>no-skill</span></div>
+  <div class="panel" style="padding:16px"><svg id="dumbbell"></svg></div>
+</section>
+
+<section id="equalizerSec">
+  <h2>P3 · The equalizer table</h2>
+  <p class="h2sub">Small and local models <em>with</em> the skill, ranked against flagship models <em>without</em> it.</p>
+  <div class="tablewrap"><table id="eqTable"></table></div>
+</section>
+
+<section id="cellsSec">
+  <h2>All cells</h2>
+  <p class="h2sub">Every harness × model × effort × mode aggregate — this table is the accessible data view for every chart above.</p>
+  <div class="filters" id="cellFilters"></div>
+  <div class="tablewrap"><table id="cellTable"></table></div>
+</section>
+
+<footer id="method"></footer>
+</div>
+<div id="tooltip"></div>
+
+<script src="results.js"></script>
+<script src="sample-results.js"></script>
+<script>
+(function () {
+  "use strict";
+  const real = window.MATRIX_RESULTS;
+  const hasReal = !!(real && real.status);
+  const hasData = !!(hasReal && real.status.done > 0);
+  const data = hasData ? real : (window.MATRIX_SAMPLE || real);
+  if (!data) { document.body.innerHTML = "<p style='padding:40px'>No results.js and no sample data found.</p>"; return; }
+  const statusData = hasReal ? real : data;
+
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, attrs, text) => {
+    const n = tag.includes("svg:") ? document.createElementNS("http://www.w3.org/2000/svg", tag.slice(4))
+                                   : document.createElement(tag);
+    for (const k in (attrs || {})) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const fmtMs = (ms) => ms == null ? "—" : ms >= 10000 ? (ms / 1000).toFixed(1) + "s" : (ms / 1000).toFixed(2) + "s";
+  const pct = (p, n) => n ? Math.round(100 * p / n) : null;
+  const modelShort = (m) => m.replace(/^(anthropic|openai|ollama)\//, "").replace(":q4_K_M-32k", "");
+
+  if (data.sample) $("#banner").classList.add("on");
+  $("#genline").textContent = "suite: " + data.suite + " · generated: " + data.generated +
+    (hasReal && !hasData ? " · real queue present, no completed runs yet — analytic sections show the synthetic preview" : "");
+
+  /* ---- tooltip layer ---- */
+  const tt = $("#tooltip");
+  function showTip(evt, title, rows) {
+    tt.innerHTML = "";
+    tt.appendChild(el("div", { class: "tt-t" }, title));
+    for (const [k, v] of rows) {
+      const r = el("div", { class: "tt-r" }); r.appendChild(el("span", null, k));
+      r.appendChild(el("b", null, v)); tt.appendChild(r);
+    }
+    tt.style.display = "block";
+    const pad = 14, w = tt.offsetWidth, h = tt.offsetHeight;
+    tt.style.left = Math.min(evt.clientX + pad, innerWidth - w - 8) + "px";
+    tt.style.top = Math.min(evt.clientY + pad, innerHeight - h - 8) + "px";
+  }
+  const hideTip = () => (tt.style.display = "none");
+
+  /* ---- status tiles (always real when a real queue exists) ---- */
+  (function statusTiles() {
+    const s = statusData.status, total = s.queued + s.running + s.done + s.error;
+    const wrap = $("#statusTiles");
+    const tiles = [
+      ["Total runs", total, null],
+      ["Completed", s.done, total ? Math.round(100 * s.done / total) + "% of queue" : null],
+      ["Running", s.running, null],
+      ["Queued", s.queued, null],
+      ["Errors", s.error, null]
+    ];
+    for (const [lbl, val, note] of tiles) {
+      const t = el("div", { class: "tile" });
+      t.appendChild(el("div", { class: "lbl" }, lbl));
+      t.appendChild(el("div", { class: "val" }, String(val)));
+      if (note) t.appendChild(el("div", { class: "note" }, note));
+      wrap.appendChild(t);
+    }
+    for (const l of statusData.lanes || []) {
+      const t = el("div", { class: "tile" });
+      t.appendChild(el("div", { class: "lbl" }, l.harness + " · " + l.lane));
+      const m = el("div", { class: "meterwrap" }); const f = el("div", { class: "meter" });
+      f.style.width = (l.total ? Math.round(100 * l.done / l.total) : 0) + "%";
+      m.appendChild(f);
+      const v = el("div", { class: "val" }); v.style.fontSize = "15px";
+      v.textContent = l.done + " / " + l.total; v.style.marginBottom = "6px";
+      t.appendChild(v); t.appendChild(m);
+      wrap.appendChild(t);
+    }
+  })();
+
+  const cells = (data.cells || []).filter(c => c.done > 0);
+  const noData = cells.length === 0;
+  if (noData) {
+    for (const id of ["hero", "hcards", "collapse", "eqTable", "cellTable", "dumbbell"]) {
+      const n = document.getElementById(id);
+      if (n) n.replaceWith(el("div", { class: "empty", id }, "No completed runs yet — dispatch the queue, then re-run build-report.ps1."));
+    }
+    return;
+  }
+
+  /* ---- grouping helpers ---- */
+  const comboKey = (c) => c.harness + " · " + modelShort(c.model) + (c.lane === "local" ? " (local)" : "");
+  const combos = [...new Set(cells.map(comboKey))];
+  const byCombo = {};
+  for (const c of cells) (byCombo[comboKey(c)] = byCombo[comboKey(c)] || []).push(c);
+
+  /* ---- P1 headline ---- */
+  (function headline() {
+    const hc = $("#hcards");
+    const savings = [];
+    for (const key of combos) {
+      const g = byCombo[key];
+      const ns = g.filter(c => c.mode === "no-skill");
+      const sk = g.filter(c => c.mode === "skill");
+      if (!ns.length || !sk.length) continue;
+      const bestNs = ns.slice().sort((a, b) => (pct(b.pass, b.done) - pct(a.pass, a.done)) || (a.wallMs - b.wallMs))[0];
+      const bestNsAcc = pct(bestNs.pass, bestNs.done);
+      const parity = sk.filter(c => pct(c.pass, c.done) >= bestNsAcc).sort((a, b) => a.wallMs - b.wallMs)[0];
+      const card = el("div", { class: "hcard" });
+      card.appendChild(el("div", { class: "who" }, key));
+      if (parity) {
+        const save = bestNs.wallMs > 0 ? Math.round(100 * (bestNs.wallMs - parity.wallMs) / bestNs.wallMs) : 0;
+        savings.push(save);
+        const big = el("div", { class: "big" + (save <= 0 ? " na" : "") },
+          (save > 0 ? "−" + save + "%" : save === 0 ? "±0%" : "+" + (-save) + "%"));
+        card.appendChild(big);
+        card.appendChild(el("div", { class: "note", style: "color:var(--muted);font-size:11.5px" },
+          "wall-clock at ≥ no-skill accuracy"));
+        const rows = el("div", { class: "rows" });
+        const r1 = el("div", { class: "r" });
+        r1.innerHTML = "<span><i class='dotk' style='background:var(--noskill)'></i>no-skill best · " + bestNs.effort +
+          "</span><b>" + bestNsAcc + "% · " + fmtMs(bestNs.wallMs) + "</b>";
+        const r2 = el("div", { class: "r" });
+        r2.innerHTML = "<span><i class='dotk' style='background:var(--skill)'></i>skill fastest ≥ · " + parity.effort +
+          "</span><b>" + pct(parity.pass, parity.done) + "% · " + fmtMs(parity.wallMs) + "</b>";
+        rows.appendChild(r1); rows.appendChild(r2); card.appendChild(rows);
+      } else {
+        card.appendChild(el("div", { class: "big na" }, "no parity config"));
+        card.appendChild(el("div", { class: "note", style: "color:var(--muted)" },
+          "no skill cell reached the best no-skill accuracy (" + bestNsAcc + "%)"));
+      }
+      hc.appendChild(card);
+    }
+    const hero = $("#hero");
+    if (savings.length) {
+      const med = savings.slice().sort((a, b) => a - b)[Math.floor(savings.length / 2)];
+      hero.appendChild(el("div", { class: "big" }, (med > 0 ? "−" : "") + med + "%"));
+      hero.appendChild(el("div", { class: "cap" },
+        "median wall-clock change at iso-accuracy across " + savings.length +
+        " harness × model combinations — the skill's speed dividend at equal-or-better accuracy" +
+        (data.sample ? " (synthetic sample)" : "")));
+    } else hero.style.display = "none";
+  })();
+
+  /* ---- P2 effort-collapse small multiples ---- */
+  (function collapse() {
+    const grid = $("#collapse");
+    const W = 250, H = 150, m = { t: 12, r: 14, b: 22, l: 30 };
+    for (const key of combos) {
+      const g = byCombo[key];
+      const efforts = [...new Set(g.map(c => c.effort))].sort();
+      const x = (i) => m.l + (W - m.l - m.r) * (efforts.length === 1 ? 0.5 : i / (efforts.length - 1));
+      const y = (v) => m.t + (H - m.t - m.b) * (1 - v / 100);
+      const panel = el("div", { class: "panel" });
+      panel.appendChild(el("h3", null, key));
+      panel.appendChild(el("div", { class: "ph" }, g[0].provider + " · " + g[0].lane));
+      const svg = el("svg:svg", { viewBox: "0 0 " + W + " " + H, role: "img",
+        "aria-label": "Pass rate by effort for " + key + ", skill vs no-skill" });
+      for (const v of [0, 50, 100]) {
+        svg.appendChild(el("svg:line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v),
+          stroke: "var(--grid)", "stroke-width": 1 }));
+        svg.appendChild(el("svg:text", { x: m.l - 5, y: y(v) + 3.5, "text-anchor": "end",
+          "font-size": 9, fill: "var(--muted)" }, String(v)));
+      }
+      efforts.forEach((e, i) => svg.appendChild(el("svg:text",
+        { x: x(i), y: H - 7, "text-anchor": "middle", "font-size": 9.5, fill: "var(--muted)" }, e)));
+      for (const mode of ["no-skill", "skill"]) {
+        const col = mode === "skill" ? "var(--skill)" : "var(--noskill)";
+        const pts = efforts.map((e, i) => {
+          const c = g.find(x => x.effort === e && x.mode === mode);
+          return c ? { i, c, v: pct(c.pass, c.done) } : null;
+        }).filter(Boolean);
+        if (pts.length > 1) svg.appendChild(el("svg:path", {
+          d: pts.map((p, j) => (j ? "L" : "M") + x(p.i) + " " + y(p.v)).join(" "),
+          fill: "none", stroke: col, "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        for (const p of pts) {
+          const dot = el("svg:circle", { cx: x(p.i), cy: y(p.v), r: 4.5, fill: col,
+            stroke: "var(--surface)", "stroke-width": 2 });
+          const hit = el("svg:circle", { cx: x(p.i), cy: y(p.v), r: 11, fill: "transparent", cursor: "pointer" });
+          hit.addEventListener("mousemove", (evt) => showTip(evt, key + " · " + p.c.effort + " · " + mode, [
+            ["pass rate", p.v + "% (" + p.c.pass + "/" + p.c.done + ")"],
+            ["mean wall", fmtMs(p.c.wallMs)],
+            ["mean tokens out", p.c.tokensOut != null ? String(p.c.tokensOut) : "—"]]));
+          hit.addEventListener("mouseleave", hideTip);
+          svg.appendChild(dot); svg.appendChild(hit);
+        }
+        const last = pts[pts.length - 1];
+        if (last) svg.appendChild(el("svg:text", { x: x(last.i) + 8, y: y(last.v) + 3.5,
+          "font-size": 9.5, fill: "var(--ink-2)" }, last.v + "%"));
+      }
+      panel.appendChild(svg); grid.appendChild(panel);
+    }
+  })();
+
+  /* ---- per-task dumbbell ---- */
+  (function dumbbell() {
+    const tasks = (data.tasks || []).slice()
+      .sort((a, b) => (a.knowledge || "").localeCompare(b.knowledge || "") || a.id.localeCompare(b.id));
+    if (!tasks.length) return;
+    const rowH = 26, m = { t: 24, r: 46, b: 8, l: 190 }, W = 860;
+    const H = m.t + m.b + tasks.length * rowH;
+    const svg = $("#dumbbell");
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "Per-task pass rate, skill versus no-skill");
+    const x = (v) => m.l + (W - m.l - m.r) * (v / 100);
+    for (const v of [0, 25, 50, 75, 100]) {
+      svg.appendChild(el("svg:line", { x1: x(v), x2: x(v), y1: m.t - 6, y2: H - m.b, stroke: "var(--grid)", "stroke-width": 1 }));
+      svg.appendChild(el("svg:text", { x: x(v), y: m.t - 10, "text-anchor": "middle", "font-size": 9.5, fill: "var(--muted)" }, v + "%"));
+    }
+    let lastClass = null;
+    tasks.forEach((t, i) => {
+      const cy = m.t + i * rowH + rowH / 2;
+      if (t.knowledge !== lastClass) {
+        lastClass = t.knowledge;
+        svg.appendChild(el("svg:text", { x: 4, y: cy - 8, "font-size": 9, fill: "var(--muted)",
+          "letter-spacing": ".08em" }, (t.knowledge || "").toUpperCase()));
+      }
+      svg.appendChild(el("svg:text", { x: m.l - 10, y: cy + 3.5, "text-anchor": "end",
+        "font-size": 11, fill: "var(--ink-2)" }, t.id));
+      const ps = pct(t.passSkill, t.nSkill), pn = pct(t.passNoSkill, t.nNoSkill);
+      if (ps == null || pn == null) return;
+      svg.appendChild(el("svg:line", { x1: x(Math.min(ps, pn)), x2: x(Math.max(ps, pn)),
+        y1: cy, y2: cy, stroke: "var(--baseline)", "stroke-width": 2 }));
+      for (const [v, col, mode, hit] of [[pn, "var(--noskill)", "no-skill", t.passNoSkill + "/" + t.nNoSkill],
+                                        [ps, "var(--skill)", "skill", t.passSkill + "/" + t.nSkill]]) {
+        const dot = el("svg:circle", { cx: x(v), cy, r: 5, fill: col, stroke: "var(--surface)", "stroke-width": 2, cursor: "pointer" });
+        dot.addEventListener("mousemove", (evt) => showTip(evt, t.id + " · " + mode,
+          [["pass rate", v + "% (" + hit + ")"], ["skill under test", t.skill], ["knowledge class", t.knowledge || "—"]]));
+        dot.addEventListener("mouseleave", hideTip);
+        svg.appendChild(dot);
+      }
+      svg.appendChild(el("svg:text", { x: x(Math.max(ps, pn)) + 10, y: cy + 3.5,
+        "font-size": 10.5, fill: "var(--ink-2)" }, "+" + Math.max(0, ps - pn)));
+    });
+  })();
+
+  /* ---- P3 equalizer ---- */
+  (function equalizer() {
+    const small = cells.filter(c => c.mode === "skill" && /haiku|luna|gemma|glm|qwen/i.test(c.model));
+    const flag = cells.filter(c => c.mode === "no-skill" && /opus|sol/i.test(c.model));
+    const rows = [
+      ...small.map(c => ({ ...c, cls: "small + skill" })),
+      ...flag.map(c => ({ ...c, cls: "flagship, no skill" }))
+    ].map(c => ({ ...c, acc: pct(c.pass, c.done) }))
+     .sort((a, b) => b.acc - a.acc || a.wallMs - b.wallMs)
+     .slice(0, 16);
+    const t = $("#eqTable");
+    t.appendChild(el("thead")).innerHTML =
+      "<tr><th>#</th><th>Config</th><th>Class</th><th>Effort</th><th>Accuracy</th><th>Mean wall</th><th>Mean tokens out</th></tr>";
+    const tb = el("tbody");
+    rows.forEach((c, i) => {
+      const tr = el("tr");
+      tr.innerHTML = "<td class='n'>" + (i + 1) + "</td>" +
+        "<td>" + c.harness + " · " + modelShort(c.model) + "</td>" +
+        "<td><span class='chip " + (c.cls.includes("skill +") || c.cls.includes("+ skill") ? "pass" : "pend") + "'>" +
+          (c.cls === "small + skill" ? "● " : "○ ") + c.cls + "</span></td>" +
+        "<td>" + c.effort + "</td>" +
+        "<td class='n'>" + c.acc + "%</td>" +
+        "<td class='n'>" + fmtMs(c.wallMs) + "</td>" +
+        "<td class='n'>" + (c.tokensOut ?? "—") + "</td>";
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb);
+  })();
+
+  /* ---- all-cells table with filters ---- */
+  (function cellTable() {
+    const t = $("#cellTable"), filters = $("#cellFilters");
+    const state = { harness: "all", mode: "all", lane: "all" };
+    const dims = [["harness", ["all", ...new Set(cells.map(c => c.harness))]],
+                  ["lane", ["all", ...new Set(cells.map(c => c.lane))]],
+                  ["mode", ["all", "skill", "no-skill"]]];
+    for (const [dim, vals] of dims) for (const v of vals) {
+      const b = el("button", { class: "fbtn", "aria-pressed": String(state[dim] === v) }, dim + ": " + v);
+      b.addEventListener("click", () => {
+        state[dim] = v;
+        filters.querySelectorAll(".fbtn").forEach(x => {
+          const [d, val] = x.textContent.split(": ");
+          x.setAttribute("aria-pressed", String(state[d] === val));
+        });
+        render();
+      });
+      filters.appendChild(b);
+    }
+    function render() {
+      t.innerHTML = "";
+      t.appendChild(el("thead")).innerHTML =
+        "<tr><th>Harness</th><th>Model</th><th>Lane</th><th>Effort</th><th>Mode</th>" +
+        "<th>Done</th><th>Accuracy</th><th>Mean wall</th><th>Mean tokens out</th><th>Cost</th></tr>";
+      const tb = el("tbody");
+      cells.filter(c => (state.harness === "all" || c.harness === state.harness) &&
+                        (state.lane === "all" || c.lane === state.lane) &&
+                        (state.mode === "all" || c.mode === state.mode))
+        .sort((a, b) => a.harness.localeCompare(b.harness) || a.model.localeCompare(b.model) ||
+                        a.effort.localeCompare(b.effort) || a.mode.localeCompare(b.mode))
+        .forEach(c => {
+          const acc = pct(c.pass, c.done);
+          const tr = el("tr");
+          tr.innerHTML = "<td>" + c.harness + "</td><td>" + modelShort(c.model) + "</td>" +
+            "<td>" + c.lane + "</td><td>" + c.effort + "</td>" +
+            "<td><i class='dotk' style='background:var(--" + (c.mode === "skill" ? "skill" : "noskill") + ")'></i>" + c.mode + "</td>" +
+            "<td class='n'>" + c.done + "/" + c.runs + "</td>" +
+            "<td class='n'>" + (acc == null ? "—" : acc + "%") + "</td>" +
+            "<td class='n'>" + fmtMs(c.wallMs) + "</td>" +
+            "<td class='n'>" + (c.tokensOut ?? "—") + "</td>" +
+            "<td class='n'>" + (c.cost != null ? "$" + c.cost : "—") + "</td>";
+          tb.appendChild(tr);
+        });
+      t.appendChild(tb);
+    }
+    render();
+  })();
+
+  $("#method").innerHTML =
+    "<b>Method.</b> Suite: 12 graded one-shot tasks (6 per skill) with neutral phrasing; expected answers " +
+    "traceable to cited content in the refreshed skills (2026-08-08). Each run is a fresh session — no retries, " +
+    "no coaching. Accuracy = deterministic expected-spec grading. Wall-clock in analytic sections comes from the " +
+    "sweep; quoted P1 numbers should come from the serial timing pass (timing-pass.ps1), never parallel-sweep timings. " +
+    "Skill arm provisioning: claude --plugin-dir · codex CODEX_HOME swap · pi --skill; identical prompts and isolation " +
+    "flags in both arms. Design: evals/design/cross-harness-matrix.html.";
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,756 @@
+<title>Cross-Harness Eval Matrix — Design Proposal</title>
+<style>
+  :root {
+    --paper: #F6F8F7;
+    --card: #FFFFFF;
+    --ink: #1B2226;
+    --muted: #57646C;
+    --faint: #8A969D;
+    --line: #D7DEDF;
+    --accent: #0E6E6B;
+    --accent-soft: #E1EEED;
+    --signal: #C46A00;
+    --signal-soft: #F6E9D7;
+    --good: #2E7D32;
+    --bad: #B3402E;
+    --code-bg: #EDF1F0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181B;
+      --card: #1C2226;
+      --ink: #E4E9EB;
+      --muted: #9AA7AE;
+      --faint: #6E7B82;
+      --line: #2E383D;
+      --accent: #45ABA6;
+      --accent-soft: #1E3231;
+      --signal: #E79A3C;
+      --signal-soft: #34281A;
+      --good: #66BB6A;
+      --bad: #E57360;
+      --code-bg: #232B2F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181B;
+    --card: #1C2226;
+    --ink: #E4E9EB;
+    --muted: #9AA7AE;
+    --faint: #6E7B82;
+    --line: #2E383D;
+    --accent: #45ABA6;
+    --accent-soft: #1E3231;
+    --signal: #E79A3C;
+    --signal-soft: #34281A;
+    --good: #66BB6A;
+    --bad: #E57360;
+    --code-bg: #232B2F;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 20px 96px;
+  }
+  .sheet { max-width: 940px; margin: 0 auto; }
+  .mono, th, .chip, .eyebrow, .marker, code, pre, .metaline, .cellnum {
+    font-family: "Cascadia Code", Consolas, "SF Mono", "Fira Code", monospace;
+  }
+
+  header.doc { padding: 56px 0 28px; border-bottom: 3px solid var(--ink); }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: "Cascadia Code", Consolas, "SF Mono", monospace;
+    font-size: clamp(26px, 4.4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .metaline { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 12.5px; color: var(--muted); }
+  .metaline b { color: var(--ink); font-weight: 600; }
+  .chip {
+    display: inline-block;
+    border: 1px solid var(--signal);
+    color: var(--signal);
+    padding: 1px 9px 2px;
+    border-radius: 3px;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  section { margin-top: 52px; }
+  .marker { color: var(--accent); font-size: 13px; letter-spacing: 0.12em; display: block; margin-bottom: 6px; }
+  h2 {
+    font-family: "Cascadia Code", Consolas, "SF Mono", monospace;
+    font-size: 21px;
+    line-height: 1.25;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+  h3 { font-size: 17px; margin: 26px 0 8px; font-weight: 700; }
+  p { max-width: 68ch; margin: 0 0 14px; }
+  ul, ol { max-width: 68ch; margin: 0 0 14px; padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 700; }
+  em { font-style: italic; }
+  a { color: var(--accent); }
+
+  .thesis {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--signal);
+    padding: 20px 24px;
+    margin: 22px 0;
+    max-width: none;
+  }
+  .thesis p { margin: 0; max-width: none; font-size: 18.5px; line-height: 1.55; }
+  .thesis .mono { color: var(--signal); font-size: 15px; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); background: var(--card); margin: 16px 0 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+  th {
+    text-align: left;
+    font-size: 11.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--ink);
+    white-space: nowrap;
+  }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+  td.num { text-align: right; font-family: "Cascadia Code", Consolas, monospace; font-size: 13.5px; }
+  .yes { color: var(--good); font-weight: 700; }
+  .no  { color: var(--faint); }
+  .warn { color: var(--signal); font-weight: 600; }
+  .tbv {
+    font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--signal); border: 1px solid var(--signal);
+    border-radius: 3px; padding: 0 5px; white-space: nowrap;
+    font-family: "Cascadia Code", Consolas, monospace;
+  }
+  .ok {
+    font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--good); border: 1px solid var(--good);
+    border-radius: 3px; padding: 0 5px; white-space: nowrap;
+    font-family: "Cascadia Code", Consolas, monospace;
+  }
+  .cap { font-size: 13px; color: var(--muted); margin-top: 6px; max-width: 68ch; }
+
+  code {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13.5px;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-size: 12.75px;
+    line-height: 1.55;
+    margin: 14px 0;
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  .cmt { color: var(--muted); }
+  .kw { color: var(--accent); font-weight: 600; }
+  .str { color: var(--signal); }
+  .codehead {
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); margin: 20px 0 -8px;
+  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  @media (max-width: 780px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  .panel { background: var(--card); border: 1px solid var(--line); padding: 16px 20px; }
+  .panel h4 {
+    margin: 0 0 8px;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .panel p { font-size: 14.5px; margin-bottom: 8px; max-width: none; }
+  .panel p:last-child { margin-bottom: 0; }
+  .panel code { font-size: 12.5px; }
+
+  .footgun {
+    background: var(--signal-soft);
+    border: 1px solid var(--signal);
+    padding: 14px 20px;
+    margin: 16px 0;
+    max-width: none;
+    font-size: 14.5px;
+  }
+  .footgun b { font-family: "Cascadia Code", Consolas, monospace; font-size: 13px; }
+  .footgun ul { margin: 6px 0 0; max-width: none; }
+
+  .diagram-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); padding: 18px 8px; margin: 16px 0 8px; }
+  .diagram-wrap svg { display: block; margin: 0 auto; min-width: 780px; }
+  .d-box { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
+  .d-store { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.4; }
+  .d-hot { fill: var(--signal-soft); stroke: var(--signal); stroke-width: 1.4; }
+  .d-label { font-family: "Cascadia Code", Consolas, monospace; font-size: 12px; fill: var(--ink); }
+  .d-sub { font-family: "Cascadia Code", Consolas, monospace; font-size: 10px; fill: var(--muted); }
+  .d-arrow { stroke: var(--muted); stroke-width: 1.4; fill: none; marker-end: url(#arr); }
+
+  .qa { max-width: 68ch; }
+  .qa li { margin-bottom: 10px; }
+  footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="sheet">
+<header class="doc">
+  <p class="eyebrow">domain-expert · eval harness · design proposal</p>
+  <h1>Cross-Harness Eval Matrix</h1>
+  <div class="metaline">
+    <span>date <b>2026-08-08</b></span>
+    <span>rev <b>v0.2</b></span>
+    <span>author <b>Chris Huffman + Claude</b></span>
+    <span>extends <b>evals/run-evals.ps1</b></span>
+    <span class="chip">draft — for review</span>
+  </div>
+  <p class="cap" style="margin-top:12px">
+    v0.2: flags verified against the installed CLIs on HUFFTECH01 (codex-cli 0.144.1, claude 2.1.225, pi + pi-psh)
+    per <code>train-gemma4/CLI.md</code>, cross-checked with the ai plugin's <code>claude-code</code>, <code>codex</code>,
+    and <code>pi</code> skills. Command templates below are real, not illustrative — Phase 0 is substantially done.
+  </p>
+</header>
+
+<section>
+  <span class="marker">01 · HYPOTHESIS</span>
+  <h2>A good skill buys speed, not just accuracy</h2>
+  <p>
+    The current harness proves the skills layer improves <em>accuracy and cost</em> against a
+    same-model baseline. This design extends it to prove a sharper claim about <em>speed</em>:
+  </p>
+  <div class="thesis">
+    <p>
+      A model reading a well-curated skill can run at <span class="mono">low/medium</span> effort and still match —
+      or beat — the accuracy of a bare model at <span class="mono">high</span> effort, because the skill has already
+      done the thinking the model would otherwise re-derive. Less reasoning to re-derive means fewer thinking
+      tokens, which means <strong>faster responses at equal accuracy</strong>.
+    </p>
+  </div>
+  <p>Three measurable predictions fall out of that, and the matrix is shaped to test each:</p>
+  <ul>
+    <li><strong>P1 — Iso-accuracy speedup.</strong> For each harness × model: the fastest <em>skill</em> config that reaches the accuracy of the best <em>no-skill</em> config is materially faster (target: ≥30% wall-clock reduction).</li>
+    <li><strong>P2 — Effort-collapse.</strong> With the skill installed, the accuracy gap between <span class="mono">low</span> and <span class="mono">high</span> effort shrinks toward zero; without it, the gap stays wide. Overthinking has nothing left to add when the skill already states the answer's shape.</li>
+    <li><strong>P3 — Small-model uplift.</strong> Skill + small/cheap model (Haiku 4.5, Luna, local) approaches no-skill + flagship accuracy — the "skill as equalizer" effect, measured per domain.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="marker">02 · TEST AXES</span>
+  <h2>Four axes, one control</h2>
+
+  <h3>Harnesses <span class="ok">flags verified 2026-08-08</span></h3>
+  <div class="tablewrap"><table>
+    <tr><th>Harness</th><th>One-shot form</th><th>Effort control</th><th>Isolation lever</th><th>Machine output</th></tr>
+    <tr>
+      <td><b>Claude Code</b><br><span class="cap">v2.1.225</span></td>
+      <td><code>claude -p "…"</code> (prompt positional)</td>
+      <td>settings-based <span class="tbv">confirm per-run flag</span></td>
+      <td><code>--bare --no-session-persistence</code></td>
+      <td><code>--output-format json</code> (single object, usage + cost + duration)</td>
+    </tr>
+    <tr>
+      <td><b>Codex CLI</b><br><span class="cap">v0.144.1</span></td>
+      <td><code>codex e "…"</code> (<code>e</code> = <code>exec</code>)</td>
+      <td><code>-c model_reasoning_effort="low"</code></td>
+      <td><code>--ephemeral --skip-git-repo-check</code> + <code>CODEX_HOME</code> swap</td>
+      <td><code>--json</code> (JSONL events) + <code>-o last_message.txt</code></td>
+    </tr>
+    <tr>
+      <td><b>Pi CLI</b></td>
+      <td><code>pi -p "…"</code> (prompt positional)</td>
+      <td><code>--thinking low</code> (or <code>--model provider/id:low</code>)</td>
+      <td><code>--no-session --no-context-files</code></td>
+      <td><code>--mode json</code> (typed event stream, delta messages)</td>
+    </tr>
+  </table></div>
+
+  <div class="footgun">
+    <b>⚠ FOOTGUNS (from CLI.md — the runner templates around all four)</b>
+    <ul>
+      <li><code>-p</code> collides: codex → <code>--profile &lt;name&gt;</code> (takes a value); pi and claude → <code>--print</code> (boolean). The command templater special-cases codex.</li>
+      <li>pi's default provider is <b>google</b> — every pi run passes an explicit <code>--provider</code> or <code>--model provider/…</code>.</li>
+      <li>codex profiles are standalone <code>&lt;name&gt;.config.toml</code> files in <code>$CODEX_HOME</code>, not sections inside <code>config.toml</code>.</li>
+      <li>claude → Ollama needs <code>ANTHROPIC_API_KEY</code> set to any non-empty value; <code>--bare</code> pins auth strictly to that env var.</li>
+    </ul>
+  </div>
+
+  <h3>Models (roster pinned 2026-08-08)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Provider</th><th>Model</th><th>ID</th><th>Class</th><th>Claude Code</th><th>Codex</th><th>Pi</th><th>Lane</th></tr>
+    <tr><td>Anthropic</td><td>Opus 5</td><td><code>claude-opus-5</code></td><td>flagship</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>Anthropic</td><td>Sonnet 5</td><td><code>claude-sonnet-5</code></td><td>mid</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>Anthropic</td><td>Haiku 4.5</td><td><code>claude-haiku-4-5</code></td><td>small</td><td class="yes">✓</td><td class="no">—</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>OpenAI</td><td>GPT-5.6 Sol</td><td><code>gpt-5.6-sol</code></td><td>flagship</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>OpenAI</td><td>GPT-5.6 Terra</td><td><code>gpt-5.6-terra</code></td><td>mid</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>OpenAI</td><td>GPT-5.6 Luna</td><td><code>gpt-5.6-luna</code></td><td>small</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td>cloud</td></tr>
+    <tr><td>Local (Ollama)</td><td>gemma4-12b</td><td><code>gemma4:12b</code></td><td>local</td><td class="no">opt *</td><td class="yes">✓ <code>ollama-gemma</code></td><td class="yes">✓</td><td><span class="warn">local · serial</span></td></tr>
+    <tr><td>Local (Ollama)</td><td>glm-4.7-flash</td><td><code>glm-4.7-flash:q4_K_M-32k</code></td><td>local</td><td class="no">opt *</td><td class="yes">✓ <code>ollama-glm</code></td><td class="yes">✓</td><td><span class="warn">local · serial</span></td></tr>
+    <tr><td>Local (Ollama)</td><td>qwen3.6-27b</td><td><code>qwen3.6:27b</code></td><td>local</td><td class="no">opt *</td><td class="yes">✓ <code>ollama-qwen27b</code></td><td class="yes">✓</td><td><span class="warn">local · serial</span></td></tr>
+  </table></div>
+  <p class="cap">
+    Tier order for GPT-5.6 confirmed from the codex skill's model table: Sol = complex work,
+    Terra = everyday at lower cost, Luna = repetitive structured work, lowest cost.
+    <b>Local lane (decided 2026-08-08): codex via the existing profile files (named in the Codex column)
+    + pi natively.</b> <b>*</b> claude→Ollama works via <code>ANTHROPIC_BASE_URL</code> (verified live) but is an
+    optional extension, not in the base matrix. Effort for codex local runs: <code>-c model_reasoning_effort</code>
+    overrides compose on top of profiles.
+  </p>
+
+  <h3>Effort levels — normalized across harnesses</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Normalized</th><th>Claude Code</th><th>Codex CLI</th><th>Pi</th><th>Role in the experiment</th></tr>
+    <tr><td><b>E1 low</b></td><td>low</td><td><code>low</code></td><td><code>low</code> (local: <code>minimal</code>)</td><td>the speed lane the skill is supposed to unlock</td></tr>
+    <tr><td><b>E2 medium</b></td><td>medium</td><td><code>medium</code> (default)</td><td><code>medium</code></td><td>the practical daily-driver setting</td></tr>
+    <tr><td><b>E3 high</b></td><td>high</td><td><code>high</code></td><td><code>high</code></td><td>the overthinking ceiling the baseline needs</td></tr>
+  </table></div>
+  <p class="cap">
+    Full scales for reference — codex: low · medium · high · xhigh · max · <em>ultra</em> (parallel subagents);
+    pi: off · minimal · low · medium · high · xhigh · max. The matrix pins E1–E3 for comparability;
+    the extremes aren't comparable across vendors and stay out (codex <code>ultra</code> changes the execution
+    model entirely). Results store both <code>effort_norm</code> and <code>effort_literal</code>.
+  </p>
+
+  <h3>Skill mode — provisioning per harness</h3>
+  <div class="grid3">
+    <div class="panel">
+      <h4>claude</h4>
+      <p><b>on:</b> <code>--plugin-dir C:\evals\plugins</code> under <code>--bare</code> (bare skips auto-discovery; the flag adds back exactly one controlled source).</p>
+      <p><b>off:</b> <code>--disable-slash-commands</code>, still under <code>--bare</code>.</p>
+    </div>
+    <div class="panel">
+      <h4>codex</h4>
+      <p><b>on:</b> <code>$env:CODEX_HOME = 'C:\evals\codex-home-skills'</code> — home contains <code>skills/&lt;name&gt;/SKILL.md</code> + auth + profiles.</p>
+      <p><b>off:</b> <code>codex-home-bare</code> — same auth + profiles, no skills dir. No flag exists; the directory <em>is</em> the switch.</p>
+    </div>
+    <div class="panel">
+      <h4>pi</h4>
+      <p><b>on:</b> <code>--skill C:\evals\skills\&lt;name&gt;</code> (explicit path include).</p>
+      <p><b>off:</b> <code>--no-skills</code>. Both always with <code>--no-context-files</code> so a stray AGENTS.md/CLAUDE.md can't contaminate either arm.</p>
+    </div>
+  </div>
+  <p class="cap" style="margin-top:10px">
+    <strong>Parity rule:</strong> the two arms differ only in skill presence — same prompt, same isolation flags,
+    same workspace shape. Codex gets two pre-built homes that are byte-identical except for <code>skills/</code>.
+  </p>
+
+  <h3>Command templates — one per cell type, verified syntax</h3>
+  <pre><code><span class="cmt"># claude · cloud · skill</span>
+claude -p --bare --no-session-persistence --output-format json `
+  --model claude-opus-5 --plugin-dir C:\evals\plugins <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># claude · cloud · no-skill</span>
+claude -p --bare --no-session-persistence --output-format json `
+  --model claude-opus-5 --disable-slash-commands <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># claude · local — Ollama serves an Anthropic-compatible /v1/messages; set per-process, never per-thread</span>
+$env:ANTHROPIC_BASE_URL = <span class="str">'http://localhost:11434'</span>; $env:ANTHROPIC_API_KEY = <span class="str">'ollama'</span>
+claude -p --bare --output-format json --model gemma4:12b <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># codex · cloud — skill arm selected by which CODEX_HOME the worker exported</span>
+codex e --ephemeral --skip-git-repo-check -C C:\evals\work\codex -s read-only `
+  --json -o last_message.txt -m gpt-5.6-sol -c model_reasoning_effort=<span class="str">"low"</span> <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># codex · local — existing profile files; -s danger-full-access when the task must run tools.</span>
+<span class="cmt"># user-verified base form: codex e --skip-git-repo-check --profile ollama-gemma -s danger-full-access "…"</span>
+codex e --ephemeral --skip-git-repo-check --profile ollama-gemma -s danger-full-access `
+  --json -o last_message.txt -c model_reasoning_effort=<span class="str">"low"</span> <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># pi · cloud · skill</span>
+pi -p --no-session --no-context-files --mode json `
+  --provider anthropic --model claude-haiku-4-5 --thinking low `
+  --skill C:\evals\skills\aws-cli <span class="str">"&lt;prompt&gt;"</span>
+
+<span class="cmt"># pi · local · no-skill</span>
+pi -p --no-session --no-context-files --mode json `
+  --model ollama/gemma4:12b --thinking minimal --no-skills <span class="str">"&lt;prompt&gt;"</span></code></pre>
+  <p class="cap">
+    The only unverified control left: claude's per-run effort mechanism (settings key vs flag) — the last
+    Phase 0 item. Everything else above is lifted from CLI.md as tested on this machine.
+  </p>
+</section>
+
+<section>
+  <span class="marker">03 · THE MATRIX</span>
+  <h2>Cell math</h2>
+  <p>
+    One <strong>cell</strong> = harness × model × effort × skill-mode. One <strong>run</strong> = cell × prompt × attempt.
+    Prompts come from the existing <code>evals/suites/*.json</code> (graded, one-shot, fresh session per attempt —
+    unchanged). With the pinned roster and one 10-prompt pilot suite:
+  </p>
+  <div class="tablewrap"><table>
+    <tr><th>Lane</th><th>Cells</th><th>× prompts</th><th>× attempts</th><th>Runs</th><th>Execution</th></tr>
+    <tr>
+      <td>Cloud</td>
+      <td class="num">(3 + 3 + 6) × 3 × 2 = 72</td>
+      <td class="num">10</td>
+      <td class="num">1</td>
+      <td class="num"><b>720</b></td>
+      <td>parallel, throttled per provider</td>
+    </tr>
+    <tr>
+      <td>Local (codex profiles + pi)</td>
+      <td class="num">3 × 2 × 2 × 2 = 24</td>
+      <td class="num">10</td>
+      <td class="num">1</td>
+      <td class="num"><b>240</b></td>
+      <td><span class="warn">strictly serial</span>; models grouped so each loads into VRAM once</td>
+    </tr>
+  </table></div>
+  <p class="cap">
+    Claude Code contributes 3 cloud models, Codex 3 (Sol/Terra/Luna), Pi bridges all 6; local models
+    run E1/E2 only (local "high thinking" mostly measures the GPU). The local lane's two harnesses on
+    identical models give the harness-tax readout for free: codex-vs-pi overhead on the same weights.
+  </p>
+</section>
+
+<section>
+  <span class="marker">04 · RUNNER</span>
+  <h2>Queue-fed PowerShell orchestrator</h2>
+  <p>
+    A <strong>SQLite database is the queue and the ledger</strong>: a seeding script expands
+    suites × matrix into one row per planned run (the exact CLI command pre-rendered);
+    a PowerShell 7 dispatcher drains the queue with a thread pool for cloud lanes and a single-threaded
+    lane for local models. Crash-safe by construction — re-running the dispatcher picks up
+    <code>status = queued|error</code> rows and never re-executes <code>done</code> ones.
+  </p>
+
+  <div class="diagram-wrap">
+    <svg viewBox="0 0 840 320" role="img" aria-label="Runner architecture: suites seed a SQLite queue, a PowerShell dispatcher fans out to throttled cloud workers and a serial local worker, results flow to JSONL, grading, CSV, and the dashboard">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" opacity="0.65"/>
+        </marker>
+      </defs>
+      <rect class="d-box" x="10" y="30" width="150" height="52" rx="3"/>
+      <text class="d-label" x="85" y="52" text-anchor="middle">suites/*.json</text>
+      <text class="d-sub" x="85" y="68" text-anchor="middle">+ matrix.config.json</text>
+
+      <rect class="d-box" x="10" y="130" width="150" height="52" rx="3"/>
+      <text class="d-label" x="85" y="152" text-anchor="middle">seed-queue.ps1</text>
+      <text class="d-sub" x="85" y="168" text-anchor="middle">expand cells × prompts</text>
+
+      <rect class="d-store" x="220" y="118" width="160" height="76" rx="3"/>
+      <text class="d-label" x="300" y="146" text-anchor="middle">evalq.sqlite</text>
+      <text class="d-sub" x="300" y="162" text-anchor="middle">runs: queued → running</text>
+      <text class="d-sub" x="300" y="176" text-anchor="middle">→ done | error</text>
+
+      <rect class="d-box" x="440" y="118" width="150" height="76" rx="3"/>
+      <text class="d-label" x="515" y="146" text-anchor="middle">dispatch.ps1</text>
+      <text class="d-sub" x="515" y="162" text-anchor="middle">PS7 thread pool</text>
+      <text class="d-sub" x="515" y="176" text-anchor="middle">child pwsh per run</text>
+
+      <rect class="d-hot" x="650" y="22" width="180" height="64" rx="3"/>
+      <text class="d-label" x="740" y="46" text-anchor="middle">cloud lane × N</text>
+      <text class="d-sub" x="740" y="62" text-anchor="middle">claude · codex · pi</text>
+      <text class="d-sub" x="740" y="75" text-anchor="middle">throttle per provider</text>
+
+      <rect class="d-hot" x="650" y="128" width="180" height="56" rx="3"/>
+      <text class="d-label" x="740" y="150" text-anchor="middle">local lane × 1</text>
+      <text class="d-sub" x="740" y="166" text-anchor="middle">ollama · serial · warm-up</text>
+
+      <rect class="d-store" x="650" y="232" width="180" height="56" rx="3"/>
+      <text class="d-label" x="740" y="254" text-anchor="middle">attempts.jsonl</text>
+      <text class="d-sub" x="740" y="270" text-anchor="middle">raw output + usage + timing</text>
+
+      <rect class="d-box" x="410" y="232" width="180" height="56" rx="3"/>
+      <text class="d-label" x="500" y="254" text-anchor="middle">grade.ps1</text>
+      <text class="d-sub" x="500" y="270" text-anchor="middle">expected-spec + LLM judge</text>
+
+      <rect class="d-box" x="180" y="232" width="170" height="56" rx="3"/>
+      <text class="d-label" x="265" y="254" text-anchor="middle">summary.csv</text>
+      <text class="d-sub" x="265" y="270" text-anchor="middle">docs/ dashboard</text>
+
+      <path class="d-arrow" style="color: var(--muted)" d="M 85 82 L 85 130"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 160 156 L 220 156"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 380 156 L 440 156"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 590 140 C 620 120, 620 70, 650 58"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 590 160 L 650 158"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 740 86 L 740 122"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 740 184 L 740 232"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 650 260 L 590 260"/>
+      <path class="d-arrow" style="color: var(--muted)" d="M 410 260 L 350 260"/>
+    </svg>
+  </div>
+
+  <div class="footgun">
+    <b>⚠ ENV VARS ARE PROCESS-WIDE — THE ONE CORRECTNESS RULE</b>
+    <ul>
+      <li>Three cell types are configured through environment variables: claude→Ollama (<code>ANTHROPIC_BASE_URL</code>), codex skill-arm (<code>CODEX_HOME</code>), and any provider key override. PS7 thread-parallelism (<code>ForEach-Object -Parallel</code>, <code>Start-ThreadJob</code>) shares one process environment — a thread flipping <code>ANTHROPIC_BASE_URL</code> would silently reroute every concurrent claude cloud run to localhost.</li>
+      <li>Rule: <strong>workers never mutate <code>$env:</code> in the pool</strong>. Every run executes in a child <code>pwsh</code> process (<code>invoke-run.ps1</code>) that sets its own env from queue columns. Threads only schedule; processes execute.</li>
+    </ul>
+  </div>
+
+  <h3>Queue schema (one row = one planned run)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Column group</th><th>Fields</th></tr>
+    <tr><td>Identity</td><td><code>run_id</code>, <code>suite</code>, <code>task_id</code>, <code>attempt</code></td></tr>
+    <tr><td>Cell key</td><td><code>harness</code>, <code>provider</code>, <code>model</code>, <code>effort_norm</code> (E1–E3), <code>effort_literal</code>, <code>skill_mode</code>, <code>lane</code>, <code>sandbox</code> (codex <code>-s</code>: read-only for knowledge tasks, danger-full-access for tool-exec tasks — always identical across the skill/no-skill arms)</td></tr>
+    <tr><td>Execution</td><td><code>command</code> (fully rendered), <code>env_json</code> (per-run env map), <code>workspace</code>, <code>status</code>, <code>claimed_by</code>, <code>started_at</code>, <code>finished_at</code>, <code>exit_code</code></td></tr>
+    <tr><td>Measures</td><td><code>wall_ms</code>, <code>tokens_in</code>, <code>tokens_out</code>, <code>tokens_cache_read</code>, <code>cost_usd</code>, <code>output_path</code>, <code>grade</code>, <code>graded_by</code></td></tr>
+  </table></div>
+  <p class="cap">
+    <code>command</code> + <code>env_json</code> together are the reproducible "training command" — the dispatcher
+    executes rows, it never composes them. The database <em>is</em> the experiment log.
+  </p>
+
+  <h3>Strategy 0 — command templating (the codex -p special case lives here)</h3>
+  <pre><code><span class="kw">function</span> New-CellCommand {
+    <span class="kw">param</span>($Cell)   <span class="cmt"># harness, model, effortLiteral, skillMode, skillPath, prompt, workdir</span>
+    $q = <span class="str">'"'</span> + ($Cell.prompt -replace <span class="str">'"'</span>, <span class="str">'\"'</span>) + <span class="str">'"'</span>
+    <span class="kw">switch</span> ($Cell.harness) {
+        <span class="str">'claude'</span> {
+            $f = @(<span class="str">'-p'</span>,<span class="str">'--bare'</span>,<span class="str">'--no-session-persistence'</span>,<span class="str">'--output-format'</span>,<span class="str">'json'</span>,<span class="str">'--model'</span>,$Cell.model)
+            $f += <span class="kw">if</span> ($Cell.skillMode -eq <span class="str">'skill'</span>) { @(<span class="str">'--plugin-dir'</span>,<span class="str">'C:\evals\plugins'</span>) }
+                  <span class="kw">else</span>                              { <span class="str">'--disable-slash-commands'</span> }
+            <span class="str">"claude $($f -join ' ') $q"</span>
+        }
+        <span class="str">'codex'</span> {   <span class="cmt"># NB: -p here means --profile, never --print; skill arm = CODEX_HOME in env_json</span>
+            $f = @(<span class="str">'e'</span>,<span class="str">'--ephemeral'</span>,<span class="str">'--skip-git-repo-check'</span>,<span class="str">'-C'</span>,$Cell.workdir,
+                   <span class="str">'-s'</span>,$Cell.sandbox,<span class="str">'--json'</span>,<span class="str">'-o'</span>,<span class="str">'last_message.txt'</span>)
+            $f += <span class="kw">if</span> ($Cell.lane -eq <span class="str">'local'</span>) { @(<span class="str">'--profile'</span>,$Cell.codexProfile) }
+                  <span class="kw">else</span>                           { @(<span class="str">'-m'</span>,$Cell.model) }
+            $f += @(<span class="str">'-c'</span>,<span class="str">"model_reasoning_effort=`"$($Cell.effortLiteral)`""</span>)  <span class="cmt"># composes over profiles too</span>
+            <span class="str">"codex $($f -join ' ') $q"</span>
+        }
+        <span class="str">'pi'</span> {      <span class="cmt"># default provider is google — ALWAYS pass provider or provider/model</span>
+            $f = @(<span class="str">'-p'</span>,<span class="str">'--no-session'</span>,<span class="str">'--no-context-files'</span>,<span class="str">'--mode'</span>,<span class="str">'json'</span>,
+                   <span class="str">'--model'</span>,$Cell.model,<span class="str">'--thinking'</span>,$Cell.effortLiteral)
+            $f += <span class="kw">if</span> ($Cell.skillMode -eq <span class="str">'skill'</span>) { @(<span class="str">'--skill'</span>,$Cell.skillPath) }
+                  <span class="kw">else</span>                              { <span class="str">'--no-skills'</span> }
+            <span class="str">"pi $($f -join ' ') $q"</span>
+        }
+    }
+}</code></pre>
+
+  <h3>Strategy 1 — seeding the queue</h3>
+  <pre><code><span class="cmt"># seed-queue.ps1 — expand matrix.config.json × suites into evalq.sqlite (PSSQLite module)</span>
+Import-Module PSSQLite
+$cfg = Get-Content .\matrix.config.json | ConvertFrom-Json
+$db  = <span class="str">'.\evalq.sqlite'</span>
+Invoke-SqliteQuery -DataSource $db -Query (Get-Content .\schema.sql -Raw)
+
+$rows = <span class="kw">foreach</span> ($cell <span class="kw">in</span> $cfg.cells) {          <span class="cmt"># cells pre-expanded: harness×model×effort×mode</span>
+  <span class="kw">foreach</span> ($suiteName <span class="kw">in</span> $cfg.suites) {
+    $suite = Get-Content <span class="str">"..\suites\$suiteName.json"</span> | ConvertFrom-Json
+    <span class="kw">foreach</span> ($t <span class="kw">in</span> $suite.tasks) {
+      <span class="kw">for</span> ($a = 1; $a -le $cfg.attempts; $a++) {
+        [pscustomobject]@{
+          run_id     = <span class="str">'{0}.{1}.{2}.{3}.{4}.a{5}'</span> -f $cell.harness,$cell.model,$cell.effort_norm,$cell.skill_mode,$t.id,$a
+          harness    = $cell.harness;  provider = $cell.provider; model = $cell.model
+          effort_norm = $cell.effort_norm; effort_literal = $cell.effort_literal
+          skill_mode = $cell.skill_mode;   lane = $cell.lane
+          suite = $suiteName; task_id = $t.id; attempt = $a
+          command  = New-CellCommand ($cell + @{ prompt = $t.prompt })
+          env_json = ($cell.env | ConvertTo-Json -Compress)   <span class="cmt"># CODEX_HOME / ANTHROPIC_BASE_URL / keys</span>
+          workspace = <span class="str">"C:\evals\work\$($cell.harness)"</span>; status = <span class="str">'queued'</span>
+        }
+      }
+    }
+  }
+}
+$rows | ForEach-Object { Invoke-SqliteQuery -DataSource $db -Query $insertSql -SqlParameters $_ }
+Write-Host <span class="str">"$($rows.Count) runs queued"</span></code></pre>
+
+  <h3>Strategy 2 — flat thread pool (simplest; single-provider sweeps)</h3>
+  <pre><code><span class="cmt"># dispatch-flat.ps1 — ForEach-Object -Parallel; one global throttle. Right answer when the</span>
+<span class="cmt"># sweep is one provider (no per-provider fairness needed). Each run still executes in a CHILD pwsh.</span>
+$queued = Invoke-SqliteQuery -DataSource $db -Query <span class="str">"SELECT run_id FROM runs WHERE status='queued' AND lane='cloud'"</span>
+$queued | ForEach-Object -Parallel {
+    $run = Claim-Run -Db $using:db -RunId $_.run_id      <span class="cmt"># atomic: UPDATE…WHERE status='queued' RETURNING</span>
+    <span class="kw">if</span> (-not $run) { <span class="kw">return</span> }                            <span class="cmt"># another worker got it — fine</span>
+    $sw  = [Diagnostics.Stopwatch]::StartNew()
+    $raw = &amp; pwsh -NoProfile -File .\invoke-run.ps1 -Db $using:db -RunId $run.run_id
+    $sw.Stop()
+    Complete-Run -Db $using:db -RunId $run.run_id -WallMs $sw.ElapsedMilliseconds -Raw ($raw -join <span class="str">"`n"</span>)
+} -ThrottleLimit 6</code></pre>
+
+  <h3>Strategy 3 — per-provider slot pool (the full sweep)</h3>
+  <pre><code><span class="cmt"># dispatch-pool.ps1 — Start-ThreadJob with per-provider caps + live progress + stall detection.</span>
+<span class="cmt"># Use for the mixed sweep: anthropic and openai fill independently; neither starves the other.</span>
+$caps = @{ anthropic = 4; openai = 4 }                   <span class="cmt"># per-provider concurrency</span>
+$jobs = @{}
+<span class="kw">while</span> ($true) {
+    <span class="kw">foreach</span> ($p <span class="kw">in</span> $caps.Keys) {                         <span class="cmt"># fill free slots per provider</span>
+        $running = @($jobs.Values | Where-Object { $_.Provider -eq $p -and $_.Job.State -eq <span class="str">'Running'</span> })
+        <span class="kw">for</span> ($i = $running.Count; $i -lt $caps[$p]; $i++) {
+            $run = Claim-NextRun -Db $db -Provider $p -Lane cloud
+            <span class="kw">if</span> (-not $run) { <span class="kw">break</span> }
+            $jobs[$run.run_id] = @{ Provider = $p; Started = Get-Date
+                Job = Start-ThreadJob -ArgumentList $db, $run.run_id {
+                    <span class="kw">param</span>($db, $id)
+                    $sw  = [Diagnostics.Stopwatch]::StartNew()
+                    $raw = &amp; pwsh -NoProfile -File .\invoke-run.ps1 -Db $db -RunId $id   <span class="cmt"># child process</span>
+                    $sw.Stop()
+                    @{ WallMs = $sw.ElapsedMilliseconds; Raw = ($raw -join <span class="str">"`n"</span>) }
+                } }
+        }
+    }
+    <span class="kw">foreach</span> ($id <span class="kw">in</span> @($jobs.Keys)) {                     <span class="cmt"># harvest + timeout enforcement</span>
+        $e = $jobs[$id]
+        <span class="kw">if</span> ($e.Job.State -in <span class="str">'Completed'</span>,<span class="str">'Failed'</span>) {
+            $res = Receive-Job $e.Job; Remove-Job $e.Job
+            Complete-Run -Db $db -RunId $id -WallMs $res.WallMs -Raw $res.Raw
+            $jobs.Remove($id)
+        } <span class="kw">elseif</span> ((Get-Date) - $e.Started -gt [timespan]::FromMinutes(10)) {
+            Stop-Job $e.Job; Remove-Job $e.Job -Force
+            Fail-Run -Db $db -RunId $id -Reason <span class="str">'timeout'</span>; $jobs.Remove($id)
+        }
+    }
+    $depth = Get-QueueDepth -Db $db -Lane cloud
+    Write-Progress -Activity <span class="str">'cloud sweep'</span> -Status <span class="str">"$depth queued / $($jobs.Count) running"</span>
+    <span class="kw">if</span> (-not $jobs.Count -and $depth -eq 0) { <span class="kw">break</span> }
+    Start-Sleep -Milliseconds 250
+}</code></pre>
+
+  <h3>Strategy 4 — the per-run child process (where env vars are allowed)</h3>
+  <pre><code><span class="cmt"># invoke-run.ps1 — one run, one clean process. The ONLY place $env: is ever set.</span>
+<span class="kw">param</span>($Db, $RunId)
+$run = Get-Run -Db $Db -RunId $RunId
+<span class="kw">foreach</span> ($kv <span class="kw">in</span> ($run.env_json | ConvertFrom-Json).PSObject.Properties) {
+    Set-Item <span class="str">"env:$($kv.Name)"</span> $kv.Value    <span class="cmt"># e.g. CODEX_HOME=C:\evals\codex-home-skills</span>
+}                                            <span class="cmt">#      ANTHROPIC_BASE_URL=http://localhost:11434</span>
+Set-Location $run.workspace
+Invoke-Expression $run.command               <span class="cmt"># stdout (JSON / JSONL) returns to the pool worker</span>
+<span class="kw">exit</span> 0                                       <span class="cmt"># codex exit codes are undocumented — never grade on $LASTEXITCODE</span></code></pre>
+
+  <h3>Strategy 5 — local lane: serial with VRAM warm-up</h3>
+  <pre><code><span class="cmt"># dispatch-local.ps1 — one run at a time, grouped by model so each loads into VRAM once.</span>
+$models = Invoke-SqliteQuery -DataSource $db -Query <span class="str">"
+  SELECT DISTINCT model FROM runs WHERE status='queued' AND lane='local' ORDER BY model"</span>
+<span class="kw">foreach</span> ($m <span class="kw">in</span> $models.model) {
+    &amp; ollama run $m --keepalive 45m <span class="str">"ok"</span> | Out-Null        <span class="cmt"># warm-up: load before the clock ever starts</span>
+    <span class="kw">while</span> ($run = Claim-NextRun -Db $db -Lane local -Model $m) {
+        $sw  = [Diagnostics.Stopwatch]::StartNew()
+        $raw = &amp; pwsh -NoProfile -File .\invoke-run.ps1 -Db $db -RunId $run.run_id
+        $sw.Stop()
+        Complete-Run -Db $db -RunId $run.run_id -WallMs $sw.ElapsedMilliseconds -Raw ($raw -join <span class="str">"`n"</span>)
+    }
+    &amp; ollama stop $m                                        <span class="cmt"># evict before the next model claims the GPU</span>
+}</code></pre>
+
+  <h3>Strategy 6 — serial timing confirmation (the P1 numbers)</h3>
+  <pre><code><span class="cmt"># timing-pass.ps1 — headline cells re-run at concurrency 1, N repeats, median reported.</span>
+<span class="cmt"># The parallel sweep decides WHICH cells win; this pass decides what number gets quoted.</span>
+<span class="kw">param</span>([string[]]$CellIds, [int]$Repeats = 3)
+<span class="kw">foreach</span> ($cellId <span class="kw">in</span> $CellIds) {
+    <span class="kw">foreach</span> ($run <span class="kw">in</span> Get-CellRuns -Db $db -CellId $cellId) {
+        $samples = 1..$Repeats | ForEach-Object {
+            $sw = [Diagnostics.Stopwatch]::StartNew()
+            &amp; pwsh -NoProfile -File .\invoke-run.ps1 -Db $db -RunId $run.run_id | Out-Null
+            $sw.Stop(); $sw.ElapsedMilliseconds
+        }
+        $median = ($samples | Sort-Object)[[math]::Floor($samples.Count / 2)]
+        Add-TimingSample -Db $db -RunId $run.run_id -MedianMs $median -Samples ($samples -join <span class="str">','</span>)
+    }
+}</code></pre>
+</section>
+
+<section>
+  <span class="marker">05 · MEASUREMENT</span>
+  <h2>Metrics, parsing, grading</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Metric</th><th>Source</th><th>Feeds</th></tr>
+    <tr><td><b>Wall-clock</b></td><td>runner stopwatch (+ harness <code>duration_ms</code> where emitted)</td><td>P1 speedup — serial-pass medians only</td></tr>
+    <tr><td><b>Tokens</b></td><td>per-harness JSON (mapping below)</td><td>P2 effort-collapse — the overthinking measure</td></tr>
+    <tr><td><b>Accuracy</b></td><td>existing <code>expected</code>-spec grader; LLM judge for prose answers (fixed judge model, blind to cell)</td><td>all three predictions</td></tr>
+    <tr><td><b>Attempts-to-correct</b></td><td>attempt number of first pass (fresh sessions, no coaching)</td><td>reliability per cell</td></tr>
+    <tr><td><b>Cost</b></td><td>claude reports <code>total_cost_usd</code> natively; codex/pi via token × price table; local reports tokens/sec instead</td><td>cost-per-correct-answer</td></tr>
+  </table></div>
+
+  <h3>Per-harness result parsing — verified field maps</h3>
+  <pre><code><span class="kw">function</span> Read-RunResult {
+    <span class="kw">param</span>($Run, [string]$Raw)
+    <span class="kw">switch</span> ($Run.harness) {
+        <span class="str">'claude'</span> {   <span class="cmt"># --output-format json → one object</span>
+            $j = $Raw | ConvertFrom-Json
+            @{ answer = $j.result
+               tokens_in = $j.usage.input_tokens;  tokens_out = $j.usage.output_tokens
+               cache_read = $j.usage.cache_read_input_tokens
+               cost_usd = $j.total_cost_usd;       api_ms = $j.duration_ms }
+        }
+        <span class="str">'codex'</span> {    <span class="cmt"># --json → JSONL events; answer from the -o file; tokens from turn.completed</span>
+            $turn = $Raw -split <span class="str">"`n"</span> | Where-Object { $_ } | ForEach-Object { $_ | ConvertFrom-Json } |
+                    Where-Object type -eq <span class="str">'turn.completed'</span> | Select-Object -Last 1
+            @{ answer = Get-Content (Join-Path $Run.workspace <span class="str">'last_message.txt'</span>) -Raw
+               tokens_in = $turn.usage.input_tokens; tokens_out = $turn.usage.output_tokens
+               cache_read = $turn.usage.cached_input_tokens }
+        }
+        <span class="str">'pi'</span> {       <span class="cmt"># --mode json → session header + typed events; message_update is DELTA-ONLY,</span>
+                     <span class="cmt"># so take message_end (complete message), never accumulate by hand unless streaming</span>
+            $end = $Raw -split <span class="str">"`n"</span> | Where-Object { $_ } | ForEach-Object { $_ | ConvertFrom-Json } |
+                   Where-Object type -eq <span class="str">'message_end'</span> | Select-Object -Last 1
+            @{ answer = $end.message.content }
+        }
+    }
+}</code></pre>
+  <p class="cap">
+    Raw stdout is archived per run alongside the parsed fields, so a mapping bug is recoverable
+    without re-spending tokens. Codex exit codes are undocumented (per its own skill corpus) —
+    outcomes are graded from the answer artifact, never from <code>$LASTEXITCODE</code>.
+  </p>
+
+  <h3>The readout that proves it</h3>
+  <ul>
+    <li><strong>Headline:</strong> per harness × model, a two-column card — <em>best no-skill config</em> vs <em>fastest skill config at ≥ that accuracy</em> — with the wall-clock delta as the big number. That's P1 in one glance.</li>
+    <li><strong>Effort-collapse chart:</strong> accuracy vs effort (E1→E3), two lines per model (skill / no-skill). P2 is the skill line running flat while the no-skill line climbs.</li>
+    <li><strong>Equalizer table:</strong> small-model + skill rows (Haiku 4.5, Luna, locals) ranked against flagship no-skill rows (P3).</li>
+    <li><strong>Harness tax:</strong> same local model on codex vs pi — overhead attributable to the harness itself, free from the local lane's design.</li>
+    <li>All of it lands in the existing <code>docs/</code> dashboard as a new page fed by <code>summary.csv</code>.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="marker">06 · BUILD PLAN</span>
+  <h2>Phasing</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Phase</th><th>Deliverable</th><th>Status / proves</th></tr>
+    <tr><td class="num">0</td><td>CLI capability check: flags, JSON schemas, effort controls</td><td><span class="ok">mostly done</span> via CLI.md (verified on HUFFTECH01) + ai plugin skills; remaining: claude per-run effort mechanism</td></tr>
+    <tr><td class="num">1</td><td><code>matrix.config.json</code> + <code>seed-queue.ps1</code> + SQLite schema + <code>New-CellCommand</code></td><td>queue seeds correctly, sparse matrix renders</td></tr>
+    <tr><td class="num">2</td><td><code>invoke-run.ps1</code> + flat dispatcher on ONE cell pair (claude, one model, E1+E3, skill/no-skill, one suite)</td><td>end-to-end plumbing + parity rule + parsing</td></tr>
+    <tr><td class="num">3</td><td>Pool dispatcher, full cloud sweep, timing pass, grading</td><td>P1, P2 on cloud models</td></tr>
+    <tr><td class="num">4</td><td>Local lane (codex profiles + pi, warm-up/evict discipline)</td><td>P3 + harness tax</td></tr>
+    <tr><td class="num">5</td><td>Dashboard page + write-up</td><td>the shareable result</td></tr>
+  </table></div>
+
+  <h3 id="q">07 · Open questions for sign-off</h3>
+  <ol class="qa">
+    <li><strong>Model roster</strong> — <span class="yes">resolved</span>: GPT-5.6 Sol/Terra/Luna (<code>gpt-5.6-*</code>, tier order confirmed from the codex skill); local gemma4-12b, glm-4.7-flash, qwen3.6-27b.</li>
+    <li><strong>Local lane scope</strong> — <span class="yes">resolved 2026-08-08</span>: codex (via <code>ollama-*</code> profiles, <code>codex e</code> short form, <code>-s danger-full-access</code> for tool-exec tasks) + pi. Claude-local stays an optional extension.</li>
+    <li><strong>Pilot suite</strong> — <code>cli-scripting</code> + <code>cloud-platforms</code> (both just refreshed to citation-grade, so skill quality is a known quantity)?</li>
+    <li><strong>Attempts per run</strong> — 1 for the sweep, 3 for headline cells (recommended), or 3 everywhere (3× cost)?</li>
+    <li><strong>Judge</strong> — deterministic <code>expected</code>-spec grader primary, LLM judge only for prose tasks; which judge model?</li>
+    <li><strong>Budget cap</strong> — a per-sweep USD ceiling the seeder enforces by pruning cells (which axis gets cut first)?</li>
+  </ol>
+</section>
+
+<footer>
+  domain-expert marketplace · cross-harness eval design v0.2 · sources: train-gemma4/CLI.md (flags verified 2026-08-08, HUFFTECH01),
+  plugins/ai/skills/{claude-code,codex,pi} (corpus fetched 2026-08-05), evals/README.md, evals/run-evals.ps1 · local file — not published anywhere.
+</footer>
+</div>

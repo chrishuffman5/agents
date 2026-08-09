@@ -17,3 +17,7 @@ training/
 
 # Research workspaces (intermediate research used to build skills)
 research/
+
+# Cross-harness eval matrix run artifacts
+evals/matrix/*.sqlite
+evals/matrix/report/results.js

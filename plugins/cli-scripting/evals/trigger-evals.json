@@ -16,8 +16,8 @@
     {"id": "nodejs-pos", "skill": "nodejs", "prompt": "I want a Node.js CLI tool using parseArgs that reads a CSV and streams it to JSON with node:fs/promises.", "should_trigger": true},
     {"id": "nodejs-neg", "skill": "nodejs", "prompt": "How should I structure middleware in my Express app for request logging?", "should_trigger": false},
 
-    {"id": "aws-cli-pos", "skill": "aws-cli", "prompt": "What's the aws cli command with --query to get the public IP of an EC2 instance by tag, output as text for a script variable?", "should_trigger": true},
-    {"id": "aws-cli-neg", "skill": "aws-cli", "prompt": "Should we go multi-account with AWS Organizations or keep everything in one account for our new landing zone?", "should_trigger": false},
+    {"id": "aws-cli-pos", "skill": "aws-cli", "prompt": "Our CI role keeps expiring mid-deploy — what's the right aws cli setup to assume the deploy role and capture the account ID into a script variable?", "should_trigger": true},
+    {"id": "aws-cli-neg", "skill": "aws-cli", "prompt": "Design the permission boundary and SCP structure so team leads can create IAM roles without escalating their own privileges.", "should_trigger": false},
 
     {"id": "azure-cli-pos", "skill": "azure-cli", "prompt": "Give me the az cli commands to create a resource group, VNet, and NSG, with --no-wait for the long-running parts.", "should_trigger": true},
     {"id": "azure-cli-neg", "skill": "azure-cli", "prompt": "What's the recommended landing zone architecture for a new Azure enterprise deployment?", "should_trigger": false},

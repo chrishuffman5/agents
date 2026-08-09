@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "suite": "suites/aws.json",
+  "attempts": 1,
+  "skillModes": ["skill", "no-skill"],
+  "timeoutMinutes": 10,
+  "paths": {
+    "workRoot": "C:\\evals\\work",
+    "pluginDir": "C:\\evals\\plugins",
+    "skillsDir": "C:\\evals\\skills",
+    "codexHomeSkills": "C:\\evals\\codex-home-skills",
+    "codexHomeBare": "C:\\evals\\codex-home-bare",
+    "secretsFile": "C:\\evals\\secrets.json"
+  },
+  "skillPaths": {
+    "aws-cli": "C:\\evals\\skills\\aws-cli",
+    "aws": "C:\\evals\\skills\\aws"
+  },
+  "throttle": { "anthropic": 4, "openai": 4 },
+  "pricing": {
+    "_comment": "USD per 1M tokens: [input, cached-input, output]. claude reports cost_usd natively (used as-is); codex/pi costs are ESTIMATED from these rates. null = rates unknown -> reports say 'rates not configured' rather than guessing. Fill gpt-5.6 rates from learn.chatgpt.com/docs/pricing.",
+    "gpt-5.6-sol": null,
+    "gpt-5.6-terra": null,
+    "gpt-5.6-luna": null,
+    "claude-opus-5": null,
+    "claude-sonnet-5": null,
+    "claude-haiku-4-5": null
+  },
+  "lanes": [
+    {
+      "harness": "claude", "provider": "anthropic", "lane": "cloud",
+      "models": [
+        { "id": "claude-opus-5" },
+        { "id": "claude-sonnet-5" },
+        { "id": "claude-haiku-4-5" }
+      ],
+      "efforts": { "E1": "low", "E2": "medium", "E3": "high" },
+      "env": { "CLAUDE_CONFIG_DIR": "C:\\evals\\claude-home" }
+    },
+    {
+      "harness": "codex", "provider": "openai", "lane": "cloud",
+      "models": [
+        { "id": "gpt-5.6-sol" },
+        { "id": "gpt-5.6-terra" },
+        { "id": "gpt-5.6-luna" }
+      ],
+      "efforts": { "E1": "low", "E2": "medium", "E3": "high" },
+      "sandbox": "read-only",
+      "env": { "CODEX_HOME": "@skillmode:codexHome" }
+    },
+    {
+      "harness": "pi", "provider": "anthropic", "lane": "cloud",
+      "models": [
+        { "id": "anthropic/claude-opus-5" },
+        { "id": "anthropic/claude-sonnet-5" },
+        { "id": "anthropic/claude-haiku-4-5" }
+      ],
+      "efforts": { "E1": "low", "E2": "medium", "E3": "high" }
+    },
+    {
+      "harness": "pi", "provider": "openai", "lane": "cloud",
+      "models": [
+        { "id": "openai/gpt-5.6-sol" },
+        { "id": "openai/gpt-5.6-terra" },
+        { "id": "openai/gpt-5.6-luna" }
+      ],
+      "efforts": { "E1": "low", "E2": "medium", "E3": "high" }
+    },
+    {
+      "harness": "codex", "provider": "ollama", "lane": "local",
+      "models": [
+        { "id": "gemma4:12b", "profile": "ollama-gemma" },
+        { "id": "glm-4.7-flash:q4_K_M-32k", "profile": "ollama-glm" },
+        { "id": "qwen3.6:27b", "profile": "ollama-qwen27b" }
+      ],
+      "efforts": { "E1": "low", "E2": "medium" },
+      "sandbox": "danger-full-access",
+      "env": { "CODEX_HOME": "@skillmode:codexHome" }
+    },
+    {
+      "harness": "pi", "provider": "ollama", "lane": "local",
+      "models": [
+        { "id": "ollama/gemma4:12b" },
+        { "id": "ollama/glm-4.7-flash:q4_K_M-32k" },
+        { "id": "ollama/qwen3.6:27b" }
+      ],
+      "efforts": { "E1": "minimal", "E2": "medium" }
+    }
+  ]
+}

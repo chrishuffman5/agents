@@ -1,6 +1,6 @@
 # AWS Compute Reference
 
-> EC2, Lambda, ECS, EKS, Fargate, Auto Scaling, right-sizing. Prices are US East (N. Virginia) on-demand.
+> EC2, Lambda, ECS, EKS, Fargate, Auto Scaling, right-sizing, edge/hybrid compute. Prices are US East (N. Virginia) on-demand and are PRICE-VOLATILE unless flagged as a structural fact.
 
 ---
 
@@ -8,41 +8,47 @@
 
 ### Instance Family Decision Tree
 
-| Family | Prefix | Choose When | Typical Workloads |
-|--------|--------|-------------|-------------------|
-| General Purpose | M, T | No single resource dominates; balanced CPU/memory | Web servers, app servers, small-to-mid DBs, dev/test |
-| Compute Optimized | C | CPU-bound, highest clock or core density | Batch processing, HPC, ML inference, media encoding, game servers |
-| Memory Optimized | R, X, z | Large in-memory datasets, high mem:CPU ratio | In-memory DBs (Redis, SAP HANA), big-data analytics |
-| Storage Optimized | I, D, H | High sequential/random IOPS or throughput to local storage | Data warehousing, distributed file systems, HDFS/Kafka |
-| Accelerated Computing | P, G, Inf, Trn, DL | GPU/custom silicon for parallel floating-point or inference | ML training (P5), graphics (G5), inference (Inf2), training (Trn1) |
-| HPC Optimized | Hpc | Tightly coupled HPC with EFA networking | CFD, molecular dynamics, weather modeling |
+> Source: https://aws.amazon.com/ec2/instance-types/ (official)
 
-### Burstable (T family) Guidance
-
-T instances (t3, t4g) use CPU credits. Suitable ONLY when average CPU is below baseline (20-40%). If you consistently exhaust credits, switch to M-family -- unlimited mode on T instances often costs more than an equivalently sized M instance. Monitor `CPUCreditBalance` CloudWatch metric.
+| Family | Prefix | Choose when | Typical workloads |
+|---|---|---|---|
+| General Purpose | M, T | No single resource dominates | Web/app servers, small-to-mid DBs, dev/test |
+| Compute Optimized | C | CPU-bound, high clock or core density | Batch, HPC, ML inference, media encoding, game servers |
+| Memory Optimized | R, X, z | Large in-memory datasets | In-memory DBs, SAP HANA, big-data analytics |
+| Storage Optimized | I, D, H | High local-disk IOPS or throughput | Data warehousing, distributed filesystems, Kafka |
+| Accelerated Computing | P, G, Inf, Trn, DL | GPU or custom silicon | ML training (P5, Trn2), graphics (G5), inference (Inf2) |
+| HPC Optimized | Hpc | Tightly coupled HPC with EFA | CFD, molecular dynamics, weather modeling |
 
 ### Generation Strategy
 
-**Always use the latest generation.** Each delivers 20-40% better price/performance with zero application changes.
+> Source: https://aws.amazon.com/about-aws/whats-new/2024/07/amazon-ec2-r8g-instances-aws-graviton4-generally-available/, https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-ec2-c8g-m8g-instances/, https://aws.amazon.com/ec2/instance-types/m8g/, https://www.aboutamazon.com/news/aws/aws-graviton-5-cpu-amazon-ec2, https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-ec2-trn2-instances-available, https://aws.amazon.com/ec2/instance-types/trn2/ (official)
 
-Current latest (early 2025):
-- General: **M7i** (Intel), **M7g** (Graviton3), **M7a** (AMD)
-- Compute: **C7i** (Intel), **C7g** (Graviton3), **C7a** (AMD)
-- Memory: **R7i** (Intel), **R7g** (Graviton3), **R8g** (Graviton4)
-- Accelerated: **P5** (H100), **Inf2** (Inferentia2), **Trn1/Trn2** (Trainium)
+**Use the latest generation available in your Region.** Each generation delivers materially better price/performance with no application change.
+
+- **Graviton4 (`8g`) is the safe default baseline.** R8g reached GA July 9, 2024 with up to 30% better performance than Graviton3-based R7g (30% faster web applications, 40% faster databases, 45% faster large Java applications); R8g scales 1-192 vCPU and 8 GB-1,536 GB, with R8gd (local NVMe), R8gn (network-optimized), and R8gb (storage-optimized) variants. C8g and M8g reached GA September 25, 2024 with "up to 30% better performance and larger instance sizes with up to 3x more vCPUs and memory than" M7g.
+- **Graviton5 (`9g`) is the new frontier.** M9g/M9gd reached GA June 10, 2026 (C9g/R9g rolling out): 192 cores, 3 nm, 2.6x more L3 cache per core than Graviton4, DDR5-8800, PCIe Gen 6. Versus Graviton4: up to 25% better overall compute, 35% faster web apps, 35% faster ML inference, 30% faster databases, 15% higher network bandwidth, 20% higher EBS bandwidth.
+- **Accelerated:** P5 (H100), Inf2 (Inferentia2), **Trn2 GA December 3, 2024** — Trn2 UltraServers pair 64 Trainium2 chips for up to 83.2 petaflops FP8, and the Trn2 instance page states "30-40% better price performance than GPU-based EC2 P5e and P5en instances."
 
 ### Graviton (ARM) vs x86
 
-Graviton delivers **20-40% better price/performance** than comparable x86:
+> Source: https://aws.amazon.com/ec2/instance-types/graviton/ (official)
+
+AWS's own framing splits cost and performance rather than merging them: **up to 20% lower cost** than comparable x86 instances, **up to 30-40% better performance** on compute-bound workloads (databases, Java), and **up to 60% less energy**.
 
 | Aspect | Graviton (ARM) | x86 (Intel/AMD) |
-|--------|---------------|-----------------|
-| Price/performance | 20-40% better | Baseline |
-| Compatibility | Most Linux, interpreted languages (Python, Node, Java, .NET 6+) | Universal |
-| When NOT to use | Windows, legacy x86-only binaries, x86 SIMD dependencies | -- |
-| Instance suffix | `g` (m7g, c7g, r7g) | `i` (Intel) or `a` (AMD) |
+|---|---|---|
+| Cost | Up to 20% lower | Baseline |
+| Compatibility | Most Linux, Python, Node, Java, .NET 6+ | Universal |
+| Do not use for | Windows, x86-only binaries, x86 SIMD dependencies | -- |
+| Suffix | `g` (m8g, c8g, r8g) | `i` (Intel), `a` (AMD) |
 
-**Decision rule:** Default to Graviton. Only use x86 when you have a hard x86 dependency.
+**Rule:** default to Graviton; require a stated hard x86 dependency to opt out. Graviton has no Windows support — a Windows-containing fleet is an automatic disqualifier.
+
+### Burstable (T family)
+
+> Source: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html (official)
+
+T instances run on CPU credits and suit workloads averaging below baseline (roughly 20-40% CPU). **T4g (Graviton2) is the current default choice** — AWS states up to 40% higher price/performance and 20% lower cost than T3, and it is Free Tier eligible for accounts created after July 15, 2025 (alongside t3.micro/small). T instances can save up to 15% versus M instances for suitable workloads. Monitor `CPUCreditBalance`; if credits are consistently exhausted, move to M — sustained unlimited-mode surcharges often exceed an equivalent M instance.
 
 ---
 
@@ -50,148 +56,166 @@ Graviton delivers **20-40% better price/performance** than comparable x86:
 
 ### Reserved Instances
 
-| Term | Payment | Savings vs On-Demand |
-|------|---------|---------------------|
-| 1-year No Upfront | Monthly | ~36% |
-| 1-year All Upfront | Pay now | ~42% |
-| 3-year No Upfront | Monthly | ~50% |
-| 3-year All Upfront | Pay now | ~60% |
+> Source: https://aws.amazon.com/ec2/pricing/reserved-instances/ (official)
+
+Terms are 1 or 3 years; payment options are No Upfront, Partial Upfront, All Upfront. Discounts differ by RI type and are PRICE-VOLATILE:
+
+- **Standard RIs** — up to ~40% (1 year), up to ~60% (3 year), maximum "up to 72%". Cannot change instance family.
+- **Convertible RIs** — up to ~31% (1 year), up to ~54% (3 year), maximum "up to 66%". Can be exchanged for a different family/OS/tenancy.
+
+Treat these as materially different products; the flexibility premium is the price gap.
 
 ### Savings Plans
 
-| Plan Type | Flexibility | Savings |
-|-----------|------------|---------|
-| Compute Savings Plan | Any instance family, size, OS, region, tenancy + Fargate + Lambda | Up to 66% (3yr all upfront) |
-| EC2 Instance Savings Plan | Any size within family+region | Up to 72% (3yr all upfront) |
+> Source: https://aws.amazon.com/savingsplans/compute-pricing/ (official)
 
-**Recommendation:** Prefer Compute Savings Plans over RIs for most organizations. Nearly the same savings with far greater flexibility. Use EC2 Instance Savings Plans only when certain about family and region.
+| Plan | Flexibility | Max discount |
+|---|---|---|
+| Compute Savings Plan | Any EC2 family/size/AZ/Region/OS/tenancy, **plus Fargate and Lambda** | Up to 66% (3yr all-upfront) |
+| EC2 Instance Savings Plan | Any size/AZ/OS/tenancy within one family in one Region | Up to 72% (3yr all-upfront) |
 
-### Spot Instances (Up to 90% Savings)
+Prefer Compute Savings Plans for most organizations — you can move EC2 workloads onto Fargate without losing the discount. Use EC2 Instance Savings Plans only where family and Region are certain for the whole term.
 
-| Strategy | Use Case | Interruption Handling |
-|----------|----------|----------------------|
-| Batch/CI/CD | Stateless, fault-tolerant jobs | Checkpoint and retry; Spot Fleet capacity-optimized |
-| Containers | ECS/EKS worker nodes | Capacity provider: 70% Spot / 30% On-Demand baseline |
-| Web tier | Stateless servers behind ASG | Mixed instances: 6+ types, all AZs |
-| NOT for Spot | Databases, stateful services, single-instance | -- |
+### Spot Instances
 
-**Key Spot patterns:**
-- Diversify across 6+ instance types and all AZs
-- Use `capacity-optimized` allocation (not `lowest-price`)
-- Implement graceful shutdown via 2-minute warning (instance metadata or EventBridge)
+> Source: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-allocation-strategies.html (official)
+
+Up to 90% off on-demand for interruption-tolerant workloads: batch, CI/CD, stateless web tiers behind an ASG, container worker nodes. Never for databases, stateful singletons, or anything that cannot absorb a 2-minute interruption notice.
+
+Allocation strategies AWS currently documents: **`price-capacity-optimized`** (balances price and capacity — the modern default for most Auto Scaling and Spot Fleet cases), **`capacity-optimized`** (deepest-capacity pools, AWS's long-standing recommendation), **`capacity-optimized-prioritized`** (capacity-optimized within an explicit priority order), and `lowest-price` (highest interruption risk). Diversify across 6+ instance types and every AZ; handle the 2-minute interruption notice with checkpointing.
 
 ---
 
 ## Lambda
 
-### When Lambda Wins
+> Source: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html and https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html (official)
 
-All must be true: request/event-driven, <15 min execution, <10 GB memory, spiky/unpredictable traffic, stateless. Sweet-spot: API backends with variable traffic, file processing, data transformation, scheduled tasks, webhooks.
+### When Lambda wins / loses
 
-### When Lambda Loses
+Wins when all hold: event-driven, under the **900 second (15 minute)** timeout, within the **128 MB - 10,240 MB** memory range, spiky traffic, stateless. Loses on sustained high throughput (containers become cheaper), >15 minutes, GPU need, >10 GB RAM, sub-100 ms p99 cold-start sensitivity, heavy local storage, or persistent connections.
 
-Do NOT use when: sustained high throughput (>1M invocations/day = cheaper on containers), >15 minutes, GPU needed, >10 GB RAM, cold-start-sensitive (sub-100ms p99), heavy local storage, persistent connections.
+Cost model (structure is stable; digits are PRICE-VOLATILE): per-request charge plus per-GB-second duration charge at 1 ms granularity, with a monthly free tier of requests and GB-seconds.
 
-### Cost Model and Break-Even
+**Rule of thumb:** if the function runs at >50 concurrent invocations for most of the day, price a container alternative.
 
-- Requests: $0.20 per 1M
-- Duration: $0.0000166667 per GB-second (1ms granularity)
-- Free tier: 1M requests + 400,000 GB-seconds per month
+### Performance
 
-**Break-even vs t4g.small (~$12/mo with Savings Plan):**
+> Source: https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html and https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html (official)
 
-| Config | Break-Even |
-|--------|-----------|
-| 128 MB, 100ms avg | ~3.5M requests/mo |
-| 512 MB, 200ms avg | ~800K requests/mo |
-| 1024 MB, 500ms avg | ~200K requests/mo |
-| 3008 MB, 1s avg | ~35K requests/mo |
+- **Memory buys CPU.** AWS documents exactly one anchor: "At 1,769 MB, a function has the equivalent of one vCPU." CPU scales proportionally with memory up to 10,240 MB — roughly six vCPU-equivalent at the ceiling, but AWS does not publish that figure, so do not assert it as a documented number. For CPU-bound functions, more memory can *lower* total cost by shortening duration.
+- **`arm64` (Graviton2)** is the default architecture choice: lower cost and generally better price/performance.
+- **SnapStart is no longer Java-only.** It supports **Java 11 and later, Python 3.12 and later, and .NET 8 and later**. Container images and OS-only runtimes are unsupported, and SnapStart cannot be combined with Provisioned Concurrency, EFS, S3 Files, or >512 MB ephemeral storage on the same function version. **Pricing differs by runtime: free for Java; Python and .NET incur caching and restoration charges based on memory.**
 
-**Rule of thumb:** If Lambda runs consistently at >50 concurrent invocations most of the day, investigate container/EC2 alternatives.
+Cold-start levers in priority order: `arm64` plus a smaller deployment package -> SnapStart (where the runtime supports it) -> Provisioned Concurrency (paid, eliminates cold starts). Keep-warm pings are an anti-pattern.
 
-### Performance Optimization
+### Quotas and layers
 
-**Memory = CPU:** At 1,769 MB you get 1 full vCPU. At 10,240 MB you get 6 vCPUs. For CPU-bound functions, increasing memory may reduce cost (shorter duration offsets higher rate).
-
-**ARM (Graviton2):** 20% lower cost, up to 34% better price/performance. Use `arm64` by default.
-
-**Cold start mitigation (priority order):**
-
-| Strategy | Impact | Cost |
-|----------|--------|------|
-| ARM + smaller package | 10-30% reduction | Saves 20% |
-| SnapStart (Java only) | ~90% reduction | Free |
-| Provisioned Concurrency | Eliminates cold start | ~$15/mo per instance at 512 MB |
-| Keep-warm pings | Anti-pattern -- unreliable | Wasteful |
-
-### Concurrency
-
-- **Unreserved:** Shares account pool (default 1,000). Risk: one function starves others.
-- **Reserved:** Guarantees N slots and acts as throttle ceiling. Free.
-- **Provisioned:** Pre-warms N environments. Eliminates cold starts. Costs money.
-- **Formula:** Concurrency = invocations/sec x avg duration in seconds
+- Function layers: **5**; deployment package unzipped including layers and custom runtimes: **250 MB**.
+- Default account concurrency: **1,000** (adjustable). Reserved concurrency is free and acts as both floor and ceiling; Provisioned Concurrency is paid and pre-warms environments.
+- Concurrency = invocations per second x average duration in seconds.
+- **A second, independent throttle exists:** a requests-per-second limit of **10x the concurrency limit** (default 1,000 concurrency implies a 10,000 req/s ceiling). Very short functions can throttle on RPS while concurrency still looks healthy.
 
 ---
 
 ## ECS vs EKS
 
+> Source: https://aws.amazon.com/eks/pricing/ and https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-eks-auto-mode/ (official)
+
 | Factor | ECS | EKS |
-|--------|-----|-----|
+|---|---|---|
+| Control plane cost | Free | **$0.10/cluster-hour** Standard Support (~$73/mo); **$0.60/cluster-hour** Extended Support |
 | Learning curve | Low (AWS concepts only) | Steeper (Kubernetes) |
-| Control plane cost | **Free** | $73/month |
-| Operational burden | Low | Medium-High (cluster upgrades, add-ons) |
+| Operational burden | Low | Medium — or **Low with EKS Auto Mode** |
 | Portability | AWS-locked | Multi-cloud capable |
-| Ecosystem | AWS-native tools | Vast K8s ecosystem (Istio, ArgoCD, Karpenter) |
-| Scaling | Task-level auto scaling | HPA, VPA, Karpenter, KEDA |
+| Ecosystem | AWS-native | Istio, ArgoCD, Karpenter, KEDA |
 
-**Choose ECS** for AWS-native teams, simpler ops, cost-sensitive (free control plane), moderate scale.
+**Extended Support** applies to clusters running a Kubernetes version past the 14-month standard window, extending support to 26 months total at 6x the hourly rate. Treat it as a budgeting signal that the upgrade is overdue, not a supported steady state.
 
-**Choose EKS** for existing K8s investment, multi-cloud/hybrid, rich ecosystem needs, complex scheduling, large-scale microservices.
+**EKS Auto Mode** (GA December 2024) automates compute, storage, and networking management for EKS clusters: it selects and provisions EC2 instances, handles OS patching and security upgrades, and scales capacity dynamically. AWS frames it as removing the need for "deep expertise, ongoing infrastructure management, or capacity planning." Available on Kubernetes 1.29+ in all commercial Regions (not GovCloud or China), with no upfront fee — you pay for the managed resources plus standard EC2 costs. It substantially narrows the "EKS is operationally heavier" argument, so recommend ECS on AWS-native simplicity and cost grounds rather than on ops burden alone.
 
-### Fargate vs EC2 Launch Type
+### Fargate vs EC2 launch type
+
+> Source: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html and https://docs.aws.amazon.com/eks/latest/userguide/fargate-pod-configuration.html (official)
 
 | Factor | Fargate | EC2 |
-|--------|---------|-----|
-| Server management | None (serverless) | You manage instances |
-| Per-unit cost | 20-40% higher | Lower with Spot/RIs |
+|---|---|---|
+| Server management | None | You manage instances |
+| Per-unit cost | Higher (PRICE-VOLATILE premium) | Lower with Spot/RIs |
 | GPU support | No | Yes |
-| Max resources | 4 vCPU / 30 GB (ECS), 16 vCPU / 120 GB (EKS) | Instance limits |
-| Fargate Spot | Up to 70% savings | EC2 Spot up to 90% |
+| Max task/pod size (ECS) | **16 vCPU / 32-120 GB** standard, plus a **32 vCPU / 60, 120, or 244 GB** tier (Linux only, platform 1.4.0+) | Instance limits |
+| Max pod size (EKS) | **16 vCPU / 32-120 GB** (no 32 vCPU tier) | Instance limits |
+| Spot | Fargate Spot | EC2 Spot up to 90% |
 
-**Decision rule:** Start with Fargate for simplicity. Move to EC2 when Fargate cost exceeds operational cost of managing instances, or when you need GPUs/DaemonSets/privileged containers.
+**EKS Fargate pod-sizing gotcha:** Fargate adds **256 MB of memory overhead per pod** for kubelet, kube-proxy, and containerd. A pod requesting 1 vCPU / 8 GB provisions a 2 vCPU / 9 GB task, because no 1 vCPU / 9 GB combination exists. Size requests against the published combination table, not against the raw request.
+
+**Rule:** start on Fargate for simplicity; move to EC2 when Fargate's per-unit premium exceeds the operational cost of managing instances, or when you need GPUs, DaemonSets, or privileged containers.
 
 ---
 
 ## Auto Scaling Patterns
 
-| Pattern | Best For |
-|---------|----------|
-| **Target Tracking** | Most workloads. Maintains metric at target (CPU 50-70%). Start here. |
-| **Step Scaling** | Different actions at different thresholds |
-| **Predictive Scaling** | Recurring daily/weekly patterns (uses ML forecasting) |
-| **Scheduled Scaling** | Known events (sales, batch windows) |
+| Pattern | Best for |
+|---|---|
+| Target Tracking | Most workloads. Hold a metric at target (CPU 50-70%). Start here. |
+| Step Scaling | Different responses at different breach magnitudes |
+| Predictive Scaling | Recurring daily/weekly shapes (ML forecasting) |
+| Scheduled Scaling | Known events (sales windows, batch runs) |
 
-**Mixed Instances Policy (cost optimization):**
-- Base capacity: On-Demand (minimum healthy)
-- Above base: 70-80% Spot, 20-30% On-Demand
-- Instance types: 6+ types for Spot diversity
-- Allocation: `capacity-optimized-prioritized`
-
-**Scaling cooldowns:** Scale-out: 60-120s (fast). Scale-in: 300s (slow). Scale out fast, scale in cautiously.
-
-**Warm pool:** Pre-initialized stopped instances for faster scale-out. Useful when boot + init takes minutes. Launch from warm pool in 30-60s vs 3-5 min cold.
+Mixed-instances policy for cost: On-Demand base capacity for the minimum healthy fleet, 70-80% Spot above it, 6+ instance types for Spot diversity, `capacity-optimized-prioritized` or `price-capacity-optimized` allocation. Scale out fast (60-120 s cooldown), scale in slowly (300 s). Warm pools pre-initialize stopped instances when boot plus init takes minutes.
 
 ---
 
 ## Right-Sizing Methodology
 
-1. **Measure:** Enable detailed CloudWatch monitoring (1-min intervals). Collect 2+ weeks. CPU, memory (requires CW agent), network, disk I/O.
-2. **Analyze:** Use Compute Optimizer (free basic, $0.0003272/resource/hr enhanced). Analyzes 14 days.
-3. **Resize:** Stop, change instance type, start (seconds of downtime). Or use ASG to roll.
-4. **Repeat:** Quarterly review cadence.
+> Source: https://aws.amazon.com/compute-optimizer/pricing/ and https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html (official)
 
-**Signals:**
-- Average CPU < 20% -> downsize (or switch M to T if bursting fits)
-- Average memory < 30% -> downsize
-- Network below baseline -> smaller instance fine
-- EBS IOPS never near provisioned limits -> reduce or switch type
+1. **Measure.** Detailed CloudWatch monitoring at 1-minute intervals for 2+ weeks; CPU, memory (requires the CloudWatch agent), network, disk I/O.
+2. **Analyze with Compute Optimizer.** Basic recommendations are **free** over a **14-day** lookback. The **enhanced/paid tier is $0.0003360215 per resource-hour** and extends the lookback to **about three months (93 days)** — distinguish the two lookbacks when quoting them.
+3. **Resize.** Stop, change type, start; or roll through an Auto Scaling group.
+4. **Repeat quarterly.**
+
+Practitioner thresholds (not AWS-published rules): average CPU <20% -> downsize; <5% -> investigate termination; average memory <30% -> downsize; sustained network well below the instance limit -> smaller type.
+
+---
+
+## Edge and Hybrid Compute Placement
+
+> Source: https://aws.amazon.com/outposts/ and https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/perf_networking_choose_workload_location_network_requirements.html (official)
+
+Well-Architected's three-way split, close to verbatim: "Use AWS Local Zones to run workloads like video rendering... Use AWS Outposts for workloads that need to remain on-premises and where you want that workload to run seamlessly with the rest of your other workloads in AWS... For [applications requiring] ultra-low-latency for 5G devices, consider AWS Wavelength."
+
+- **Local Zones** — AWS-operated infrastructure closer to a metro population. No customer facility, no on-premises data-residency requirement.
+- **Outposts** — AWS-managed racks or servers in a customer-owned or customer-selected facility, for workloads that must physically stay on-premises (compliance, deep on-prem dependencies, phased migration of latency-coupled legacy apps) while using native AWS APIs via a service link back to a home Region.
+- **Wavelength** — inside a telco 5G network edge, for mobile-device ultra-low latency specifically.
+
+Cost framing for the hybrid-compute question: Outposts is a committed-capacity purchase, so its cost optimization is capacity planning and workload placement, not on-demand elasticity — the opposite lever from the rest of this file.
+
+## Sources
+
+- https://aws.amazon.com/ec2/instance-types/
+- https://aws.amazon.com/ec2/instance-types/graviton/
+- https://aws.amazon.com/about-aws/whats-new/2024/07/amazon-ec2-r8g-instances-aws-graviton4-generally-available/
+- https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-ec2-c8g-m8g-instances/
+- https://aws.amazon.com/ec2/instance-types/m8g/
+- https://aws.amazon.com/ec2/instance-types/r8g/
+- https://www.aboutamazon.com/news/aws/aws-graviton-5-cpu-amazon-ec2
+- https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-ec2-trn2-instances-available
+- https://aws.amazon.com/ec2/instance-types/trn2/
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+- https://aws.amazon.com/ec2/pricing/reserved-instances/
+- https://aws.amazon.com/savingsplans/compute-pricing/
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-allocation-strategies.html
+- https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+- https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html
+- https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html
+- https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
+- https://aws.amazon.com/eks/pricing/
+- https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-eks-auto-mode/
+- https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+- https://docs.aws.amazon.com/eks/latest/userguide/fargate-pod-configuration.html
+- https://aws.amazon.com/compute-optimizer/pricing/
+- https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html
+- https://aws.amazon.com/outposts/
+- https://docs.aws.amazon.com/wellarchitected/latest/performance-efficiency-pillar/perf_networking_choose_workload_location_network_requirements.html
+
+Fetched: 2026-08-08
