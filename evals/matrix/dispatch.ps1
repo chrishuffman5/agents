@@ -19,6 +19,8 @@ param(
 )
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
+# pwsh -File binds "a,b,c" as ONE string (no array conversion) — normalize either style
+if ($OnlySuites) { $OnlySuites = @($OnlySuites | ForEach-Object { $_ -split ',' } | Where-Object { $_ }) }
 Import-Module PSSQLite
 Import-Module (Join-Path $PSScriptRoot 'MatrixRunner.psm1') -Force
 $cfg = Get-Content (Join-Path $PSScriptRoot 'matrix.config.json') -Raw | ConvertFrom-Json
