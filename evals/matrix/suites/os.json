@@ -1,0 +1,546 @@
+{
+  "suite": "os",
+  "description": "Cross-harness matrix suite covering every skill in the os plugin (overview plus 19 technology skills: apparmor, btrfs-snapper, debian, failover-clustering, hyper-v, macos, macos-developer-toolchain, macos-mdm-deployment, macos-platform-sso, rhel, rhel-podman, rocky-alma, selinux, sles, sles-ha-extension, ubuntu, windows-client, windows-server, wsl). Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md as of 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff, niche, or a specific version/number); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "apparmor-userns-restriction",
+      "skill": "apparmor",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Starting with which Ubuntu LTS release does AppArmor restrict unprivileged user namespace creation by default, a change that can break apps like Chrome, Electron apps, and rootless Podman? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)24\\.04" },
+      "notes": "plugins/os/skills/apparmor/SKILL.md - Unprivileged User Namespace Restrictions (24.04+): Ubuntu 24.04 introduced AppArmor-based restriction of unprivileged user namespace creation"
+    },
+    {
+      "id": "apparmor-kill-mode-intro",
+      "skill": "apparmor",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "AppArmor's kill mode, which terminates a process immediately on a policy denial rather than just logging it, was introduced in which Ubuntu LTS release? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)22\\.04" },
+      "notes": "plugins/os/skills/apparmor/SKILL.md - Version-Specific Changes table: Kill mode Not available (20.04) -> Introduced (22.04)"
+    },
+    {
+      "id": "apparmor-dac-order",
+      "skill": "apparmor",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "When a process attempts a file access on an Ubuntu system, which check is evaluated first, the traditional Unix permission check or the AppArmor mandatory access control check? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bDAC\\b" },
+      "notes": "plugins/os/skills/apparmor/SKILL.md - Mandatory Access Control (MAC): The decision order is: DAC check first, then AppArmor MAC check."
+    },
+    {
+      "id": "btrfs-snapper-xxhash-version",
+      "skill": "btrfs-snapper",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Btrfs on SLES supports several checksum algorithms. Alongside the long standing crc32c default, which additional checksum algorithm became available starting with SLES 15 SP3? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["xxhash"] },
+      "notes": "plugins/os/skills/btrfs-snapper/SKILL.md - Checksums: Supported algorithms: crc32c, xxhash (SLES 15 SP3+), sha256, blake2b"
+    },
+    {
+      "id": "btrfs-snapper-qgroup-overhead",
+      "skill": "btrfs-snapper",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage of extra write overhead do Btrfs quota groups add on a system with many snapshots? Answer with the percentage range.",
+      "expected": { "type": "regex", "value": "(?i)10\\s*-\\s*30\\s*%?" },
+      "notes": "plugins/os/skills/btrfs-snapper/SKILL.md - Performance warning: Qgroups add 10-30% write overhead on systems with many snapshots."
+    },
+    {
+      "id": "btrfs-snapper-raid56-unsafe",
+      "skill": "btrfs-snapper",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Is it safe to run Btrfs RAID 5 or RAID 6 in a production environment? Answer in one sentence explaining the reason.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not (safe|production ready)|never).{0,60}(write hole)" },
+      "notes": "plugins/os/skills/btrfs-snapper/SKILL.md - RAID Profiles table: RAID 5/6 NO -- write hole bug; Never use RAID 5/6 in production."
+    },
+    {
+      "id": "debian-testing-migration-days",
+      "skill": "debian",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "In Debian's three suite release pipeline, how many days must a package sit in unstable without release critical bugs before it automatically migrates to testing? Answer with the number of days.",
+      "expected": { "type": "regex", "value": "(?i)\\b10\\b" },
+      "notes": "plugins/os/skills/debian/SKILL.md - Release Process: Packages enter unstable first. After 10 days without RC bugs, they auto-migrate to testing."
+    },
+    {
+      "id": "debian-sid-never-releases",
+      "skill": "debian",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Debian's rolling development branch carries the nickname Sid, after the Toy Story character who breaks his toys. Does Sid ever itself become a stable release?",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|never)" },
+      "notes": "plugins/os/skills/debian/SKILL.md - Release Process: Sid is permanent -- it never becomes a release."
+    },
+    {
+      "id": "debian-nonfree-firmware-split",
+      "skill": "debian",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Which Debian release first split hardware firmware packages out of the non-free archive section into their own separate non-free-firmware component? Answer with the release number or codename.",
+      "expected": { "type": "regex", "value": "(?i)(\\b12\\b|Bookworm)" },
+      "notes": "plugins/os/skills/debian/SKILL.md - Archive sections: non-free-firmware (hardware firmware, split from non-free in Debian 12); Common Pitfall #4"
+    },
+    {
+      "id": "failover-clustering-max-nodes",
+      "skill": "failover-clustering",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "As of Windows Server 2025, what is the maximum number of nodes supported in a single Windows Server Failover Cluster? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b64\\b" },
+      "notes": "plugins/os/skills/failover-clustering/SKILL.md - Version-Specific Changes table: Max Nodes per Cluster = 64 across 2016, 2019, 2022, 2025"
+    },
+    {
+      "id": "failover-clustering-heartbeat-port",
+      "skill": "failover-clustering",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Which UDP port carries Windows Server Failover Clustering heartbeat traffic between nodes? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b3343\\b" },
+      "notes": "plugins/os/skills/failover-clustering/SKILL.md - Key Paths and Ports table: 3343 UDP/TCP Cluster heartbeat and communication"
+    },
+    {
+      "id": "failover-clustering-s2d-node-range",
+      "skill": "failover-clustering",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "For a Storage Spaces Direct hyperconverged cluster, what are the minimum and maximum node counts supported? Answer with both numbers.",
+      "expected": { "type": "contains_all", "value": ["2", "16"] },
+      "notes": "plugins/os/skills/failover-clustering/SKILL.md - Storage Spaces Direct (S2D): Minimum 2 nodes, maximum 16 nodes per S2D cluster"
+    },
+    {
+      "id": "hyperv-max-vcpu-2025",
+      "skill": "hyper-v",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "In Windows Server 2025, what is the maximum number of virtual CPUs a single Hyper-V VM can be assigned, double the limit from the prior release? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b2048\\b" },
+      "notes": "plugins/os/skills/hyper-v/SKILL.md - Version-Specific Changes table and 2025 Highlights: 2048 vCPUs per VM, doubled from 1024 in 2022"
+    },
+    {
+      "id": "hyperv-live-migration-port",
+      "skill": "hyper-v",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Which TCP port does Hyper-V live migration traffic use between hosts? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b6600\\b" },
+      "notes": "plugins/os/skills/hyper-v/SKILL.md - Key Ports table: 6600 TCP Live Migration"
+    },
+    {
+      "id": "hyperv-gpup-live-migration-version",
+      "skill": "hyper-v",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Starting with which Windows Server version can GPU partitions (GPU-P) live migrate between Hyper-V hosts and participate in failover clustering? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b2025\\b" },
+      "notes": "plugins/os/skills/hyper-v/SKILL.md - GPU Partitioning (GPU-P) with Live Migration: Starting in Windows Server 2025, GPU-P supports live migration and failover clustering"
+    },
+    {
+      "id": "macos-tahoe-version-number",
+      "skill": "macos",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Apple's macOS version numbering jumped from 15 straight to a much higher number for the Tahoe release, skipping the traditional next integer. What version number is macOS Tahoe? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b26\\b" },
+      "notes": "plugins/os/skills/macos/SKILL.md - Note: macOS uses year-based versioning starting with Tahoe (macOS 26, not macOS 16)."
+    },
+    {
+      "id": "macos-filevault-encryption",
+      "skill": "macos",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "What encryption algorithm and key length does FileVault use for full disk encryption on APFS volumes? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["XTS-AES-128", "256-bit"] },
+      "notes": "plugins/os/skills/macos/SKILL.md - FileVault: Full-disk encryption using XTS-AES-128 with 256-bit key on APFS volumes."
+    },
+    {
+      "id": "macos-homebrew-path-apple-silicon",
+      "skill": "macos",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "On Apple Silicon Macs, what filesystem path does Homebrew install to by default, as opposed to /usr/local on Intel Macs? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["/opt/homebrew"] },
+      "notes": "plugins/os/skills/macos/SKILL.md - Apple Silicon vs Intel table: Homebrew prefix /opt/homebrew (Apple Silicon) vs /usr/local (Intel)"
+    },
+    {
+      "id": "macos-dev-toolchain-devid-cert-years",
+      "skill": "macos-developer-toolchain",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "How many years does a Developer ID certificate remain valid before expiring, compared to Apple Development and Distribution certificates which expire annually? Answer with the number of years.",
+      "expected": { "type": "regex", "value": "(?i)\\b5\\b" },
+      "notes": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Certificate Lifecycle: Developer ID certificates expire in 5 years; Apple Development/Distribution certificates expire in 1 year"
+    },
+    {
+      "id": "macos-dev-toolchain-xcode-jump-reason",
+      "skill": "macos-developer-toolchain",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Apple's Xcode major version numbers jumped from Xcode 16 straight to Xcode 26, skipping the usual sequential numbering. What was this jump aligned to? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(Tahoe|macOS\\s*26)" },
+      "notes": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Note: Xcode jumped from 16 to 26 to align with the macOS 26 Tahoe branding cycle."
+    },
+    {
+      "id": "macos-dev-toolchain-clt-disk-size",
+      "skill": "macos-developer-toolchain",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Roughly how much disk space do the standalone Xcode Command Line Tools require, compared to a full Xcode install at 12 to 30 GB? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)~?\\s*2\\s*GB" },
+      "notes": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Command Line Tools table: Disk footprint ~2 GB (CLT Only) vs 12-30 GB (Full Xcode)"
+    },
+    {
+      "id": "macos-mdm-migration-no-wipe-version",
+      "skill": "macos-mdm-deployment",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Starting with which macOS release can a managed Mac migrate from one MDM vendor to another without requiring a full device wipe? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(macOS\\s*26|Tahoe)" },
+      "notes": "plugins/os/skills/macos-mdm-deployment/SKILL.md - MDM Migration (macOS 26 Tahoe): Tahoe introduces native vendor-to-vendor MDM migration without device wipe"
+    },
+    {
+      "id": "macos-mdm-clock-skew-threshold",
+      "skill": "macos-mdm-deployment",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "How much clock skew between a Mac and the MDM server can cause TLS and enrollment authentication failures during MDM setup? Answer with the time threshold.",
+      "expected": { "type": "regex", "value": "(?i)5\\s*minute" },
+      "notes": "plugins/os/skills/macos-mdm-deployment/SKILL.md - Common Pitfalls #2: Clock skew exceeding 5 minutes causes TLS errors."
+    },
+    {
+      "id": "macos-mdm-ddm-introduced-version",
+      "skill": "macos-mdm-deployment",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Declarative Device Management for macOS was first introduced, as a subset of declarations, with which macOS version? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(macOS\\s*13|Ventura)" },
+      "notes": "plugins/os/skills/macos-mdm-deployment/SKILL.md - macOS MDM Feature Timeline table: DDM (macOS) - 13 Ventura - Subset of declarations introduced"
+    },
+    {
+      "id": "macos-psso-grace-periods",
+      "skill": "macos-platform-sso",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "To avoid locking users out when the identity provider is unreachable at the login window, what are the recommended minimum LoginGracePeriod and UnlockGracePeriod values, in seconds, for macOS Platform SSO? Answer with both numbers.",
+      "expected": { "type": "contains_all", "value": ["900", "300"] },
+      "notes": "plugins/os/skills/macos-platform-sso/SKILL.md - Grace Periods: Recommendation: Set LoginGracePeriod >= 900 (15 min) and UnlockGracePeriod >= 300 (5 min)"
+    },
+    {
+      "id": "macos-psso-auth-policy-min-version",
+      "skill": "macos-platform-sso",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Granular Platform SSO authentication policies, such as FileVaultPolicy, LoginPolicy, and UnlockPolicy, require which minimum macOS version? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(macOS\\s*15|Sequoia)" },
+      "notes": "plugins/os/skills/macos-platform-sso/SKILL.md - Authentication Policies (Sequoia+): macOS 15 Sequoia introduced granular authentication policies delivered via MDM profile or DDM."
+    },
+    {
+      "id": "macos-psso-nfc-tap-login-version",
+      "skill": "macos-platform-sso",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Which macOS release introduces NFC Tap-to-Login support for Platform SSO, letting a user tap an NFC enabled hardware key or phone at the login window? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(macOS\\s*26|Tahoe)" },
+      "notes": "plugins/os/skills/macos-platform-sso/SKILL.md - NFC Tap-to-Login (Tahoe): macOS 26 Tahoe introduces NFC authentication for PSSO"
+    },
+    {
+      "id": "overview-rocky-alma-path",
+      "skill": "overview",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "We need a RHEL compatible Linux distribution that requires no paid subscription but still tracks RHEL's binary compatibility guarantees for regulatory workloads. Per cross platform OS selection guidance, what is this no subscription path usually called? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Rocky", "Alma"] },
+      "notes": "plugins/os/skills/overview/SKILL.md - Distro/OS Selection: Rocky/Alma are the no-subscription RHEL-compatible path"
+    },
+    {
+      "id": "overview-selinux-family",
+      "skill": "overview",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Across the RHEL family of distributions and SLES, which mandatory access control mechanism handles security enforcement, as opposed to AppArmor on Ubuntu and Debian? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bSELinux\\b" },
+      "notes": "plugins/os/skills/overview/SKILL.md - Security Frameworks table: RHEL family / SLES -> SELinux (contexts, booleans, permissive-first testing)"
+    },
+    {
+      "id": "overview-test-first",
+      "skill": "overview",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Across every platform covered, Linux mandatory access control, Windows Group Policy, macOS MDM profiles, what universal hyphenated testing principle should precede switching any hardening control into full enforcement? Give the term used.",
+      "expected": { "type": "regex", "value": "(?i)test[- ]first" },
+      "notes": "plugins/os/skills/overview/SKILL.md - Guardrails: Test-first is universal: permissive/complain/audit/report-only mode before enforcement, on every platform."
+    },
+    {
+      "id": "rhel-rpm-database-format",
+      "skill": "rhel",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Which database format stores the RPM package database on RHEL 9 and later, replacing the format used on RHEL 8? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["SQLite"] },
+      "notes": "plugins/os/skills/rhel/SKILL.md - dnf / rpm Package Management: RPM database location: BerkeleyDB in RHEL 8, SQLite in RHEL 9+."
+    },
+    {
+      "id": "rhel-cockpit-port",
+      "skill": "rhel",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Which TCP port does the Cockpit web console listen on by default for browser based RHEL administration? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b9090\\b" },
+      "notes": "plugins/os/skills/rhel/SKILL.md - Cockpit Web Console: Browser-based administration on port 9090."
+    },
+    {
+      "id": "rhel-crypto-policy-sha1-tls",
+      "skill": "rhel",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Under RHEL 9's default system-wide crypto policy, are SHA-1 signatures and TLS 1.0/1.1 still permitted for legacy applications? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|disab|does not|not (permit|allow))" },
+      "notes": "plugins/os/skills/rhel/SKILL.md - Common Pitfalls #4: RHEL 9 disables SHA-1 signatures, TLS 1.0/1.1, and DES by default."
+    },
+    {
+      "id": "rhel-podman-quadlet-intro-version",
+      "skill": "rhel-podman",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Quadlet, Podman's declarative systemd integration, was introduced in which Podman version and correspondingly which RHEL point release? Answer with both version numbers.",
+      "expected": { "type": "contains_all", "value": ["4.4", "9.2"] },
+      "notes": "plugins/os/skills/rhel-podman/SKILL.md - Quadlet (systemd Integration, RHEL 9.2+): Quadlet introduced in Podman 4.4 (RHEL 9.2)"
+    },
+    {
+      "id": "rhel-podman-default-oci-runtime",
+      "skill": "rhel-podman",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "What is the default OCI container runtime on RHEL 9 and later, replacing runc which was the RHEL 8 default? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["crun"] },
+      "notes": "plugins/os/skills/rhel-podman/SKILL.md - OCI Runtime: runc (RHEL 8 default, Go) or crun (RHEL 9+ default, C, faster startup, lower memory)"
+    },
+    {
+      "id": "rhel-podman-generate-systemd-removed",
+      "skill": "rhel-podman",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "The podman generate systemd command, once the primary way to create systemd units for containers, was removed entirely in which major Podman version, shipping with RHEL 10? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(podman\\s*5|5\\.x)" },
+      "notes": "plugins/os/skills/rhel-podman/SKILL.md - Common Pitfalls #5: podman generate systemd removed in Podman 5.x (RHEL 10)"
+    },
+    {
+      "id": "rocky-alma-elevate-target-dropped",
+      "skill": "rocky-alma",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "As of November 2025, can the ELevate tool still be used to migrate a CentOS or RHEL system to Rocky Linux? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|no longer|dropped|removed)" },
+      "notes": "plugins/os/skills/rocky-alma/SKILL.md - CentOS Migration: As of November 2025, ELevate no longer supports Rocky Linux as a migration target."
+    },
+    {
+      "id": "rocky-alma-crb-before-epel",
+      "skill": "rocky-alma",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "On Rocky Linux or AlmaLinux, EPEL packages often depend on packages in another repository that must be enabled first, or dependency resolution silently fails or pulls the wrong versions. Name that repository.",
+      "expected": { "type": "regex", "value": "(?i)(\\bCRB\\b|Code Ready Builder)" },
+      "notes": "plugins/os/skills/rocky-alma/SKILL.md - Common Pitfalls #2: Not enabling CRB before installing EPEL; EPEL packages frequently depend on packages in CRB"
+    },
+    {
+      "id": "rocky-alma-cpanel-requires-alma",
+      "skill": "rocky-alma",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "For web hosting with cPanel version 134 or later, cPanel dropped support for one RHEL compatible rebuild and now requires the other. Which distribution does cPanel require, Rocky Linux or AlmaLinux? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["AlmaLinux"] },
+      "notes": "plugins/os/skills/rocky-alma/SKILL.md - Common Pitfalls #1: For web hosting with cPanel, AlmaLinux is required (cPanel dropped Rocky in v134+)"
+    },
+    {
+      "id": "selinux-audit2allow-cil-version",
+      "skill": "selinux",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "The audit2allow tool gained a --cil flag for generating native CIL policy output starting with which RHEL version? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bRHEL\\s*9\\b" },
+      "notes": "plugins/os/skills/selinux/SKILL.md - Version-Specific Changes table: audit2allow CIL output - Not available (RHEL 8), --cil flag added (RHEL 9)"
+    },
+    {
+      "id": "selinux-module-priority-local",
+      "skill": "selinux",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "In SELinux custom policy module management, what numeric priority value is reserved for local, site specific customizations, above base policy at 100 and contrib at 200? Answer with the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b300\\b" },
+      "notes": "plugins/os/skills/selinux/SKILL.md - Custom Policy Modules: Module priorities: 100 (base), 200 (contrib), 300 (local), 400 (custom overrides)"
+    },
+    {
+      "id": "selinux-dac-mac-order",
+      "skill": "selinux",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "When both traditional Unix permissions and SELinux apply to a file access attempt on RHEL, which check happens first? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bDAC\\b" },
+      "notes": "plugins/os/skills/selinux/SKILL.md - Mandatory Access Control (MAC): The decision order is: DAC check first, then SELinux MAC check."
+    },
+    {
+      "id": "sles-agama-installer-successor",
+      "skill": "sles",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "YaST's installation component on SLES is being phased out in favor of which newer installer, planned for SLE 16? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Agama"] },
+      "notes": "plugins/os/skills/sles/SKILL.md - YaST -- Yet another Setup Tool: YaST's installation component is being phased out in favor of Agama for SLE 16."
+    },
+    {
+      "id": "sles-firewalld-replaces-suse",
+      "skill": "sles",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Which legacy firewall tool did firewalld replace on SLES 15? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["SuSEfirewall2"] },
+      "notes": "plugins/os/skills/sles/SKILL.md - Security Overview: firewalld manages zone-based firewalling (replaced SuSEfirewall2 in SLES 15)"
+    },
+    {
+      "id": "sles-livepatch-kgraft",
+      "skill": "sles",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "What is the underlying technology name behind SUSE's rebootless kernel security patching feature, Live Patching? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)kGraft" },
+      "notes": "plugins/os/skills/sles/SKILL.md - Core Expertise list: Live Patching (kGraft) for rebootless kernel security fixes"
+    },
+    {
+      "id": "sles-ha-sbd-majority-count",
+      "skill": "sles-ha-extension",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "For SBD based fencing in a SUSE HA cluster, how many SBD devices are recommended to achieve a majority vote configuration, avoiding the single point of failure of one device? Answer with the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b3\\b" },
+      "notes": "plugins/os/skills/sles-ha-extension/SKILL.md - Fencing (STONITH): SBD device count: 1 (simple, SPOF), 3 (majority vote, recommended), diskless"
+    },
+    {
+      "id": "sles-ha-hawk-port",
+      "skill": "sles-ha-extension",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "What TCP port does the HAWK web console use for browser based Pacemaker cluster management? Answer with just the number.",
+      "expected": { "type": "regex", "value": "(?i)\\b7630\\b" },
+      "notes": "plugins/os/skills/sles-ha-extension/SKILL.md - HAWK Web Console: Browser-based cluster management on port 7630 (HTTPS)"
+    },
+    {
+      "id": "sles-ha-stonith-disable-unsupported",
+      "skill": "sles-ha-extension",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Is setting stonith-enabled=false considered a supported configuration for a production SUSE HA cluster? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|not supported|unsupported)" },
+      "notes": "plugins/os/skills/sles-ha-extension/SKILL.md - Common Pitfalls #1: Setting stonith-enabled=false is unsupported for production clusters."
+    },
+    {
+      "id": "ubuntu-pro-extension-years",
+      "skill": "ubuntu",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Ubuntu Pro extends the standard LTS security maintenance window from 5 years to how many total years, and how many machines can attach for free? Answer with both numbers.",
+      "expected": { "type": "contains_all", "value": ["10", "5"] },
+      "notes": "plugins/os/skills/ubuntu/SKILL.md - Ubuntu Pro / ESM / Livepatch: Ubuntu Pro extends LTS security maintenance from 5 to 10 years. Free for up to 5 machines."
+    },
+    {
+      "id": "ubuntu-2004-standard-eol",
+      "skill": "ubuntu",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "When did standard, non-Pro security support end for Ubuntu 20.04 LTS? Answer with month and year.",
+      "expected": { "type": "regex", "value": "(?i)April\\s*2025" },
+      "notes": "plugins/os/skills/ubuntu/SKILL.md - Common Pitfalls #5: Ubuntu 20.04 standard support ended April 2025."
+    },
+    {
+      "id": "ubuntu-apt-key-removed-version",
+      "skill": "ubuntu",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "The apt-key tool for importing repository signing keys was deprecated on Ubuntu 22.04. In which Ubuntu LTS release was it removed entirely? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)24\\.04" },
+      "notes": "plugins/os/skills/ubuntu/SKILL.md - Common Pitfalls #2: apt-key is deprecated since 22.04 and removed in 24.04."
+    },
+    {
+      "id": "windows-client-10-eol-dates",
+      "skill": "windows-client",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "When did standard support end for Windows 10 Home and Pro version 22H2, and until what year does Enterprise/Education 22H2 continue receiving support? Answer with both years.",
+      "expected": { "type": "contains_all", "value": ["2025", "2027"] },
+      "notes": "plugins/os/skills/windows-client/SKILL.md - Common Pitfalls #3: Home and Pro 22H2 reached EOL October 14, 2025. Enterprise/Education 22H2 is supported until October 2027."
+    },
+    {
+      "id": "windows-client-11-hardware-requirements",
+      "skill": "windows-client",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "What two hardware security requirements does Windows 11 strictly enforce, blocking upgrade on devices that lack them, unlike Windows 10? Name both.",
+      "expected": { "type": "contains_all", "value": ["TPM 2.0", "Secure Boot"] },
+      "notes": "plugins/os/skills/windows-client/SKILL.md - Common Pitfalls #1: Windows 11 strictly requires TPM 2.0 and UEFI Secure Boot."
+    },
+    {
+      "id": "windows-client-smbv1-disable",
+      "skill": "windows-client",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "On Windows desktops, which decades old SMB protocol version, the attack vector used by WannaCry, should always be disabled? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["SMBv1"] },
+      "notes": "plugins/os/skills/windows-client/SKILL.md - Common Pitfalls #5: SMBv1 is the WannaCry attack vector. Disable on all desktops."
+    },
+    {
+      "id": "windows-server-ntlmv1-blocked-version",
+      "skill": "windows-server",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "Starting with which Windows Server version is NTLMv1 authentication blocked by default? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b2025\\b" },
+      "notes": "plugins/os/skills/windows-server/SKILL.md - Authentication: NTLM is the fallback -- NTLMv1 is blocked by default in Server 2025"
+    },
+    {
+      "id": "windows-server-core-attack-surface-reduction",
+      "skill": "windows-server",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage smaller is the attack surface of a Server Core installation compared to one running Desktop Experience? Answer with the percentage.",
+      "expected": { "type": "regex", "value": "(?i)~?\\s*40\\s*%" },
+      "notes": "plugins/os/skills/windows-server/SKILL.md - Roles and Features Model: Server Core installations lack the Desktop Experience feature, reducing attack surface by ~40%."
+    },
+    {
+      "id": "windows-server-smb-quic-all-editions",
+      "skill": "windows-server",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "SMB over QUIC first shipped on Windows Server 2022, but only for one specific edition. In which Windows Server version does SMB over QUIC become available on all editions? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\b2025\\b" },
+      "notes": "plugins/os/skills/windows-server/SKILL.md - Networking Overview: SMB over QUIC: tunnels SMB over UDP/443 with TLS 1.3 (Azure Edition in 2022, all editions in 2025)"
+    },
+    {
+      "id": "wsl-open-source-date",
+      "skill": "wsl",
+      "plugin": "os",
+      "knowledge": "recent",
+      "prompt": "In what month and year did WSL go fully open source? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)May\\s*2025" },
+      "notes": "plugins/os/skills/wsl/SKILL.md - Current state: WSL went fully open-source in May 2025."
+    },
+    {
+      "id": "wsl-systemd-native-version",
+      "skill": "wsl",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "Native systemd support in WSL2 first shipped with which WSL version, released in September 2022? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)0\\.67\\.6" },
+      "notes": "plugins/os/skills/wsl/SKILL.md - systemd Support: Native systemd support since WSL 0.67.6 (September 2022)."
+    },
+    {
+      "id": "wsl-default-swap-percentage",
+      "skill": "wsl",
+      "plugin": "os",
+      "knowledge": "stable",
+      "prompt": "By default, how large is the WSL2 swap file relative to the configured memory limit? Answer with the percentage.",
+      "expected": { "type": "regex", "value": "(?i)25\\s*%" },
+      "notes": "plugins/os/skills/wsl/SKILL.md - Memory Management: Swap is on a separate VHD (default 25% of memory limit)."
+    }
+  ]
+}

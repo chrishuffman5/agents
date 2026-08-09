@@ -1,0 +1,1172 @@
+{
+  "suite": "database",
+  "description": "Cross-harness matrix suite for the 30 database plugin skills (plugins/database/skills), covering every relational, document, key-value, wide-column, graph, time-series, search, and cloud-analytics engine skill plus the cross-engine overview skill. Prompts are deliberately neutral (no mention of a skills library or documentation) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in the relevant skill's SKILL.md or references/ files as of 2026-08-09. knowledge: 'recent' = fact a bare model plausibly lacks (version-specific behavior from references/versions/, or niche/newer product detail); 'stable' = long-standing fact a strong bare model may already know.",
+  "tasks": [
+    {
+      "id": "bigquery-storage-write-savings",
+      "skill": "bigquery",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In BigQuery, roughly how much cheaper per GB ingested is the Storage Write API compared to the legacy streaming inserts API? Answer with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(50\\s*%|50\\s*percent)"
+      },
+      "notes": "plugins/database/skills/bigquery/SKILL.md - Streaming Ingestion table: Storage Write API costs 0.025 per GB ingested (50% cheaper) versus legacy streaming inserts at 0.05 per GB ingested."
+    },
+    {
+      "id": "bigquery-failsafe-window",
+      "skill": "bigquery",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In BigQuery, once a table's time travel window has fully expired, for how many additional days does the fail-safe feature retain the data before it becomes unrecoverable except via a Google Cloud support request? Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(seven|7)[\\s-]*day"
+      },
+      "notes": "plugins/database/skills/bigquery/SKILL.md - Storage (Colossus) section: Fail-safe is an additional 7-day recovery window after time travel expires, accessible only by Google support. Corroborated in references/architecture.md Storage Tiers table."
+    },
+    {
+      "id": "bigquery-partition-limit",
+      "skill": "bigquery",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In BigQuery, what is the maximum number of partitions allowed on a single partitioned table? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4,?000"
+      },
+      "notes": "plugins/database/skills/bigquery/SKILL.md - Partitioning section, Partition limits: Maximum 4,000 partitions per table."
+    },
+    {
+      "id": "cassandra-5-java-version",
+      "skill": "cassandra",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Java version required to run Apache Cassandra 5.0? Answer with just the version number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b17\\b"
+      },
+      "notes": "plugins/database/skills/cassandra/references/versions/5.0.md - Java 17 Requirement section: Cassandra 5.0 requires Java 17 (Java 11 and Java 8 are no longer supported)."
+    },
+    {
+      "id": "cassandra-ucs-shard-count",
+      "skill": "cassandra",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Cassandra 5.0, when using the Unified Compaction Strategy with default settings, what is the default base_shard_count, the number of shards used for parallel compaction? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\b"
+      },
+      "notes": "plugins/database/skills/cassandra/references/versions/5.0.md - UCS configuration reference table: base_shard_count default is 4."
+    },
+    {
+      "id": "cassandra-gc-grace-default",
+      "skill": "cassandra",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Cassandra, what is the default value, in seconds, of gc_grace_seconds, the setting controlling how long tombstones are kept before compaction can purge them? Answer with the exact number of seconds.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "864000"
+        ]
+      },
+      "notes": "plugins/database/skills/cassandra/SKILL.md - Tombstones and TTL section: gc_grace_seconds (default 864000 = 10 days)."
+    },
+    {
+      "id": "clickhouse-sharedmergetree-cloud",
+      "skill": "clickhouse",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Which ClickHouse storage engine, introduced in the 24.8 LTS release and exclusive to ClickHouse Cloud, decouples storage from compute by keeping data in object storage with a local SSD cache? Answer with the exact engine name.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SharedMergeTree"
+        ]
+      },
+      "notes": "plugins/database/skills/clickhouse/references/versions/24.8-lts.md - SharedMergeTree (ClickHouse Cloud) section: cloud-native storage engine available exclusively in ClickHouse Cloud, replacing ReplicatedMergeTree for Cloud deployments."
+    },
+    {
+      "id": "clickhouse-variant-type-flag-25-3",
+      "skill": "clickhouse",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "As of ClickHouse 25.3 LTS, do you still need to set an experimental flag such as allow_experimental_variant_type before creating a table with a Variant column? Answer with yes or no.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/database/skills/clickhouse/references/versions/25.3-lts.md - Variant and Dynamic Types (GA) section: no experimental flag needed in 25.3, contrasted with references/versions/24.8-lts.md which required SET allow_experimental_variant_type = 1."
+    },
+    {
+      "id": "clickhouse-index-granularity",
+      "skill": "clickhouse",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In ClickHouse MergeTree tables, what is the default index_granularity value, meaning how many rows are represented by each entry in the sparse primary index? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8192"
+        ]
+      },
+      "notes": "plugins/database/skills/clickhouse/SKILL.md - Primary Key and Sparse Index section: one index entry per index_granularity rows (default 8192)."
+    },
+    {
+      "id": "cosmosdb-logical-partition-size",
+      "skill": "cosmosdb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Azure Cosmos DB, what is the maximum storage size permitted for a single logical partition? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20\\s*gb"
+      },
+      "notes": "plugins/database/skills/cosmosdb/SKILL.md - Partitioning section: Logical partition maximum size is 20 GB. Corroborated in references/architecture.md Logical Partitions section."
+    },
+    {
+      "id": "cosmosdb-replace-ru-cost",
+      "skill": "cosmosdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Azure Cosmos DB's NoSQL API, approximately how many Request Units does replacing an existing 1 KB item cost, given that a replace operation reads the old item before writing the new one? Answer with the approximate number of RUs.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10.7"
+        ]
+      },
+      "notes": "plugins/database/skills/cosmosdb/references/architecture.md - RU Cost Benchmarks table: Point write / replace (1 KB item) costs approximately 10.7 RU (reads old + writes new)."
+    },
+    {
+      "id": "cosmosdb-reserved-capacity-discount",
+      "skill": "cosmosdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "For Azure Cosmos DB reserved capacity, approximately what percentage discount does committing to a 1-year reservation provide on provisioned throughput cost? Answer with the approximate percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20\\s*%"
+      },
+      "notes": "plugins/database/skills/cosmosdb/references/best-practices.md - Cost Management, Reserved Capacity section: 1-year reservation gives approximately 20% discount."
+    },
+    {
+      "id": "couchbase-hvi-billion-scale-latency",
+      "skill": "couchbase",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Couchbase Server 8.0, in billion-scale benchmark testing of the Hyperscale Vector Index, what latency in milliseconds was achieved at up to 19,000 queries per second? Answer with the exact number of milliseconds.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)28\\s*ms"
+      },
+      "notes": "plugins/database/skills/couchbase/references/versions/8.0.md - Hyperscale Vector Indexes (HVI) Performance characteristics: Billion-scale testing up to 19,000 QPS with 28ms latency."
+    },
+    {
+      "id": "couchbase-8-magma-min-ram",
+      "skill": "couchbase",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Couchbase Server 8.0, what is the minimum bucket RAM required for a new bucket using the default 128 vBucket Magma storage configuration? Answer with the exact amount.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100\\s*mi?b"
+      },
+      "notes": "plugins/database/skills/couchbase/references/versions/8.0.md - Magma as Default Storage Engine comparison table: Min bucket RAM for 128 vBucket Magma (the new default) is 100 MiB."
+    },
+    {
+      "id": "couchbase-vbucket-count",
+      "skill": "couchbase",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Couchbase Server, how many virtual buckets, or vBuckets, has each bucket traditionally been divided into? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1024"
+        ]
+      },
+      "notes": "plugins/database/skills/couchbase/SKILL.md - Distributed Architecture section: Each bucket is divided into 1024 virtual buckets (vBuckets)."
+    },
+    {
+      "id": "databricks-uniform-writer-version",
+      "skill": "databricks",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Databricks, for a Delta table to support the UniForm feature that generates Iceberg metadata alongside Delta metadata, what minimum Delta writer protocol version must the table have? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b7\\b"
+      },
+      "notes": "plugins/database/skills/databricks/references/architecture.md - UniForm (Universal Format) Requirements: Requires Delta reader version 3 and writer version 7."
+    },
+    {
+      "id": "databricks-delta-checkpoint-interval",
+      "skill": "databricks",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Databricks Delta Lake, a checkpoint Parquet file is written to the transaction log after how many commits by default? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
+      "notes": "plugins/database/skills/databricks/references/architecture.md - Transaction Log section: Checkpoint files (.checkpoint.parquet) are written every 10 commits (configurable)."
+    },
+    {
+      "id": "databricks-vacuum-default-retention",
+      "skill": "databricks",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Databricks Delta Lake, what is the default file retention period used by the VACUUM command before unreferenced data files become eligible for deletion? Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)7\\s*-?\\s*day"
+      },
+      "notes": "plugins/database/skills/databricks/references/best-practices.md - VACUUM and Retention section: Default retention is 7 days (delta.deletedFileRetentionDuration = interval 7 days)."
+    },
+    {
+      "id": "druid-segment-size-mb",
+      "skill": "druid",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "For Apache Druid, what is the recommended target size range, in megabytes, for a single segment on disk? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300",
+          "700"
+        ]
+      },
+      "notes": "plugins/database/skills/druid/SKILL.md - Segment sizing best practices: Target 300-700 MB per segment on disk (also target 3-5 million rows per segment)."
+    },
+    {
+      "id": "druid-36-release-stats",
+      "skill": "druid",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Apache Druid 36.0.0 was released in February 2026. How many new features, bug fixes, and improvements did that release include, and from how many contributors? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "189",
+          "34"
+        ]
+      },
+      "notes": "plugins/database/skills/druid/references/versions/36.x.md - opening line: 36.0.0 released February 9, 2026 with 189 new features, bug fixes, and improvements from 34 contributors."
+    },
+    {
+      "id": "druid-costbased-autoscaler",
+      "skill": "druid",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Apache Druid 36.x, what is the name of the new autoScalerStrategy value that lets Kafka supervisor autoscaling balance resource cost against lag, rather than relying only on lag thresholds? Answer with the exact setting value.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "costBased"
+        ]
+      },
+      "notes": "plugins/database/skills/druid/references/versions/36.x.md - Cost-Based Autoscaling for Streaming Ingestion table: autoScalerStrategy costBased (36.x new) optimizes task count balancing lag vs resource cost."
+    },
+    {
+      "id": "duckdb-quack-port",
+      "skill": "duckdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In DuckDB, the Quack remote protocol lets one DuckDB process serve another over HTTP. What is the default port that quack_serve binds to? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9494"
+        ]
+      },
+      "notes": "plugins/database/skills/duckdb/references/versions/1.5.md - Quack Remote Protocol section: server side binds to localhost by default, Default port is 9494."
+    },
+    {
+      "id": "duckdb-15-codename",
+      "skill": "duckdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "What is the release codename for DuckDB version 1.5? Answer with just the codename.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Variegata"
+        ]
+      },
+      "notes": "plugins/database/skills/duckdb/references/versions/1.5.md - opening line: This reference covers DuckDB 1.5 (codename Variegata), first released March 9, 2026."
+    },
+    {
+      "id": "duckdb-row-group-size",
+      "skill": "duckdb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In DuckDB's native columnar storage format, roughly how many rows does each row group contain? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)122,?880"
+      },
+      "notes": "plugins/database/skills/duckdb/SKILL.md - Columnar Storage Format section: Tables are split into row groups of ~122,880 rows each."
+    },
+    {
+      "id": "dynamodb-autoscale-scaledown-periods",
+      "skill": "dynamodb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "For DynamoDB auto-scaling in provisioned capacity mode, for how many consecutive 1-minute periods must utilization stay below the target before capacity is scaled down? Answer with the exact number of periods.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b15\\b"
+      },
+      "notes": "plugins/database/skills/dynamodb/references/architecture.md - Auto-Scaling for Provisioned Mode: Scale-down when utilization is below target for 15 consecutive 1-minute periods, capacity is decreased."
+    },
+    {
+      "id": "dynamodb-ondemand-burst-rrus",
+      "skill": "dynamodb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "For a brand-new DynamoDB table in on-demand capacity mode, up to how many read/write request units per second can it instantly accommodate before any traffic history exists? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)40,?000"
+      },
+      "notes": "plugins/database/skills/dynamodb/SKILL.md - Capacity Modes, On-Demand Mode: instantly accommodates up to double the previous peak traffic; for new tables, up to 40,000 RRU/WRU (also stated in references/architecture.md On-Demand Scaling Architecture)."
+    },
+    {
+      "id": "dynamodb-max-item-size",
+      "skill": "dynamodb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "What is the maximum size of a single item in DynamoDB? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)400\\s*kb"
+      },
+      "notes": "plugins/database/skills/dynamodb/SKILL.md - Fundamental Concepts and Quick Reference Limits table: Maximum item size is 400 KB."
+    },
+    {
+      "id": "elasticache-serverless-ecpu-max",
+      "skill": "elasticache",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "What is the maximum sustained ElastiCache Processing Units throughput per second that a single ElastiCache Serverless cache supports? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30,?000"
+      },
+      "notes": "plugins/database/skills/elasticache/SKILL.md - ElastiCache Serverless section: Limits -- Maximum 5 TB data storage, 30,000 ECPUs/second sustained throughput per cache."
+    },
+    {
+      "id": "elasticache-clustermode-max-capacity",
+      "skill": "elasticache",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "For ElastiCache Redis or Valkey with cluster mode enabled, using cache.r7g.16xlarge nodes across the maximum number of shards, what is the approximate theoretical maximum data capacity? Answer with the approximate number of terabytes.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "317"
+        ]
+      },
+      "notes": "plugins/database/skills/elasticache/SKILL.md - Cluster Mode Enabled section: Maximum capacity -- up to 500 shards x node memory, theoretical maximum ~317 TB with cache.r7g.16xlarge nodes."
+    },
+    {
+      "id": "elasticache-iam-token-validity",
+      "skill": "elasticache",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "For ElastiCache IAM authentication on Redis 7.0+ or Valkey, how long is a generated IAM auth token valid before it needs to be renewed? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15\\s*min"
+      },
+      "notes": "plugins/database/skills/elasticache/references/architecture.md - Security Architecture, IAM authentication: Token validity 15 minutes (auto-renewed by supported clients)."
+    },
+    {
+      "id": "elasticsearch-bbq-memory-reduction",
+      "skill": "elasticsearch",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Elasticsearch 8.14 introduced Better Binary Quantization for dense vectors. Roughly what memory reduction factor does BBQ provide compared to unquantized vectors? Answer with the approximate multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)32\\s*x"
+      },
+      "notes": "plugins/database/skills/elasticsearch/references/versions/8.x.md - kNN evolution across 8.x table: 8.14 BBQ (Better Binary Quantization) for ~32x memory reduction."
+    },
+    {
+      "id": "elasticsearch-logsdb-ignoreabove",
+      "skill": "elasticsearch",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Elasticsearch 9.x logsdb index mode, what is the default value of the ignore_above setting applied to keyword fields? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8191"
+        ]
+      },
+      "notes": "plugins/database/skills/elasticsearch/references/versions/9.x.md - Logsdb mode features: ignore_above for keywords -- Keyword fields have a default ignore_above: 8191 to prevent excessively long values."
+    },
+    {
+      "id": "elasticsearch-shard-size-target",
+      "skill": "elasticsearch",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "What is the recommended target size range, in gigabytes, for a single Elasticsearch shard? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10",
+          "50"
+        ]
+      },
+      "notes": "plugins/database/skills/elasticsearch/SKILL.md - Index Architecture (Shards, Replicas, Segments) section: Target 10-50GB per shard, and avoid exceeding 20 shards per GB of heap."
+    },
+    {
+      "id": "influxdb-docker-latest-switch",
+      "skill": "influxdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Starting on what date will the InfluxDB Docker latest tag point to InfluxDB 3 Core instead of 2.x? Answer with the exact date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(may\\s*27,?\\s*2026|2026-05-27)"
+      },
+      "notes": "plugins/database/skills/influxdb/references/versions/2.x.md - Important Docker note: On May 27, 2026, the latest Docker tag will point to InfluxDB 3 Core instead of 2.x."
+    },
+    {
+      "id": "influxdb-3x-ga-date",
+      "skill": "influxdb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "On what date did InfluxDB 3 Core and Enterprise reach general availability? Answer with the exact date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(april\\s*15,?\\s*2025|2025-04-15)"
+      },
+      "notes": "plugins/database/skills/influxdb/references/versions/3.x.md - Support status line: InfluxDB 3 Core and Enterprise reached General Availability on April 15, 2025."
+    },
+    {
+      "id": "influxdb-write-batch-size",
+      "skill": "influxdb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "For InfluxDB write performance, what is the recommended batch size range, in number of points, for a single HTTP write request? Answer with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5,?000.{0,20}10,?000"
+      },
+      "notes": "plugins/database/skills/influxdb/SKILL.md - Write Path and Optimization: Batch 5,000-10,000 points per write request (also in Performance Tuning Quick Reference table for both 2.x and 3.x)."
+    },
+    {
+      "id": "mariadb-vector-max-dimensions",
+      "skill": "mariadb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In MariaDB, the VECTOR data type used for AI similarity search supports embeddings up to how many dimensions? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8192"
+        ]
+      },
+      "notes": "plugins/database/skills/mariadb/references/versions/11.8.md - MariaDB Vector section states VECTOR supports up to 8192 dimensions."
+    },
+    {
+      "id": "mariadb-json-depth-limit-removed",
+      "skill": "mariadb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "MariaDB used to enforce a hard cap on how many levels deep a JSON document could be nested, before that restriction was removed in a rolling release. What was that old nesting limit, in levels? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b32\\b|thirty[- ]two)"
+      },
+      "notes": "plugins/database/skills/mariadb/references/versions/12.x.md - Removed JSON Depth Limit section (MariaDB 12.2) states the previous hard limit of 32 levels of JSON nesting has been removed."
+    },
+    {
+      "id": "mariadb-galera-large-transaction-threshold",
+      "skill": "mariadb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In a Galera Cluster, transactions modifying more than roughly how many rows generate writesets large enough to stall the whole cluster during certification? Answer with the exact number, in thousands of rows.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128"
+        ]
+      },
+      "notes": "plugins/database/skills/mariadb/SKILL.md - Galera Limitations and Common Pitfalls sections both state transactions modifying more than approximately 128K rows cause cluster-wide performance issues."
+    },
+    {
+      "id": "memcached-extstore-min-version",
+      "skill": "memcached",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Which minimum Memcached version introduced extstore, the feature that offloads large item values to flash or SSD storage while keeping metadata in RAM? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.5.4"
+        ]
+      },
+      "notes": "plugins/database/skills/memcached/references/architecture.md - Extstore (External Storage) section states Memcached 1.5.4+ includes extstore."
+    },
+    {
+      "id": "memcached-elasticache-max-nodes",
+      "skill": "memcached",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "For AWS ElastiCache for Memcached, what is the maximum number of nodes allowed in a single cluster, and across how many shards at most in cluster mode? Answer with both exact numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300",
+          "20"
+        ]
+      },
+      "notes": "plugins/database/skills/memcached/SKILL.md - AWS ElastiCache for Memcached section states up to 300 nodes per cluster across up to 20 shards for cluster mode."
+    },
+    {
+      "id": "memcached-ketama-virtual-nodes",
+      "skill": "memcached",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "With Ketama consistent hashing in Memcached client libraries, each physical server is mapped to approximately how many points, or virtual nodes, on the hash ring? Answer with the approximate range.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100",
+          "200"
+        ]
+      },
+      "notes": "plugins/database/skills/memcached/SKILL.md - Consistent Hashing section states each server is mapped to approximately 100-200 points on the hash ring (virtual nodes)."
+    },
+    {
+      "id": "mongodb-oidc-min-version",
+      "skill": "mongodb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Starting with which minimum MongoDB server version can you authenticate using native OIDC, OpenID Connect, without a third-party proxy? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.0"
+        ]
+      },
+      "notes": "plugins/database/skills/mongodb/references/versions/8.0.md - OIDC Authentication section; SKILL.md Security Model table also marks OIDC as 8.0+."
+    },
+    {
+      "id": "mongodb-querystats-stage",
+      "skill": "mongodb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "MongoDB 8.0 added a new aggregation pipeline stage for querying a historical store of query statistics, cutting down on the need to combine currentOp with the profiler. What is the name of that stage? Answer with the exact name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bqueryStats\\b"
+      },
+      "notes": "plugins/database/skills/mongodb/references/versions/8.0.md - queryStats Aggregation Stage section introduces the $queryStats stage."
+    },
+    {
+      "id": "mongodb-wiredtiger-min-cache",
+      "skill": "mongodb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In MongoDB, what is the minimum default size of the WiredTiger internal cache, regardless of how little RAM the host machine has? Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "256"
+        ]
+      },
+      "notes": "plugins/database/skills/mongodb/SKILL.md - WiredTiger Storage Engine section states default cache size is 50 percent of RAM minus 1GB, with a minimum of 256MB."
+    },
+    {
+      "id": "mysql-spatial-index-fix-version",
+      "skill": "mysql",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "MySQL 8.4.0 through 8.4.3 shipped with a bug that could corrupt spatial indexes during certain DML operations. Which patch release first fixed it? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.4.4"
+        ]
+      },
+      "notes": "plugins/database/skills/mysql/references/versions/8.4.md - Spatial Index Corruption pitfall section states the fix is to upgrade to 8.4.4 or later."
+    },
+    {
+      "id": "mysql-dedicated-server-dml-gain",
+      "skill": "mysql",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "With innodb_dedicated_server enabled by default in MySQL 8.4, what is the maximum DML throughput multiplier reported on dedicated database servers compared to default 8.0 settings? Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(3\\s*x\\b|three\\s*times|threefold)"
+      },
+      "notes": "plugins/database/skills/mysql/references/versions/8.4.md - innodb_dedicated_server=ON by Default section states up to 3x DML throughput improvement."
+    },
+    {
+      "id": "mysql-innodb-lru-old-sublist-fraction",
+      "skill": "mysql",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In the InnoDB buffer pool LRU list, new pages are inserted at the midpoint, the head of the old sublist, rather than the head of the whole list. What fraction of the list, measured from the tail, makes up this old sublist by default? Answer with the exact fraction.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(3\\s*/\\s*8|three[- ]eighths)"
+      },
+      "notes": "plugins/database/skills/mysql/references/architecture.md - LRU with Midpoint Insertion section states the old sublist is the tail, roughly 3/8 of the list."
+    },
+    {
+      "id": "neo4j-cypher25-default-release",
+      "skill": "neo4j",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "As of which monthly Neo4j 2026.x release did Cypher 25 become the default query language for new deployments? Answer with the exact version in YYYY.MM format.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026.02"
+        ]
+      },
+      "notes": "plugins/database/skills/neo4j/references/versions/2026.x.md - Cypher 25 section and the 2026.x release timeline table both state Cypher 25 becomes default starting 2026.02."
+    },
+    {
+      "id": "neo4j-query-cache-max-size",
+      "skill": "neo4j",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Neo4j 2026.01 introduced a default maximum query size for the query cache. What is that default size, in KiB? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128"
+        ]
+      },
+      "notes": "plugins/database/skills/neo4j/references/versions/2026.x.md - Maximum Query Size for Caching section shows server.memory.query_cache.per_entry_max_query_size defaults to 128k."
+    },
+    {
+      "id": "neo4j-5-primary-cluster-fault-tolerance",
+      "skill": "neo4j",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In a Neo4j Enterprise cluster with 5 primary servers using Raft consensus, how many primary server failures can the cluster tolerate while still accepting writes? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b2\\b|\\btwo\\b)"
+      },
+      "notes": "plugins/database/skills/neo4j/SKILL.md - Cluster Architecture cluster sizing table states 5 primaries tolerates 2 failures."
+    },
+    {
+      "id": "neptune-max-property-value-size",
+      "skill": "neptune",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Amazon Neptune, what is the maximum size of a single vertex or edge property value? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b55\\s*mb\\b"
+      },
+      "notes": "plugins/database/skills/neptune/SKILL.md - Key Limits and Constraints table lists maximum property value size as 55 MB."
+    },
+    {
+      "id": "neptune-streams-retention-days",
+      "skill": "neptune",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Amazon Neptune, Neptune Streams retains its change data capture log for up to how many days by default before it needs custom configuration? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*days|seven\\s*days)"
+      },
+      "notes": "plugins/database/skills/neptune/SKILL.md - Neptune Streams (Change Data Capture) section states retention is up to 7 days (configurable)."
+    },
+    {
+      "id": "neptune-write-quorum-copies",
+      "skill": "neptune",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "Amazon Neptune replicates every write to 6 copies of data across 3 Availability Zones. How many of those 6 copies must acknowledge a write before it is considered durable? Answer with the exact ratio.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\s*(of|/)\\s*6\\b"
+      },
+      "notes": "plugins/database/skills/neptune/references/architecture.md - Storage Engine section states quorum writes require 4 of 6 copies to acknowledge before a write is considered durable."
+    },
+    {
+      "id": "opensearch-3x-perf-multiplier",
+      "skill": "opensearch",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "OpenSearch publishes aggregate performance comparisons between major versions. Approximately how many times more performant is OpenSearch 3.0 than OpenSearch 1.3 on aggregate benchmarks? Answer with the exact multiplier.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.4"
+        ]
+      },
+      "notes": "plugins/database/skills/opensearch/references/versions/3.x.md - Performance Comparison: 3.x vs 2.x table states OpenSearch 3.0 is approximately 8.4x more performant than OpenSearch 1.3 on aggregate and 20% faster than 2.19"
+    },
+    {
+      "id": "opensearch-agentic-search-types",
+      "skill": "opensearch",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "OpenSearch agentic search, which reached general availability in version 3.3, ships with four pre-built agent types. Which one is designed for complex multi-step reasoning that breaks a task into steps and refines its approach through reflection? Answer with the exact agent type name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)plan.?execute.?reflect"
+      },
+      "notes": "plugins/database/skills/opensearch/references/versions/3.x.md - OpenSearch 3.3 (November 2025) Agentic Search (GA) section lists 4 pre-built agent types; the 4th is the Plan-execute-reflect agent for complex multi-step reasoning"
+    },
+    {
+      "id": "opensearch-serverless-ocu-spec",
+      "skill": "opensearch",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Amazon OpenSearch Serverless, one OCU (OpenSearch Compute Unit) equals 1 vCPU plus how much RAM and how much local storage? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6",
+          "120"
+        ]
+      },
+      "notes": "plugins/database/skills/opensearch/SKILL.md - OpenSearch Serverless (AOSS) on AWS section: each OCU = 1 vCPU + 6 GiB RAM + 120 GiB storage"
+    },
+    {
+      "id": "oracle-26ai-binary-vector-storage",
+      "skill": "oracle",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Oracle AI Database 26ai, binary vectors provide how much lower storage compared to FLOAT32 vectors? Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)32\\s*x\\b"
+      },
+      "notes": "plugins/database/skills/oracle/references/versions/26ai.md - Enhanced AI Vector Search > Binary Vectors: 32x lower storage compared to FLOAT32 vectors"
+    },
+    {
+      "id": "oracle-26ai-release-type",
+      "skill": "oracle",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Is Oracle AI Database 26ai a traditional major version upgrade from Oracle 23ai, or is it delivered as a release update applied on top of 23ai? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(release update|patch|23\\.26)"
+      },
+      "notes": "plugins/database/skills/oracle/references/versions/26ai.md - Version Identity: 26ai is NOT a new major version upgrade; it is 23ai with Release Update 23.26 applied via OPatch, internal version remains 23.x"
+    },
+    {
+      "id": "oracle-pga-limit-default",
+      "skill": "oracle",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Oracle Database, PGA_AGGREGATE_LIMIT defaults to what multiple of PGA_AGGREGATE_TARGET, or what percentage of physical memory? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(2x|two\\s*times|200\\s*%|200\\s*percent)"
+      },
+      "notes": "plugins/database/skills/oracle/SKILL.md - Common Pitfalls #1: PGA_AGGREGATE_LIMIT defaults to 2x PGA_AGGREGATE_TARGET or 200% of physical memory"
+    },
+    {
+      "id": "overview-cap-cassandra-classification",
+      "skill": "overview",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "Under CAP theorem classification, are Cassandra and DynamoDB typically categorized as CP systems or AP systems during a network partition? Answer with the two-letter classification.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bap\\b"
+      },
+      "notes": "plugins/database/skills/overview/SKILL.md - CAP Theorem table: Cassandra, DynamoDB, CouchDB listed under AP (Availability + Partition tolerance), accepts writes during partition"
+    },
+    {
+      "id": "overview-denormalization-ratio",
+      "skill": "overview",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In general database design guidance, denormalization becomes worth considering once the read to write ratio exceeds what threshold? Answer with the exact ratio.",
+      "expected": {
+        "type": "regex",
+        "value": "100\\s*:\\s*1"
+      },
+      "notes": "plugins/database/skills/overview/SKILL.md - Normalization vs. Denormalization: denormalization triggers include when read:write ratio exceeds 100:1"
+    },
+    {
+      "id": "overview-mongodb-doc-size-limit",
+      "skill": "overview",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "When deciding whether to embed or reference child data in a document database such as MongoDB, what document size limit is commonly cited as the threshold favoring embedding? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b16\\s*mb\\b"
+      },
+      "notes": "plugins/database/skills/overview/references/concepts.md - Document Embedding vs. Referencing: embed when document size stays under 16 MB (MongoDB limit)"
+    },
+    {
+      "id": "postgresql-pgupgrade-swap-flag",
+      "skill": "postgresql",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Which pg_upgrade flag introduced in PostgreSQL 18 swaps data directories instead of copying them, dramatically speeding up major version upgrades of large databases? Answer with the exact flag.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "--swap"
+        ]
+      },
+      "notes": "plugins/database/skills/postgresql/references/versions/18.md - pg_upgrade Improvements: --swap flag swaps data directories instead of copying, fastest upgrade option"
+    },
+    {
+      "id": "postgresql-17-vacuum-tidstore-memory",
+      "skill": "postgresql",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "PostgreSQL 17 introduced a TID store, a radix tree that VACUUM uses to track dead tuple IDs. Compared to the previous flat array approach, it reduces VACUUM memory consumption on large tables by up to how many times? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(20\\s*x\\b|20\\s*times)"
+      },
+      "notes": "plugins/database/skills/postgresql/references/versions/17.md - Improved VACUUM Memory Management: TID store optimization reduces memory consumption for VACUUM on large tables by up to 20x"
+    },
+    {
+      "id": "postgresql-autovacuum-scale-factor-default",
+      "skill": "postgresql",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "What is the default value of the autovacuum_vacuum_scale_factor parameter in PostgreSQL? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0.2"
+        ]
+      },
+      "notes": "plugins/database/skills/postgresql/SKILL.md - VACUUM and Autovacuum: autovacuum_vacuum_scale_factor default is 0.2, lower for large tables"
+    },
+    {
+      "id": "redis-8-listpack-threshold-change",
+      "skill": "redis",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Redis 8.0, the default hash-max-listpack-entries threshold changed from what value to what value? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128",
+          "256"
+        ]
+      },
+      "notes": "plugins/database/skills/redis/references/versions/8.0.md - Encoding threshold changes: hash-max-listpack-entries 128 -> 256 (list, set, and zset listpack thresholds change the same way)"
+    },
+    {
+      "id": "redis-hash-field-ttl-memory-overhead",
+      "skill": "redis",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Redis, giving a hash field an expiration with HEXPIRE adds roughly how many extra bytes of memory overhead per expiring field for the expiration metadata? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16"
+        ]
+      },
+      "notes": "plugins/database/skills/redis/references/versions/7.4.md - Hash Field Expiration > Internal implementation: memory overhead is approximately 16 bytes per expiring field"
+    },
+    {
+      "id": "redis-cluster-hash-slots",
+      "skill": "redis",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "How many hash slots does Redis Cluster use to distribute keys across master nodes? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16384"
+        ]
+      },
+      "notes": "plugins/database/skills/redis/SKILL.md - Clustering Architecture: 16,384 hash slots distributed across master nodes"
+    },
+    {
+      "id": "redshift-serverless-min-billing-seconds",
+      "skill": "redshift",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b60\\b"
+      },
+      "notes": "plugins/database/skills/redshift/references/architecture.md - Redshift Serverless Architecture > Auto-Scaling Behavior: billed only for RPU-seconds consumed, with a minimum of 60 seconds per query"
+    },
+    {
+      "id": "redshift-concurrency-scaling-free-credit",
+      "skill": "redshift",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "How many free hours of Redshift concurrency scaling credit does a cluster earn per 24-hour period that it is active? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(1\\s*hour|one\\s*hour)"
+      },
+      "notes": "plugins/database/skills/redshift/references/architecture.md - Concurrency Scaling: each cluster earns up to 1 hour of free concurrency scaling credits per day for every 24 hours it is active (also stated in best-practices.md Cost Optimization)"
+    },
+    {
+      "id": "redshift-columnar-block-size",
+      "skill": "redshift",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "In Amazon Redshift's columnar storage engine, what is the fixed size of each immutable block that a column's data is broken into on disk? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1\\s*mb\\b"
+      },
+      "notes": "plugins/database/skills/redshift/references/architecture.md and SKILL.md - Columnar Storage Engine: each column stored in a sequence of immutable 1 MB blocks"
+    },
+    {
+      "id": "scylladb-vector-filter-version",
+      "skill": "scylladb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In ScyllaDB, combining an ANN vector search with a WHERE clause filter on a non-vector column in the same query was first supported starting in which release. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026.1"
+        ]
+      },
+      "notes": "plugins/database/skills/scylladb/references/versions/2026.1.md - Vector Search with Filtering and Quantization section: ANN search with filtering is listed as NEW in 2026.1, with basic unfiltered ANN search available since earlier versions."
+    },
+    {
+      "id": "scylladb-counter-tablets-2025",
+      "skill": "scylladb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In ScyllaDB 2025.1, can a counter table be created in a tablets-enabled keyspace, or does it require a vnodes-based keyspace instead. Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(vnode|\\bno\\b|not support)"
+      },
+      "notes": "plugins/database/skills/scylladb/references/versions/2025.1.md - Known Issues and Workarounds: Counters are NOT supported with tablets in 2025.1 (use vnodes for counter tables); this limitation is resolved in ScyllaDB 2026.1."
+    },
+    {
+      "id": "scylladb-ics-temp-space",
+      "skill": "scylladb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "When ScyllaDB uses Incremental Compaction Strategy instead of SizeTiered Compaction Strategy, roughly what percentage of temporary space overhead does compaction require. Answer with the approximate percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10\\s*-\\s*15\\s*%|10%\\s*-\\s*15%|10 to 15 ?percent)"
+      },
+      "notes": "plugins/database/skills/scylladb/SKILL.md - Compaction Strategies section: ICS has the same read/write amplification as STCS but only ~10-15% temporary space, versus STCS's 2x."
+    },
+    {
+      "id": "snowflake-snowpipe-file-cost",
+      "skill": "snowflake",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Roughly how many Snowflake credits does Snowpipe charge per 1000 files loaded. Answer with the approximate number of credits.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0?\\.06"
+      },
+      "notes": "plugins/database/skills/snowflake/SKILL.md - Snowpipe (Continuous Data Loading) section: Snowpipe is billed per file loaded, approximately 0.06 credits per 1000 files."
+    },
+    {
+      "id": "snowflake-snowpark-optimized-memory",
+      "skill": "snowflake",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Compared with a standard Snowflake virtual warehouse node, how much more memory per node does a Snowpark-optimized warehouse provide. Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(16\\s*x|16\\s*times)"
+      },
+      "notes": "plugins/database/skills/snowflake/references/advanced-features.md - Snowpark section: Snowpark-optimized warehouses have 16x memory per node compared to standard warehouses."
+    },
+    {
+      "id": "snowflake-failsafe-window",
+      "skill": "snowflake",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "After Snowflake Time Travel retention expires on a permanent table, how many additional days does Fail-Safe provide for data recovery. Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b7\\s*-?\\s*days?\\b|seven[- ]day)"
+      },
+      "notes": "plugins/database/skills/snowflake/SKILL.md - Time Travel and Fail-Safe section: Fail-Safe is an additional 7-day recovery period after Time Travel expires, available only for permanent tables."
+    },
+    {
+      "id": "sql-server-standard-edition-ram",
+      "skill": "sql-server",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In SQL Server 2025, what is the maximum RAM supported by Standard Edition. Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "256"
+        ]
+      },
+      "notes": "plugins/database/skills/sql-server/references/versions/2025.md - Standard Edition Improvements section: RAM limit raised to 256 GB, up from 128 GB."
+    },
+    {
+      "id": "sql-server-optimized-locking-default",
+      "skill": "sql-server",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In SQL Server 2025, is optimized locking turned on by default for a database. Answer with yes or no.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "notes": "plugins/database/skills/sql-server/references/versions/2025.md - Optimized Locking section note: Optimized locking is disabled by default in SQL Server 2025 and requires Accelerated Database Recovery to be enabled first."
+    },
+    {
+      "id": "sql-server-max-nc-indexes",
+      "skill": "sql-server",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of nonclustered indexes allowed on a single SQL Server table. Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "999"
+        ]
+      },
+      "notes": "plugins/database/skills/sql-server/SKILL.md - Indexing Strategies table: Nonclustered index row notes a maximum of 999 nonclustered indexes."
+    },
+    {
+      "id": "sqlite-352-withdrawn",
+      "skill": "sqlite",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Which SQLite release was withdrawn for backwards-compatibility rework and is being replaced by a later version. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.52.0"
+        ]
+      },
+      "notes": "plugins/database/skills/sqlite/SKILL.md - intro paragraph: Version 3.52.0 was withdrawn for backwards-compatibility rework and will be replaced by 3.53.0; current stable is 3.51.3."
+    },
+    {
+      "id": "sqlite-jsonb-each-version",
+      "skill": "sqlite",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Starting in which SQLite version can you iterate a JSONB column directly using the jsonb_each and jsonb_tree table-valued functions. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.51"
+        ]
+      },
+      "notes": "plugins/database/skills/sqlite/SKILL.md - JSON Functions section: jsonb_each and jsonb_tree for iterating JSONB directly are marked as available since 3.51+."
+    },
+    {
+      "id": "sqlite-max-db-size",
+      "skill": "sqlite",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "What is the theoretical maximum size of a single SQLite database file. Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "281"
+        ]
+      },
+      "notes": "plugins/database/skills/sqlite/SKILL.md - When to Use SQLite, Poor fit list: notes SQLite supports databases up to 281TB theoretically."
+    },
+    {
+      "id": "synapse-spark-runtime-versions",
+      "skill": "synapse",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "As of 2026, which Apache Spark runtime versions does Azure Synapse support for its Spark pools. Answer with both version numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.4",
+          "3.5"
+        ]
+      },
+      "notes": "plugins/database/skills/synapse/SKILL.md - Synapse Spark Pools section: Synapse supports Spark 3.4 and 3.5 runtimes as of 2026, selected per pool."
+    },
+    {
+      "id": "synapse-result-cache-ttl",
+      "skill": "synapse",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In Azure Synapse dedicated SQL pool, how long do cached query results remain valid under result set caching, assuming the underlying data has not changed. Answer with the exact number of hours.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(48\\s*-?\\s*hours?|forty[- ]eight hours)"
+      },
+      "notes": "plugins/database/skills/synapse/SKILL.md - Performance Features section: cached results under result set caching expire after 48 hours or when underlying data changes."
+    },
+    {
+      "id": "synapse-serverless-price-per-tb",
+      "skill": "synapse",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "How much does Azure Synapse serverless SQL pool charge per terabyte of data scanned. Answer with the exact dollar amount.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "$5"
+        ]
+      },
+      "notes": "plugins/database/skills/synapse/SKILL.md - Platform Components table: Serverless SQL pool billing model is listed as Per-TB scanned ($5/TB)."
+    },
+    {
+      "id": "timescaledb-minmax-fastpath-speedup",
+      "skill": "timescaledb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "In TimescaleDB 2.25, the new ColumnarIndexScan fast path can make MIN and MAX queries how many times faster than before. Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)289\\s*x"
+      },
+      "notes": "plugins/database/skills/timescaledb/references/versions/2.x.md - TimescaleDB 2.25 section: MIN/MAX fast paths are up to 289x faster by reading only _ts_meta_min/max metadata."
+    },
+    {
+      "id": "timescaledb-realtime-agg-default",
+      "skill": "timescaledb",
+      "plugin": "database",
+      "knowledge": "recent",
+      "prompt": "Starting with which TimescaleDB version did newly created continuous aggregates default to having real-time aggregation turned off. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.13"
+        ]
+      },
+      "notes": "plugins/database/skills/timescaledb/SKILL.md - Continuous Aggregates section: the default changed in TimescaleDB 2.13, where real-time aggregates became disabled by default for new continuous aggregates."
+    },
+    {
+      "id": "timescaledb-chunk-interval-default",
+      "skill": "timescaledb",
+      "plugin": "database",
+      "knowledge": "stable",
+      "prompt": "When you create a TimescaleDB hypertable without specifying a chunk time interval, what is the default chunk interval. Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*-?\\s*days?|one\\s*week|seven\\s*days)"
+      },
+      "notes": "plugins/database/skills/timescaledb/SKILL.md - Hypertable Architecture section: create_hypertable code comment states the default chunk_time_interval is 7 days; the chunk interval sizing table also lists 1-week chunks as the default for low ingest."
+    }
+  ]
+}

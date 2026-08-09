@@ -1,0 +1,465 @@
+{
+  "suite": "containers",
+  "description": "Cross-harness matrix suite for the containers plugin's 17 skills (aks, consul, containerd, docker, eks, gke, helm, istio, kubernetes, linkerd, openshift, orchestration, overview, podman, rancher, runtimes, service-mesh). Prompts are deliberately neutral (no mention of a skills library or docs) so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in each skill's SKILL.md as of 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff version/date or niche architectural detail); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "aks-automatic-ga",
+      "skill": "aks",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "In Azure Kubernetes Service, AKS Automatic reached general availability in a specific year, and it is often compared to a feature on a competing cloud's managed Kubernetes offering. Which year did it reach GA, and which Google Cloud feature is it most comparable to? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026", "Autopilot"] },
+      "notes": "plugins/containers/skills/aks/SKILL.md - AKS Automatic GA since 2026, comparable to GKE Autopilot"
+    },
+    {
+      "id": "aks-taint-key",
+      "skill": "aks",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "When you separate system and user node pools in AKS, what taint key and value do you typically apply to the system pool so application pods cannot land on it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["CriticalAddonsOnly", "NoSchedule"] },
+      "notes": "plugins/containers/skills/aks/SKILL.md - system pool taint CriticalAddonsOnly=true:NoSchedule"
+    },
+    {
+      "id": "aks-workload-identity-label",
+      "skill": "aks",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "For AKS workload identity, if you annotate the ServiceAccount with the client ID but never label the pod itself, will the mutating webhook still inject the Azure credential environment variables into the pod? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|will not|won't|not inject)" },
+      "notes": "plugins/containers/skills/aks/SKILL.md - pod must carry azure.workload.identity/use: true label itself, not just the ServiceAccount, for injection to occur"
+    },
+    {
+      "id": "consul-dataplane-intro",
+      "skill": "consul",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "What version of Consul first introduced Consul Dataplane, removing the need for a full client agent on every node? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.14"] },
+      "notes": "plugins/containers/skills/consul/SKILL.md - Consul Dataplane introduced in Consul 1.14+"
+    },
+    {
+      "id": "consul-intention-precedence",
+      "skill": "consul",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "In Consul Connect, when both an exact-source-exact-destination intention and a wildcard-source-wildcard-destination intention could apply to a connection, does the wildcard rule ever win over the exact one? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|less specific|least specific|does not)" },
+      "notes": "plugins/containers/skills/consul/SKILL.md - intention precedence: exact+exact is most specific, wildcard+wildcard is least specific/default deny"
+    },
+    {
+      "id": "consul-gateway-mode-default",
+      "skill": "consul",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "In Consul Connect mesh gateway configuration, which gateway mode, local, remote, or none, is the default for routing cross-datacenter traffic? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\blocal\\b" },
+      "notes": "plugins/containers/skills/consul/SKILL.md - local: traffic exits through the local datacenter's mesh gateway (default)"
+    },
+    {
+      "id": "containerd-nri-default",
+      "skill": "containerd",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Starting with containerd 2.0, is the NRI plugin framework enabled by default, or do operators need to turn it on manually? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(enabled by default|\\byes\\b)" },
+      "notes": "plugins/containers/skills/containerd/SKILL.md - NRI: Enabled by default in containerd 2.0"
+    },
+    {
+      "id": "containerd-config-version",
+      "skill": "containerd",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "If a containerd 2.x install is left running with an outdated config.toml that is missing the required version = 3 header, what happens to that configuration rather than the daemon simply erroring out? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["silently", "defaults"] },
+      "notes": "plugins/containers/skills/containerd/SKILL.md - Common Pitfalls: using old config silently falls back to defaults"
+    },
+    {
+      "id": "containerd-namespace-moby",
+      "skill": "containerd",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Within a single containerd instance shared by Docker and Kubernetes, which containerd namespace holds Docker Engine's own containers and images? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["moby"] },
+      "notes": "plugins/containers/skills/containerd/SKILL.md - moby namespace used by Docker Engine"
+    },
+    {
+      "id": "docker-v29-containerd-version",
+      "skill": "docker",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Which exact containerd version does Docker Engine 29 bundle as its execution backend? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.2.2"] },
+      "notes": "plugins/containers/skills/docker/SKILL.md - Docker Engine v29 ships containerd 2.2.2 with config version 3"
+    },
+    {
+      "id": "docker-compose-spec-removal",
+      "skill": "docker",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "The Compose Specification released in December 2025 removed which internal capability from Docker Compose, pushing users toward Docker Bake instead? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["builder", "Bake"] },
+      "notes": "plugins/containers/skills/docker/SKILL.md - Compose Specification v5.0.0 (Dec 2025) removed the internal builder in favor of Docker Bake"
+    },
+    {
+      "id": "docker-desktop-license-threshold",
+      "skill": "docker",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "At what company size or annual revenue does Docker Desktop stop being free and require a paid subscription? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["250", "10"] },
+      "notes": "plugins/containers/skills/docker/SKILL.md - Paid for large orgs (>250 employees / >10M revenue)"
+    },
+    {
+      "id": "eks-karpenter-version",
+      "skill": "eks",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "What is the current major and minor version line of Karpenter used for node autoscaling on Amazon EKS? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.10"] },
+      "notes": "plugins/containers/skills/eks/SKILL.md - Karpenter current: v1.10.x"
+    },
+    {
+      "id": "eks-extended-support-cost",
+      "skill": "eks",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Once an EKS cluster moves past standard version support into extended support, what additional hourly charge does AWS bill per cluster? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["0.60"] },
+      "notes": "plugins/containers/skills/eks/SKILL.md - Version support: 14 months standard, 12 months extended ($0.60/hr)"
+    },
+    {
+      "id": "eks-fargate-pod-limit",
+      "skill": "eks",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "On Amazon EKS Fargate, what are the maximum vCPU and memory a single pod can be allocated? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["4", "30"] },
+      "notes": "plugins/containers/skills/eks/SKILL.md - Fargate limitations: Max 4 vCPU, 30 GB memory per pod"
+    },
+    {
+      "id": "gke-autopilot-default-cpu",
+      "skill": "gke",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "In GKE Autopilot, if a pod spec omits a CPU request, what default CPU request does Autopilot apply on its behalf? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["500m"] },
+      "notes": "plugins/containers/skills/gke/SKILL.md - Default CPU request: 500m"
+    },
+    {
+      "id": "gke-spot-grace-period",
+      "skill": "gke",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "On GKE Autopilot spot pods, how many seconds of termination notice do pods receive before eviction? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)25.{0,15}(second|notice)" },
+      "notes": "plugins/containers/skills/gke/SKILL.md - spot pods get 25s notice, terminationGracePeriodSeconds: 25"
+    },
+    {
+      "id": "gke-dataplane-v2-tech",
+      "skill": "gke",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "What underlying kernel technology powers GKE's default network dataplane, Dataplane V2? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(cilium|ebpf)" },
+      "notes": "plugins/containers/skills/gke/SKILL.md - Dataplane V2 (Cilium), eBPF-based service load balancing"
+    },
+    {
+      "id": "helm4-release-version",
+      "skill": "helm",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "What is the current Helm major and minor release, the one announced at KubeCon 2025? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["4.1"] },
+      "notes": "plugins/containers/skills/helm/SKILL.md - current: 4.1.x, released KubeCon 2025"
+    },
+    {
+      "id": "helm-apply-strategy",
+      "skill": "helm",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Between Helm 3 and Helm 4, which version switched from client-side three-way merge to Server-Side Apply for reconciling manifests? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)helm\\s*4" },
+      "notes": "plugins/containers/skills/helm/SKILL.md - Apply strategy: Helm 3 client-side 3-way merge vs Helm 4 Server-Side Apply (SSA)"
+    },
+    {
+      "id": "helm-hook-weight-order",
+      "skill": "helm",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "For Helm hooks, does a hook with weight -5 run before or after a hook with weight 5? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)before" },
+      "notes": "plugins/containers/skills/helm/SKILL.md - Hook weights: -5 runs before 5"
+    },
+    {
+      "id": "istio-ambient-ga-version",
+      "skill": "istio",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "At which Istio minor version did ambient mesh reach general availability? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.24"] },
+      "notes": "plugins/containers/skills/istio/SKILL.md - Ambient is GA since 1.24"
+    },
+    {
+      "id": "istio-hbone-acronym",
+      "skill": "istio",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "In Istio's ambient mesh, what does the acronym HBONE stand for? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)http-based overlay network environment" },
+      "notes": "plugins/containers/skills/istio/SKILL.md - HBONE (HTTP-Based Overlay Network Environment)"
+    },
+    {
+      "id": "istio-sidecar-memory",
+      "skill": "istio",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Roughly how much RAM does each Envoy sidecar consume per pod under Istio's sidecar mode? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["50"] },
+      "notes": "plugins/containers/skills/istio/SKILL.md - Each Envoy sidecar consumes ~50 MB RAM"
+    },
+    {
+      "id": "k8s-sidecar-ga-version",
+      "skill": "kubernetes",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "At which Kubernetes minor version did native sidecar containers, meaning init containers with restartPolicy set to Always, become stable? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.34"] },
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md - Sidecar containers (stable in K8s 1.34)"
+    },
+    {
+      "id": "k8s-nodeport-range",
+      "skill": "kubernetes",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "What is the default port range Kubernetes reserves for NodePort services? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["30000", "32767"] },
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md - NodePort | ClusterIP + port on every node (30000-32767)"
+    },
+    {
+      "id": "k8s-gateway-api-version",
+      "skill": "kubernetes",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Which version of the Kubernetes Gateway API is now GA and adds BackendTLSPolicy alongside a stable GRPCRoute? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.4"] },
+      "notes": "plugins/containers/skills/kubernetes/SKILL.md - Gateway API (v1.4, GA) adds BackendTLSPolicy and stable GRPCRoute"
+    },
+    {
+      "id": "linkerd-postquantum-version",
+      "skill": "linkerd",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Which Linkerd release, and in what month and year, introduced ML-KEM-768 hybrid post-quantum key exchange for mTLS? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.19"] },
+      "notes": "plugins/containers/skills/linkerd/SKILL.md - Linkerd 2.19 (October 2025) introduced ML-KEM-768 hybrid key exchange"
+    },
+    {
+      "id": "linkerd-proxy-memory",
+      "skill": "linkerd",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Approximately how much RAM does the Rust-based linkerd2-proxy sidecar use per pod, compared to a typical Envoy sidecar? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["20", "50"] },
+      "notes": "plugins/containers/skills/linkerd/SKILL.md - ~20-30 MB per pod vs Envoy's ~50 MB+"
+    },
+    {
+      "id": "linkerd-cert-rotation",
+      "skill": "linkerd",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "By default, how often does Linkerd automatically rotate the mTLS certificates it issues to each proxy? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(24\\s*hour|24h|daily)" },
+      "notes": "plugins/containers/skills/linkerd/SKILL.md - Certificates rotate automatically every 24 hours"
+    },
+    {
+      "id": "openshift-default-scc",
+      "skill": "openshift",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "What is the default Security Context Constraint applied in a modern OpenShift cluster, and which upstream Pod Security Standard level does it align with? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["restricted-v2", "Restricted"] },
+      "notes": "plugins/containers/skills/openshift/SKILL.md - restricted-v2 is default, aligns with K8s Restricted PSS"
+    },
+    {
+      "id": "openshift-route-passthrough",
+      "skill": "openshift",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Which OpenShift Route TLS termination mode passes encrypted traffic straight through to the pod without the router inspecting it? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["passthrough"] },
+      "notes": "plugins/containers/skills/openshift/SKILL.md - passthrough: TLS passed through to pod (no inspection)"
+    },
+    {
+      "id": "openshift-scc-selection-algorithm",
+      "skill": "openshift",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "When OpenShift schedules a pod and several SCCs are available to its ServiceAccount, does it choose the least restrictive or the most restrictive SCC that still satisfies the pod's requirements? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)most restrictive" },
+      "notes": "plugins/containers/skills/openshift/SKILL.md - SCC selection algorithm selects the most restrictive SCC that satisfies the pod's requirements"
+    },
+    {
+      "id": "orchestration-aks-free-sla",
+      "skill": "orchestration",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "For Azure AKS, what SLA percentage applies to the free control plane tier, compared to the standard paid tier's SLA? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["99.5", "99.95"] },
+      "notes": "plugins/containers/skills/orchestration/SKILL.md - AKS control plane SLA 99.95% (free tier: 99.5%)"
+    },
+    {
+      "id": "orchestration-k3s-size",
+      "skill": "orchestration",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Among the lightweight Kubernetes distributions compared for edge use, which one ships as a single binary under 100 megabytes with SQLite as its default datastore? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)\\bK3s\\b" },
+      "notes": "plugins/containers/skills/orchestration/SKILL.md - K3s | <100MB | SQLite | Edge, IoT, dev"
+    },
+    {
+      "id": "orchestration-nap-aks-timing",
+      "skill": "orchestration",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "In comparisons of managed Kubernetes node autoscaling, when is Karpenter-based Node Auto Provisioning expected to reach general availability on Azure AKS? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2026"] },
+      "notes": "plugins/containers/skills/orchestration/SKILL.md - Karpenter (NAP, GA 2026) or CA for AKS node autoscaling"
+    },
+    {
+      "id": "overview-containerd-no-build",
+      "skill": "overview",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Among Docker, Podman, and containerd, which container runtime has no built-in image build capability, requiring BuildKit to be run separately? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["containerd"] },
+      "notes": "plugins/containers/skills/overview/SKILL.md - containerd: no build tools (use BuildKit separately)"
+    },
+    {
+      "id": "overview-immutable-infra",
+      "skill": "overview",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Under the immutable infrastructure principle for container platforms, when an application needs to change, should you patch the running container in place or build and deploy a new image? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(new image|never patch)" },
+      "notes": "plugins/containers/skills/overview/SKILL.md - Immutable infrastructure: never patch running containers, build new images, deploy, replace"
+    },
+    {
+      "id": "overview-compose-anti-pattern",
+      "skill": "overview",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "For a small project running on a single host with no scaling requirements, is Docker Compose considered a fine choice rather than always defaulting to Kubernetes? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)compose.{0,20}(fine|acceptable|sufficient|works)" },
+      "notes": "plugins/containers/skills/overview/SKILL.md - anti-pattern Kubernetes for everything: Docker Compose is fine for small projects"
+    },
+    {
+      "id": "podman-6-changes",
+      "skill": "podman",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "What major architectural change does Podman version 6.0 introduce, according to its release notes summary? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["revision"] },
+      "notes": "plugins/containers/skills/podman/SKILL.md - 6.0: Major API revision, Quadlet enhancements"
+    },
+    {
+      "id": "podman-rootless-default-network",
+      "skill": "podman",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "In Podman 5.x and later, which rootless networking backend became the default, offering better performance than the legacy slirp4netns? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["pasta"] },
+      "notes": "plugins/containers/skills/podman/SKILL.md - pasta (default in 5.x+)"
+    },
+    {
+      "id": "podman-crun-speed",
+      "skill": "podman",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "How much faster does Podman's default crun runtime start containers compared to runc? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(10x|10 times|ten times)" },
+      "notes": "plugins/containers/skills/podman/SKILL.md - crun (C, 10x faster startup than runc)"
+    },
+    {
+      "id": "rancher-100plus-sizing",
+      "skill": "rancher",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "For a Rancher management server overseeing more than 100 downstream clusters, what vCPU and RAM sizing does the guidance recommend? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["32", "64"] },
+      "notes": "plugins/containers/skills/rancher/SKILL.md - 100+ managed clusters: 32 vCPU, 64 GB RAM"
+    },
+    {
+      "id": "rancher-agent-connection",
+      "skill": "rancher",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Do downstream clusters managed by Rancher need inbound firewall rules opened for the Rancher server to reach them, or does the agent initiate the connection outbound instead? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(outbound|no inbound)" },
+      "notes": "plugins/containers/skills/rancher/SKILL.md - Rancher agent connects outbound via WebSocket, no inbound firewall rules needed"
+    },
+    {
+      "id": "rancher-provisioning-capi",
+      "skill": "rancher",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "What upstream Kubernetes cluster lifecycle project does Rancher's Provisioning v2 build on top of? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["CAPI"] },
+      "notes": "plugins/containers/skills/rancher/SKILL.md - Provisioning v2 uses Cluster API (CAPI) under the hood"
+    },
+    {
+      "id": "runtimes-dockershim-version",
+      "skill": "runtimes",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "At which Kubernetes minor version was the built-in dockershim dropped, making containerd the standard container runtime interface backend? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["1.24"] },
+      "notes": "plugins/containers/skills/runtimes/SKILL.md - Kubernetes dropped dockershim in 1.24"
+    },
+    {
+      "id": "runtimes-docker-desktop-threshold",
+      "skill": "runtimes",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "According to runtime licensing guidance, at what employee count or revenue level does Docker Desktop require a paid subscription? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["250", "10"] },
+      "notes": "plugins/containers/skills/runtimes/SKILL.md - Organizations > 250 employees or > 10M revenue require a paid subscription"
+    },
+    {
+      "id": "runtimes-youki-language",
+      "skill": "runtimes",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Which experimental OCI container runtime is written in Rust for memory safety, positioned as a growing alternative to runc and crun? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["youki"] },
+      "notes": "plugins/containers/skills/runtimes/SKILL.md - youki | Rust | Memory safety, growing ecosystem | Experimental alternative"
+    },
+    {
+      "id": "servicemesh-postquantum",
+      "skill": "service-mesh",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "Among Istio, Linkerd, and Consul Connect, which mesh is the only one offering post-quantum cryptography for mTLS, and starting at which version? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Linkerd", "2.19"] },
+      "notes": "plugins/containers/skills/service-mesh/SKILL.md - Post-quantum crypto: Yes (Linkerd 2.19+, ML-KEM-768), No for Istio and Consul"
+    },
+    {
+      "id": "servicemesh-multicluster-alpha",
+      "skill": "service-mesh",
+      "plugin": "containers",
+      "knowledge": "recent",
+      "prompt": "For Istio's ambient mode, what maturity level is multi-cluster support at today, and at which Istio version was it introduced? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Alpha", "1.27"] },
+      "notes": "plugins/containers/skills/service-mesh/SKILL.md - Multi-cluster: Alpha (ambient 1.27) for Istio"
+    },
+    {
+      "id": "servicemesh-p99-latency",
+      "skill": "service-mesh",
+      "plugin": "containers",
+      "knowledge": "stable",
+      "prompt": "Among Istio, Linkerd, and Consul Connect, which mesh has the lowest p99 latency overhead per hop according to comparative benchmarks? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["Linkerd"] },
+      "notes": "plugins/containers/skills/service-mesh/SKILL.md - p99 latency overhead: Lowest (163ms less at 2k RPS) is Linkerd's column"
+    }
+  ]
+}
