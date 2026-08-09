@@ -18,13 +18,13 @@
   },
   "throttle": { "anthropic": 4, "openai": 4 },
   "pricing": {
-    "_comment": "USD per 1M tokens: [input, cached-input, output]. claude reports cost_usd natively (used as-is); codex/pi costs are ESTIMATED from these rates. null = rates unknown -> reports say 'rates not configured' rather than guessing. Fill gpt-5.6 rates from learn.chatgpt.com/docs/pricing.",
-    "gpt-5.6-sol": null,
-    "gpt-5.6-terra": null,
-    "gpt-5.6-luna": null,
-    "claude-opus-5": null,
-    "claude-sonnet-5": null,
-    "claude-haiku-4-5": null
+    "_comment": "USD per 1M tokens: [input, cached-input, output], as of 2026-08-05 per plugins/ai/skills/model-selection/SKILL.md (cached = 10x cheaper OpenAI, 0.1x Claude). claude reports cost_usd natively (used as-is; these rates are fallback). Sonnet 5 rate is the pre-Sep-1-2026 price.",
+    "gpt-5.6-sol": [5.0, 0.5, 30.0],
+    "gpt-5.6-terra": [2.0, 0.2, 12.0],
+    "gpt-5.6-luna": [0.2, 0.02, 1.2],
+    "claude-opus-5": [5.0, 0.5, 25.0],
+    "claude-sonnet-5": [2.0, 0.2, 10.0],
+    "claude-haiku-4-5": [1.0, 0.1, 5.0]
   },
   "lanes": [
     {
@@ -49,22 +49,18 @@
       "env": { "CODEX_HOME": "@skillmode:codexHome" }
     },
     {
-      "harness": "pi", "provider": "anthropic", "lane": "cloud",
+      "harness": "claude", "provider": "ollama", "lane": "local",
       "models": [
-        { "id": "anthropic/claude-opus-5" },
-        { "id": "anthropic/claude-sonnet-5" },
-        { "id": "anthropic/claude-haiku-4-5" }
+        { "id": "gemma4:12b" },
+        { "id": "glm-4.7-flash:q4_K_M-32k" },
+        { "id": "qwen3.6:27b" }
       ],
-      "efforts": { "E1": "low", "E2": "medium", "E3": "high" }
-    },
-    {
-      "harness": "pi", "provider": "openai", "lane": "cloud",
-      "models": [
-        { "id": "openai/gpt-5.6-sol" },
-        { "id": "openai/gpt-5.6-terra" },
-        { "id": "openai/gpt-5.6-luna" }
-      ],
-      "efforts": { "E1": "low", "E2": "medium", "E3": "high" }
+      "efforts": { "E1": "low", "E2": "medium" },
+      "env": {
+        "CLAUDE_CONFIG_DIR": "C:\\evals\\claude-home",
+        "ANTHROPIC_BASE_URL": "http://localhost:11434",
+        "ANTHROPIC_API_KEY": "ollama"
+      }
     },
     {
       "harness": "codex", "provider": "ollama", "lane": "local",

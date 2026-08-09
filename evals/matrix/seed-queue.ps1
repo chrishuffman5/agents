@@ -32,9 +32,9 @@ if ($Force -and -not $OnlyHarness -and (Test-Path $DbPath)) { Remove-Item $DbPat
 if ((Test-Path $DbPath) -and -not $WhatIfSummary) {
     if ($OnlyHarness) {
         Import-Module PSSQLite
-        $n = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) n FROM runs WHERE harness=@h" -SqlParameters @{ h = $OnlyHarness }).n
-        Invoke-SqliteQuery -DataSource $DbPath -Query "DELETE FROM runs WHERE harness=@h" -SqlParameters @{ h = $OnlyHarness } | Out-Null
-        Write-Host "deleted $n existing $OnlyHarness runs (other harnesses untouched)"
+        $kept = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) n FROM runs WHERE harness=@h AND status='done'" -SqlParameters @{ h = $OnlyHarness }).n
+        Invoke-SqliteQuery -DataSource $DbPath -Query "DELETE FROM runs WHERE harness=@h AND status != 'done'" -SqlParameters @{ h = $OnlyHarness } | Out-Null
+        Write-Host "reseeding $OnlyHarness (kept $kept completed runs; re-inserts are INSERT OR IGNORE)"
     } else {
         $existing = (Invoke-SqliteQuery -DataSource $DbPath -Query "SELECT COUNT(*) AS n FROM runs").n
         if ($existing -gt 0) { throw "evalq.sqlite already holds $existing runs. Use -Force to re-seed, -OnlyHarness <h> to replace one harness, or dispatch the existing queue." }
@@ -112,7 +112,7 @@ $conn = New-SQLiteConnection -DataSource $DbPath
 try {
     Invoke-SqliteQuery -SQLiteConnection $conn -Query 'BEGIN TRANSACTION' | Out-Null
     $insert = @"
-INSERT INTO runs (run_id, harness, provider, model, effort_norm, effort_literal, skill_mode,
+INSERT OR IGNORE INTO runs (run_id, harness, provider, model, effort_norm, effort_literal, skill_mode,
                   lane, sandbox, suite, task_id, skill, knowledge, attempt, command, env_json, workspace)
 VALUES (@run_id, @harness, @provider, @model, @effort_norm, @effort_literal, @skill_mode,
         @lane, @sandbox, @suite, @task_id, @skill, @knowledge, @attempt, @command, @env_json, @workspace)
