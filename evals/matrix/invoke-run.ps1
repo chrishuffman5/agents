@@ -44,6 +44,23 @@ try {
     $parsed = Read-RunResult -Run $run -Raw $raw
     if (-not $parsed) { $parsed = @{} }
 
+    # Cost: harness-reported when present (claude); otherwise estimated from config pricing
+    # rates ([input, cached, output] USD/Mtok). Local lane costs $0. No rates -> stays NULL.
+    if ($null -eq $parsed.cost_usd -or $parsed.cost_usd -is [System.DBNull]) {
+        if ($run.lane -eq 'local') { $parsed.cost_usd = 0.0 }
+        else {
+            $key  = $run.model -replace '^(anthropic|openai|ollama)/', ''
+            $prop = $cfg.pricing.PSObject.Properties[$key]
+            if ($prop -and $prop.Value) {
+                $r = $prop.Value
+                $tin  = if ($parsed.tokens_in) { [double]$parsed.tokens_in } else { 0 }
+                $cin  = if ($parsed.tokens_cache_read) { [double]$parsed.tokens_cache_read } else { 0 }
+                $tout = if ($parsed.tokens_out) { [double]$parsed.tokens_out } else { 0 }
+                $parsed.cost_usd = [math]::Round((([math]::Max(0, $tin - $cin) * $r[0]) + ($cin * $r[1]) + ($tout * $r[2])) / 1e6, 6)
+            }
+        }
+    }
+
     # deterministic grade against the expected spec (task looked up across all suites)
     $task = $null
     foreach ($sf in $cfg.suites) {
