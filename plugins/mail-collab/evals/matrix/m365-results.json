@@ -1,0 +1,51 @@
+{
+  "skill": "m365",
+  "plugin": "mail-collab",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "m365-e1-mailbox-limit",
+      "knowledge": "stable",
+      "prompt": "Under Microsoft 365 E1 licensing, what is the Exchange Online mailbox storage limit? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)50\\s*gb"
+      },
+      "source": "plugins/mail-collab/skills/m365/SKILL.md - Enterprise Plans table: Exchange mailbox row, E1 = 50 GB."
+    },
+    {
+      "id": "m365-defender-e3-2026",
+      "knowledge": "recent",
+      "prompt": "As of 2026, does the Microsoft 365 E3 license include Defender for Office 365 Plan 1? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\byes\\b"
+      },
+      "source": "plugins/mail-collab/skills/m365/SKILL.md - Enterprise Plans table: Defender for O365 row shows E3 = Plan 1 (2026)."
+    },
+    {
+      "id": "m365-ca-legacy-auth",
+      "knowledge": "stable",
+      "prompt": "Among the essential Conditional Access policies recommended for a Microsoft 365 tenant, which legacy authentication protocols should be blocked entirely? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "IMAP",
+          "POP3"
+        ]
+      },
+      "source": "plugins/mail-collab/skills/m365/SKILL.md - Essential policies #3: Block legacy authentication (IMAP, POP3, SMTP AUTH)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

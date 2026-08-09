@@ -1,0 +1,52 @@
+{
+  "skill": "angular-signals",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "angular-signals-v16-preview",
+      "knowledge": "stable",
+      "prompt": "Angular first shipped signal, computed, and effect as a developer preview in which major version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16"
+        ]
+      },
+      "source": "plugins/frontend/skills/angular-signals/SKILL.md - Version History table: v16 Developer Preview of signal(), computed(), effect()"
+    },
+    {
+      "id": "angular-signals-resource-v19",
+      "knowledge": "recent",
+      "prompt": "In Angular signals, which major version first introduced the resource and rxResource APIs for async data? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "19"
+        ]
+      },
+      "source": "plugins/frontend/skills/angular-signals/SKILL.md - Version History table: v19 introduced resource()/rxResource()"
+    },
+    {
+      "id": "angular-signals-resource-status",
+      "knowledge": "recent",
+      "prompt": "In an Angular resource, once the loader has finished and data is available without error, what status value does the resource report? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bresolved\\b"
+      },
+      "source": "plugins/frontend/skills/angular-signals/SKILL.md - Status values: idle, loading, reloading, resolved, error, local"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

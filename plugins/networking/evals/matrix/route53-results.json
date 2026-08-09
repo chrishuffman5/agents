@@ -1,0 +1,50 @@
+{
+  "skill": "route53",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "route53-dnssec-ksk-region",
+      "knowledge": "recent",
+      "prompt": "For Route 53 DNSSEC signing, in which AWS region must the KMS key used for the key-signing key reside, no matter where the hosted zone itself is served from? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "us-east-1"
+        ]
+      },
+      "source": "plugins/networking/skills/route53/SKILL.md - DNSSEC: KSK customer-managed via AWS KMS (must be in us-east-1, ECC_NIST_P256)"
+    },
+    {
+      "id": "route53-multivalue-max",
+      "knowledge": "recent",
+      "prompt": "With Route 53 multivalue answer routing, what is the maximum number of healthy records it will return in response to a single DNS query? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\b"
+      },
+      "source": "plugins/networking/skills/route53/SKILL.md - Multivalue Answer: Up to 8 healthy records per query"
+    },
+    {
+      "id": "route53-cname-apex",
+      "knowledge": "stable",
+      "prompt": "Can you create a CNAME record at the zone apex, such as the bare domain example.com, in Route 53? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not allow)"
+      },
+      "source": "plugins/networking/skills/route53/SKILL.md - Common Pitfalls: CNAME at zone apex - Route 53 does not allow CNAME at zone apex. Use Alias record instead"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

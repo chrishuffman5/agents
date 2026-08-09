@@ -1,0 +1,50 @@
+{
+  "skill": "cosmosdb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cosmosdb-logical-partition-size",
+      "knowledge": "stable",
+      "prompt": "In Azure Cosmos DB, what is the maximum storage size permitted for a single logical partition? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20\\s*gb"
+      },
+      "source": "plugins/database/skills/cosmosdb/SKILL.md - Partitioning section: Logical partition maximum size is 20 GB. Corroborated in references/architecture.md Logical Partitions section."
+    },
+    {
+      "id": "cosmosdb-replace-ru-cost",
+      "knowledge": "recent",
+      "prompt": "In Azure Cosmos DB's NoSQL API, approximately how many Request Units does replacing an existing 1 KB item cost, given that a replace operation reads the old item before writing the new one? Answer with the approximate number of RUs.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10.7"
+        ]
+      },
+      "source": "plugins/database/skills/cosmosdb/references/architecture.md - RU Cost Benchmarks table: Point write / replace (1 KB item) costs approximately 10.7 RU (reads old + writes new)."
+    },
+    {
+      "id": "cosmosdb-reserved-capacity-discount",
+      "knowledge": "recent",
+      "prompt": "For Azure Cosmos DB reserved capacity, approximately what percentage discount does committing to a 1-year reservation provide on provisioned throughput cost? Answer with the approximate percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20\\s*%"
+      },
+      "source": "plugins/database/skills/cosmosdb/references/best-practices.md - Cost Management, Reserved Capacity section: 1-year reservation gives approximately 20% discount."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

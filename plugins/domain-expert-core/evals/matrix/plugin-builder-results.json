@@ -1,0 +1,52 @@
+{
+  "skill": "plugin-builder",
+  "plugin": "domain-expert-core",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "plugin-builder-checkpoint-count",
+      "knowledge": "stable",
+      "prompt": "How many mandatory checkpoints requiring a direct user answer does the plugin-builder pipeline's interview-first contract call for? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(three|3)\\b"
+      },
+      "source": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md - Three mandatory checkpoints, each requiring a user answer: (0) the intent interview, (2) architecture sign-off before any file moves, (3) explicit confirmation before destructive migration steps"
+    },
+    {
+      "id": "plugin-builder-question-batch-limit",
+      "knowledge": "stable",
+      "prompt": "When the plugin-builder pipeline's intent interview uses AskUserQuestion to gather answers, what is the maximum number of questions it should batch into a single call? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md - Batch questions with AskUserQuestion, up to 4 per call, concrete options plus the built-in free-text escape"
+    },
+    {
+      "id": "plugin-builder-hook-component",
+      "knowledge": "stable",
+      "prompt": "In plugin-builder's component placement guide, which Claude Code component type should you choose for behavior that must happen every time, deterministically, on a lifecycle event? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Hook"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/plugin-builder/SKILL.md component table - Behavior that must happen every time, deterministically, on a lifecycle event | Hook (hooks/hooks.json)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

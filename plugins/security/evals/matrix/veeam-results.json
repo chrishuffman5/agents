@@ -1,0 +1,48 @@
+{
+  "skill": "veeam",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "veeam-rest-api-port",
+      "knowledge": "recent",
+      "prompt": "In Veeam Backup and Replication version 12 and later, what TCP port does the unified REST API listen on by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)9419"
+      },
+      "source": "plugins/security/skills/veeam/SKILL.md - REST API (v12+) Base URL: https://[vbr-server]:9419/api/v1"
+    },
+    {
+      "id": "veeam-s3-objectlock-mode",
+      "knowledge": "stable",
+      "prompt": "When enabling AWS S3 Object Lock on a bucket used as a Veeam immutable backup repository, which retention mode should you choose for true ransomware protection, Governance or Compliance? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bcompliance\\b"
+      },
+      "source": "plugins/security/skills/veeam/SKILL.md - Choose Compliance mode (not Governance) for true ransomware protection"
+    },
+    {
+      "id": "veeam-surebackup-timeout",
+      "knowledge": "recent",
+      "prompt": "In Veeam SureBackup verification, what is the default timeout in seconds for the heartbeat test and the ping test? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)300"
+      },
+      "source": "plugins/security/skills/veeam/SKILL.md - Verification Tests table: Heartbeat test and Ping test default timeout 300 seconds"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

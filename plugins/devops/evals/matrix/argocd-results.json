@@ -1,0 +1,52 @@
+{
+  "skill": "argocd",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "argocd-poll-interval",
+      "knowledge": "stable",
+      "prompt": "When automated sync is enabled without a configured Git webhook, roughly how often does the ArgoCD application controller poll the source repository for changes by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(3\\s*-?\\s*min|three\\s*min)"
+      },
+      "source": "plugins/devops/skills/argocd/references/architecture.md - reconciliation flow diagram: Poll/Webhook Every 3 min (default) or on Git webhook; best-practices.md also references the 3-minute poll interval"
+    },
+    {
+      "id": "argocd-health-score-range",
+      "knowledge": "recent",
+      "prompt": "ArgoCD's Application Health Insights feature introduced in the 3.2 release line assigns each application a numeric health score. What is the full numeric range of that score, from lowest to highest? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0-100"
+        ]
+      },
+      "source": "plugins/devops/skills/argocd/references/versions/3.2.md - Health score: Numeric health score (0-100) for applications based on resource health"
+    },
+    {
+      "id": "argocd-oldest-3x-supported",
+      "knowledge": "recent",
+      "prompt": "As of the ArgoCD 3.3 release, which version is called out as the oldest release still supported within the 3.x line? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.1"
+        ]
+      },
+      "source": "plugins/devops/skills/argocd/references/versions/3.3.md - ArgoCD 3.1 is the oldest supported version in the 3.x line - plan upgrades from 3.0 and earlier"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

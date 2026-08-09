@@ -1,0 +1,54 @@
+{
+  "skill": "github-copilot",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "github-copilot-session-cap",
+      "knowledge": "stable",
+      "prompt": "What is the maximum duration of a single GitHub Copilot cloud coding agent session? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "59"
+        ]
+      },
+      "source": "plugins/ai/skills/github-copilot/SKILL.md - 59 minutes maximum per session, cannot be extended"
+    },
+    {
+      "id": "github-copilot-setup-job-name",
+      "knowledge": "recent",
+      "prompt": "In the copilot-setup-steps.yml workflow file that customizes the GitHub Copilot cloud agent's environment, what must the job itself be named for GitHub to recognize it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "copilot-setup-steps"
+        ]
+      },
+      "source": "plugins/ai/skills/github-copilot/SKILL.md - must contain a single job named copilot-setup-steps"
+    },
+    {
+      "id": "github-copilot-audit-log-retention",
+      "knowledge": "stable",
+      "prompt": "How many days of history does the GitHub Copilot enterprise audit log retain before you need to stream it elsewhere for longer history? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "180"
+        ]
+      },
+      "source": "plugins/ai/skills/github-copilot/SKILL.md - 180-day retention on the audit log"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

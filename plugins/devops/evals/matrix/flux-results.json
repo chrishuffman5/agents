@@ -1,0 +1,53 @@
+{
+  "skill": "flux",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "flux-helmrepo-interval",
+      "knowledge": "stable",
+      "prompt": "According to recommended Flux reconciliation intervals, how often should a HelmRepository source typically be reconciled, given that chart indexes do not change often? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)24\\s*h(ours?)?"
+      },
+      "source": "plugins/devops/skills/flux/references/best-practices.md - Reconciliation Intervals table: HelmRepository recommended interval 24h"
+    },
+    {
+      "id": "flux-git-verify-providers",
+      "knowledge": "stable",
+      "prompt": "When configuring Git commit signature verification on a Flux GitRepository resource, which two providers can you set under spec.verify.provider? Name both.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "cosign",
+          "gpg"
+        ]
+      },
+      "source": "plugins/devops/skills/flux/references/best-practices.md - Git Commit Verification: verify.provider: cosign (or 'gpg')"
+    },
+    {
+      "id": "flux-oci-apiversion",
+      "knowledge": "recent",
+      "prompt": "A Flux GitRepository resource is already on the v1 API version. What API version does the OCIRepository source kind use instead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "v1beta2"
+        ]
+      },
+      "source": "plugins/devops/skills/flux/references/architecture.md - OCIRepository example apiVersion: source.toolkit.fluxcd.io/v1beta2, vs GitRepository at v1"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

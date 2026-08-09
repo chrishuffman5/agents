@@ -1,0 +1,48 @@
+{
+  "skill": "qlik-sense",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "qlik-sense-cloud-update-cadence",
+      "knowledge": "recent",
+      "prompt": "Roughly how many days apart does Qlik Cloud ship its continuous platform updates? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b5\\b|five)"
+      },
+      "source": "plugins/analytics/skills/qlik-sense/SKILL.md - Product Suite Overview, Qlik Cloud: Continuous updates (~every 5 days)."
+    },
+    {
+      "id": "qlik-sense-qvd-speed",
+      "knowledge": "stable",
+      "prompt": "Roughly how much faster is reading from a QVD file compared to querying the source database directly in a Qlik Sense load script? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10.{0,4}100"
+      },
+      "source": "plugins/analytics/skills/qlik-sense/SKILL.md - Anti-Patterns: skipping the QVD intermediate layer is slow; QVD reads are 10-100x faster than database queries."
+    },
+    {
+      "id": "qlik-sense-set-vs-if",
+      "knowledge": "stable",
+      "prompt": "In Qlik Sense, is set analysis evaluated before or after aggregation, compared to an equivalent If() function used inside an aggregation? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)before"
+      },
+      "source": "plugins/analytics/skills/qlik-sense/SKILL.md - Set Analysis vs If(): set analysis is evaluated before aggregation, making it faster than equivalent If() conditions."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

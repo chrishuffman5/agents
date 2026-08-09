@@ -1,0 +1,54 @@
+{
+  "skill": "nextjs-app-router",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nextjs-app-router-error-boundary-file",
+      "knowledge": "stable",
+      "prompt": "In the Next.js App Router, which special file acts as a React Error Boundary for a route segment and must itself be a Client Component? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "error.tsx"
+        ]
+      },
+      "source": "plugins/frontend/skills/nextjs-app-router/SKILL.md - file conventions table: error.tsx is the Error Boundary, must be Client Component"
+    },
+    {
+      "id": "nextjs-app-router-intercept-root-prefix",
+      "knowledge": "recent",
+      "prompt": "In the Next.js App Router intercepting routes syntax, which folder prefix intercepts relative to the application root, as opposed to one or two levels up? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "(...)"
+        ]
+      },
+      "source": "plugins/frontend/skills/nextjs-app-router/SKILL.md - Intercepting Routes prefix table: (...) intercepts relative to application root"
+    },
+    {
+      "id": "nextjs-app-router-parallel-default-file",
+      "knowledge": "stable",
+      "prompt": "In the Next.js App Router, what file must you add inside a parallel route slot to prevent a full page 404 when that slot has no match for the current URL? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "default.tsx"
+        ]
+      },
+      "source": "plugins/frontend/skills/nextjs-app-router/SKILL.md - Parallel Routes section: default.tsx required for unmatched slots"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

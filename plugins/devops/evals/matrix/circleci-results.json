@@ -1,0 +1,52 @@
+{
+  "skill": "circleci",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "circleci-cache-ttl",
+      "knowledge": "recent",
+      "prompt": "How many days does a CircleCI dependency cache normally stay valid before it automatically expires, assuming the cache key does not change? Answer concisely with the number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15\\s*days?"
+      },
+      "source": "plugins/devops/skills/circleci/references/architecture.md - Cache layer TTL is 15 days (or until key changes); diagnostics.md restates caches expire after 15 days"
+    },
+    {
+      "id": "circleci-ssh-debug-window",
+      "knowledge": "stable",
+      "prompt": "After a CircleCI job finishes running with SSH rerun enabled, for how long afterward can you still SSH into the container or VM to debug? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*hours?"
+      },
+      "source": "plugins/devops/skills/circleci/references/diagnostics.md - SSH Debugging section: available for 2 hours after job completes, not available for self-hosted runners"
+    },
+    {
+      "id": "circleci-2xlarge-specs",
+      "knowledge": "stable",
+      "prompt": "In CircleCI's resource class table, what are the vCPU count, RAM in GB, and per-minute credit cost of the 2xlarge resource class? Answer concisely with all three numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16",
+          "32",
+          "80"
+        ]
+      },
+      "source": "plugins/devops/skills/circleci/SKILL.md - Resource Classes table: 2xlarge = 16 vCPU, 32 GB, 80 credits/min"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

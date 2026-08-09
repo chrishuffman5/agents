@@ -1,0 +1,51 @@
+{
+  "skill": "keycloak",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "keycloak-organizations-ga-version",
+      "knowledge": "recent",
+      "prompt": "As of which major Keycloak release did the Organizations feature for multi-tenancy become generally available, after being in preview in an earlier release? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b26(\\.0)?\\b"
+      },
+      "source": "plugins/security/skills/keycloak/SKILL.md - states Organizations for multi-tenancy (GA in 26.0)"
+    },
+    {
+      "id": "keycloak-quarkus-transition-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which Keycloak version did the project switch from a WildFly-based distribution to a Quarkus-based runtime? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b17(\\.0)?\\b"
+      },
+      "source": "plugins/security/skills/keycloak/SKILL.md - version guidance: Pre-17.0 WildFly-based (legacy), 17.0+ Quarkus-based (current)"
+    },
+    {
+      "id": "keycloak-clustering-tech",
+      "knowledge": "stable",
+      "prompt": "In a clustered Keycloak deployment, what technology handles distributed session caching, and what technology handles cluster node discovery and communication? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Infinispan",
+          "JGroups"
+        ]
+      },
+      "source": "plugins/security/skills/keycloak/SKILL.md - High Availability / Clustering section: Infinispan for distributed caching, JGroups for cluster communication"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

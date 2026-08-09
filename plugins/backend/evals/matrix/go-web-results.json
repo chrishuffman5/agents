@@ -1,0 +1,48 @@
+{
+  "skill": "go-web",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "go-web-goroutine-stack",
+      "knowledge": "stable",
+      "prompt": "Roughly how much memory does a single goroutine consume for its initial stack in Go? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)8\\s*kb"
+      },
+      "source": "plugins/backend/skills/go-web/SKILL.md - handling tens of thousands of concurrent connections with modest memory (~8KB initial stack per goroutine)"
+    },
+    {
+      "id": "go-web-gorilla-mux-archived",
+      "knowledge": "recent",
+      "prompt": "The once-popular gorilla mux router for Go has been archived and unmaintained since when, making it a poor pick for new projects? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(dec(ember)?\\s*2022|2022)"
+      },
+      "source": "plugins/backend/skills/go-web/SKILL.md - Using gorilla/mux for new projects -- Archived since Dec 2022. Use net/http 1.22+, Chi, or Gin instead."
+    },
+    {
+      "id": "go-web-fiber-httptest",
+      "knowledge": "stable",
+      "prompt": "Can you exercise a Fiber web application's handlers directly with Go's standard net/http/httptest package? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|does\\s+not|app\\.test)"
+      },
+      "source": "plugins/backend/skills/go-web/SKILL.md - stdlib Compatibility Matrix: Fiber Works with httptest = No (app.Test()); fasthttp base is architecturally incompatible"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

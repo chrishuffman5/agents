@@ -1,0 +1,51 @@
+{
+  "skill": "thousandeyes",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "thousandeyes-vantage-cities",
+      "knowledge": "recent",
+      "prompt": "Across roughly how many cities worldwide does Cisco ThousandEyes deploy its Cloud Agent vantage points? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b271\\b"
+      },
+      "source": "plugins/networking/skills/thousandeyes/SKILL.md - Cloud Agents: 1,057+ globally distributed vantage points across 271 cities"
+    },
+    {
+      "id": "thousandeyes-api-version",
+      "knowledge": "recent",
+      "prompt": "What is the base URL, including its version number, for the Cisco ThousandEyes REST API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "api.thousandeyes.com",
+          "v7"
+        ]
+      },
+      "source": "plugins/networking/skills/thousandeyes/SKILL.md - REST API Base URL: https://api.thousandeyes.com/v7/"
+    },
+    {
+      "id": "thousandeyes-bgp-agent",
+      "knowledge": "stable",
+      "prompt": "To run BGP route monitoring tests in ThousandEyes, do you need Enterprise Agents, or only Cloud Agents? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bcloud\\b"
+      },
+      "source": "plugins/networking/skills/thousandeyes/SKILL.md - Test Types table: BGP test type available on Cloud (BGP monitors) only"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

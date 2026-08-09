@@ -1,0 +1,52 @@
+{
+  "skill": "qradar",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "qradar-offense-magnitude",
+      "knowledge": "recent",
+      "prompt": "What three factors are averaged together to calculate an offense's magnitude score in IBM QRadar? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Severity",
+          "Relevance",
+          "Credibility"
+        ]
+      },
+      "source": "plugins/security/skills/qradar/SKILL.md - Offense magnitude formula: Magnitude = (Severity + Relevance + Credibility) / 3"
+    },
+    {
+      "id": "qradar-enterprise-eps-threshold",
+      "knowledge": "recent",
+      "prompt": "According to QRadar deployment sizing guidance, what events-per-second threshold marks the start of an Enterprise-scale deployment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100,?000\\+?"
+      },
+      "source": "plugins/security/skills/qradar/SKILL.md - Typical sizing table: Enterprise deployment is 100,000+ EPS"
+    },
+    {
+      "id": "qradar-event-coalescing",
+      "knowledge": "stable",
+      "prompt": "What general SIEM technique does QRadar use to merge identical repeated events within a time window into a single stored event with an incremented count, rather than storing every duplicate? Answer in one word or a short phrase.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)coalesc"
+      },
+      "source": "plugins/security/skills/qradar/SKILL.md - Coalescing: identical events within a time window are merged (count incremented)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

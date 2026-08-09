@@ -1,0 +1,52 @@
+{
+  "skill": "sse",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sse-204-close",
+      "knowledge": "stable",
+      "prompt": "What HTTP status code can a Server-Sent Events endpoint return to tell the browser to permanently stop trying to reconnect the stream? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "204"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/sse/SKILL.md - Key Features: server sends 204 No Content to permanently close stream"
+    },
+    {
+      "id": "sse-nginx-buffering-header",
+      "knowledge": "stable",
+      "prompt": "For a Server-Sent Events endpoint running behind Nginx, which response header must be set to stop Nginx from buffering the stream? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "X-Accel-Buffering"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/sse/SKILL.md - anti-pattern 4: no X-Accel-Buffering: no behind Nginx prevents streaming"
+    },
+    {
+      "id": "sse-keepalive-interval",
+      "knowledge": "recent",
+      "prompt": "To stop proxies from killing an idle Server-Sent Events connection after 60 to 120 seconds of inactivity, roughly how often should the server send a keepalive comment line? Answer concisely with the recommended interval.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15.{0,6}30"
+      },
+      "source": "plugins/api-realtime/skills/sse/SKILL.md - anti-pattern 2: send a keepalive comment every 15-30 seconds"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

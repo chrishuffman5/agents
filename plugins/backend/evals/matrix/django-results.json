@@ -1,0 +1,50 @@
+{
+  "skill": "django",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "django-select-related-join",
+      "knowledge": "stable",
+      "prompt": "In the Django ORM, when you call select_related on a ForeignKey field, does that execute a SQL JOIN or a separate follow-up query? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bjoin\\b"
+      },
+      "source": "plugins/backend/skills/django/SKILL.md - .select_related(author) # JOIN for ForeignKey, .prefetch_related(tags) # separate query for M2M"
+    },
+    {
+      "id": "django-async-for-version",
+      "knowledge": "recent",
+      "prompt": "Full support for using async for to iterate over a Django QuerySet arrived in which Django release? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5.0"
+        ]
+      },
+      "source": "plugins/backend/skills/django/SKILL.md - Async views since 3.1, async ORM interface since 4.1, full async for on QuerySets since 5.0"
+    },
+    {
+      "id": "django-background-tasks-module",
+      "knowledge": "recent",
+      "prompt": "Django introduced a built-in background task system in version 6.0. What is the name of that module? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)django\\.tasks"
+      },
+      "source": "plugins/backend/skills/django/SKILL.md - Cross-Version Feature Matrix: Background tasks (django.tasks) - No / No / Yes for 4.2 / 5.2 / 6.0"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

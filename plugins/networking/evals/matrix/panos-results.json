@@ -1,0 +1,50 @@
+{
+  "skill": "panos",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "panos-pqc-hardware",
+      "knowledge": "recent",
+      "prompt": "Which Palo Alto Networks PAN-OS hardware series, introduced alongside version 12.1, is needed to decrypt and inspect post-quantum-encrypted traffic at line rate? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "PA-5500"
+        ]
+      },
+      "source": "plugins/networking/skills/panos/references/versions/12.1.md - PQC Traffic Inspection requires PA-5500 Series or compatible hardware"
+    },
+    {
+      "id": "panos-support-lifecycle",
+      "knowledge": "recent",
+      "prompt": "Under Palo Alto's newer support policy introduced with PAN-OS 12.1, how many total months of standard plus extended support does a release receive? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b48\\b"
+      },
+      "source": "plugins/networking/skills/panos/references/versions/12.1.md - 48-Month Support Policy: Standard Support 36 months + Extended Support 12 months"
+    },
+    {
+      "id": "panos-nat-matching",
+      "knowledge": "stable",
+      "prompt": "In PAN-OS, when a security policy rule evaluates a NAT'd flow, does it match on the pre-NAT or post-NAT source and destination IP addresses? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)pre-?nat"
+      },
+      "source": "plugins/networking/skills/panos/SKILL.md - Critical NAT/policy interaction: Security policy matches pre-NAT source/destination IPs but post-NAT zones"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

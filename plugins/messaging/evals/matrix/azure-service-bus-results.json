@@ -1,0 +1,48 @@
+{
+  "skill": "azure-service-bus",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-service-bus-max-delivery",
+      "knowledge": "stable",
+      "prompt": "In Azure Service Bus, what is the default maximum delivery count for a queue before a message is automatically dead-lettered? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
+      "source": "plugins/messaging/skills/azure-service-bus/SKILL.md - Queues section: Max delivery count default 10"
+    },
+    {
+      "id": "azure-service-bus-topic-subs",
+      "knowledge": "recent",
+      "prompt": "What is the maximum number of subscriptions a single Azure Service Bus topic can have? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2,?000\\b"
+      },
+      "source": "plugins/messaging/skills/azure-service-bus/SKILL.md - Topics and Subscriptions section: up to 2,000 subscriptions per topic"
+    },
+    {
+      "id": "azure-service-bus-premium-message-size",
+      "knowledge": "recent",
+      "prompt": "On the Premium tier of Azure Service Bus, using AMQP, what is the maximum message size supported? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100\\s*mb"
+      },
+      "source": "plugins/messaging/skills/azure-service-bus/SKILL.md - Premium Tier section: messages up to 100 MB (AMQP only)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

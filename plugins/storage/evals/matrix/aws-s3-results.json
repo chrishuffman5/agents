@@ -1,0 +1,56 @@
+{
+  "skill": "aws-s3",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-s3-durability",
+      "knowledge": "stable",
+      "prompt": "What durability percentage does AWS specify for objects stored in the Amazon S3 Standard storage class? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "99.999999999"
+        ]
+      },
+      "source": "plugins/storage/skills/aws-s3/SKILL.md - Durability: 99.999999999% (11 nines) across minimum 3 AZs (Standard)"
+    },
+    {
+      "id": "aws-s3-sse-c-default",
+      "knowledge": "recent",
+      "prompt": "Amazon S3 supports server-side encryption with customer-provided keys, SSE-C. As of the most current guidance, when is AWS disabling SSE-C by default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2026"
+        ]
+      },
+      "source": "plugins/storage/skills/aws-s3/SKILL.md - Key Security Features: SSE-S3 default encryption (SSE-C disabled by default April 2026)"
+    },
+    {
+      "id": "aws-s3-glacier-deep-archive",
+      "knowledge": "stable",
+      "prompt": "For Amazon S3 Glacier Deep Archive, how many days must an object sit before a lifecycle rule can transition it there, and roughly how long can retrieval take? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "180",
+          "48"
+        ]
+      },
+      "source": "plugins/storage/skills/aws-s3/SKILL.md - Storage Classes table: Glacier Deep Archive min storage 180 days, retrieval 12-48 hours"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

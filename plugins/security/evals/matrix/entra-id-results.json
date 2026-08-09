@@ -1,0 +1,52 @@
+{
+  "skill": "entra-id",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "entra-id-pim-default-duration",
+      "knowledge": "recent",
+      "prompt": "In Microsoft Entra Privileged Identity Management, what is the default maximum duration for a role activation before it automatically expires? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)8\\s*hours"
+      },
+      "source": "plugins/security/skills/entra-id/SKILL.md - PIM section: Time-limited -- Activations expire (default: 8 hours, configurable)"
+    },
+    {
+      "id": "entra-id-b2b-guest-licensing",
+      "knowledge": "recent",
+      "prompt": "Under Entra ID B2B licensing rules, how many external guest users can be covered by a single P1 or P2 license? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b"
+      },
+      "source": "plugins/security/skills/entra-id/SKILL.md - B2B section: Licensing: up to 5 guests per P1/P2 license"
+    },
+    {
+      "id": "entra-id-phishing-resistant-mfa",
+      "knowledge": "stable",
+      "prompt": "In an Entra ID authentication strength policy, which three authentication methods together are classified as phishing-resistant MFA? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "FIDO2",
+          "Windows Hello",
+          "Certificate"
+        ]
+      },
+      "source": "plugins/security/skills/entra-id/SKILL.md - Authentication strength policies: Phishing-resistant MFA = FIDO2 + Windows Hello + Certificate"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

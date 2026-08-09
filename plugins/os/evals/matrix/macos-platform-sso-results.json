@@ -1,0 +1,231 @@
+{
+  "skill": "macos-platform-sso",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "macos-psso-grace-periods",
+      "knowledge": "recent",
+      "prompt": "To avoid locking users out when the identity provider is unreachable at the login window, what are the recommended minimum LoginGracePeriod and UnlockGracePeriod values, in seconds, for macOS Platform SSO? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "900",
+          "300"
+        ]
+      },
+      "source": "plugins/os/skills/macos-platform-sso/SKILL.md - Grace Periods: Recommendation: Set LoginGracePeriod >= 900 (15 min) and UnlockGracePeriod >= 300 (5 min)"
+    },
+    {
+      "id": "macos-psso-auth-policy-min-version",
+      "knowledge": "stable",
+      "prompt": "Granular Platform SSO authentication policies, such as FileVaultPolicy, LoginPolicy, and UnlockPolicy, require which minimum macOS version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(macOS\\s*15|Sequoia)"
+      },
+      "source": "plugins/os/skills/macos-platform-sso/SKILL.md - Authentication Policies (Sequoia+): macOS 15 Sequoia introduced granular authentication policies delivered via MDM profile or DDM."
+    },
+    {
+      "id": "macos-psso-nfc-tap-login-version",
+      "knowledge": "recent",
+      "prompt": "Which macOS release introduces NFC Tap-to-Login support for Platform SSO, letting a user tap an NFC enabled hardware key or phone at the login window? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(macOS\\s*26|Tahoe)"
+      },
+      "source": "plugins/os/skills/macos-platform-sso/SKILL.md - NFC Tap-to-Login (Tahoe): macOS 26 Tahoe introduces NFC authentication for PSSO"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 11762,
+      "meanTokensOut": 258,
+      "totalCostUsd": 1.3664,
+      "costPerCorrect": 0.1708
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 3,
+      "accuracy": 50.0,
+      "meanWallMs": 24032,
+      "meanTokensOut": 403,
+      "totalCostUsd": 0.9015,
+      "costPerCorrect": 0.3005
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9549,
+        "meanTokensOut": 294,
+        "totalCostUsd": 1.1835,
+        "costPerCorrect": 0.2367
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 4742,
+        "meanTokensOut": 81,
+        "totalCostUsd": 0.1659,
+        "costPerCorrect": 0.1659
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16188,
+        "meanTokensOut": 185,
+        "totalCostUsd": 0.183,
+        "costPerCorrect": 0.061
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 43321,
+        "meanTokensOut": 725,
+        "totalCostUsd": 0.7357,
+        "costPerCorrect": 0.3678
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9549,
+        "meanTokensOut": 294,
+        "totalCostUsd": 1.1835,
+        "costPerCorrect": 0.2367
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 4742,
+        "meanTokensOut": 81,
+        "totalCostUsd": 0.1659,
+        "costPerCorrect": 0.1659
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16188,
+        "meanTokensOut": 185,
+        "totalCostUsd": 0.183,
+        "costPerCorrect": 0.061
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 43321,
+        "meanTokensOut": 725,
+        "totalCostUsd": 0.7357,
+        "costPerCorrect": 0.3678
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 4742,
+        "meanTokensOut": 81,
+        "totalCostUsd": 0.1659,
+        "costPerCorrect": 0.1659
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7429,
+        "meanTokensOut": 141,
+        "totalCostUsd": 0.4985,
+        "costPerCorrect": 0.2492
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11669,
+        "meanTokensOut": 448,
+        "totalCostUsd": 0.685,
+        "costPerCorrect": 0.2283
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 43321,
+        "meanTokensOut": 725,
+        "totalCostUsd": 0.7357,
+        "costPerCorrect": 0.3678
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16188,
+        "meanTokensOut": 185,
+        "totalCostUsd": 0.183,
+        "costPerCorrect": 0.061
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

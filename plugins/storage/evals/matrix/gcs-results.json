@@ -1,0 +1,55 @@
+{
+  "skill": "gcs",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gcs-archive-min-duration",
+      "knowledge": "stable",
+      "prompt": "For the Google Cloud Storage Archive storage class, what is the minimum storage duration in days before you avoid an early deletion fee? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "365"
+        ]
+      },
+      "source": "plugins/storage/skills/gcs/SKILL.md - Storage Classes table: Archive Min Duration 365 days"
+    },
+    {
+      "id": "gcs-turbo-replication",
+      "knowledge": "recent",
+      "prompt": "Google Cloud Storage dual-region buckets offer a fast replication mode with an SLA-backed recovery point objective. What is that time objective, and what flag enables it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "15",
+          "ASYNC_TURBO"
+        ]
+      },
+      "source": "plugins/storage/skills/gcs/SKILL.md - Bucket Locations: Turbo Replication: 15-minute RPO SLA (--rpo=ASYNC_TURBO)"
+    },
+    {
+      "id": "gcs-autoclass-min-size",
+      "knowledge": "recent",
+      "prompt": "Under Google Cloud Storage Autoclass, objects smaller than what size always remain in the Standard storage class regardless of access pattern? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128"
+        ]
+      },
+      "source": "plugins/storage/skills/gcs/SKILL.md - Autoclass: Objects < 128 KiB stay Standard"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

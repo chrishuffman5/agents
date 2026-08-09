@@ -1,0 +1,50 @@
+{
+  "skill": "gitops",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gitops-secrets-recommend",
+      "knowledge": "stable",
+      "prompt": "In Kubernetes GitOps setups, which secret management approach is generally recommended for most production deployments needing centralized secrets with automatic rotation across clusters? Answer concisely with the name of the tool or approach.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "External Secrets Operator"
+        ]
+      },
+      "source": "plugins/devops/skills/gitops/references/concepts.md - Secret Management options table recommendation: External Secrets Operator for most production setups"
+    },
+    {
+      "id": "gitops-image-automation",
+      "knowledge": "recent",
+      "prompt": "Between ArgoCD and Flux, which one has the more mature built-in image automation for updating deployed image tags, given that the other tool relies on a separate add-on project for this? Answer concisely with the tool name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bflux\\b"
+      },
+      "source": "plugins/devops/skills/gitops/SKILL.md - When to Choose table: Image auto-update row favors Flux, noting Image Automation is more mature than Argo Image Updater"
+    },
+    {
+      "id": "gitops-repo-strategy",
+      "knowledge": "stable",
+      "prompt": "For GitOps repository strategy, should application source code and Kubernetes deployment manifests be kept together in one monorepo, or split into separate repositories? Answer in one sentence with the recommendation.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)separate"
+      },
+      "source": "plugins/devops/skills/gitops/references/concepts.md - App Repo vs Config Repo: recommendation is to use separate repos"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "xpanse",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "xpanse-formerly-expanse",
+      "knowledge": "stable",
+      "prompt": "Cortex Xpanse was formerly known by what name before Palo Alto Networks acquired the company, and in what year did that acquisition happen? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Expanse",
+          "2021"
+        ]
+      },
+      "source": "plugins/security/skills/xpanse/SKILL.md - Palo Alto Networks Cortex Xpanse (formerly Expanse, acquired by Palo Alto in 2021)"
+    },
+    {
+      "id": "xpanse-ipv4-scan",
+      "knowledge": "stable",
+      "prompt": "Cortex Xpanse continuously scans the internet as its core discovery mechanism. Roughly how many IPv4 addresses does it scan repeatedly? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\.3\\s*billion"
+      },
+      "source": "plugins/security/skills/xpanse/SKILL.md - Internet-Wide Scanning Approach: Scans all IPv4 address space (4.3 billion IPs) repeatedly"
+    },
+    {
+      "id": "xpanse-grade",
+      "knowledge": "recent",
+      "prompt": "What letter-grade scale does Cortex Xpanse use to rate an organization overall attack surface exposure? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bA\\s*(-|to|through)\\s*F\\b"
+      },
+      "source": "plugins/security/skills/xpanse/SKILL.md - Attack Surface Grade: Xpanse assigns an Attack Surface Grade (A-F) to each organization"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,217 @@
+{
+  "skill": "sles",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sles-agama-installer-successor",
+      "knowledge": "recent",
+      "prompt": "YaST's installation component on SLES is being phased out in favor of which newer installer, planned for SLE 16? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Agama"
+        ]
+      },
+      "source": "plugins/os/skills/sles/SKILL.md - YaST -- Yet another Setup Tool: YaST's installation component is being phased out in favor of Agama for SLE 16."
+    },
+    {
+      "id": "sles-firewalld-replaces-suse",
+      "knowledge": "stable",
+      "prompt": "Which legacy firewall tool did firewalld replace on SLES 15? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SuSEfirewall2"
+        ]
+      },
+      "source": "plugins/os/skills/sles/SKILL.md - Security Overview: firewalld manages zone-based firewalling (replaced SuSEfirewall2 in SLES 15)"
+    },
+    {
+      "id": "sles-livepatch-kgraft",
+      "knowledge": "stable",
+      "prompt": "What is the underlying technology name behind SUSE's rebootless kernel security patching feature, Live Patching? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)kGraft"
+      },
+      "source": "plugins/os/skills/sles/SKILL.md - Core Expertise list: Live Patching (kGraft) for rebootless kernel security fixes"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 11119,
+      "meanTokensOut": 92,
+      "totalCostUsd": 0.592,
+      "costPerCorrect": 0.0987
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 8114,
+      "meanTokensOut": 87,
+      "totalCostUsd": 0.3302,
+      "costPerCorrect": 0.055
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5563,
+        "meanTokensOut": 43,
+        "totalCostUsd": 0.4235,
+        "costPerCorrect": 0.1412
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5712,
+        "meanTokensOut": 63,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16676,
+        "meanTokensOut": 140,
+        "totalCostUsd": 0.1686,
+        "costPerCorrect": 0.0562
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10516,
+        "meanTokensOut": 111,
+        "totalCostUsd": 0.1734,
+        "costPerCorrect": 0.0578
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5563,
+        "meanTokensOut": 43,
+        "totalCostUsd": 0.4235,
+        "costPerCorrect": 0.1412
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5712,
+        "meanTokensOut": 63,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16676,
+        "meanTokensOut": 140,
+        "totalCostUsd": 0.1686,
+        "costPerCorrect": 0.0562
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10516,
+        "meanTokensOut": 111,
+        "totalCostUsd": 0.1734,
+        "costPerCorrect": 0.0578
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5712,
+        "meanTokensOut": 63,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5563,
+        "meanTokensOut": 43,
+        "totalCostUsd": 0.4235,
+        "costPerCorrect": 0.1412
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10516,
+        "meanTokensOut": 111,
+        "totalCostUsd": 0.1734,
+        "costPerCorrect": 0.0578
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16676,
+        "meanTokensOut": 140,
+        "totalCostUsd": 0.1686,
+        "costPerCorrect": 0.0562
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

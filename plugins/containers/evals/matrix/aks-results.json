@@ -1,0 +1,249 @@
+{
+  "skill": "aks",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 18,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aks-automatic-ga",
+      "knowledge": "recent",
+      "prompt": "In Azure Kubernetes Service, AKS Automatic reached general availability in a specific year, and it is often compared to a feature on a competing cloud's managed Kubernetes offering. Which year did it reach GA, and which Google Cloud feature is it most comparable to? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026",
+          "Autopilot"
+        ]
+      },
+      "source": "plugins/containers/skills/aks/SKILL.md - AKS Automatic GA since 2026, comparable to GKE Autopilot"
+    },
+    {
+      "id": "aks-taint-key",
+      "knowledge": "stable",
+      "prompt": "When you separate system and user node pools in AKS, what taint key and value do you typically apply to the system pool so application pods cannot land on it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CriticalAddonsOnly",
+          "NoSchedule"
+        ]
+      },
+      "source": "plugins/containers/skills/aks/SKILL.md - system pool taint CriticalAddonsOnly=true:NoSchedule"
+    },
+    {
+      "id": "aks-workload-identity-label",
+      "knowledge": "stable",
+      "prompt": "For AKS workload identity, if you annotate the ServiceAccount with the client ID but never label the pod itself, will the mutating webhook still inject the Azure credential environment variables into the pod? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|will not|won't|not inject)"
+      },
+      "source": "plugins/containers/skills/aks/SKILL.md - pod must carry azure.workload.identity/use: true label itself, not just the ServiceAccount, for injection to occur"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 12,
+      "pass": 11,
+      "accuracy": 91.7,
+      "meanWallMs": 13789,
+      "meanTokensOut": 261,
+      "totalCostUsd": 1.2296,
+      "costPerCorrect": 0.1118
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 8983,
+      "meanTokensOut": 114,
+      "totalCostUsd": 0.6718,
+      "costPerCorrect": 0.1679
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9698,
+        "meanTokensOut": 330,
+        "totalCostUsd": 0.8222,
+        "costPerCorrect": 0.1644
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8275,
+        "meanTokensOut": 131,
+        "totalCostUsd": 0.5499,
+        "costPerCorrect": 0.275
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 17879,
+        "meanTokensOut": 193,
+        "totalCostUsd": 0.4074,
+        "costPerCorrect": 0.0679
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 9691,
+        "meanTokensOut": 97,
+        "totalCostUsd": 0.1218,
+        "costPerCorrect": 0.0609
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9698,
+        "meanTokensOut": 330,
+        "totalCostUsd": 0.8222,
+        "costPerCorrect": 0.1644
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8275,
+        "meanTokensOut": 131,
+        "totalCostUsd": 0.5499,
+        "costPerCorrect": 0.275
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 17879,
+        "meanTokensOut": 193,
+        "totalCostUsd": 0.4074,
+        "costPerCorrect": 0.0679
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 9691,
+        "meanTokensOut": 97,
+        "totalCostUsd": 0.1218,
+        "costPerCorrect": 0.0609
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8275,
+        "meanTokensOut": 131,
+        "totalCostUsd": 0.5499,
+        "costPerCorrect": 0.275
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7117,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.3445,
+        "costPerCorrect": 0.1722
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12280,
+        "meanTokensOut": 500,
+        "totalCostUsd": 0.4777,
+        "costPerCorrect": 0.1592
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 9691,
+        "meanTokensOut": 97,
+        "totalCostUsd": 0.1218,
+        "costPerCorrect": 0.0609
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18047,
+        "meanTokensOut": 142,
+        "totalCostUsd": 0.1852,
+        "costPerCorrect": 0.0617
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17712,
+        "meanTokensOut": 243,
+        "totalCostUsd": 0.2222,
+        "costPerCorrect": 0.0741
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

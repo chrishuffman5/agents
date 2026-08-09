@@ -1,0 +1,48 @@
+{
+  "skill": "express",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "express-error-handler-params",
+      "knowledge": "stable",
+      "prompt": "For Express to treat a middleware function as an error handler rather than a normal one, exactly how many parameters must its function signature declare? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b4\\b|\\bfour\\b)"
+      },
+      "source": "plugins/backend/skills/express/SKILL.md - Error-handling middleware is distinguished solely by its 4-parameter signature. Express checks function.length to identify it."
+    },
+    {
+      "id": "express-5-node-minimum",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Node.js version required to run Express 5? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b18\\b|node\\s*18)"
+      },
+      "source": "plugins/backend/skills/express/SKILL.md - Express 4 vs Express 5 table: Node.js minimum Node 10+ (v4) vs Node 18+ (v5)"
+    },
+    {
+      "id": "express-5-async-errors",
+      "knowledge": "recent",
+      "prompt": "In Express 5, if an async route handler throws or rejects, does it get forwarded to your error-handling middleware automatically, or do you still need an explicit call passing the error to next? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(automat|no\\s+longer|not\\s+require|no\\s+try)"
+      },
+      "source": "plugins/backend/skills/express/SKILL.md - Express 5: Async errors in route handlers are automatically forwarded to error middleware -- no try/catch or asyncHandler wrapper needed."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

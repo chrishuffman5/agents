@@ -1,0 +1,52 @@
+{
+  "skill": "opentofu",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "opentofu-fork-version",
+      "knowledge": "recent",
+      "prompt": "OpenTofu forked from which exact Terraform version, the last one released under the MPL license, and in what month and year did that fork happen? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.5.6"
+        ]
+      },
+      "source": "plugins/devops/skills/opentofu/references/architecture.md - Fork History and Divergence: forked from Terraform v1.5.6 in September 2023"
+    },
+    {
+      "id": "opentofu-state-compat",
+      "knowledge": "stable",
+      "prompt": "Are OpenTofu and Terraform state files interchangeable between the two tools? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|interchangeable|compatible)"
+      },
+      "source": "plugins/devops/skills/opentofu/SKILL.md - Core Architecture, State file bullet: same format (version 4), state files are interchangeable between Terraform and OpenTofu"
+    },
+    {
+      "id": "opentofu-key-providers",
+      "knowledge": "recent",
+      "prompt": "Besides pbkdf2, aws_kms, and gcp_kms, OpenTofu supports a key provider built on a Vault fork for client-side state encryption. What is that key provider called? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "openbao"
+        ]
+      },
+      "source": "plugins/devops/skills/opentofu/SKILL.md - State Encryption section lists key providers pbkdf2, aws_kms, gcp_kms, openbao (Vault fork)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,57 @@
+{
+  "skill": "misp",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "misp-origin-license",
+      "knowledge": "stable",
+      "prompt": "MISP, the threat intelligence sharing platform, was originally developed by which organization, and under what open-source license is it distributed? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CIRCL",
+          "AGPL"
+        ]
+      },
+      "source": "plugins/security/skills/misp/SKILL.md - Platform Overview: licensed under AGPL, originally developed by CIRCL"
+    },
+    {
+      "id": "misp-distribution-sharing-group",
+      "knowledge": "recent",
+      "prompt": "In MISP's event distribution model, which numbered distribution level restricts visibility to only the members of a specific named sharing group? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4",
+          "Sharing Group"
+        ]
+      },
+      "source": "plugins/security/skills/misp/SKILL.md - Distribution Levels table: 4 - Sharing Group"
+    },
+    {
+      "id": "misp-correlation-types",
+      "knowledge": "recent",
+      "prompt": "MISP's correlation engine supports two types of attribute correlation. Name both, and state which one is disabled by default because of its false positive risk. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Direct",
+          "Fuzzy"
+        ]
+      },
+      "source": "plugins/security/skills/misp/SKILL.md - Correlation Engine section: Direct and Fuzzy correlation types, Fuzzy disabled by default"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

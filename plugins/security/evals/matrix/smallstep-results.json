@@ -1,0 +1,48 @@
+{
+  "skill": "smallstep",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "smallstep-renewal-window",
+      "knowledge": "recent",
+      "prompt": "When step ca renew runs in daemon mode to keep a service certificate continuously fresh, at what percentage of the certificate's total lifetime does it actually trigger renewal? Answer concisely with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b66\\s*(percent|%)?"
+      },
+      "source": "plugins/security/skills/smallstep/SKILL.md - Certificate Renewal: Renews at 66% of lifetime; ca.json disableRenewalUntilPercentage: 66"
+    },
+    {
+      "id": "smallstep-max-host-ssh-duration",
+      "knowledge": "recent",
+      "prompt": "In a step-ca authority configuration, what is the maximum duration allowed for an SSH host certificate, expressed in hours? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1680\\s*h(ours?)?"
+      },
+      "source": "plugins/security/skills/smallstep/SKILL.md - ca.json authority.claims: maxHostSSHCertDuration: 1680h"
+    },
+    {
+      "id": "smallstep-default-tls-duration",
+      "knowledge": "stable",
+      "prompt": "By default, how long is a TLS leaf certificate valid for when issued by a step-ca authority using its default claims configuration? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b24\\s*h(ours?)?"
+      },
+      "source": "plugins/security/skills/smallstep/SKILL.md - ca.json authority.claims: defaultTLSCertDuration: 24h"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

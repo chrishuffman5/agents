@@ -1,0 +1,48 @@
+{
+  "skill": "azure-key-vault",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-key-vault-access-policy-limit",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of access policy entries allowed on a single Azure Key Vault under the legacy access policy model? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?024"
+      },
+      "source": "plugins/security/skills/azure-key-vault/references/architecture.md - Access Policy Model: Limits - Maximum 1024 access policy entries per vault"
+    },
+    {
+      "id": "azure-key-vault-mhsm-quorum",
+      "knowledge": "recent",
+      "prompt": "In an Azure Managed HSM pool, how many HSM instances are provisioned in total, and how many of them are needed to reach quorum for administrative operations? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\b\\D{0,30}\\b2\\b"
+      },
+      "source": "plugins/security/skills/azure-key-vault/references/architecture.md - Azure Managed HSM: HSM pool - 3 HSM instances (2 needed for quorum operations)"
+    },
+    {
+      "id": "azure-key-vault-mhsm-sla",
+      "knowledge": "recent",
+      "prompt": "What availability SLA percentage does Azure Managed HSM offer, compared to the 99.99 percent SLA of Standard and Premium Key Vault? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)99\\.9(?!9)"
+      },
+      "source": "plugins/security/skills/azure-key-vault/references/architecture.md - SLA and Compliance table: Managed HSM 99.9% availability SLA, FIPS 140-3 Level 3"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

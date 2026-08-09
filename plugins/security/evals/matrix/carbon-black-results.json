@@ -1,0 +1,52 @@
+{
+  "skill": "carbon-black",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "carbon-black-broadcom-acquisition",
+      "knowledge": "stable",
+      "prompt": "In what month and year did Broadcom complete its acquisition of VMware, which brought Carbon Black under Broadcom? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)november.{0,4}2023"
+      },
+      "source": "plugins/security/skills/carbon-black/SKILL.md - Important Note: Broadcom Acquisition: Broadcom acquired VMware (and Carbon Black) in November 2023"
+    },
+    {
+      "id": "carbon-black-reputation-score-range",
+      "knowledge": "recent",
+      "prompt": "In Carbon Black's threat reputation scoring system, what numeric score range is classified as Known Malware with a default block action? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "1\\D{1,5}19"
+      },
+      "source": "plugins/security/skills/carbon-black/SKILL.md - Reputation Scores table: 1-19 | Known Malware | Block"
+    },
+    {
+      "id": "carbon-black-enforcement-levels",
+      "knowledge": "stable",
+      "prompt": "What are the three enforcement levels available for Carbon Black Cloud prevention policies, from least to most aggressive? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "REPORT",
+          "BLOCK",
+          "TERMINATE"
+        ]
+      },
+      "source": "plugins/security/skills/carbon-black/SKILL.md - Prevention Policy Settings, Enforcement levels: REPORT, BLOCK, TERMINATE"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

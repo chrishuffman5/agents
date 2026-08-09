@@ -1,0 +1,48 @@
+{
+  "skill": "graphql",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "graphql-mercurius-throughput",
+      "knowledge": "recent",
+      "prompt": "For a JIT-compiled Mercurius GraphQL server running on Node.js with Fastify, what throughput in requests per second does it reach as the highest-throughput Node.js GraphQL server option? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)70,?000"
+      },
+      "source": "plugins/api-realtime/skills/graphql/SKILL.md - Key Server Implementations table: Mercurius (Node.js/Fastify) 70,000+ req/s (JIT), highest throughput Node.js server"
+    },
+    {
+      "id": "graphql-deprecation-window",
+      "knowledge": "recent",
+      "prompt": "Before removing a field from a GraphQL schema that has been marked deprecated, how many days of migration period should you generally allow? Answer concisely with the range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)90.{0,5}180"
+      },
+      "source": "plugins/api-realtime/skills/graphql/SKILL.md - anti-pattern 6: use @deprecated(reason) with a 90-180 day migration period before removal"
+    },
+    {
+      "id": "graphql-dataloader-scope",
+      "knowledge": "stable",
+      "prompt": "Should a single DataLoader instance in a GraphQL server be shared across multiple incoming requests, or created fresh for each request? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(per.request|each request|new (instance|dataloader)|not.{0,15}shar)"
+      },
+      "source": "plugins/api-realtime/skills/graphql/SKILL.md - anti-pattern 2: DataLoaders must be per-request; sharing causes stale data and security leaks"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

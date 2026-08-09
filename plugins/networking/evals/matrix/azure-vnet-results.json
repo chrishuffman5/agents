@@ -1,0 +1,53 @@
+{
+  "skill": "azure-vnet",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-vnet-idps-signatures",
+      "knowledge": "recent",
+      "prompt": "Azure Firewall Premium ships its IDPS intrusion detection and prevention feature with roughly how many signatures? Answer concisely with the approximate number.",
+      "expected": {
+        "type": "regex",
+        "value": "58,?000"
+      },
+      "source": "plugins/networking/skills/azure-vnet/SKILL.md - IDPS (Premium only): Yes (58,000+ signatures)"
+    },
+    {
+      "id": "azure-vnet-fastpath-sku",
+      "knowledge": "recent",
+      "prompt": "To enable Azure ExpressRoute FastPath, bypassing the gateway for data plane traffic, which gateway SKU tiers are required? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "UltraPerformance",
+          "ErGw3AZ"
+        ]
+      },
+      "source": "plugins/networking/skills/azure-vnet/SKILL.md - FastPath requires UltraPerformance or ErGw3AZ gateway SKU"
+    },
+    {
+      "id": "azure-vnet-firewall-subnet-size",
+      "knowledge": "stable",
+      "prompt": "What is the minimum subnet size required for the AzureFirewallSubnet when deploying Azure Firewall? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/26"
+        ]
+      },
+      "source": "plugins/networking/skills/azure-vnet/SKILL.md - Azure Firewall | AzureFirewallSubnet | /26"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

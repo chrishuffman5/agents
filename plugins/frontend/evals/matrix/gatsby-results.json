@@ -1,0 +1,55 @@
+{
+  "skill": "gatsby",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gatsby-netlify-acquired",
+      "knowledge": "stable",
+      "prompt": "Which company acquired Gatsby Inc in February 2023? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Netlify"
+        ]
+      },
+      "source": "plugins/frontend/skills/gatsby/SKILL.md - Status section: Feb 2023 Netlify acquired Gatsby Inc"
+    },
+    {
+      "id": "gatsby-node18-eol-date",
+      "knowledge": "recent",
+      "prompt": "Gatsby 5 requires Node.js 18. When did Node.js 18 reach end of life? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2025"
+        ]
+      },
+      "source": "plugins/frontend/skills/gatsby/SKILL.md - Status section: Node.js 18 (required by Gatsby 5) reached EOL April 2025"
+    },
+    {
+      "id": "gatsby-migration-target-content",
+      "knowledge": "stable",
+      "prompt": "For a mostly static, content-focused site currently built on Gatsby, which modern framework is recommended as the migration target to minimize JavaScript? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Astro"
+        ]
+      },
+      "source": "plugins/frontend/skills/gatsby/SKILL.md - Migration Targets: Astro for content/docs sites, minimal interactivity"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

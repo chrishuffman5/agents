@@ -1,0 +1,51 @@
+{
+  "skill": "wiz",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "wiz-acquisition",
+      "knowledge": "recent",
+      "prompt": "Which company acquired Wiz, for roughly how much money, and in what year? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)google.{0,60}(\\$?32\\s*(b\\b|billion))"
+      },
+      "source": "plugins/security/skills/wiz/SKILL.md - Wiz was acquired by Google for $32B in 2025"
+    },
+    {
+      "id": "wiz-builtin-rules",
+      "knowledge": "recent",
+      "prompt": "Roughly how many built-in detection rules does Wiz ship out of the box across CSPM, CWPP, CIEM, and DSPM? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?400\\+?"
+      },
+      "source": "plugins/security/skills/wiz/SKILL.md - Wiz Rule Framework: Wiz ships 1,400+ built-in detection rules across CSPM, CWPP, CIEM, DSPM"
+    },
+    {
+      "id": "wiz-security-graph",
+      "knowledge": "stable",
+      "prompt": "In the Wiz Security Graph data model, what are the two basic graph elements used to represent cloud resources and the relationships between them? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "nodes",
+          "edges"
+        ]
+      },
+      "source": "plugins/security/skills/wiz/SKILL.md - Security Graph: a property graph where nodes are cloud resources and edges are relationships"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

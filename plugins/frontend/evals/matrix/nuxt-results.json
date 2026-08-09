@@ -1,0 +1,52 @@
+{
+  "skill": "nuxt",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nuxt-server-route-method-source",
+      "knowledge": "stable",
+      "prompt": "In Nuxt, for a server handler file like hello.post.ts under the server api directory, what part of the filename tells Nitro which HTTP method to register? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)suffix"
+      },
+      "source": "plugins/frontend/skills/nuxt/SKILL.md - Nitro Server Engine: HTTP method is inferred from filename suffix"
+    },
+    {
+      "id": "nuxt-v4-shallowref-default",
+      "knowledge": "recent",
+      "prompt": "In Nuxt 4, what does the framework use as the default ref behavior in place of the deep reactive refs from Nuxt 3? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "shallowRef"
+        ]
+      },
+      "source": "plugins/frontend/skills/nuxt/SKILL.md - version table and intro: Nuxt 4 makes shallowRef the default"
+    },
+    {
+      "id": "nuxt-nitro-hosting-targets",
+      "knowledge": "recent",
+      "prompt": "Roughly how many hosting targets can a Nuxt Nitro build output be deployed to? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "15"
+        ]
+      },
+      "source": "plugins/frontend/skills/nuxt/SKILL.md - Nitro Server Engine: portable across 15+ hosting targets"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

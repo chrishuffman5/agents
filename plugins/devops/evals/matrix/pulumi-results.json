@@ -1,0 +1,52 @@
+{
+  "skill": "pulumi",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pulumi-go-sdk-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Go version required to use the Pulumi Go SDK per the language support requirements? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.21"
+        ]
+      },
+      "source": "plugins/devops/skills/pulumi/SKILL.md - Language SDKs table: Go github.com/pulumi/pulumi/sdk/v3 minimum version Go 1.21+"
+    },
+    {
+      "id": "pulumi-parallel-default",
+      "knowledge": "stable",
+      "prompt": "When you run pulumi up without specifying the parallel flag, is there a default cap on how many resource operations run concurrently? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(unlimited|no\\s*(default\\s*)?limit|not\\s*limited)"
+      },
+      "source": "plugins/devops/skills/pulumi/references/architecture.md - Parallelism: pulumi up --parallel 10 comment notes default is unlimited"
+    },
+    {
+      "id": "pulumi-urn-meaning",
+      "knowledge": "stable",
+      "prompt": "In Pulumi, what does the acronym URN stand for? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Uniform Resource Name"
+        ]
+      },
+      "source": "plugins/devops/skills/pulumi/references/architecture.md - section header URN (Uniform Resource Name)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

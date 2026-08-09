@@ -1,0 +1,48 @@
+{
+  "skill": "elastic-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "elastic-security-esql-introduced",
+      "knowledge": "recent",
+      "prompt": "In which minor version of the Elastic Stack was the ES|QL piped query language first introduced? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)8\\.11"
+      },
+      "source": "plugins/security/skills/elastic-security/SKILL.md - ES|QL section: a piped query language introduced in 8.11"
+    },
+    {
+      "id": "elastic-security-fleet-server-scale",
+      "knowledge": "recent",
+      "prompt": "According to common Elastic Security guidance, roughly how many Elastic Agents can a single Fleet Server manage before you need to scale horizontally? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10,?000"
+      },
+      "source": "plugins/security/skills/elastic-security/SKILL.md - Common Pitfalls: A single Fleet Server can manage ~10,000 agents"
+    },
+    {
+      "id": "elastic-security-detection-rule-count",
+      "knowledge": "stable",
+      "prompt": "About how many prebuilt detection rules does Elastic Security ship with, mapped to the MITRE ATT&CK framework? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?300\\+?"
+      },
+      "source": "plugins/security/skills/elastic-security/SKILL.md - Detection Rules Engine: Elastic Security includes 1,300+ prebuilt detection rules"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

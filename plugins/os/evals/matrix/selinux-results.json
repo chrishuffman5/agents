@@ -1,0 +1,213 @@
+{
+  "skill": "selinux",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "selinux-audit2allow-cil-version",
+      "knowledge": "recent",
+      "prompt": "The audit2allow tool gained a --cil flag for generating native CIL policy output starting with which RHEL version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bRHEL\\s*9\\b"
+      },
+      "source": "plugins/os/skills/selinux/SKILL.md - Version-Specific Changes table: audit2allow CIL output - Not available (RHEL 8), --cil flag added (RHEL 9)"
+    },
+    {
+      "id": "selinux-module-priority-local",
+      "knowledge": "stable",
+      "prompt": "In SELinux custom policy module management, what numeric priority value is reserved for local, site specific customizations, above base policy at 100 and contrib at 200? Answer with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b300\\b"
+      },
+      "source": "plugins/os/skills/selinux/SKILL.md - Custom Policy Modules: Module priorities: 100 (base), 200 (contrib), 300 (local), 400 (custom overrides)"
+    },
+    {
+      "id": "selinux-dac-mac-order",
+      "knowledge": "stable",
+      "prompt": "When both traditional Unix permissions and SELinux apply to a file access attempt on RHEL, which check happens first? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bDAC\\b"
+      },
+      "source": "plugins/os/skills/selinux/SKILL.md - Mandatory Access Control (MAC): The decision order is: DAC check first, then SELinux MAC check."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 12598,
+      "meanTokensOut": 106,
+      "totalCostUsd": 0.7019,
+      "costPerCorrect": 0.1404
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 3,
+      "accuracy": 50.0,
+      "meanWallMs": 9291,
+      "meanTokensOut": 54,
+      "totalCostUsd": 0.2421,
+      "costPerCorrect": 0.0807
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6800,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.5031,
+        "costPerCorrect": 0.2516
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 5587,
+        "meanTokensOut": 53,
+        "totalCostUsd": 0.1698,
+        "costPerCorrect": 0.0849
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18396,
+        "meanTokensOut": 128,
+        "totalCostUsd": 0.1989,
+        "costPerCorrect": 0.0663
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12995,
+        "meanTokensOut": 55,
+        "totalCostUsd": 0.0722,
+        "costPerCorrect": 0.0722
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6800,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.5031,
+        "costPerCorrect": 0.2516
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 5587,
+        "meanTokensOut": 53,
+        "totalCostUsd": 0.1698,
+        "costPerCorrect": 0.0849
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18396,
+        "meanTokensOut": 128,
+        "totalCostUsd": 0.1989,
+        "costPerCorrect": 0.0663
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12995,
+        "meanTokensOut": 55,
+        "totalCostUsd": 0.0722,
+        "costPerCorrect": 0.0722
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 5587,
+        "meanTokensOut": 53,
+        "totalCostUsd": 0.1698,
+        "costPerCorrect": 0.0849
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6800,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.5031,
+        "costPerCorrect": 0.2516
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12995,
+        "meanTokensOut": 55,
+        "totalCostUsd": 0.0722,
+        "costPerCorrect": 0.0722
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18396,
+        "meanTokensOut": 128,
+        "totalCostUsd": 0.1989,
+        "costPerCorrect": 0.0663
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

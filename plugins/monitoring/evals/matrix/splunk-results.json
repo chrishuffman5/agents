@@ -1,0 +1,78 @@
+{
+  "skill": "splunk",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 132,
+  "prompts": [
+    {
+      "id": "splunk-license-violations",
+      "knowledge": "recent",
+      "prompt": "After how many daily license volume violations within a rolling 30 day window does Splunk disable search on non-internal indexes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b5\\b"
+      },
+      "source": "plugins/monitoring/skills/splunk/SKILL.md - Common Pitfalls number 1, after 5 daily volume violations in a rolling 30-day window Splunk disables search for non-internal indexes"
+    },
+    {
+      "id": "splunk-subsearch-limit",
+      "knowledge": "recent",
+      "prompt": "What is the default maximum result count for a Splunk subsearch before results are silently truncated? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "10,?000"
+      },
+      "source": "plugins/monitoring/skills/splunk/SKILL.md - Common Pitfalls number 5, subsearch default is 10,000 results with a 60 second timeout"
+    },
+    {
+      "id": "splunk-tstats-speed",
+      "knowledge": "stable",
+      "prompt": "Using tstats against an accelerated data model in Splunk, roughly how much faster is it compared to a raw search? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10.{0,6}100"
+      },
+      "source": "plugins/monitoring/skills/splunk/SKILL.md - Top 10 Cost Rules number 4, accelerated data models enable tstats which is 10-100x faster than raw search"
+    },
+    {
+      "id": "splunk-join-alternative",
+      "knowledge": "stable",
+      "prompt": "In Splunk SPL, which command should you use instead of join when combining result sets by shared keys, since join is memory-limited? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bstats\\b"
+      },
+      "source": "plugins/security/skills/splunk/SKILL.md - Search Optimization list item 4: Avoid join, use stats with shared keys or lookup instead, join is memory-limited."
+    },
+    {
+      "id": "splunk-spl2-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which major Splunk platform version does SPL2 become available? Answer concisely with the version number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10(\\.0)?\\b"
+      },
+      "source": "plugins/security/skills/splunk/SKILL.md - Version-Specific Guidance table: Splunk 10.0 introduces SPL2, and How to Approach Tasks notes SPL2 availability (10.0+)."
+    },
+    {
+      "id": "splunk-tstats-speedup",
+      "knowledge": "stable",
+      "prompt": "Roughly how many times faster is a tstats query against an accelerated data model compared to raw search, according to Splunk search optimization guidance? Answer concisely with the approximate multiplier range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10.{0,4}100"
+      },
+      "source": "plugins/security/skills/splunk/SKILL.md - Search Optimization item 3: Accelerate data models, tstats on accelerated data models is 10-100x faster than raw search."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,55 @@
+{
+  "skill": "dell-powerstore",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dell-powerstore-drr-guarantee",
+      "knowledge": "stable",
+      "prompt": "Dell PowerStore guarantees a minimum data reduction ratio on PowerStore Prime without needing a pre-assessment. What is that guaranteed ratio? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5:1"
+        ]
+      },
+      "source": "plugins/storage/skills/dell-powerstore/SKILL.md - Always-On Data Reduction: 5:1 guaranteed (PowerStore Prime, no pre-assessment)"
+    },
+    {
+      "id": "dell-powerstore-metro-distance",
+      "knowledge": "stable",
+      "prompt": "For Dell PowerStore Metro Volume synchronous replication, what is the maximum supported distance between sites, in kilometers? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "96"
+        ]
+      },
+      "source": "plugins/storage/skills/dell-powerstore/SKILL.md - Metro Volume: Up to 96 km / 5ms RTT"
+    },
+    {
+      "id": "dell-powerstore-supportassist",
+      "knowledge": "recent",
+      "prompt": "Dell discontinued one SupportAssist connectivity method for PowerStore. Which method, and roughly when? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Direct Connect",
+          "2024"
+        ]
+      },
+      "source": "plugins/storage/skills/dell-powerstore/SKILL.md - Critical Operational Knowledge: SupportAssist Direct Connect discontinued Dec 2024; all clusters require Secure Connect Gateway (SCG)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

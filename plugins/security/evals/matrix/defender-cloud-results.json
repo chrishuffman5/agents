@@ -1,0 +1,48 @@
+{
+  "skill": "defender-cloud",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "defender-cloud-servers-plan2-loganalytics",
+      "knowledge": "recent",
+      "prompt": "Under Microsoft Defender for Servers Plan 2, how much free Log Analytics data ingestion is included per server, per day? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)500\\s*mb"
+      },
+      "source": "plugins/security/skills/defender-cloud/SKILL.md - Defender for Servers > Plan 2 (full): Free 500 MB/day of Log Analytics ingestion per server"
+    },
+    {
+      "id": "defender-cloud-jit-window",
+      "knowledge": "stable",
+      "prompt": "When a user requests just-in-time VM access in Microsoft Defender for Cloud, what is the typical time-limited range, in hours, that the resulting NSG rule stays open? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*(-|to)\\s*8\\s*hours"
+      },
+      "source": "plugins/security/skills/defender-cloud/SKILL.md - JIT VM Access: On request: NSG rule added for specific IP, time-limited (1-8 hours)"
+    },
+    {
+      "id": "defender-cloud-securescore-partial",
+      "knowledge": "stable",
+      "prompt": "In Microsoft Defender for Cloud's secure score, if only some but not all of the recommendations inside a control are remediated, how many points does that control contribute toward the score -- full, partial, or zero? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bzero\\b"
+      },
+      "source": "plugins/security/skills/defender-cloud/SKILL.md - Secure Score > Score structure: Partial completion = zero points for that control (binary per control, not per recommendation)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

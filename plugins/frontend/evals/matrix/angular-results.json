@@ -1,0 +1,54 @@
+{
+  "skill": "angular",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "angular-onpush-strategy",
+      "knowledge": "stable",
+      "prompt": "In Angular, which single change detection strategy is described as the highest-impact performance optimization to set on every component? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OnPush"
+        ]
+      },
+      "source": "plugins/frontend/skills/angular/SKILL.md - Always use ChangeDetectionStrategy.OnPush, the single highest-impact performance optimization"
+    },
+    {
+      "id": "angular-21-test-runner",
+      "knowledge": "recent",
+      "prompt": "As of Angular 21, which test runner became the default, replacing the older Karma-based setup? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Vitest"
+        ]
+      },
+      "source": "plugins/frontend/skills/angular/SKILL.md - version table: Angular 21 makes Vitest the default test runner"
+    },
+    {
+      "id": "angular-21-hammerjs-removed",
+      "knowledge": "recent",
+      "prompt": "Angular 21 removed a long-standing library that had been used for touch and gesture handling. Which library was removed? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "HammerJS"
+        ]
+      },
+      "source": "plugins/frontend/skills/angular/SKILL.md - version table: Angular 21 - HammerJS removed"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

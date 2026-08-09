@@ -1,0 +1,51 @@
+{
+  "skill": "synapse-pipelines",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "synapse-fabric-growth",
+      "knowledge": "recent",
+      "prompt": "According to the latest platform status assessment, roughly how many customers does Microsoft Fabric have, and what is its year-over-year growth rate? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "31,000",
+          "60"
+        ]
+      },
+      "source": "plugins/etl/skills/synapse-pipelines/SKILL.md - Platform Status: Fabric surpassed 2 billion dollars ARR with 31,000+ customers, growing 60% YoY."
+    },
+    {
+      "id": "synapse-data-explorer-retired",
+      "knowledge": "recent",
+      "prompt": "Within Azure Synapse Analytics, one preview component was formally retired. Which component was it, and on what date was it retired? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)data explorer.{0,40}october\\s*7,?\\s*2025"
+      },
+      "source": "plugins/etl/skills/synapse-pipelines/SKILL.md - Platform Status: Retired component: Synapse Data Explorer (Preview) retired October 7, 2025."
+    },
+    {
+      "id": "synapse-no-ssis-ir",
+      "knowledge": "stable",
+      "prompt": "Does Azure Synapse Pipelines support the Azure-SSIS integration runtime for running SSIS packages natively, the way standalone Azure Data Factory does? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not support|does not)"
+      },
+      "source": "plugins/etl/skills/synapse-pipelines/SKILL.md - Synapse Pipelines vs ADF table: Azure-SSIS IR Not supported in Synapse Pipelines -- use standalone ADF."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

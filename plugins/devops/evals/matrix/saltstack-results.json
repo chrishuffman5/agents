@@ -1,0 +1,53 @@
+{
+  "skill": "saltstack",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "saltstack-zeromq-ports",
+      "knowledge": "recent",
+      "prompt": "What two TCP ports does the Salt master use by default for its ZeroMQ publish and request event bus? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4505",
+          "4506"
+        ]
+      },
+      "source": "plugins/devops/skills/saltstack/SKILL.md - Core Architecture diagram: Event Bus ZeroMQ pub/sub (port 4505/4506)"
+    },
+    {
+      "id": "saltstack-version-line",
+      "knowledge": "recent",
+      "prompt": "Which Salt release line does current SaltStack guidance target, using its calendar-based version numbering? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3007"
+        ]
+      },
+      "source": "plugins/devops/skills/saltstack/SKILL.md - intro: This skill covers SaltStack (Salt) 3007.x"
+    },
+    {
+      "id": "saltstack-fleet-scale",
+      "knowledge": "stable",
+      "prompt": "Roughly how large a minion fleet is SaltStack described as excelling at managing with real-time execution? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10\\s*k|10,?000)"
+      },
+      "source": "plugins/devops/skills/saltstack/SKILL.md - intro: excels at managing large fleets (10K+ nodes) with real-time execution"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

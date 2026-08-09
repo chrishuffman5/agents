@@ -1,0 +1,52 @@
+{
+  "skill": "wireguard",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "wireguard-key-rotation",
+      "knowledge": "recent",
+      "prompt": "How often does WireGuard automatically rotate session keys to provide forward secrecy? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b180\\b"
+      },
+      "source": "plugins/networking/skills/wireguard/SKILL.md - Fixed Cryptography: Session key rotation every 180 seconds automatically (forward secrecy)"
+    },
+    {
+      "id": "wireguard-boringtun",
+      "knowledge": "recent",
+      "prompt": "Which company created BoringTun, a Rust-based userspace implementation of WireGuard? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Cloudflare"
+        ]
+      },
+      "source": "plugins/networking/skills/wireguard/references/architecture.md - Implementations table: BoringTun, Cross-platform (Rust), Cloudflare userspace"
+    },
+    {
+      "id": "wireguard-mtu",
+      "knowledge": "stable",
+      "prompt": "What MTU value is commonly recommended for a WireGuard interface running over a standard 1500-byte Ethernet path? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1420"
+        ]
+      },
+      "source": "plugins/networking/skills/wireguard/SKILL.md - MTU Calculation: Standard Ethernet 1500 - 60 = 1420 (recommended default)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

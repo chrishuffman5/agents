@@ -1,0 +1,235 @@
+{
+  "skill": "runtimes",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "runtimes-dockershim-version",
+      "knowledge": "stable",
+      "prompt": "At which Kubernetes minor version was the built-in dockershim dropped, making containerd the standard container runtime interface backend? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.24"
+        ]
+      },
+      "source": "plugins/containers/skills/runtimes/SKILL.md - Kubernetes dropped dockershim in 1.24"
+    },
+    {
+      "id": "runtimes-docker-desktop-threshold",
+      "knowledge": "stable",
+      "prompt": "According to runtime licensing guidance, at what employee count or revenue level does Docker Desktop require a paid subscription? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "250",
+          "10"
+        ]
+      },
+      "source": "plugins/containers/skills/runtimes/SKILL.md - Organizations > 250 employees or > 10M revenue require a paid subscription"
+    },
+    {
+      "id": "runtimes-youki-language",
+      "knowledge": "recent",
+      "prompt": "Which experimental OCI container runtime is written in Rust for memory safety, positioned as a growing alternative to runc and crun? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "youki"
+        ]
+      },
+      "source": "plugins/containers/skills/runtimes/SKILL.md - youki | Rust | Memory safety, growing ecosystem | Experimental alternative"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 9070,
+      "meanTokensOut": 155,
+      "totalCostUsd": 1.066,
+      "costPerCorrect": 0.1184
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 11518,
+      "meanTokensOut": 87,
+      "totalCostUsd": 0.3257,
+      "costPerCorrect": 0.0543
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 7364,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.8217,
+        "costPerCorrect": 0.1369
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6432,
+        "meanTokensOut": 38,
+        "totalCostUsd": 0.1687,
+        "costPerCorrect": 0.0562
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12482,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2443,
+        "costPerCorrect": 0.0814
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16603,
+        "meanTokensOut": 136,
+        "totalCostUsd": 0.157,
+        "costPerCorrect": 0.0523
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 7364,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.8217,
+        "costPerCorrect": 0.1369
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6432,
+        "meanTokensOut": 38,
+        "totalCostUsd": 0.1687,
+        "costPerCorrect": 0.0562
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12482,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2443,
+        "costPerCorrect": 0.0814
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16603,
+        "meanTokensOut": 136,
+        "totalCostUsd": 0.157,
+        "costPerCorrect": 0.0523
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6432,
+        "meanTokensOut": 38,
+        "totalCostUsd": 0.1687,
+        "costPerCorrect": 0.0562
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7314,
+        "meanTokensOut": 105,
+        "totalCostUsd": 0.3845,
+        "costPerCorrect": 0.1282
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7415,
+        "meanTokensOut": 216,
+        "totalCostUsd": 0.4372,
+        "costPerCorrect": 0.1457
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16603,
+        "meanTokensOut": 136,
+        "totalCostUsd": 0.157,
+        "costPerCorrect": 0.0523
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12482,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2443,
+        "costPerCorrect": 0.0814
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

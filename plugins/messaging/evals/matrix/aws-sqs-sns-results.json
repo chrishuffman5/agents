@@ -1,0 +1,48 @@
+{
+  "skill": "aws-sqs-sns",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-sqs-sns-fifo-throughput",
+      "knowledge": "recent",
+      "prompt": "For an SQS FIFO queue running in high throughput mode, what is the maximum number of transactions per second the queue can handle? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)70,?000"
+      },
+      "source": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SQS FIFO section: High-throughput mode up to 70,000 transactions/s"
+    },
+    {
+      "id": "aws-sqs-sns-standard-inflight",
+      "knowledge": "recent",
+      "prompt": "What is the maximum number of in-flight, not yet deleted, messages a single standard SQS queue supports? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)120,?000"
+      },
+      "source": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SQS Standard section: 120,000 in-flight message limit"
+    },
+    {
+      "id": "aws-sqs-sns-fifo-topic-target",
+      "knowledge": "stable",
+      "prompt": "Can an SNS FIFO topic deliver messages to a standard, non-FIFO SQS queue as a subscriber? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/messaging/skills/aws-sqs-sns/SKILL.md - SNS FIFO Topics: strict ordering and exactly-once to SQS FIFO subscriptions only"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "soar",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "soar-xsoar-integration-count",
+      "knowledge": "recent",
+      "prompt": "Roughly how many integrations does Cortex XSOAR offer, according to typical SOAR platform comparisons? Answer concisely with the approximate number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b900\\+?"
+      },
+      "source": "plugins/security/skills/soar/SKILL.md - SOAR Platform Comparison table: XSOAR Integrations 900+"
+    },
+    {
+      "id": "soar-maturity-level-5",
+      "knowledge": "stable",
+      "prompt": "In a five-level SOAR automation maturity model, what is the name of the highest level, characterized by ML-driven triage and auto-containment for high-confidence threats? Answer with just the level name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bautonomous\\b"
+      },
+      "source": "plugins/security/skills/soar/SKILL.md - Automation Maturity Model: Level 5 - Autonomous"
+    },
+    {
+      "id": "soar-phishing-triage-roi",
+      "knowledge": "recent",
+      "prompt": "When automating phishing email triage as an early SOAR use case, what percentage range of analyst time savings is typically expected? Answer concisely with the range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)60\\s*(-|to)\\s*80\\s*%?"
+      },
+      "source": "plugins/security/skills/soar/SKILL.md - What to Automate First table: P1 phishing triage, Expected ROI 60-80% analyst time savings"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

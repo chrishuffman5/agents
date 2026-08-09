@@ -1,0 +1,228 @@
+{
+  "skill": "macos-mdm-deployment",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "macos-mdm-migration-no-wipe-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which macOS release can a managed Mac migrate from one MDM vendor to another without requiring a full device wipe? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(macOS\\s*26|Tahoe)"
+      },
+      "source": "plugins/os/skills/macos-mdm-deployment/SKILL.md - MDM Migration (macOS 26 Tahoe): Tahoe introduces native vendor-to-vendor MDM migration without device wipe"
+    },
+    {
+      "id": "macos-mdm-clock-skew-threshold",
+      "knowledge": "stable",
+      "prompt": "How much clock skew between a Mac and the MDM server can cause TLS and enrollment authentication failures during MDM setup? Answer with the time threshold.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*minute"
+      },
+      "source": "plugins/os/skills/macos-mdm-deployment/SKILL.md - Common Pitfalls #2: Clock skew exceeding 5 minutes causes TLS errors."
+    },
+    {
+      "id": "macos-mdm-ddm-introduced-version",
+      "knowledge": "stable",
+      "prompt": "Declarative Device Management for macOS was first introduced, as a subset of declarations, with which macOS version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(macOS\\s*13|Ventura)"
+      },
+      "source": "plugins/os/skills/macos-mdm-deployment/SKILL.md - macOS MDM Feature Timeline table: DDM (macOS) - 13 Ventura - Subset of declarations introduced"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 12163,
+      "meanTokensOut": 359,
+      "totalCostUsd": 1.5165,
+      "costPerCorrect": 0.1685
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 13589,
+      "meanTokensOut": 234,
+      "totalCostUsd": 0.4545,
+      "costPerCorrect": 0.0909
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 11260,
+        "meanTokensOut": 470,
+        "totalCostUsd": 1.3468,
+        "costPerCorrect": 0.2245
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7587,
+        "meanTokensOut": 264,
+        "totalCostUsd": 0.1791,
+        "costPerCorrect": 0.0896
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13967,
+        "meanTokensOut": 138,
+        "totalCostUsd": 0.1697,
+        "costPerCorrect": 0.0566
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19591,
+        "meanTokensOut": 203,
+        "totalCostUsd": 0.2754,
+        "costPerCorrect": 0.0918
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 11260,
+        "meanTokensOut": 470,
+        "totalCostUsd": 1.3468,
+        "costPerCorrect": 0.2245
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7587,
+        "meanTokensOut": 264,
+        "totalCostUsd": 0.1791,
+        "costPerCorrect": 0.0896
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13967,
+        "meanTokensOut": 138,
+        "totalCostUsd": 0.1697,
+        "costPerCorrect": 0.0566
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19591,
+        "meanTokensOut": 203,
+        "totalCostUsd": 0.2754,
+        "costPerCorrect": 0.0918
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7587,
+        "meanTokensOut": 264,
+        "totalCostUsd": 0.1791,
+        "costPerCorrect": 0.0896
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8813,
+        "meanTokensOut": 291,
+        "totalCostUsd": 0.6134,
+        "costPerCorrect": 0.2045
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13707,
+        "meanTokensOut": 648,
+        "totalCostUsd": 0.7333,
+        "costPerCorrect": 0.2444
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19591,
+        "meanTokensOut": 203,
+        "totalCostUsd": 0.2754,
+        "costPerCorrect": 0.0918
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13967,
+        "meanTokensOut": 138,
+        "totalCostUsd": 0.1697,
+        "costPerCorrect": 0.0566
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,55 @@
+{
+  "skill": "airflow",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "airflow-2x-eol",
+      "knowledge": "recent",
+      "prompt": "Apache Airflow 2.x is being phased out in favor of the 3.x line. In what month and year does Airflow 2.x reach end of life? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2026"
+        ]
+      },
+      "source": "plugins/etl/skills/airflow/SKILL.md - Airflow 2.x reference row: TaskFlow API origin, smart sensors, datasets, grid view, EOL (April 2026) migration."
+    },
+    {
+      "id": "airflow-taskflow-min-version",
+      "knowledge": "stable",
+      "prompt": "The TaskFlow API using the @task decorator became the recommended way to write Airflow DAGs starting in which Airflow version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.0"
+        ]
+      },
+      "source": "plugins/etl/skills/airflow/SKILL.md - TaskFlow API: The recommended way to write DAGs in Airflow 2.0+ (and especially 3.x)."
+    },
+    {
+      "id": "airflow-xcom-size-limit",
+      "knowledge": "stable",
+      "prompt": "For reliable use of Airflow XCom to pass small values between tasks, under how many kilobytes should a value be kept? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "48"
+        ]
+      },
+      "source": "plugins/etl/skills/airflow/SKILL.md - XCom Patterns: Keep values small -- Under 48 KB for reliability; over 1 MB causes performance degradation."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

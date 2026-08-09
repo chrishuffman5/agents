@@ -1,0 +1,48 @@
+{
+  "skill": "cortex-xdr",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cortex-xdr-causality-analog",
+      "knowledge": "recent",
+      "prompt": "Cortex XDR's Causality Chain feature, which automatically reconstructs an attack chain, is described as similar in concept to which named feature from a competing EDR vendor? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)storyline"
+      },
+      "source": "plugins/security/skills/cortex-xdr/SKILL.md - Core components: Causality Chain - Automatic attack chain reconstruction (similar to SentinelOne's Storyline)"
+    },
+    {
+      "id": "cortex-xdr-xql-dataset",
+      "knowledge": "recent",
+      "prompt": "In Cortex XDR's XQL query language, what is the name of the dataset that contains all endpoint events and serves as the starting point for most threat hunting queries? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)xdr_data"
+      },
+      "source": "plugins/security/skills/cortex-xdr/SKILL.md - Key XQL Datasets table: xdr_data = All endpoint events"
+    },
+    {
+      "id": "cortex-xdr-xsiam-soar",
+      "knowledge": "stable",
+      "prompt": "How does Cortex XSIAM differ from standalone Cortex XDR when it comes to SOAR capability -- does XSIAM ship with SOAR built in, or does it depend on integrating a separate product? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)built.?in"
+      },
+      "source": "plugins/security/skills/cortex-xdr/SKILL.md - Key Differences: Cortex XDR vs XSIAM table, SOAR row: XDR - Integration with XSOAR; XSIAM - Built-in SOAR (ML-driven playbooks)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,54 @@
+{
+  "skill": "stackhawk",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "stackhawk-zap-engine",
+      "knowledge": "stable",
+      "prompt": "What open-source scanning engine does StackHawk HawkScan wrap under the hood? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OWASP ZAP"
+        ]
+      },
+      "source": "plugins/security/skills/stackhawk/SKILL.md - intro: StackHawk is a developer-centric DAST platform built on OWASP ZAP."
+    },
+    {
+      "id": "stackhawk-failure-threshold-levels",
+      "knowledge": "recent",
+      "prompt": "In a stackhawk.yml configuration, what severity levels can the failureThreshold setting be set to, from lowest to highest, to control when HawkScan breaks a CI build? Answer concisely, naming at least three of the levels.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "INFORMATIONAL",
+          "MEDIUM",
+          "CRITICAL"
+        ]
+      },
+      "source": "plugins/security/skills/stackhawk/SKILL.md - Full Configuration Reference and Failure Thresholds section: failureThreshold values are INFORMATIONAL | LOW | MEDIUM | HIGH | CRITICAL."
+    },
+    {
+      "id": "stackhawk-network-host-flag",
+      "knowledge": "stable",
+      "prompt": "When running HawkScan in Docker and the application under test is running directly on the host machine rather than in another container, which Docker networking flag should you add so the scanner can reach it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)--?network(=|\\s+)host"
+      },
+      "source": "plugins/security/skills/stackhawk/SKILL.md - Common Issues section: use --network=host Docker flag when app runs on the host directly."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

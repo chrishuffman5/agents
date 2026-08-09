@@ -1,0 +1,53 @@
+{
+  "skill": "burp-suite",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "burp-suite-intruder-attack-types",
+      "knowledge": "stable",
+      "prompt": "Burp Suite Intruder offers four attack types combining payload positions with payload lists. Name all four. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Sniper",
+          "Battering Ram",
+          "Pitchfork",
+          "Cluster Bomb"
+        ]
+      },
+      "source": "plugins/security/skills/burp-suite/SKILL.md - Intruder attack types table: Sniper, Battering Ram, Pitchfork, Cluster Bomb"
+    },
+    {
+      "id": "burp-suite-bcheck-year",
+      "knowledge": "recent",
+      "prompt": "In what year was BCheck, the scripting language for writing custom Burp Suite scan checks, introduced? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2022\\b"
+      },
+      "source": "plugins/security/skills/burp-suite/SKILL.md - BCheck (Custom Scan Checks): a scripting language for writing custom active scan checks, introduced in Burp Suite 2022"
+    },
+    {
+      "id": "burp-suite-sequencer-keyspace",
+      "knowledge": "recent",
+      "prompt": "When analyzing a session token with Burp Suite Sequencer, what minimum effective key space in bits should the token show to be considered adequately random? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b64\\b"
+      },
+      "source": "plugins/security/skills/burp-suite/SKILL.md - Sequencer, Interpreting results: Effective key space should be greater than 64 bits for session tokens"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

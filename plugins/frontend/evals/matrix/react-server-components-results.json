@@ -1,0 +1,52 @@
+{
+  "skill": "react-server-components",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rsc-client-import-server-forbidden",
+      "knowledge": "stable",
+      "prompt": "Can a Client Component directly import a Server Component as a module dependency, or does that fail to build? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(cannot|build error|\\bno\\b)"
+      },
+      "source": "plugins/frontend/skills/react-server-components/SKILL.md - Boundary rules: Client Component CANNOT import Server Components (build error)"
+    },
+    {
+      "id": "rsc-stable-react-version",
+      "knowledge": "recent",
+      "prompt": "React Server Components became stable starting in which major version of React? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "19"
+        ]
+      },
+      "source": "plugins/frontend/skills/react-server-components/SKILL.md - intro: RSC, stable in React 19"
+    },
+    {
+      "id": "rsc-server-action-directive",
+      "knowledge": "stable",
+      "prompt": "Which directive do you place on a function to mark it as a Server Action that is callable from Client Components? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "use server"
+        ]
+      },
+      "source": "plugins/frontend/skills/react-server-components/SKILL.md - Directive Summary table: use server marks Server Actions"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

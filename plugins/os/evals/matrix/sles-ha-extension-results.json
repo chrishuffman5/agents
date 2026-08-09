@@ -1,0 +1,213 @@
+{
+  "skill": "sles-ha-extension",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sles-ha-sbd-majority-count",
+      "knowledge": "recent",
+      "prompt": "For SBD based fencing in a SUSE HA cluster, how many SBD devices are recommended to achieve a majority vote configuration, avoiding the single point of failure of one device? Answer with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\b"
+      },
+      "source": "plugins/os/skills/sles-ha-extension/SKILL.md - Fencing (STONITH): SBD device count: 1 (simple, SPOF), 3 (majority vote, recommended), diskless"
+    },
+    {
+      "id": "sles-ha-hawk-port",
+      "knowledge": "stable",
+      "prompt": "What TCP port does the HAWK web console use for browser based Pacemaker cluster management? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b7630\\b"
+      },
+      "source": "plugins/os/skills/sles-ha-extension/SKILL.md - HAWK Web Console: Browser-based cluster management on port 7630 (HTTPS)"
+    },
+    {
+      "id": "sles-ha-stonith-disable-unsupported",
+      "knowledge": "stable",
+      "prompt": "Is setting stonith-enabled=false considered a supported configuration for a production SUSE HA cluster? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not supported|unsupported)"
+      },
+      "source": "plugins/os/skills/sles-ha-extension/SKILL.md - Common Pitfalls #1: Setting stonith-enabled=false is unsupported for production clusters."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 12878,
+      "meanTokensOut": 91,
+      "totalCostUsd": 0.5663,
+      "costPerCorrect": 0.0944
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 7207,
+      "meanTokensOut": 62,
+      "totalCostUsd": 0.3313,
+      "costPerCorrect": 0.0552
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7719,
+        "meanTokensOut": 27,
+        "totalCostUsd": 0.4152,
+        "costPerCorrect": 0.1384
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4816,
+        "meanTokensOut": 37,
+        "totalCostUsd": 0.1689,
+        "costPerCorrect": 0.0563
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18037,
+        "meanTokensOut": 156,
+        "totalCostUsd": 0.1512,
+        "costPerCorrect": 0.0504
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9598,
+        "meanTokensOut": 88,
+        "totalCostUsd": 0.1625,
+        "costPerCorrect": 0.0542
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7719,
+        "meanTokensOut": 27,
+        "totalCostUsd": 0.4152,
+        "costPerCorrect": 0.1384
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4816,
+        "meanTokensOut": 37,
+        "totalCostUsd": 0.1689,
+        "costPerCorrect": 0.0563
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18037,
+        "meanTokensOut": 156,
+        "totalCostUsd": 0.1512,
+        "costPerCorrect": 0.0504
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9598,
+        "meanTokensOut": 88,
+        "totalCostUsd": 0.1625,
+        "costPerCorrect": 0.0542
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4816,
+        "meanTokensOut": 37,
+        "totalCostUsd": 0.1689,
+        "costPerCorrect": 0.0563
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7719,
+        "meanTokensOut": 27,
+        "totalCostUsd": 0.4152,
+        "costPerCorrect": 0.1384
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9598,
+        "meanTokensOut": 88,
+        "totalCostUsd": 0.1625,
+        "costPerCorrect": 0.0542
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18037,
+        "meanTokensOut": 156,
+        "totalCostUsd": 0.1512,
+        "costPerCorrect": 0.0504
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

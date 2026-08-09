@@ -1,0 +1,53 @@
+{
+  "skill": "sops",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sops-dek-encryption",
+      "knowledge": "stable",
+      "prompt": "In Mozilla SOPS, is each encrypted file protected by a single shared master key, or by a unique per-file data encryption key that is itself wrapped by each configured master key? Name the cipher used for that per-file key. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AES-256-GCM",
+          "DEK"
+        ]
+      },
+      "source": "plugins/security/skills/sops/SKILL.md - What SOPS Does section: SOPS uses envelope encryption, each file encrypted with a unique DEK (AES-256-GCM), and the DEK is encrypted with each configured master key."
+    },
+    {
+      "id": "sops-updatekeys-ciphertext",
+      "knowledge": "recent",
+      "prompt": "When you run the sops updatekeys command on an already-encrypted file, does the actual encrypted ciphertext of the values change, or does it only re-wrap the data encryption key for the new set of keys? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|not|unchanged)\\b"
+      },
+      "source": "plugins/security/skills/sops/SKILL.md - Key Rotation section: updatekeys re-reads .sops.yaml creation rules and re-encrypts the file's DEK with the new set of keys; the actual encrypted data is not changed."
+    },
+    {
+      "id": "sops-exec-file-placeholder",
+      "knowledge": "recent",
+      "prompt": "In the SOPS exec-file command, what two-character placeholder appears in the command string and gets replaced with the path to a temporary decrypted file? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "{}"
+        ]
+      },
+      "source": "plugins/security/skills/sops/SKILL.md - Running Commands with Decrypted Secrets section: exec-file example uses app --config {} and notes {} is replaced with the temp file path."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

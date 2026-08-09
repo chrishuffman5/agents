@@ -1,0 +1,48 @@
+{
+  "skill": "recorded-future",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "recorded-future-risk-band",
+      "knowledge": "recent",
+      "prompt": "On Recorded Future's 0-99 risk score scale, what score range corresponds to the risk level labeled Malicious, meaning block or investigate as an active threat? Answer concisely with the numeric range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)65.{0,4}89"
+      },
+      "source": "plugins/security/skills/recorded-future/SKILL.md - Score ranges table: 65-89 = Malicious, Block/investigate; active threat"
+    },
+    {
+      "id": "recorded-future-mastercard-acquisition",
+      "knowledge": "recent",
+      "prompt": "Which company acquired Recorded Future in 2024? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)mastercard"
+      },
+      "source": "plugins/security/skills/recorded-future/SKILL.md - Recorded Future was acquired by Mastercard in 2024"
+    },
+    {
+      "id": "recorded-future-cvss-vs-exploitation",
+      "knowledge": "stable",
+      "prompt": "Should a vulnerability with a high CVSS score but no public exploit generally be prioritized above or below a medium-CVSS vulnerability that is being actively exploited by ransomware? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(below|lower|after)\\b"
+      },
+      "source": "plugins/security/skills/recorded-future/SKILL.md - A high-CVSS vulnerability with no public exploit has lower remediation priority than a medium-CVSS vulnerability actively exploited by ransomware"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

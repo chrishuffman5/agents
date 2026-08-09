@@ -1,0 +1,230 @@
+{
+  "skill": "helm",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "helm4-release-version",
+      "knowledge": "recent",
+      "prompt": "What is the current Helm major and minor release, the one announced at KubeCon 2025? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.1"
+        ]
+      },
+      "source": "plugins/containers/skills/helm/SKILL.md - current: 4.1.x, released KubeCon 2025"
+    },
+    {
+      "id": "helm-apply-strategy",
+      "knowledge": "stable",
+      "prompt": "Between Helm 3 and Helm 4, which version switched from client-side three-way merge to Server-Side Apply for reconciling manifests? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)helm\\s*4"
+      },
+      "source": "plugins/containers/skills/helm/SKILL.md - Apply strategy: Helm 3 client-side 3-way merge vs Helm 4 Server-Side Apply (SSA)"
+    },
+    {
+      "id": "helm-hook-weight-order",
+      "knowledge": "stable",
+      "prompt": "For Helm hooks, does a hook with weight -5 run before or after a hook with weight 5? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)before"
+      },
+      "source": "plugins/containers/skills/helm/SKILL.md - Hook weights: -5 runs before 5"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 10756,
+      "meanTokensOut": 177,
+      "totalCostUsd": 1.0159,
+      "costPerCorrect": 0.127
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 10892,
+      "meanTokensOut": 108,
+      "totalCostUsd": 0.281,
+      "costPerCorrect": 0.0703
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 8832,
+        "meanTokensOut": 186,
+        "totalCostUsd": 0.8572,
+        "costPerCorrect": 0.1714
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6698,
+        "meanTokensOut": 91,
+        "totalCostUsd": 0.1645,
+        "costPerCorrect": 0.0822
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14605,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 15086,
+        "meanTokensOut": 125,
+        "totalCostUsd": 0.1166,
+        "costPerCorrect": 0.0583
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 8832,
+        "meanTokensOut": 186,
+        "totalCostUsd": 0.8572,
+        "costPerCorrect": 0.1714
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6698,
+        "meanTokensOut": 91,
+        "totalCostUsd": 0.1645,
+        "costPerCorrect": 0.0822
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14605,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 15086,
+        "meanTokensOut": 125,
+        "totalCostUsd": 0.1166,
+        "costPerCorrect": 0.0583
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6698,
+        "meanTokensOut": 91,
+        "totalCostUsd": 0.1645,
+        "costPerCorrect": 0.0822
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6214,
+        "meanTokensOut": 73,
+        "totalCostUsd": 0.3371,
+        "costPerCorrect": 0.1686
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11449,
+        "meanTokensOut": 298,
+        "totalCostUsd": 0.5201,
+        "costPerCorrect": 0.1734
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 15086,
+        "meanTokensOut": 125,
+        "totalCostUsd": 0.1166,
+        "costPerCorrect": 0.0583
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14605,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

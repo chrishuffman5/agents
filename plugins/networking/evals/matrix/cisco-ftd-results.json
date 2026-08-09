@@ -1,0 +1,54 @@
+{
+  "skill": "cisco-ftd",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-ftd-2100-deprecation",
+      "knowledge": "recent",
+      "prompt": "Starting with which Cisco FTD software version are Firepower 2100 series appliances (2110/2120/2130/2140) no longer supported? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.6"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-ftd/SKILL.md - Firepower 2100 deprecation: 2100 series not supported on FTD 7.6+"
+    },
+    {
+      "id": "cisco-ftd-fmc-api-rate-limit",
+      "knowledge": "recent",
+      "prompt": "In Cisco FTD 7.6, what is the FMC REST API rate limit, expressed in requests per minute? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-ftd/references/versions/7.6.md - FMC REST API rate limit: 300 req/min (up from 120)"
+    },
+    {
+      "id": "cisco-ftd-sftunnel-port",
+      "knowledge": "stable",
+      "prompt": "Cisco FTD devices communicate with FMC over an encrypted tunnel called sftunnel. What TCP port does this use? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8305"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-ftd/SKILL.md - sftunnel: Encrypted tunnel over TCP 8305 for FMC-FTD communication"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

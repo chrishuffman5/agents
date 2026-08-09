@@ -1,0 +1,52 @@
+{
+  "skill": "mcp",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mcp-current-spec-revision",
+      "knowledge": "recent",
+      "prompt": "As of current guidance, what is the latest stable Model Context Protocol specification revision date? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025-11-25"
+        ]
+      },
+      "source": "plugins/ai/skills/mcp/SKILL.md - 2025-11-25 is Stable, the default revision"
+    },
+    {
+      "id": "mcp-protocol-version-fallback",
+      "knowledge": "stable",
+      "prompt": "If an MCP client sends no MCP-Protocol-Version header on a post-initialization HTTP request, which protocol version should the server assume? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025-03-26"
+        ]
+      },
+      "source": "plugins/ai/skills/mcp/SKILL.md - a server seeing no MCP-Protocol-Version header SHOULD assume 2025-03-26"
+    },
+    {
+      "id": "mcp-elicitation-form-mode-rule",
+      "knowledge": "stable",
+      "prompt": "In MCP's elicitation form mode, what kinds of information must a server never request from the user, such as passwords or access tokens? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(password|credential|payment)"
+      },
+      "source": "plugins/ai/skills/mcp/SKILL.md - never request passwords, API keys, access tokens, or payment credentials in form mode"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

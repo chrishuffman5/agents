@@ -1,0 +1,48 @@
+{
+  "skill": "ssas",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ssas-standard-ram-limit",
+      "knowledge": "stable",
+      "prompt": "On SQL Server Standard edition, what is the model RAM limit for an on-premises SSAS Tabular instance? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)16\\s*GB"
+      },
+      "source": "plugins/analytics/skills/ssas/SKILL.md - Platform Variants, On-Premises SSAS: Standard edition 16 GB model RAM limit; Enterprise unlimited."
+    },
+    {
+      "id": "ssas-vertipaq-segment-size",
+      "knowledge": "stable",
+      "prompt": "In the SSAS VertiPaq engine, roughly how many rows make up each column segment used for parallel scanning? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)8\\s*million|\\b8m\\b"
+      },
+      "source": "plugins/analytics/skills/ssas/SKILL.md - VertiPaq (xVelocity) Engine: column partitions divided into ~8M-row segments for parallel scanning."
+    },
+    {
+      "id": "ssas-migration-effort",
+      "knowledge": "recent",
+      "prompt": "When migrating an SSAS Multidimensional model to Tabular, roughly what percentage of the original development time should be budgeted, since it requires a full redesign rather than a conversion? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)60.{0,3}80\\s*%?"
+      },
+      "source": "plugins/analytics/skills/ssas/SKILL.md - SSAS and Power BI Convergence: migration from Multidimensional to Tabular requires complete redesign, expect 60-80% of original development time."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

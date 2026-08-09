@@ -1,0 +1,58 @@
+{
+  "skill": "infisical",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "infisical-encryption-model",
+      "knowledge": "recent",
+      "prompt": "What symmetric encryption algorithm does Infisical use to encrypt secrets under its zero-knowledge, client-side encryption model? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AES-256-GCM"
+        ]
+      },
+      "source": "plugins/security/skills/infisical/SKILL.md - Encryption Model section: AES-256-GCM with per-project keys"
+    },
+    {
+      "id": "infisical-org-roles",
+      "knowledge": "stable",
+      "prompt": "What are the four built-in organization-level roles available in Infisical for controlling member access? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Owner",
+          "Admin",
+          "Member",
+          "No Access"
+        ]
+      },
+      "source": "plugins/security/skills/infisical/SKILL.md - RBAC section: Organization roles: Owner, Admin, Member, No Access"
+    },
+    {
+      "id": "infisical-hierarchy-levels",
+      "knowledge": "stable",
+      "prompt": "In Infisical resource organization, between a Project and an individual Secret, what two intermediate levels exist in the hierarchy? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Environment",
+          "Folder"
+        ]
+      },
+      "source": "plugins/security/skills/infisical/SKILL.md - Organization Hierarchy diagram: Organization > Project > Environment > Folder > Secret"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

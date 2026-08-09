@@ -1,0 +1,233 @@
+{
+  "skill": "macos",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "macos-tahoe-version-number",
+      "knowledge": "recent",
+      "prompt": "Apple's macOS version numbering jumped from 15 straight to a much higher number for the Tahoe release, skipping the traditional next integer. What version number is macOS Tahoe? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b26\\b"
+      },
+      "source": "plugins/os/skills/macos/SKILL.md - Note: macOS uses year-based versioning starting with Tahoe (macOS 26, not macOS 16)."
+    },
+    {
+      "id": "macos-filevault-encryption",
+      "knowledge": "stable",
+      "prompt": "What encryption algorithm and key length does FileVault use for full disk encryption on APFS volumes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "XTS-AES-128",
+          "256-bit"
+        ]
+      },
+      "source": "plugins/os/skills/macos/SKILL.md - FileVault: Full-disk encryption using XTS-AES-128 with 256-bit key on APFS volumes."
+    },
+    {
+      "id": "macos-homebrew-path-apple-silicon",
+      "knowledge": "stable",
+      "prompt": "On Apple Silicon Macs, what filesystem path does Homebrew install to by default, as opposed to /usr/local on Intel Macs? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/opt/homebrew"
+        ]
+      },
+      "source": "plugins/os/skills/macos/SKILL.md - Apple Silicon vs Intel table: Homebrew prefix /opt/homebrew (Apple Silicon) vs /usr/local (Intel)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 11641,
+      "meanTokensOut": 188,
+      "totalCostUsd": 1.1283,
+      "costPerCorrect": 0.1254
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 10861,
+      "meanTokensOut": 120,
+      "totalCostUsd": 0.3541,
+      "costPerCorrect": 0.0708
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 8486,
+        "meanTokensOut": 184,
+        "totalCostUsd": 0.9301,
+        "costPerCorrect": 0.155
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5550,
+        "meanTokensOut": 108,
+        "totalCostUsd": 0.1674,
+        "costPerCorrect": 0.0558
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17951,
+        "meanTokensOut": 196,
+        "totalCostUsd": 0.1982,
+        "costPerCorrect": 0.0661
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16172,
+        "meanTokensOut": 132,
+        "totalCostUsd": 0.1867,
+        "costPerCorrect": 0.0934
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 8486,
+        "meanTokensOut": 184,
+        "totalCostUsd": 0.9301,
+        "costPerCorrect": 0.155
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5550,
+        "meanTokensOut": 108,
+        "totalCostUsd": 0.1674,
+        "costPerCorrect": 0.0558
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17951,
+        "meanTokensOut": 196,
+        "totalCostUsd": 0.1982,
+        "costPerCorrect": 0.0661
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16172,
+        "meanTokensOut": 132,
+        "totalCostUsd": 0.1867,
+        "costPerCorrect": 0.0934
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5550,
+        "meanTokensOut": 108,
+        "totalCostUsd": 0.1674,
+        "costPerCorrect": 0.0558
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7713,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.4161,
+        "costPerCorrect": 0.1387
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9258,
+        "meanTokensOut": 245,
+        "totalCostUsd": 0.5139,
+        "costPerCorrect": 0.1713
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16172,
+        "meanTokensOut": 132,
+        "totalCostUsd": 0.1867,
+        "costPerCorrect": 0.0934
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17951,
+        "meanTokensOut": 196,
+        "totalCostUsd": 0.1982,
+        "costPerCorrect": 0.0661
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

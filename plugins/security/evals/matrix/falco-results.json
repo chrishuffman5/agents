@@ -1,0 +1,52 @@
+{
+  "skill": "falco",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "falco-modern-ebpf-kernel",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Linux kernel version required for Falco's modern eBPF driver that relies on CO-RE and BTF support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\.8"
+      },
+      "source": "plugins/security/skills/falco/SKILL.md - Falco Architecture Overview: Modern eBPF (CO-RE): Kernel 5.8+ with BTF"
+    },
+    {
+      "id": "falco-default-rule-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many default detection rules does Falco ship with out of the box? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)70\\+?"
+      },
+      "source": "plugins/security/skills/falco/SKILL.md - Default Rules Reference: Falco ships 70+ default rules"
+    },
+    {
+      "id": "falco-priority-levels",
+      "knowledge": "stable",
+      "prompt": "List at least three of the severity levels Falco supports for the priority field of a rule, out of its full set of eight levels. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "EMERGENCY",
+          "CRITICAL",
+          "DEBUG"
+        ]
+      },
+      "source": "plugins/security/skills/falco/SKILL.md - Rule fields: priority: EMERGENCY, ALERT, CRITICAL, ERROR, WARNING, NOTICE, INFORMATIONAL, DEBUG"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "snowflake",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "snowflake-snowpipe-file-cost",
+      "knowledge": "recent",
+      "prompt": "Roughly how many Snowflake credits does Snowpipe charge per 1000 files loaded. Answer with the approximate number of credits.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0?\\.06"
+      },
+      "source": "plugins/database/skills/snowflake/SKILL.md - Snowpipe (Continuous Data Loading) section: Snowpipe is billed per file loaded, approximately 0.06 credits per 1000 files."
+    },
+    {
+      "id": "snowflake-snowpark-optimized-memory",
+      "knowledge": "recent",
+      "prompt": "Compared with a standard Snowflake virtual warehouse node, how much more memory per node does a Snowpark-optimized warehouse provide. Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(16\\s*x|16\\s*times)"
+      },
+      "source": "plugins/database/skills/snowflake/references/advanced-features.md - Snowpark section: Snowpark-optimized warehouses have 16x memory per node compared to standard warehouses."
+    },
+    {
+      "id": "snowflake-failsafe-window",
+      "knowledge": "stable",
+      "prompt": "After Snowflake Time Travel retention expires on a permanent table, how many additional days does Fail-Safe provide for data recovery. Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b7\\s*-?\\s*days?\\b|seven[- ]day)"
+      },
+      "source": "plugins/database/skills/snowflake/SKILL.md - Time Travel and Fail-Safe section: Fail-Safe is an additional 7-day recovery period after Time Travel expires, available only for permanent tables."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

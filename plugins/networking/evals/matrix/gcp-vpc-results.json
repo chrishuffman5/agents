@@ -1,0 +1,50 @@
+{
+  "skill": "gcp-vpc",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gcp-vpc-cloudnat-default-ports",
+      "knowledge": "recent",
+      "prompt": "By default, how many ports does GCP Cloud NAT allocate per VM instance for outbound connections? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b64\\b"
+      },
+      "source": "plugins/networking/skills/gcp-vpc/SKILL.md - Cloud NAT default port allocation is 64 ports per VM"
+    },
+    {
+      "id": "gcp-vpc-havpn-tunnel-throughput",
+      "knowledge": "recent",
+      "prompt": "On GCP, what is the throughput cap of a single HA VPN tunnel? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3 Gbps"
+        ]
+      },
+      "source": "plugins/networking/skills/gcp-vpc/SKILL.md - each HA VPN tunnel supports up to 3 Gbps"
+    },
+    {
+      "id": "gcp-vpc-global-by-default",
+      "knowledge": "stable",
+      "prompt": "Does a Google Cloud VPC network span a single region only, or does it span all regions globally by default? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)global"
+      },
+      "source": "plugins/networking/skills/gcp-vpc/SKILL.md - GCP VPC is global by default, a single VPC spans all regions simultaneously"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

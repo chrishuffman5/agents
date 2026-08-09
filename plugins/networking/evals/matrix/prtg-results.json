@@ -1,0 +1,50 @@
+{
+  "skill": "prtg",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "prtg-free-tier-sensors",
+      "knowledge": "recent",
+      "prompt": "How many sensors does PRTG Network Monitor's free licensing tier include? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b100\\b"
+      },
+      "source": "plugins/networking/skills/prtg/SKILL.md - Licensing Tiers: Free tier = 100 sensors"
+    },
+    {
+      "id": "prtg-remote-probe-port",
+      "knowledge": "recent",
+      "prompt": "What TCP port do PRTG remote probes use to connect outbound to the PRTG Core Server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "23560"
+        ]
+      },
+      "source": "plugins/networking/skills/prtg/SKILL.md - Common Pitfalls: Remote probes need outbound TLS (port 23560) to Core Server"
+    },
+    {
+      "id": "prtg-core-os-windows",
+      "knowledge": "stable",
+      "prompt": "Is the on-premises PRTG Core Server a Windows-based product or a Linux-based product? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)windows"
+      },
+      "source": "plugins/networking/skills/prtg/SKILL.md - On-Premises Architecture: Core Server runs on Windows Server (2016/2019/2022)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

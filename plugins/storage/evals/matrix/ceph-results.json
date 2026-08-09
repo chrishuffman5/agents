@@ -1,0 +1,56 @@
+{
+  "skill": "ceph",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ceph-pg-target",
+      "knowledge": "stable",
+      "prompt": "When sizing Ceph placement groups, what is the recommended target range of PGs per OSD across all pools? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100",
+          "200"
+        ]
+      },
+      "source": "plugins/storage/skills/ceph/SKILL.md - Placement Groups: Target 100-200 PGs per OSD"
+    },
+    {
+      "id": "ceph-replicated-pool",
+      "knowledge": "stable",
+      "prompt": "For a Ceph replicated pool configured with size equal to 3, what percentage of raw capacity ends up usable? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "33"
+        ]
+      },
+      "source": "plugins/storage/skills/ceph/SKILL.md - Pool Types table: Replicated (size=3): 33% usable, tolerate 2 failures"
+    },
+    {
+      "id": "ceph-tentacle-fastec",
+      "knowledge": "recent",
+      "prompt": "Which Ceph major release introduces FastEC erasure coding along with a management gateway and an integrated SMB Manager? Give the release name and version number. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Tentacle",
+          "20.2"
+        ]
+      },
+      "source": "plugins/storage/skills/ceph/SKILL.md - Version-specific guidance: Tentacle 20.2: FastEC, mgmt-gateway, oauth2-proxy, certmgr, integrated SMB Manager"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

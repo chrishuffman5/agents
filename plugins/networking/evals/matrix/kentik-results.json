@@ -1,0 +1,57 @@
+{
+  "skill": "kentik",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "kentik-rest-api-base-url",
+      "knowledge": "recent",
+      "prompt": "What is the base URL, including version path, for Kentik's REST API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "api.kentik.com",
+          "v5"
+        ]
+      },
+      "source": "plugins/networking/skills/kentik/SKILL.md - REST API base URL is https://api.kentik.com/api/v5/"
+    },
+    {
+      "id": "kentik-rtbh-prefix-length",
+      "knowledge": "recent",
+      "prompt": "In Kentik's automated DDoS mitigation using RTBH (Remote Triggered Black Hole), what prefix length is announced via BGP community to null-route the attacked destination? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/32"
+        ]
+      },
+      "source": "plugins/networking/skills/kentik/SKILL.md - RTBH: announce /32 route to null via BGP community"
+    },
+    {
+      "id": "kentik-flow-protocols-supported",
+      "knowledge": "stable",
+      "prompt": "Name at least three flow export protocols or formats that Kentik ingests for network traffic analytics. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "NetFlow",
+          "sFlow",
+          "IPFIX"
+        ]
+      },
+      "source": "plugins/networking/skills/kentik/SKILL.md - ingestion supports NetFlow v5/v9, IPFIX, sFlow, VPC Flow Logs, eBPF agent"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

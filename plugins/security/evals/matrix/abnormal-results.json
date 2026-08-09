@@ -1,0 +1,53 @@
+{
+  "skill": "abnormal",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "abnormal-baseline-maturity",
+      "knowledge": "recent",
+      "prompt": "After connecting Abnormal Security via API to Microsoft 365 or Google Workspace, roughly how many days does it take for the behavioral AI model to reach full maturity? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b7\\b\\D{0,10}\\b14\\b"
+      },
+      "source": "plugins/security/skills/abnormal/SKILL.md - full behavioral model maturity in 7-14 days (initial connection takes 30-60 minutes)"
+    },
+    {
+      "id": "abnormal-bec-auto-remediate-threshold",
+      "knowledge": "recent",
+      "prompt": "In Abnormal Security's example remediation policy, what confidence score threshold for a detected BEC attack triggers automatic move-to-junk remediation? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b90\\b"
+      },
+      "source": "plugins/security/skills/abnormal/SKILL.md - High-confidence BEC (score > 90): Auto-move to junk"
+    },
+    {
+      "id": "abnormal-siem-integrations",
+      "knowledge": "stable",
+      "prompt": "Which four SIEM or SOAR platforms does Abnormal Security list as having native integrations? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Splunk",
+          "Sentinel",
+          "XSOAR",
+          "ServiceNow"
+        ]
+      },
+      "source": "plugins/security/skills/abnormal/SKILL.md - native SIEM integrations: Splunk, Microsoft Sentinel, Palo Alto Cortex XSOAR, ServiceNow"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

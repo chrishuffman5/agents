@@ -1,0 +1,48 @@
+{
+  "skill": "dependabot",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dependabot-default-pr-limit",
+      "knowledge": "stable",
+      "prompt": "If you do not set open-pull-requests-limit in a dependabot.yml update configuration, what is the default maximum number of open pull requests Dependabot keeps for that ecosystem? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b"
+      },
+      "source": "plugins/security/skills/dependabot/SKILL.md - Full Configuration Reference: open-pull-requests-limit: 10 (Max open PRs, default: 5)"
+    },
+    {
+      "id": "dependabot-cvss-critical-range",
+      "knowledge": "stable",
+      "prompt": "GitHub Dependabot alerts assign severity labels based on CVSS score. What CVSS score range maps to the Critical severity label? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)9(\\.0)?\\s*(-|to)\\s*10(\\.0)?"
+      },
+      "source": "plugins/security/skills/dependabot/SKILL.md - Understanding Alert Severity: Critical: CVSS 9.0-10.0"
+    },
+    {
+      "id": "dependabot-security-update-granularity",
+      "knowledge": "recent",
+      "prompt": "When Dependabot automatically creates security update pull requests, does it open one PR per vulnerable dependency, or one PR per individual vulnerability? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)one.{0,4}(pr|pull request).{0,20}vulnerability"
+      },
+      "source": "plugins/security/skills/dependabot/SKILL.md - Security Update PR Behavior: One PR per vulnerability (not per dependency)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

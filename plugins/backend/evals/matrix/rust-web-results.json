@@ -1,0 +1,51 @@
+{
+  "skill": "rust-web",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rust-web-extractor-order",
+      "knowledge": "stable",
+      "prompt": "In an Axum handler function signature, where must a body-consuming extractor like Json of T be positioned relative to extractors such as State or Path? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\blast\\b"
+      },
+      "source": "plugins/backend/skills/rust-web/SKILL.md - Extractors resolve left-to-right. Body-consuming extractors (Json<T>, Bytes) must be last."
+    },
+    {
+      "id": "rust-web-axum-vs-actix-throughput",
+      "knowledge": "recent",
+      "prompt": "In raw throughput comparisons between the two major Rust web frameworks, Axum performs at roughly what percentage of Actix Web's performance? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b94\\b"
+      },
+      "source": "plugins/backend/skills/rust-web/SKILL.md - Framework Selection Guide table: Performance | Excellent (~94% of Actix) | Historically highest TechEmpower"
+    },
+    {
+      "id": "rust-web-error-crates",
+      "knowledge": "stable",
+      "prompt": "For a Rust web service, which crate should define your structured application error enum in the domain layer, and which crate serves as the catch all for internal plumbing where you just need error propagation with context? Answer concisely with both crate names.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "thiserror",
+          "anyhow"
+        ]
+      },
+      "source": "plugins/backend/skills/rust-web/SKILL.md - Error Crate Roles: thiserror for structured error enums in libraries/domain layers, anyhow for catch-all application code plumbing"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

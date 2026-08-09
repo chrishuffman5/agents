@@ -1,0 +1,50 @@
+{
+  "skill": "fine-tuning",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fine-tuning-7b-vram",
+      "knowledge": "stable",
+      "prompt": "Roughly how much VRAM does QLoRA fine-tuning of a 7B parameter model require, per the documented sizing table? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*gb"
+      },
+      "source": "plugins/ai/skills/fine-tuning/SKILL.md - 7B QLoRA (4-bit) requires 5 GB"
+    },
+    {
+      "id": "fine-tuning-grpo-min-steps",
+      "knowledge": "recent",
+      "prompt": "What is the documented recommended minimum value for max_steps when running a GRPO reinforcement learning training run? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "source": "plugins/ai/skills/fine-tuning/SKILL.md - Use max_steps >= 300 (the docs' recommended minimum)"
+    },
+    {
+      "id": "fine-tuning-openai-status",
+      "knowledge": "recent",
+      "prompt": "As of this guidance, is OpenAI's hosted fine-tuning platform open to new users? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|closed|wound down|not open)"
+      },
+      "source": "plugins/ai/skills/fine-tuning/SKILL.md - fine-tuning platform is being wound down: closed to new users"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

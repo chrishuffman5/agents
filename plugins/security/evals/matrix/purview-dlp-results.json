@@ -1,0 +1,55 @@
+{
+  "skill": "purview-dlp",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "purview-dlp-sit-confidence",
+      "knowledge": "recent",
+      "prompt": "For Microsoft Purview sensitive information type detections, what are the three confidence levels and their associated percentage thresholds? Answer concisely with all three percentages.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "65",
+          "75",
+          "85"
+        ]
+      },
+      "source": "plugins/security/skills/purview-dlp/SKILL.md - SIT confidence levels: Low (65%), Medium (75%), High (85%)"
+    },
+    {
+      "id": "purview-dlp-classifier-seed-docs",
+      "knowledge": "recent",
+      "prompt": "When building a custom trainable classifier in Microsoft Purview, how many positive seed documents and how many negative example documents are recommended at minimum? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50",
+          "200"
+        ]
+      },
+      "source": "plugins/security/skills/purview-dlp/SKILL.md - Custom trainable classifiers: provide 50+ positive seed documents plus 200+ negative examples"
+    },
+    {
+      "id": "purview-dlp-luhn-algorithm",
+      "knowledge": "stable",
+      "prompt": "Which validation algorithm does Microsoft Purview's built-in Credit Card Number sensitive information type use to reduce false positives? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)luhn"
+      },
+      "source": "plugins/security/skills/purview-dlp/SKILL.md - Credit Card Number SIT key validator: Luhn algorithm"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

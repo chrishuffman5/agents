@@ -1,0 +1,52 @@
+{
+  "skill": "cyberark",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cyberark-venafi-acquisition",
+      "knowledge": "recent",
+      "prompt": "In what month and year did CyberArk acquire Venafi, bringing Venafi products under the CyberArk Machine Identity Security portfolio? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)october.{0,5}2024"
+      },
+      "source": "plugins/security/skills/cyberark/SKILL.md - Note callout: CyberArk acquired Venafi in October 2024"
+    },
+    {
+      "id": "cyberark-vault-encryption",
+      "knowledge": "stable",
+      "prompt": "What encryption algorithm and key length does the CyberArk Digital Vault use to protect all data stored at rest? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)aes-?256"
+      },
+      "source": "plugins/security/skills/cyberark/SKILL.md - Digital Vault: All data encrypted with AES-256 (server key + Master CD key)"
+    },
+    {
+      "id": "cyberark-conjur-auth-methods",
+      "knowledge": "recent",
+      "prompt": "For machine authentication to CyberArk Conjur, as opposed to human authentication in CyberArk PAM, which modern auth methods does Conjur support? Name at least three. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Kubernetes",
+          "OIDC",
+          "AWS IAM"
+        ]
+      },
+      "source": "plugins/security/skills/cyberark/SKILL.md - Conjur > Key Differences from PAM table: Auth methods for Conjur - JWT, Kubernetes, AWS IAM, OIDC"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

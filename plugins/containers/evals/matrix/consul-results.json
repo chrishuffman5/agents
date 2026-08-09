@@ -1,0 +1,245 @@
+{
+  "skill": "consul",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 18,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "consul-dataplane-intro",
+      "knowledge": "recent",
+      "prompt": "What version of Consul first introduced Consul Dataplane, removing the need for a full client agent on every node? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.14"
+        ]
+      },
+      "source": "plugins/containers/skills/consul/SKILL.md - Consul Dataplane introduced in Consul 1.14+"
+    },
+    {
+      "id": "consul-intention-precedence",
+      "knowledge": "stable",
+      "prompt": "In Consul Connect, when both an exact-source-exact-destination intention and a wildcard-source-wildcard-destination intention could apply to a connection, does the wildcard rule ever win over the exact one? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|less specific|least specific|does not)"
+      },
+      "source": "plugins/containers/skills/consul/SKILL.md - intention precedence: exact+exact is most specific, wildcard+wildcard is least specific/default deny"
+    },
+    {
+      "id": "consul-gateway-mode-default",
+      "knowledge": "stable",
+      "prompt": "In Consul Connect mesh gateway configuration, which gateway mode, local, remote, or none, is the default for routing cross-datacenter traffic? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\blocal\\b"
+      },
+      "source": "plugins/containers/skills/consul/SKILL.md - local: traffic exits through the local datacenter's mesh gateway (default)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 12,
+      "pass": 12,
+      "accuracy": 100.0,
+      "meanWallMs": 16398,
+      "meanTokensOut": 418,
+      "totalCostUsd": 1.4875,
+      "costPerCorrect": 0.124
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 11802,
+      "meanTokensOut": 119,
+      "totalCostUsd": 0.3111,
+      "costPerCorrect": 0.0622
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13578,
+        "meanTokensOut": 654,
+        "totalCostUsd": 1.1305,
+        "costPerCorrect": 0.1884
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5744,
+        "meanTokensOut": 87,
+        "totalCostUsd": 0.1657,
+        "costPerCorrect": 0.0552
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 19218,
+        "meanTokensOut": 182,
+        "totalCostUsd": 0.3571,
+        "costPerCorrect": 0.0595
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17859,
+        "meanTokensOut": 151,
+        "totalCostUsd": 0.1454,
+        "costPerCorrect": 0.0727
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13578,
+        "meanTokensOut": 654,
+        "totalCostUsd": 1.1305,
+        "costPerCorrect": 0.1884
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5744,
+        "meanTokensOut": 87,
+        "totalCostUsd": 0.1657,
+        "costPerCorrect": 0.0552
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 19218,
+        "meanTokensOut": 182,
+        "totalCostUsd": 0.3571,
+        "costPerCorrect": 0.0595
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17859,
+        "meanTokensOut": 151,
+        "totalCostUsd": 0.1454,
+        "costPerCorrect": 0.0727
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5744,
+        "meanTokensOut": 87,
+        "totalCostUsd": 0.1657,
+        "costPerCorrect": 0.0552
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7838,
+        "meanTokensOut": 239,
+        "totalCostUsd": 0.4727,
+        "costPerCorrect": 0.1576
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19318,
+        "meanTokensOut": 1070,
+        "totalCostUsd": 0.6578,
+        "costPerCorrect": 0.2193
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17859,
+        "meanTokensOut": 151,
+        "totalCostUsd": 0.1454,
+        "costPerCorrect": 0.0727
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19216,
+        "meanTokensOut": 163,
+        "totalCostUsd": 0.1673,
+        "costPerCorrect": 0.0558
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19219,
+        "meanTokensOut": 202,
+        "totalCostUsd": 0.1897,
+        "costPerCorrect": 0.0632
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

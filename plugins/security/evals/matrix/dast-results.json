@@ -1,0 +1,48 @@
+{
+  "skill": "dast",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dast-active-scan-production-rule",
+      "knowledge": "stable",
+      "prompt": "In dynamic application security testing, is it acceptable to run active scanning with attack payloads against a production environment without explicit authorization? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|never|not)\\b"
+      },
+      "source": "plugins/security/skills/dast/SKILL.md - Active vs. Passive Scanning: Never run against production without explicit authorization"
+    },
+    {
+      "id": "dast-pr-scan-duration",
+      "knowledge": "recent",
+      "prompt": "In a typical DAST scan profile guide for CI/CD pull request gates, what scan duration range is suggested for the limited active scan run on new endpoints touched by a PR? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*(-|to)\\s*15\\s*min"
+      },
+      "source": "plugins/security/skills/dast/SKILL.md - DAST Scan Profiles for Different Environments table: PR/CI = Active (limited), 5-15 min"
+    },
+    {
+      "id": "dast-logging-failures-coverage",
+      "knowledge": "stable",
+      "prompt": "For the OWASP Top 10 category covering security logging and monitoring failures, how well can DAST tools detect that category of issue, and why? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bnone\\b"
+      },
+      "source": "plugins/security/skills/dast/SKILL.md - OWASP Top 10 DAST Coverage table: A09 Logging Failures = None, Cannot observe logging from outside"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

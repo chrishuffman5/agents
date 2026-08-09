@@ -1,0 +1,51 @@
+{
+  "skill": "sentinelone",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sentinelone-deep-visibility-retention",
+      "knowledge": "recent",
+      "prompt": "In SentinelOne Singularity, how many days of raw endpoint telemetry does Deep Visibility retain on the Complete and Enterprise tiers, compared to the Core and Control tiers? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "90 days",
+          "14 days"
+        ]
+      },
+      "source": "plugins/security/skills/sentinelone/SKILL.md - Platform tiers table: Deep Visibility telemetry 14 days (Core/Control), 90 days (Complete/Enterprise)"
+    },
+    {
+      "id": "sentinelone-quarantine-extension",
+      "knowledge": "recent",
+      "prompt": "When SentinelOne's behavioral protection quarantines a malicious file, what file extension is used for the file placed in the quarantine vault? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\.s1q"
+      },
+      "source": "plugins/security/skills/sentinelone/SKILL.md - Behavioral Protection Action Flow: Quarantine moves malicious files to quarantine vault (.s1q files)"
+    },
+    {
+      "id": "sentinelone-rollback-platform",
+      "knowledge": "stable",
+      "prompt": "SentinelOne's 1-click rollback restores encrypted files using Volume Shadow Service snapshots after a ransomware attack. On which single operating system is this rollback capability available? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bwindows\\b"
+      },
+      "source": "plugins/security/skills/sentinelone/SKILL.md - Rollback Prerequisites: Windows only (macOS/Linux: separate remediation approach)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

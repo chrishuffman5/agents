@@ -1,0 +1,50 @@
+{
+  "skill": "couchbase",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "couchbase-hvi-billion-scale-latency",
+      "knowledge": "recent",
+      "prompt": "In Couchbase Server 8.0, in billion-scale benchmark testing of the Hyperscale Vector Index, what latency in milliseconds was achieved at up to 19,000 queries per second? Answer with the exact number of milliseconds.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)28\\s*ms"
+      },
+      "source": "plugins/database/skills/couchbase/references/versions/8.0.md - Hyperscale Vector Indexes (HVI) Performance characteristics: Billion-scale testing up to 19,000 QPS with 28ms latency."
+    },
+    {
+      "id": "couchbase-8-magma-min-ram",
+      "knowledge": "recent",
+      "prompt": "In Couchbase Server 8.0, what is the minimum bucket RAM required for a new bucket using the default 128 vBucket Magma storage configuration? Answer with the exact amount.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100\\s*mi?b"
+      },
+      "source": "plugins/database/skills/couchbase/references/versions/8.0.md - Magma as Default Storage Engine comparison table: Min bucket RAM for 128 vBucket Magma (the new default) is 100 MiB."
+    },
+    {
+      "id": "couchbase-vbucket-count",
+      "knowledge": "stable",
+      "prompt": "In Couchbase Server, how many virtual buckets, or vBuckets, has each bucket traditionally been divided into? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1024"
+        ]
+      },
+      "source": "plugins/database/skills/couchbase/SKILL.md - Distributed Architecture section: Each bucket is divided into 1024 virtual buckets (vBuckets)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,54 @@
+{
+  "skill": "openai-agents-sdk",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "openai-agents-sdk-python-min",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Python version required to install the openai-agents package? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.10"
+        ]
+      },
+      "source": "plugins/ai/skills/openai-agents-sdk/SKILL.md - Python requires 3.10+"
+    },
+    {
+      "id": "openai-agents-sdk-default-model",
+      "knowledge": "recent",
+      "prompt": "If you create an Agent in the OpenAI Agents SDK without specifying a model, which model does it default to? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "gpt-5.4-mini"
+        ]
+      },
+      "source": "plugins/ai/skills/openai-agents-sdk/SKILL.md - model unset, defaults to gpt-5.4-mini"
+    },
+    {
+      "id": "openai-agents-sdk-js-max-turns",
+      "knowledge": "stable",
+      "prompt": "In the OpenAI Agents SDK for TypeScript, what is the default value of maxTurns before a run throws a MaxTurnsExceededError? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10"
+        ]
+      },
+      "source": "plugins/ai/skills/openai-agents-sdk/SKILL.md - cap max_turns / maxTurns (JS default 10)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

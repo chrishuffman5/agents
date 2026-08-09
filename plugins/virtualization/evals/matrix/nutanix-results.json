@@ -1,0 +1,51 @@
+{
+  "skill": "nutanix",
+  "plugin": "virtualization",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nutanix-nearsync-rpo",
+      "knowledge": "recent",
+      "prompt": "For Nutanix AHV NearSync replication, what is the internal replication interval, in seconds, that underlies its near one minute RPO? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b20\\s*-?\\s*sec"
+      },
+      "source": "plugins/virtualization/skills/nutanix/SKILL.md - Data Protection table: NearSync 1 minute RPO (20-sec internal), shadow clone-based change tracking"
+    },
+    {
+      "id": "nutanix-rf3-failures",
+      "knowledge": "stable",
+      "prompt": "On a Nutanix storage container configured with Replication Factor 3, how many simultaneous failures can the data tolerate? Answer concisely with a number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2\\b|\\btwo\\b"
+      },
+      "source": "plugins/virtualization/skills/nutanix/SKILL.md - DSF table: Replication Factor RF3 (3 copies, 2 failures)"
+    },
+    {
+      "id": "nutanix-cvm-ram",
+      "knowledge": "stable",
+      "prompt": "On production Nutanix nodes, what is the typical memory allocation range, in GB, reserved for the Controller VM? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "32",
+          "48"
+        ]
+      },
+      "source": "plugins/virtualization/skills/nutanix/SKILL.md - Node Architecture: CVM typically 32-48 GB RAM on production nodes"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

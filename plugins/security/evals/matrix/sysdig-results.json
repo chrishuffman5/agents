@@ -1,0 +1,51 @@
+{
+  "skill": "sysdig",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sysdig-inuse-reduction",
+      "knowledge": "recent",
+      "prompt": "Roughly what percentage reduction in vulnerability remediation workload does Sysdig claim its runtime in-use prioritization achieves in typical environments? Answer concisely with the approximate range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)85.{0,4}90"
+      },
+      "source": "plugins/security/skills/sysdig/SKILL.md - In Use differentiator, Practical impact: Reduces remediation workload by 85-90% in typical environments."
+    },
+    {
+      "id": "sysdig-falco-rule-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many production-ready Falco rules does Sysdig ship out of the box, organized by threat category? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b300\\+?\\b"
+      },
+      "source": "plugins/security/skills/sysdig/SKILL.md - Runtime Security section: Sysdig ships 300+ production-ready Falco rules organized by threat category."
+    },
+    {
+      "id": "sysdig-ebpf-kernel-requirement",
+      "knowledge": "recent",
+      "prompt": "For Sysdig's recommended eBPF kernel monitoring mode, what is the minimum Linux kernel version required, and what additional kernel feature must be supported? Answer concisely with both details.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.14",
+          "BTF"
+        ]
+      },
+      "source": "plugins/security/skills/sysdig/SKILL.md - Agent kernel monitoring modes: eBPF (recommended), Low overhead, requires kernel 4.14+ with BTF support."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

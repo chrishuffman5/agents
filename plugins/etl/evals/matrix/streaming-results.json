@@ -1,0 +1,54 @@
+{
+  "skill": "streaming",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "streaming-kafka-40-change",
+      "knowledge": "stable",
+      "prompt": "In streaming platform comparisons, which major Kafka version is described as KRaft-only after ZooKeeper removal, alongside a consumer group protocol rewrite? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.0"
+        ]
+      },
+      "source": "plugins/etl/skills/streaming/SKILL.md - Kafka Versions table: 4.0 KRaft-only (ZooKeeper removed), consumer group protocol rewrite."
+    },
+    {
+      "id": "streaming-ksqldb-role",
+      "knowledge": "stable",
+      "prompt": "Within the Kafka ecosystem comparison, what SQL-based component provides a SQL interface over Kafka Streams for stream processing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ksqlDB"
+        ]
+      },
+      "source": "plugins/etl/skills/streaming/SKILL.md - Kafka Ecosystem Comparison table: ksqlDB -- SQL interface over Kafka Streams."
+    },
+    {
+      "id": "streaming-kafka-41-sharegroups",
+      "knowledge": "recent",
+      "prompt": "Which Kafka version introduced share groups, adding queue-like semantics on top of topics? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.1"
+        ]
+      },
+      "source": "plugins/etl/skills/streaming/SKILL.md - Kafka Versions table: 4.1 Share groups (queue semantics on topics), improved KRaft."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

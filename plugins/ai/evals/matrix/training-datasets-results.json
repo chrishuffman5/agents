@@ -1,0 +1,51 @@
+{
+  "skill": "training-datasets",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "training-datasets-openai-sft-floor",
+      "knowledge": "stable",
+      "prompt": "What is OpenAI's hard minimum number of examples to submit a supervised fine-tuning job, and what count do they recommend starting at instead? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10",
+          "50"
+        ]
+      },
+      "source": "plugins/ai/skills/training-datasets/SKILL.md - OpenAI SFT: 10 examples hard minimum, start at 50"
+    },
+    {
+      "id": "training-datasets-unsloth-floor",
+      "knowledge": "stable",
+      "prompt": "According to documented guidance, how many training rows does Unsloth need for reasonable fine-tuning results, and how many rows are preferred? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100.{0,60}1,?000"
+      },
+      "source": "plugins/ai/skills/training-datasets/SKILL.md - Unsloth: 100 rows for reasonable results, over 1,000 preferred"
+    },
+    {
+      "id": "training-datasets-gemini-tuning-status",
+      "knowledge": "recent",
+      "prompt": "Is fine-tuning still offered through the Gemini API or AI Studio, according to current guidance on building training datasets? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not offered|no longer)"
+      },
+      "source": "plugins/ai/skills/training-datasets/SKILL.md - fine-tuning is no longer offered through the Gemini API or AI Studio"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

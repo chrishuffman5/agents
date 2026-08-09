@@ -1,0 +1,52 @@
+{
+  "skill": "checkpoint",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "checkpoint-ai-copilot-take",
+      "knowledge": "recent",
+      "prompt": "To use the AI Copilot feature in Check Point desktop SmartConsole on R82, what is the minimum Take (build) number required? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1027"
+        ]
+      },
+      "source": "plugins/networking/skills/checkpoint/references/versions/r82.md - AI Copilot available from Take 1027 (desktop SmartConsole) and Take 125 (Web SmartConsole)"
+    },
+    {
+      "id": "checkpoint-pqc-kyber",
+      "knowledge": "recent",
+      "prompt": "Check Point R82 introduced Post-Quantum VPN using a hybrid key exchange of classical IKE plus a NIST-certified post-quantum algorithm. Which algorithm is it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)kyber"
+      },
+      "source": "plugins/networking/skills/checkpoint/references/versions/r82.md - NIST-certified Kyber (ML-KEM / CRYSTALS-Kyber) integrated into IPsec VPN"
+    },
+    {
+      "id": "checkpoint-maestro-scale",
+      "knowledge": "stable",
+      "prompt": "In Check Point Maestro hyperscale orchestration, what is the maximum number of physical gateways a single Security Group can scale to? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "52"
+        ]
+      },
+      "source": "plugins/networking/skills/checkpoint/SKILL.md - Scale: 2 to 52 gateways per group, add members without downtime"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

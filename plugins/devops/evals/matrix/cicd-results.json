@@ -1,0 +1,52 @@
+{
+  "skill": "cicd",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cicd-jenkins-plugin-count",
+      "knowledge": "stable",
+      "prompt": "In a cross-platform CI/CD comparison, roughly how many plugins does the Jenkins ecosystem offer? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1800"
+        ]
+      },
+      "source": "plugins/devops/skills/cicd/SKILL.md - Feature Matrix table, Marketplace/Plugins row: Jenkins 1800+ plugins"
+    },
+    {
+      "id": "cicd-azure-devops-free-tier-users",
+      "knowledge": "stable",
+      "prompt": "In a CI/CD platform cost comparison, Azure DevOps offers its free tier for how many users before per-agent charges kick in? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b|\\bfive\\b"
+      },
+      "source": "plugins/devops/skills/cicd/SKILL.md - Feature Matrix table, Cost row: Azure DevOps Free tier (5 users) + per-agent"
+    },
+    {
+      "id": "cicd-github-actions-arc",
+      "knowledge": "recent",
+      "prompt": "What is the name of the Kubernetes-based tool commonly used to autoscale self-hosted GitHub Actions runners? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Runner Controller"
+        ]
+      },
+      "source": "plugins/devops/skills/cicd/references/concepts.md - Autoscaling Runners table: GitHub Actions - Actions Runner Controller (ARC) on K8s"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

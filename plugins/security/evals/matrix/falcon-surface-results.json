@@ -1,0 +1,52 @@
+{
+  "skill": "falcon-surface",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "falcon-surface-reposify-acquisition",
+      "knowledge": "recent",
+      "prompt": "CrowdStrike Falcon Surface was built on a company CrowdStrike acquired in 2021. What was that company called? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)reposify"
+      },
+      "source": "plugins/security/skills/falcon-surface/SKILL.md - intro line: CrowdStrike Falcon Surface (formerly Reposify, acquired by CrowdStrike in 2021)"
+    },
+    {
+      "id": "falcon-surface-attribution-confidence",
+      "knowledge": "recent",
+      "prompt": "Falcon Surface scores each discovered internet asset with an attribution confidence level. What are the three levels used? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Confirmed",
+          "Probable",
+          "Possible"
+        ]
+      },
+      "source": "plugins/security/skills/falcon-surface/SKILL.md - Attribution Confidence: Confirmed, Probable, Possible"
+    },
+    {
+      "id": "falcon-surface-rdp-risk",
+      "knowledge": "stable",
+      "prompt": "In Falcon Surface's exposure risk categorization, what severity is assigned to an internet-exposed RDP service on port 3389? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)critical"
+      },
+      "source": "plugins/security/skills/falcon-surface/SKILL.md - High-Risk Exposure Categories table: RDP exposed (port 3389) = Critical"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

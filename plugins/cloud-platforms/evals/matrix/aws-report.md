@@ -1,6 +1,6 @@
 # aws — cross-harness eval report
 
-Generated: 2026-08-08T21:50:18.3314216-05:00 · plugin: `cloud-platforms` · runs: **0 / 576** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `cloud-platforms` · runs: **261 / 432** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -19,13 +19,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 0 | — | — | — | — | — |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 132 | **81.8%** | 13.9s | 371 | $9.8719 | $0.0914 |
+| no-skill | 129 | **78.3%** | 10.4s | 212 | $5.5567 | $0.055 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
+| claude | 75.8% | 68.2% | +7.6pp | 14.9s | 11.4s |
+| codex | 87.9% | 88.9% | +-1pp | 12.9s | 9.3s |
 
 ## By model — price to performance
 
@@ -33,5 +35,19 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
+| claude-haiku-4-5 | skill | 66.7% | 11.6s | $0.0475 |
+| claude-haiku-4-5 | no-skill | 55.6% | 8.1s | $0.0289 |
+| claude-opus-5 | skill | 94.4% | 14.7s | $0.1787 |
+| claude-opus-5 | no-skill | 83.3% | 8.5s | $0.0819 |
+| claude-sonnet-5 | skill | 94.4% | 7.8s | $0.0755 |
+| claude-sonnet-5 | no-skill | 83.3% | 5s | $0.0483 |
+| gemma4:12b | skill | 41.7% | 23.2s | $0.2061 |
+| gemma4:12b | no-skill | 42.9% | 22.2s | $0.2105 |
+| gpt-5.6-luna | skill | 94.4% | 10.9s | $0.004 |
+| gpt-5.6-luna | no-skill | 100% | 7.6s | $0.0013 |
+| gpt-5.6-sol | skill | 94.4% | 15.4s | $0.1325 |
+| gpt-5.6-sol | no-skill | 100% | 10.5s | $0.0583 |
+| gpt-5.6-terra | skill | 100% | 10.9s | $0.0333 |
+| gpt-5.6-terra | no-skill | 88.9% | 8.8s | $0.0218 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `aws-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

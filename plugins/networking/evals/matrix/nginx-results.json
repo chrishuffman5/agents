@@ -1,0 +1,48 @@
+{
+  "skill": "nginx",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nginx-ingress-retirement",
+      "knowledge": "recent",
+      "prompt": "Is the community ingress-nginx Kubernetes Ingress Controller project still actively maintained, or was it retired? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)retir"
+      },
+      "source": "plugins/networking/skills/nginx/SKILL.md - the community ingress-nginx project was retired in November 2025; use the official F5 NGINX Ingress Controller"
+    },
+    {
+      "id": "nginx-plus-r35-api-version",
+      "knowledge": "recent",
+      "prompt": "NGINX Plus R35 shipped an updated version of its live activity monitoring REST API. What API version number does R35 introduce? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(version\\s*9|\\bv9\\b)"
+      },
+      "source": "plugins/networking/skills/nginx/references/versions/plus-r35.md - NGINX Plus R35 includes API version 9"
+    },
+    {
+      "id": "nginx-keepalive-per-worker",
+      "knowledge": "stable",
+      "prompt": "In an NGINX upstream block, does the keepalive directive set the maximum idle keepalive connections for the whole server, or per worker process? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)per\\s*worker"
+      },
+      "source": "plugins/networking/skills/nginx/SKILL.md - Common Pitfalls: keepalive sets max idle keepalive connections PER WORKER, not total"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

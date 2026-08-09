@@ -1,0 +1,48 @@
+{
+  "skill": "azure-dns",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-dns-forwarding-ruleset-limit",
+      "knowledge": "recent",
+      "prompt": "In Azure DNS Private Resolver, how many forwarding rules can a single DNS forwarding ruleset contain? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "1,?000"
+      },
+      "source": "plugins/networking/skills/azure-dns/SKILL.md - Up to 1,000 forwarding rules per ruleset, ruleset linkable to multiple VNets"
+    },
+    {
+      "id": "azure-dns-autoreg-single-zone",
+      "knowledge": "recent",
+      "prompt": "In Azure Private DNS, can a single VNet have auto-registration enabled for more than one private DNS zone at the same time? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|only one|single zone)"
+      },
+      "source": "plugins/networking/skills/azure-dns/SKILL.md - Auto-registration conflict: a VNet can only have auto-registration enabled for one private DNS zone, linking a second fails"
+    },
+    {
+      "id": "azure-dns-dnssec-public-only",
+      "knowledge": "stable",
+      "prompt": "Does Azure DNS support DNSSEC on private DNS zones, or only on public zones? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(public|not.{0,20}private)"
+      },
+      "source": "plugins/networking/skills/azure-dns/SKILL.md - DNSSEC is NOT supported on private zones"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

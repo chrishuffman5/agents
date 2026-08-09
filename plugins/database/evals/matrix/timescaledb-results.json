@@ -1,0 +1,50 @@
+{
+  "skill": "timescaledb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "timescaledb-minmax-fastpath-speedup",
+      "knowledge": "recent",
+      "prompt": "In TimescaleDB 2.25, the new ColumnarIndexScan fast path can make MIN and MAX queries how many times faster than before. Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)289\\s*x"
+      },
+      "source": "plugins/database/skills/timescaledb/references/versions/2.x.md - TimescaleDB 2.25 section: MIN/MAX fast paths are up to 289x faster by reading only _ts_meta_min/max metadata."
+    },
+    {
+      "id": "timescaledb-realtime-agg-default",
+      "knowledge": "recent",
+      "prompt": "Starting with which TimescaleDB version did newly created continuous aggregates default to having real-time aggregation turned off. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.13"
+        ]
+      },
+      "source": "plugins/database/skills/timescaledb/SKILL.md - Continuous Aggregates section: the default changed in TimescaleDB 2.13, where real-time aggregates became disabled by default for new continuous aggregates."
+    },
+    {
+      "id": "timescaledb-chunk-interval-default",
+      "knowledge": "stable",
+      "prompt": "When you create a TimescaleDB hypertable without specifying a chunk time interval, what is the default chunk interval. Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*-?\\s*days?|one\\s*week|seven\\s*days)"
+      },
+      "source": "plugins/database/skills/timescaledb/SKILL.md - Hypertable Architecture section: create_hypertable code comment states the default chunk_time_interval is 7 days; the chunk interval sizing table also lists 1-week chunks as the default for low ingest."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

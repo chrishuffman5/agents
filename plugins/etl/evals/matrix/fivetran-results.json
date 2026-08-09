@@ -1,0 +1,56 @@
+{
+  "skill": "fivetran",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fivetran-dbt-merger",
+      "knowledge": "recent",
+      "prompt": "Fivetran announced a major corporate combination with another data tooling company in the fall of 2025. Which company did Fivetran announce an all-stock merger with, and in what month and year? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "dbt",
+          "October",
+          "2025"
+        ]
+      },
+      "source": "plugins/etl/skills/fivetran/SKILL.md - Fivetran + dbt Labs Merger: In October 2025, Fivetran and dbt Labs announced an all-stock merger."
+    },
+    {
+      "id": "fivetran-base-charge",
+      "knowledge": "stable",
+      "prompt": "What is Fivetran's minimum monthly base charge per connection, covering up to 1 million Monthly Active Rows? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "$5"
+        ]
+      },
+      "source": "plugins/etl/skills/fivetran/SKILL.md - Pricing: Base charge: $5/connection/month (1 to 1M MAR)."
+    },
+    {
+      "id": "fivetran-hva-lineage",
+      "knowledge": "stable",
+      "prompt": "Fivetran's High-Volume Agent connector for enterprise database CDC is derived from technology acquired from which company? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "HVR"
+        ]
+      },
+      "source": "plugins/etl/skills/fivetran/SKILL.md - Connector types: HVA -- Enterprise database connectors with log-based CDC, running in customer infrastructure (HVR-derived engine)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

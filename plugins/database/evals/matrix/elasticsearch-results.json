@@ -1,0 +1,53 @@
+{
+  "skill": "elasticsearch",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "elasticsearch-bbq-memory-reduction",
+      "knowledge": "recent",
+      "prompt": "Elasticsearch 8.14 introduced Better Binary Quantization for dense vectors. Roughly what memory reduction factor does BBQ provide compared to unquantized vectors? Answer with the approximate multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)32\\s*x"
+      },
+      "source": "plugins/database/skills/elasticsearch/references/versions/8.x.md - kNN evolution across 8.x table: 8.14 BBQ (Better Binary Quantization) for ~32x memory reduction."
+    },
+    {
+      "id": "elasticsearch-logsdb-ignoreabove",
+      "knowledge": "recent",
+      "prompt": "In Elasticsearch 9.x logsdb index mode, what is the default value of the ignore_above setting applied to keyword fields? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8191"
+        ]
+      },
+      "source": "plugins/database/skills/elasticsearch/references/versions/9.x.md - Logsdb mode features: ignore_above for keywords -- Keyword fields have a default ignore_above: 8191 to prevent excessively long values."
+    },
+    {
+      "id": "elasticsearch-shard-size-target",
+      "knowledge": "stable",
+      "prompt": "What is the recommended target size range, in gigabytes, for a single Elasticsearch shard? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10",
+          "50"
+        ]
+      },
+      "source": "plugins/database/skills/elasticsearch/SKILL.md - Index Architecture (Shards, Replicas, Segments) section: Target 10-50GB per shard, and avoid exceeding 20 shards per GB of heap."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

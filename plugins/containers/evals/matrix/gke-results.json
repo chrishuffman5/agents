@@ -1,0 +1,230 @@
+{
+  "skill": "gke",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gke-autopilot-default-cpu",
+      "knowledge": "stable",
+      "prompt": "In GKE Autopilot, if a pod spec omits a CPU request, what default CPU request does Autopilot apply on its behalf? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "500m"
+        ]
+      },
+      "source": "plugins/containers/skills/gke/SKILL.md - Default CPU request: 500m"
+    },
+    {
+      "id": "gke-spot-grace-period",
+      "knowledge": "recent",
+      "prompt": "On GKE Autopilot spot pods, how many seconds of termination notice do pods receive before eviction? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)25.{0,15}(second|notice)"
+      },
+      "source": "plugins/containers/skills/gke/SKILL.md - spot pods get 25s notice, terminationGracePeriodSeconds: 25"
+    },
+    {
+      "id": "gke-dataplane-v2-tech",
+      "knowledge": "stable",
+      "prompt": "What underlying kernel technology powers GKE's default network dataplane, Dataplane V2? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(cilium|ebpf)"
+      },
+      "source": "plugins/containers/skills/gke/SKILL.md - Dataplane V2 (Cilium), eBPF-based service load balancing"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 10498,
+      "meanTokensOut": 297,
+      "totalCostUsd": 0.9659,
+      "costPerCorrect": 0.1207
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 11485,
+      "meanTokensOut": 125,
+      "totalCostUsd": 0.3644,
+      "costPerCorrect": 0.0911
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 10998,
+        "meanTokensOut": 379,
+        "totalCostUsd": 0.8201,
+        "costPerCorrect": 0.164
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8581,
+        "meanTokensOut": 119,
+        "totalCostUsd": 0.1679,
+        "costPerCorrect": 0.056
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9496,
+        "meanTokensOut": 134,
+        "totalCostUsd": 0.1457,
+        "costPerCorrect": 0.0486
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14389,
+        "meanTokensOut": 130,
+        "totalCostUsd": 0.1965,
+        "costPerCorrect": 0.1965
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 10998,
+        "meanTokensOut": 379,
+        "totalCostUsd": 0.8201,
+        "costPerCorrect": 0.164
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8581,
+        "meanTokensOut": 119,
+        "totalCostUsd": 0.1679,
+        "costPerCorrect": 0.056
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9496,
+        "meanTokensOut": 134,
+        "totalCostUsd": 0.1457,
+        "costPerCorrect": 0.0486
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14389,
+        "meanTokensOut": 130,
+        "totalCostUsd": 0.1965,
+        "costPerCorrect": 0.1965
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8581,
+        "meanTokensOut": 119,
+        "totalCostUsd": 0.1679,
+        "costPerCorrect": 0.056
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8586,
+        "meanTokensOut": 245,
+        "totalCostUsd": 0.3365,
+        "costPerCorrect": 0.1682
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13411,
+        "meanTokensOut": 513,
+        "totalCostUsd": 0.4836,
+        "costPerCorrect": 0.1612
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14389,
+        "meanTokensOut": 130,
+        "totalCostUsd": 0.1965,
+        "costPerCorrect": 0.1965
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9496,
+        "meanTokensOut": 134,
+        "totalCostUsd": 0.1457,
+        "costPerCorrect": 0.0486
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

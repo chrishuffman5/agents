@@ -1,0 +1,55 @@
+{
+  "skill": "adf",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "adf-fabric-migration-assistant",
+      "knowledge": "recent",
+      "prompt": "Microsoft offers a migration assistant that helps move Azure Data Factory and Synapse pipelines to Microsoft Fabric. In what month and year did this assistant enter public preview? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "March",
+          "2026"
+        ]
+      },
+      "source": "plugins/etl/skills/adf/SKILL.md - Migration assistant (ADF/Synapse to Fabric) entered public preview March 2026."
+    },
+    {
+      "id": "adf-shir-network",
+      "knowledge": "stable",
+      "prompt": "An Azure Data Factory self-hosted integration runtime communicates with the cloud service using only outbound traffic on a single port, with no inbound ports required. What is that port number? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "443"
+        ]
+      },
+      "source": "plugins/etl/skills/adf/SKILL.md - Integration Runtime Types table: Self-hosted IR Network = Outbound HTTPS only (443), no inbound ports."
+    },
+    {
+      "id": "adf-wrangling-dataflow-deprecated",
+      "knowledge": "stable",
+      "prompt": "Azure Data Factory once offered Power Query-based wrangling data flows as an alternative to mapping data flows. In what year were wrangling data flows deprecated? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2024"
+        ]
+      },
+      "source": "plugins/etl/skills/adf/SKILL.md - Wrangling Data Flows (Power Query-based) were deprecated in 2024."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

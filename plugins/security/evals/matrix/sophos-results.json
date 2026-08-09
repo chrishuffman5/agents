@@ -1,0 +1,52 @@
+{
+  "skill": "sophos",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sophos-exploit-technique-count",
+      "knowledge": "recent",
+      "prompt": "How many exploit mitigation techniques does Sophos Intercept X include for protecting against memory-based and code injection attacks? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b30\\+?\\b"
+      },
+      "source": "plugins/security/skills/sophos/SKILL.md - Exploit Prevention section states Intercept X includes 30+ exploit mitigation techniques."
+    },
+    {
+      "id": "sophos-aap-manual-deactivation",
+      "knowledge": "recent",
+      "prompt": "After Sophos Adaptive Attack Protection activates on an endpoint in response to active attack behavior, does it revert to normal mode automatically once the attack stops, or does an analyst need to manually deactivate it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bmanual(ly)?\\b"
+      },
+      "source": "plugins/security/skills/sophos/SKILL.md - AAP section: it stays active until analyst manually deactivates; responding to AAP activation instructs to deactivate AAP manually to restore normal operations."
+    },
+    {
+      "id": "sophos-mdr-tiers",
+      "knowledge": "stable",
+      "prompt": "What are the three service levels offered under Sophos MDR, from most basic to most comprehensive? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Essentials",
+          "Complete",
+          "Response"
+        ]
+      },
+      "source": "plugins/security/skills/sophos/SKILL.md - MDR Service Levels table lists MDR Essentials, MDR Complete, and MDR Complete + Response."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "rabbitmq",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rabbitmq-khepri-default-version",
+      "knowledge": "recent",
+      "prompt": "As of which RabbitMQ release does Khepri become the default metadata store for brand-new deployments? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b4\\.2\\b"
+      },
+      "source": "plugins/messaging/skills/rabbitmq/SKILL.md - Khepri Metadata Store section: default for new deployments in 4.2"
+    },
+    {
+      "id": "rabbitmq-quorum-delivery-limit",
+      "knowledge": "stable",
+      "prompt": "What is the default delivery limit, meaning number of redeliveries, before a RabbitMQ quorum queue dead-letters a message? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b20\\b"
+      },
+      "source": "plugins/messaging/skills/rabbitmq/SKILL.md - Quorum Queue Essentials section: default delivery limit 20 redeliveries before dead-lettering"
+    },
+    {
+      "id": "rabbitmq-7node-replicas",
+      "knowledge": "recent",
+      "prompt": "In a 7-node RabbitMQ cluster, how many replicas does a quorum queue get by default? Do all 7 nodes hold a copy? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b3\\b"
+      },
+      "source": "plugins/messaging/skills/rabbitmq/SKILL.md - Quorum Queue Essentials table: 7 cluster nodes -> default replicas 3 (not all 7)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

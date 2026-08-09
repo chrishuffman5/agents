@@ -1,0 +1,53 @@
+{
+  "skill": "threatconnect",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "threatconnect-cal-score-range",
+      "knowledge": "stable",
+      "prompt": "What is the numeric range of ThreatConnect's Collective Analytics Layer score used to indicate community-observed maliciousness of an indicator? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0.{0,4}1000"
+      },
+      "source": "plugins/security/skills/threatconnect/SKILL.md - CAL Score section: Score range 0-1000 (or displayed as percentage in some UI versions)."
+    },
+    {
+      "id": "threatconnect-dataminr-acquisition",
+      "knowledge": "recent",
+      "prompt": "Which company acquired ThreatConnect in 2024, later adding real-time event and social media intelligence capabilities to the combined offering? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Dataminr"
+        ]
+      },
+      "source": "plugins/security/skills/threatconnect/SKILL.md - Context note: ThreatConnect was acquired by Dataminr in 2024."
+    },
+    {
+      "id": "threatconnect-rating-scale",
+      "knowledge": "stable",
+      "prompt": "On ThreatConnect's manual indicator rating scale, what is the highest numeric value an analyst can assign, and what label does that top rating represent? Answer concisely with both the number and the label.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5",
+          "Confirmed Malicious"
+        ]
+      },
+      "source": "plugins/security/skills/threatconnect/SKILL.md - Indicator Rating section: 0-5 rating scale, 5 is Confirmed Malicious."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

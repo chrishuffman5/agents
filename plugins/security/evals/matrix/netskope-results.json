@@ -1,0 +1,55 @@
+{
+  "skill": "netskope",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "netskope-newedge-pop-count",
+      "knowledge": "recent",
+      "prompt": "How many points of presence does Netskope's NewEdge private network infrastructure operate globally? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "75"
+        ]
+      },
+      "source": "plugins/security/skills/netskope/SKILL.md - NewEdge Infrastructure section: 75+ PoPs globally"
+    },
+    {
+      "id": "netskope-app-catalog-cci-scale",
+      "knowledge": "stable",
+      "prompt": "Roughly how many cloud applications are covered in Netskope's app catalog for CASB purposes, and what numeric scale does the Cloud Confidence Index use to score each app's risk posture? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "40,000",
+          "100"
+        ]
+      },
+      "source": "plugins/security/skills/netskope/SKILL.md - Cloud App Catalog section: 40,000+ apps, CCI score 1-100 scale"
+    },
+    {
+      "id": "netskope-gateway-anycast-domain",
+      "knowledge": "recent",
+      "prompt": "What domain name does the Netskope Client use for anycast DNS resolution so it can automatically connect to the nearest NewEdge point of presence? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "gateway.yo.ng"
+        ]
+      },
+      "source": "plugins/security/skills/netskope/SKILL.md - PoP selection section: anycast DNS resolution of gateway.yo.ng"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

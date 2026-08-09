@@ -1,0 +1,48 @@
+{
+  "skill": "htmx",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "htmx-input-default-trigger",
+      "knowledge": "stable",
+      "prompt": "In HTMX, absent an explicit hx-trigger attribute, what event by default triggers a request from a text input element? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bchange\\b"
+      },
+      "source": "plugins/frontend/skills/htmx/SKILL.md - hx-trigger section: default is change for inputs"
+    },
+    {
+      "id": "htmx-selfrequestsonly-default",
+      "knowledge": "recent",
+      "prompt": "In HTMX 2.0, is the selfRequestsOnly configuration option true or false by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\btrue\\b"
+      },
+      "source": "plugins/frontend/skills/htmx/SKILL.md - Security section and pitfall 4: selfRequestsOnly default true in 2.0"
+    },
+    {
+      "id": "htmx-delete-params-2.0",
+      "knowledge": "recent",
+      "prompt": "In HTMX 2.0, how does a DELETE request send its parameters, compared with HTMX 1.x which put them in the request body? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)query param"
+      },
+      "source": "plugins/frontend/skills/htmx/SKILL.md - pitfall 6: DELETE sends URL/query parameters in 2.0, body in 1.x"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

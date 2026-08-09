@@ -1,0 +1,55 @@
+{
+  "skill": "zero-trust",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "zerotrust-nist-tenets",
+      "knowledge": "stable",
+      "prompt": "How many core tenets does NIST SP 800-207 define for a Zero Trust Architecture? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bseven\\b|\\b7\\b"
+      },
+      "source": "plugins/security/skills/zero-trust/SKILL.md - Seven Zero Trust Tenets (NIST 800-207)"
+    },
+    {
+      "id": "zerotrust-pe-pa-pep",
+      "knowledge": "stable",
+      "prompt": "In the NIST 800-207 zero trust logical architecture, what are the three core components that make and enforce access decisions, commonly abbreviated PE, PA, and PEP? Answer concisely, spelling out all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Policy Engine",
+          "Policy Administrator",
+          "Policy Enforcement"
+        ]
+      },
+      "source": "plugins/security/skills/zero-trust/SKILL.md - Zero Trust Logical Components: Policy Engine (PE), Policy Administrator (PA), Policy Enforcement Point (PEP)"
+    },
+    {
+      "id": "zerotrust-omb-mandate",
+      "knowledge": "recent",
+      "prompt": "Which US federal government memo mandates a zero trust strategy for federal agencies, and by what fiscal year deadline? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "M-22-09",
+          "2024"
+        ]
+      },
+      "source": "plugins/security/skills/zero-trust/SKILL.md - Federal Zero Trust Strategy (OMB M-22-09) mandates a Zero Trust strategy by FY2024"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

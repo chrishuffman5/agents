@@ -1,0 +1,50 @@
+{
+  "skill": "infoblox",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "infoblox-wapi-current-version",
+      "knowledge": "recent",
+      "prompt": "What is the current WAPI REST API version supported on Infoblox NIOS 9.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.13"
+        ]
+      },
+      "source": "plugins/networking/skills/infoblox/SKILL.md - current WAPI version is 2.13+ (NIOS 9.0)"
+    },
+    {
+      "id": "infoblox-pdns-retention",
+      "knowledge": "recent",
+      "prompt": "How many months of historical DNS resolution data does Infoblox BloxOne Passive DNS typically retain for threat hunting? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)12\\+?[\\s-]*months?"
+      },
+      "source": "plugins/networking/skills/infoblox/references/architecture.md - PDNS retention is 12+ months of resolution history"
+    },
+    {
+      "id": "infoblox-gmc-auto-promotion",
+      "knowledge": "stable",
+      "prompt": "In an Infoblox NIOS Grid, if the Grid Master becomes unreachable, does the Grid Master Candidate promote itself automatically, or does it require manual intervention? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)automat"
+      },
+      "source": "plugins/networking/skills/infoblox/references/architecture.md - automatic promotion: if GM becomes unreachable, GMC promotes to GM automatically"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

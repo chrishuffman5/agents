@@ -1,0 +1,58 @@
+{
+  "skill": "guardicore",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "guardicore-acquisition-year",
+      "knowledge": "recent",
+      "prompt": "In what year did Akamai acquire Guardicore (the platform now sold as Akamai Guardicore Segmentation, formerly Guardicore Centra)? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2021"
+        ]
+      },
+      "source": "plugins/security/skills/guardicore/SKILL.md - states the platform was acquired by Akamai in 2021"
+    },
+    {
+      "id": "guardicore-policy-modes",
+      "knowledge": "stable",
+      "prompt": "In Akamai Guardicore segmentation policy configuration, what are the three policy modes a rule set can operate in, ranging from passive monitoring to active blocking? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Monitor",
+          "Alert",
+          "Block"
+        ]
+      },
+      "source": "plugins/security/skills/guardicore/SKILL.md - Policy modes section: Monitor, Alert, Block"
+    },
+    {
+      "id": "guardicore-deception-types",
+      "knowledge": "recent",
+      "prompt": "Akamai Guardicore Centra includes built-in deception capabilities. What are the three types of deception mechanisms it offers for catching lateral movement? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Network decoys",
+          "Service decoys",
+          "Breadcrumbs"
+        ]
+      },
+      "source": "plugins/security/skills/guardicore/SKILL.md - Deception Capabilities section lists Network decoys, Service decoys, Breadcrumbs"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

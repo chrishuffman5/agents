@@ -1,0 +1,50 @@
+{
+  "skill": "juniper-junos",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "juniper-junos-rollback-history-count",
+      "knowledge": "recent",
+      "prompt": "How many previous configurations does Junos retain in its rollback history by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b50\\b"
+      },
+      "source": "plugins/networking/skills/juniper-junos/SKILL.md - up to 50 rollback configurations stored"
+    },
+    {
+      "id": "juniper-junos-isis-classic-metric-max",
+      "knowledge": "recent",
+      "prompt": "In Junos IS-IS, what is the maximum value of a classic narrow interface metric, which is why wide-metrics-only should be enabled for modern designs? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b63\\b"
+      },
+      "source": "plugins/networking/skills/juniper-junos/references/best-practices.md - classic IS-IS metrics are limited to 63, enable wide-metrics-only"
+    },
+    {
+      "id": "juniper-junos-commit-confirmed",
+      "knowledge": "stable",
+      "prompt": "In Junos, which commit variant activates the candidate configuration but automatically rolls it back if you do not reconfirm within a set number of minutes, protecting against remote lockout? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "commit confirmed"
+        ]
+      },
+      "source": "plugins/networking/skills/juniper-junos/SKILL.md - commit confirmed <minutes>: auto-rollback if not re-confirmed, prevents lockout"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

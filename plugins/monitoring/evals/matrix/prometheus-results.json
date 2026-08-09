@@ -1,0 +1,48 @@
+{
+  "skill": "prometheus",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "prometheus-series-ram-cost",
+      "knowledge": "recent",
+      "prompt": "Roughly how much RAM does each active Prometheus time series cost? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)3.{0,6}6\\s*kb"
+      },
+      "source": "plugins/monitoring/skills/prometheus/SKILL.md - Top 10 Operational Rules number 1, each series costs 3-6 KB RAM"
+    },
+    {
+      "id": "prometheus-alertmanager-cluster-size",
+      "knowledge": "stable",
+      "prompt": "How many nodes are recommended when running Alertmanager as a cluster in production? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b3\\b"
+      },
+      "source": "plugins/monitoring/skills/prometheus/SKILL.md - Top 10 Operational Rules number 6, run Alertmanager as a cluster of 3 nodes"
+    },
+    {
+      "id": "prometheus-default-retention",
+      "knowledge": "stable",
+      "prompt": "What is the default local TSDB retention period for Prometheus if you do not configure it otherwise? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15[\\s-]*(day|d\\b)"
+      },
+      "source": "plugins/monitoring/skills/prometheus/SKILL.md - Common Pitfalls number 4 and Architecture Quick Reference, default retention is 15 days"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

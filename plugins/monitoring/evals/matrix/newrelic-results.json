@@ -1,0 +1,50 @@
+{
+  "skill": "newrelic",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "newrelic-free-tier-gb",
+      "knowledge": "recent",
+      "prompt": "How many gigabytes per month of data ingest does the New Relic forever-free tier include? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100"
+        ]
+      },
+      "source": "plugins/monitoring/skills/newrelic/SKILL.md - Pricing Overview table, free tier is 100 GB per month ingest plus 1 Full Platform user, forever free"
+    },
+    {
+      "id": "newrelic-log-retention",
+      "knowledge": "recent",
+      "prompt": "By default, how many days does New Relic retain ingested log data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b30\\b"
+      },
+      "source": "plugins/monitoring/skills/newrelic/SKILL.md - Pricing Overview section, default retention lists Logs 30 days"
+    },
+    {
+      "id": "newrelic-facet-default-limit",
+      "knowledge": "stable",
+      "prompt": "In an NRQL query, if you do not specify a LIMIT clause on a FACET, how many results are returned by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b10\\b"
+      },
+      "source": "plugins/monitoring/skills/newrelic/SKILL.md - Common Pitfalls number 4, FACET queries default to 10 results"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

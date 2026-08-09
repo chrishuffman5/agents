@@ -1,0 +1,251 @@
+{
+  "skill": "docker",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 17,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "docker-v29-containerd-version",
+      "knowledge": "recent",
+      "prompt": "Which exact containerd version does Docker Engine 29 bundle as its execution backend? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.2.2"
+        ]
+      },
+      "source": "plugins/containers/skills/docker/SKILL.md - Docker Engine v29 ships containerd 2.2.2 with config version 3"
+    },
+    {
+      "id": "docker-compose-spec-removal",
+      "knowledge": "recent",
+      "prompt": "The Compose Specification released in December 2025 removed which internal capability from Docker Compose, pushing users toward Docker Bake instead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "builder",
+          "Bake"
+        ]
+      },
+      "source": "plugins/containers/skills/docker/SKILL.md - Compose Specification v5.0.0 (Dec 2025) removed the internal builder in favor of Docker Bake"
+    },
+    {
+      "id": "docker-desktop-license-threshold",
+      "knowledge": "stable",
+      "prompt": "At what company size or annual revenue does Docker Desktop stop being free and require a paid subscription? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "250",
+          "10"
+        ]
+      },
+      "source": "plugins/containers/skills/docker/SKILL.md - Paid for large orgs (>250 employees / >10M revenue)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 11,
+      "pass": 10,
+      "accuracy": 90.9,
+      "meanWallMs": 15306,
+      "meanTokensOut": 330,
+      "totalCostUsd": 1.6098,
+      "costPerCorrect": 0.161
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 3,
+      "accuracy": 50.0,
+      "meanWallMs": 12234,
+      "meanTokensOut": 181,
+      "totalCostUsd": 0.515,
+      "costPerCorrect": 0.1717
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 15131,
+        "meanTokensOut": 445,
+        "totalCostUsd": 1.1439,
+        "costPerCorrect": 0.2288
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7283,
+        "meanTokensOut": 141,
+        "totalCostUsd": 0.1763,
+        "costPerCorrect": 0.1763
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 5,
+        "pass": 5,
+        "accuracy": 100.0,
+        "meanWallMs": 15515,
+        "meanTokensOut": 193,
+        "totalCostUsd": 0.4659,
+        "costPerCorrect": 0.0932
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17185,
+        "meanTokensOut": 221,
+        "totalCostUsd": 0.3387,
+        "costPerCorrect": 0.1694
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 15131,
+        "meanTokensOut": 445,
+        "totalCostUsd": 1.1439,
+        "costPerCorrect": 0.2288
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7283,
+        "meanTokensOut": 141,
+        "totalCostUsd": 0.1763,
+        "costPerCorrect": 0.1763
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 5,
+        "pass": 5,
+        "accuracy": 100.0,
+        "meanWallMs": 15515,
+        "meanTokensOut": 193,
+        "totalCostUsd": 0.4659,
+        "costPerCorrect": 0.0932
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17185,
+        "meanTokensOut": 221,
+        "totalCostUsd": 0.3387,
+        "costPerCorrect": 0.1694
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7283,
+        "meanTokensOut": 141,
+        "totalCostUsd": 0.1763,
+        "costPerCorrect": 0.1763
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 11099,
+        "meanTokensOut": 284,
+        "totalCostUsd": 0.5122,
+        "costPerCorrect": 0.2561
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19162,
+        "meanTokensOut": 606,
+        "totalCostUsd": 0.6317,
+        "costPerCorrect": 0.2106
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17185,
+        "meanTokensOut": 221,
+        "totalCostUsd": 0.3387,
+        "costPerCorrect": 0.1694
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14754,
+        "meanTokensOut": 197,
+        "totalCostUsd": 0.3462,
+        "costPerCorrect": 0.1154
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 2,
+        "pass": 2,
+        "accuracy": 100.0,
+        "meanWallMs": 16658,
+        "meanTokensOut": 186,
+        "totalCostUsd": 0.1197,
+        "costPerCorrect": 0.0598
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

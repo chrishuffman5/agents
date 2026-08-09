@@ -1,0 +1,230 @@
+{
+  "skill": "btrfs-snapper",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "btrfs-snapper-xxhash-version",
+      "knowledge": "recent",
+      "prompt": "Btrfs on SLES supports several checksum algorithms. Alongside the long standing crc32c default, which additional checksum algorithm became available starting with SLES 15 SP3? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "xxhash"
+        ]
+      },
+      "source": "plugins/os/skills/btrfs-snapper/SKILL.md - Checksums: Supported algorithms: crc32c, xxhash (SLES 15 SP3+), sha256, blake2b"
+    },
+    {
+      "id": "btrfs-snapper-qgroup-overhead",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage of extra write overhead do Btrfs quota groups add on a system with many snapshots? Answer with the percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10\\s*-\\s*30\\s*%?"
+      },
+      "source": "plugins/os/skills/btrfs-snapper/SKILL.md - Performance warning: Qgroups add 10-30% write overhead on systems with many snapshots."
+    },
+    {
+      "id": "btrfs-snapper-raid56-unsafe",
+      "knowledge": "stable",
+      "prompt": "Is it safe to run Btrfs RAID 5 or RAID 6 in a production environment? Answer in one sentence explaining the reason.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not (safe|production ready)|never).{0,60}(write hole)"
+      },
+      "source": "plugins/os/skills/btrfs-snapper/SKILL.md - RAID Profiles table: RAID 5/6 NO -- write hole bug; Never use RAID 5/6 in production."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 4,
+      "accuracy": 44.4,
+      "meanWallMs": 13238,
+      "meanTokensOut": 334,
+      "totalCostUsd": 1.4327,
+      "costPerCorrect": 0.3582
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 2,
+      "accuracy": 33.3,
+      "meanWallMs": 16932,
+      "meanTokensOut": 216,
+      "totalCostUsd": 0.4157,
+      "costPerCorrect": 0.2078
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 3,
+        "accuracy": 50.0,
+        "meanWallMs": 11022,
+        "meanTokensOut": 429,
+        "totalCostUsd": 1.2001,
+        "costPerCorrect": 0.4
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 10865,
+        "meanTokensOut": 198,
+        "totalCostUsd": 0.1812,
+        "costPerCorrect": 0.1812
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 17671,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2326,
+        "costPerCorrect": 0.2326
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 22998,
+        "meanTokensOut": 235,
+        "totalCostUsd": 0.2345,
+        "costPerCorrect": 0.2345
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 3,
+        "accuracy": 50.0,
+        "meanWallMs": 11022,
+        "meanTokensOut": 429,
+        "totalCostUsd": 1.2001,
+        "costPerCorrect": 0.4
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 10865,
+        "meanTokensOut": 198,
+        "totalCostUsd": 0.1812,
+        "costPerCorrect": 0.1812
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 17671,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2326,
+        "costPerCorrect": 0.2326
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 22998,
+        "meanTokensOut": 235,
+        "totalCostUsd": 0.2345,
+        "costPerCorrect": 0.2345
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 10865,
+        "meanTokensOut": 198,
+        "totalCostUsd": 0.1812,
+        "costPerCorrect": 0.1812
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8616,
+        "meanTokensOut": 253,
+        "totalCostUsd": 0.5524,
+        "costPerCorrect": 0.2762
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 13429,
+        "meanTokensOut": 606,
+        "totalCostUsd": 0.6478,
+        "costPerCorrect": 0.6478
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 22998,
+        "meanTokensOut": 235,
+        "totalCostUsd": 0.2345,
+        "costPerCorrect": 0.2345
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 17671,
+        "meanTokensOut": 144,
+        "totalCostUsd": 0.2326,
+        "costPerCorrect": 0.2326
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

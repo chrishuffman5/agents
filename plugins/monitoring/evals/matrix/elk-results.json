@@ -1,0 +1,54 @@
+{
+  "skill": "elk",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "elk-disk-watermarks",
+      "knowledge": "stable",
+      "prompt": "What are the default Elasticsearch disk watermark percentages for the low, high, and flood stages in the Elastic Stack? Answer concisely with all three numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "85",
+          "90",
+          "95"
+        ]
+      },
+      "source": "plugins/monitoring/skills/elk/SKILL.md - Common Pitfalls number 5, default watermarks 85% low, 90% high, 95% flood"
+    },
+    {
+      "id": "elk-esql-ga",
+      "knowledge": "recent",
+      "prompt": "As of which Elastic Stack version number did ES|QL become generally available? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.11"
+        ]
+      },
+      "source": "plugins/monitoring/skills/elk/SKILL.md - Top 10 Operational Rules number 9, ES|QL has been GA since 8.11"
+    },
+    {
+      "id": "elk-logsdb-reduction",
+      "knowledge": "recent",
+      "prompt": "In Elastic Stack 9.x, roughly what percentage storage reduction does the Logsdb index mode provide for logs versus standard indexing? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b65\\b"
+      },
+      "source": "plugins/monitoring/skills/elk/SKILL.md - Core Expertise bullet and Top 10 Operational Rules number 6, Logsdb provides about 65% storage reduction in 9.x"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

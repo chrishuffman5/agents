@@ -1,0 +1,48 @@
+{
+  "skill": "metabase",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "metabase-model-version-history",
+      "knowledge": "stable",
+      "prompt": "In Metabase, how many previous versions of a model does the platform retain for change tracking and reversion? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b15\\b"
+      },
+      "source": "plugins/analytics/skills/metabase/SKILL.md - Models and Semantic Layer: Version history retains 15 previous versions with change tracking and reversion."
+    },
+    {
+      "id": "metabase-sql-disabled-sandboxed",
+      "knowledge": "stable",
+      "prompt": "In Metabase, if even a single table in a database is blocked or sandboxed, what happens to native SQL access for the rest of that database? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(disabled|turn(ed)? off|no longer)"
+      },
+      "source": "plugins/analytics/skills/metabase/SKILL.md - Permissions Model critical rules: if any table is blocked/sandboxed, native SQL access is disabled for the entire database."
+    },
+    {
+      "id": "metabase-current-version",
+      "knowledge": "recent",
+      "prompt": "What is the current major version number of Metabase as of March 2026? Answer concisely with just the version number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bv?59\\b"
+      },
+      "source": "plugins/analytics/skills/metabase/SKILL.md - intro: The current version is Metabase v59 (March 2026), with v60 in beta."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

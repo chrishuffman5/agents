@@ -1,0 +1,50 @@
+{
+  "skill": "iam",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "iam-deprovision-target",
+      "knowledge": "stable",
+      "prompt": "As an identity and access management best practice, within how much time after a termination event should a departing employee account be disabled? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1\\s*hour\\b"
+      },
+      "source": "plugins/security/skills/iam/SKILL.md - Anti-Patterns section: target is accounts disabled within 1 hour of termination"
+    },
+    {
+      "id": "iam-access-review-cadence",
+      "knowledge": "stable",
+      "prompt": "For privileged access in an IAM governance program, what is the minimum recommended frequency for conducting access reviews or certifications? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bquarterly\\b"
+      },
+      "source": "plugins/security/skills/iam/SKILL.md - Anti-Patterns section: quarterly reviews minimum for privileged access"
+    },
+    {
+      "id": "iam-role-explosion-threshold",
+      "knowledge": "recent",
+      "prompt": "In a flat RBAC model for a small organization, roughly how many distinct roles is considered a red flag signaling role explosion? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50"
+        ]
+      },
+      "source": "plugins/security/skills/iam/SKILL.md - Anti-Patterns section: more than 50 roles in a small organization is a red flag"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

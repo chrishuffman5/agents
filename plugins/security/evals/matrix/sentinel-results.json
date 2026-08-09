@@ -1,0 +1,54 @@
+{
+  "skill": "sentinel",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sentinel-defender-migration-deadline",
+      "knowledge": "recent",
+      "prompt": "Microsoft has set a mandatory deadline for migrating Microsoft Sentinel workloads to the unified Defender portal. What month and year is that deadline? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "July",
+          "2026"
+        ]
+      },
+      "source": "plugins/security/skills/sentinel/SKILL.md - Key architectural note: migration to unified Defender portal mandatory by July 2026"
+    },
+    {
+      "id": "sentinel-basic-logs-window",
+      "knowledge": "recent",
+      "prompt": "For Microsoft Sentinel Basic logs, how many days back can you query with KQL, and how many days is the data retained before it moves to archive? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8-day",
+          "30 days"
+        ]
+      },
+      "source": "plugins/security/skills/sentinel/SKILL.md - Log tiers table: Basic logs Limited KQL (8-day window), 30 days retention then archive"
+    },
+    {
+      "id": "sentinel-materialize-function",
+      "knowledge": "stable",
+      "prompt": "In Kusto Query Language, which function should you use to cache an intermediate result set that is referenced multiple times later in the same query, to avoid recomputing it? Answer with just the function name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)materialize"
+      },
+      "source": "plugins/security/skills/sentinel/SKILL.md - KQL performance tips: Use materialize() to cache intermediate results referenced multiple times"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

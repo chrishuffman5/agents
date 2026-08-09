@@ -1,0 +1,51 @@
+{
+  "skill": "venafi",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "venafi-acquisition",
+      "knowledge": "recent",
+      "prompt": "Which company acquired Venafi, and in what year did the acquisition happen? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CyberArk",
+          "2024"
+        ]
+      },
+      "source": "plugins/security/skills/venafi/SKILL.md - CyberArk acquired Venafi in October 2024 for 1.54B"
+    },
+    {
+      "id": "venafi-firefly-speed",
+      "knowledge": "recent",
+      "prompt": "Venafi Firefly is designed for Kubernetes and service mesh environments and is SPIRE-compatible. How fast can it issue short-lived workload identities, according to its stated performance characteristic? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)millisecond"
+      },
+      "source": "plugins/security/skills/venafi/SKILL.md - Venafi Firefly: Extremely fast issuance (milliseconds) for short-lived workload identities"
+    },
+    {
+      "id": "venafi-integrations-count",
+      "knowledge": "stable",
+      "prompt": "Roughly how many third-party integrations does Venafi TLS Protect offer for things like load balancers, web servers, and automation tools such as F5, NetScaler, IIS, nginx, Kubernetes, Terraform, and Ansible? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)300\\+?"
+      },
+      "source": "plugins/security/skills/venafi/SKILL.md - Integration: 300+ integrations (F5, A10, NetScaler, IIS, nginx, Apache, Kubernetes, Terraform, Ansible)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

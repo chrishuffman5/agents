@@ -1,0 +1,48 @@
+{
+  "skill": "elastic-defend",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "elastic-defend-storage-estimate",
+      "knowledge": "recent",
+      "prompt": "In Elastic Defend, roughly how much Elasticsearch storage per endpoint per day does full event collection across all telemetry categories generate, according to typical guidance? Answer concisely with the range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*-\\s*10\\s*gb"
+      },
+      "source": "plugins/security/skills/elastic-defend/SKILL.md - Cost Awareness: Full event collection (all categories): ~5-10GB/endpoint/day"
+    },
+    {
+      "id": "elastic-defend-ransomware-license",
+      "knowledge": "stable",
+      "prompt": "In Elastic Defend, which minimum Elastic license tier is required to enable ransomware and memory threat prevention capabilities? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)platinum"
+      },
+      "source": "plugins/security/skills/elastic-defend/SKILL.md - License tiers table: Ransomware prevention and Memory threat prevention require Platinum/Enterprise"
+    },
+    {
+      "id": "elastic-defend-prebuilt-rules",
+      "knowledge": "recent",
+      "prompt": "Approximately how many prebuilt detection rules does Elastic provide out of the box for Elastic Defend and Elastic Security? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)500\\+?"
+      },
+      "source": "plugins/security/skills/elastic-defend/SKILL.md - Prebuilt Detection Rules: Elastic provides 500+ prebuilt detection rules"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

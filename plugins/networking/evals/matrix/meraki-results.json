@@ -1,0 +1,48 @@
+{
+  "skill": "meraki",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "meraki-action-batch-limits",
+      "knowledge": "recent",
+      "prompt": "When using Meraki Dashboard action batches for bulk API operations, how many actions can a single batch contain when run synchronously, and how many when run asynchronously? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b100\\b)(?=.*\\b1000\\b)"
+      },
+      "source": "plugins/networking/skills/meraki/SKILL.md - Action Batches: up to 100 actions (synchronous) or 1000 actions (asynchronous)"
+    },
+    {
+      "id": "meraki-license-grace",
+      "knowledge": "recent",
+      "prompt": "If a Cisco Meraki organization's licenses expire and are not renewed, how many days pass before the devices become non-functional? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(30\\s*days|thirty\\s*days)"
+      },
+      "source": "plugins/networking/skills/meraki/SKILL.md - License Expiration: Meraki devices become non-functional 30 days after license expiration"
+    },
+    {
+      "id": "meraki-autovpn-protocol",
+      "knowledge": "stable",
+      "prompt": "What VPN protocol suite does Cisco Meraki AutoVPN use to automatically build tunnels between MX security appliances? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)ipsec"
+      },
+      "source": "plugins/networking/skills/meraki/SKILL.md - AutoVPN: Automated IPsec VPN between MX appliances"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

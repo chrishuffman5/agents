@@ -1,0 +1,56 @@
+{
+  "skill": "datadog",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "datadog-trace-agent-port",
+      "knowledge": "stable",
+      "prompt": "Which TCP port does the Datadog Agent Trace Agent component listen on to receive APM traces from tracing libraries? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8126"
+        ]
+      },
+      "source": "plugins/monitoring/skills/datadog/SKILL.md - Key Reference table lists Trace Agent at port 8126 (HTTP)"
+    },
+    {
+      "id": "datadog-lambda-invocations",
+      "knowledge": "recent",
+      "prompt": "For Datadog Lambda APM billing, how many function invocations equal one APM host-equivalent? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "150"
+        ]
+      },
+      "source": "plugins/monitoring/skills/datadog/SKILL.md - Common Pitfalls number 3, Lambda functions billed per invocation, 150 invocations = 1 APM host-equivalent"
+    },
+    {
+      "id": "datadog-ust-tags",
+      "knowledge": "stable",
+      "prompt": "In Datadog Unified Service Tagging, which three environment variables get set on every container to enable cross-product correlation? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DD_ENV",
+          "DD_SERVICE",
+          "DD_VERSION"
+        ]
+      },
+      "source": "plugins/monitoring/skills/datadog/SKILL.md - Unified Service Tagging section lists DD_ENV, DD_SERVICE, DD_VERSION as the reserved correlation tags"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

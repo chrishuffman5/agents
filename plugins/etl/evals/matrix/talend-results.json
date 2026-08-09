@@ -1,0 +1,52 @@
+{
+  "skill": "talend",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "talend-java17-mandatory",
+      "knowledge": "recent",
+      "prompt": "Talend made Java 17 a mandatory requirement for all builds and executions starting with which release designation? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "R2025-02"
+        ]
+      },
+      "source": "plugins/etl/skills/talend/SKILL.md - Qlik Acquisition and Current State: Java 17 mandatory (R2025-02): Java 8 support ended."
+    },
+    {
+      "id": "talend-openstudio-freetier-end",
+      "knowledge": "recent",
+      "prompt": "Talend Open Studio's free tier was discontinued. On what exact date did the free tier end? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)january\\s*31,?\\s*2024"
+      },
+      "source": "plugins/etl/skills/talend/SKILL.md - Qlik Acquisition and Current State: Open Studio discontinued: Free tier ended January 31, 2024."
+    },
+    {
+      "id": "talend-gen2-heartbeat-timeout",
+      "knowledge": "stable",
+      "prompt": "Talend Management Console considers a Remote Engine Gen2 connection broken after how many seconds without a heartbeat? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "180"
+        ]
+      },
+      "source": "plugins/etl/skills/talend/SKILL.md - Remote Engines: TMC considers Gen2 connection broken after 180 seconds without heartbeat."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

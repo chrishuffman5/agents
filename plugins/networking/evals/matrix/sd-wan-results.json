@@ -1,0 +1,53 @@
+{
+  "skill": "sd-wan",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sd-wan-cost-savings",
+      "knowledge": "recent",
+      "prompt": "Roughly what percentage cost savings does a broadband-plus-SD-WAN overlay typically deliver compared to keeping MPLS circuits? Answer concisely with a percentage range.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "40",
+          "60"
+        ]
+      },
+      "source": "plugins/networking/skills/sd-wan/SKILL.md - When SD-WAN Makes Sense: broadband + SD-WAN overlay often 40-60% cheaper than MPLS"
+    },
+    {
+      "id": "sd-wan-eaar-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Cisco Catalyst SD-WAN (IOS-XE) release train that introduced Enhanced Application-Aware Routing (EAAR) for sub-second path switching? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.12"
+        ]
+      },
+      "source": "plugins/networking/skills/sd-wan/SKILL.md - Cisco Catalyst SD-WAN Strengths: Enhanced AAR (EAAR) for sub-second path switching (17.12+)"
+    },
+    {
+      "id": "sd-wan-bigbang",
+      "knowledge": "stable",
+      "prompt": "When migrating a multi-site WAN from MPLS to SD-WAN, is it advisable to cut every site over simultaneously in a single big-bang migration? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|never|not advis|avoid|anti-pattern)"
+      },
+      "source": "plugins/networking/skills/sd-wan/SKILL.md - Migration Anti-Patterns: Big-bang cutover -- Never migrate all sites simultaneously"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

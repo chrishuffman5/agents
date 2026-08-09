@@ -1,0 +1,50 @@
+{
+  "skill": "windows-dns",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "windows-dns-scavenge-days",
+      "knowledge": "recent",
+      "prompt": "With default Windows DNS Server aging and scavenging settings, how many total days pass before a stale dynamically-registered record becomes eligible for scavenging? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b14\\b"
+      },
+      "source": "plugins/networking/skills/windows-dns/SKILL.md - Aging and Scavenging: total record lifetime = no-refresh (7 days) + refresh (7 days) = 14 days"
+    },
+    {
+      "id": "windows-dns-doh-kb",
+      "knowledge": "recent",
+      "prompt": "Which Microsoft KB update introduced public-preview server-side DNS-over-HTTPS support for the Windows Server 2025 DNS Server role? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "KB5075899"
+        ]
+      },
+      "source": "plugins/networking/skills/windows-dns/references/versions/2025.md - Server-side DoH added via KB5075899 (February 10, 2026)"
+    },
+    {
+      "id": "windows-dns-policies-gui",
+      "knowledge": "stable",
+      "prompt": "Can Windows DNS Policies, introduced in Server 2016, be configured through the graphical DNS Manager console, or only via PowerShell? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(powershell.{0,30}only|only.{0,20}powershell|no gui|not.{0,20}gui)"
+      },
+      "source": "plugins/networking/skills/windows-dns/SKILL.md - DNS Policies (Server 2016+): PowerShell only -- no GUI"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

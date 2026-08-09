@@ -1,0 +1,54 @@
+{
+  "skill": "ultimate-tech-stack",
+  "plugin": "domain-expert-core",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ultimate-tech-stack-security-weight",
+      "knowledge": "stable",
+      "prompt": "In the domain-expert marketplace's security-first tech stack scoring model, what percentage weight is assigned to security architecture and secure defaults when comparing candidate technologies that already passed the security gate? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md scoring table - Security architecture and secure defaults | 30%"
+    },
+    {
+      "id": "ultimate-tech-stack-iac-default",
+      "knowledge": "stable",
+      "prompt": "Between Terraform and OpenTofu, which one does the domain-expert marketplace's security-first tech stack guidance recommend adopting as the open-source infrastructure-as-code default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OpenTofu"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md Replacements table - Terraform: Do not adopt as an open-source default, BSL-licensed; use OpenTofu"
+    },
+    {
+      "id": "ultimate-tech-stack-app-default",
+      "knowledge": "stable",
+      "prompt": "According to the domain-expert marketplace's security-first tech stack defaults, which web application framework is the starting default for a conventional business application, before FastAPI or Next.js is earned by a specific requirement? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Django"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/ultimate-tech-stack/SKILL.md Defaults at a Glance table - Application | Supported Django LTS + server-rendered templates/htmx"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,54 @@
+{
+  "skill": "wireless",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "wireless-wifi7-specs",
+      "knowledge": "recent",
+      "prompt": "What is the maximum PHY data rate for Wi-Fi 7 (802.11be), and what is the widest channel width it supports? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "46",
+          "320"
+        ]
+      },
+      "source": "plugins/networking/skills/wireless/SKILL.md - Wi-Fi Standards Overview: 802.11be / Wi-Fi 7, Max PHY Rate 46 Gbps, 320 MHz channels"
+    },
+    {
+      "id": "wireless-rssi-targets",
+      "knowledge": "recent",
+      "prompt": "In enterprise Wi-Fi site surveys, what target RSSI values in dBm are typically used for voice and video coverage versus general data coverage? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "67",
+          "72"
+        ]
+      },
+      "source": "plugins/networking/skills/wireless/SKILL.md - Survey Best Practices: target RSSI -67 dBm for voice/video, -72 dBm for data"
+    },
+    {
+      "id": "wireless-6ghz-wpa3",
+      "knowledge": "stable",
+      "prompt": "Does the 6 GHz Wi-Fi band permit legacy WPA2 security, or does it require WPA3? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bwpa3\\b"
+      },
+      "source": "plugins/networking/skills/wireless/SKILL.md - Security escalation: 6 GHz band requires WPA3 -- no legacy WPA2 permitted"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

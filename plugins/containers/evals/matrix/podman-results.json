@@ -1,0 +1,232 @@
+{
+  "skill": "podman",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "podman-6-changes",
+      "knowledge": "recent",
+      "prompt": "What major architectural change does Podman version 6.0 introduce, according to its release notes summary? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "revision"
+        ]
+      },
+      "source": "plugins/containers/skills/podman/SKILL.md - 6.0: Major API revision, Quadlet enhancements"
+    },
+    {
+      "id": "podman-rootless-default-network",
+      "knowledge": "stable",
+      "prompt": "In Podman 5.x and later, which rootless networking backend became the default, offering better performance than the legacy slirp4netns? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "pasta"
+        ]
+      },
+      "source": "plugins/containers/skills/podman/SKILL.md - pasta (default in 5.x+)"
+    },
+    {
+      "id": "podman-crun-speed",
+      "knowledge": "stable",
+      "prompt": "How much faster does Podman's default crun runtime start containers compared to runc? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10x|10 times|ten times)"
+      },
+      "source": "plugins/containers/skills/podman/SKILL.md - crun (C, 10x faster startup than runc)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 6,
+      "accuracy": 66.7,
+      "meanWallMs": 17555,
+      "meanTokensOut": 578,
+      "totalCostUsd": 1.3649,
+      "costPerCorrect": 0.2275
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 2,
+      "accuracy": 33.3,
+      "meanWallMs": 14498,
+      "meanTokensOut": 263,
+      "totalCostUsd": 0.484,
+      "costPerCorrect": 0.242
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 4,
+        "accuracy": 66.7,
+        "meanWallMs": 20226,
+        "meanTokensOut": 785,
+        "totalCostUsd": 1.1221,
+        "costPerCorrect": 0.2805
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12781,
+        "meanTokensOut": 294,
+        "totalCostUsd": 0.2298,
+        "costPerCorrect": 0.2298
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12213,
+        "meanTokensOut": 165,
+        "totalCostUsd": 0.2427,
+        "costPerCorrect": 0.1214
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 16214,
+        "meanTokensOut": 233,
+        "totalCostUsd": 0.2541,
+        "costPerCorrect": 0.2541
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 4,
+        "accuracy": 66.7,
+        "meanWallMs": 20226,
+        "meanTokensOut": 785,
+        "totalCostUsd": 1.1221,
+        "costPerCorrect": 0.2805
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12781,
+        "meanTokensOut": 294,
+        "totalCostUsd": 0.2298,
+        "costPerCorrect": 0.2298
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12213,
+        "meanTokensOut": 165,
+        "totalCostUsd": 0.2427,
+        "costPerCorrect": 0.1214
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 16214,
+        "meanTokensOut": 233,
+        "totalCostUsd": 0.2541,
+        "costPerCorrect": 0.2541
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 12781,
+        "meanTokensOut": 294,
+        "totalCostUsd": 0.2298,
+        "costPerCorrect": 0.2298
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 13444,
+        "meanTokensOut": 488,
+        "totalCostUsd": 0.4666,
+        "costPerCorrect": 0.2333
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 27008,
+        "meanTokensOut": 1083,
+        "totalCostUsd": 0.6556,
+        "costPerCorrect": 0.3278
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 16214,
+        "meanTokensOut": 233,
+        "totalCostUsd": 0.2541,
+        "costPerCorrect": 0.2541
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12213,
+        "meanTokensOut": 165,
+        "totalCostUsd": 0.2427,
+        "costPerCorrect": 0.1214
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

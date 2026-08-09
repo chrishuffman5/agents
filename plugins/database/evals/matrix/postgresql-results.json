@@ -1,0 +1,52 @@
+{
+  "skill": "postgresql",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "postgresql-pgupgrade-swap-flag",
+      "knowledge": "recent",
+      "prompt": "Which pg_upgrade flag introduced in PostgreSQL 18 swaps data directories instead of copying them, dramatically speeding up major version upgrades of large databases? Answer with the exact flag.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "--swap"
+        ]
+      },
+      "source": "plugins/database/skills/postgresql/references/versions/18.md - pg_upgrade Improvements: --swap flag swaps data directories instead of copying, fastest upgrade option"
+    },
+    {
+      "id": "postgresql-17-vacuum-tidstore-memory",
+      "knowledge": "recent",
+      "prompt": "PostgreSQL 17 introduced a TID store, a radix tree that VACUUM uses to track dead tuple IDs. Compared to the previous flat array approach, it reduces VACUUM memory consumption on large tables by up to how many times? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(20\\s*x\\b|20\\s*times)"
+      },
+      "source": "plugins/database/skills/postgresql/references/versions/17.md - Improved VACUUM Memory Management: TID store optimization reduces memory consumption for VACUUM on large tables by up to 20x"
+    },
+    {
+      "id": "postgresql-autovacuum-scale-factor-default",
+      "knowledge": "stable",
+      "prompt": "What is the default value of the autovacuum_vacuum_scale_factor parameter in PostgreSQL? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0.2"
+        ]
+      },
+      "source": "plugins/database/skills/postgresql/SKILL.md - VACUUM and Autovacuum: autovacuum_vacuum_scale_factor default is 0.2, lower for large tables"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

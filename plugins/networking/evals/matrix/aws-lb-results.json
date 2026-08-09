@@ -1,0 +1,50 @@
+{
+  "skill": "aws-lb",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-lb-nlb-weighted-tg",
+      "knowledge": "recent",
+      "prompt": "AWS Network Load Balancer added support for weighted target groups, enabling blue and green deployments for TCP services. Around when was this capability added? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)nov(ember)?\\s*2025"
+      },
+      "source": "plugins/networking/skills/aws-lb/SKILL.md - Weighted target groups | Blue/green for TCP services (Nov 2025)"
+    },
+    {
+      "id": "aws-lb-alb-target-optimizer",
+      "knowledge": "recent",
+      "prompt": "AWS Application Load Balancer has a Target Optimizer feature aimed at AI and ML inference workloads that routes requests with single-task concurrency. What specific problem does this prevent? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(gpu\\s*contention|contention)"
+      },
+      "source": "plugins/networking/skills/aws-lb/SKILL.md - Target Optimizer routes AI/ML workloads requiring single-task concurrency to appropriate targets, prevents GPU contention"
+    },
+    {
+      "id": "aws-lb-gwlb-geneve-port",
+      "knowledge": "stable",
+      "prompt": "AWS Gateway Load Balancer encapsulates traffic to security appliances using the GENEVE protocol. What UDP port does GENEVE use? Answer concisely with just the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6081"
+        ]
+      },
+      "source": "plugins/networking/skills/aws-lb/SKILL.md - Wraps original packets in GENEVE (UDP 6081)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

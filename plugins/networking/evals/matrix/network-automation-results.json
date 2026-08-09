@@ -1,0 +1,50 @@
+{
+  "skill": "network-automation",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "network-automation-maturity-levels",
+      "knowledge": "recent",
+      "prompt": "In a typical network automation maturity model that runs from manual CLI changes up through self-healing, closed-loop networks, how many maturity levels are usually defined? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b5\\b|\\bfive\\b)"
+      },
+      "source": "plugins/networking/skills/network-automation/references/concepts.md - Network Automation Maturity Model defines Level 1 through Level 5"
+    },
+    {
+      "id": "network-automation-batfish",
+      "knowledge": "stable",
+      "prompt": "What free, open-source tool is commonly used to parse network device configurations offline and analyze reachability, routing correctness, and ACL behavior before a change is deployed? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Batfish"
+        ]
+      },
+      "source": "plugins/networking/skills/network-automation/references/concepts.md - Batfish (Offline Analysis): parses device configs offline and analyzes reachability, routing, ACLs"
+    },
+    {
+      "id": "network-automation-ansible-no-state",
+      "knowledge": "stable",
+      "prompt": "Unlike Terraform, does Ansible maintain a persistent state file that tracks what infrastructure or configuration it has previously deployed? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/networking/skills/network-automation/SKILL.md - Ansible Considerations: No state file, does not track what it has deployed (re-reads device state each run)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

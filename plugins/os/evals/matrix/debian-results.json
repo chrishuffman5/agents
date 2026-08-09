@@ -1,0 +1,228 @@
+{
+  "skill": "debian",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "debian-testing-migration-days",
+      "knowledge": "recent",
+      "prompt": "In Debian's three suite release pipeline, how many days must a package sit in unstable without release critical bugs before it automatically migrates to testing? Answer with the number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
+      "source": "plugins/os/skills/debian/SKILL.md - Release Process: Packages enter unstable first. After 10 days without RC bugs, they auto-migrate to testing."
+    },
+    {
+      "id": "debian-sid-never-releases",
+      "knowledge": "stable",
+      "prompt": "Debian's rolling development branch carries the nickname Sid, after the Toy Story character who breaks his toys. Does Sid ever itself become a stable release?",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|never)"
+      },
+      "source": "plugins/os/skills/debian/SKILL.md - Release Process: Sid is permanent -- it never becomes a release."
+    },
+    {
+      "id": "debian-nonfree-firmware-split",
+      "knowledge": "recent",
+      "prompt": "Which Debian release first split hardware firmware packages out of the non-free archive section into their own separate non-free-firmware component? Answer with the release number or codename.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b12\\b|Bookworm)"
+      },
+      "source": "plugins/os/skills/debian/SKILL.md - Archive sections: non-free-firmware (hardware firmware, split from non-free in Debian 12); Common Pitfall #4"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 14855,
+      "meanTokensOut": 438,
+      "totalCostUsd": 1.2535,
+      "costPerCorrect": 0.1393
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 12738,
+      "meanTokensOut": 152,
+      "totalCostUsd": 0.3805,
+      "costPerCorrect": 0.0761
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 14994,
+        "meanTokensOut": 586,
+        "totalCostUsd": 1.0766,
+        "costPerCorrect": 0.1794
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6861,
+        "meanTokensOut": 135,
+        "totalCostUsd": 0.1754,
+        "costPerCorrect": 0.0585
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14578,
+        "meanTokensOut": 142,
+        "totalCostUsd": 0.1768,
+        "costPerCorrect": 0.0589
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18616,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.205,
+        "costPerCorrect": 0.1025
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 14994,
+        "meanTokensOut": 586,
+        "totalCostUsd": 1.0766,
+        "costPerCorrect": 0.1794
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6861,
+        "meanTokensOut": 135,
+        "totalCostUsd": 0.1754,
+        "costPerCorrect": 0.0585
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14578,
+        "meanTokensOut": 142,
+        "totalCostUsd": 0.1768,
+        "costPerCorrect": 0.0589
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18616,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.205,
+        "costPerCorrect": 0.1025
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6861,
+        "meanTokensOut": 135,
+        "totalCostUsd": 0.1754,
+        "costPerCorrect": 0.0585
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8077,
+        "meanTokensOut": 212,
+        "totalCostUsd": 0.4227,
+        "costPerCorrect": 0.1409
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21911,
+        "meanTokensOut": 960,
+        "totalCostUsd": 0.6539,
+        "costPerCorrect": 0.218
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18616,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.205,
+        "costPerCorrect": 0.1025
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14578,
+        "meanTokensOut": 142,
+        "totalCostUsd": 0.1768,
+        "costPerCorrect": 0.0589
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

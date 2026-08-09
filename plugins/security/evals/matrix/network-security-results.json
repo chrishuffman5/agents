@@ -1,0 +1,55 @@
+{
+  "skill": "network-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "network-security-encrypted-traffic-share",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage of traffic on a modern enterprise network is TLS encrypted, according to typical network security guidance on visibility challenges? Answer concisely with the range.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "80",
+          "95"
+        ]
+      },
+      "source": "plugins/security/skills/network-security/SKILL.md - Encrypted Traffic Challenge section: Modern networks are 80-95 percent TLS encrypted"
+    },
+    {
+      "id": "network-security-ja3-fingerprinting",
+      "knowledge": "recent",
+      "prompt": "What TLS client fingerprinting technique, supported by Suricata, lets analysts identify malware command-and-control traffic without decrypting the TLS session? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "JA3"
+        ]
+      },
+      "source": "plugins/security/skills/network-security/SKILL.md - Encrypted Traffic Challenge and ATT&CK table: JA3/JA4 fingerprinting"
+    },
+    {
+      "id": "network-security-af-packet-capture",
+      "knowledge": "recent",
+      "prompt": "Which high-throughput, NIC-bypassing packet capture method used for high-throughput Suricata deployments is available only on Linux? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AF_PACKET"
+        ]
+      },
+      "source": "plugins/security/skills/network-security/SKILL.md - Traffic Capture Methods table: AF_PACKET (bypass NIC), Linux only, High-throughput Suricata"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

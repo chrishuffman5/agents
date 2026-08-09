@@ -1,0 +1,52 @@
+{
+  "skill": "dbt-cloud",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dbtcloud-state-aware-savings",
+      "knowledge": "recent",
+      "prompt": "dbt Labs reported an internal compute cost reduction from combining the Fusion engine with state-aware orchestration in dbt Cloud. What percentage reduction did they report? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "64"
+        ]
+      },
+      "source": "plugins/etl/skills/dbt-cloud/SKILL.md - State-Aware Orchestration: dbt Labs reported 64% compute cost reduction internally using Fusion + state-aware orchestration."
+    },
+    {
+      "id": "dbtcloud-semantic-layer-engine",
+      "knowledge": "stable",
+      "prompt": "What open-source engine powers the dbt Cloud Semantic Layer, generating optimized SQL from metric and dimension definitions? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "MetricFlow"
+        ]
+      },
+      "source": "plugins/etl/skills/dbt-cloud/SKILL.md - Semantic Layer Architecture: MetricFlow (open-source engine) powers the Semantic Layer."
+    },
+    {
+      "id": "dbtcloud-starter-models",
+      "knowledge": "stable",
+      "prompt": "On the dbt Cloud Starter licensing tier, how many models per month are included before overage? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15,?000"
+      },
+      "source": "plugins/etl/skills/dbt-cloud/SKILL.md - Licensing Tiers table: Starter tier, 15,000 Models/Month."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

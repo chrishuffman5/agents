@@ -1,0 +1,50 @@
+{
+  "skill": "update-plugin",
+  "plugin": "domain-expert-core",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "update-plugin-total-plugins",
+      "knowledge": "stable",
+      "prompt": "In the domain-expert Claude Code marketplace, how many plugins total are there when you count every IT domain plugin plus domain-expert-core? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "19"
+        ]
+      },
+      "source": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - Look for the @domain-expert suffix to see which of the 19 plugins (18 domains + domain-expert-core) the user has"
+    },
+    {
+      "id": "update-plugin-agent-count",
+      "knowledge": "stable",
+      "prompt": "How many cross-domain task agents does the domain-expert-core plugin bundle? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(six|6)\\b"
+      },
+      "source": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - domain-expert-core, which holds the six cross-domain task agents (architecture-consultant, troubleshooting-agent, migration-expert, iac-consultant, data-expert, security-expert) and this skill"
+    },
+    {
+      "id": "update-plugin-update-timing",
+      "knowledge": "stable",
+      "prompt": "After a Claude Code plugin update command succeeds, does the change apply to the session that is currently running, or only starting from the next session? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)next.{0,15}session"
+      },
+      "source": "plugins/domain-expert-core/skills/update-plugin/SKILL.md - Plugin updates take effect on the next Claude Code session. The currently running session keeps the version it started with."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

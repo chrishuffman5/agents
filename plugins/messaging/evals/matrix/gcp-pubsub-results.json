@@ -1,0 +1,48 @@
+{
+  "skill": "gcp-pubsub",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gcp-pubsub-max-retention",
+      "knowledge": "recent",
+      "prompt": "What is the maximum message retention duration you can configure on a Google Cloud Pub/Sub topic? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)31\\s*day"
+      },
+      "source": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Topics section: message retention (10 min to 31 days)"
+    },
+    {
+      "id": "gcp-pubsub-dlt-attempts",
+      "knowledge": "stable",
+      "prompt": "For a Pub/Sub dead-letter topic, what is the maximum number of delivery attempts you can configure before a message is forwarded to it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b100\\b"
+      },
+      "source": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Dead-Letter Topics section: forwarded after 5-100 delivery attempts"
+    },
+    {
+      "id": "gcp-pubsub-ordering-throughput",
+      "knowledge": "recent",
+      "prompt": "When publishing to a Pub/Sub topic using an ordering key, what is the per-key publish throughput limit that can create a hot-key bottleneck? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*mb"
+      },
+      "source": "plugins/messaging/skills/gcp-pubsub/SKILL.md - Anti-Patterns table: hot keys block progress, 1 MBps per key limit"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

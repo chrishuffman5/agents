@@ -1,0 +1,51 @@
+{
+  "skill": "sast",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sast-fp-rate-enterprise",
+      "knowledge": "recent",
+      "prompt": "Without tuning, what false-positive rate range do enterprise SAST tools like Checkmarx and Veracode typically exhibit? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30.{0,4}50\\s*%"
+      },
+      "source": "plugins/security/skills/sast/SKILL.md - Enterprise tools (Checkmarx, Veracode) typically see 30-50% FP rates without tuning"
+    },
+    {
+      "id": "sast-fp-rate-gate-target",
+      "knowledge": "recent",
+      "prompt": "What false-positive rate threshold is recommended as a tuning target for SAST findings that gate a CI/CD pipeline merge? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(<|less than)\\s*20\\s*%"
+      },
+      "source": "plugins/security/skills/sast/SKILL.md - Practical balance: tune to less than 20% FP rate for gated findings"
+    },
+    {
+      "id": "sast-sanitizer-techniques",
+      "knowledge": "stable",
+      "prompt": "Name two specific secure-coding techniques that SAST tools treat as sanitizers, which break the taint chain and thereby reduce injection-vulnerability false positives. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "parameterized queries",
+          "output encoding"
+        ]
+      },
+      "source": "plugins/security/skills/sast/SKILL.md - Sanitizers: parameterized queries / prepared statements, output encoding (HTML, URL, JavaScript)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

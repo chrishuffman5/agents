@@ -1,0 +1,54 @@
+{
+  "skill": "snyk",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "snyk-iac-opa-rego",
+      "knowledge": "recent",
+      "prompt": "Snyk IaC+ supports writing custom infrastructure-as-code policies beyond its built-in rule set. What policy engine and language does it use for these custom policies? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Open Policy Agent",
+          "Rego"
+        ]
+      },
+      "source": "plugins/security/skills/snyk/SKILL.md - Snyk IaC+ (custom policies): supports Open Policy Agent (OPA) Rego-based custom policies"
+    },
+    {
+      "id": "snyk-k8s-admission-helm",
+      "knowledge": "recent",
+      "prompt": "To deploy the Snyk Kubernetes admission controller that can deny or warn on deployment of images with critical vulnerabilities, which Helm chart and Helm repository name do you install? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "snyk-monitor",
+          "snyk-charts"
+        ]
+      },
+      "source": "plugins/security/skills/snyk/SKILL.md - Kubernetes admission controller: helm install snyk-monitor snyk-charts/snyk-monitor"
+    },
+    {
+      "id": "snyk-ecr-auth-method",
+      "knowledge": "stable",
+      "prompt": "When Snyk Container integrates with a private AWS ECR registry, what authentication mechanism does it use to access the images? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)iam.{0,15}role"
+      },
+      "source": "plugins/security/skills/snyk/SKILL.md - Registry integration: AWS ECR: IAM role-based access"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

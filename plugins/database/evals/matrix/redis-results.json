@@ -1,0 +1,55 @@
+{
+  "skill": "redis",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "redis-8-listpack-threshold-change",
+      "knowledge": "recent",
+      "prompt": "In Redis 8.0, the default hash-max-listpack-entries threshold changed from what value to what value? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128",
+          "256"
+        ]
+      },
+      "source": "plugins/database/skills/redis/references/versions/8.0.md - Encoding threshold changes: hash-max-listpack-entries 128 -> 256 (list, set, and zset listpack thresholds change the same way)"
+    },
+    {
+      "id": "redis-hash-field-ttl-memory-overhead",
+      "knowledge": "recent",
+      "prompt": "In Redis, giving a hash field an expiration with HEXPIRE adds roughly how many extra bytes of memory overhead per expiring field for the expiration metadata? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16"
+        ]
+      },
+      "source": "plugins/database/skills/redis/references/versions/7.4.md - Hash Field Expiration > Internal implementation: memory overhead is approximately 16 bytes per expiring field"
+    },
+    {
+      "id": "redis-cluster-hash-slots",
+      "knowledge": "stable",
+      "prompt": "How many hash slots does Redis Cluster use to distribute keys across master nodes? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16384"
+        ]
+      },
+      "source": "plugins/database/skills/redis/SKILL.md - Clustering Architecture: 16,384 hash slots distributed across master nodes"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

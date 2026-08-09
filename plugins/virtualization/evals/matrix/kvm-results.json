@@ -1,0 +1,50 @@
+{
+  "skill": "kvm",
+  "plugin": "virtualization",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "kvm-numa-penalty",
+      "knowledge": "recent",
+      "prompt": "In KVM and libvirt, when a VM's vCPU count exceeds a single NUMA node's core count and the VM ends up spanning multiple NUMA nodes, roughly what memory latency penalty results? Answer concisely with a percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "30.{0,6}40"
+      },
+      "source": "plugins/virtualization/skills/kvm/SKILL.md - Common Pitfalls #5: over-allocating vCPUs beyond NUMA node causes 30-40% memory latency penalty"
+    },
+    {
+      "id": "kvm-rhel9-daemon",
+      "knowledge": "stable",
+      "prompt": "On RHEL 9 and newer, and on Fedora 36 and newer, which modular libvirt daemon is the default for managing KVM and QEMU, replacing the older monolithic libvirtd? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "virtqemud"
+        ]
+      },
+      "source": "plugins/virtualization/skills/kvm/SKILL.md - libvirt Management table: virtqemud is the modular daemon, default on RHEL 9+, Fedora 36+"
+    },
+    {
+      "id": "kvm-hugepage-threshold",
+      "knowledge": "stable",
+      "prompt": "In KVM and libvirt performance tuning guidance, at what minimum VM memory size do 1 GB hugepages start providing a significant benefit? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\+?\\s*gb"
+      },
+      "source": "plugins/virtualization/skills/kvm/SKILL.md - Common Pitfalls #6: VMs with 8+ GB RAM benefit significantly from 1 GB hugepages"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

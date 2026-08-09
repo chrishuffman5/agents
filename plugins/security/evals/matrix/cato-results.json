@@ -1,0 +1,48 @@
+{
+  "skill": "cato",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cato-founding-year",
+      "knowledge": "stable",
+      "prompt": "In what year was Cato Networks founded, notably before Gartner coined the term SASE? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2015\\b"
+      },
+      "source": "plugins/security/skills/cato/SKILL.md - Single-Vendor SASE Philosophy: Cato Networks was founded (2015) before the term SASE was coined by Gartner"
+    },
+    {
+      "id": "cato-socket-x1700-throughput",
+      "knowledge": "recent",
+      "prompt": "What is the maximum throughput supported by the Cato Socket X1700 model for large sites? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*gbps"
+      },
+      "source": "plugins/security/skills/cato/SKILL.md - Cato Socket, Socket models: X1700: Large sites (up to 1 Gbps)"
+    },
+    {
+      "id": "cato-failover-time",
+      "knowledge": "recent",
+      "prompt": "With Cato Socket active-active dual WAN bonding, how fast does failover occur when one link degrades? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(sub[- ]?second|<\\s*1\\s*second|less than 1 second)"
+      },
+      "source": "plugins/security/skills/cato/SKILL.md - Last-Mile Optimization: Failover < 1 second with active-active bonding (vs. BGP convergence of 30-90 seconds)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,55 @@
+{
+  "skill": "ping-identity",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ping-identity-ports",
+      "knowledge": "recent",
+      "prompt": "In a typical PingFederate deployment diagram, what two TCP ports are shown for the federation runtime versus the administrative console? Answer concisely with both port numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9031",
+          "9999"
+        ]
+      },
+      "source": "plugins/security/skills/ping-identity/SKILL.md - Architecture diagram: PingFederate runtime port 9031, Admin Console port 9999"
+    },
+    {
+      "id": "ping-identity-davinci-connectors",
+      "knowledge": "recent",
+      "prompt": "Roughly how many connectors does Ping Identity's DaVinci no-code orchestration platform offer for building identity journeys? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)200\\+?"
+      },
+      "source": "plugins/security/skills/ping-identity/SKILL.md - DaVinci Connectors (200+)"
+    },
+    {
+      "id": "ping-identity-protocols",
+      "knowledge": "stable",
+      "prompt": "Name at least three of the federation and authorization protocols that PingFederate supports out of the box. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SAML 2.0",
+          "OIDC",
+          "OAuth 2.0"
+        ]
+      },
+      "source": "plugins/security/skills/ping-identity/SKILL.md - PingFederate key capabilities: SAML 2.0, OIDC, OAuth 2.0, WS-Federation, WS-Trust"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

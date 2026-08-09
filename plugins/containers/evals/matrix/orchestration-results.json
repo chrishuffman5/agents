@@ -1,0 +1,266 @@
+{
+  "skill": "orchestration",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 132,
+  "prompts": [
+    {
+      "id": "orchestration-aks-free-sla",
+      "knowledge": "stable",
+      "prompt": "For Azure AKS, what SLA percentage applies to the free control plane tier, compared to the standard paid tier's SLA? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "99.5",
+          "99.95"
+        ]
+      },
+      "source": "plugins/containers/skills/orchestration/SKILL.md - AKS control plane SLA 99.95% (free tier: 99.5%)"
+    },
+    {
+      "id": "orchestration-k3s-size",
+      "knowledge": "stable",
+      "prompt": "Among the lightweight Kubernetes distributions compared for edge use, which one ships as a single binary under 100 megabytes with SQLite as its default datastore? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bK3s\\b"
+      },
+      "source": "plugins/containers/skills/orchestration/SKILL.md - K3s | <100MB | SQLite | Edge, IoT, dev"
+    },
+    {
+      "id": "orchestration-nap-aks-timing",
+      "knowledge": "recent",
+      "prompt": "In comparisons of managed Kubernetes node autoscaling, when is Karpenter-based Node Auto Provisioning expected to reach general availability on Azure AKS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026"
+        ]
+      },
+      "source": "plugins/containers/skills/orchestration/SKILL.md - Karpenter (NAP, GA 2026) or CA for AKS node autoscaling"
+    },
+    {
+      "id": "orchestration-airflow-scaling-model",
+      "knowledge": "stable",
+      "prompt": "When comparing orchestration platforms, is Apache Airflow's scalability model characterized as horizontal or vertical? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bhorizontal\\b"
+      },
+      "source": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix: Airflow Scalability = Horizontal (Celery, Kubernetes, or edge executors)."
+    },
+    {
+      "id": "orchestration-ssis-scaling-model",
+      "knowledge": "stable",
+      "prompt": "When comparing orchestration platforms, is SSIS scalability characterized as horizontal or vertical scaling? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bvertical\\b"
+      },
+      "source": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix: SSIS Scalability = Vertical (scale-up server), limited SSIS Scale Out."
+    },
+    {
+      "id": "orchestration-airflow-eol",
+      "knowledge": "recent",
+      "prompt": "In orchestration tool comparisons, Airflow 2.x is noted as reaching end of life in which month and year? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2026"
+        ]
+      },
+      "source": "plugins/etl/skills/orchestration/SKILL.md - Comparison Matrix Version row: Airflow 2.x (EOL April 2026), 3.x (current)."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 13922,
+      "meanTokensOut": 351,
+      "totalCostUsd": 1.1195,
+      "costPerCorrect": 0.1399
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 3,
+      "accuracy": 50.0,
+      "meanWallMs": 12967,
+      "meanTokensOut": 228,
+      "totalCostUsd": 0.4323,
+      "costPerCorrect": 0.1441
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 11704,
+        "meanTokensOut": 458,
+        "totalCostUsd": 0.965,
+        "costPerCorrect": 0.1608
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 10272,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2168,
+        "costPerCorrect": 0.1084
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18358,
+        "meanTokensOut": 137,
+        "totalCostUsd": 0.1544,
+        "costPerCorrect": 0.0772
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 15662,
+        "meanTokensOut": 200,
+        "totalCostUsd": 0.2155,
+        "costPerCorrect": 0.2155
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 11704,
+        "meanTokensOut": 458,
+        "totalCostUsd": 0.965,
+        "costPerCorrect": 0.1608
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 10272,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2168,
+        "costPerCorrect": 0.1084
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18358,
+        "meanTokensOut": 137,
+        "totalCostUsd": 0.1544,
+        "costPerCorrect": 0.0772
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 15662,
+        "meanTokensOut": 200,
+        "totalCostUsd": 0.2155,
+        "costPerCorrect": 0.2155
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 10272,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2168,
+        "costPerCorrect": 0.1084
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6927,
+        "meanTokensOut": 166,
+        "totalCostUsd": 0.4011,
+        "costPerCorrect": 0.1337
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16482,
+        "meanTokensOut": 749,
+        "totalCostUsd": 0.5639,
+        "costPerCorrect": 0.188
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 15662,
+        "meanTokensOut": 200,
+        "totalCostUsd": 0.2155,
+        "costPerCorrect": 0.2155
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 18358,
+        "meanTokensOut": 137,
+        "totalCostUsd": 0.1544,
+        "costPerCorrect": 0.0772
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

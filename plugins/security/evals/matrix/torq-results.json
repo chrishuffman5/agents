@@ -1,0 +1,52 @@
+{
+  "skill": "torq",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "torq-integration-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many native, pre-built integrations does Torq's marketplace offer for connecting to SIEM, EDR, cloud, and ticketing tools? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b200\\+?\\b"
+      },
+      "source": "plugins/security/skills/torq/SKILL.md - Core Expertise intro and Integration Patterns: 200+ native integrations."
+    },
+    {
+      "id": "torq-soc-copilot-name",
+      "knowledge": "recent",
+      "prompt": "What does Torq call its AI-powered assistant that analyzes incoming alerts, generates case summaries, and recommends response actions to analysts? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SOC Copilot"
+        ]
+      },
+      "source": "plugins/security/skills/torq/SKILL.md - SOC Copilot section describes the AI-powered assistant integrated into the platform."
+    },
+    {
+      "id": "torq-hyperautomation-term",
+      "knowledge": "stable",
+      "prompt": "What term does Torq use to describe its overall automation philosophy, emphasizing AI-assisted end-to-end SOC automation rather than traditional playbook-based SOAR? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "hyperautomation"
+        ]
+      },
+      "source": "plugins/security/skills/torq/SKILL.md - Platform note: Torq positions itself as a hyperautomation platform."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

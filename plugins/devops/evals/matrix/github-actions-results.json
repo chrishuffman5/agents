@@ -1,0 +1,48 @@
+{
+  "skill": "github-actions",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "github-actions-reusable-nesting",
+      "knowledge": "recent",
+      "prompt": "In GitHub Actions, reusable workflows can call other reusable workflows. What is the maximum nesting depth allowed for these chained workflow_call references? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\b|\\bfour\\b"
+      },
+      "source": "plugins/devops/skills/github-actions/references/architecture.md - Limitations of Reusable Workflows lists max 4 levels of nesting"
+    },
+    {
+      "id": "github-actions-runner-cost",
+      "knowledge": "stable",
+      "prompt": "For GitHub-hosted Actions runners, using the 1x baseline cost of Linux runner minutes, what is the cost multiplier for macOS runner minutes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10x|10 x|ten times)"
+      },
+      "source": "plugins/devops/skills/github-actions/references/best-practices.md - Cost Optimization section states macOS costs 10x"
+    },
+    {
+      "id": "github-actions-cache-size",
+      "knowledge": "stable",
+      "prompt": "In GitHub Actions caching, what is the maximum size allowed for a single cache entry? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10\\s*gb"
+      },
+      "source": "plugins/devops/skills/github-actions/references/diagnostics.md - Cache Size Limits: individual cache entry max 10 GB"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

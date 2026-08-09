@@ -1,0 +1,48 @@
+{
+  "skill": "aws-vpc",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-vpc-tgw-attachments",
+      "knowledge": "recent",
+      "prompt": "How many attachments can a single AWS Transit Gateway support? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "5,?000"
+      },
+      "source": "plugins/networking/skills/aws-vpc/SKILL.md - Up to 5,000 attachments per TGW"
+    },
+    {
+      "id": "aws-vpc-cross-az-cost",
+      "knowledge": "recent",
+      "prompt": "In AWS, what is the data transfer charge per GB for traffic crossing Availability Zones within the same region, charged in each direction? Answer concisely with the amount.",
+      "expected": {
+        "type": "regex",
+        "value": "0\\.01"
+      },
+      "source": "plugins/networking/skills/aws-vpc/SKILL.md - Every cross-AZ packet incurs 0.01 USD/GB each direction (0.02 USD/GB round trip)"
+    },
+    {
+      "id": "aws-vpc-sg-stateful",
+      "knowledge": "stable",
+      "prompt": "In an AWS VPC, are Security Groups stateful or stateless with respect to return traffic? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)stateful"
+      },
+      "source": "plugins/networking/skills/aws-vpc/SKILL.md - Security Groups: Stateful packet filtering at the ENI level"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

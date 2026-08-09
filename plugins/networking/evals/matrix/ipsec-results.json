@@ -1,0 +1,52 @@
+{
+  "skill": "ipsec",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ipsec-cnsa-pfs-min-group",
+      "knowledge": "recent",
+      "prompt": "For CNSA 1.0 compliant IPsec IKEv2 deployments today, what is the minimum Diffie-Hellman group required for Perfect Forward Secrecy? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Group 20"
+        ]
+      },
+      "source": "plugins/networking/skills/ipsec/references/best-practices.md - CNSA 1.0 DH Group 20 (ECP-384) minimum, PFS always enabled at Group 20"
+    },
+    {
+      "id": "ipsec-cnsa2-pqc-algorithm",
+      "knowledge": "recent",
+      "prompt": "Which post-quantum key exchange algorithm does CNSA 2.0 specify for IPsec IKEv2, used hybrid with ECP-384 during the transition period? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ML-KEM"
+        ]
+      },
+      "source": "plugins/networking/skills/ipsec/references/best-practices.md - CNSA 2.0 key exchange is ML-KEM-1024 (FIPS 203), hybrid with ECP-384 during transition"
+    },
+    {
+      "id": "ipsec-natt-udp-ports",
+      "knowledge": "stable",
+      "prompt": "Which two UDP ports need to be open through firewalls and NAT devices for IPsec IKEv2 with NAT Traversal enabled? Answer concisely with both port numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b500\\b)(?=.*\\b4500\\b)"
+      },
+      "source": "plugins/networking/skills/ipsec/SKILL.md - reachability requires UDP/500 and UDP/4500 open for NAT-T"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

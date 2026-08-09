@@ -1,0 +1,48 @@
+{
+  "skill": "firewall",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "firewall-zone-count-guideline",
+      "knowledge": "recent",
+      "prompt": "As a rule of thumb for minimizing zone sprawl, roughly how many security zones should cover most enterprise firewall deployments? Answer concisely with a number range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*(-|to)\\s*8"
+      },
+      "source": "plugins/networking/skills/firewall/SKILL.md - Design Rules state minimize zone sprawl, 5-8 zones covers most deployments"
+    },
+    {
+      "id": "firewall-panos-nat-prenat",
+      "knowledge": "recent",
+      "prompt": "On PAN-OS, when you write a security policy rule for a destination NAT scenario, should the destination address in that rule match the pre-NAT public IP or the post-NAT private IP? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)pre-?nat"
+      },
+      "source": "plugins/networking/skills/firewall/references/concepts.md - on PAN-OS security policy matches pre-NAT IP addresses but post-NAT zones"
+    },
+    {
+      "id": "firewall-stateful-return-traffic",
+      "knowledge": "stable",
+      "prompt": "In a stateful firewall, once a session is established and permitted, does the return traffic need its own explicit matching rule? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/networking/skills/firewall/references/concepts.md - return traffic is automatically permitted based on session state, no explicit rule needed for replies"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

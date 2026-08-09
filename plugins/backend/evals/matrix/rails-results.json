@@ -1,0 +1,52 @@
+{
+  "skill": "rails",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rails-after-commit-purpose",
+      "knowledge": "stable",
+      "prompt": "In Rails ActiveRecord callbacks, why would you use after_commit rather than after_save to trigger an external API call or send an email? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(commit|transaction)"
+      },
+      "source": "plugins/backend/skills/rails/SKILL.md - Use after_commit for side effects (emails, jobs, external APIs) to ensure the transaction has committed."
+    },
+    {
+      "id": "rails-destroy-status-code",
+      "knowledge": "recent",
+      "prompt": "When a Rails controller destroy action redirects after deleting a record, which HTTP status code should it use for correct Turbo compatibility? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "303"
+        ]
+      },
+      "source": "plugins/backend/skills/rails/SKILL.md - redirect_to articles_path, status: :see_other # 303 for Turbo"
+    },
+    {
+      "id": "rails-8-ruby-minimum",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Ruby version required to run Rails 8.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.2"
+        ]
+      },
+      "source": "plugins/backend/skills/rails/SKILL.md - Ruby Version Requirements table: Rails 8.0.x Minimum Ruby 3.2.0"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

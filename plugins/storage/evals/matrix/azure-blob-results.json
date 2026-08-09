@@ -1,0 +1,53 @@
+{
+  "skill": "azure-blob",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-blob-archive-tier",
+      "knowledge": "stable",
+      "prompt": "In Azure Blob Storage, if a blob sits in the Archive access tier, what is the minimum retention period in days, and roughly how long can rehydration retrieval take? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "180",
+          "15"
+        ]
+      },
+      "source": "plugins/storage/skills/azure-blob/SKILL.md - Access Tiers table: Archive min retention 180 days, retrieval up to 15 hours"
+    },
+    {
+      "id": "azure-blob-ra-gzrs",
+      "knowledge": "stable",
+      "prompt": "Which Azure Storage redundancy option keeps six copies of data spread across three availability zones plus a paired region, while also allowing reads from the secondary region? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "RA-GZRS"
+        ]
+      },
+      "source": "plugins/storage/skills/azure-blob/SKILL.md - Redundancy table: RA-GZRS = 6 copies, 3 zones + paired region, secondary reads Yes"
+    },
+    {
+      "id": "azure-blob-adls-requirement",
+      "knowledge": "recent",
+      "prompt": "In Azure Storage, what capability must be enabled on a storage account before you can use NFS 3.0 or SFTP access? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(hierarchical namespace|adls gen2|\\bhns\\b)"
+      },
+      "source": "plugins/storage/skills/azure-blob/SKILL.md - ADLS Gen2 section: Enabled by hierarchical namespace (HNS); required for NFS 3.0 and SFTP"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

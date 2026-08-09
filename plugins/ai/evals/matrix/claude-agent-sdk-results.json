@@ -1,0 +1,53 @@
+{
+  "skill": "claude-agent-sdk",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "claude-agent-sdk-node-python-min",
+      "knowledge": "stable",
+      "prompt": "What are the minimum Node.js and Python versions required to use the Claude Agent SDK? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "18",
+          "3.10"
+        ]
+      },
+      "source": "plugins/ai/skills/claude-agent-sdk/SKILL.md - Prerequisites: Node.js 18+ or Python 3.10+"
+    },
+    {
+      "id": "claude-agent-sdk-v2-session-removed",
+      "knowledge": "recent",
+      "prompt": "The experimental V2 session API in the Claude Agent SDK, using createSession with send and stream, was removed as of which TypeScript SDK version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0.3.142"
+        ]
+      },
+      "source": "plugins/ai/skills/claude-agent-sdk/SKILL.md - removed in TypeScript Agent SDK 0.3.142"
+    },
+    {
+      "id": "claude-agent-sdk-capacity-disk",
+      "knowledge": "recent",
+      "prompt": "When capacity planning to host Claude Agent SDK sessions, what starting resource allocation per agent is recommended for RAM, disk, and CPU? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*gi?b.{0,40}5\\s*gi?b.{0,40}1\\s*cpu"
+      },
+      "source": "plugins/ai/skills/claude-agent-sdk/SKILL.md - Start capacity planning at 1 GiB RAM, 5 GiB disk, 1 CPU per agent"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

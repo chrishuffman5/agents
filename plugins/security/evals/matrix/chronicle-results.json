@@ -1,0 +1,48 @@
+{
+  "skill": "chronicle",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "chronicle-pricing-model",
+      "knowledge": "stable",
+      "prompt": "How does Chronicle's (Google Security Operations) pricing model fundamentally differ from most traditional SIEM pricing? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)flat.*per.?user"
+      },
+      "source": "plugins/security/skills/chronicle/SKILL.md - Architecture note: unique pricing model (flat per-user pricing, not ingestion-based)"
+    },
+    {
+      "id": "chronicle-retroactive-window",
+      "knowledge": "recent",
+      "prompt": "Chronicle's retroactive rule matching lets analysts hunt across at least how many months of historical data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "12\\+?\\s*month"
+      },
+      "source": "plugins/security/skills/chronicle/SKILL.md - Retroactive Rule Matching: Historical search, search across 12+ months of retained data"
+    },
+    {
+      "id": "chronicle-yaral-version",
+      "knowledge": "recent",
+      "prompt": "What version number of YARA-L, Chronicle's detection rule language, is currently used? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2\\.0\\b"
+      },
+      "source": "plugins/security/skills/chronicle/SKILL.md - Core Expertise: YARA-L 2.0 is Chronicle's detection rule language"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

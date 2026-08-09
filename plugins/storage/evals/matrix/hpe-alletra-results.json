@@ -1,0 +1,56 @@
+{
+  "skill": "hpe-alletra",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "hpe-alletra-max-iops",
+      "knowledge": "stable",
+      "prompt": "For the HPE Alletra 9000, what maximum IOPS figure is quoted for a 4-node 9080 configuration? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.1M"
+        ]
+      },
+      "source": "plugins/storage/skills/hpe-alletra/SKILL.md - Critical Numbers table: Max IOPS 2.1M (9000, 4-node 9080)"
+    },
+    {
+      "id": "hpe-alletra-csi-hostname-limit",
+      "knowledge": "recent",
+      "prompt": "When using the HPE CSI Driver for Kubernetes, what is the maximum number of characters allowed in a node hostname? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "27"
+        ]
+      },
+      "source": "plugins/storage/skills/hpe-alletra/SKILL.md - Critical Numbers table: K8s hostname limit 27 characters (CSI Driver)"
+    },
+    {
+      "id": "hpe-alletra-partnerships-discontinued",
+      "knowledge": "recent",
+      "prompt": "In November 2025, HPE discontinued several third-party storage software partnerships to focus on its own storage IP. Which partnerships were dropped? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Qumulo",
+          "Scality",
+          "WEKA"
+        ]
+      },
+      "source": "plugins/storage/skills/hpe-alletra/SKILL.md - Strategic Direction: In November 2025, HPE discontinued Qumulo, Scality, and WEKA partnerships"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

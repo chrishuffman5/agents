@@ -1,0 +1,48 @@
+{
+  "skill": "efficientip",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "efficientip-dnsblast-virtual-qps",
+      "knowledge": "recent",
+      "prompt": "On virtual instances, not dedicated hardware appliances, roughly what queries-per-second figure does EfficientIP cite for its DNS Blast engine? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(million|m\\b)"
+      },
+      "source": "plugins/networking/skills/efficientip/SKILL.md - Performance: tens of millions QPS on dedicated hardware; 2M+ QPS on virtual instances"
+    },
+    {
+      "id": "efficientip-guardian-sizing",
+      "knowledge": "recent",
+      "prompt": "When sizing EfficientIP appliances for DNS Guardian protection, what multiple of normal query volume should you provision for to absorb volumetric DNS attacks? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "10\\s*x"
+      },
+      "source": "plugins/networking/skills/efficientip/SKILL.md - Size appliances for 10x normal QPS to handle volumetric attacks"
+    },
+    {
+      "id": "efficientip-ha-model",
+      "knowledge": "stable",
+      "prompt": "Does EfficientIP SOLIDserver use a distributed Grid model like Infoblox, or a primary and secondary appliance pair model for high availability? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)primary.{0,20}secondary"
+      },
+      "source": "plugins/networking/skills/efficientip/SKILL.md - Primary/Secondary appliance pairs with replicated database; simpler topology than Infoblox Grid"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

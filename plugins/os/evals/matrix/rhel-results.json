@@ -1,0 +1,230 @@
+{
+  "skill": "rhel",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rhel-rpm-database-format",
+      "knowledge": "recent",
+      "prompt": "Which database format stores the RPM package database on RHEL 9 and later, replacing the format used on RHEL 8? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SQLite"
+        ]
+      },
+      "source": "plugins/os/skills/rhel/SKILL.md - dnf / rpm Package Management: RPM database location: BerkeleyDB in RHEL 8, SQLite in RHEL 9+."
+    },
+    {
+      "id": "rhel-cockpit-port",
+      "knowledge": "stable",
+      "prompt": "Which TCP port does the Cockpit web console listen on by default for browser based RHEL administration? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b9090\\b"
+      },
+      "source": "plugins/os/skills/rhel/SKILL.md - Cockpit Web Console: Browser-based administration on port 9090."
+    },
+    {
+      "id": "rhel-crypto-policy-sha1-tls",
+      "knowledge": "recent",
+      "prompt": "Under RHEL 9's default system-wide crypto policy, are SHA-1 signatures and TLS 1.0/1.1 still permitted for legacy applications? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|disab|does not|not (permit|allow))"
+      },
+      "source": "plugins/os/skills/rhel/SKILL.md - Common Pitfalls #4: RHEL 9 disables SHA-1 signatures, TLS 1.0/1.1, and DES by default."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 12960,
+      "meanTokensOut": 231,
+      "totalCostUsd": 1.2211,
+      "costPerCorrect": 0.1357
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 9213,
+      "meanTokensOut": 106,
+      "totalCostUsd": 0.2708,
+      "costPerCorrect": 0.0451
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 8581,
+        "meanTokensOut": 224,
+        "totalCostUsd": 0.9711,
+        "costPerCorrect": 0.1618
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6519,
+        "meanTokensOut": 93,
+        "totalCostUsd": 0.1593,
+        "costPerCorrect": 0.0531
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21719,
+        "meanTokensOut": 246,
+        "totalCostUsd": 0.2499,
+        "costPerCorrect": 0.0833
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11907,
+        "meanTokensOut": 120,
+        "totalCostUsd": 0.1114,
+        "costPerCorrect": 0.0371
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 8581,
+        "meanTokensOut": 224,
+        "totalCostUsd": 0.9711,
+        "costPerCorrect": 0.1618
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6519,
+        "meanTokensOut": 93,
+        "totalCostUsd": 0.1593,
+        "costPerCorrect": 0.0531
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21719,
+        "meanTokensOut": 246,
+        "totalCostUsd": 0.2499,
+        "costPerCorrect": 0.0833
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11907,
+        "meanTokensOut": 120,
+        "totalCostUsd": 0.1114,
+        "costPerCorrect": 0.0371
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6519,
+        "meanTokensOut": 93,
+        "totalCostUsd": 0.1593,
+        "costPerCorrect": 0.0531
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 5730,
+        "meanTokensOut": 91,
+        "totalCostUsd": 0.4274,
+        "costPerCorrect": 0.1425
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11432,
+        "meanTokensOut": 357,
+        "totalCostUsd": 0.5437,
+        "costPerCorrect": 0.1812
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11907,
+        "meanTokensOut": 120,
+        "totalCostUsd": 0.1114,
+        "costPerCorrect": 0.0371
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21719,
+        "meanTokensOut": 246,
+        "totalCostUsd": 0.2499,
+        "costPerCorrect": 0.0833
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

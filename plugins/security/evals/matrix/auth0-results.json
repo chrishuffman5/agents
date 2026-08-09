@@ -1,0 +1,53 @@
+{
+  "skill": "auth0",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "auth0-mgmt-api-rate-limit",
+      "knowledge": "stable",
+      "prompt": "What is the Auth0 Management API rate limit, in requests per second, that you should plan bulk operations around? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b50\\b"
+      },
+      "source": "plugins/security/skills/auth0/SKILL.md - Common Pitfalls: Management API rate limit is 50 requests/second"
+    },
+    {
+      "id": "auth0-fga-basis",
+      "knowledge": "recent",
+      "prompt": "Auth0 Fine-Grained Authorization, known as Okta FGA, is based on which open source project and which Google authorization model, respectively? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OpenFGA",
+          "Zanzibar"
+        ]
+      },
+      "source": "plugins/security/skills/auth0/SKILL.md - Fine-Grained Authorization (FGA): Okta FGA (based on OpenFGA/Google Zanzibar)"
+    },
+    {
+      "id": "auth0-log-code-limit-wc",
+      "knowledge": "recent",
+      "prompt": "In Auth0 tenant logs, which short event code indicates an account was blocked specifically because too many failed logins occurred for that account, as distinct from an IP-based block? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "limit_wc"
+        ]
+      },
+      "source": "plugins/security/skills/auth0/SKILL.md - Critical events to monitor: limit_wc - Blocked account due to too many failed logins"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "sca",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sca-cvss-severity-bands",
+      "knowledge": "stable",
+      "prompt": "Using the standard CVSS v3.1 severity bands, what score range is classified as Critical, and what score range is classified as Low? Answer concisely with both numeric ranges.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9.0",
+          "10.0",
+          "0.1",
+          "3.9"
+        ]
+      },
+      "source": "plugins/security/skills/sca/SKILL.md - CVSS score ranges: Critical 9.0-10.0, High 7.0-8.9, Medium 4.0-6.9, Low 0.1-3.9"
+    },
+    {
+      "id": "sca-sbom-executive-order",
+      "knowledge": "recent",
+      "prompt": "Which numbered US Executive Order, issued in 2021, first required federal agencies to require software bills of materials from software vendors? Answer concisely with the order number and year.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "14028",
+          "2021"
+        ]
+      },
+      "source": "plugins/security/skills/sca/SKILL.md - US Executive Order 14028 (2021): Federal agencies must require SBOMs from software vendors"
+    },
+    {
+      "id": "sca-critical-sla",
+      "knowledge": "recent",
+      "prompt": "In a risk-based dependency vulnerability remediation program, what is the typical SLA window for fixing a critical CVSS 9 or higher vulnerability that also has a known public exploit? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)24\\s*(-|to)\\s*48\\s*hours?"
+      },
+      "source": "plugins/security/skills/sca/SKILL.md - Typical SLA guidelines: Critical (CVSS 9+) + public exploit: 24-48 hours"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

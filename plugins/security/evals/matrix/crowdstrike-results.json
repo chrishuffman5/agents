@@ -1,0 +1,52 @@
+{
+  "skill": "crowdstrike",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "crowdstrike-overwatch-sla",
+      "knowledge": "recent",
+      "prompt": "What is CrowdStrike OverWatch's stated response SLA for notifying customers after its managed threat hunters confirm malicious activity? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(1\\s*minute|one\\s*minute)"
+      },
+      "source": "plugins/security/skills/crowdstrike/SKILL.md - OverWatch (Managed Threat Hunting): Response SLA: Notification within 1 minute of confirmed malicious activity"
+    },
+    {
+      "id": "crowdstrike-sensor-size",
+      "knowledge": "recent",
+      "prompt": "Approximately how large, in megabytes, is the CrowdStrike Falcon sensor agent installed on endpoints? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)25\\s*mb"
+      },
+      "source": "plugins/security/skills/crowdstrike/SKILL.md - Core components: Falcon Sensor - Lightweight agent (~25MB) deployed on endpoints"
+    },
+    {
+      "id": "crowdstrike-rtr-session-types",
+      "knowledge": "stable",
+      "prompt": "CrowdStrike Real Time Response offers three tiers of session access. Name all three, from most restricted read-only access to full administrative access. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Responder",
+          "Active Responder",
+          "Admin"
+        ]
+      },
+      "source": "plugins/security/skills/crowdstrike/SKILL.md - RTR Session Types: Responder (read-only), Active Responder (read-write), Admin (full)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "arista-eos",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "arista-eos-cluster-load-balancing",
+      "knowledge": "recent",
+      "prompt": "Arista EOS 4.35 added a Cluster Load Balancing feature for optimizing RoCE traffic between GPU servers in AI clusters. Which switch platform family does this feature require? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7060DX4"
+        ]
+      },
+      "source": "plugins/networking/skills/arista-eos/references/versions/4.35.md - Cluster Load Balancing requires compatible 7060DX4 or similar platforms"
+    },
+    {
+      "id": "arista-eos-4-30-eoss",
+      "knowledge": "recent",
+      "prompt": "For Arista EOS, when does the 4.30.x release train reach end of software support? Answer concisely with the date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)april\\s*14,?\\s*2026"
+      },
+      "source": "plugins/networking/skills/arista-eos/references/versions/4.35.md - Running 4.30.x: Upgrade immediately, EoSS April 14, 2026"
+    },
+    {
+      "id": "arista-eos-vxlan-mtu",
+      "knowledge": "stable",
+      "prompt": "On an Arista EOS VXLAN fabric, what MTU should you configure on spine-leaf and MLAG peer-link interfaces to account for VXLAN encapsulation overhead? Answer concisely with the number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9214"
+        ]
+      },
+      "source": "plugins/networking/skills/arista-eos/SKILL.md - MTU not 9214: VXLAN adds 50 bytes, all spine-leaf and peer-link interfaces must be MTU 9214"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

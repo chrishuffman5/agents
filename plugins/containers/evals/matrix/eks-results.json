@@ -1,0 +1,235 @@
+{
+  "skill": "eks",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "eks-karpenter-version",
+      "knowledge": "recent",
+      "prompt": "What is the current major and minor version line of Karpenter used for node autoscaling on Amazon EKS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.10"
+        ]
+      },
+      "source": "plugins/containers/skills/eks/SKILL.md - Karpenter current: v1.10.x"
+    },
+    {
+      "id": "eks-extended-support-cost",
+      "knowledge": "stable",
+      "prompt": "Once an EKS cluster moves past standard version support into extended support, what additional hourly charge does AWS bill per cluster? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "0.60"
+        ]
+      },
+      "source": "plugins/containers/skills/eks/SKILL.md - Version support: 14 months standard, 12 months extended ($0.60/hr)"
+    },
+    {
+      "id": "eks-fargate-pod-limit",
+      "knowledge": "stable",
+      "prompt": "On Amazon EKS Fargate, what are the maximum vCPU and memory a single pod can be allocated? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4",
+          "30"
+        ]
+      },
+      "source": "plugins/containers/skills/eks/SKILL.md - Fargate limitations: Max 4 vCPU, 30 GB memory per pod"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 13203,
+      "meanTokensOut": 407,
+      "totalCostUsd": 1.274,
+      "costPerCorrect": 0.1592
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 2,
+      "accuracy": 33.3,
+      "meanWallMs": 11283,
+      "meanTokensOut": 188,
+      "totalCostUsd": 0.3792,
+      "costPerCorrect": 0.1896
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13399,
+        "meanTokensOut": 482,
+        "totalCostUsd": 1.0064,
+        "costPerCorrect": 0.1677
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7934,
+        "meanTokensOut": 205,
+        "totalCostUsd": 0.2116,
+        "costPerCorrect": 0.2116
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12812,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2676,
+        "costPerCorrect": 0.1338
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14631,
+        "meanTokensOut": 172,
+        "totalCostUsd": 0.1676,
+        "costPerCorrect": 0.1676
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13399,
+        "meanTokensOut": 482,
+        "totalCostUsd": 1.0064,
+        "costPerCorrect": 0.1677
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7934,
+        "meanTokensOut": 205,
+        "totalCostUsd": 0.2116,
+        "costPerCorrect": 0.2116
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12812,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2676,
+        "costPerCorrect": 0.1338
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14631,
+        "meanTokensOut": 172,
+        "totalCostUsd": 0.1676,
+        "costPerCorrect": 0.1676
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7934,
+        "meanTokensOut": 205,
+        "totalCostUsd": 0.2116,
+        "costPerCorrect": 0.2116
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7745,
+        "meanTokensOut": 153,
+        "totalCostUsd": 0.3939,
+        "costPerCorrect": 0.1313
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19054,
+        "meanTokensOut": 812,
+        "totalCostUsd": 0.6125,
+        "costPerCorrect": 0.2042
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 14631,
+        "meanTokensOut": 172,
+        "totalCostUsd": 0.1676,
+        "costPerCorrect": 0.1676
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12812,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.2676,
+        "costPerCorrect": 0.1338
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

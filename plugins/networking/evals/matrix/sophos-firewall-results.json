@@ -1,0 +1,52 @@
+{
+  "skill": "sophos-firewall",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sophos-firewall-v22-kernel",
+      "knowledge": "recent",
+      "prompt": "What Linux kernel version baseline does the Sophos Firewall v22 hardened kernel use? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.6"
+        ]
+      },
+      "source": "plugins/networking/skills/sophos-firewall/SKILL.md - v22 Specific Features: Hardened Kernel, Linux kernel 6.6+ (LTS)"
+    },
+    {
+      "id": "sophos-firewall-api-port",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the Sophos Firewall local WebAdmin API (APIController) use? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4444"
+        ]
+      },
+      "source": "plugins/networking/skills/sophos-firewall/SKILL.md - Local API: Base URL https://firewall-ip:4444/webconsole/APIController"
+    },
+    {
+      "id": "sophos-firewall-heartbeat-red",
+      "knowledge": "stable",
+      "prompt": "In Sophos Synchronized Security, what single-word color does the Security Heartbeat use to signal an active threat on an endpoint, triggering automatic network isolation? Answer in one word.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bred\\b"
+      },
+      "source": "plugins/networking/skills/sophos-firewall/SKILL.md - Security Heartbeat: Red (active threat) -- isolate endpoint"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

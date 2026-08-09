@@ -1,0 +1,48 @@
+{
+  "skill": "symantec-dlp",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "symantec-dlp-idm-threshold",
+      "knowledge": "recent",
+      "prompt": "For Symantec DLP's Indexed Document Matching document fingerprinting, roughly what percentage overlap with an indexed sensitive document is enough to trigger a partial-match detection? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10.{0,4}15"
+      },
+      "source": "plugins/security/skills/symantec-dlp/SKILL.md - IDM section: Detects partial matches, even 10-15% of a sensitive document triggers."
+    },
+    {
+      "id": "symantec-dlp-vml-examples",
+      "knowledge": "recent",
+      "prompt": "When training a Vector Machine Learning classification profile in Symantec DLP, what is the minimum recommended number of positive and negative example documents to upload before training? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b50\\+?\\b"
+      },
+      "source": "plugins/security/skills/symantec-dlp/SKILL.md - VML process: Upload positive examples (50+ documents), Upload negative examples (50+ non-sensitive similar documents)."
+    },
+    {
+      "id": "symantec-dlp-endpoint-sizing",
+      "knowledge": "stable",
+      "prompt": "As a rough sizing guideline, how many endpoints can a single Symantec DLP Endpoint Server typically support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5,?000"
+      },
+      "source": "plugins/security/skills/symantec-dlp/SKILL.md - Performance sizing: Endpoint Server, 1 server per ~5,000 endpoints (varies by incident volume)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

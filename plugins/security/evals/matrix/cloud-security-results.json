@@ -1,0 +1,52 @@
+{
+  "skill": "cloud-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cloud-security-cnapp-origin-year",
+      "knowledge": "recent",
+      "prompt": "In what year did Gartner coin the term CNAPP for the converged cloud security platform category? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2021\\b"
+      },
+      "source": "plugins/security/skills/cloud-security/references/concepts.md - CNAPP: Definition and History: Gartner coined CNAPP in 2021"
+    },
+    {
+      "id": "cloud-security-cspm-deployment",
+      "knowledge": "stable",
+      "prompt": "Does CSPM (Cloud Security Posture Management) typically require agents installed inside the cloud workloads it assesses, or does it work agentlessly? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)agentless"
+      },
+      "source": "plugins/security/skills/cloud-security/SKILL.md - CSPM vs. CWPP vs. CIEM: Works agentlessly by reading cloud APIs"
+    },
+    {
+      "id": "cloud-security-cis-benchmark-levels",
+      "knowledge": "recent",
+      "prompt": "What are the three levels of the CIS AWS Foundations Benchmark called, from basic to most stringent? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Level 1",
+          "Level 2",
+          "Level 3"
+        ]
+      },
+      "source": "plugins/security/skills/cloud-security/references/concepts.md - CIS Benchmarks: 3 levels (Level 1 basic, Level 2 enhanced, Level 3 high security)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

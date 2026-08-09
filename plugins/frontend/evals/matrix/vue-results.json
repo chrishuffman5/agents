@@ -1,0 +1,54 @@
+{
+  "skill": "vue",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vue-definemodel-macro",
+      "knowledge": "stable",
+      "prompt": "In Vue Single File Components, which compiler macro lets you set up two-way v-model binding without manually writing a separate prop and emit pair? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "defineModel"
+        ]
+      },
+      "source": "plugins/frontend/skills/vue/SKILL.md - Single-File Components: defineModel compiler macro"
+    },
+    {
+      "id": "vue-3.5-memory-reduction",
+      "knowledge": "recent",
+      "prompt": "Vue 3.5 shipped a new reactivity engine. By roughly what percentage did it cut memory usage? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "56"
+        ]
+      },
+      "source": "plugins/frontend/skills/vue/SKILL.md - Reactivity System: 56% memory reduction in the new engine"
+    },
+    {
+      "id": "vue-vapor-alien-signals-engine",
+      "knowledge": "recent",
+      "prompt": "Vue's Vapor Mode, in beta as of version 3.6, is built on which named reactivity engine? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Alien Signals"
+        ]
+      },
+      "source": "plugins/frontend/skills/vue/SKILL.md - Vapor Mode section: Uses the Alien Signals reactivity engine"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

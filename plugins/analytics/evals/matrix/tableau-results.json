@@ -1,0 +1,53 @@
+{
+  "skill": "tableau",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "tableau-semantics-ga",
+      "knowledge": "recent",
+      "prompt": "Since when has Tableau Semantics, the platform's semantic layer for consistent metric definitions, been generally available? Answer concisely with month and year.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "February",
+          "2025"
+        ]
+      },
+      "source": "plugins/analytics/skills/tableau/SKILL.md - AI and Insights: Tableau Semantics GA since February 2025."
+    },
+    {
+      "id": "tableau-uat-version",
+      "knowledge": "recent",
+      "prompt": "Starting in which Tableau version were Unified Access Tokens introduced for embedding authentication? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025.3"
+        ]
+      },
+      "source": "plugins/analytics/skills/tableau/SKILL.md - Embedding, Authentication Methods table: Unified Access Tokens (UATs) via Cloud Manager, version 2025.3+."
+    },
+    {
+      "id": "tableau-fixed-lod-filter-order",
+      "knowledge": "stable",
+      "prompt": "In Tableau, does a FIXED level-of-detail expression respect an ordinary dimension filter in the view unless that filter is promoted to a context filter? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|ignore|does not respect)"
+      },
+      "source": "plugins/analytics/skills/tableau/SKILL.md - Filter Interaction with LOD: FIXED ignores dimension filters unless a context filter is promoted."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

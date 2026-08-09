@@ -1,0 +1,51 @@
+{
+  "skill": "fortinac",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fortinac-ha-failover-timeout",
+      "knowledge": "recent",
+      "prompt": "In a default FortiNAC high-availability configuration example, what is the failover timeout value? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15\\s*seconds"
+      },
+      "source": "plugins/security/skills/fortinac/SKILL.md - HA Configuration example: Failover timeout: 15 seconds"
+    },
+    {
+      "id": "fortinac-deployment-modes",
+      "knowledge": "stable",
+      "prompt": "FortiNAC supports two primary enforcement deployment modes based on where the appliance sits relative to network traffic, aside from FortiGate-based enforcement. What are those two modes called? Answer concisely, naming both.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "In-line",
+          "Out-of-band"
+        ]
+      },
+      "source": "plugins/security/skills/fortinac/SKILL.md - Deployment modes: In-line, Out-of-band"
+    },
+    {
+      "id": "fortinac-ot-active-scanning",
+      "knowledge": "stable",
+      "prompt": "Should active Nmap-style port scanning be enabled by default for device discovery in OT or ICS network segments monitored by FortiNAC? Answer concisely, stating the recommended stance clearly.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|never|disable|should not)\\b"
+      },
+      "source": "plugins/security/skills/fortinac/SKILL.md - Common Pitfalls: Never enable Nmap scanning in OT/ICS networks without explicit approval from OT team"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

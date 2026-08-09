@@ -1,0 +1,48 @@
+{
+  "skill": "zeek",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "zeek-formerly-bro",
+      "knowledge": "stable",
+      "prompt": "Zeek, the open-source network analysis framework, was previously known by what name? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bbro\\b"
+      },
+      "source": "plugins/security/skills/zeek/SKILL.md - Zeek (formerly Bro), the open-source network analysis framework"
+    },
+    {
+      "id": "zeek-conn-state",
+      "knowledge": "stable",
+      "prompt": "In a Zeek conn.log record, what does a conn_state value of S0 indicate about that connection? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)no\\s*response"
+      },
+      "source": "plugins/security/skills/zeek/SKILL.md - conn_state (SF=normal close, S0=no response, REJ=rejected, RSTO=RST by originator, RSTR=RST by responder)"
+    },
+    {
+      "id": "zeek-kerberoasting",
+      "knowledge": "recent",
+      "prompt": "When hunting for Kerberoasting activity in Zeek kerberos.log, which cipher used in TGS service ticket requests is the key indicator? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)rc4-?hmac"
+      },
+      "source": "plugins/security/skills/zeek/SKILL.md - Kerberoasting detection: $2 == TGS && $4 == rc4-hmac, RC4 encryption for service tickets = Kerberoasting"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

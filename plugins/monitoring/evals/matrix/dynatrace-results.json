@@ -1,0 +1,48 @@
+{
+  "skill": "dynatrace",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dynatrace-host-units",
+      "knowledge": "recent",
+      "prompt": "In Dynatrace full-stack monitoring, how many Host Units does OneAgent consume when monitoring a host with 64 GB of RAM? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b8\\b"
+      },
+      "source": "plugins/monitoring/skills/dynatrace/SKILL.md - How to Approach Tasks number 3 and Common Pitfalls number 1, a 64 GB host consumes 8 Host Units in full-stack mode"
+    },
+    {
+      "id": "dynatrace-davis-deterministic",
+      "knowledge": "stable",
+      "prompt": "Is the causation logic behind Dynatrace Davis AI problem detection deterministic or based on probabilistic machine learning? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)determin"
+      },
+      "source": "plugins/monitoring/skills/dynatrace/SKILL.md - Davis AI section states Davis is deterministic, not probabilistic, using the Smartscape dependency graph for causation"
+    },
+    {
+      "id": "dynatrace-purepath-threshold",
+      "knowledge": "recent",
+      "prompt": "By default, what is the minimum method timing threshold that Dynatrace PurePath captures as contributing to latency? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*ms|1\\s*millisecond"
+      },
+      "source": "plugins/monitoring/skills/dynatrace/SKILL.md - PurePath section, method timings contributing to latency have a configurable threshold, default 1ms"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

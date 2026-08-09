@@ -1,0 +1,54 @@
+{
+  "skill": "integration",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "integration-talend-connector-count",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many connectors does Talend offer? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "900"
+        ]
+      },
+      "source": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: Talend 900+."
+    },
+    {
+      "id": "integration-nifi-connector-count",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many processors does Apache NiFi offer as its connector equivalent? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "source": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: NiFi 300+ processors."
+    },
+    {
+      "id": "integration-fivetran-connector-count",
+      "knowledge": "stable",
+      "prompt": "In cross-platform data integration tool comparisons, roughly how many pre-built connectors does Fivetran offer? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "500"
+        ]
+      },
+      "source": "plugins/etl/skills/integration/SKILL.md - Comparison Matrix Connectors row: Fivetran 500+ pre-built."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

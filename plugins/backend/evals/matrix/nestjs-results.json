@@ -1,0 +1,48 @@
+{
+  "skill": "nestjs",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nestjs-lifecycle-order",
+      "knowledge": "stable",
+      "prompt": "In the NestJS request lifecycle, which runs first on an incoming request: guards or interceptors? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bguards?\\b"
+      },
+      "source": "plugins/backend/skills/nestjs/SKILL.md - Request Lifecycle: Middleware -> Guards -> Interceptors (before) -> Pipes -> Route Handler -> ..."
+    },
+    {
+      "id": "nestjs-fastify-throughput",
+      "knowledge": "recent",
+      "prompt": "Swapping NestJS's default Express HTTP adapter for the Fastify adapter typically yields roughly what percentage throughput improvement? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20.{0,10}30"
+      },
+      "source": "plugins/backend/skills/nestjs/SKILL.md - Fastify adapter -- ~20-30% throughput improvement"
+    },
+    {
+      "id": "nestjs-exception-filter-order",
+      "knowledge": "stable",
+      "prompt": "When an unhandled exception occurs in a NestJS app, do exception filters run from route scope up to global scope, or from global scope down to route scope? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)route.{0,25}global"
+      },
+      "source": "plugins/backend/skills/nestjs/SKILL.md - Exception filters run in reverse scope order on error: Route -> Controller -> Global."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

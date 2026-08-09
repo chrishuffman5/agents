@@ -1,0 +1,51 @@
+{
+  "skill": "zscaler",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "zscaler-datacenters",
+      "knowledge": "stable",
+      "prompt": "Roughly how many global data centers does Zscaler operate its Zero Trust Exchange from, and what percentage of the Fortune 500 use Zscaler? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "150+",
+          "40%"
+        ]
+      },
+      "source": "plugins/security/skills/zscaler/SKILL.md - 150+ data centers; Zscaler is deployed by approximately 40% of the Fortune 500"
+    },
+    {
+      "id": "zscaler-url-categories",
+      "knowledge": "recent",
+      "prompt": "Roughly how many URL categories does Zscaler ZIA maintain for URL filtering, kept updated in real time by ThreatLabZ? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)200\\+?"
+      },
+      "source": "plugins/security/skills/zscaler/SKILL.md - URL Filtering: Zscaler maintains 200+ URL categories updated in real-time by ThreatLabZ"
+    },
+    {
+      "id": "zscaler-zdx-probe-interval",
+      "knowledge": "recent",
+      "prompt": "By default, how often does the Zscaler Client Connector agent run ZDX synthetic probes such as HTTP GET, DNS lookup, and traceroute? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*minutes?"
+      },
+      "source": "plugins/security/skills/zscaler/SKILL.md - ZDX probes (via ZCC agent): Probes run every 5 minutes (configurable)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

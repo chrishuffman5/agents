@@ -1,0 +1,52 @@
+{
+  "skill": "blazor",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "blazor-wasm-baseline-download",
+      "knowledge": "stable",
+      "prompt": "Roughly how large, in compressed megabytes, is the baseline Blazor WebAssembly runtime download before any app code is added? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*mb"
+      },
+      "source": "plugins/frontend/skills/blazor/SKILL.md - WebAssembly Runtime section: Baseline WASM download is ~2 MB compressed"
+    },
+    {
+      "id": "blazor-dotnet10-bundle-shrink",
+      "knowledge": "recent",
+      "prompt": "Dot NET 10 shipped a much smaller JavaScript bundle for Blazor Interactive Server circuits. By roughly what percentage did the bundle shrink? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "76"
+        ]
+      },
+      "source": "plugins/frontend/skills/blazor/SKILL.md - version table: .NET 10 - 76% smaller JS bundle"
+    },
+    {
+      "id": "blazor-dotnet10-persistent-state-attribute",
+      "knowledge": "recent",
+      "prompt": "Which new attribute did dot NET 10 add to Blazor for persisting component state across the prerender-to-interactive handoff? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "PersistentState"
+        ]
+      },
+      "source": "plugins/frontend/skills/blazor/SKILL.md - version table and pitfall 1: [PersistentState] attribute added in .NET 10"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,55 @@
+{
+  "skill": "google-adk",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "google-adk-default-metrics",
+      "knowledge": "stable",
+      "prompt": "In Google ADK's adk eval command, what are the two default metric thresholds when none are specified - the tool trajectory average score and the response match score? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.0",
+          "0.8"
+        ]
+      },
+      "source": "plugins/ai/skills/google-adk/SKILL.md - default metrics tool_trajectory_avg_score at 1.0 and response_match_score at 0.8"
+    },
+    {
+      "id": "google-adk-python-ga-date",
+      "knowledge": "recent",
+      "prompt": "On what date did Google ADK's Python line reach GA for version 2.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026-05-19"
+        ]
+      },
+      "source": "plugins/ai/skills/google-adk/SKILL.md - Python 2.0 (GA 2026-05-19)"
+    },
+    {
+      "id": "google-adk-docs-redirect",
+      "knowledge": "recent",
+      "prompt": "The canonical Google ADK documentation used to live at google.github.io/adk-docs. Where does that URL redirect to now? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "adk.dev"
+        ]
+      },
+      "source": "plugins/ai/skills/google-adk/SKILL.md - google.github.io/adk-docs now 301-redirects to adk.dev"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "appsec",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "appsec-precommit-secret-scanners",
+      "knowledge": "recent",
+      "prompt": "Which two open source secret-scanning tools are named as options to run during the pre-commit stage of a DevSecOps pipeline? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "detect-secrets",
+          "git-secrets"
+        ]
+      },
+      "source": "plugins/security/skills/appsec/SKILL.md - DevSecOps Pipeline Stages: Pre-commit - Secret scanning (detect-secrets, git-secrets)"
+    },
+    {
+      "id": "appsec-shift-left-cost",
+      "knowledge": "stable",
+      "prompt": "Roughly by what factor does catching a security issue early via shift-left practices reduce remediation cost compared to finding it in production? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b\\D{0,4}\\b100\\b"
+      },
+      "source": "plugins/security/skills/appsec/SKILL.md - Shift-Left Principle reduces remediation cost by 10-100x vs. finding issues in production"
+    },
+    {
+      "id": "appsec-asvs-level3",
+      "knowledge": "stable",
+      "prompt": "Under the OWASP ASVS, which verification level requires penetration testing and architectural review, and is reserved for critical applications like finance and healthcare? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)level\\s*3|\\bl3\\b|\\bthree\\b"
+      },
+      "source": "plugins/security/skills/appsec/SKILL.md - ASVS Verification Levels: Level 3 - Critical applications, requires penetration testing and architectural review"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

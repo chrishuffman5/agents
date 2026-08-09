@@ -1,0 +1,54 @@
+{
+  "skill": "dc-fabric",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dc-fabric-min-mtu",
+      "knowledge": "recent",
+      "prompt": "In a spine-leaf VXLAN or EVPN data center fabric, what is the minimum recommended MTU on all fabric links to account for VXLAN encapsulation overhead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9214"
+        ]
+      },
+      "source": "plugins/networking/skills/dc-fabric/SKILL.md - Minimum fabric MTU: 9214 bytes"
+    },
+    {
+      "id": "dc-fabric-oversubscription-ratio",
+      "knowledge": "recent",
+      "prompt": "For a two-tier spine-leaf fabric carrying general enterprise workloads, what oversubscription ratio is typically targeted as the maximum acceptable? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3:1"
+        ]
+      },
+      "source": "plugins/networking/skills/dc-fabric/SKILL.md - Target: 3:1 or better for general workloads; 1:1 for storage/HPC"
+    },
+    {
+      "id": "dc-fabric-nsx-overlay",
+      "knowledge": "stable",
+      "prompt": "What overlay encapsulation protocol does VMware NSX use for its data plane, as opposed to Cisco ACI and open EVPN fabrics which use VXLAN? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Geneve"
+        ]
+      },
+      "source": "plugins/networking/skills/dc-fabric/SKILL.md - Architecture Comparison table: NSX Overlay protocol = Geneve"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

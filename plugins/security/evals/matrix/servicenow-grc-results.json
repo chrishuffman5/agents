@@ -1,0 +1,57 @@
+{
+  "skill": "servicenow-grc",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "servicenow-grc-inherent-risk-formula",
+      "knowledge": "stable",
+      "prompt": "In ServiceNow Risk Management, how is a risk's Inherent Risk Score derived from its likelihood and impact ratings? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Likelihood",
+          "Impact"
+        ]
+      },
+      "source": "plugins/security/skills/servicenow-grc/SKILL.md - Risk Data Model: Inherent Risk Score = Likelihood x Impact"
+    },
+    {
+      "id": "servicenow-grc-attestation-escalation",
+      "knowledge": "recent",
+      "prompt": "In a ServiceNow policy attestation campaign, how many days before the deadline is a reminder sent to the user, and how many days before the deadline is the user's manager notified? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7 days",
+          "3 days"
+        ]
+      },
+      "source": "plugins/security/skills/servicenow-grc/SKILL.md - Policy Attestation escalation rules: Reminder 7 days before deadline, manager notification 3 days before"
+    },
+    {
+      "id": "servicenow-grc-cam-acronym",
+      "knowledge": "recent",
+      "prompt": "In ServiceNow GRC, alongside Risk Management, Policy and Compliance, and Audit Management, there is an application abbreviated CAM. What does that acronym stand for? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Continuous Authorization",
+          "Monitoring"
+        ]
+      },
+      "source": "plugins/security/skills/servicenow-grc/SKILL.md - Continuous Authorization and Monitoring (CAM) application section"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

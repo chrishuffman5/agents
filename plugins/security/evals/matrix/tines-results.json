@@ -1,0 +1,55 @@
+{
+  "skill": "tines",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "tines-formula-language",
+      "knowledge": "stable",
+      "prompt": "What templating language does Tines use for data transformation expressions inside its Transform actions? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Liquid"
+        ]
+      },
+      "source": "plugins/security/skills/tines/SKILL.md - Transform Action section header: Formula language (Liquid-based)."
+    },
+    {
+      "id": "tines-free-tier-limits",
+      "knowledge": "recent",
+      "prompt": "On Tines's free Team Edition, name at least two enterprise capabilities that are not included, such as single sign-on or audit logging. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SSO",
+          "audit"
+        ]
+      },
+      "source": "plugins/security/skills/tines/SKILL.md - Team Edition limitations list: no SSO, no audit logging, no SLA actions, no advanced credential management, limited to 1 team."
+    },
+    {
+      "id": "tines-credential-syntax",
+      "knowledge": "stable",
+      "prompt": "In Tines, actions reference securely stored credentials using double curly brace syntax with a special prefix before the credential name. What is that prefix keyword? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CREDENTIAL"
+        ]
+      },
+      "source": "plugins/security/skills/tines/SKILL.md - Credential Management section: credentials referenced as CREDENTIAL.name in actions."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,50 @@
+{
+  "skill": "github",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "github-pr-size-limit",
+      "knowledge": "stable",
+      "prompt": "What is the recommended maximum number of changed lines in a pull request, beyond which review quality and defect detection drop sharply? Answer with the approximate number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)400"
+      },
+      "source": "plugins/devops/skills/github/references/pull-requests.md - PR Workflow: Size aim less than approximately 400 changed lines"
+    },
+    {
+      "id": "github-codeowners-precedence",
+      "knowledge": "stable",
+      "prompt": "In a GitHub CODEOWNERS file, when multiple patterns match the same changed file, does the first listed pattern or the last listed pattern determine the owner? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)last"
+      },
+      "source": "plugins/devops/skills/github/references/pull-requests.md - CODEOWNERS section: Last matching pattern wins"
+    },
+    {
+      "id": "github-ruleset-dry-run",
+      "knowledge": "recent",
+      "prompt": "Unlike legacy branch protection, GitHub rulesets support a dry run mode where rules are evaluated without being enforced. What exact value do you set on the ruleset's enforcement field to turn on this evaluate only dry run mode? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "evaluate"
+        ]
+      },
+      "source": "plugins/devops/skills/github/references/pull-requests.md - Branch Protection vs Rulesets table: Dry run Yes via enforcement: evaluate, legacy branch protection has no dry run"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

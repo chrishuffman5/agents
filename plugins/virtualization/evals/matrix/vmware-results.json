@@ -1,0 +1,48 @@
+{
+  "skill": "vmware",
+  "plugin": "virtualization",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vmware-ha-failure-detection",
+      "knowledge": "stable",
+      "prompt": "In vSphere HA, heartbeats are exchanged every second. After how many seconds of missed heartbeats is a host declared failed? Answer concisely with a number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b12\\b|\\btwelve\\b"
+      },
+      "source": "plugins/virtualization/skills/vmware/SKILL.md - vSphere HA: heartbeats every second, host declared failed after 12 seconds of missed heartbeats"
+    },
+    {
+      "id": "vmware-vcsa-xlarge",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of ESXi hosts that a vCenter Server Appliance X-Large deployment size is rated to manage? Answer concisely with a number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2,?500"
+      },
+      "source": "plugins/virtualization/skills/vmware/SKILL.md - vCenter Server: deployment sizes from Tiny (10 hosts/100 VMs) to X-Large (2,500 hosts/35,000 VMs)"
+    },
+    {
+      "id": "vmware-9-licensing",
+      "knowledge": "recent",
+      "prompt": "As of vSphere 9.x, did Broadcom move VMware licensing to a subscription only, per core model? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|subscription-only|per-core)"
+      },
+      "source": "plugins/virtualization/skills/vmware/SKILL.md - Version-specific guidance table: vSphere 9.x - Broadcom licensing changes (subscription-only, per-core)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

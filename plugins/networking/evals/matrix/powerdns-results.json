@@ -1,0 +1,52 @@
+{
+  "skill": "powerdns",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "powerdns-versions",
+      "knowledge": "recent",
+      "prompt": "What are the current major version numbers of the three PowerDNS suite products: Authoritative Server, Recursor, and DNSdist? Answer concisely with all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5.0",
+          "5.4",
+          "2.0"
+        ]
+      },
+      "source": "plugins/networking/skills/powerdns/SKILL.md - PowerDNS suite: Authoritative Server 5.0, Recursor 5.4, and DNSdist 2.0"
+    },
+    {
+      "id": "powerdns-serve-stale",
+      "knowledge": "recent",
+      "prompt": "Can PowerDNS Recursor keep answering queries using expired cache entries when the upstream authoritative servers become unreachable? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|serve-?stale|serve-?expired)"
+      },
+      "source": "plugins/networking/skills/powerdns/SKILL.md - Serve-Stale/Serve-Expired: Return expired cache entries when upstream unreachable; essential for DNS resilience"
+    },
+    {
+      "id": "powerdns-auth-no-recursion",
+      "knowledge": "stable",
+      "prompt": "Can the PowerDNS Authoritative Server perform recursive DNS lookups on behalf of clients? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not)"
+      },
+      "source": "plugins/networking/skills/powerdns/SKILL.md - PowerDNS Auth does NOT perform recursive lookups; it answers only for zones it is authoritative for"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

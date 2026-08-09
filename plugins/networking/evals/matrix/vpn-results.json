@@ -1,0 +1,51 @@
+{
+  "skill": "vpn",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vpn-cnsa2-deadline",
+      "knowledge": "recent",
+      "prompt": "By what year does CNSA 2.0 guidance require full transition to post-quantum algorithms like ML-KEM-1024 for VPN key exchange? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2033",
+          "ML-KEM"
+        ]
+      },
+      "source": "plugins/networking/skills/vpn/SKILL.md - Post-Quantum Transition (CNSA 2.0, by 2033): Key Exchange ML-KEM-1024 (FIPS 203)"
+    },
+    {
+      "id": "vpn-wireguard-loc",
+      "knowledge": "recent",
+      "prompt": "Roughly how many lines of kernel code make up the WireGuard implementation, according to the simplicity comparison used when evaluating VPN technologies? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4,?000"
+      },
+      "source": "plugins/networking/skills/vpn/SKILL.md - WireGuard Strengths: Simplest configuration of any VPN technology (~4,000 lines of kernel code)"
+    },
+    {
+      "id": "vpn-weak-dh-groups",
+      "knowledge": "stable",
+      "prompt": "Should you use Diffie-Hellman Groups 1, 2, or 5 for a new IPsec/IKE VPN configuration today? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|avoid|weak|broken|should not)"
+      },
+      "source": "plugins/networking/skills/vpn/SKILL.md - Avoid: DH Groups 1, 2, 5, 22, 23, 24 (all weak/broken)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

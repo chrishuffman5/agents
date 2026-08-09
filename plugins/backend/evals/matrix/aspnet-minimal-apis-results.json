@@ -1,0 +1,51 @@
+{
+  "skill": "aspnet-minimal-apis",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aspnet-minimal-apis-filter-order",
+      "knowledge": "stable",
+      "prompt": "When several endpoint filters are chained on one ASP.NET Core Minimal API route, what execution order do they follow going into the handler versus coming back out after it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "FIFO",
+          "FILO"
+        ]
+      },
+      "source": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - Execution order: FIFO before handler, FILO after handler (like middleware)."
+    },
+    {
+      "id": "aspnet-minimal-apis-sse-version",
+      "knowledge": "recent",
+      "prompt": "Support for building Server-Sent Events endpoints via TypedResults arrived in ASP.NET Core Minimal APIs starting with which .NET version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bnet\\s*10\\b|\\b10\\b|\\bten\\b)"
+      },
+      "source": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - TypedResults.ServerSentEvents(asyncEnumerable) // SSE (.NET 10+); Version Feature Matrix marks Server-Sent Events (SSE) as starting at .NET 10"
+    },
+    {
+      "id": "aspnet-minimal-apis-asparameters-version",
+      "knowledge": "stable",
+      "prompt": "The AsParameters attribute for grouping multiple Minimal API parameters into one type became available starting with which .NET version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bnet\\s*7\\b|\\b7\\b|\\bseven\\b)"
+      },
+      "source": "plugins/backend/skills/aspnet-minimal-apis/SKILL.md - [AsParameters] (.NET 7+)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

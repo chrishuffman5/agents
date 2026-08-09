@@ -1,0 +1,52 @@
+{
+  "skill": "suricata",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "suricata-failopen-nfq",
+      "knowledge": "recent",
+      "prompt": "In a Suricata inline IPS deployment, which suricata.yaml NFQ setting should always be enabled so a Suricata crash or overload does not cause a full network outage? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "fail-open"
+        ]
+      },
+      "source": "plugins/security/skills/suricata/SKILL.md - IPS Mode Configuration shows fail-open: yes in NFQ config, and Common Pitfalls warns to always configure fail-open for inline deployments."
+    },
+    {
+      "id": "suricata-file-extraction-hash",
+      "knowledge": "stable",
+      "prompt": "What hash algorithm does Suricata use to name files saved through its file-extraction feature, enabling automated malware hash lookups? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SHA256"
+        ]
+      },
+      "source": "plugins/security/skills/suricata/SKILL.md - File Extraction section: Files are stored with SHA256 hashes as filenames, enabling automated malware hash lookups."
+    },
+    {
+      "id": "suricata-dhcp-version",
+      "knowledge": "recent",
+      "prompt": "Starting in which major Suricata version does the DHCP event type get added to EVE JSON logging? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8(\\.0)?\\b"
+      },
+      "source": "plugins/security/skills/suricata/SKILL.md - EVE JSON Output key event types list: dhcp -- DHCP transactions (8.0+)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

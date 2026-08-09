@@ -1,0 +1,50 @@
+{
+  "skill": "react",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "react-error-boundary-class-only",
+      "knowledge": "stable",
+      "prompt": "In React, which single capability still has no hook equivalent and requires a class component? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)error boundar"
+      },
+      "source": "plugins/frontend/skills/react/SKILL.md - Core Expertise bullets: Error boundaries (class-only API)"
+    },
+    {
+      "id": "react-19-render-removed",
+      "knowledge": "recent",
+      "prompt": "In React 19, has the legacy ReactDOM.render API been removed, or is it still supported alongside createRoot? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)remov"
+      },
+      "source": "plugins/frontend/skills/react/SKILL.md - Concurrent Features: ReactDOM.render is removed in 19"
+    },
+    {
+      "id": "react-19-optimistic-hook",
+      "knowledge": "recent",
+      "prompt": "In React 19, what is the name of the new hook that lets you show an optimistic UI state while an async action is still pending? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "useOptimistic"
+        ]
+      },
+      "source": "plugins/frontend/skills/react/SKILL.md - React 19 hooks list: useActionState, useOptimistic, useFormStatus, use()"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

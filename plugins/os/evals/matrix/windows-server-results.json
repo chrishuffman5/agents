@@ -1,0 +1,213 @@
+{
+  "skill": "windows-server",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "windows-server-ntlmv1-blocked-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which Windows Server version is NTLMv1 authentication blocked by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2025\\b"
+      },
+      "source": "plugins/os/skills/windows-server/SKILL.md - Authentication: NTLM is the fallback -- NTLMv1 is blocked by default in Server 2025"
+    },
+    {
+      "id": "windows-server-core-attack-surface-reduction",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage smaller is the attack surface of a Server Core installation compared to one running Desktop Experience? Answer with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)~?\\s*40\\s*%"
+      },
+      "source": "plugins/os/skills/windows-server/SKILL.md - Roles and Features Model: Server Core installations lack the Desktop Experience feature, reducing attack surface by ~40%."
+    },
+    {
+      "id": "windows-server-smb-quic-all-editions",
+      "knowledge": "recent",
+      "prompt": "SMB over QUIC first shipped on Windows Server 2022, but only for one specific edition. In which Windows Server version does SMB over QUIC become available on all editions? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2025\\b"
+      },
+      "source": "plugins/os/skills/windows-server/SKILL.md - Networking Overview: SMB over QUIC: tunnels SMB over UDP/443 with TLS 1.3 (Azure Edition in 2022, all editions in 2025)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 12875,
+      "meanTokensOut": 164,
+      "totalCostUsd": 0.7227,
+      "costPerCorrect": 0.1204
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 11141,
+      "meanTokensOut": 138,
+      "totalCostUsd": 0.4181,
+      "costPerCorrect": 0.1045
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8114,
+        "meanTokensOut": 116,
+        "totalCostUsd": 0.5023,
+        "costPerCorrect": 0.1674
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6084,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.1724,
+        "costPerCorrect": 0.0862
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17636,
+        "meanTokensOut": 212,
+        "totalCostUsd": 0.2204,
+        "costPerCorrect": 0.0735
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16197,
+        "meanTokensOut": 192,
+        "totalCostUsd": 0.2456,
+        "costPerCorrect": 0.1228
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8114,
+        "meanTokensOut": 116,
+        "totalCostUsd": 0.5023,
+        "costPerCorrect": 0.1674
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6084,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.1724,
+        "costPerCorrect": 0.0862
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17636,
+        "meanTokensOut": 212,
+        "totalCostUsd": 0.2204,
+        "costPerCorrect": 0.0735
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16197,
+        "meanTokensOut": 192,
+        "totalCostUsd": 0.2456,
+        "costPerCorrect": 0.1228
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 6084,
+        "meanTokensOut": 84,
+        "totalCostUsd": 0.1724,
+        "costPerCorrect": 0.0862
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8114,
+        "meanTokensOut": 116,
+        "totalCostUsd": 0.5023,
+        "costPerCorrect": 0.1674
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16197,
+        "meanTokensOut": 192,
+        "totalCostUsd": 0.2456,
+        "costPerCorrect": 0.1228
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17636,
+        "meanTokensOut": 212,
+        "totalCostUsd": 0.2204,
+        "costPerCorrect": 0.0735
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

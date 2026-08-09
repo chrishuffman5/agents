@@ -1,0 +1,51 @@
+{
+  "skill": "logscale",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "logscale-community-edition-limits",
+      "knowledge": "recent",
+      "prompt": "What is the daily ingestion cap and the data retention period for CrowdStrike Falcon LogScale's free Community Edition? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16 GB",
+          "7 days"
+        ]
+      },
+      "source": "plugins/security/skills/logscale/SKILL.md - Community Edition section: Daily ingestion 16 GB/day, Retention 7 days"
+    },
+    {
+      "id": "logscale-former-name",
+      "knowledge": "stable",
+      "prompt": "CrowdStrike Falcon LogScale was previously known by a different product name before CrowdStrike's rebrand. What was that earlier name? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bhumio\\b"
+      },
+      "source": "plugins/security/skills/logscale/SKILL.md - title and description: CrowdStrike Falcon LogScale (formerly Humio)"
+    },
+    {
+      "id": "logscale-compression-ratio",
+      "knowledge": "recent",
+      "prompt": "LogScale's index-free storage architecture compresses raw log data using zstd compression. What approximate compression ratio does it achieve? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10\\s*:\\s*1|10x|10-to-1)"
+      },
+      "source": "plugins/security/skills/logscale/SKILL.md - Index-Free Architecture diagram: Compression (zstd, ~10:1 ratio)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

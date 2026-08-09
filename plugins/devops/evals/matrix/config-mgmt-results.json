@@ -1,0 +1,52 @@
+{
+  "skill": "config-mgmt",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "config-mgmt-gpl-license",
+      "knowledge": "stable",
+      "prompt": "Among Chef, Puppet, SaltStack, and Ansible, which one is licensed under GPL v3 while the other three use Apache 2.0? Answer with just the tool name.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Ansible"
+        ]
+      },
+      "source": "plugins/devops/skills/config-mgmt/SKILL.md - Comparison Matrix License row: Chef/Puppet/SaltStack Apache 2.0, Ansible GPL v3"
+    },
+    {
+      "id": "config-mgmt-agent-interval",
+      "knowledge": "recent",
+      "prompt": "For Chef and Puppet's agent based continuous enforcement model, roughly how many minutes elapse between each agent run that checks for and reverts configuration drift? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30\\s*min"
+      },
+      "source": "plugins/devops/skills/config-mgmt/references/concepts.md - Drift Detection and Remediation table: continuous enforcement Chef (30 min), Puppet (30 min)"
+    },
+    {
+      "id": "config-mgmt-molecule-testing",
+      "knowledge": "stable",
+      "prompt": "In the configuration management testing pyramid comparison, which single tool does Ansible rely on for both unit level and integration level testing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Molecule"
+        ]
+      },
+      "source": "plugins/devops/skills/config-mgmt/references/concepts.md - Testing Patterns table: Ansible unit=Molecule, integration=Molecule"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

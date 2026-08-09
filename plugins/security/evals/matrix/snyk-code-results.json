@@ -1,0 +1,53 @@
+{
+  "skill": "snyk-code",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "snyk-code-deepcode-acquisition-year",
+      "knowledge": "recent",
+      "prompt": "In what year did Snyk acquire the DeepCode engine that now powers Snyk Code? Answer with just the year.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2020\\b"
+      },
+      "source": "plugins/security/skills/snyk-code/SKILL.md - DeepCode Engine section: Snyk acquired DeepCode in 2020"
+    },
+    {
+      "id": "snyk-code-priority-score-bands",
+      "knowledge": "recent",
+      "prompt": "On Snyk Code's Priority Score scale of 0 to 1000, what is the minimum score at which a finding falls into the fix-immediately band? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b900\\b"
+      },
+      "source": "plugins/security/skills/snyk-code/SKILL.md - Priority Score interpretation: 900-1000: Fix immediately"
+    },
+    {
+      "id": "snyk-code-standard-analysis-languages",
+      "knowledge": "stable",
+      "prompt": "Snyk Code performs deep data-flow analysis for languages such as JavaScript, Python, and Java. Which four languages does it instead cover with only standard-depth analysis? Answer concisely naming all four.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Kotlin",
+          "Swift",
+          "Scala",
+          "Apex"
+        ]
+      },
+      "source": "plugins/security/skills/snyk-code/SKILL.md - Supported Languages: Standard analysis: Kotlin, Swift, Scala, Apex"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

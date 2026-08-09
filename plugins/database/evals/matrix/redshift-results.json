@@ -1,0 +1,48 @@
+{
+  "skill": "redshift",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "redshift-serverless-min-billing-seconds",
+      "knowledge": "recent",
+      "prompt": "In Amazon Redshift Serverless, what is the minimum billing duration in seconds charged per query, regardless of how quickly the query actually finishes? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b60\\b"
+      },
+      "source": "plugins/database/skills/redshift/references/architecture.md - Redshift Serverless Architecture > Auto-Scaling Behavior: billed only for RPU-seconds consumed, with a minimum of 60 seconds per query"
+    },
+    {
+      "id": "redshift-concurrency-scaling-free-credit",
+      "knowledge": "recent",
+      "prompt": "How many free hours of Redshift concurrency scaling credit does a cluster earn per 24-hour period that it is active? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(1\\s*hour|one\\s*hour)"
+      },
+      "source": "plugins/database/skills/redshift/references/architecture.md - Concurrency Scaling: each cluster earns up to 1 hour of free concurrency scaling credits per day for every 24 hours it is active (also stated in best-practices.md Cost Optimization)"
+    },
+    {
+      "id": "redshift-columnar-block-size",
+      "knowledge": "stable",
+      "prompt": "In Amazon Redshift's columnar storage engine, what is the fixed size of each immutable block that a column's data is broken into on disk? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b1\\s*mb\\b"
+      },
+      "source": "plugins/database/skills/redshift/references/architecture.md and SKILL.md - Columnar Storage Engine: each column stored in a sequence of immutable 1 MB blocks"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,6 +1,6 @@
 # aws-cli — cross-harness eval report
 
-Generated: 2026-08-08T21:50:18.3314216-05:00 · plugin: `cli-scripting` · runs: **3 / 576** · **PARTIAL — sweep incomplete, numbers will change**
+Generated: 2026-08-09T00:59:12.9209624-05:00 · plugin: `cli-scripting` · runs: **264 / 432** · **PARTIAL — sweep incomplete, numbers will change**
 
 ## The exact prompts used
 
@@ -19,15 +19,15 @@ One-shot, neutral phrasing (the no-skill arm gets no hint a skills library exist
 
 | mode | runs | accuracy | mean wall | mean out-tokens | total cost | cost/correct |
 |---|---|---|---|---|---|---|
-| skill | 3 | **66.7%** | 59s | 2857 | $0.196 | $0.098 |
-| no-skill | 0 | — | — | — | — | — |
+| skill | 132 | **88.6%** | 15.5s | 453 | $9.6954 | $0.0829 |
+| no-skill | 132 | **80.3%** | 13.9s | 396 | $7.0816 | $0.0668 |
 
 ## By harness
 
 | harness | skill acc | no-skill acc | delta | skill wall | no-skill wall |
 |---|---|---|---|---|---|
-| claude | 100% | — | — | 10.6s | — |
-| codex | 50% | — | — | 83.2s | — |
+| claude | 84.8% | 71.2% | +13.6pp | 14.2s | 13.3s |
+| codex | 92.4% | 89.4% | +3pp | 16.8s | 14.6s |
 
 ## By model — price to performance
 
@@ -35,7 +35,19 @@ Cost weighting: accuracy alone flatters frontier models; **cost/correct** and wa
 
 | model | mode | accuracy | mean wall | cost/correct |
 |---|---|---|---|---|
-| claude-opus-5 | skill | 100% | 10.6s | $0.196 |
-| gemma4:12b | skill | 50% | 83.2s | $0 |
+| claude-haiku-4-5 | skill | 94.4% | 11.6s | $0.0327 |
+| claude-haiku-4-5 | no-skill | 66.7% | 7.9s | $0.0283 |
+| claude-opus-5 | skill | 94.4% | 13.1s | $0.1879 |
+| claude-opus-5 | no-skill | 83.3% | 9.3s | $0.116 |
+| claude-sonnet-5 | skill | 83.3% | 7s | $0.1054 |
+| claude-sonnet-5 | no-skill | 77.8% | 5.5s | $0.065 |
+| gemma4:12b | skill | 58.3% | 33.7s | $0.1348 |
+| gemma4:12b | no-skill | 45.8% | 39.2s | $0.2415 |
+| gpt-5.6-luna | skill | 100% | 10.4s | $0.0037 |
+| gpt-5.6-luna | no-skill | 100% | 8.1s | $0.0014 |
+| gpt-5.6-sol | skill | 100% | 17.4s | $0.1087 |
+| gpt-5.6-sol | no-skill | 100% | 10.8s | $0.0602 |
+| gpt-5.6-terra | skill | 100% | 9.3s | $0.0252 |
+| gpt-5.6-terra | no-skill | 100% | 8s | $0.0181 |
 
 _Full per-cell aggregates (harness × model × effort × mode) in `aws-cli-results.json`. Method: evals/matrix/ in the repo root; design doc at evals/design/cross-harness-matrix.html._

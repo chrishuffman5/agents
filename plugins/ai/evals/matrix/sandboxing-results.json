@@ -1,0 +1,51 @@
+{
+  "skill": "sandboxing",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sandboxing-governing-rule",
+      "knowledge": "stable",
+      "prompt": "What two kinds of isolation does effective agent sandboxing require together, per the governing rule stated for coding agent sandboxing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "filesystem",
+          "network"
+        ]
+      },
+      "source": "plugins/ai/skills/sandboxing/SKILL.md - effective sandboxing requires both filesystem and network isolation"
+    },
+    {
+      "id": "sandboxing-firecracker-boot-time",
+      "knowledge": "recent",
+      "prompt": "How quickly do Firecracker microVMs boot, and roughly how much memory overhead do they add? Answer concisely with both figures.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)125\\s*ms.{0,60}5\\s*mi?b"
+      },
+      "source": "plugins/ai/skills/sandboxing/SKILL.md - Firecracker microVMs boot in under 125 ms with <5 MiB overhead"
+    },
+    {
+      "id": "sandboxing-gvisor-io-overhead",
+      "knowledge": "recent",
+      "prompt": "What is gVisor's documented performance overhead range for heavy file I/O workloads, compared to near-zero overhead for CPU-bound work? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10.{0,5}200x"
+      },
+      "source": "plugins/ai/skills/sandboxing/SKILL.md - gVisor at ~0% overhead for CPU-bound work but up to 10-200x on heavy file I/O"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

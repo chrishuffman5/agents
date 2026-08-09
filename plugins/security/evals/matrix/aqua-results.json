@@ -1,0 +1,50 @@
+{
+  "skill": "aqua",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aqua-enforcer-heartbeat",
+      "knowledge": "recent",
+      "prompt": "How frequently does the Aqua Enforcer send a heartbeat to the Aqua Console or Gateway? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15\\s*sec"
+      },
+      "source": "plugins/security/skills/aqua/references/architecture.md - Enforcer to Console Communication: Heartbeat every 15 seconds"
+    },
+    {
+      "id": "aqua-ebpf-kernel-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Linux kernel version required for the Aqua Enforcer to use its preferred eBPF-based kernel monitoring mechanism, instead of falling back to a kernel module? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\.14"
+      },
+      "source": "plugins/security/skills/aqua/references/architecture.md - Kernel monitoring mechanisms: eBPF (preferred, kernel 4.14+) - no kernel module required"
+    },
+    {
+      "id": "aqua-saas-soc2",
+      "knowledge": "stable",
+      "prompt": "What compliance certification does Aqua state its SaaS-hosted Console holds? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SOC 2"
+        ]
+      },
+      "source": "plugins/security/skills/aqua/references/architecture.md - SaaS (Aqua Cloud): SOC 2 Type II certified"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

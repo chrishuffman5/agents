@@ -1,0 +1,55 @@
+{
+  "skill": "cert-manager",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cert-manager-csi-etcd",
+      "knowledge": "recent",
+      "prompt": "When using the cert-manager CSI driver to mount certificates directly into pods, are those certificates stored as Kubernetes Secrets in etcd? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|not|never)\\b"
+      },
+      "source": "plugins/security/skills/cert-manager/references/csi-driver.md - CSI driver certificates are not stored in etcd (no Kubernetes Secret created)"
+    },
+    {
+      "id": "cert-manager-issuer-scope",
+      "knowledge": "stable",
+      "prompt": "In cert-manager, what is the scope difference between an Issuer resource and a ClusterIssuer resource? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "namespace-scoped",
+          "cluster-wide"
+        ]
+      },
+      "source": "plugins/security/skills/cert-manager/SKILL.md - How to Approach Tasks: Identify issuer scope: Issuer (namespace-scoped) vs. ClusterIssuer (cluster-wide)"
+    },
+    {
+      "id": "cert-manager-dns01-providers",
+      "knowledge": "stable",
+      "prompt": "Name at least three DNS providers for which cert-manager ships a built-in DNS-01 solver. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Route53",
+          "Cloudflare",
+          "Azure"
+        ]
+      },
+      "source": "plugins/security/skills/cert-manager/references/issuer-examples.md - DNS-01 Solver Providers: Route 53, Azure DNS, Google Cloud DNS, Cloudflare"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

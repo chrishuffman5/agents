@@ -1,0 +1,53 @@
+{
+  "skill": "fastapi",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fastapi-openapi-version",
+      "knowledge": "stable",
+      "prompt": "What version of the OpenAPI specification does FastAPI generate for its automatic interactive docs? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.1"
+        ]
+      },
+      "source": "plugins/backend/skills/fastapi/SKILL.md - FastAPI generates OpenAPI 3.1 specs from your code. Interactive docs at /docs (Swagger UI) and /redoc."
+    },
+    {
+      "id": "fastapi-worker-count",
+      "knowledge": "stable",
+      "prompt": "Using the standard Gunicorn worker formula recommended for I O bound async FastAPI apps of two times the CPU count plus one, how many worker processes should you run on a 4 core machine? Answer with a number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b9\\b|\\bnine\\b)"
+      },
+      "source": "plugins/backend/skills/fastapi/SKILL.md - Worker formula: (2 * CPU_COUNT) + 1 for I/O-bound async apps; on 4 cores that is 2*4+1=9"
+    },
+    {
+      "id": "fastapi-pydantic-v2-speed",
+      "knowledge": "recent",
+      "prompt": "FastAPI relies on Pydantic v2, whose validation engine is written in which systems programming language, and roughly how many times faster is it than the Pydantic v1 engine at the high end? Answer concisely with both facts.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Rust",
+          "50"
+        ]
+      },
+      "source": "plugins/backend/skills/fastapi/SKILL.md - The v2 engine is Rust-based (pydantic-core), providing 5-50x faster validation than v1."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

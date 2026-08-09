@@ -1,0 +1,52 @@
+{
+  "skill": "dns",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dns-bind-dot-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which version does BIND include a built-in DNS-over-TLS server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9.18"
+        ]
+      },
+      "source": "plugins/networking/skills/dns/SKILL.md - DoH/DoT feature matrix row: BIND DoT server (9.18+)"
+    },
+    {
+      "id": "dns-windows-doh-year",
+      "knowledge": "recent",
+      "prompt": "In which year did Windows Server DNS gain a DNS-over-HTTPS server capability, currently in preview? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025"
+        ]
+      },
+      "source": "plugins/networking/skills/dns/SKILL.md - DoH/DoT feature matrix row: Windows DNS DoH server (2025 preview)"
+    },
+    {
+      "id": "dns-single-server-risk",
+      "knowledge": "stable",
+      "prompt": "For production DNS redundancy, is it acceptable to run just a single authoritative DNS server for a zone? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/networking/skills/dns/SKILL.md - Single DNS server: always deploy at least 2 DNS servers per zone; single-server DNS is a critical single point of failure"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

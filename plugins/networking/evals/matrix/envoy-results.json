@@ -1,0 +1,54 @@
+{
+  "skill": "envoy",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "envoy-circuit-breaker-default",
+      "knowledge": "recent",
+      "prompt": "What is Envoy's default max_connections circuit breaker threshold per cluster when it is not explicitly configured? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1024"
+        ]
+      },
+      "source": "plugins/networking/skills/envoy/SKILL.md - Circuit breaker defaults too low: default max_connections is 1024"
+    },
+    {
+      "id": "envoy-gateway-version",
+      "knowledge": "recent",
+      "prompt": "What is the current version of Envoy Gateway as of early 2026? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.5.3"
+        ]
+      },
+      "source": "plugins/networking/skills/envoy/SKILL.md - Current version: Envoy Gateway v1.5.3 (March 2026)"
+    },
+    {
+      "id": "envoy-router-filter-order",
+      "knowledge": "stable",
+      "prompt": "In an Envoy HTTP filter chain, which filter must always be placed last? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "router"
+        ]
+      },
+      "source": "plugins/networking/skills/envoy/SKILL.md - Router filter not last: the router filter must be the last HTTP filter in the chain"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

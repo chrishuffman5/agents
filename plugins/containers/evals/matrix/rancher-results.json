@@ -1,0 +1,233 @@
+{
+  "skill": "rancher",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rancher-100plus-sizing",
+      "knowledge": "stable",
+      "prompt": "For a Rancher management server overseeing more than 100 downstream clusters, what vCPU and RAM sizing does the guidance recommend? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "32",
+          "64"
+        ]
+      },
+      "source": "plugins/containers/skills/rancher/SKILL.md - 100+ managed clusters: 32 vCPU, 64 GB RAM"
+    },
+    {
+      "id": "rancher-agent-connection",
+      "knowledge": "stable",
+      "prompt": "Do downstream clusters managed by Rancher need inbound firewall rules opened for the Rancher server to reach them, or does the agent initiate the connection outbound instead? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(outbound|no inbound)"
+      },
+      "source": "plugins/containers/skills/rancher/SKILL.md - Rancher agent connects outbound via WebSocket, no inbound firewall rules needed"
+    },
+    {
+      "id": "rancher-provisioning-capi",
+      "knowledge": "recent",
+      "prompt": "What upstream Kubernetes cluster lifecycle project does Rancher's Provisioning v2 build on top of? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CAPI"
+        ]
+      },
+      "source": "plugins/containers/skills/rancher/SKILL.md - Provisioning v2 uses Cluster API (CAPI) under the hood"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 8712,
+      "meanTokensOut": 177,
+      "totalCostUsd": 1.0765,
+      "costPerCorrect": 0.1196
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 10782,
+      "meanTokensOut": 132,
+      "totalCostUsd": 0.3232,
+      "costPerCorrect": 0.0808
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 7894,
+        "meanTokensOut": 191,
+        "totalCostUsd": 0.8785,
+        "costPerCorrect": 0.1464
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 4674,
+        "meanTokensOut": 96,
+        "totalCostUsd": 0.1658,
+        "costPerCorrect": 0.0829
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10348,
+        "meanTokensOut": 149,
+        "totalCostUsd": 0.1981,
+        "costPerCorrect": 0.066
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16891,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.1574,
+        "costPerCorrect": 0.0787
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 7894,
+        "meanTokensOut": 191,
+        "totalCostUsd": 0.8785,
+        "costPerCorrect": 0.1464
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 4674,
+        "meanTokensOut": 96,
+        "totalCostUsd": 0.1658,
+        "costPerCorrect": 0.0829
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10348,
+        "meanTokensOut": 149,
+        "totalCostUsd": 0.1981,
+        "costPerCorrect": 0.066
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16891,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.1574,
+        "costPerCorrect": 0.0787
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 4674,
+        "meanTokensOut": 96,
+        "totalCostUsd": 0.1658,
+        "costPerCorrect": 0.0829
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7779,
+        "meanTokensOut": 131,
+        "totalCostUsd": 0.3992,
+        "costPerCorrect": 0.1331
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8008,
+        "meanTokensOut": 251,
+        "totalCostUsd": 0.4793,
+        "costPerCorrect": 0.1598
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 16891,
+        "meanTokensOut": 169,
+        "totalCostUsd": 0.1574,
+        "costPerCorrect": 0.0787
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10348,
+        "meanTokensOut": 149,
+        "totalCostUsd": 0.1981,
+        "costPerCorrect": 0.066
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

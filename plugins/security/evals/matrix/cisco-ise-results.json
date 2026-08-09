@@ -1,0 +1,48 @@
+{
+  "skill": "cisco-ise",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-ise-tacacs-port",
+      "knowledge": "stable",
+      "prompt": "What TCP port does TACACS+ use for Cisco ISE device administration traffic? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b49\\b"
+      },
+      "source": "plugins/security/skills/cisco-ise/SKILL.md - TACACS+ vs RADIUS table: Protocol | TCP/49"
+    },
+    {
+      "id": "cisco-ise-monitor-mode-duration",
+      "knowledge": "recent",
+      "prompt": "Before enabling full 802.1X enforcement on Cisco ISE, how long should an organization typically run in Monitor Mode first to build a device inventory? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "30\\D{1,5}90\\s*days"
+      },
+      "source": "plugins/security/skills/cisco-ise/SKILL.md - Common Pitfalls: Always run in monitor mode for 30-90 days first"
+    },
+    {
+      "id": "cisco-ise-ad-forest-limit",
+      "knowledge": "recent",
+      "prompt": "In ISE 3.x, what is the maximum number of Active Directory forests that Cisco ISE can join? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b50\\b"
+      },
+      "source": "plugins/security/skills/cisco-ise/references/architecture.md - Identity Store Integration: ISE supports joins to multiple AD forests (up to 50 in ISE 3.x)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "siem",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "siem-ocsf-origin",
+      "knowledge": "recent",
+      "prompt": "The OCSF normalization standard for security telemetry, now seeing growing cross-platform adoption, originated at which company? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(aws|amazon web services)\\b"
+      },
+      "source": "plugins/security/skills/siem/SKILL.md - Normalization Standards table: OCSF - AWS-originated open standard; growing adoption"
+    },
+    {
+      "id": "siem-alert-fidelity-threshold",
+      "knowledge": "recent",
+      "prompt": "For SOC alert fidelity, measured as true positives divided by total alerts, what is the healthy target percentage, and below what percentage is it generally considered alert fatigue? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "80%",
+          "50%"
+        ]
+      },
+      "source": "plugins/security/skills/siem/SKILL.md - SOC Metrics table: Alert Fidelity target > 80% (below 50% = alert fatigue)"
+    },
+    {
+      "id": "siem-normalization-standards",
+      "knowledge": "stable",
+      "prompt": "Which SIEM platform's normalization standard is called ASIM, and which platform's normalization standard is called UDM? Answer concisely naming both the standard and the platform for each.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ASIM",
+          "Sentinel",
+          "UDM",
+          "Chronicle"
+        ]
+      },
+      "source": "plugins/security/skills/siem/SKILL.md - Normalization Standards table: ASIM = Sentinel, UDM = Chronicle"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

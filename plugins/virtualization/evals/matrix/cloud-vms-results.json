@@ -1,0 +1,50 @@
+{
+  "skill": "cloud-vms",
+  "plugin": "virtualization",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cloudvms-azure-stop",
+      "knowledge": "stable",
+      "prompt": "On Microsoft Azure, if you run the command to stop a VM without deallocating it, does compute billing for that VM actually stop? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|continues?|remains?\\s+allocated|still\\s+(be\\s+)?bill)"
+      },
+      "source": "plugins/virtualization/skills/cloud-vms/SKILL.md - Key Billing Differences: az vm stop halts OS but keeps VM allocated, billing continues; must use az vm deallocate"
+    },
+    {
+      "id": "cloudvms-gcp-local-ssd",
+      "knowledge": "stable",
+      "prompt": "On Google Compute Engine, what is the storage capacity of a single local SSD device you can attach to an instance? Answer concisely with the number of GB.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "375"
+        ]
+      },
+      "source": "plugins/virtualization/skills/cloud-vms/SKILL.md - Storage table: Ephemeral row, GCP Local SSD (375 GB each)"
+    },
+    {
+      "id": "cloudvms-spot-discount",
+      "knowledge": "recent",
+      "prompt": "Roughly what maximum percentage discount off pay as you go pricing can Azure Spot VMs offer? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b80\\b"
+      },
+      "source": "plugins/virtualization/skills/cloud-vms/SKILL.md - Key Conceptual Differences table: Preemptible/Spot row, Azure Spot VMs (~80% off)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

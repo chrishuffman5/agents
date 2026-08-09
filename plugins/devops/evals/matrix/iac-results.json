@@ -1,0 +1,50 @@
+{
+  "skill": "iac",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "iac-terraform-test-version",
+      "knowledge": "recent",
+      "prompt": "The built-in terraform test command for unit testing modules became available starting in which Terraform minor version? Answer concisely with the version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.6"
+        ]
+      },
+      "source": "plugins/devops/skills/iac/references/concepts.md - Testing IaC table, Unit tests row lists terraform test (1.6+)"
+    },
+    {
+      "id": "iac-ansible-license",
+      "knowledge": "stable",
+      "prompt": "What open source license governs Ansible? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)gpl\\s*v?3"
+      },
+      "source": "plugins/devops/skills/iac/SKILL.md - Comparison Matrix Licensing row: Ansible is GPL v3 (Red Hat)"
+    },
+    {
+      "id": "iac-ansible-idempotent",
+      "knowledge": "stable",
+      "prompt": "In Ansible, are the shell and command modules idempotent by default without any extra guard conditions? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not idempotent|are not)"
+      },
+      "source": "plugins/devops/skills/iac/references/concepts.md - Idempotency section: shell and command modules are NOT idempotent unless creates or removes guards are used"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

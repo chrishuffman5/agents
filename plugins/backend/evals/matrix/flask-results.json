@@ -1,0 +1,50 @@
+{
+  "skill": "flask",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "flask-g-object",
+      "knowledge": "stable",
+      "prompt": "In Flask, which single-letter global object provides request-scoped scratch space for stashing data during one request, distinct from current_app? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bg\\b"
+      },
+      "source": "plugins/backend/skills/flask/SKILL.md - g | App context (per-request) | Request-scoped scratch space"
+    },
+    {
+      "id": "flask-python-minimum",
+      "knowledge": "stable",
+      "prompt": "What is the minimum Python version required to run Flask 3.1? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.10"
+        ]
+      },
+      "source": "plugins/backend/skills/flask/SKILL.md - Flask 3.1 runs on Python 3.10+ and supports async views via asgiref."
+    },
+    {
+      "id": "flask-async-thread-pool",
+      "knowledge": "recent",
+      "prompt": "When you write an async view in Flask, does it actually run on a true asyncio event loop, or does Flask execute it somewhere else under the hood? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)thread\\s*pool"
+      },
+      "source": "plugins/backend/skills/flask/SKILL.md - Async views run in a thread pool, not on an event loop. Limitations: one request per thread, no true concurrency."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

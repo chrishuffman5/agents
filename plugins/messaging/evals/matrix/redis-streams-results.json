@@ -1,0 +1,51 @@
+{
+  "skill": "redis-streams",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "redis-streams-exactly-once",
+      "knowledge": "stable",
+      "prompt": "Does Redis Streams provide exactly-once processing guarantees out of the box? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/messaging/skills/redis-streams/SKILL.md - comparison table: Exactly-once No (at-least-once with XACK) for Redis Streams"
+    },
+    {
+      "id": "redis-streams-pel",
+      "knowledge": "stable",
+      "prompt": "In a Redis Streams consumer group, what is the name of the internal structure that tracks messages delivered but not yet acknowledged? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Pending",
+          "Entries"
+        ]
+      },
+      "source": "plugins/messaging/skills/redis-streams/SKILL.md - Redis Streams as a Message Broker section: unacknowledged messages tracked in Pending Entries List (PEL)"
+    },
+    {
+      "id": "redis-streams-autoclaim",
+      "knowledge": "recent",
+      "prompt": "Which Redis Streams command would you use to reassign messages that are stuck pending on a consumer that has failed? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(xautoclaim|xclaim)"
+      },
+      "source": "plugins/messaging/skills/redis-streams/SKILL.md - Redis Streams as a Message Broker section: XCLAIM and XAUTOCLAIM reassign stuck messages from failed consumers"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

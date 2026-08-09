@@ -1,0 +1,51 @@
+{
+  "skill": "ad-fs",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ad-fs-wid-limits",
+      "knowledge": "stable",
+      "prompt": "When using the Windows Internal Database for an AD FS farm configuration database, what is the maximum number of AD FS servers it supports, and the maximum number of relying party trusts, before you must move to SQL Server? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b\\D{0,40}\\b100\\b"
+      },
+      "source": "plugins/security/skills/ad-fs/SKILL.md - Common Pitfalls: WID scaling limits - WID supports 5 AD FS servers and 100 relying party trusts"
+    },
+    {
+      "id": "ad-fs-version-numbers",
+      "knowledge": "recent",
+      "prompt": "What internal version numbers correspond to AD FS running on Windows Server 2016 versus Windows Server 2019? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.0",
+          "5.0"
+        ]
+      },
+      "source": "plugins/security/skills/ad-fs/SKILL.md - AD FS 4.0 (Server 2016) or AD FS 5.0 (Server 2019)"
+    },
+    {
+      "id": "ad-fs-token-signing-rollover",
+      "knowledge": "recent",
+      "prompt": "By default, how many days before expiry does AD FS automatically roll over the token-signing certificate? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b20\\b"
+      },
+      "source": "plugins/security/skills/ad-fs/SKILL.md - Certificate Management table: Token-signing rotation is auto-rollover (default: 20 days before expiry)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

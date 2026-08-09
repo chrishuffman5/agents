@@ -1,0 +1,52 @@
+{
+  "skill": "jenkins",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "jenkins-lts-version",
+      "knowledge": "recent",
+      "prompt": "What Jenkins LTS version, or higher, is referenced as the current baseline? Answer concisely with the version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.541"
+        ]
+      },
+      "source": "plugins/devops/skills/jenkins/SKILL.md - intro paragraph states current LTS is 2.541+"
+    },
+    {
+      "id": "jenkins-durability-default",
+      "knowledge": "stable",
+      "prompt": "In a Jenkins Declarative Pipeline, if you do not set a durabilityHint option, what is the default durability level? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "MAX_SURVIVABILITY"
+        ]
+      },
+      "source": "plugins/devops/skills/jenkins/references/best-practices.md - Pipeline Durability section lists MAX_SURVIVABILITY as the default option"
+    },
+    {
+      "id": "jenkins-secrets-backup",
+      "knowledge": "stable",
+      "prompt": "If a Jenkins JENKINS_HOME backup excludes the secrets directory, can the encrypted credentials still be recovered after a restore? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|unrecoverable|cannot|not recoverable)"
+      },
+      "source": "plugins/devops/skills/jenkins/references/best-practices.md - Backup Strategy notes secrets directory holds encryption keys; without these, credentials are unrecoverable"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

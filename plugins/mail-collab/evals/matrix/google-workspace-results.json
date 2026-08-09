@@ -1,0 +1,48 @@
+{
+  "skill": "google-workspace",
+  "plugin": "mail-collab",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "google-workspace-domain-cap",
+      "knowledge": "stable",
+      "prompt": "In Google Workspace, what is the maximum number of domains, combining primary, alias, and secondary domains, that a single account can have? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b600\\b"
+      },
+      "source": "plugins/mail-collab/skills/google-workspace/SKILL.md - Account Model: Up to 600 domains (primary + alias + secondary)."
+    },
+    {
+      "id": "google-workspace-dkim-bit",
+      "knowledge": "stable",
+      "prompt": "When generating a new DKIM signing key for a domain in the Google Workspace Admin Console, what key length in bits is recommended? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2048\\b"
+      },
+      "source": "plugins/mail-collab/skills/google-workspace/SKILL.md - DKIM Configuration: Click Generate new record (2048-bit recommended)."
+    },
+    {
+      "id": "google-workspace-gwmme-gap",
+      "knowledge": "recent",
+      "prompt": "When migrating from Google Workspace to Microsoft 365 with a tool like GWMME, does the migration bring over Google Chat history and Meet recordings along with email, calendar, and contacts? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not|doesn't|won't|not\\b)"
+      },
+      "source": "plugins/mail-collab/skills/google-workspace/SKILL.md - Migration > Google Workspace to M365: Migrates email/calendar/contacts. Does NOT migrate: Chat history, Meet recordings, Google Sites."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

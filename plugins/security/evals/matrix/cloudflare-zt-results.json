@@ -1,0 +1,48 @@
+{
+  "skill": "cloudflare-zt",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cloudflare-zt-free-tier-users",
+      "knowledge": "recent",
+      "prompt": "How many users does the free tier of Cloudflare Zero Trust support with full Access and Gateway functionality? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b50\\b"
+      },
+      "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Free Tier: Up to 50 users, full Access + Gateway functionality"
+    },
+    {
+      "id": "cloudflare-zt-area1-acquisition-year",
+      "knowledge": "recent",
+      "prompt": "In what year did Cloudflare acquire Area 1 Security, which became its email security product? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2022\\b"
+      },
+      "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Email Security (Area 1): Cloudflare acquired Area 1 Security in 2022"
+    },
+    {
+      "id": "cloudflare-zt-anycast-cities",
+      "knowledge": "stable",
+      "prompt": "Approximately how many cities does Cloudflare's anycast network span? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "300\\+?"
+      },
+      "source": "plugins/security/skills/cloudflare-zt/SKILL.md - Network Foundation: Cloudflare operates in 300+ cities"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

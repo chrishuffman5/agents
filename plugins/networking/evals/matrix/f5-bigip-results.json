@@ -1,0 +1,53 @@
+{
+  "skill": "f5-bigip",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "f5-bigip-mgmt-tls-min",
+      "knowledge": "recent",
+      "prompt": "On F5 BIG-IP 17.1 and later, what is the minimum TLS version enforced for management interfaces like the Configuration Utility GUI and iControl REST? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)tls\\s*1\\.2"
+      },
+      "source": "plugins/networking/skills/f5-bigip/references/versions/17.5.md - BIG-IP 17.1+ enforces TLS 1.2 as the minimum protocol version for all management interfaces"
+    },
+    {
+      "id": "f5-bigip-fips-level",
+      "knowledge": "recent",
+      "prompt": "On BIG-IP 17.x hardware platforms equipped with a FIPS HSM (r-series, i-series), what FIPS 140 compliance level do they support? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "140-2",
+          "Level 2"
+        ]
+      },
+      "source": "plugins/networking/skills/f5-bigip/references/versions/17.5.md - BIG-IP 17.x FIPS-equipped platforms support FIPS 140-2 Level 2, up from Level 1 in 15.x/16.x"
+    },
+    {
+      "id": "f5-bigip-client-accepted-event",
+      "knowledge": "stable",
+      "prompt": "In an F5 BIG-IP iRule, which event fires the moment a new TCP connection from the client is accepted, before any HTTP parsing occurs? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CLIENT_ACCEPTED"
+        ]
+      },
+      "source": "plugins/networking/skills/f5-bigip/SKILL.md - iRules event model table lists CLIENT_ACCEPTED as the trigger for a new TCP connection from client"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

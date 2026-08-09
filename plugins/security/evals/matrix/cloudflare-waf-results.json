@@ -1,0 +1,48 @@
+{
+  "skill": "cloudflare-waf",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cloudflare-waf-paranoia-level",
+      "knowledge": "stable",
+      "prompt": "In Cloudflare's OWASP Core Ruleset configuration, what is the name of the setting that controls how aggressively rules are applied, ranging from PL1 through PL4? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)paranoia"
+      },
+      "source": "plugins/security/skills/cloudflare-waf/SKILL.md - Configuring OWASP Ruleset, Key settings: Paranoia Level: PL1 (default) to PL4 (most aggressive)"
+    },
+    {
+      "id": "cloudflare-waf-under-attack-mode",
+      "knowledge": "stable",
+      "prompt": "What is the name of the Cloudflare security level setting that issues a JavaScript challenge to every visitor, intended for use during an active DDoS incident? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)under attack"
+      },
+      "source": "plugins/security/skills/cloudflare-waf/SKILL.md - Security Level: I'm Under Attack!: Maximum protection (all visitors get JS challenge)"
+    },
+    {
+      "id": "cloudflare-waf-processing-order",
+      "knowledge": "recent",
+      "prompt": "In Cloudflare's edge security processing order, which is evaluated first: custom WAF rules or the managed rulesets like the Cloudflare OWASP Core Ruleset? Answer with just which one comes first.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)custom"
+      },
+      "source": "plugins/security/skills/cloudflare-waf/SKILL.md - Processing order list: 2. Custom WAF rules comes before 4. Managed rulesets"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

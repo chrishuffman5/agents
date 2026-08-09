@@ -1,0 +1,52 @@
+{
+  "skill": "chef",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "chef-attribute-precedence-winner",
+      "knowledge": "stable",
+      "prompt": "In Chef Infra's attribute precedence hierarchy, which attribute source always wins over every other level, including role override attributes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(automatic|ohai)"
+      },
+      "source": "plugins/devops/skills/chef/SKILL.md - Attribute Precedence list, level 8: Automatic (Ohai) attributes - always wins"
+    },
+    {
+      "id": "chef-server-erchef",
+      "knowledge": "stable",
+      "prompt": "What is the name of the Erlang-based API server component inside Chef Server that handles every client request? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Erchef"
+        ]
+      },
+      "source": "plugins/devops/skills/chef/references/architecture.md - Chef Server Components table: Erchef - API server (Erlang) - handles all client requests"
+    },
+    {
+      "id": "chef-custom-resource-unified-mode",
+      "knowledge": "recent",
+      "prompt": "When writing a modern custom resource for Chef Infra 18.x, what property line is commonly set near the top of the resource file to enable unified mode? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "unified_mode"
+        ]
+      },
+      "source": "plugins/devops/skills/chef/references/architecture.md - Custom Resources example, cookbooks/myapp/resources/deploy.rb opens with unified_mode true"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

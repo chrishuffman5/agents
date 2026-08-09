@@ -1,0 +1,58 @@
+{
+  "skill": "asm",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "asm-internet-scan-tools",
+      "knowledge": "stable",
+      "prompt": "Which three internet-wide scanning data providers are named as indexing the entire internet daily, providing data that EASM tools leverage or replicate? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Shodan",
+          "Censys",
+          "FOFA"
+        ]
+      },
+      "source": "plugins/security/skills/asm/SKILL.md - Discovery methods: Internet-wide scanning data - Shodan, Censys, FOFA index the entire internet daily"
+    },
+    {
+      "id": "asm-crtsh",
+      "knowledge": "recent",
+      "prompt": "Which certificate transparency log lookup site is named as a source for enumerating subdomains during external attack surface discovery? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "crt.sh"
+        ]
+      },
+      "source": "plugins/security/skills/asm/SKILL.md - Discovery methods: Domain enumeration - certificate transparency logs (crt.sh), zone transfers, passive DNS"
+    },
+    {
+      "id": "asm-vm-integration-tools",
+      "knowledge": "stable",
+      "prompt": "In the EASM-to-VM workflow, which three named vulnerability scanners does a newly discovered exposed host commonly get added to for credentialed scanning? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Tenable",
+          "Qualys",
+          "Rapid7"
+        ]
+      },
+      "source": "plugins/security/skills/asm/SKILL.md - Integration with VM: EASM to VM workflow - VM team adds host to scanner (Tenable, Qualys, Rapid7)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

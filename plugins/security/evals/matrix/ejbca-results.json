@@ -1,0 +1,51 @@
+{
+  "skill": "ejbca",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ejbca-est-rfc",
+      "knowledge": "stable",
+      "prompt": "Which RFC number defines the EST enrollment protocol that EJBCA supports for device certificate enrollment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)rfc\\s*7030"
+      },
+      "source": "plugins/security/skills/ejbca/SKILL.md - EST (RFC 7030) section heading"
+    },
+    {
+      "id": "ejbca-common-criteria-eal",
+      "knowledge": "recent",
+      "prompt": "What Common Criteria assurance level is the Enterprise edition of EJBCA certified to? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)eal\\s*4\\+?"
+      },
+      "source": "plugins/security/skills/ejbca/SKILL.md - EJBCA Overview: Common Criteria EAL4+ certified (Enterprise edition); also under Compliance Features"
+    },
+    {
+      "id": "ejbca-est-endpoints",
+      "knowledge": "recent",
+      "prompt": "In EJBCA's EST protocol implementation, what is the name of the endpoint used for a device's initial certificate enrollment, and what is the name of the endpoint used to renew an existing certificate? Answer concisely, naming both endpoints.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "simpleenroll",
+          "simplereenroll"
+        ]
+      },
+      "source": "plugins/security/skills/ejbca/SKILL.md - EST endpoints list: /simpleenroll (Enroll), /simplereenroll (Re-enroll)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

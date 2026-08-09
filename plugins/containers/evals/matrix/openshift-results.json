@@ -1,0 +1,233 @@
+{
+  "skill": "openshift",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "openshift-default-scc",
+      "knowledge": "stable",
+      "prompt": "What is the default Security Context Constraint applied in a modern OpenShift cluster, and which upstream Pod Security Standard level does it align with? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "restricted-v2",
+          "Restricted"
+        ]
+      },
+      "source": "plugins/containers/skills/openshift/SKILL.md - restricted-v2 is default, aligns with K8s Restricted PSS"
+    },
+    {
+      "id": "openshift-route-passthrough",
+      "knowledge": "stable",
+      "prompt": "Which OpenShift Route TLS termination mode passes encrypted traffic straight through to the pod without the router inspecting it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "passthrough"
+        ]
+      },
+      "source": "plugins/containers/skills/openshift/SKILL.md - passthrough: TLS passed through to pod (no inspection)"
+    },
+    {
+      "id": "openshift-scc-selection-algorithm",
+      "knowledge": "recent",
+      "prompt": "When OpenShift schedules a pod and several SCCs are available to its ServiceAccount, does it choose the least restrictive or the most restrictive SCC that still satisfies the pod's requirements? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)most restrictive"
+      },
+      "source": "plugins/containers/skills/openshift/SKILL.md - SCC selection algorithm selects the most restrictive SCC that satisfies the pod's requirements"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 14590,
+      "meanTokensOut": 378,
+      "totalCostUsd": 1.0493,
+      "costPerCorrect": 0.1166
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 10620,
+      "meanTokensOut": 177,
+      "totalCostUsd": 0.292,
+      "costPerCorrect": 0.0487
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13078,
+        "meanTokensOut": 487,
+        "totalCostUsd": 0.8906,
+        "costPerCorrect": 0.1484
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10999,
+        "meanTokensOut": 241,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17614,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10241,
+        "meanTokensOut": 113,
+        "totalCostUsd": 0.1183,
+        "costPerCorrect": 0.0394
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 13078,
+        "meanTokensOut": 487,
+        "totalCostUsd": 0.8906,
+        "costPerCorrect": 0.1484
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10999,
+        "meanTokensOut": 241,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17614,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10241,
+        "meanTokensOut": 113,
+        "totalCostUsd": 0.1183,
+        "costPerCorrect": 0.0394
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10999,
+        "meanTokensOut": 241,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8442,
+        "meanTokensOut": 180,
+        "totalCostUsd": 0.3388,
+        "costPerCorrect": 0.1129
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17714,
+        "meanTokensOut": 793,
+        "totalCostUsd": 0.5518,
+        "costPerCorrect": 0.1839
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 10241,
+        "meanTokensOut": 113,
+        "totalCostUsd": 0.1183,
+        "costPerCorrect": 0.0394
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 17614,
+        "meanTokensOut": 160,
+        "totalCostUsd": 0.1587,
+        "costPerCorrect": 0.0529
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

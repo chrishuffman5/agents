@@ -1,0 +1,50 @@
+{
+  "skill": "grpc",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "grpc-status-code-count",
+      "knowledge": "stable",
+      "prompt": "How many distinct status codes make up the gRPC error model, from OK through UNAUTHENTICATED? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/grpc/SKILL.md - Status Codes: 17 codes: OK(0) ... UNAUTHENTICATED(16)"
+    },
+    {
+      "id": "grpc-k8s-probe-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which Kubernetes version can a workload use a native built-in gRPC probe for liveness and readiness checks, instead of a sidecar or exec probe? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\.24"
+      },
+      "source": "plugins/api-realtime/skills/grpc/SKILL.md - anti-pattern 7: Kubernetes 1.24+ supports native gRPC probes"
+    },
+    {
+      "id": "grpc-max-message-size",
+      "knowledge": "stable",
+      "prompt": "What is the default maximum size for a single gRPC message, and what pattern should be used instead when transferring larger data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s?mb"
+      },
+      "source": "plugins/api-realtime/skills/grpc/SKILL.md - anti-pattern 5: default max message size is 4MB; use streaming for large data transfers"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

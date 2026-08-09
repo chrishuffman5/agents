@@ -1,0 +1,230 @@
+{
+  "skill": "rocky-alma",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 13,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rocky-alma-elevate-target-dropped",
+      "knowledge": "recent",
+      "prompt": "As of November 2025, can the ELevate tool still be used to migrate a CentOS or RHEL system to Rocky Linux? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|no longer|dropped|removed)"
+      },
+      "source": "plugins/os/skills/rocky-alma/SKILL.md - CentOS Migration: As of November 2025, ELevate no longer supports Rocky Linux as a migration target."
+    },
+    {
+      "id": "rocky-alma-crb-before-epel",
+      "knowledge": "stable",
+      "prompt": "On Rocky Linux or AlmaLinux, EPEL packages often depend on packages in another repository that must be enabled first, or dependency resolution silently fails or pulls the wrong versions. Name that repository.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bCRB\\b|Code Ready Builder)"
+      },
+      "source": "plugins/os/skills/rocky-alma/SKILL.md - Common Pitfalls #2: Not enabling CRB before installing EPEL; EPEL packages frequently depend on packages in CRB"
+    },
+    {
+      "id": "rocky-alma-cpanel-requires-alma",
+      "knowledge": "recent",
+      "prompt": "For web hosting with cPanel version 134 or later, cPanel dropped support for one RHEL compatible rebuild and now requires the other. Which distribution does cPanel require, Rocky Linux or AlmaLinux? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AlmaLinux"
+        ]
+      },
+      "source": "plugins/os/skills/rocky-alma/SKILL.md - Common Pitfalls #1: For web hosting with cPanel, AlmaLinux is required (cPanel dropped Rocky in v134+)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 7,
+      "pass": 7,
+      "accuracy": 100.0,
+      "meanWallMs": 11009,
+      "meanTokensOut": 191,
+      "totalCostUsd": 0.8342,
+      "costPerCorrect": 0.1192
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 14072,
+      "meanTokensOut": 262,
+      "totalCostUsd": 0.5389,
+      "costPerCorrect": 0.0898
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 4,
+        "pass": 4,
+        "accuracy": 100.0,
+        "meanWallMs": 7940,
+        "meanTokensOut": 219,
+        "totalCostUsd": 0.6859,
+        "costPerCorrect": 0.1715
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12380,
+        "meanTokensOut": 293,
+        "totalCostUsd": 0.2063,
+        "costPerCorrect": 0.0688
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15101,
+        "meanTokensOut": 154,
+        "totalCostUsd": 0.1483,
+        "costPerCorrect": 0.0494
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15765,
+        "meanTokensOut": 231,
+        "totalCostUsd": 0.3325,
+        "costPerCorrect": 0.1108
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 4,
+        "pass": 4,
+        "accuracy": 100.0,
+        "meanWallMs": 7940,
+        "meanTokensOut": 219,
+        "totalCostUsd": 0.6859,
+        "costPerCorrect": 0.1715
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12380,
+        "meanTokensOut": 293,
+        "totalCostUsd": 0.2063,
+        "costPerCorrect": 0.0688
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15101,
+        "meanTokensOut": 154,
+        "totalCostUsd": 0.1483,
+        "costPerCorrect": 0.0494
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15765,
+        "meanTokensOut": 231,
+        "totalCostUsd": 0.3325,
+        "costPerCorrect": 0.1108
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12380,
+        "meanTokensOut": 293,
+        "totalCostUsd": 0.2063,
+        "costPerCorrect": 0.0688
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7194,
+        "meanTokensOut": 145,
+        "totalCostUsd": 0.4809,
+        "costPerCorrect": 0.1603
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 1,
+        "pass": 1,
+        "accuracy": 100.0,
+        "meanWallMs": 10179,
+        "meanTokensOut": 439,
+        "totalCostUsd": 0.205,
+        "costPerCorrect": 0.205
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15765,
+        "meanTokensOut": 231,
+        "totalCostUsd": 0.3325,
+        "costPerCorrect": 0.1108
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15101,
+        "meanTokensOut": 154,
+        "totalCostUsd": 0.1483,
+        "costPerCorrect": 0.0494
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

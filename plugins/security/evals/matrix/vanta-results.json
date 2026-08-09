@@ -1,0 +1,50 @@
+{
+  "skill": "vanta",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vanta-aws-external-id",
+      "knowledge": "stable",
+      "prompt": "When Vanta connects to an AWS account via its CloudFormation stack, what mechanism does it require to prevent a confused deputy attack? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)external\\s*id"
+      },
+      "source": "plugins/security/skills/vanta/SKILL.md - Connecting AWS steps: External ID required to prevent confused deputy attack"
+    },
+    {
+      "id": "vanta-okta-sync",
+      "knowledge": "recent",
+      "prompt": "When Vanta is connected to Okta as an integration, how often does it poll Okta to sync data, expressed as a range in hours? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4-24"
+        ]
+      },
+      "source": "plugins/security/skills/vanta/SKILL.md - Connecting Okta: Sync period: Vanta polls Okta every 4-24 hours"
+    },
+    {
+      "id": "vanta-soc2-readiness",
+      "knowledge": "recent",
+      "prompt": "Before inviting an auditor into Vanta for a SOC 2 engagement, what readiness percentage threshold does Vanta recommend hitting first? Answer concisely with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(85\\s*%|85\\s*percent)"
+      },
+      "source": "plugins/security/skills/vanta/SKILL.md - SOC 2 readiness score: Target >=85% before inviting auditor"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

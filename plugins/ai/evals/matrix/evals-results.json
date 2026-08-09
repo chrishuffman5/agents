@@ -1,0 +1,54 @@
+{
+  "skill": "evals",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "evals-test-composition",
+      "knowledge": "stable",
+      "prompt": "For a well-composed AI eval test set, what rough percentage breakdown does Anthropic recommend across core or typical cases, edge cases, and adversarial cases? Answer concisely with the three ranges.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "60",
+          "30",
+          "10"
+        ]
+      },
+      "source": "plugins/ai/skills/evals/SKILL.md - composition target 60-70% core, 20-30% edge, 5-10% adversarial cases"
+    },
+    {
+      "id": "evals-pass-at-k-vs-pass-hat-k",
+      "knowledge": "stable",
+      "prompt": "In agent evaluation, what is the difference between the pass at k metric and the pass hat k metric? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(at least one).{0,80}(all\\s*k|every\\s*attempt)"
+      },
+      "source": "plugins/ai/skills/evals/SKILL.md - pass@k = at least one success in k attempts; pass^k = all k attempts succeed"
+    },
+    {
+      "id": "evals-skill-request-limit",
+      "knowledge": "recent",
+      "prompt": "How many Agent Skills can be attached to a single Claude API request, per guidance on watching recall as skill count grows? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8"
+        ]
+      },
+      "source": "plugins/ai/skills/evals/SKILL.md - API requests support a maximum of 8 Skills per request"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

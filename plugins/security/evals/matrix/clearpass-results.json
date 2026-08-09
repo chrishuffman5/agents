@@ -1,0 +1,55 @@
+{
+  "skill": "clearpass",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "clearpass-onguard-modes",
+      "knowledge": "stable",
+      "prompt": "What are the three deployment modes for Aruba ClearPass's OnGuard posture agent? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Persistent",
+          "Dissolvable",
+          "Web-based"
+        ]
+      },
+      "source": "plugins/security/skills/clearpass/SKILL.md - OnGuard Posture Assessment, OnGuard deployment modes: Persistent agent, Dissolvable agent, Web-based"
+    },
+    {
+      "id": "clearpass-tacacs-privilege-level",
+      "knowledge": "stable",
+      "prompt": "In a ClearPass TACACS+ shell profile granting full administrative access on a network device, what privilege level is typically assigned? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b15\\b"
+      },
+      "source": "plugins/security/skills/clearpass/SKILL.md - TACACS+ Configuration example: TACACS+ Shell Profile: privilege-level=15"
+    },
+    {
+      "id": "clearpass-dhcp-profiling-options",
+      "knowledge": "recent",
+      "prompt": "Which two DHCP option numbers does ClearPass primarily rely on for device profiling, corresponding to the parameter request list and the vendor class? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "55",
+          "60"
+        ]
+      },
+      "source": "plugins/security/skills/clearpass/SKILL.md - Device Profiling and Fingerprinting table: DHCP Option 55 (parameter request list), Option 60 (vendor class)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

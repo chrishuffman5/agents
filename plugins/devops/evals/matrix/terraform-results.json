@@ -1,0 +1,52 @@
+{
+  "skill": "terraform",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "terraform-ephemeral-origin-version",
+      "knowledge": "recent",
+      "prompt": "Ephemeral resources reached full stabilization in Terraform 1.14. In which earlier minor version were they originally introduced? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.10"
+        ]
+      },
+      "source": "plugins/devops/skills/terraform/references/versions/1.14.md - Ephemeral Resources section: (introduced in 1.10) are fully stabilized in 1.14"
+    },
+    {
+      "id": "terraform-115-release-date",
+      "knowledge": "recent",
+      "prompt": "As cited in Terraform 1.15 release guidance, what month and year is given as its current release date? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)april\\s*2026"
+      },
+      "source": "plugins/devops/skills/terraform/references/versions/1.15.md - covers Terraform 1.15, the current release as of April 2026"
+    },
+    {
+      "id": "terraform-s3-backend-lock",
+      "knowledge": "stable",
+      "prompt": "When Terraform uses an S3 bucket as its state backend, what AWS service is used to provide state locking? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DynamoDB"
+        ]
+      },
+      "source": "plugins/devops/skills/terraform/references/architecture.md - Backend Architecture table: S3 | S3 bucket | DynamoDB table | SSE-S3 or SSE-KMS"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

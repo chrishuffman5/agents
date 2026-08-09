@@ -1,0 +1,55 @@
+{
+  "skill": "akamai-waf",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "akamai-waf-edge-network-scale",
+      "knowledge": "stable",
+      "prompt": "Approximately how many edge servers does Akamai operate globally, and across how many countries, per its description as the largest CDN network? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "240",
+          "130"
+        ]
+      },
+      "source": "plugins/security/skills/akamai-waf/SKILL.md - Akamai operates the world's largest CDN network (~240,000 servers in 130+ countries)"
+    },
+    {
+      "id": "akamai-waf-bot-tarpit",
+      "knowledge": "recent",
+      "prompt": "In Akamai Bot Manager, what term does Akamai use in parentheses for the slow down action that introduces an artificial delay in the response to detected bot traffic? Answer with one word.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "tarpit"
+        ]
+      },
+      "source": "plugins/security/skills/akamai-waf/SKILL.md - Actions per bot category: Slow down (tarpit - artificial delay response)"
+    },
+    {
+      "id": "akamai-waf-staging-domain",
+      "knowledge": "recent",
+      "prompt": "What domain suffix does Akamai's staging network use so you can test WAF configuration changes before activating them to production? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "akamai-staging.net"
+        ]
+      },
+      "source": "plugins/security/skills/akamai-waf/SKILL.md - Networks: Staging network - *.akamai-staging.net - test configurations without affecting production"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

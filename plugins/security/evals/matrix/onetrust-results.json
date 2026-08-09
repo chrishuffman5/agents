@@ -1,0 +1,56 @@
+{
+  "skill": "onetrust",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "onetrust-dsar-deadlines",
+      "knowledge": "stable",
+      "prompt": "What are the standard regulatory response deadlines for a Data Subject Access Request under GDPR versus under CCPA? Answer concisely with both numbers of days.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30",
+          "45"
+        ]
+      },
+      "source": "plugins/security/skills/onetrust/SKILL.md - DSAR Automation section: response within 30 days (GDPR) or 45 days (CCPA)"
+    },
+    {
+      "id": "onetrust-regulatory-monitoring-scale",
+      "knowledge": "recent",
+      "prompt": "OneTrust's regulatory change monitoring capability tracks regulatory sources across how many jurisdictions, and roughly how many total regulatory sources does it monitor? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2,000",
+          "100"
+        ]
+      },
+      "source": "plugins/security/skills/onetrust/SKILL.md - Ethics and Compliance Module section: monitors 2,000+ regulatory sources across 100+ jurisdictions"
+    },
+    {
+      "id": "onetrust-tcf-version",
+      "knowledge": "recent",
+      "prompt": "Which specific version of the IAB Transparency and Consent Framework does OneTrust support as a certified consent management platform for programmatic advertising compliance? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.2"
+        ]
+      },
+      "source": "plugins/security/skills/onetrust/SKILL.md - Consent Management section: IAB TCF 2.2 support and certified CMP for IAB TCF"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "solarwinds-npm",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "solarwinds-npm-api-port",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the SolarWinds Orion Information Service REST API listen on by default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17778"
+        ]
+      },
+      "source": "plugins/networking/skills/solarwinds-npm/SKILL.md - Orion SDK / REST API: Base URL https://orion-server:17778/SolarWinds/InformationService/v3/Json/"
+    },
+    {
+      "id": "solarwinds-npm-2025-thinap",
+      "knowledge": "recent",
+      "prompt": "Which SolarWinds NPM release added the ability to discover and manage individual thin access points as their own SNMP nodes, instead of only at the wireless controller level? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2025.2"
+        ]
+      },
+      "source": "plugins/networking/skills/solarwinds-npm/SKILL.md - NPM 2025.2 Features: Thin AP Management (previously WLC-level only)"
+    },
+    {
+      "id": "solarwinds-npm-sql-backend",
+      "knowledge": "stable",
+      "prompt": "Does SolarWinds Orion (NPM) require a Microsoft SQL Server backend to store its configuration and polling data? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|requires|sql server)"
+      },
+      "source": "plugins/networking/skills/solarwinds-npm/SKILL.md - Orion Platform Architecture: SQL Server Backend, Microsoft SQL Server stores all configuration, polling data, events"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

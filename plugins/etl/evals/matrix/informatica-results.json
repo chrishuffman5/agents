@@ -1,0 +1,51 @@
+{
+  "skill": "informatica",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "informatica-claire-acronym",
+      "knowledge": "stable",
+      "prompt": "In Informatica IDMC, CLAIRE is the name of the AI engine. What does the acronym CLAIRE stand for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)cloud.{0,2}scale.*real.{0,2}time.*execution"
+      },
+      "source": "plugins/etl/skills/informatica/SKILL.md - CLAIRE AI Engine: CLAIRE (Cloud-scale AI for Real-time Execution)."
+    },
+    {
+      "id": "informatica-pricing-metric",
+      "knowledge": "stable",
+      "prompt": "What unified, usage-based pricing metric does Informatica IDMC use across all its services? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(IPU|informatica processing units)"
+      },
+      "source": "plugins/etl/skills/informatica/SKILL.md - Pricing Model: Informatica Processing Units (IPU) -- unified consumption-based metric across all IDMC services."
+    },
+    {
+      "id": "informatica-claire-agents-era",
+      "knowledge": "recent",
+      "prompt": "Informatica introduced CLAIRE Agents, including Data Exploration Agents and Enterprise Discovery Agents, starting in which season and year? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Fall",
+          "2025"
+        ]
+      },
+      "source": "plugins/etl/skills/informatica/SKILL.md - CLAIRE Agents (Fall 2025+): Data Exploration Agents, Enterprise Discovery Agents, ELT Agents."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

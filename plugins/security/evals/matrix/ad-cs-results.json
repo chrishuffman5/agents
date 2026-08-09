@@ -1,0 +1,50 @@
+{
+  "skill": "ad-cs",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ad-cs-event-4887",
+      "knowledge": "stable",
+      "prompt": "Which Windows security event ID logs that an Active Directory Certificate Services certificate request was approved and issued? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4887\\b"
+      },
+      "source": "plugins/security/skills/ad-cs/SKILL.md - Event ID 4887: Certificate request approved and issued"
+    },
+    {
+      "id": "ad-cs-esc10-strongcert-enforcement",
+      "knowledge": "recent",
+      "prompt": "To fully remediate the ESC10 weak certificate mapping issue in AD CS, what value must the StrongCertificateBindingEnforcement registry setting on domain controllers be set to for full enforcement mode? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)StrongCertificateBindingEnforcement\\D{0,10}2\\b"
+      },
+      "source": "plugins/security/skills/ad-cs/references/vulnerabilities.md - ESC10 remediation: Set StrongCertificateBindingEnforcement = 2 (full enforcement mode)"
+    },
+    {
+      "id": "ad-cs-esc8-petitpotam-cve",
+      "knowledge": "recent",
+      "prompt": "The ESC8 AD CS attack path is commonly enabled by coercion tools like PetitPotam. What CVE number was assigned to patch the PetitPotam coercion vulnerability? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CVE-2021-36942"
+        ]
+      },
+      "source": "plugins/security/skills/ad-cs/references/vulnerabilities.md - ESC8 remediation mentions mitigating coercion by patching PetitPotam (CVE-2021-36942)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

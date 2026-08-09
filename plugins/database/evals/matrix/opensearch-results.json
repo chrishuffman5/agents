@@ -1,0 +1,53 @@
+{
+  "skill": "opensearch",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "opensearch-3x-perf-multiplier",
+      "knowledge": "recent",
+      "prompt": "OpenSearch publishes aggregate performance comparisons between major versions. Approximately how many times more performant is OpenSearch 3.0 than OpenSearch 1.3 on aggregate benchmarks? Answer with the exact multiplier.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.4"
+        ]
+      },
+      "source": "plugins/database/skills/opensearch/references/versions/3.x.md - Performance Comparison: 3.x vs 2.x table states OpenSearch 3.0 is approximately 8.4x more performant than OpenSearch 1.3 on aggregate and 20% faster than 2.19"
+    },
+    {
+      "id": "opensearch-agentic-search-types",
+      "knowledge": "recent",
+      "prompt": "OpenSearch agentic search, which reached general availability in version 3.3, ships with four pre-built agent types. Which one is designed for complex multi-step reasoning that breaks a task into steps and refines its approach through reflection? Answer with the exact agent type name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)plan.?execute.?reflect"
+      },
+      "source": "plugins/database/skills/opensearch/references/versions/3.x.md - OpenSearch 3.3 (November 2025) Agentic Search (GA) section lists 4 pre-built agent types; the 4th is the Plan-execute-reflect agent for complex multi-step reasoning"
+    },
+    {
+      "id": "opensearch-serverless-ocu-spec",
+      "knowledge": "stable",
+      "prompt": "In Amazon OpenSearch Serverless, one OCU (OpenSearch Compute Unit) equals 1 vCPU plus how much RAM and how much local storage? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6",
+          "120"
+        ]
+      },
+      "source": "plugins/database/skills/opensearch/SKILL.md - OpenSearch Serverless (AOSS) on AWS section: each OCU = 1 vCPU + 6 GiB RAM + 120 GiB storage"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

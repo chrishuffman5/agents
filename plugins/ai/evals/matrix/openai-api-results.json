@@ -1,0 +1,52 @@
+{
+  "skill": "openai-api",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "openai-api-assistants-sunset",
+      "knowledge": "recent",
+      "prompt": "By what date is the OpenAI Assistants API scheduled for full sunset? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026-08-26"
+        ]
+      },
+      "source": "plugins/ai/skills/openai-api/SKILL.md - Assistants API full sunset: 2026-08-26"
+    },
+    {
+      "id": "openai-api-batch-caps",
+      "knowledge": "stable",
+      "prompt": "What are the request-count and file-size caps for a single OpenAI Batch API submission? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)50,?000.{0,60}200\\s?mb"
+      },
+      "source": "plugins/ai/skills/openai-api/SKILL.md - Caps: 50,000 requests and 200 MB per batch"
+    },
+    {
+      "id": "openai-api-code-interpreter-idle",
+      "knowledge": "recent",
+      "prompt": "How long can an OpenAI code interpreter container sit idle before it is terminated and its data is lost? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "20"
+        ]
+      },
+      "source": "plugins/ai/skills/openai-api/SKILL.md - Container dies after 20 minutes idle"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

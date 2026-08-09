@@ -1,0 +1,52 @@
+{
+  "skill": "mandiant",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mandiant-google-acquisition-year",
+      "knowledge": "stable",
+      "prompt": "In what year was Mandiant acquired by Google, becoming part of Google Cloud Security? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2022"
+        ]
+      },
+      "source": "plugins/security/skills/mandiant/SKILL.md - Context note: Mandiant was acquired by Google in 2022"
+    },
+    {
+      "id": "mandiant-unc-to-apt-promotion",
+      "knowledge": "recent",
+      "prompt": "Which UNC-designated activity cluster tracked by Mandiant was later promoted to the APT29 designation following attribution work tied to the SolarWinds compromise? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "UNC2452"
+        ]
+      },
+      "source": "plugins/security/skills/mandiant/SKILL.md - UNC Group Tracking section: UNC2452 promoted to APT29 after SolarWinds attribution"
+    },
+    {
+      "id": "mandiant-ir-breach-volume",
+      "knowledge": "recent",
+      "prompt": "According to Mandiant, roughly how many breaches does its incident response practice respond to each year? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?000\\+?"
+      },
+      "source": "plugins/security/skills/mandiant/SKILL.md - Mandiant's Intelligence Foundation: Mandiant responds to 1,000+ breaches annually"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

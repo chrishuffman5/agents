@@ -1,0 +1,56 @@
+{
+  "skill": "cursor",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cursor-mdc-extension",
+      "knowledge": "stable",
+      "prompt": "In Cursor, what file extension must rule files inside the .cursor/rules directory use in order to actually be recognized by the editor? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          ".mdc"
+        ]
+      },
+      "source": "plugins/ai/skills/cursor/SKILL.md - Always spell rule files *.mdc, never *.md, inside .cursor/rules"
+    },
+    {
+      "id": "cursor-always-approve-actions",
+      "knowledge": "stable",
+      "prompt": "In Cursor, name the three kinds of actions that always require approval no matter which Run Mode is active. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "browser",
+          "deletion",
+          "workspace"
+        ]
+      },
+      "source": "plugins/ai/skills/cursor/SKILL.md - browser tool execution, file deletion, and modifying files outside the workspace always require approval"
+    },
+    {
+      "id": "cursor-fable-data-retention",
+      "knowledge": "recent",
+      "prompt": "Under Cursor's Privacy Mode, which Claude model is the exception that needs explicit admin dashboard approval because Anthropic retains its inputs and outputs for safety review? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Fable"
+        ]
+      },
+      "source": "plugins/ai/skills/cursor/SKILL.md - Exception: Claude Fable 5 requires data retention and needs explicit admin approval"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

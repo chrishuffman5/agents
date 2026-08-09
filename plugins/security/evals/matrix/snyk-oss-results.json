@@ -1,0 +1,55 @@
+{
+  "skill": "snyk-oss",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "snyk-oss-reachability-languages",
+      "knowledge": "recent",
+      "prompt": "Snyk Open Source reachability analysis, which checks whether your code actually calls a vulnerable function, is available for which three programming languages? Answer concisely naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "JavaScript",
+          "Java",
+          "Python"
+        ]
+      },
+      "source": "plugins/security/skills/snyk-oss/SKILL.md - Reachability Analysis: available for JavaScript, Java, Python"
+    },
+    {
+      "id": "snyk-oss-sbom-formats",
+      "knowledge": "stable",
+      "prompt": "The snyk sbom command can generate output in which two SBOM standard formats? Answer concisely naming both.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CycloneDX",
+          "SPDX"
+        ]
+      },
+      "source": "plugins/security/skills/snyk-oss/SKILL.md - SBOM Generation: CycloneDX and SPDX formats"
+    },
+    {
+      "id": "snyk-oss-target-vs-project",
+      "knowledge": "recent",
+      "prompt": "In Snyk terminology, if a monorepo contains ten separate package.json manifest files, how many separate Snyk Projects does scanning that repository create? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b|\\bten\\b"
+      },
+      "source": "plugins/security/skills/snyk-oss/SKILL.md - Projects and Targets: A monorepo with 10 package.json files creates 10 Snyk projects"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

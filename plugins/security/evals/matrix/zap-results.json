@@ -1,0 +1,48 @@
+{
+  "skill": "zap",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "zap-license",
+      "knowledge": "stable",
+      "prompt": "OWASP ZAP, the open-source DAST scanner, is distributed under which open-source license? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)apache\\s*2(\\.0)?"
+      },
+      "source": "plugins/security/skills/zap/SKILL.md - ZAP is licensed under Apache 2.0"
+    },
+    {
+      "id": "zap-baseline-duration",
+      "knowledge": "stable",
+      "prompt": "A ZAP baseline scan only performs passive scanning with no attack payloads, making it safe to run against production. How long does it typically take to complete? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\s*-?\\s*(to)?\\s*5\\s*minutes?"
+      },
+      "source": "plugins/security/skills/zap/SKILL.md - Baseline scan: Fast: 1-5 minutes depending on application size"
+    },
+    {
+      "id": "zap-rule-sqli",
+      "knowledge": "recent",
+      "prompt": "In OWASP ZAP alert rules, what rule ID corresponds to the active SQL Injection detection rule? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)40018"
+      },
+      "source": "plugins/security/skills/zap/SKILL.md - Common Rules by ID table: 40018 | SQL Injection | Active"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

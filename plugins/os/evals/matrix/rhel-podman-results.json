@@ -1,0 +1,233 @@
+{
+  "skill": "rhel-podman",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 14,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rhel-podman-quadlet-intro-version",
+      "knowledge": "recent",
+      "prompt": "Quadlet, Podman's declarative systemd integration, was introduced in which Podman version and correspondingly which RHEL point release? Answer with both version numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.4",
+          "9.2"
+        ]
+      },
+      "source": "plugins/os/skills/rhel-podman/SKILL.md - Quadlet (systemd Integration, RHEL 9.2+): Quadlet introduced in Podman 4.4 (RHEL 9.2)"
+    },
+    {
+      "id": "rhel-podman-default-oci-runtime",
+      "knowledge": "stable",
+      "prompt": "What is the default OCI container runtime on RHEL 9 and later, replacing runc which was the RHEL 8 default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "crun"
+        ]
+      },
+      "source": "plugins/os/skills/rhel-podman/SKILL.md - OCI Runtime: runc (RHEL 8 default, Go) or crun (RHEL 9+ default, C, faster startup, lower memory)"
+    },
+    {
+      "id": "rhel-podman-generate-systemd-removed",
+      "knowledge": "recent",
+      "prompt": "The podman generate systemd command, once the primary way to create systemd units for containers, was removed entirely in which major Podman version, shipping with RHEL 10? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(podman\\s*5|5\\.x)"
+      },
+      "source": "plugins/os/skills/rhel-podman/SKILL.md - Common Pitfalls #5: podman generate systemd removed in Podman 5.x (RHEL 10)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 8,
+      "pass": 7,
+      "accuracy": 87.5,
+      "meanWallMs": 13354,
+      "meanTokensOut": 253,
+      "totalCostUsd": 1.1338,
+      "costPerCorrect": 0.162
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 14016,
+      "meanTokensOut": 242,
+      "totalCostUsd": 0.5828,
+      "costPerCorrect": 0.0971
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 5,
+        "pass": 4,
+        "accuracy": 80.0,
+        "meanWallMs": 8930,
+        "meanTokensOut": 313,
+        "totalCostUsd": 0.9682,
+        "costPerCorrect": 0.242
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6794,
+        "meanTokensOut": 99,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 20727,
+        "meanTokensOut": 152,
+        "totalCostUsd": 0.1656,
+        "costPerCorrect": 0.0552
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21238,
+        "meanTokensOut": 385,
+        "totalCostUsd": 0.4091,
+        "costPerCorrect": 0.1364
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 5,
+        "pass": 4,
+        "accuracy": 80.0,
+        "meanWallMs": 8930,
+        "meanTokensOut": 313,
+        "totalCostUsd": 0.9682,
+        "costPerCorrect": 0.242
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6794,
+        "meanTokensOut": 99,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 20727,
+        "meanTokensOut": 152,
+        "totalCostUsd": 0.1656,
+        "costPerCorrect": 0.0552
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21238,
+        "meanTokensOut": 385,
+        "totalCostUsd": 0.4091,
+        "costPerCorrect": 0.1364
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6794,
+        "meanTokensOut": 99,
+        "totalCostUsd": 0.1737,
+        "costPerCorrect": 0.0579
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7918,
+        "meanTokensOut": 256,
+        "totalCostUsd": 0.512,
+        "costPerCorrect": 0.256
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 2,
+        "pass": 2,
+        "accuracy": 100.0,
+        "meanWallMs": 10449,
+        "meanTokensOut": 400,
+        "totalCostUsd": 0.4562,
+        "costPerCorrect": 0.2281
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 21238,
+        "meanTokensOut": 385,
+        "totalCostUsd": 0.4091,
+        "costPerCorrect": 0.1364
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 20727,
+        "meanTokensOut": 152,
+        "totalCostUsd": 0.1656,
+        "costPerCorrect": 0.0552
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

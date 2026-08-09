@@ -1,0 +1,50 @@
+{
+  "skill": "cisco-wireless",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-wireless-mlo-version",
+      "knowledge": "recent",
+      "prompt": "Which Cisco IOS-XE wireless release first introduced Wi-Fi 7 Multi-Link Operation support on the Catalyst 9800 WLC? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.15"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - first release to introduce Wi-Fi 7 MLO on Catalyst 9800"
+    },
+    {
+      "id": "cisco-wireless-320mhz-channels",
+      "knowledge": "recent",
+      "prompt": "In the 6 GHz band on a Cisco Catalyst 9800 wireless deployment, how many non-overlapping 320 MHz channels are available? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b3\\b"
+      },
+      "source": "plugins/networking/skills/cisco-wireless/references/versions/17.15.md - Only 3 non-overlapping 320 MHz channels in the 6 GHz band"
+    },
+    {
+      "id": "cisco-wireless-cw9170-standard",
+      "knowledge": "stable",
+      "prompt": "What Wi-Fi standard do the Cisco CW9170 and CW9178 access points support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(wi-?fi\\s*7|802\\.11be)"
+      },
+      "source": "plugins/networking/skills/cisco-wireless/SKILL.md - CW9170/9172/9176/9178 = Wi-Fi 7 (802.11be)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,50 @@
+{
+  "skill": "thoughtspot",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "thoughtspot-spotter-usage-growth",
+      "knowledge": "recent",
+      "prompt": "By what percentage did ThoughtSpot platform usage grow year-over-year by the end of fiscal 2025? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)133\\s*%"
+      },
+      "source": "plugins/analytics/skills/thoughtspot/SKILL.md - Platform Overview: platform usage surging 133% year-over-year (end of fiscal 2025)."
+    },
+    {
+      "id": "thoughtspot-spotcache-engine",
+      "knowledge": "stable",
+      "prompt": "What open-source database engine is ThoughtSpot's SpotCache caching layer built on? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DuckDB"
+        ]
+      },
+      "source": "plugins/analytics/skills/thoughtspot/SKILL.md - SpotCache: caching layer built on DuckDB for high-performance columnar storage."
+    },
+    {
+      "id": "thoughtspot-spotcache-security",
+      "knowledge": "stable",
+      "prompt": "Does ThoughtSpot SpotCache automatically inherit row-level and column-level security from the source data warehouse? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not inherit|manually)"
+      },
+      "source": "plugins/analytics/skills/thoughtspot/SKILL.md - SpotCache: security must be applied manually (not inherited from source warehouse)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

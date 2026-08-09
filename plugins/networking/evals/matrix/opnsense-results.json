@@ -1,0 +1,52 @@
+{
+  "skill": "opnsense",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "opnsense-suricata-inline-version",
+      "knowledge": "recent",
+      "prompt": "Starting in which OPNsense release did Suricata gain true inline IPS mode using FreeBSD divert sockets, letting it drop and modify packets instead of only alerting? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "26.1"
+        ]
+      },
+      "source": "plugins/networking/skills/opnsense/SKILL.md - OPNsense 26.1 uses FreeBSD divert sockets for true inline operation; Suricata v8 inline requires 26.1+"
+    },
+    {
+      "id": "opnsense-hostwatch-default",
+      "knowledge": "recent",
+      "prompt": "Is OPNsense's passive host discovery feature, hostwatch, enabled by default in version 26.1? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|enabled by default)"
+      },
+      "source": "plugins/networking/skills/opnsense/SKILL.md - Host Discovery (hostwatch): Enabled by default in 26.1"
+    },
+    {
+      "id": "opnsense-hardenedbsd-base",
+      "knowledge": "stable",
+      "prompt": "What security-hardened FreeBSD fork serves as the base operating system for OPNsense? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "HardenedBSD"
+        ]
+      },
+      "source": "plugins/networking/skills/opnsense/SKILL.md - OPNsense uses HardenedBSD (security-hardened FreeBSD fork)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

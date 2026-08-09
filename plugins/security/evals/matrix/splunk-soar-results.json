@@ -1,0 +1,52 @@
+{
+  "skill": "splunk-soar",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "splunk-soar-app-count",
+      "knowledge": "recent",
+      "prompt": "Approximately how many pre-built apps does Splunk SOAR ship with for integrating third-party security tools? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b300\\+?\\b"
+      },
+      "source": "plugins/security/skills/splunk-soar/SKILL.md - frontmatter and intro state Splunk SOAR provides 300+ apps with 2,800+ automated actions."
+    },
+    {
+      "id": "splunk-soar-artifact-term",
+      "knowledge": "stable",
+      "prompt": "In Splunk SOAR's container-based data model, what term describes an individual piece of evidence, such as an IP address, domain, or file hash, attached to a container? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Artifact"
+        ]
+      },
+      "source": "plugins/security/skills/splunk-soar/SKILL.md - Container and Artifact Model: Artifact -- Individual piece of evidence (IOC, user, host), contains CEF-formatted data."
+    },
+    {
+      "id": "splunk-soar-automation-broker",
+      "knowledge": "recent",
+      "prompt": "What is the name of the on-premises component that lets a cloud-hosted Splunk SOAR instance reach and act on internal, non-internet-facing systems? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "automation broker"
+        ]
+      },
+      "source": "plugins/security/skills/splunk-soar/SKILL.md - Container and Artifact Model key concepts: Automation broker -- On-prem component for reaching internal systems from cloud SOAR."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

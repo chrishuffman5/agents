@@ -1,0 +1,52 @@
+{
+  "skill": "bicep",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "bicep-bcp062-error-code",
+      "knowledge": "recent",
+      "prompt": "In Bicep, which specific compiler error code is raised when a template references a symbol that has not actually been defined anywhere? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "BCP062"
+        ]
+      },
+      "source": "plugins/devops/skills/bicep/references/diagnostics.md - Bicep Compilation Errors list: BCP062: Referenced symbol is not defined"
+    },
+    {
+      "id": "bicep-default-deployment-mode",
+      "knowledge": "stable",
+      "prompt": "When you deploy a Bicep or ARM template without explicitly setting a deployment mode, does Azure Resource Manager default to Incremental mode or Complete mode? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)incremental"
+      },
+      "source": "plugins/devops/skills/bicep/references/architecture.md - Deployment Modes table: Incremental (default) - Add/update resources, leave existing resources untouched"
+    },
+    {
+      "id": "bicep-storage-name-length",
+      "knowledge": "stable",
+      "prompt": "For a typical Bicep parameter validating a storage account name with minLength and maxLength decorators, what character length range is commonly enforced? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3-24"
+        ]
+      },
+      "source": "plugins/devops/skills/bicep/references/best-practices.md - minLength(3) maxLength(24), description Storage account name (3-24 chars, lowercase and numbers only)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "proofpoint",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "proofpoint-fortune100-percent",
+      "knowledge": "recent",
+      "prompt": "Approximately what percentage of the Fortune 100 does Proofpoint say it secures email for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)83\\s*(%|percent)"
+      },
+      "source": "plugins/security/skills/proofpoint/SKILL.md - Proofpoint secures email for approximately 83% of the Fortune 100"
+    },
+    {
+      "id": "proofpoint-urldefense-v3-domain",
+      "knowledge": "recent",
+      "prompt": "What base domain does Proofpoint use for version 3 URL Defense rewritten links, as opposed to the older version 2 domain? Answer concisely with the version 3 domain.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)urldefense\\.com"
+      },
+      "source": "plugins/security/skills/proofpoint/SKILL.md - Version 3 (newer) format uses https://urldefense.com/v3/ vs v2 urldefense.proofpoint.com/v2/"
+    },
+    {
+      "id": "proofpoint-email-auth-stage",
+      "knowledge": "stable",
+      "prompt": "Which three well-known email authentication mechanisms are verified and enforced as a stage in Proofpoint's inbound filtering stack? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SPF",
+          "DKIM",
+          "DMARC"
+        ]
+      },
+      "source": "plugins/security/skills/proofpoint/SKILL.md - Filtering stack stage 8: Email authentication -- SPF, DKIM, DMARC verification and enforcement"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

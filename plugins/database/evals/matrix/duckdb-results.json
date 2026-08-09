@@ -1,0 +1,123 @@
+{
+  "skill": "duckdb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 198,
+  "prompts": [
+    {
+      "id": "duckdb-quack-port",
+      "knowledge": "recent",
+      "prompt": "In DuckDB, the Quack remote protocol lets one DuckDB process serve another over HTTP. What is the default port that quack_serve binds to? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9494"
+        ]
+      },
+      "source": "plugins/database/skills/duckdb/references/versions/1.5.md - Quack Remote Protocol section: server side binds to localhost by default, Default port is 9494."
+    },
+    {
+      "id": "duckdb-15-codename",
+      "knowledge": "recent",
+      "prompt": "What is the release codename for DuckDB version 1.5? Answer with just the codename.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Variegata"
+        ]
+      },
+      "source": "plugins/database/skills/duckdb/references/versions/1.5.md - opening line: This reference covers DuckDB 1.5 (codename Variegata), first released March 9, 2026."
+    },
+    {
+      "id": "duckdb-row-group-size",
+      "knowledge": "stable",
+      "prompt": "In DuckDB's native columnar storage format, roughly how many rows does each row group contain? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)122,?880"
+      },
+      "source": "plugins/database/skills/duckdb/SKILL.md - Columnar Storage Format section: Tables are split into row groups of ~122,880 rows each."
+    },
+    {
+      "id": "duckdb-etl-spark-threshold",
+      "knowledge": "stable",
+      "prompt": "As a Spark replacement for small-to-medium ETL workloads, up to roughly what data volume does DuckDB comfortably handle on a single machine before a distributed cluster becomes necessary? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "200"
+        ]
+      },
+      "source": "plugins/etl/skills/duckdb/SKILL.md - Why DuckDB for ETL: Datasets under ~200 GB do not need a distributed cluster."
+    },
+    {
+      "id": "duckdb-etl-production-warehouse-size",
+      "knowledge": "stable",
+      "prompt": "Using the dbt-duckdb adapter, DuckDB can serve as the production warehouse itself for datasets under roughly what size, with dbt managing the transformation layer? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50"
+        ]
+      },
+      "source": "plugins/etl/skills/duckdb/SKILL.md - dbt-duckdb Integration: For datasets under ~50 GB, DuckDB can serve as the production warehouse itself."
+    },
+    {
+      "id": "duckdb-etl-copy-compression",
+      "knowledge": "stable",
+      "prompt": "In a typical DuckDB COPY statement that converts a CSV file to Parquet format in one step, which compression codec is used in the example format conversion pattern? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ZSTD"
+        ]
+      },
+      "source": "plugins/etl/skills/duckdb/SKILL.md - Transformation Patterns: COPY (SELECT * FROM input.csv) TO output.parquet (FORMAT PARQUET, COMPRESSION ZSTD)."
+    },
+    {
+      "id": "duckdb-superset-connection",
+      "knowledge": "stable",
+      "prompt": "When Apache Superset connects to DuckDB as a data source, what Python package provides the native SQLAlchemy dialect for it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "duckdb-engine"
+        ]
+      },
+      "source": "plugins/analytics/skills/duckdb/SKILL.md - BI Tool Integration table: Superset connects via SQLAlchemy (duckdb://), native DuckDB dialect via the duckdb-engine Python package."
+    },
+    {
+      "id": "duckdb-warehouse-threshold",
+      "knowledge": "recent",
+      "prompt": "Below roughly what data volume does DuckDB on a single machine tend to outperform a cloud data warehouse while costing nothing? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)200\\s*GB"
+      },
+      "source": "plugins/analytics/skills/duckdb/SKILL.md - Why DuckDB for Analytics: small-to-medium data warehouse replacement for datasets under ~200 GB."
+    },
+    {
+      "id": "duckdb-powerbi-query-modes",
+      "knowledge": "stable",
+      "prompt": "When Power BI connects to DuckDB through the ODBC driver, what two query modes are available? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DirectQuery",
+          "Import"
+        ]
+      },
+      "source": "plugins/analytics/skills/duckdb/SKILL.md - BI Tool Integration table: Power BI | ODBC | DuckDB ODBC driver; DirectQuery or Import mode."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

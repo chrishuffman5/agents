@@ -1,0 +1,48 @@
+{
+  "skill": "bigquery",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "bigquery-storage-write-savings",
+      "knowledge": "recent",
+      "prompt": "In BigQuery, roughly how much cheaper per GB ingested is the Storage Write API compared to the legacy streaming inserts API? Answer with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(50\\s*%|50\\s*percent)"
+      },
+      "source": "plugins/database/skills/bigquery/SKILL.md - Streaming Ingestion table: Storage Write API costs 0.025 per GB ingested (50% cheaper) versus legacy streaming inserts at 0.05 per GB ingested."
+    },
+    {
+      "id": "bigquery-failsafe-window",
+      "knowledge": "recent",
+      "prompt": "In BigQuery, once a table's time travel window has fully expired, for how many additional days does the fail-safe feature retain the data before it becomes unrecoverable except via a Google Cloud support request? Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(seven|7)[\\s-]*day"
+      },
+      "source": "plugins/database/skills/bigquery/SKILL.md - Storage (Colossus) section: Fail-safe is an additional 7-day recovery window after time travel expires, accessible only by Google support. Corroborated in references/architecture.md Storage Tiers table."
+    },
+    {
+      "id": "bigquery-partition-limit",
+      "knowledge": "stable",
+      "prompt": "In BigQuery, what is the maximum number of partitions allowed on a single partitioned table? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4,?000"
+      },
+      "source": "plugins/database/skills/bigquery/SKILL.md - Partitioning section, Partition limits: Maximum 4,000 partitions per table."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

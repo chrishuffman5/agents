@@ -1,0 +1,50 @@
+{
+  "skill": "juniper-mist",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "juniper-mist-marvis-mttr-reduction",
+      "knowledge": "recent",
+      "prompt": "Roughly how much does Marvis AI cross-domain correlation reduce Mean Time to Repair compared to manual troubleshooting, according to Juniper Mist? Answer concisely with a percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)50\\s*-?\\s*(to)?\\s*80\\s*%?"
+      },
+      "source": "plugins/networking/skills/juniper-mist/SKILL.md - Marvis correlation reduces Mean Time to Repair (MTTR) by 50-80% compared to manual troubleshooting"
+    },
+    {
+      "id": "juniper-mist-vble-antenna-elements",
+      "knowledge": "recent",
+      "prompt": "How many elements does the BLE antenna array in each Juniper Mist access point have, enabling directional vBLE location? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b16\\b"
+      },
+      "source": "plugins/networking/skills/juniper-mist/references/architecture.md - each Mist AP contains a 16-element BLE antenna array for software-defined beamforming"
+    },
+    {
+      "id": "juniper-mist-ap32-wifi6e",
+      "knowledge": "stable",
+      "prompt": "Which Juniper Mist access point model was the first tri-band model supporting Wi-Fi 6E across 2.4, 5, and 6 GHz? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AP32"
+        ]
+      },
+      "source": "plugins/networking/skills/juniper-mist/SKILL.md - AP family table lists AP32 as Wi-Fi 6E indoor tri-band, first 6 GHz Mist AP"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

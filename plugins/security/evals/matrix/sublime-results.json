@@ -1,0 +1,55 @@
+{
+  "skill": "sublime",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sublime-selfhosted-storage",
+      "knowledge": "stable",
+      "prompt": "In a self-hosted Sublime Security deployment, which two data stores handle message metadata storage and full-text search, respectively? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "PostgreSQL",
+          "Elasticsearch"
+        ]
+      },
+      "source": "plugins/security/skills/sublime/SKILL.md - Self-Hosted Option components list: PostgreSQL for message metadata storage, Elasticsearch for full-text search."
+    },
+    {
+      "id": "sublime-edit-distance",
+      "knowledge": "recent",
+      "prompt": "In Sublime Security MQL rules, what string function computes character-level similarity between a sender domain and a protected organization domain, commonly used to catch lookalike domains? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "edit_distance"
+        ]
+      },
+      "source": "plugins/security/skills/sublime/SKILL.md - MQL Examples, Lookalike domain detection: strings.edit_distance(sender.email.domain, example.com) in [1, 2]."
+    },
+    {
+      "id": "sublime-signal-rule-type",
+      "knowledge": "stable",
+      "prompt": "In Sublime Security's YAML rule schema, which rule type value defines a reusable boolean condition that other rules can reference, as opposed to the standard detection rule type. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "signal"
+        ]
+      },
+      "source": "plugins/security/skills/sublime/SKILL.md - Rule Types section: type signal is a boolean signal that can be referenced in other rules for composability."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "threat-intel",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "threat-intel-pyramid-of-pain-top",
+      "knowledge": "stable",
+      "prompt": "In David Bianco's Pyramid of Pain, which indicator category sits at the very top as hardest for attackers to change and most valuable for defenders to detect. Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bTTPs?\\b"
+      },
+      "source": "plugins/security/skills/threat-intel/SKILL.md - Pyramid of Pain diagram: TTP (hardest to change, most valuable) at the top."
+    },
+    {
+      "id": "threat-intel-tlp2-changes",
+      "knowledge": "recent",
+      "prompt": "Under TLP 2.0, what did the old marking TLP:WHITE get renamed to, and what new marking level was added between TLP:AMBER and TLP:RED? Answer concisely with both terms.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CLEAR",
+          "AMBER+STRICT"
+        ]
+      },
+      "source": "plugins/security/skills/threat-intel/SKILL.md - TLP 2.0 changes from 1.0: TLP:WHITE renamed to TLP:CLEAR, TLP:AMBER+STRICT added as new level between AMBER and RED."
+    },
+    {
+      "id": "threat-intel-kill-chain-stages",
+      "knowledge": "stable",
+      "prompt": "How many stages does the Lockheed Martin Cyber Kill Chain have, from reconnaissance through actions on objectives? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(seven|7)\\b"
+      },
+      "source": "plugins/security/skills/threat-intel/SKILL.md - Kill Chain section lists 7 numbered stages from Reconnaissance to Actions on Objectives."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

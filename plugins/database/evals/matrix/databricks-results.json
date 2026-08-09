@@ -1,0 +1,48 @@
+{
+  "skill": "databricks",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "databricks-uniform-writer-version",
+      "knowledge": "recent",
+      "prompt": "In Databricks, for a Delta table to support the UniForm feature that generates Iceberg metadata alongside Delta metadata, what minimum Delta writer protocol version must the table have? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b7\\b"
+      },
+      "source": "plugins/database/skills/databricks/references/architecture.md - UniForm (Universal Format) Requirements: Requires Delta reader version 3 and writer version 7."
+    },
+    {
+      "id": "databricks-delta-checkpoint-interval",
+      "knowledge": "recent",
+      "prompt": "In Databricks Delta Lake, a checkpoint Parquet file is written to the transaction log after how many commits by default? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
+      "source": "plugins/database/skills/databricks/references/architecture.md - Transaction Log section: Checkpoint files (.checkpoint.parquet) are written every 10 commits (configurable)."
+    },
+    {
+      "id": "databricks-vacuum-default-retention",
+      "knowledge": "stable",
+      "prompt": "In Databricks Delta Lake, what is the default file retention period used by the VACUUM command before unreferenced data files become eligible for deletion? Answer with the exact number of days.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)7\\s*-?\\s*day"
+      },
+      "source": "plugins/database/skills/databricks/references/best-practices.md - VACUUM and Retention section: Default retention is 7 days (delta.deletedFileRetentionDuration = interval 7 days)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

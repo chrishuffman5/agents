@@ -1,0 +1,55 @@
+{
+  "skill": "cisco-aci",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-aci-esg-min-version",
+      "knowledge": "recent",
+      "prompt": "Cisco ACI's Endpoint Security Groups segmentation construct requires a minimum APIC software version. What is it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.0"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-aci/SKILL.md - Version matters for feature availability (ESGs require 6.0+, Cloud ACI requires 5.0+)"
+    },
+    {
+      "id": "cisco-aci-bgp-multihop-version",
+      "knowledge": "recent",
+      "prompt": "Cisco ACI added eBGP multihop peering support for L3Out logical node profiles starting in which APIC release? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6.1"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-aci/SKILL.md - BGP multi-hop support (APIC 6.1+)"
+    },
+    {
+      "id": "cisco-aci-apic-quorum",
+      "knowledge": "stable",
+      "prompt": "In a Cisco ACI fabric, what is the minimum number of APIC controllers required for a production quorum deployment, and how many can you scale up to for larger fabrics? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3",
+          "9"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-aci/SKILL.md - Production: 3 physical APICs in separate availability zones, up to 9 for scale"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

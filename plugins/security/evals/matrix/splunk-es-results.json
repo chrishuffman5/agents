@@ -1,0 +1,53 @@
+{
+  "skill": "splunk-es",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "splunk-es-rba-alert-reduction",
+      "knowledge": "recent",
+      "prompt": "In Splunk Enterprise Security, roughly what percentage reduction in alert volume does risk-based alerting typically achieve compared to a traditional one-notable-per-rule-match approach? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b90\\+?%?\\b"
+      },
+      "source": "plugins/security/skills/splunk-es/SKILL.md - RBA benefits list: 90%+ reduction in alert volume."
+    },
+    {
+      "id": "splunk-es-acceleration-lag",
+      "knowledge": "recent",
+      "prompt": "In Splunk Enterprise Security, by how many minutes can data model acceleration lag behind real time, meaning new events may not yet appear in tstats results? Answer concisely with the range in minutes.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5.{0,4}15"
+      },
+      "source": "plugins/security/skills/splunk-es/SKILL.md - Common Pitfalls: data model acceleration lag, new data may not appear in tstats results for 5-15 minutes."
+    },
+    {
+      "id": "splunk-es-notable-lifecycle",
+      "knowledge": "stable",
+      "prompt": "In Splunk Enterprise Security, what are the status values a notable event moves through after being created, in order? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Progress",
+          "Pending",
+          "Resolved",
+          "Closed"
+        ]
+      },
+      "source": "plugins/security/skills/splunk-es/SKILL.md - Notable Events table, status field: Lifecycle New -> In Progress -> Pending -> Resolved -> Closed."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

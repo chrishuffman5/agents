@@ -1,0 +1,233 @@
+{
+  "skill": "linkerd",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "linkerd-postquantum-version",
+      "knowledge": "recent",
+      "prompt": "Which Linkerd release, and in what month and year, introduced ML-KEM-768 hybrid post-quantum key exchange for mTLS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.19"
+        ]
+      },
+      "source": "plugins/containers/skills/linkerd/SKILL.md - Linkerd 2.19 (October 2025) introduced ML-KEM-768 hybrid key exchange"
+    },
+    {
+      "id": "linkerd-proxy-memory",
+      "knowledge": "stable",
+      "prompt": "Approximately how much RAM does the Rust-based linkerd2-proxy sidecar use per pod, compared to a typical Envoy sidecar? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "20",
+          "50"
+        ]
+      },
+      "source": "plugins/containers/skills/linkerd/SKILL.md - ~20-30 MB per pod vs Envoy's ~50 MB+"
+    },
+    {
+      "id": "linkerd-cert-rotation",
+      "knowledge": "stable",
+      "prompt": "By default, how often does Linkerd automatically rotate the mTLS certificates it issues to each proxy? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(24\\s*hour|24h|daily)"
+      },
+      "source": "plugins/containers/skills/linkerd/SKILL.md - Certificates rotate automatically every 24 hours"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 12453,
+      "meanTokensOut": 236,
+      "totalCostUsd": 1.1398,
+      "costPerCorrect": 0.1266
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 14093,
+      "meanTokensOut": 271,
+      "totalCostUsd": 0.4094,
+      "costPerCorrect": 0.0819
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 10797,
+        "meanTokensOut": 288,
+        "totalCostUsd": 0.98,
+        "costPerCorrect": 0.1633
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8600,
+        "meanTokensOut": 288,
+        "totalCostUsd": 0.2119,
+        "costPerCorrect": 0.106
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15763,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.1599,
+        "costPerCorrect": 0.0533
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19587,
+        "meanTokensOut": 255,
+        "totalCostUsd": 0.1976,
+        "costPerCorrect": 0.0659
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 10797,
+        "meanTokensOut": 288,
+        "totalCostUsd": 0.98,
+        "costPerCorrect": 0.1633
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8600,
+        "meanTokensOut": 288,
+        "totalCostUsd": 0.2119,
+        "costPerCorrect": 0.106
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15763,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.1599,
+        "costPerCorrect": 0.0533
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19587,
+        "meanTokensOut": 255,
+        "totalCostUsd": 0.1976,
+        "costPerCorrect": 0.0659
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8600,
+        "meanTokensOut": 288,
+        "totalCostUsd": 0.2119,
+        "costPerCorrect": 0.106
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 9881,
+        "meanTokensOut": 200,
+        "totalCostUsd": 0.4147,
+        "costPerCorrect": 0.1382
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11713,
+        "meanTokensOut": 376,
+        "totalCostUsd": 0.5653,
+        "costPerCorrect": 0.1884
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 19587,
+        "meanTokensOut": 255,
+        "totalCostUsd": 0.1976,
+        "costPerCorrect": 0.0659
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15763,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.1599,
+        "costPerCorrect": 0.0533
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

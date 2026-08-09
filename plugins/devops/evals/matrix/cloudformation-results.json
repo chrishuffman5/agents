@@ -1,0 +1,53 @@
+{
+  "skill": "cloudformation",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cloudformation-sam-transform",
+      "knowledge": "stable",
+      "prompt": "In an AWS CloudFormation template that uses AWS SAM syntax, what exact value do you set for the top level Transform key to enable SAM resource expansion? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Serverless",
+          "2016-10-31"
+        ]
+      },
+      "source": "plugins/devops/skills/cloudformation/references/architecture.md - Transform: AWS::Serverless-2016-10-31 expands AWS::Serverless::* resources"
+    },
+    {
+      "id": "cloudformation-export-locked",
+      "knowledge": "stable",
+      "prompt": "If Stack A exports an output value with an Export Name and Stack B imports it using ImportValue, can Stack A's export be deleted or changed while Stack B still imports it? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|can't|can not)"
+      },
+      "source": "plugins/devops/skills/cloudformation/references/best-practices.md - Nested vs Cross-Stack table: exports can't be deleted while imported"
+    },
+    {
+      "id": "cloudformation-ami-ssm-param",
+      "knowledge": "recent",
+      "prompt": "Instead of hardcoding an AMI ID in a CloudFormation template, what SSM public parameter path can you reference through the resolve ssm dynamic reference to automatically pick up the latest Amazon Linux 2023 AMI? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "al2023-ami-kernel-default-x86_64"
+        ]
+      },
+      "source": "plugins/devops/skills/cloudformation/references/best-practices.md - Common Mistakes, hardcoded AMIs fix: resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

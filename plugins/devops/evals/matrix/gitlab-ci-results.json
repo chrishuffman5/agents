@@ -1,0 +1,52 @@
+{
+  "skill": "gitlab-ci",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gitlab-ci-oldest-supported",
+      "knowledge": "recent",
+      "prompt": "As of GitLab CI 18.9, which is the oldest GitLab minor version still officially supported for upgrade paths? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "18.7"
+        ]
+      },
+      "source": "plugins/devops/skills/gitlab-ci/references/versions/18.9.md - Migration Notes: GitLab 18.7 is the oldest supported version, plan upgrades from 18.6 and earlier"
+    },
+    {
+      "id": "gitlab-ci-short-sha",
+      "knowledge": "stable",
+      "prompt": "In GitLab CI, how many characters long is the value of the CI_COMMIT_SHORT_SHA predefined variable? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\b|eight"
+      },
+      "source": "plugins/devops/skills/gitlab-ci/references/architecture.md - Key Predefined Variables table: CI_COMMIT_SHORT_SHA is short commit SHA, 8 chars"
+    },
+    {
+      "id": "gitlab-ci-cache-compression",
+      "knowledge": "recent",
+      "prompt": "GitLab CI 18.9 added new cache compression options. Besides the default gzip, what faster compression algorithm can you choose for pipeline caching? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "zstd"
+        ]
+      },
+      "source": "plugins/devops/skills/gitlab-ci/references/versions/18.9.md - Advanced Caching: compression options gzip default, zstd faster, or none"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

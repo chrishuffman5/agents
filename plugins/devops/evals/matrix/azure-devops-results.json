@@ -1,0 +1,50 @@
+{
+  "skill": "azure-devops",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azuredevops-ubuntu-latest-version",
+      "knowledge": "recent",
+      "prompt": "On Azure DevOps Microsoft-hosted agent pools, the ubuntu-latest image currently maps to which Ubuntu release version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "24.04"
+        ]
+      },
+      "source": "plugins/devops/skills/azure-devops/references/architecture.md - Microsoft-Hosted Agents table: ubuntu-latest | Ubuntu 24.04"
+    },
+    {
+      "id": "azuredevops-agent-version-window",
+      "knowledge": "stable",
+      "prompt": "For a self-hosted Azure DevOps agent to keep working normally, how many major versions behind the Azure DevOps service version can its own agent version fall before that becomes a problem? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\b|\\btwo\\b"
+      },
+      "source": "plugins/devops/skills/azure-devops/references/diagnostics.md - Agent Not Available diagnosis step: Check agent version (must be within 2 major versions of service)"
+    },
+    {
+      "id": "azuredevops-variable-precedence",
+      "knowledge": "stable",
+      "prompt": "In Azure Pipelines variable precedence, when someone manually queues a run and overrides a variable at queue time, does that queue-time value win over a variable defined in the pipeline YAML, or does the YAML value take priority? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)queue"
+      },
+      "source": "plugins/devops/skills/azure-devops/references/architecture.md - Variable Precedence (Highest to Lowest): 1. Queue-time variables (manual run with override), 2. Pipeline YAML variables, ..."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

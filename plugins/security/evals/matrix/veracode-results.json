@@ -1,0 +1,52 @@
+{
+  "skill": "veracode",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "veracode-pipeline-limit",
+      "knowledge": "recent",
+      "prompt": "What is the maximum artifact size accepted by Veracode Pipeline Scan for CI or CD pipeline scanning? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)200\\s*mb"
+      },
+      "source": "plugins/security/skills/veracode/SKILL.md - Pipeline Scan vs Policy Scan table: Artifact size limit 200MB (Policy Scan up to 5GB)"
+    },
+    {
+      "id": "veracode-sca-origin",
+      "knowledge": "stable",
+      "prompt": "Veracode SCA, the software composition analysis product, originated from Veracode acquiring which company? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)sourceclear"
+      },
+      "source": "plugins/security/skills/veracode/SKILL.md - Veracode SCA (acquired from SourceClear) provides open source vulnerability scanning"
+    },
+    {
+      "id": "veracode-fix-languages",
+      "knowledge": "recent",
+      "prompt": "Veracode Fix uses AI to generate code patches for vulnerabilities. Name at least three of the programming languages it supports. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Java",
+          "Python",
+          "JavaScript"
+        ]
+      },
+      "source": "plugins/security/skills/veracode/SKILL.md - Supported languages: Java, JavaScript, Python, TypeScript, C#, PHP, Go, Kotlin, Scala"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

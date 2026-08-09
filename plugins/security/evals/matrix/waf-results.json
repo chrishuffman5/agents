@@ -1,0 +1,48 @@
+{
+  "skill": "waf",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "waf-crs-rules",
+      "knowledge": "stable",
+      "prompt": "The OWASP Core Rule Set, the industry-standard open-source WAF rule set that many commercial WAFs derive their managed rules from, ships with roughly how many rules? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)3,?000\\+?"
+      },
+      "source": "plugins/security/skills/waf/SKILL.md - OWASP Core Rule Set: 3,000+ rules covering OWASP Top 10 and more"
+    },
+    {
+      "id": "waf-crs-paranoia-levels",
+      "knowledge": "stable",
+      "prompt": "The OWASP Core Rule Set defines paranoia levels PL1 through PL4 for tuning WAF strictness. Which paranoia level is recommended as the starting point with minimal false positives? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bPL1\\b"
+      },
+      "source": "plugins/security/skills/waf/SKILL.md - Paranoia levels: PL1: Basic protection, minimal false positives (start here)"
+    },
+    {
+      "id": "waf-login-ratelimit",
+      "knowledge": "recent",
+      "prompt": "For a login endpoint sitting behind a WAF, what request rate limit per IP address is commonly recommended to prevent credential stuffing? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10\\s*requests?\\s*(per|/)\\s*minute"
+      },
+      "source": "plugins/security/skills/waf/SKILL.md - Rate Limiting: Login endpoints: Max 10 requests/minute per IP to prevent credential stuffing"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

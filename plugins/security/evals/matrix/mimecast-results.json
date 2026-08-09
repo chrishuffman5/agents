@@ -1,0 +1,57 @@
+{
+  "skill": "mimecast",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mimecast-spam-score-scale",
+      "knowledge": "stable",
+      "prompt": "What numeric scale does Mimecast use for its inbound spam scoring, and around what score is typically treated as the spam threshold for quarantine? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100",
+          "70"
+        ]
+      },
+      "source": "plugins/security/skills/mimecast/SKILL.md - Anti-Spam and Anti-Malware section: 0-100 spam score, Spam typically 70+"
+    },
+    {
+      "id": "mimecast-continuity-rto",
+      "knowledge": "recent",
+      "prompt": "For Mimecast Email Continuity during a primary mail server outage, what is the target recovery time objective for making the emergency inbox available, and how many days of email history does that emergency inbox retain? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5 minutes",
+          "30 days"
+        ]
+      },
+      "source": "plugins/security/skills/mimecast/SKILL.md - Email Continuity section: RTO less than 5 minutes, last 30 days of email available"
+    },
+    {
+      "id": "mimecast-archive-dedup-savings",
+      "knowledge": "recent",
+      "prompt": "Mimecast Archive uses single-instance storage to deduplicate identical messages. By roughly what percentage range does this reduce storage footprint? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "20",
+          "40"
+        ]
+      },
+      "source": "plugins/security/skills/mimecast/SKILL.md - Mimecast Archive Architecture section: reduces storage footprint by 20-40 percent"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

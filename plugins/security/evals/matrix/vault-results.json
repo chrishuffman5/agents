@@ -1,0 +1,51 @@
+{
+  "skill": "vault",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vault-shamir-default",
+      "knowledge": "stable",
+      "prompt": "With HashiCorp Vault default Shamir secret sharing during initialization, how many total key shares are generated and how many are required to reconstruct the root key by default? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(5\\s*(key\\s*)?shares).{0,30}3|3.{0,30}(5\\s*(key\\s*)?shares)"
+      },
+      "source": "plugins/security/skills/vault/SKILL.md - vault operator init -key-shares=5 -key-threshold=3; default: 5 shares, 3 required"
+    },
+    {
+      "id": "vault-hcp-eol",
+      "knowledge": "recent",
+      "prompt": "HCP Vault Secrets, the SaaS key-value store offering from HashiCorp, is being retired. What is the end of life year and what is one recommended migration path? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026",
+          "Dedicated"
+        ]
+      },
+      "source": "plugins/security/skills/vault/SKILL.md - HCP Vault Secrets reaches end-of-life July 2026. Migration path is HCP Vault Dedicated or self-managed Vault."
+    },
+    {
+      "id": "vault-barrier-encryption",
+      "knowledge": "stable",
+      "prompt": "What encryption algorithm does the HashiCorp Vault barrier use to protect everything stored inside it at rest? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)aes-?256-?gcm"
+      },
+      "source": "plugins/security/skills/vault/SKILL.md - Barrier (AES-256-GCM encryption), everything inside encrypted at rest"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

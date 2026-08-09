@@ -1,0 +1,52 @@
+{
+  "skill": "clickhouse",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "clickhouse-sharedmergetree-cloud",
+      "knowledge": "recent",
+      "prompt": "Which ClickHouse storage engine, introduced in the 24.8 LTS release and exclusive to ClickHouse Cloud, decouples storage from compute by keeping data in object storage with a local SSD cache? Answer with the exact engine name.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "SharedMergeTree"
+        ]
+      },
+      "source": "plugins/database/skills/clickhouse/references/versions/24.8-lts.md - SharedMergeTree (ClickHouse Cloud) section: cloud-native storage engine available exclusively in ClickHouse Cloud, replacing ReplicatedMergeTree for Cloud deployments."
+    },
+    {
+      "id": "clickhouse-variant-type-flag-25-3",
+      "knowledge": "recent",
+      "prompt": "As of ClickHouse 25.3 LTS, do you still need to set an experimental flag such as allow_experimental_variant_type before creating a table with a Variant column? Answer with yes or no.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/database/skills/clickhouse/references/versions/25.3-lts.md - Variant and Dynamic Types (GA) section: no experimental flag needed in 25.3, contrasted with references/versions/24.8-lts.md which required SET allow_experimental_variant_type = 1."
+    },
+    {
+      "id": "clickhouse-index-granularity",
+      "knowledge": "stable",
+      "prompt": "In ClickHouse MergeTree tables, what is the default index_granularity value, meaning how many rows are represented by each entry in the sparse primary index? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8192"
+        ]
+      },
+      "source": "plugins/database/skills/clickhouse/SKILL.md - Primary Key and Sparse Index section: one index entry per index_granularity rows (default 8192)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

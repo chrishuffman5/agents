@@ -1,0 +1,52 @@
+{
+  "skill": "aspnet-core",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aspnet-core-docker-port",
+      "knowledge": "recent",
+      "prompt": "When you containerize an ASP.NET Core app starting with .NET 8, what non-root HTTP port does Kestrel listen on by default inside the container? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8080"
+        ]
+      },
+      "source": "plugins/backend/skills/aspnet-core/SKILL.md - Docker default port changed to 8080 in .NET 8 (non-root). Use ASPNETCORE_HTTP_PORTS=8080."
+    },
+    {
+      "id": "aspnet-core-net10-eol",
+      "knowledge": "stable",
+      "prompt": "For a project on the .NET 10 LTS release of ASP.NET Core, in what year does that release reach end of support? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2028"
+        ]
+      },
+      "source": "plugins/backend/skills/aspnet-core/SKILL.md - Version-specific guidance table: .NET 10 | LTS (Nov 2025 - Nov 2028)"
+    },
+    {
+      "id": "aspnet-core-captive-dependency",
+      "knowledge": "stable",
+      "prompt": "In ASP.NET Core dependency injection, is it safe practice to inject a Scoped or Transient service directly into a Singleton service? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bnever\\b|\\bno\\b|avoid|not\\s+safe|captive)"
+      },
+      "source": "plugins/backend/skills/aspnet-core/SKILL.md - Captive dependency trap: never inject Scoped/Transient into Singleton -- the short-lived service gets captured for the app's lifetime."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

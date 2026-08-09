@@ -1,0 +1,55 @@
+{
+  "skill": "glusterfs",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "glusterfs-stable-version",
+      "knowledge": "recent",
+      "prompt": "As of the latest guidance, what is the current stable release version number of GlusterFS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "11.2"
+        ]
+      },
+      "source": "plugins/storage/skills/glusterfs/SKILL.md - This skill covers GlusterFS distributed filesystem (current stable: 11.2)"
+    },
+    {
+      "id": "glusterfs-rhgs-eol",
+      "knowledge": "recent",
+      "prompt": "When did Red Hat Gluster Storage reach end of life? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "December",
+          "2024"
+        ]
+      },
+      "source": "plugins/storage/skills/glusterfs/SKILL.md - Project status: community-maintained, Red Hat Gluster Storage EOL Dec 2024"
+    },
+    {
+      "id": "glusterfs-xfs-isize",
+      "knowledge": "stable",
+      "prompt": "When formatting GlusterFS bricks with XFS, what isize value is required to properly store extended attributes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "512"
+        ]
+      },
+      "source": "plugins/storage/skills/glusterfs/SKILL.md - Critical Rules: Format bricks with XFS and isize=512"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

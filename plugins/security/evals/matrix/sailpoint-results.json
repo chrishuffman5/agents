@@ -1,0 +1,52 @@
+{
+  "skill": "sailpoint",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sailpoint-role-target-ratio",
+      "knowledge": "recent",
+      "prompt": "What target percentage split does SailPoint guidance recommend between role-based access coverage and exception-based access in a mature role governance program? Answer concisely with both percentages.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*80\\s*%)(?=.*20\\s*%)"
+      },
+      "source": "plugins/security/skills/sailpoint/SKILL.md - Role governance target: 80% of access covered by roles, 20% exception-based"
+    },
+    {
+      "id": "sailpoint-campaign-types",
+      "knowledge": "recent",
+      "prompt": "Besides the standard Manager campaign, name at least three other access certification campaign types available in SailPoint IdentityNow. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Source Owner",
+          "Entitlement Owner",
+          "Role Composition"
+        ]
+      },
+      "source": "plugins/security/skills/sailpoint/SKILL.md - Campaign types table: Manager, Source Owner, Entitlement Owner, Role Composition, Search-based"
+    },
+    {
+      "id": "sailpoint-jml-lifecycle",
+      "knowledge": "stable",
+      "prompt": "What three-stage identity lifecycle process, commonly abbreviated JML, does SailPoint automate to handle employees joining, changing roles, and leaving an organization? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)joiner.{0,4}mover.{0,4}leaver"
+      },
+      "source": "plugins/security/skills/sailpoint/SKILL.md - Lifecycle Management: Automate identity lifecycle (Joiner-Mover-Leaver)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

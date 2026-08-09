@@ -1,0 +1,53 @@
+{
+  "skill": "inference-providers",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "inference-providers-payload-caps",
+      "knowledge": "stable",
+      "prompt": "What are the maximum request payload sizes for Amazon Bedrock versus Google Vertex AI when calling Claude through each? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "20",
+          "30"
+        ]
+      },
+      "source": "plugins/ai/skills/inference-providers/SKILL.md - Bedrock caps request payloads at 20 MB; Vertex payload cap is 30 MB"
+    },
+    {
+      "id": "inference-providers-openrouter-byok-fee",
+      "knowledge": "recent",
+      "prompt": "When using OpenRouter's BYOK feature to bring your own provider credentials, what percentage fee does OpenRouter charge on top of the underlying cost, and under what monthly request volume is that fee waived? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s?%.{0,80}1,?000,?000"
+      },
+      "source": "plugins/ai/skills/inference-providers/SKILL.md - BYOK is 5% of the equivalent OpenRouter cost, waived under 1,000,000 BYOK requests/month"
+    },
+    {
+      "id": "inference-providers-foundry-devtier",
+      "knowledge": "recent",
+      "prompt": "On Microsoft Foundry, how long after deployment does a DeveloperTier model deployment automatically delete itself? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "24"
+        ]
+      },
+      "source": "plugins/ai/skills/inference-providers/SKILL.md - DeveloperTier deployments auto-delete after 24 hours"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

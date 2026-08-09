@@ -1,0 +1,48 @@
+{
+  "skill": "dynamodb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dynamodb-autoscale-scaledown-periods",
+      "knowledge": "recent",
+      "prompt": "For DynamoDB auto-scaling in provisioned capacity mode, for how many consecutive 1-minute periods must utilization stay below the target before capacity is scaled down? Answer with the exact number of periods.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b15\\b"
+      },
+      "source": "plugins/database/skills/dynamodb/references/architecture.md - Auto-Scaling for Provisioned Mode: Scale-down when utilization is below target for 15 consecutive 1-minute periods, capacity is decreased."
+    },
+    {
+      "id": "dynamodb-ondemand-burst-rrus",
+      "knowledge": "recent",
+      "prompt": "For a brand-new DynamoDB table in on-demand capacity mode, up to how many read/write request units per second can it instantly accommodate before any traffic history exists? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)40,?000"
+      },
+      "source": "plugins/database/skills/dynamodb/SKILL.md - Capacity Modes, On-Demand Mode: instantly accommodates up to double the previous peak traffic; for new tables, up to 40,000 RRU/WRU (also stated in references/architecture.md On-Demand Scaling Architecture)."
+    },
+    {
+      "id": "dynamodb-max-item-size",
+      "knowledge": "stable",
+      "prompt": "What is the maximum size of a single item in DynamoDB? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)400\\s*kb"
+      },
+      "source": "plugins/database/skills/dynamodb/SKILL.md - Fundamental Concepts and Quick Reference Limits table: Maximum item size is 400 KB."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

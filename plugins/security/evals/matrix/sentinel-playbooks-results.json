@@ -1,0 +1,55 @@
+{
+  "skill": "sentinel-playbooks",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sentinel-playbooks-logic-apps-timeout",
+      "knowledge": "recent",
+      "prompt": "For Sentinel playbooks built on Azure Logic Apps, what is the default timeout for a single action, and what is the maximum duration for an entire workflow? Answer concisely with both time values.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30 seconds",
+          "90 days"
+        ]
+      },
+      "source": "plugins/security/skills/sentinel-playbooks/SKILL.md - Common Pitfalls: default timeout is 30 seconds per action, 90 days per workflow"
+    },
+    {
+      "id": "sentinel-playbooks-virustotal-rate-limit",
+      "knowledge": "recent",
+      "prompt": "What request rate limit does the VirusTotal free tier API impose, which Sentinel playbook designers need to account for with throttling? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*(req(uests)?)?\\s*(per|/)\\s*min"
+      },
+      "source": "plugins/security/skills/sentinel-playbooks/SKILL.md - Common Pitfalls: Rate limiting - VirusTotal free tier: 4 req/min"
+    },
+    {
+      "id": "sentinel-playbooks-trigger-types",
+      "knowledge": "stable",
+      "prompt": "Sentinel playbooks can be started by three different trigger types. Name all three. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Incident trigger",
+          "Alert trigger",
+          "Entity trigger"
+        ]
+      },
+      "source": "plugins/security/skills/sentinel-playbooks/SKILL.md - Playbook Trigger Types table: Incident trigger, Alert trigger, Entity trigger"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

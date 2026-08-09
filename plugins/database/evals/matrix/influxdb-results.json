@@ -1,0 +1,48 @@
+{
+  "skill": "influxdb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "influxdb-docker-latest-switch",
+      "knowledge": "recent",
+      "prompt": "Starting on what date will the InfluxDB Docker latest tag point to InfluxDB 3 Core instead of 2.x? Answer with the exact date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(may\\s*27,?\\s*2026|2026-05-27)"
+      },
+      "source": "plugins/database/skills/influxdb/references/versions/2.x.md - Important Docker note: On May 27, 2026, the latest Docker tag will point to InfluxDB 3 Core instead of 2.x."
+    },
+    {
+      "id": "influxdb-3x-ga-date",
+      "knowledge": "recent",
+      "prompt": "On what date did InfluxDB 3 Core and Enterprise reach general availability? Answer with the exact date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(april\\s*15,?\\s*2025|2025-04-15)"
+      },
+      "source": "plugins/database/skills/influxdb/references/versions/3.x.md - Support status line: InfluxDB 3 Core and Enterprise reached General Availability on April 15, 2025."
+    },
+    {
+      "id": "influxdb-write-batch-size",
+      "knowledge": "stable",
+      "prompt": "For InfluxDB write performance, what is the recommended batch size range, in number of points, for a single HTTP write request? Answer with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5,?000.{0,20}10,?000"
+      },
+      "source": "plugins/database/skills/influxdb/SKILL.md - Write Path and Optimization: Batch 5,000-10,000 points per write request (also in Performance Tuning Quick Reference table for both 2.x and 3.x)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

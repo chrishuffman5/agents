@@ -1,0 +1,52 @@
+{
+  "skill": "prisma-cloud",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "prisma-cloud-builtin-policies",
+      "knowledge": "recent",
+      "prompt": "Approximately how many built-in detection policies does Prisma Cloud ship out of the box across all its policy types? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2,?000\\+?"
+      },
+      "source": "plugins/security/skills/prisma-cloud/SKILL.md - Built-in policies: 2,000+ built-in detection rules across all policy types"
+    },
+    {
+      "id": "prisma-cloud-iac-formats",
+      "knowledge": "stable",
+      "prompt": "Name at least three infrastructure-as-code formats that Prisma Cloud's Code Security module can scan for misconfigurations. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Terraform",
+          "CloudFormation",
+          "Helm"
+        ]
+      },
+      "source": "plugins/security/skills/prisma-cloud/SKILL.md - IaC Scanning: Terraform, CloudFormation, ARM/Bicep, Helm charts, Kubernetes YAML, Dockerfile"
+    },
+    {
+      "id": "prisma-cloud-app-embedded-defender",
+      "knowledge": "recent",
+      "prompt": "Which specific twistcli subcommand embeds Prisma Cloud's Defender agent directly inside a container image, for environments like Fargate where a DaemonSet cannot be deployed? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)twistcli\\s+embed"
+      },
+      "source": "plugins/security/skills/prisma-cloud/SKILL.md - App-Embedded Defender embedded directly in a container image via twistcli embed"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

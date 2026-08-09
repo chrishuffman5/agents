@@ -1,0 +1,48 @@
+{
+  "skill": "defender-o365",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "defender-o365-zap-window",
+      "knowledge": "stable",
+      "prompt": "Microsoft Defender for Office 365's Zero-hour Auto Purge feature retroactively removes newly-identified malicious mail. What is the default time window it can reach back to remediate delivered messages? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*-?\\s*days?|seven\\s*days?)"
+      },
+      "source": "plugins/security/skills/defender-o365/SKILL.md - ZAP - Zero-Hour Auto Purge: ZAP scans recent delivered mail (7 days by default); ZAP limitations: 7-day window"
+    },
+    {
+      "id": "defender-o365-bcl-default",
+      "knowledge": "recent",
+      "prompt": "In Exchange Online Protection's anti-spam policy, what is Microsoft's default bulk complaint level threshold, on the 1 to 9 scale? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b7\\b"
+      },
+      "source": "plugins/security/skills/defender-o365/SKILL.md - EOP Protection Stack > Anti-spam policy (inbound): Bulk email threshold: BCL 1-9. Lower = stricter. Microsoft default: 7"
+    },
+    {
+      "id": "defender-o365-safe-attachments-verdict",
+      "knowledge": "recent",
+      "prompt": "Without Dynamic Delivery enabled, roughly how long does Safe Attachments detonation typically take to produce a verdict on an email attachment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(-|to)\\s*8\\s*min"
+      },
+      "source": "plugins/security/skills/defender-o365/SKILL.md - Safe Attachments detonation: Verdict time: Typically 2-8 minutes (Dynamic Delivery eliminates wait)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

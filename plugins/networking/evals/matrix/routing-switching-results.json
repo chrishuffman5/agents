@@ -1,0 +1,51 @@
+{
+  "skill": "routing-switching",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "routing-switching-vxlan-mtu",
+      "knowledge": "recent",
+      "prompt": "In a data center spine-leaf fabric running VXLAN, how many bytes of overhead does VXLAN encapsulation add, and what MTU should you set on the fabric links so encapsulated frames are not fragmented or dropped? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50",
+          "9214"
+        ]
+      },
+      "source": "plugins/networking/skills/routing-switching/SKILL.md - Common Pitfalls: VXLAN adds 50 bytes overhead; set fabric links to MTU 9214"
+    },
+    {
+      "id": "routing-switching-stackwise-max",
+      "knowledge": "recent",
+      "prompt": "For Cisco Catalyst 9200/9300 campus access switches using StackWise physical stacking, what is the maximum number of switches you can join into a single stack? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b8\\b"
+      },
+      "source": "plugins/networking/skills/routing-switching/SKILL.md - Redundancy Technologies Comparison: StackWise (IOS-XE Cat 9200/9300) max members 8"
+    },
+    {
+      "id": "routing-switching-eigrp-arista",
+      "knowledge": "stable",
+      "prompt": "Does Arista EOS support the EIGRP routing protocol the way Cisco IOS-XE and NX-OS do? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not (available|supported)|cisco-only|cisco proprietary)"
+      },
+      "source": "plugins/networking/skills/routing-switching/SKILL.md - EIGRP: Cisco-only (IOS-XE and NX-OS). Not available on Arista EOS"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

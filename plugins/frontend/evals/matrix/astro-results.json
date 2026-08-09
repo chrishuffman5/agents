@@ -1,0 +1,54 @@
+{
+  "skill": "astro",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "astro-client-visible-directive",
+      "knowledge": "stable",
+      "prompt": "In Astro, which client hydration directive waits until the component scrolls into the viewport before hydrating it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "client:visible"
+        ]
+      },
+      "source": "plugins/frontend/skills/astro/SKILL.md - directive table: client:visible hydrates when element enters viewport"
+    },
+    {
+      "id": "astro-v5-content-config-path",
+      "knowledge": "recent",
+      "prompt": "In Astro 5, at what file path do you define content collection configuration, replacing the old version 4 location? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "content.config.ts"
+        ]
+      },
+      "source": "plugins/frontend/skills/astro/SKILL.md - pitfall 3: Astro 5 uses src/content.config.ts, not src/content/config.ts from v4"
+    },
+    {
+      "id": "astro-server-islands-key",
+      "knowledge": "recent",
+      "prompt": "For Astro Server Islands, what environment variable name should you set to keep prop encryption stable across separate deployments? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ASTRO_KEY"
+        ]
+      },
+      "source": "plugins/frontend/skills/astro/SKILL.md - Server Islands section: use ASTRO_KEY for stable encryption across deployments"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

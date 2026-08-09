@@ -1,0 +1,51 @@
+{
+  "skill": "cohesity",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cohesity-eol-date",
+      "knowledge": "recent",
+      "prompt": "When does Cohesity Data Cloud 7.x reach end of life? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)june.{0,4}2026"
+      },
+      "source": "plugins/security/skills/cohesity/SKILL.md - Note: Cohesity Data Cloud 7.x reaches end of life June 2026"
+    },
+    {
+      "id": "cohesity-cluster-node-limits",
+      "knowledge": "stable",
+      "prompt": "What are the minimum and maximum number of nodes in a Cohesity cluster? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3",
+          "16"
+        ]
+      },
+      "source": "plugins/security/skills/cohesity/references/architecture.md - Cluster Scaling: Minimum: 3 nodes / Maximum: 16 nodes per cluster"
+    },
+    {
+      "id": "cohesity-erasure-coding-scheme",
+      "knowledge": "recent",
+      "prompt": "What is the default erasure coding scheme used by Cohesity's SpanFS filesystem, expressed as N plus how many? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)n\\s*\\+\\s*2"
+      },
+      "source": "plugins/security/skills/cohesity/references/architecture.md - High Availability: Data erasure-coded across nodes (N+2 by default; sustains 2 simultaneous node failures)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

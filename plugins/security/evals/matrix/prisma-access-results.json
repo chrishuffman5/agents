@@ -1,0 +1,57 @@
+{
+  "skill": "prisma-access",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "prisma-access-wildfire-verdicts",
+      "knowledge": "recent",
+      "prompt": "What four possible verdicts can Palo Alto Networks' WildFire sandbox return for a file submitted through Prisma Access? Answer concisely, naming all four.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Benign",
+          "Grayware",
+          "Malware",
+          "Phishing"
+        ]
+      },
+      "source": "plugins/security/skills/prisma-access/SKILL.md - WildFire sandbox verdict returned: Benign, Grayware, Malware, Phishing"
+    },
+    {
+      "id": "prisma-access-pop-count",
+      "knowledge": "recent",
+      "prompt": "Approximately how many points of presence, or compute locations, does Palo Alto Networks' Prisma Access global network span? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)110\\+?"
+      },
+      "source": "plugins/security/skills/prisma-access/SKILL.md - Compute Locations (110+ PoPs globally)"
+    },
+    {
+      "id": "prisma-access-globalprotect-modes",
+      "knowledge": "stable",
+      "prompt": "What three connection modes does the GlobalProtect endpoint agent support for when it connects relative to user authentication? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Pre-logon",
+          "User-logon",
+          "On-demand"
+        ]
+      },
+      "source": "plugins/security/skills/prisma-access/SKILL.md - GlobalProtect connection modes: Pre-logon, User-logon, On-demand"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

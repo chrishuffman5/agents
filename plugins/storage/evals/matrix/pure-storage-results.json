@@ -1,0 +1,56 @@
+{
+  "skill": "pure-storage",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pure-storage-safemode-default",
+      "knowledge": "stable",
+      "prompt": "Pure Storage SafeMode locks immutable snapshots for a default retention period, extendable up to a maximum. What is the default number of hours, and what is the maximum number of days? Answer concisely with both.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "24",
+          "30"
+        ]
+      },
+      "source": "plugins/storage/skills/pure-storage/SKILL.md - SafeMode: Immutable snapshots locked for configurable period (24h default, up to 30 days)"
+    },
+    {
+      "id": "pure-storage-activecluster-rtt",
+      "knowledge": "stable",
+      "prompt": "For Pure Storage ActiveCluster synchronous replication, what is the maximum round-trip time, in milliseconds, supported between sites? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "11"
+        ]
+      },
+      "source": "plugins/storage/skills/pure-storage/SKILL.md - Replication section: ActiveCluster: max 11 ms RTT"
+    },
+    {
+      "id": "pure-storage-everpure-rebrand",
+      "knowledge": "recent",
+      "prompt": "Pure Storage FlashArray has been marketed under a new brand name since when? Give the name and roughly when the change took effect. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Everpure",
+          "2026"
+        ]
+      },
+      "source": "plugins/storage/skills/pure-storage/SKILL.md - This skill covers Pure Storage FlashArray (marketed as Everpure since February 2026)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

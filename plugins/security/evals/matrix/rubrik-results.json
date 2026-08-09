@@ -1,0 +1,51 @@
+{
+  "skill": "rubrik",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rubrik-atlas-encryption",
+      "knowledge": "stable",
+      "prompt": "What encryption standard and key length does Rubrik's Atlas distributed filesystem use to protect backup data at rest? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)aes.?256"
+      },
+      "source": "plugins/security/skills/rubrik/SKILL.md - Encryption: AES-256 encryption at rest on the Atlas filesystem"
+    },
+    {
+      "id": "rubrik-gold-sla-retention",
+      "knowledge": "recent",
+      "prompt": "In Rubrik's example Gold SLA domain built for ransomware resilience, how many days are daily snapshots retained, and how many weeks are weekly snapshots retained? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*30\\s*days)(?=.*52\\s*weeks)"
+      },
+      "source": "plugins/security/skills/rubrik/SKILL.md - Gold SLA domain: Daily snapshots retain for 30 days, Weekly snapshots retain for 52 weeks"
+    },
+    {
+      "id": "rubrik-security-cloud-modules",
+      "knowledge": "recent",
+      "prompt": "Besides Data Threat Analytics, name at least two other modules listed under Rubrik Security Cloud's module table. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Data Classification",
+          "Cyber Recovery"
+        ]
+      },
+      "source": "plugins/security/skills/rubrik/SKILL.md - Security Cloud Modules table: Data Threat Analytics, Threat Intelligence, Data Classification, Cyber Recovery, Compliance"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

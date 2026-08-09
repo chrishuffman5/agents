@@ -100,6 +100,29 @@
   .metaline .up { color: var(--agent); }
   .noeval { font-size: 12px; color: var(--ink-soft); font-style: italic; padding-top: 8px; border-top: 1px solid var(--line); }
 
+  /* cross-harness matrix section */
+  .mx-head { margin: 52px 0 6px; }
+  .mx-head h2 { font-size: clamp(22px, 3vw, 28px); margin: 0 0 8px; letter-spacing: -.015em; }
+  .mx-head .lede { font-size: 15px; }
+  .mx-partial { display: inline-block; font: 600 11px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase;
+                color: var(--baseline); border: 1px solid var(--baseline); border-radius: 6px; padding: 4px 8px; margin-left: 10px; vertical-align: middle; }
+  .mtablewrap { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+                overflow-x: auto; margin: 14px 0 6px; }
+  table.mtable { border-collapse: collapse; width: 100%; font-size: 13px; }
+  .mtable th { text-align: left; font: 600 10.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase;
+               color: var(--ink-soft); padding: 11px 12px; border-bottom: 2px solid var(--line); white-space: nowrap; }
+  .mtable td { padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .mtable tr:last-child td { border-bottom: none; }
+  .mtable td.r, .mtable th.r { text-align: right; }
+  .mtable .sk { color: var(--agent); font-weight: 600; }
+  .mtable .ns { color: var(--baseline); font-weight: 600; }
+  .mtable .dpos { color: var(--agent); font-weight: 700; }
+  .mtable .dneg { color: var(--baseline); font-weight: 700; }
+  .mtable .dim { color: var(--ink-soft); }
+  .minitrack { display: inline-block; width: 64px; height: 7px; background: var(--line); border-radius: 999px; overflow: hidden; vertical-align: middle; margin-right: 7px; }
+  .minitrack i { display: block; height: 100%; border-radius: 999px; }
+  .minitrack .a { background: var(--agent); } .minitrack .b { background: var(--baseline); }
+
   footer { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-soft); }
   footer p { margin: 0 0 8px; max-width: 80ch; }
   code { font: 500 12px var(--mono); background: var(--panel-2); border: 1px solid var(--line); border-radius: 5px; padding: 1px 5px; }
@@ -134,6 +157,26 @@
   <div class="controls" id="controls" role="tablist" aria-label="Filter by category"></div>
   <section class="grid" id="grid" aria-live="polite"></section>
 
+  <section id="matrix" aria-label="Cross-harness skill matrix">
+    <div class="mx-head">
+      <h2>Cross-Harness Skill Matrix <span class="mx-partial" id="mxPartial" hidden>partial — sweep in progress</span></h2>
+      <p class="lede">Every skill tested as one-shot prompts under three harnesses — Claude Code, OpenAI Codex, and Pi —
+        across frontier, small, and local models at multiple reasoning-effort levels, each cell run twice: with the skill
+        provisioned, and bare. Grading is deterministic; costs use harness-reported figures where available and published
+        per-token rates otherwise.</p>
+      <p class="genstamp" id="mxStamp"></p>
+    </div>
+    <div class="stats" id="mxStats"></div>
+    <div class="controls" id="mxControls" aria-label="Filter matrix by plugin"></div>
+    <div class="mtablewrap"><table class="mtable" id="mxSkills"></table></div>
+    <p class="genstamp" style="margin-bottom:26px">Per-skill detail — the exact prompts, expected specs, and per-cell aggregates —
+      ships in each plugin's <code>evals/matrix/</code> as <code>&lt;skill&gt;-results.json</code> and <code>&lt;skill&gt;-report.md</code>.</p>
+    <div class="mx-head"><h2 style="font-size:20px">Price to performance — model × harness</h2>
+      <p class="lede" style="font-size:14px">Aggregated across all tested skills. Cost per correct answer is the comparison that
+        matters for frontier models: accuracy alone flatters the expensive tiers.</p></div>
+    <div class="mtablewrap"><table class="mtable" id="mxModels"></table></div>
+  </section>
+
   <footer>
     <p><strong>Method.</strong> Each domain has a task suite whose ground truth is quoted from the skills library. The
       harness runs every task as an independent headless session (up to 3 attempts), grading with deterministic
@@ -148,6 +191,7 @@
 </div>
 
 <script src="results.js"></script>
+<script src="matrix-results.js"></script>
 <script>
 (function () {
   var data = window.DASHBOARD_DATA;
@@ -256,6 +300,123 @@
   });
 
   render();
+})();
+
+/* ---- cross-harness matrix section ---- */
+(function () {
+  var mx = window.MATRIX_SKILLS;
+  var section = document.getElementById('matrix');
+  if (!mx || !mx.skills) { section.hidden = true; return; }
+
+  var pct = function (a) { return a == null ? '—' : a.accuracy + '%'; };
+  var secs = function (a) { return (a == null || a.meanWallMs == null) ? '—' : (a.meanWallMs / 1000).toFixed(1) + 's'; };
+  var usd = function (v) { return v == null ? '—' : '$' + v; };
+  var cpc = function (a) { return (a == null) ? '—' : usd(a.costPerCorrect); };
+
+  var names = Object.keys(mx.skills);
+  var rows = names.map(function (k) { return mx.skills[k]; });
+  var tested = rows.filter(function (s) { return s.runsDone > 0; });
+
+  if (mx.done < mx.planned) document.getElementById('mxPartial').hidden = false;
+  document.getElementById('mxStamp').textContent = 'Generated ' + mx.generated + ' · ' + mx.done + ' of ' + mx.planned + ' runs complete';
+
+  // headline stats: weighted overall skill vs no-skill
+  function tally(mode) {
+    var runs = 0, pass = 0, cost = 0, costKnown = true;
+    tested.forEach(function (s) {
+      var a = s.overall && s.overall[mode];
+      if (!a) return;
+      runs += a.runs; pass += a.pass;
+      if (a.totalCostUsd == null) costKnown = false; else cost += a.totalCostUsd;
+    });
+    return { runs: runs, pass: pass,
+             acc: runs ? Math.round(1000 * pass / runs) / 10 : null,
+             cpc: (costKnown && pass) ? Math.round(10000 * cost / pass) / 10000 : null };
+  }
+  var S = tally('skill'), N = tally('no-skill');
+  document.getElementById('mxStats').innerHTML = [
+    ['stat', tested.length + ' / ' + names.length, 'skills with results'],
+    ['stat agent', S.acc == null ? '—' : S.acc + '%', 'skill accuracy · ' + S.runs + ' runs'],
+    ['stat base', N.acc == null ? '—' : N.acc + '%', 'no-skill accuracy · ' + N.runs + ' runs'],
+    ['stat agent', S.cpc == null ? '—' : '$' + S.cpc, 'skill cost / correct'],
+    ['stat base', N.cpc == null ? '—' : '$' + N.cpc, 'no-skill cost / correct']
+  ].map(function (s) {
+    return '<div class="' + s[0] + '"><div class="n small">' + s[1] + '</div><div class="l">' + s[2] + '</div></div>';
+  }).join('');
+
+  // plugin filter chips
+  var plugins = ['All'].concat(Array.from(new Set(rows.map(function (s) { return s.plugin; }))).sort());
+  var active = 'All';
+  var controls = document.getElementById('mxControls');
+  controls.innerHTML = plugins.map(function (p) {
+    return '<button class="chip' + (p === 'All' ? ' on' : '') + '" data-p="' + p + '">' + p + '</button>';
+  }).join('') + '<span class="spacer"></span><span class="count" id="mxCount"></span>';
+  controls.addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip'); if (!btn) return;
+    active = btn.getAttribute('data-p');
+    controls.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === btn); });
+    renderSkills();
+  });
+
+  function bar(cls, a) {
+    var w = a ? Math.max(2, Math.round(a.accuracy * 0.64)) : 0;
+    return '<span class="minitrack"><i class="' + cls + '" style="width:' + w + 'px"></i></span>';
+  }
+
+  function renderSkills() {
+    var list = rows.filter(function (s) { return active === 'All' || s.plugin === active; });
+    list.sort(function (x, y) {
+      var dx = (x.overall && x.overall.skill && x.overall['no-skill']) ? x.overall.skill.accuracy - x.overall['no-skill'].accuracy : -999;
+      var dy = (y.overall && y.overall.skill && y.overall['no-skill']) ? y.overall.skill.accuracy - y.overall['no-skill'].accuracy : -999;
+      if (dx !== dy) return dy - dx;
+      return x.skill.localeCompare(y.skill);
+    });
+    var head = '<tr><th>Plugin</th><th>Skill</th><th class="r">Runs</th><th>Skill acc</th><th>No-skill acc</th>' +
+               '<th class="r">Δ</th><th class="r">Skill wall</th><th class="r">No-skill wall</th><th class="r">Skill $/✓</th><th class="r">No-skill $/✓</th></tr>';
+    var body = list.map(function (s) {
+      var a = s.overall && s.overall.skill, b = s.overall && s.overall['no-skill'];
+      var d = (a && b) ? Math.round(10 * (a.accuracy - b.accuracy)) / 10 : null;
+      return '<tr><td class="dim">' + s.plugin + '</td><td><b>' + s.skill + '</b></td>' +
+        '<td class="r dim">' + s.runsDone + '/' + s.runsPlanned + '</td>' +
+        '<td>' + bar('a', a) + '<span class="sk">' + pct(a) + '</span></td>' +
+        '<td>' + bar('b', b) + '<span class="ns">' + pct(b) + '</span></td>' +
+        '<td class="r ' + (d == null ? 'dim' : d >= 0 ? 'dpos' : 'dneg') + '">' + (d == null ? '—' : (d > 0 ? '+' : '') + d + 'pp') + '</td>' +
+        '<td class="r">' + secs(a) + '</td><td class="r">' + secs(b) + '</td>' +
+        '<td class="r">' + cpc(a) + '</td><td class="r">' + cpc(b) + '</td></tr>';
+    }).join('');
+    document.getElementById('mxSkills').innerHTML = head + body;
+    document.getElementById('mxCount').textContent = list.length + ' of ' + rows.length + ' skills';
+  }
+  renderSkills();
+
+  // price-to-performance: merge byCell across all skills -> harness × model × mode
+  var agg = {};
+  tested.forEach(function (s) {
+    (s.byCell || []).forEach(function (c) {
+      if (!c.agg) return;
+      var key = c.harness + '|' + c.model + '|' + c.mode;
+      var e = agg[key] || (agg[key] = { harness: c.harness, model: c.model, mode: c.mode,
+                                        runs: 0, pass: 0, wallSum: 0, cost: 0, costKnown: true });
+      e.runs += c.agg.runs; e.pass += c.agg.pass;
+      e.wallSum += (c.agg.meanWallMs || 0) * c.agg.runs;
+      if (c.agg.totalCostUsd == null) e.costKnown = false; else e.cost += c.agg.totalCostUsd;
+    });
+  });
+  var mrows = Object.keys(agg).map(function (k) {
+    var e = agg[k];
+    return { harness: e.harness, model: e.model.replace(/^(anthropic|openai|ollama)\//, ''), mode: e.mode,
+             runs: e.runs, acc: e.runs ? Math.round(1000 * e.pass / e.runs) / 10 : null,
+             wall: e.runs ? (e.wallSum / e.runs / 1000).toFixed(1) + 's' : '—',
+             cpc: (e.costKnown && e.pass) ? '$' + (Math.round(10000 * e.cost / e.pass) / 10000) : '—' };
+  }).sort(function (a, b) { return a.harness.localeCompare(b.harness) || a.model.localeCompare(b.model) || a.mode.localeCompare(b.mode); });
+  document.getElementById('mxModels').innerHTML =
+    '<tr><th>Harness</th><th>Model</th><th>Mode</th><th class="r">Runs</th><th class="r">Accuracy</th><th class="r">Mean wall</th><th class="r">Cost / correct</th></tr>' +
+    mrows.map(function (r) {
+      return '<tr><td>' + r.harness + '</td><td><b>' + r.model + '</b></td>' +
+        '<td class="' + (r.mode === 'skill' ? 'sk' : 'ns') + '">' + r.mode + '</td>' +
+        '<td class="r dim">' + r.runs + '</td><td class="r">' + (r.acc == null ? '—' : r.acc + '%') + '</td>' +
+        '<td class="r">' + r.wall + '</td><td class="r">' + r.cpc + '</td></tr>';
+    }).join('');
 })();
 </script>
 </body>

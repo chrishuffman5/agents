@@ -1,0 +1,50 @@
+{
+  "skill": "ipam-ddi",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ipam-ddi-guest-wifi-lease-time",
+      "knowledge": "recent",
+      "prompt": "What DHCP lease time is recommended for guest WiFi networks as a DDI best practice? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30\\s*min"
+      },
+      "source": "plugins/networking/skills/ipam-ddi/SKILL.md - DHCP design considerations table recommends 30 min lease time for guest"
+    },
+    {
+      "id": "ipam-ddi-cgn-rfc-number",
+      "knowledge": "recent",
+      "prompt": "Which RFC defines the 100.64.0.0/10 address block used for Carrier-Grade NAT and shared address space? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6598"
+        ]
+      },
+      "source": "plugins/networking/skills/ipam-ddi/references/concepts.md - RFC 6598 defines 100.64.0.0/10 for Carrier-Grade NAT (CGN)"
+    },
+    {
+      "id": "ipam-ddi-dora-process",
+      "knowledge": "stable",
+      "prompt": "What do the four steps in the DHCP DORA process stand for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*discover)(?=.*offer)(?=.*request)(?=.*ack)"
+      },
+      "source": "plugins/networking/skills/ipam-ddi/references/concepts.md - DHCP process DORA: DISCOVER, OFFER, REQUEST, ACK"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

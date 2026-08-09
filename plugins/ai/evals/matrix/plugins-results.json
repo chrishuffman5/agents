@@ -1,0 +1,52 @@
+{
+  "skill": "plugins",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "plugins-version-resolution-order",
+      "knowledge": "stable",
+      "prompt": "In Claude Code plugin versioning, if both plugin.json and the marketplace entry declare a version, which one takes effect? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "plugin.json"
+        ]
+      },
+      "source": "plugins/ai/skills/plugins/SKILL.md - Never set version in both plugin.json and the marketplace entry: plugin.json wins silently"
+    },
+    {
+      "id": "plugins-renames-min-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Claude Code version required for the marketplace.json renames field to actually take effect? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2.1.193"
+        ]
+      },
+      "source": "plugins/ai/skills/plugins/SKILL.md - add a top-level renames entry, v2.1.193+"
+    },
+    {
+      "id": "plugins-strict-marketplaces-lockdown",
+      "knowledge": "stable",
+      "prompt": "In Claude Code managed settings, what value of strictKnownMarketplaces produces total lockdown, blocking even the official marketplace from being added? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(empty\\s*array|empty\\s*list|\\[\\s*\\])"
+      },
+      "source": "plugins/ai/skills/plugins/SKILL.md - strictKnownMarketplaces: [] = total lockdown incl. the official marketplace"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,50 @@
+{
+  "skill": "pfsense",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pfsense-carp-min-ips",
+      "knowledge": "recent",
+      "prompt": "In a pfSense CARP high-availability pair, what is the minimum number of IP addresses needed per interface once you count both physical nodes and the shared virtual IP? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bthree\\b|\\b3\\b)"
+      },
+      "source": "plugins/networking/skills/pfsense/SKILL.md - CARP Design Rules: Three IPs per interface minimum: node1, node2, CARP VIP"
+    },
+    {
+      "id": "pfsense-altq-limitation",
+      "knowledge": "recent",
+      "prompt": "Does pfSense's legacy ALTQ traffic shaping framework work with modern multi-queue network interface cards? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|does not)"
+      },
+      "source": "plugins/networking/skills/pfsense/SKILL.md - Common Pitfalls: ALTQ does not work with multi-queue NICs"
+    },
+    {
+      "id": "pfsense-freebsd-base",
+      "knowledge": "stable",
+      "prompt": "What open-source operating system does pfSense build on, using its pf engine as the underlying firewall? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "FreeBSD"
+        ]
+      },
+      "source": "plugins/networking/skills/pfsense/SKILL.md - pfSense builds on FreeBSD, using pf (packet filter) as the underlying firewall engine"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

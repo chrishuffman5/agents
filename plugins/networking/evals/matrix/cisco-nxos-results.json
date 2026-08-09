@@ -1,0 +1,53 @@
+{
+  "skill": "cisco-nxos",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-nxos-105-date",
+      "knowledge": "recent",
+      "prompt": "What is the release date of Cisco NX-OS 10.5(5)M, the current recommended production baseline for Nexus 9000? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "March",
+          "2026"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-nxos/references/versions/10.5.md - Release date: March 16, 2026"
+    },
+    {
+      "id": "cisco-nxos-checkpoint-max",
+      "knowledge": "recent",
+      "prompt": "On Cisco NX-OS, what is the maximum number of user configuration checkpoints you can save on a device at one time for rollback purposes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b10\\b"
+      },
+      "source": "plugins/networking/skills/cisco-nxos/SKILL.md - Maximum 10 user checkpoints per device"
+    },
+    {
+      "id": "cisco-nxos-vpc-keepalive-port",
+      "knowledge": "stable",
+      "prompt": "On Cisco NX-OS, what UDP port does vPC peer-keepalive traffic use by default? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3200"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-nxos/SKILL.md - Peer-keepalive: heartbeat via management VRF (UDP 3200)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "rapid7",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rapid7-active-risk-range",
+      "knowledge": "recent",
+      "prompt": "What is the numeric range of Rapid7 InsightVM's proprietary Active Risk Score? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0\\s*(-|to)\\s*1000"
+      },
+      "source": "plugins/security/skills/rapid7/SKILL.md - Active Risk Score range: 0-1000 (higher = more risk)"
+    },
+    {
+      "id": "rapid7-api-port",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the InsightVM REST API version 3 listen on by default, based on its documented base URL? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)3780"
+      },
+      "source": "plugins/security/skills/rapid7/SKILL.md - InsightVM API Base URL: https://CONSOLE_HOSTNAME:3780/api/3/"
+    },
+    {
+      "id": "rapid7-epss-component",
+      "knowledge": "stable",
+      "prompt": "Which FIRST.org probabilistic exploitation-likelihood model feeds into Rapid7 InsightVM's Active Risk Score alongside CVSS and exploit data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)epss"
+      },
+      "source": "plugins/security/skills/rapid7/SKILL.md - Active Risk components include EPSS -- Exploitation probability (FIRST EPSS model)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

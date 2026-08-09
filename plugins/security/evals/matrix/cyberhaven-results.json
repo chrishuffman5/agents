@@ -1,0 +1,48 @@
+{
+  "skill": "cyberhaven",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cyberhaven-extension-latency",
+      "knowledge": "recent",
+      "prompt": "According to Cyberhaven's own performance guidance, roughly how much latency does its browser extension add to web operations during inspection? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5\\s*(-|to)\\s*15\\s*ms"
+      },
+      "source": "plugins/security/skills/cyberhaven/SKILL.md - Tuning Recommendations > Performance: Browser extension: ~5-15ms latency on web operations"
+    },
+    {
+      "id": "cyberhaven-monitor-mode-duration",
+      "knowledge": "stable",
+      "prompt": "When deploying Cyberhaven, how long is it recommended to run in monitor-only mode before turning on policy enforcement? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(-|to)\\s*4\\s*weeks"
+      },
+      "source": "plugins/security/skills/cyberhaven/SKILL.md - Deployment and Configuration > Initial Setup: Deploy in monitor mode - 2-4 weeks of monitoring before enabling enforcement"
+    },
+    {
+      "id": "cyberhaven-entra-sync-frequency",
+      "knowledge": "recent",
+      "prompt": "When Cyberhaven integrates with Entra ID to pull user attributes such as department and manager for alert enrichment, how often do those attributes typically refresh? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*(-|to)\\s*24\\s*hours"
+      },
+      "source": "plugins/security/skills/cyberhaven/SKILL.md - Common Issues and Troubleshooting: Check sync frequency - attributes refresh every 4-24 hours"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

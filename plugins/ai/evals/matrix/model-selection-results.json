@@ -1,0 +1,52 @@
+{
+  "skill": "model-selection",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "model-selection-sonnet-price-change",
+      "knowledge": "recent",
+      "prompt": "When does Claude Sonnet 5's introductory input pricing of 2 dollars per million tokens end, and what does the input price become after that date? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2026-08-31.{0,60}\\$?3"
+      },
+      "source": "plugins/ai/skills/model-selection/SKILL.md - Sonnet 5 $2/$10 through Aug 31 2026, $3/$15 after Sep 1 2026"
+    },
+    {
+      "id": "model-selection-opus41-retirement",
+      "knowledge": "recent",
+      "prompt": "What is the retirement date for the Claude model ID claude-opus-4-1-20250805? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026-08-05"
+        ]
+      },
+      "source": "plugins/ai/skills/model-selection/SKILL.md - claude-opus-4-1-20250805 retired 2026-08-05"
+    },
+    {
+      "id": "model-selection-anthropic-notice-period",
+      "knowledge": "stable",
+      "prompt": "What is Anthropic's minimum advance notice period before deprecating a publicly released Claude model? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "60"
+        ]
+      },
+      "source": "plugins/ai/skills/model-selection/SKILL.md - Anthropic notice period >=60 days for publicly released models"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,55 @@
+{
+  "skill": "agent-skills",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "agent-skills-name-constraints",
+      "knowledge": "stable",
+      "prompt": "When writing a SKILL.md file's frontmatter, what is the maximum character length allowed for the name field, and which company name must never appear inside it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "64",
+          "Anthropic"
+        ]
+      },
+      "source": "plugins/ai/skills/agent-skills/SKILL.md - name field: <=64 chars, lowercase letters/numbers/hyphens only, must not contain anthropic or claude"
+    },
+    {
+      "id": "agent-skills-body-line-target",
+      "knowledge": "stable",
+      "prompt": "Roughly how many lines should the body of a SKILL.md file stay under, according to progressive disclosure guidance for Agent Skills? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "500"
+        ]
+      },
+      "source": "plugins/ai/skills/agent-skills/SKILL.md - Keep the SKILL.md body under 500 lines"
+    },
+    {
+      "id": "agent-skills-container-skills-limit",
+      "knowledge": "recent",
+      "prompt": "When using Agent Skills through the Claude Messages API's container.skills feature, what is the maximum number of skills you can attach to a single request? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8"
+        ]
+      },
+      "source": "plugins/ai/skills/agent-skills/SKILL.md - container.skills, up to 8 per request"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

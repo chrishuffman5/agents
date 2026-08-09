@@ -1,0 +1,48 @@
+{
+  "skill": "email-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "email-security-spf-lookup-limit",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of DNS lookups an SPF record is allowed to trigger before it becomes invalid? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b10\\b"
+      },
+      "source": "plugins/security/skills/email-security/SKILL.md - SPF Limitations: 10 DNS lookup limit"
+    },
+    {
+      "id": "email-security-bimi-outlook-support",
+      "knowledge": "recent",
+      "prompt": "Among the major email clients, does Outlook currently render BIMI brand logos in received messages? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|not|does not)\\b"
+      },
+      "source": "plugins/security/skills/email-security/SKILL.md - BIMI Supported clients: Gmail, Yahoo Mail, Apple Mail (iOS 16+), Fastmail. Not yet Outlook."
+    },
+    {
+      "id": "email-security-dkim-key-length",
+      "knowledge": "stable",
+      "prompt": "What is the minimum recommended RSA key length for a DKIM signing key published in DNS? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2048"
+      },
+      "source": "plugins/security/skills/email-security/SKILL.md - DKIM Key parameters: p= Base64-encoded public key (2048-bit minimum for RSA)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

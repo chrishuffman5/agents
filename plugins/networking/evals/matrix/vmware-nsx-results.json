@@ -1,0 +1,51 @@
+{
+  "skill": "vmware-nsx",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "vmware-nsx-gwfw-rule-limit",
+      "knowledge": "recent",
+      "prompt": "In NSX 4.2's vDefend Gateway Firewall, how many rules per section can you configure before hitting the alarm notification threshold? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2,?500"
+      },
+      "source": "plugins/networking/skills/vmware-nsx/references/versions/4.2.md - vDefend Gateway Firewall: up to 2,500 rules per section with alarm notification"
+    },
+    {
+      "id": "vmware-nsx-vsphere-min",
+      "knowledge": "recent",
+      "prompt": "What is the minimum vSphere version required to run NSX 4.2.0? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.0",
+          "U3"
+        ]
+      },
+      "source": "plugins/networking/skills/vmware-nsx/references/versions/4.2.md - NSX 4.2 with vSphere Compatibility table: NSX 4.2.0 minimum vSphere 7.0 U3"
+    },
+    {
+      "id": "vmware-nsx-manager-cluster",
+      "knowledge": "stable",
+      "prompt": "For a production VMware NSX deployment, how many NSX Manager nodes should the cluster have? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bthree\\b|\\b3\\b)"
+      },
+      "source": "plugins/networking/skills/vmware-nsx/SKILL.md - NSX Manager Cluster: Minimum 1 node (lab only); Production 3-node cluster"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

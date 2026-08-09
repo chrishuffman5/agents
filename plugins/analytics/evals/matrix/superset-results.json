@@ -1,0 +1,53 @@
+{
+  "skill": "superset",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "superset-6-release-date",
+      "knowledge": "recent",
+      "prompt": "On what exact date was Apache Superset 6.0.0 released? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "December",
+          "2025"
+        ]
+      },
+      "source": "plugins/analytics/skills/superset/SKILL.md - Platform Overview, Current Version: Apache Superset 6.0.0 (December 4, 2025)."
+    },
+    {
+      "id": "superset-celery-k8s-pool",
+      "knowledge": "stable",
+      "prompt": "On Kubernetes, what Celery worker pool should Apache Superset use instead of the default prefork pool to avoid OOMKilled restarts? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(solo|gevent)"
+      },
+      "source": "plugins/analytics/skills/superset/SKILL.md - Anti-Patterns: Celery prefork pool on Kubernetes causes OOMKilled restarts; use --pool solo or --pool gevent."
+    },
+    {
+      "id": "superset-gunicorn-worker-recycle",
+      "knowledge": "stable",
+      "prompt": "What Gunicorn setting should you configure so Apache Superset periodically respawns workers and avoids memory fragmentation growth? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "max-requests"
+        ]
+      },
+      "source": "plugins/analytics/skills/superset/SKILL.md - Anti-Patterns: set --max-requests=1000 --max-requests-jitter=50 to periodically respawn Gunicorn workers."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

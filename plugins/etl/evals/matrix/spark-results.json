@@ -1,0 +1,52 @@
+{
+  "skill": "spark",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "spark-aqe-default-version",
+      "knowledge": "stable",
+      "prompt": "Adaptive Query Execution in Apache Spark has been enabled by default since which minor version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.2"
+        ]
+      },
+      "source": "plugins/etl/skills/spark/SKILL.md - AQE (Adaptive Query Execution): Enabled by default since 3.2."
+    },
+    {
+      "id": "spark-35-lts-eol",
+      "knowledge": "recent",
+      "prompt": "Apache Spark 3.5 is under extended long-term support. In what month and year does that extended support end? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)nov(ember)?.{0,3}2027"
+      },
+      "source": "plugins/etl/skills/spark/SKILL.md - Version-Specific Guidance table: 3.5 Extended LTS (EOL Nov 2027)."
+    },
+    {
+      "id": "spark-broadcast-join-threshold",
+      "knowledge": "stable",
+      "prompt": "For Spark join strategy selection, a broadcast hash join is recommended when one side of the join is smaller than roughly what size? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50"
+        ]
+      },
+      "source": "plugins/etl/skills/spark/SKILL.md - Join Strategy Selection table: One side < 50MB -> Broadcast hash join."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

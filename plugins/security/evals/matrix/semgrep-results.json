@@ -1,0 +1,55 @@
+{
+  "skill": "semgrep",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "semgrep-license",
+      "knowledge": "recent",
+      "prompt": "Under what open source license is the core Semgrep OSS engine released? Answer concisely with the license name and version.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "LGPL",
+          "2.1"
+        ]
+      },
+      "source": "plugins/security/skills/semgrep/SKILL.md - Semgrep OSS: Free, open-source (LGPL 2.1), community rules, no cloud"
+    },
+    {
+      "id": "semgrep-taint-oss-vs-pro",
+      "knowledge": "stable",
+      "prompt": "For Semgrep taint analysis, which tier is required to follow tainted data across multiple files and function calls in a project, rather than only within a single file? Answer concisely naming the tier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bpro\\b"
+      },
+      "source": "plugins/security/skills/semgrep/SKILL.md - Taint mode differences: OSS intra-file taint only; Pro cross-file, cross-function taint"
+    },
+    {
+      "id": "semgrep-secrets-validity-levels",
+      "knowledge": "recent",
+      "prompt": "Semgrep Secrets reports a validity status for each detected secret after checking whether it is still active. Name the three possible validity status values it can report. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "valid",
+          "invalid",
+          "unknown"
+        ]
+      },
+      "source": "plugins/security/skills/semgrep/SKILL.md - Validity status levels: valid, invalid, unknown"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

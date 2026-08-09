@@ -1,0 +1,54 @@
+{
+  "skill": "dell-unity",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dell-unity-eos-date",
+      "knowledge": "recent",
+      "prompt": "Dell Unity XT all-flash array models reached end-of-sale on what date? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "August",
+          "2025"
+        ]
+      },
+      "source": "plugins/storage/skills/dell-unity/SKILL.md - Lifecycle Status table: AFA models end-of-sale August 1, 2025"
+    },
+    {
+      "id": "dell-unity-vsa-capacity",
+      "knowledge": "stable",
+      "prompt": "Dell UnityVSA ships in two editions with different capacity caps. What is the maximum capacity for the free Community Edition versus the Professional Edition? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4 TB",
+          "50 TB"
+        ]
+      },
+      "source": "plugins/storage/skills/dell-unity/SKILL.md - Core Architecture: UnityVSA Community Edition (4 TB) and Professional Edition (50 TB)"
+    },
+    {
+      "id": "dell-unity-fastcache-afa",
+      "knowledge": "stable",
+      "prompt": "In Dell Unity, is FAST Cache applicable to all-flash array pools? Answer with yes or no and a brief reason.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|not applicable)\\b"
+      },
+      "source": "plugins/storage/skills/dell-unity/SKILL.md - FAST Cache: Secondary SSD cache at 64 KB granularity, for hybrid pools only (not applicable for AFA)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

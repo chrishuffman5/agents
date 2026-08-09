@@ -1,0 +1,52 @@
+{
+  "skill": "mongodb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mongodb-oidc-min-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which minimum MongoDB server version can you authenticate using native OIDC, OpenID Connect, without a third-party proxy? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.0"
+        ]
+      },
+      "source": "plugins/database/skills/mongodb/references/versions/8.0.md - OIDC Authentication section; SKILL.md Security Model table also marks OIDC as 8.0+."
+    },
+    {
+      "id": "mongodb-querystats-stage",
+      "knowledge": "recent",
+      "prompt": "MongoDB 8.0 added a new aggregation pipeline stage for querying a historical store of query statistics, cutting down on the need to combine currentOp with the profiler. What is the name of that stage? Answer with the exact name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bqueryStats\\b"
+      },
+      "source": "plugins/database/skills/mongodb/references/versions/8.0.md - queryStats Aggregation Stage section introduces the $queryStats stage."
+    },
+    {
+      "id": "mongodb-wiredtiger-min-cache",
+      "knowledge": "stable",
+      "prompt": "In MongoDB, what is the minimum default size of the WiredTiger internal cache, regardless of how little RAM the host machine has? Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "256"
+        ]
+      },
+      "source": "plugins/database/skills/mongodb/SKILL.md - WiredTiger Storage Engine section states default cache size is 50 percent of RAM minus 1GB, with a minimum of 256MB."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

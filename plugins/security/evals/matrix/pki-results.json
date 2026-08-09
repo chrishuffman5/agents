@@ -1,0 +1,52 @@
+{
+  "skill": "pki",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pki-cab-forum-max-validity",
+      "knowledge": "stable",
+      "prompt": "Under CA/Browser Forum baseline requirements enforced since 2020, what is the maximum validity period in days for a publicly-trusted TLS certificate? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)398\\s*days?"
+      },
+      "source": "plugins/security/skills/pki/SKILL.md - CA/Browser Forum: Maximum 398 days for publicly-trusted TLS certificates (enforced since 2020)"
+    },
+    {
+      "id": "pki-lets-encrypt-6day",
+      "knowledge": "recent",
+      "prompt": "In March 2025, Let's Encrypt launched a new opt-in short-lived certificate duration. How many days is that certificate valid for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(6[\\s-]?day|six[\\s-]?day)"
+      },
+      "source": "plugins/security/skills/pki/SKILL.md - Let's Encrypt launched 6-day certificates in March 2025 as an opt-in"
+    },
+    {
+      "id": "pki-fips-disallowed-algorithms",
+      "knowledge": "stable",
+      "prompt": "Under FIPS 140-3 guidance for certificates, which two legacy hash algorithms and which weak RSA key size are explicitly disallowed? Answer concisely, naming all three.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "MD5",
+          "SHA-1",
+          "1024"
+        ]
+      },
+      "source": "plugins/security/skills/pki/SKILL.md - FIPS 140-3: No MD5, SHA-1, or RSA-1024"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

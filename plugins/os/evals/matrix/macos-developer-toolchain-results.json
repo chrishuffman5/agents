@@ -1,0 +1,228 @@
+{
+  "skill": "macos-developer-toolchain",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "macos-dev-toolchain-devid-cert-years",
+      "knowledge": "recent",
+      "prompt": "How many years does a Developer ID certificate remain valid before expiring, compared to Apple Development and Distribution certificates which expire annually? Answer with the number of years.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b"
+      },
+      "source": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Certificate Lifecycle: Developer ID certificates expire in 5 years; Apple Development/Distribution certificates expire in 1 year"
+    },
+    {
+      "id": "macos-dev-toolchain-xcode-jump-reason",
+      "knowledge": "stable",
+      "prompt": "Apple's Xcode major version numbers jumped from Xcode 16 straight to Xcode 26, skipping the usual sequential numbering. What was this jump aligned to? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(Tahoe|macOS\\s*26)"
+      },
+      "source": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Note: Xcode jumped from 16 to 26 to align with the macOS 26 Tahoe branding cycle."
+    },
+    {
+      "id": "macos-dev-toolchain-clt-disk-size",
+      "knowledge": "stable",
+      "prompt": "Roughly how much disk space do the standalone Xcode Command Line Tools require, compared to a full Xcode install at 12 to 30 GB? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)~?\\s*2\\s*GB"
+      },
+      "source": "plugins/os/skills/macos-developer-toolchain/SKILL.md - Command Line Tools table: Disk footprint ~2 GB (CLT Only) vs 12-30 GB (Full Xcode)"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 10821,
+      "meanTokensOut": 269,
+      "totalCostUsd": 1.3236,
+      "costPerCorrect": 0.1655
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 9750,
+      "meanTokensOut": 116,
+      "totalCostUsd": 0.2853,
+      "costPerCorrect": 0.0571
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9648,
+        "meanTokensOut": 331,
+        "totalCostUsd": 1.107,
+        "costPerCorrect": 0.2214
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7012,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1748,
+        "costPerCorrect": 0.0583
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13167,
+        "meanTokensOut": 145,
+        "totalCostUsd": 0.2166,
+        "costPerCorrect": 0.0722
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12487,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1105,
+        "costPerCorrect": 0.0552
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 9648,
+        "meanTokensOut": 331,
+        "totalCostUsd": 1.107,
+        "costPerCorrect": 0.2214
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7012,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1748,
+        "costPerCorrect": 0.0583
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13167,
+        "meanTokensOut": 145,
+        "totalCostUsd": 0.2166,
+        "costPerCorrect": 0.0722
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12487,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1105,
+        "costPerCorrect": 0.0552
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 7012,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1748,
+        "costPerCorrect": 0.0583
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 7888,
+        "meanTokensOut": 239,
+        "totalCostUsd": 0.4323,
+        "costPerCorrect": 0.2162
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11408,
+        "meanTokensOut": 422,
+        "totalCostUsd": 0.6748,
+        "costPerCorrect": 0.2249
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12487,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1105,
+        "costPerCorrect": 0.0552
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 13167,
+        "meanTokensOut": 145,
+        "totalCostUsd": 0.2166,
+        "costPerCorrect": 0.0722
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

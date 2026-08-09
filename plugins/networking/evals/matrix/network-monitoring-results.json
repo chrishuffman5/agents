@@ -1,0 +1,48 @@
+{
+  "skill": "network-monitoring",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "network-monitoring-snmp-scale",
+      "knowledge": "recent",
+      "prompt": "Roughly how many devices can a single SNMP-based NMS polling instance typically handle before an organization needs to add distributed pollers? Answer concisely with the approximate range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)500.{0,15}2,?000"
+      },
+      "source": "plugins/networking/skills/network-monitoring/references/concepts.md - SNMP scalability: a single NMS poller typically handles 500-2,000 devices"
+    },
+    {
+      "id": "network-monitoring-64bit-counters",
+      "knowledge": "recent",
+      "prompt": "When polling a 10 Gbps or faster network interface via SNMP, why should you use the 64-bit ifXTable counters instead of the standard 32-bit interface counters? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)wrap"
+      },
+      "source": "plugins/networking/skills/network-monitoring/references/concepts.md - 32-bit counters wrap too quickly on high-speed interfaces; use ifXTable (ifHCInOctets/ifHCOutOctets) for 1 Gbps+"
+    },
+    {
+      "id": "network-monitoring-snmpv3",
+      "knowledge": "stable",
+      "prompt": "Which version of SNMP is considered the production standard because it adds real authentication and encryption instead of a cleartext community string? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(v(ersion)?\\s*3|snmpv3)"
+      },
+      "source": "plugins/networking/skills/network-monitoring/references/concepts.md - SNMP Versions table: v3 (USM username/auth, DES/AES encryption) is the production standard"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,236 @@
+{
+  "skill": "service-mesh",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "servicemesh-postquantum",
+      "knowledge": "recent",
+      "prompt": "Among Istio, Linkerd, and Consul Connect, which mesh is the only one offering post-quantum cryptography for mTLS, and starting at which version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Linkerd",
+          "2.19"
+        ]
+      },
+      "source": "plugins/containers/skills/service-mesh/SKILL.md - Post-quantum crypto: Yes (Linkerd 2.19+, ML-KEM-768), No for Istio and Consul"
+    },
+    {
+      "id": "servicemesh-multicluster-alpha",
+      "knowledge": "recent",
+      "prompt": "For Istio's ambient mode, what maturity level is multi-cluster support at today, and at which Istio version was it introduced? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Alpha",
+          "1.27"
+        ]
+      },
+      "source": "plugins/containers/skills/service-mesh/SKILL.md - Multi-cluster: Alpha (ambient 1.27) for Istio"
+    },
+    {
+      "id": "servicemesh-p99-latency",
+      "knowledge": "stable",
+      "prompt": "Among Istio, Linkerd, and Consul Connect, which mesh has the lowest p99 latency overhead per hop according to comparative benchmarks? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Linkerd"
+        ]
+      },
+      "source": "plugins/containers/skills/service-mesh/SKILL.md - p99 latency overhead: Lowest (163ms less at 2k RPS) is Linkerd's column"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 8,
+      "accuracy": 88.9,
+      "meanWallMs": 14305,
+      "meanTokensOut": 532,
+      "totalCostUsd": 1.2697,
+      "costPerCorrect": 0.1587
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 4,
+      "accuracy": 66.7,
+      "meanWallMs": 15334,
+      "meanTokensOut": 292,
+      "totalCostUsd": 0.4475,
+      "costPerCorrect": 0.1119
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 15275,
+        "meanTokensOut": 698,
+        "totalCostUsd": 1.0735,
+        "costPerCorrect": 0.2147
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 8175,
+        "meanTokensOut": 254,
+        "totalCostUsd": 0.1852,
+        "costPerCorrect": 0.1852
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12365,
+        "meanTokensOut": 199,
+        "totalCostUsd": 0.1962,
+        "costPerCorrect": 0.0654
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 22492,
+        "meanTokensOut": 330,
+        "totalCostUsd": 0.2624,
+        "costPerCorrect": 0.0875
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 5,
+        "accuracy": 83.3,
+        "meanWallMs": 15275,
+        "meanTokensOut": 698,
+        "totalCostUsd": 1.0735,
+        "costPerCorrect": 0.2147
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 8175,
+        "meanTokensOut": 254,
+        "totalCostUsd": 0.1852,
+        "costPerCorrect": 0.1852
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12365,
+        "meanTokensOut": 199,
+        "totalCostUsd": 0.1962,
+        "costPerCorrect": 0.0654
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 22492,
+        "meanTokensOut": 330,
+        "totalCostUsd": 0.2624,
+        "costPerCorrect": 0.0875
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 8175,
+        "meanTokensOut": 254,
+        "totalCostUsd": 0.1852,
+        "costPerCorrect": 0.1852
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 13818,
+        "meanTokensOut": 505,
+        "totalCostUsd": 0.4618,
+        "costPerCorrect": 0.2309
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 16732,
+        "meanTokensOut": 891,
+        "totalCostUsd": 0.6117,
+        "costPerCorrect": 0.2039
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 22492,
+        "meanTokensOut": 330,
+        "totalCostUsd": 0.2624,
+        "costPerCorrect": 0.0875
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12365,
+        "meanTokensOut": 199,
+        "totalCostUsd": 0.1962,
+        "costPerCorrect": 0.0654
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

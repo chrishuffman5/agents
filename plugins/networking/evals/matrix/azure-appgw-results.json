@@ -1,0 +1,50 @@
+{
+  "skill": "azure-appgw",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "azure-appgw-v1-eol",
+      "knowledge": "recent",
+      "prompt": "When is Azure Application Gateway V1 scheduled to reach end of life? Answer concisely with the date.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)april\\s*28,?\\s*2026"
+      },
+      "source": "plugins/networking/skills/azure-appgw/SKILL.md - Azure Application Gateway V1 EOL: April 28, 2026"
+    },
+    {
+      "id": "azure-appgw-keyvault-rotation",
+      "knowledge": "recent",
+      "prompt": "Azure Application Gateway V2 can automatically rotate TLS certificates stored in Key Vault. How often does it poll Key Vault to check for a new certificate version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*hours?"
+      },
+      "source": "plugins/networking/skills/azure-appgw/SKILL.md - App Gateway polls Key Vault every 4 hours, rotates certificate when new version detected"
+    },
+    {
+      "id": "azure-appgw-subnet-size",
+      "knowledge": "stable",
+      "prompt": "What is the minimum dedicated subnet size required for deploying Azure Application Gateway V2? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/24"
+        ]
+      },
+      "source": "plugins/networking/skills/azure-appgw/SKILL.md - V2 requires a dedicated subnet with minimum size /24"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

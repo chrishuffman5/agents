@@ -1,0 +1,50 @@
+{
+  "skill": "ansible",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ansible-default-forks",
+      "knowledge": "stable",
+      "prompt": "In Ansible, what is the default value of the forks setting that controls how many hosts are processed in parallel, before an administrator raises it in ansible.cfg? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b|\\bfive\\b"
+      },
+      "source": "plugins/devops/skills/ansible/references/diagnostics.md and references/architecture.md - forks default is 5 (Too few forks - Default is 5; ansible.cfg comment Parallel host execution (default: 5))"
+    },
+    {
+      "id": "ansible-receptor-mesh-port",
+      "knowledge": "recent",
+      "prompt": "In Ansible Automation Platform's Automation Mesh built on Receptor, all communication between control, hop, and execution nodes flows over one single TCP port. Which port number is it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "27199"
+        ]
+      },
+      "source": "plugins/devops/skills/ansible/references/aap-platform.md - All mesh communication uses port 27199/TCP (TLS-encrypted); this is the only port required between mesh nodes"
+    },
+    {
+      "id": "ansible-fqcn-enforcement",
+      "knowledge": "recent",
+      "prompt": "Starting with ansible-core 2.20, if a playbook task calls a builtin module by its short name instead of the fully qualified collection name, does ansible-core still just print a warning, or does the run now fail? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(error|fail)"
+      },
+      "source": "plugins/devops/skills/ansible/references/versions/2.20.md - Non-FQCN module references now produce errors by default (previously warnings)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

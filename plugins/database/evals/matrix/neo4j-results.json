@@ -1,0 +1,52 @@
+{
+  "skill": "neo4j",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "neo4j-cypher25-default-release",
+      "knowledge": "recent",
+      "prompt": "As of which monthly Neo4j 2026.x release did Cypher 25 become the default query language for new deployments? Answer with the exact version in YYYY.MM format.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026.02"
+        ]
+      },
+      "source": "plugins/database/skills/neo4j/references/versions/2026.x.md - Cypher 25 section and the 2026.x release timeline table both state Cypher 25 becomes default starting 2026.02."
+    },
+    {
+      "id": "neo4j-query-cache-max-size",
+      "knowledge": "recent",
+      "prompt": "Neo4j 2026.01 introduced a default maximum query size for the query cache. What is that default size, in KiB? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128"
+        ]
+      },
+      "source": "plugins/database/skills/neo4j/references/versions/2026.x.md - Maximum Query Size for Caching section shows server.memory.query_cache.per_entry_max_query_size defaults to 128k."
+    },
+    {
+      "id": "neo4j-5-primary-cluster-fault-tolerance",
+      "knowledge": "stable",
+      "prompt": "In a Neo4j Enterprise cluster with 5 primary servers using Raft consensus, how many primary server failures can the cluster tolerate while still accepting writes? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b2\\b|\\btwo\\b)"
+      },
+      "source": "plugins/database/skills/neo4j/SKILL.md - Cluster Architecture cluster sizing table states 5 primaries tolerates 2 failures."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

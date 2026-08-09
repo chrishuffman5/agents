@@ -1,0 +1,56 @@
+{
+  "skill": "druid",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "druid-segment-size-mb",
+      "knowledge": "stable",
+      "prompt": "For Apache Druid, what is the recommended target size range, in megabytes, for a single segment on disk? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300",
+          "700"
+        ]
+      },
+      "source": "plugins/database/skills/druid/SKILL.md - Segment sizing best practices: Target 300-700 MB per segment on disk (also target 3-5 million rows per segment)."
+    },
+    {
+      "id": "druid-36-release-stats",
+      "knowledge": "recent",
+      "prompt": "Apache Druid 36.0.0 was released in February 2026. How many new features, bug fixes, and improvements did that release include, and from how many contributors? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "189",
+          "34"
+        ]
+      },
+      "source": "plugins/database/skills/druid/references/versions/36.x.md - opening line: 36.0.0 released February 9, 2026 with 189 new features, bug fixes, and improvements from 34 contributors."
+    },
+    {
+      "id": "druid-costbased-autoscaler",
+      "knowledge": "recent",
+      "prompt": "In Apache Druid 36.x, what is the name of the new autoScalerStrategy value that lets Kafka supervisor autoscaling balance resource cost against lag, rather than relying only on lag thresholds? Answer with the exact setting value.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "costBased"
+        ]
+      },
+      "source": "plugins/database/skills/druid/references/versions/36.x.md - Cost-Based Autoscaling for Streaming Ingestion table: autoScalerStrategy costBased (36.x new) optimizes task count balancing lag vs resource cost."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

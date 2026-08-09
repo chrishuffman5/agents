@@ -1,0 +1,48 @@
+{
+  "skill": "pulsar",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pulsar-key-shared-subscription",
+      "knowledge": "stable",
+      "prompt": "Which Apache Pulsar subscription type delivers messages to many consumers while preserving ordering per key, with individual acknowledgment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)key.?shared"
+      },
+      "source": "plugins/messaging/skills/pulsar/SKILL.md - Subscription Types table: Key_Shared, many consumers per-key, individual ack, per-entity ordering"
+    },
+    {
+      "id": "pulsar-nonpersistent-storage",
+      "knowledge": "stable",
+      "prompt": "For a non-persistent topic in Apache Pulsar, where is the message data actually stored? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(broker\\s*memory|memory\\s*only|in.?memory)"
+      },
+      "source": "plugins/messaging/skills/pulsar/SKILL.md - Topic Types section: Non-persistent topics are broker memory only"
+    },
+    {
+      "id": "pulsar-kop",
+      "knowledge": "recent",
+      "prompt": "What does the Pulsar feature called KoP provide? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)kafka"
+      },
+      "source": "plugins/messaging/skills/pulsar/SKILL.md - intro bullet list: KoP (Kafka-on-Pulsar protocol compatibility)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

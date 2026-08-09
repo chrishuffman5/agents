@@ -1,0 +1,216 @@
+{
+  "skill": "ubuntu",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ubuntu-pro-extension-years",
+      "knowledge": "recent",
+      "prompt": "Ubuntu Pro extends the standard LTS security maintenance window from 5 years to how many total years, and how many machines can attach for free? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "10",
+          "5"
+        ]
+      },
+      "source": "plugins/os/skills/ubuntu/SKILL.md - Ubuntu Pro / ESM / Livepatch: Ubuntu Pro extends LTS security maintenance from 5 to 10 years. Free for up to 5 machines."
+    },
+    {
+      "id": "ubuntu-2004-standard-eol",
+      "knowledge": "stable",
+      "prompt": "When did standard, non-Pro security support end for Ubuntu 20.04 LTS? Answer with month and year.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)April\\s*2025"
+      },
+      "source": "plugins/os/skills/ubuntu/SKILL.md - Common Pitfalls #5: Ubuntu 20.04 standard support ended April 2025."
+    },
+    {
+      "id": "ubuntu-apt-key-removed-version",
+      "knowledge": "recent",
+      "prompt": "The apt-key tool for importing repository signing keys was deprecated on Ubuntu 22.04. In which Ubuntu LTS release was it removed entirely? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)24\\.04"
+      },
+      "source": "plugins/os/skills/ubuntu/SKILL.md - Common Pitfalls #2: apt-key is deprecated since 22.04 and removed in 24.04."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 12583,
+      "meanTokensOut": 251,
+      "totalCostUsd": 0.7981,
+      "costPerCorrect": 0.133
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 5,
+      "accuracy": 83.3,
+      "meanWallMs": 9282,
+      "meanTokensOut": 139,
+      "totalCostUsd": 0.3667,
+      "costPerCorrect": 0.0733
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12788,
+        "meanTokensOut": 345,
+        "totalCostUsd": 0.613,
+        "costPerCorrect": 0.2043
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4373,
+        "meanTokensOut": 64,
+        "totalCostUsd": 0.1703,
+        "costPerCorrect": 0.0568
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12379,
+        "meanTokensOut": 157,
+        "totalCostUsd": 0.1851,
+        "costPerCorrect": 0.0617
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 14191,
+        "meanTokensOut": 213,
+        "totalCostUsd": 0.1964,
+        "costPerCorrect": 0.0982
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12788,
+        "meanTokensOut": 345,
+        "totalCostUsd": 0.613,
+        "costPerCorrect": 0.2043
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4373,
+        "meanTokensOut": 64,
+        "totalCostUsd": 0.1703,
+        "costPerCorrect": 0.0568
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12379,
+        "meanTokensOut": 157,
+        "totalCostUsd": 0.1851,
+        "costPerCorrect": 0.0617
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 14191,
+        "meanTokensOut": 213,
+        "totalCostUsd": 0.1964,
+        "costPerCorrect": 0.0982
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4373,
+        "meanTokensOut": 64,
+        "totalCostUsd": 0.1703,
+        "costPerCorrect": 0.0568
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12788,
+        "meanTokensOut": 345,
+        "totalCostUsd": 0.613,
+        "costPerCorrect": 0.2043
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 14191,
+        "meanTokensOut": 213,
+        "totalCostUsd": 0.1964,
+        "costPerCorrect": 0.0982
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 12379,
+        "meanTokensOut": 157,
+        "totalCostUsd": 0.1851,
+        "costPerCorrect": 0.0617
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

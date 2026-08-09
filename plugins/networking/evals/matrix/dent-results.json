@@ -1,0 +1,53 @@
+{
+  "skill": "dent",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dent-codename",
+      "knowledge": "recent",
+      "prompt": "What is the code name of DentOS 3.0, the current release of the DENT open-source enterprise edge networking NOS? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Cynthia"
+        ]
+      },
+      "source": "plugins/networking/skills/dent/SKILL.md - Current version: DentOS 3.0 Cynthia"
+    },
+    {
+      "id": "dent-poe-bt-power",
+      "knowledge": "recent",
+      "prompt": "In DENT PoE device classification, what is the power delivery range in watts for IEEE 802.3bt, compared with 802.3af and 802.3at? Answer concisely with the watt figures for 802.3bt.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "60",
+          "90"
+        ]
+      },
+      "source": "plugins/networking/skills/dent/SKILL.md - Device classification: IEEE 802.3af (15.4W), 802.3at (30W), 802.3bt (60/90W)"
+    },
+    {
+      "id": "dent-switchdev-model",
+      "knowledge": "stable",
+      "prompt": "Does DENT, DentOS, use the Linux kernel switchdev driver model, or the SAI vendor abstraction library that SONiC uses? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)switchdev"
+      },
+      "source": "plugins/networking/skills/dent/SKILL.md - DENT uses the Linux kernel switchdev driver model, not SAI"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

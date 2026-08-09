@@ -1,0 +1,48 @@
+{
+  "skill": "backup-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "backup-security-3211-zero",
+      "knowledge": "stable",
+      "prompt": "In the 3-2-1-1-0 backup rule, what does the final zero requirement refer to? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(zero|no)\\s+errors"
+      },
+      "source": "plugins/security/skills/backup-security/SKILL.md - 3-2-1-1-0 rule table: 0 = Zero errors in verified restores, confirmation backups are actually usable"
+    },
+    {
+      "id": "backup-security-object-lock-compliance",
+      "knowledge": "stable",
+      "prompt": "For ransomware protection using S3 Object Lock, should backups use governance mode or compliance mode? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bcompliance\\b"
+      },
+      "source": "plugins/security/skills/backup-security/SKILL.md - Governance vs Compliance mode: for ransomware protection, use compliance mode or hardware-enforced immutability"
+    },
+    {
+      "id": "backup-security-dwell-time",
+      "knowledge": "recent",
+      "prompt": "According to backup security best practices, what is the typical dwell time range ransomware waits after initial access before it starts encrypting data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(-|to)\\s*6\\s*weeks"
+      },
+      "source": "plugins/security/skills/backup-security/SKILL.md - Ransomware Recovery Workflow: ransomware typically dwells for 2-6 weeks before detonation"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,54 @@
+{
+  "skill": "sqlite",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sqlite-352-withdrawn",
+      "knowledge": "recent",
+      "prompt": "Which SQLite release was withdrawn for backwards-compatibility rework and is being replaced by a later version. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.52.0"
+        ]
+      },
+      "source": "plugins/database/skills/sqlite/SKILL.md - intro paragraph: Version 3.52.0 was withdrawn for backwards-compatibility rework and will be replaced by 3.53.0; current stable is 3.51.3."
+    },
+    {
+      "id": "sqlite-jsonb-each-version",
+      "knowledge": "recent",
+      "prompt": "Starting in which SQLite version can you iterate a JSONB column directly using the jsonb_each and jsonb_tree table-valued functions. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.51"
+        ]
+      },
+      "source": "plugins/database/skills/sqlite/SKILL.md - JSON Functions section: jsonb_each and jsonb_tree for iterating JSONB directly are marked as available since 3.51+."
+    },
+    {
+      "id": "sqlite-max-db-size",
+      "knowledge": "stable",
+      "prompt": "What is the theoretical maximum size of a single SQLite database file. Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "281"
+        ]
+      },
+      "source": "plugins/database/skills/sqlite/SKILL.md - When to Use SQLite, Poor fit list: notes SQLite supports databases up to 281TB theoretically."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "qualys",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "qualys-trurisk-qds-ranges",
+      "knowledge": "recent",
+      "prompt": "What are the numeric ranges for Qualys's Asset TruRisk Score and its QDS, the Qualys Detection Score, respectively? Answer concisely with both ranges.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*1.{0,4}1000)(?=.*0.{0,4}100)"
+      },
+      "source": "plugins/security/skills/qualys/SKILL.md - Asset TruRisk Score (1-1000); QDS Range: 0-100"
+    },
+    {
+      "id": "qualys-cloud-agent-interval",
+      "knowledge": "recent",
+      "prompt": "By default, how often does the Qualys Cloud Agent run a full interval assessment scan on an endpoint? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\s*hours?"
+      },
+      "source": "plugins/security/skills/qualys/SKILL.md - Interval Scan: Agent runs full assessment on configurable schedule (default: every 4 hours)"
+    },
+    {
+      "id": "qualys-qds-inputs",
+      "knowledge": "stable",
+      "prompt": "Which FIRST.org exploitation-probability model and which US government known-exploited-vulnerabilities list does Qualys's QDS combine alongside CVSS to score detections? Answer concisely, naming both.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "EPSS",
+          "CISA KEV"
+        ]
+      },
+      "source": "plugins/security/skills/qualys/SKILL.md - QDS combines CVSS base, temporal metrics, EPSS, CISA KEV, threat intelligence enrichment"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

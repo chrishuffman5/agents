@@ -1,0 +1,231 @@
+{
+  "skill": "failover-clustering",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "failover-clustering-max-nodes",
+      "knowledge": "recent",
+      "prompt": "As of Windows Server 2025, what is the maximum number of nodes supported in a single Windows Server Failover Cluster? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b64\\b"
+      },
+      "source": "plugins/os/skills/failover-clustering/SKILL.md - Version-Specific Changes table: Max Nodes per Cluster = 64 across 2016, 2019, 2022, 2025"
+    },
+    {
+      "id": "failover-clustering-heartbeat-port",
+      "knowledge": "stable",
+      "prompt": "Which UDP port carries Windows Server Failover Clustering heartbeat traffic between nodes? Answer with just the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3343\\b"
+      },
+      "source": "plugins/os/skills/failover-clustering/SKILL.md - Key Paths and Ports table: 3343 UDP/TCP Cluster heartbeat and communication"
+    },
+    {
+      "id": "failover-clustering-s2d-node-range",
+      "knowledge": "stable",
+      "prompt": "For a Storage Spaces Direct hyperconverged cluster, what are the minimum and maximum node counts supported? Answer with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2",
+          "16"
+        ]
+      },
+      "source": "plugins/os/skills/failover-clustering/SKILL.md - Storage Spaces Direct (S2D): Minimum 2 nodes, maximum 16 nodes per S2D cluster"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 9,
+      "accuracy": 100.0,
+      "meanWallMs": 12759,
+      "meanTokensOut": 341,
+      "totalCostUsd": 1.3374,
+      "costPerCorrect": 0.1486
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 11547,
+      "meanTokensOut": 68,
+      "totalCostUsd": 0.2706,
+      "costPerCorrect": 0.0451
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 12082,
+        "meanTokensOut": 432,
+        "totalCostUsd": 1.0993,
+        "costPerCorrect": 0.1832
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4990,
+        "meanTokensOut": 58,
+        "totalCostUsd": 0.1696,
+        "costPerCorrect": 0.0565
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14112,
+        "meanTokensOut": 158,
+        "totalCostUsd": 0.2381,
+        "costPerCorrect": 0.0794
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18103,
+        "meanTokensOut": 78,
+        "totalCostUsd": 0.1009,
+        "costPerCorrect": 0.0336
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 6,
+        "accuracy": 100.0,
+        "meanWallMs": 12082,
+        "meanTokensOut": 432,
+        "totalCostUsd": 1.0993,
+        "costPerCorrect": 0.1832
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4990,
+        "meanTokensOut": 58,
+        "totalCostUsd": 0.1696,
+        "costPerCorrect": 0.0565
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14112,
+        "meanTokensOut": 158,
+        "totalCostUsd": 0.2381,
+        "costPerCorrect": 0.0794
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18103,
+        "meanTokensOut": 78,
+        "totalCostUsd": 0.1009,
+        "costPerCorrect": 0.0336
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 4990,
+        "meanTokensOut": 58,
+        "totalCostUsd": 0.1696,
+        "costPerCorrect": 0.0565
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 8657,
+        "meanTokensOut": 218,
+        "totalCostUsd": 0.43,
+        "costPerCorrect": 0.1433
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15507,
+        "meanTokensOut": 647,
+        "totalCostUsd": 0.6693,
+        "costPerCorrect": 0.2231
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 18103,
+        "meanTokensOut": 78,
+        "totalCostUsd": 0.1009,
+        "costPerCorrect": 0.0336
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14112,
+        "meanTokensOut": 158,
+        "totalCostUsd": 0.2381,
+        "costPerCorrect": 0.0794
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

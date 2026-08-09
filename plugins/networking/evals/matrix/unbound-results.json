@@ -1,0 +1,52 @@
+{
+  "skill": "unbound",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "unbound-doh-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Unbound version required to run as an incoming DNS-over-HTTPS (DoH) server? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.17"
+        ]
+      },
+      "source": "plugins/networking/skills/unbound/SKILL.md - DNS over TLS (DoT) upstream forwarding and incoming DoH server (1.17+)"
+    },
+    {
+      "id": "unbound-pihole-port",
+      "knowledge": "recent",
+      "prompt": "When running Unbound alongside Pi-hole on the same box, what non-standard port should Unbound listen on so it does not conflict with Pi-hole's use of port 53? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5335"
+        ]
+      },
+      "source": "plugins/networking/skills/unbound/SKILL.md - Pi-hole + Unbound Stack: port 5335 (non-standard port for Pi-hole)"
+    },
+    {
+      "id": "unbound-rrset-cache-ratio",
+      "knowledge": "stable",
+      "prompt": "In Unbound performance tuning, roughly how many times larger than msg-cache-size should you set rrset-cache-size? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(2x|two\\s*times|twice|double)"
+      },
+      "source": "plugins/networking/skills/unbound/SKILL.md - Common Pitfalls: rrset-cache-size should be approximately 2x message cache"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

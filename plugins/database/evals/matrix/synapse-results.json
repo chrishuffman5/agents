@@ -1,0 +1,53 @@
+{
+  "skill": "synapse",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "synapse-spark-runtime-versions",
+      "knowledge": "recent",
+      "prompt": "As of 2026, which Apache Spark runtime versions does Azure Synapse support for its Spark pools. Answer with both version numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.4",
+          "3.5"
+        ]
+      },
+      "source": "plugins/database/skills/synapse/SKILL.md - Synapse Spark Pools section: Synapse supports Spark 3.4 and 3.5 runtimes as of 2026, selected per pool."
+    },
+    {
+      "id": "synapse-result-cache-ttl",
+      "knowledge": "recent",
+      "prompt": "In Azure Synapse dedicated SQL pool, how long do cached query results remain valid under result set caching, assuming the underlying data has not changed. Answer with the exact number of hours.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(48\\s*-?\\s*hours?|forty[- ]eight hours)"
+      },
+      "source": "plugins/database/skills/synapse/SKILL.md - Performance Features section: cached results under result set caching expire after 48 hours or when underlying data changes."
+    },
+    {
+      "id": "synapse-serverless-price-per-tb",
+      "knowledge": "stable",
+      "prompt": "How much does Azure Synapse serverless SQL pool charge per terabyte of data scanned. Answer with the exact dollar amount.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "$5"
+        ]
+      },
+      "source": "plugins/database/skills/synapse/SKILL.md - Platform Components table: Serverless SQL pool billing model is listed as Per-TB scanned ($5/TB)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

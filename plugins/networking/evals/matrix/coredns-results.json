@@ -1,0 +1,52 @@
+{
+  "skill": "coredns",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "coredns-nodelocal-ip",
+      "knowledge": "recent",
+      "prompt": "What link-local IP address does Kubernetes NodeLocal DNSCache use for its per-node cache listener? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "169.254.20.10"
+        ]
+      },
+      "source": "plugins/networking/skills/coredns/SKILL.md - Each node has local cache at link-local IP 169.254.20.10"
+    },
+    {
+      "id": "coredns-113-doh3",
+      "knowledge": "recent",
+      "prompt": "Which experimental encrypted DNS transport, layered over QUIC and HTTP/3, did CoreDNS 1.13 add support for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(doh3|http/?3)"
+      },
+      "source": "plugins/networking/skills/coredns/SKILL.md - CoreDNS 1.13 Features: DoH3 (DNS over HTTP/3), experimental QUIC/HTTP3 transport support"
+    },
+    {
+      "id": "coredns-default-since",
+      "knowledge": "stable",
+      "prompt": "Since which Kubernetes version has CoreDNS been the default cluster DNS server, replacing kube-dns? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.13"
+        ]
+      },
+      "source": "plugins/networking/skills/coredns/SKILL.md - serves as the default DNS service for Kubernetes (since 1.13)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

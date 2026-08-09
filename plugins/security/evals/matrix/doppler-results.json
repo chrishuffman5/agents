@@ -1,0 +1,53 @@
+{
+  "skill": "doppler",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "doppler-workspace-roles",
+      "knowledge": "stable",
+      "prompt": "In Doppler, what are the four workspace-level roles, ranging from full access including billing down to read-only access? Answer concisely by listing all four.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Owner",
+          "Admin",
+          "Member",
+          "Viewer"
+        ]
+      },
+      "source": "plugins/security/skills/doppler/SKILL.md - Roles (Workspace level) table: Owner, Admin, Member, Viewer"
+    },
+    {
+      "id": "doppler-service-account-token",
+      "knowledge": "recent",
+      "prompt": "Doppler distinguishes several credential types for authenticating to its API. Which one is described as tied to a service account rather than an individual user, meant for use in CI/CD pipelines? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)service\\s*account\\s*token"
+      },
+      "source": "plugins/security/skills/doppler/SKILL.md - Token types list: Service account token is tied to a service account (not a user), for CI/CD"
+    },
+    {
+      "id": "doppler-ehr-tls-version",
+      "knowledge": "stable",
+      "prompt": "What is the minimum TLS version used for all communication in Doppler's Encrypted HTTP Relay, the mechanism behind its secret fetch API? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)tls\\s*1\\.2"
+      },
+      "source": "plugins/security/skills/doppler/SKILL.md - EHR section: all communication is TLS-encrypted (TLS 1.2+)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

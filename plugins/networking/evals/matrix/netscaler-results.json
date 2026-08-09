@@ -1,0 +1,53 @@
+{
+  "skill": "netscaler",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "netscaler-license-eol",
+      "knowledge": "recent",
+      "prompt": "By what date must Citrix NetScaler customers migrate off file-based licensing before it reaches end of life? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "April",
+          "2026"
+        ]
+      },
+      "source": "plugins/networking/skills/netscaler/SKILL.md - Licensing Alert: File-based licensing EOL April 15, 2026"
+    },
+    {
+      "id": "netscaler-mep-port",
+      "knowledge": "recent",
+      "prompt": "Which TCP port must be open between data centers for NetScaler GSLB sites to exchange health and load metrics over MEP? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3011"
+        ]
+      },
+      "source": "plugins/networking/skills/netscaler/references/architecture.md - MEP (Metric Exchange Protocol) uses TCP port 3011"
+    },
+    {
+      "id": "netscaler-cs-priority",
+      "knowledge": "stable",
+      "prompt": "On a NetScaler content switching virtual server with multiple policies that could match a request, does the policy with the lowest priority number or the highest priority number win? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)lowest"
+      },
+      "source": "plugins/networking/skills/netscaler/SKILL.md - Common Pitfalls: CS policies evaluate by priority number (lowest first), first match wins"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

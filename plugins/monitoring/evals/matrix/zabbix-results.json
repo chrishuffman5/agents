@@ -1,0 +1,48 @@
+{
+  "skill": "zabbix",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "zabbix-timescaledb-compression",
+      "knowledge": "recent",
+      "prompt": "Using TimescaleDB compression with Zabbix history tables, what compression ratio should you expect? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)5.{0,6}10"
+      },
+      "source": "plugins/monitoring/skills/zabbix/SKILL.md - Top 10 Operational Rules number 6 and Common Pitfalls number 1, TimescaleDB compression achieves 5-10x compression on history data"
+    },
+    {
+      "id": "zabbix-agent-port",
+      "knowledge": "stable",
+      "prompt": "What TCP port does the Zabbix agent listen on for passive checks initiated by the server? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b10050\\b"
+      },
+      "source": "plugins/monitoring/skills/zabbix/SKILL.md - Key Ports table, Agent listens on port 10050 for passive checks from the server"
+    },
+    {
+      "id": "zabbix-timescaledb-threshold",
+      "knowledge": "recent",
+      "prompt": "Above roughly how many monitored hosts does Zabbix guidance recommend switching to TimescaleDB? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "5,?000"
+      },
+      "source": "plugins/monitoring/skills/zabbix/SKILL.md - intro paragraph, always recommend TimescaleDB for deployments exceeding 5,000 hosts"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

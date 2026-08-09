@@ -1,0 +1,54 @@
+{
+  "skill": "minio",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "minio-community-archive-date",
+      "knowledge": "recent",
+      "prompt": "MinIO archived its open-source community edition repository on what date, and under what license did it remain available? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "13",
+          "2026",
+          "AGPLv3"
+        ]
+      },
+      "source": "plugins/storage/skills/minio/SKILL.md - Licensing table: Community (OSS) Archived Feb 13, 2026, AGPLv3"
+    },
+    {
+      "id": "minio-erasure-set-max-drives",
+      "knowledge": "recent",
+      "prompt": "A MinIO erasure set traditionally supports up to 16 drives. What is the increased maximum drives per erasure set introduced in AIStor starting in 2026? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "32"
+        ]
+      },
+      "source": "plugins/storage/skills/minio/SKILL.md - Storage Hierarchy: Erasure Sets (4-16 drives, up to 32 in AIStor 2026+)"
+    },
+    {
+      "id": "minio-write-quorum",
+      "knowledge": "stable",
+      "prompt": "In MinIO erasure coding, if an erasure set has N drives, what is the minimum number of drives required to accept a write, expressed as a formula in terms of N? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)n\\s*/\\s*2\\s*\\+\\s*1"
+      },
+      "source": "plugins/storage/skills/minio/SKILL.md - Erasure Coding table: Write minimum drives (N/2) + 1"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

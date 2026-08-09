@@ -1,0 +1,52 @@
+{
+  "skill": "aws-glue",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "awsglue-current-runtime",
+      "knowledge": "recent",
+      "prompt": "AWS Glue is a managed service whose runtime evolves through versioned releases. What Spark version ships with the current Glue runtime, version 5.1? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.5.6"
+        ]
+      },
+      "source": "plugins/etl/skills/aws-glue/SKILL.md - Current runtime (Glue 5.1): Spark 3.5.6, Python 3.11, Scala 2.12.18, Java 17."
+    },
+    {
+      "id": "awsglue-flex-savings",
+      "knowledge": "stable",
+      "prompt": "AWS Glue Flex execution is meant for non-urgent batch jobs that can tolerate delayed start times. What percentage cost reduction does Flex execution offer compared to standard execution? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "34"
+        ]
+      },
+      "source": "plugins/etl/skills/aws-glue/SKILL.md - Flex Execution: 34% cost reduction (0.29 dollars/DPU-hr vs 0.44 dollars)."
+    },
+    {
+      "id": "awsglue-crawler-classify",
+      "knowledge": "stable",
+      "prompt": "When an AWS Glue crawler scans a data store, how much of each file does it read in order to classify the file format before applying classifiers? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(first\\s*megabyte|1\\s*mb\\b|one\\s*megabyte)"
+      },
+      "source": "plugins/etl/skills/aws-glue/SKILL.md - Crawlers and Classifiers: Read first megabyte of each file to classify format."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "svelte",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "svelte-no-virtual-dom",
+      "knowledge": "stable",
+      "prompt": "Does Svelte 5 use a virtual DOM at runtime to apply updates, or does it compile components into direct DOM mutation code? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(no virtual dom|compil)"
+      },
+      "source": "plugins/frontend/skills/svelte/SKILL.md - Compiler Model: Svelte is a compiler, no virtual DOM"
+    },
+    {
+      "id": "svelte-static-adapter-spa-fallback",
+      "knowledge": "recent",
+      "prompt": "To support SPA-style client-side routing with SvelteKit's static adapter and avoid 404s on direct URL access, what fallback file name do you configure? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "200.html"
+        ]
+      },
+      "source": "plugins/frontend/skills/svelte/SKILL.md - pitfall 9: adapter fallback 200.html needed for SPA routing"
+    },
+    {
+      "id": "svelte-bindable-prop-rune",
+      "knowledge": "recent",
+      "prompt": "In Svelte 5 runes mode, which rune must a child component use to declare a prop that the parent can bind to two-way? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "bindable"
+        ]
+      },
+      "source": "plugins/frontend/skills/svelte/SKILL.md - Runes System and pitfall 4: bindable prop declared with the bindable rune"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

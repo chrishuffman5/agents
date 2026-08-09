@@ -1,0 +1,48 @@
+{
+  "skill": "defender-endpoint",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "defender-endpoint-hunting-window",
+      "knowledge": "stable",
+      "prompt": "In Microsoft Defender for Endpoint's Advanced Hunting KQL interface, how many days of telemetry do queries run against? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30\\s*days"
+      },
+      "source": "plugins/security/skills/defender-endpoint/SKILL.md - KQL Advanced Hunting: Queries run against 30 days of telemetry"
+    },
+    {
+      "id": "defender-endpoint-dvm-score-range",
+      "knowledge": "recent",
+      "prompt": "In Microsoft Defender Vulnerability Management, what is the numeric range of the overall security posture score shown to admins? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0\\s*(-|to)\\s*100"
+      },
+      "source": "plugins/security/skills/defender-endpoint/SKILL.md - Vulnerability Management > Key DVM Features: Security score - Overall posture score (0-100)"
+    },
+    {
+      "id": "defender-endpoint-plan-requirement",
+      "knowledge": "stable",
+      "prompt": "Between Microsoft Defender for Endpoint Plan 1 and Plan 2, which plan is required to get EDR behavioral detection, advanced hunting, and automated investigation and remediation? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)plan\\s*2"
+      },
+      "source": "plugins/security/skills/defender-endpoint/SKILL.md - MDE Feature Matrix by Plan table: EDR, Advanced hunting (KQL), and AIR are all No for Plan 1, Yes for Plan 2"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

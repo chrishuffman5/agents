@@ -1,0 +1,48 @@
+{
+  "skill": "haproxy",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "haproxy-stick-sync-throughput",
+      "knowledge": "recent",
+      "prompt": "In HAProxy 3.2 LTS, the new dedicated stick-table peer-sync thread can handle up to roughly how many updates per second on a 128-thread system? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(8\\s*million|8,000,000|5-8\\s*million|five\\s*to\\s*eight\\s*million)"
+      },
+      "source": "plugins/networking/skills/haproxy/references/versions/3.2.md - dedicated sync thread handles 5-8 million updates/second on 128-thread systems, up from 500k-1M pre-3.2"
+    },
+    {
+      "id": "haproxy-gpc-array-version",
+      "knowledge": "recent",
+      "prompt": "Starting in which HAProxy version can General Purpose Counters and General Purpose Tags in a stick table use array syntax like gpc(5) instead of only gpc0 and gpc1? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b3\\.2\\b"
+      },
+      "source": "plugins/networking/skills/haproxy/references/versions/3.2.md - HAProxy 3.2 introduces array data types for GPT and GPC"
+    },
+    {
+      "id": "haproxy-health-check-rise-fall-defaults",
+      "knowledge": "stable",
+      "prompt": "In an HAProxy backend server health check, what are the default rise and fall counts, meaning consecutive successes to mark a server UP and consecutive failures to mark it DOWN? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(?=.*\\b2\\b)(?=.*\\b3\\b)"
+      },
+      "source": "plugins/networking/skills/haproxy/SKILL.md - rise default 2 (consecutive successes to mark UP), fall default 3 (consecutive failures to mark DOWN)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

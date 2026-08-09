@@ -1,0 +1,61 @@
+{
+  "skill": "illumio",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "illumio-label-dimensions",
+      "knowledge": "stable",
+      "prompt": "Illumio uses a four-dimensional label model to describe workloads instead of relying on IP addresses in policy. What are the four label dimensions? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Role",
+          "Application",
+          "Environment",
+          "Location"
+        ]
+      },
+      "source": "plugins/security/skills/illumio/SKILL.md - Label-Based Policy Model table: Role, Application, Environment, Location"
+    },
+    {
+      "id": "illumio-enforcement-modes",
+      "knowledge": "stable",
+      "prompt": "Illumio workloads can be placed into different enforcement modes to enable a gradual policy rollout. Name the mode meaning installed but not enforcing, the mode enforcing only known rules while allowing the rest, the mode that fully blocks non-permitted traffic, and the validation-only mode that logs what would be blocked. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Idle",
+          "Selective",
+          "Full",
+          "Test"
+        ]
+      },
+      "source": "plugins/security/skills/illumio/SKILL.md - Enforcement Modes table: Idle, Visibility Only, Selective, Full, Test"
+    },
+    {
+      "id": "illumio-ven-enforcement-mechanism",
+      "knowledge": "recent",
+      "prompt": "The Illumio VEN agent enforces policy by managing the workload native OS firewall. What underlying mechanism does it manage on Linux, and what does it manage on Windows? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "iptables",
+          "WFP"
+        ]
+      },
+      "source": "plugins/security/skills/illumio/SKILL.md - VEN Agent Management: Linux manages iptables (or nftables), Windows manages Windows Filtering Platform (WFP)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "black-duck",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "black-duck-bdba-file-limit",
+      "knowledge": "recent",
+      "prompt": "In Black Duck Binary Analysis (BDBA), what is the default maximum file size limit for binaries being scanned? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*GB"
+      },
+      "source": "plugins/security/skills/black-duck/SKILL.md - Common Issues: BDBA analysis incomplete: check BDBA file size limits (default 2GB)"
+    },
+    {
+      "id": "black-duck-knowledgebase-projects",
+      "knowledge": "recent",
+      "prompt": "Approximately how many open source projects does the Black Duck KnowledgeBase track? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)3\\.5\\s*(million|m\\b)"
+      },
+      "source": "plugins/security/skills/black-duck/SKILL.md - Black Duck KnowledgeBase: 3.5M+ open source projects"
+    },
+    {
+      "id": "black-duck-soup-standard",
+      "knowledge": "stable",
+      "prompt": "Which IEC standard for medical device software is most closely associated with the requirement to produce a SOUP list documenting third-party and open-source components? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)iec\\s*62304"
+      },
+      "source": "plugins/security/skills/black-duck/SKILL.md - SOUP Lists (Medical Device Compliance): IEC 62304, Medical device software standard (FDA-regulated)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

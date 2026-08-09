@@ -1,0 +1,53 @@
+{
+  "skill": "opentelemetry",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "opentelemetry-otlp-ports",
+      "knowledge": "stable",
+      "prompt": "What are the default OTLP gRPC and HTTP port numbers used by the OpenTelemetry Collector? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4317",
+          "4318"
+        ]
+      },
+      "source": "plugins/monitoring/skills/opentelemetry/SKILL.md - OpenTelemetry Architecture Quick Reference diagram, OTLP gRPC port 4317 and HTTP port 4318"
+    },
+    {
+      "id": "opentelemetry-memory-limiter-first",
+      "knowledge": "stable",
+      "prompt": "Which OpenTelemetry Collector processor should always be configured first in every pipeline to avoid out of memory crashes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "memory_limiter"
+        ]
+      },
+      "source": "plugins/monitoring/skills/opentelemetry/SKILL.md - Top 10 Operational Rules number 2 and How to Approach Tasks number 3, memory_limiter must be the first processor"
+    },
+    {
+      "id": "opentelemetry-spike-limit-percent",
+      "knowledge": "recent",
+      "prompt": "When sizing the memory_limiter processor spike_limit_mib setting in the OpenTelemetry Collector, what percentage of limit_mib is recommended? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)20.{0,6}25"
+      },
+      "source": "plugins/monitoring/skills/opentelemetry/SKILL.md - Top 10 Operational Rules number 2, spike_limit_mib set to 20-25 percent of limit_mib"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

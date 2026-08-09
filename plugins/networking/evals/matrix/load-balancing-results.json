@@ -1,0 +1,48 @@
+{
+  "skill": "load-balancing",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "load-balancing-tls13-ssl-session-persistence",
+      "knowledge": "recent",
+      "prompt": "Does SSL Session ID based load balancer persistence remain fully reliable under TLS 1.3, or does something about it change? Answer in one or two sentences.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(less reliable|session ticket)"
+      },
+      "source": "plugins/networking/skills/load-balancing/references/concepts.md - SSL Session ID Persistence is less reliable with TLS 1.3 since session tickets change behavior"
+    },
+    {
+      "id": "load-balancing-power-of-two-choices",
+      "knowledge": "recent",
+      "prompt": "What load balancing algorithm picks two servers at random and then routes the request to whichever of the two currently has fewer active connections? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)two\\s*choices"
+      },
+      "source": "plugins/networking/skills/load-balancing/references/concepts.md - Random with Two Choices (Power of Two) picks two random servers, selects the less loaded one"
+    },
+    {
+      "id": "load-balancing-dsr-response-path",
+      "knowledge": "stable",
+      "prompt": "In Direct Server Return (DSR) load balancing, does the response traffic flow back through the load balancer, or does it go directly from the server to the client? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)directly"
+      },
+      "source": "plugins/networking/skills/load-balancing/references/concepts.md - in DSR the response goes directly from the server to the client, bypassing the load balancer"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

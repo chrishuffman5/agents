@@ -1,0 +1,48 @@
+{
+  "skill": "neptune",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "neptune-max-property-value-size",
+      "knowledge": "recent",
+      "prompt": "In Amazon Neptune, what is the maximum size of a single vertex or edge property value? Answer with the exact size.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b55\\s*mb\\b"
+      },
+      "source": "plugins/database/skills/neptune/SKILL.md - Key Limits and Constraints table lists maximum property value size as 55 MB."
+    },
+    {
+      "id": "neptune-streams-retention-days",
+      "knowledge": "recent",
+      "prompt": "In Amazon Neptune, Neptune Streams retains its change data capture log for up to how many days by default before it needs custom configuration? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*days|seven\\s*days)"
+      },
+      "source": "plugins/database/skills/neptune/SKILL.md - Neptune Streams (Change Data Capture) section states retention is up to 7 days (configurable)."
+    },
+    {
+      "id": "neptune-write-quorum-copies",
+      "knowledge": "stable",
+      "prompt": "Amazon Neptune replicates every write to 6 copies of data across 3 Availability Zones. How many of those 6 copies must acknowledge a write before it is considered durable? Answer with the exact ratio.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\s*(of|/)\\s*6\\b"
+      },
+      "source": "plugins/database/skills/neptune/references/architecture.md - Storage Engine section states quorum writes require 4 of 6 copies to acknowledge before a write is considered durable."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "container-security",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "container-security-pss-levels",
+      "knowledge": "stable",
+      "prompt": "In Kubernetes Pod Security Standards, what are the three enforcement profile levels, ordered from least restrictive to most restrictive? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Privileged",
+          "Baseline",
+          "Restricted"
+        ]
+      },
+      "source": "plugins/security/skills/container-security/SKILL.md - Pod Security Standard profiles table: Privileged, Baseline, Restricted"
+    },
+    {
+      "id": "container-security-kyverno-generate",
+      "knowledge": "recent",
+      "prompt": "Between OPA Gatekeeper and Kyverno for Kubernetes admission control, which one supports generating additional resources as a side effect of applying a policy? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bkyverno\\b"
+      },
+      "source": "plugins/security/skills/container-security/SKILL.md - Gatekeeper vs Kyverno table: Generate resources row - OPA Gatekeeper No, Kyverno Yes"
+    },
+    {
+      "id": "container-security-secrets-encoding",
+      "knowledge": "stable",
+      "prompt": "By default, are native Kubernetes Secrets stored in etcd fully encrypted, or only base64-encoded? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)base\\s*64"
+      },
+      "source": "plugins/security/skills/container-security/SKILL.md - Secrets Management in Kubernetes: Kubernetes Secrets (native): Base64-encoded (NOT encrypted) by default in etcd"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

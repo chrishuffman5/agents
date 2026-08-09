@@ -1,0 +1,50 @@
+{
+  "skill": "elasticache",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "elasticache-serverless-ecpu-max",
+      "knowledge": "recent",
+      "prompt": "What is the maximum sustained ElastiCache Processing Units throughput per second that a single ElastiCache Serverless cache supports? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30,?000"
+      },
+      "source": "plugins/database/skills/elasticache/SKILL.md - ElastiCache Serverless section: Limits -- Maximum 5 TB data storage, 30,000 ECPUs/second sustained throughput per cache."
+    },
+    {
+      "id": "elasticache-clustermode-max-capacity",
+      "knowledge": "recent",
+      "prompt": "For ElastiCache Redis or Valkey with cluster mode enabled, using cache.r7g.16xlarge nodes across the maximum number of shards, what is the approximate theoretical maximum data capacity? Answer with the approximate number of terabytes.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "317"
+        ]
+      },
+      "source": "plugins/database/skills/elasticache/SKILL.md - Cluster Mode Enabled section: Maximum capacity -- up to 500 shards x node memory, theoretical maximum ~317 TB with cache.r7g.16xlarge nodes."
+    },
+    {
+      "id": "elasticache-iam-token-validity",
+      "knowledge": "stable",
+      "prompt": "For ElastiCache IAM authentication on Redis 7.0+ or Valkey, how long is a generated IAM auth token valid before it needs to be renewed? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)15\\s*min"
+      },
+      "source": "plugins/database/skills/elasticache/references/architecture.md - Security Architecture, IAM authentication: Token validity 15 minutes (auto-renewed by supported clients)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

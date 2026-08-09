@@ -1,0 +1,50 @@
+{
+  "skill": "puppet",
+  "plugin": "devops",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "puppet-checkin-interval",
+      "knowledge": "recent",
+      "prompt": "By default, how often does a Puppet agent contact the Puppet Server over HTTPS to request and apply a new catalog? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(30\\s*min)"
+      },
+      "source": "plugins/devops/skills/puppet/SKILL.md - Core Architecture diagram: (HTTPS, every 30 min)"
+    },
+    {
+      "id": "puppet-facter-ohai",
+      "knowledge": "stable",
+      "prompt": "Facter is Puppet's system fact collector. Which equivalent fact-gathering tool from the Chef ecosystem is it directly compared to here? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Ohai"
+        ]
+      },
+      "source": "plugins/devops/skills/puppet/SKILL.md - Key Concepts table: Facter -- System fact collector (like Ohai in Chef)"
+    },
+    {
+      "id": "puppet-hiera-node-precedence",
+      "knowledge": "stable",
+      "prompt": "In the sample Hiera hierarchy shown for Puppet, which data source is checked first, before per-environment, per-OS, and common data? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)per-?node"
+      },
+      "source": "plugins/devops/skills/puppet/SKILL.md - Hiera hierarchy example lists Per-node first, then Per-environment, Per-OS, Common"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

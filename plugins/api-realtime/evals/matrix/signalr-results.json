@@ -1,0 +1,51 @@
+{
+  "skill": "signalr",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "signalr-native-aot-hub",
+      "knowledge": "recent",
+      "prompt": "Is the strongly typed Hub of T feature in ASP.NET Core SignalR compatible with Native AOT compilation on .NET 9 and later? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not compatible|incompatible)"
+      },
+      "source": "plugins/api-realtime/skills/signalr/SKILL.md - anti-pattern 8: strongly typed hubs (Hub<T>) not compatible with Native AOT (.NET 9+)"
+    },
+    {
+      "id": "signalr-messagepack-savings",
+      "knowledge": "stable",
+      "prompt": "Roughly how much smaller are MessagePack-encoded SignalR payloads compared to the default JSON hub protocol? Answer concisely with the percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30.{0,6}40\\s*%?"
+      },
+      "source": "plugins/api-realtime/skills/signalr/SKILL.md - Hub Protocols: MessagePack (~30-40% smaller payloads, faster parsing)"
+    },
+    {
+      "id": "signalr-transport-priority",
+      "knowledge": "stable",
+      "prompt": "In ASP.NET Core SignalR transport negotiation, what is the fallback order of transports from most to least preferred? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "WebSocket",
+          "Polling"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/signalr/SKILL.md - Transport Negotiation: Priority WebSocket (preferred) > SSE > Long Polling"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

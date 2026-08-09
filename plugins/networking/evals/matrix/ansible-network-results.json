@@ -1,0 +1,50 @@
+{
+  "skill": "ansible-network",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ansible-network-python-control-node",
+      "knowledge": "recent",
+      "prompt": "For network automation playbooks running on ansible-core 2.18, what is the minimum Python version required on the control node? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "3.11"
+        ]
+      },
+      "source": "plugins/networking/skills/ansible-network/references/versions/2.18.md - control node requires Python 3.11+ (3.10 deprecated)"
+    },
+    {
+      "id": "ansible-network-ios-enable-mode",
+      "knowledge": "stable",
+      "prompt": "When pushing configuration to a Cisco IOS device with Ansible, what ansible_become_method value must you set to enter privileged EXEC mode before config tasks run? Answer concisely with just the method name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\benable\\b"
+      },
+      "source": "plugins/networking/skills/ansible-network/SKILL.md - IOS requires ansible_become: yes and ansible_become_method: enable for privilege escalation"
+    },
+    {
+      "id": "ansible-network-junos-connection",
+      "knowledge": "stable",
+      "prompt": "Which Ansible connection plugin is used almost universally for managing Juniper Junos devices, since every Junos module relies on it? Answer with just the plugin name.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bnetconf\\b"
+      },
+      "source": "plugins/networking/skills/ansible-network/SKILL.md - netconf (NETCONF/XML) is preferred for Junos, all modules use NETCONF"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

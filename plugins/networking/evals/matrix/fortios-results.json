@@ -1,0 +1,50 @@
+{
+  "skill": "fortios",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fortios-np7-max-throughput",
+      "knowledge": "recent",
+      "prompt": "What is the maximum throughput of Fortinet's NP7 network processor used for hardware-accelerated forwarding on FortiGate appliances? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "200 Gbps"
+        ]
+      },
+      "source": "plugins/networking/skills/fortios/references/architecture.md - NP7 max throughput 200 Gbps (dual 100GigE)"
+    },
+    {
+      "id": "fortios-fgcp-failover-time",
+      "knowledge": "recent",
+      "prompt": "In FortiGate FGCP active-passive high availability, roughly how fast does failover occur for new sessions? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(under|less than|<)\\s*1\\s*second"
+      },
+      "source": "plugins/networking/skills/fortios/SKILL.md - FGCP failover time under 1 second for new sessions"
+    },
+    {
+      "id": "fortios-proxy-based-inspection",
+      "knowledge": "stable",
+      "prompt": "Which FortiOS UTM inspection mode fully buffers and reconstructs content, giving the best detection of evasive techniques like chunked encoding at the cost of higher latency? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)proxy[- ]based"
+      },
+      "source": "plugins/networking/skills/fortios/SKILL.md - proxy-based inspection uses full content buffering and reconstruction, best for evasive content, higher latency"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

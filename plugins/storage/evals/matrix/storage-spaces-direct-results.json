@@ -1,0 +1,55 @@
+{
+  "skill": "storage-spaces-direct",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "storage-spaces-direct-max-pool",
+      "knowledge": "stable",
+      "prompt": "For Windows Storage Spaces Direct on Windows Server 2019 and later, what is the maximum storage pool size and the maximum capacity per server? Answer concisely with both figures.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4 PB",
+          "400 TB"
+        ]
+      },
+      "source": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Key Limits table: WS2019+: Max pool 4 PB, Max per server 400 TB"
+    },
+    {
+      "id": "storage-spaces-direct-ws2025-nvmeof",
+      "knowledge": "recent",
+      "prompt": "Windows Server 2025 adds an NVMe-oF initiator to Storage Spaces Direct. What IOPS improvement does this deliver? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "90"
+        ]
+      },
+      "source": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Identify version: WS2025: NVMe-OF initiator (+90% IOPS)"
+    },
+    {
+      "id": "storage-spaces-direct-nested-mirror",
+      "knowledge": "stable",
+      "prompt": "For Storage Spaces Direct nested two-way mirror resiliency, what percentage of raw capacity ends up usable as storage efficiency? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "25%"
+        ]
+      },
+      "source": "plugins/storage/skills/storage-spaces-direct/SKILL.md - Resiliency Options table: Nested two-way mirror: Efficiency 25%, Min Nodes 2 (exactly)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

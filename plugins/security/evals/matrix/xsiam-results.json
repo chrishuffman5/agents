@@ -1,0 +1,48 @@
+{
+  "skill": "xsiam",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "xsiam-automation-integrations",
+      "knowledge": "recent",
+      "prompt": "The Automation Center in Cortex XSIAM, built on XSOAR technology, ships with roughly how many pre-built integrations from the XSOAR marketplace? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)900\\+?"
+      },
+      "source": "plugins/security/skills/xsiam/SKILL.md - Automation Center: Integrations -- 900+ integrations from XSOAR marketplace"
+    },
+    {
+      "id": "xsiam-qradar-migration",
+      "knowledge": "recent",
+      "prompt": "Cortex XSIAM absorbed customers from which discontinued IBM SaaS SIEM product line after IBM divested it to Palo Alto Networks? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)qradar"
+      },
+      "source": "plugins/security/skills/xsiam/SKILL.md - Migration Considerations From QRadar SaaS: IBM divested QRadar SaaS to Palo Alto"
+    },
+    {
+      "id": "xsiam-bioc-rules",
+      "knowledge": "stable",
+      "prompt": "In Cortex XSIAM, what data source do BIOC (Behavioral IOC) rules operate on to perform behavioral pattern matching? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)cortex\\s*xdr\\s*agent"
+      },
+      "source": "plugins/security/skills/xsiam/SKILL.md - Rule types table: BIOC | Cortex XDR agent telemetry | Behavioral pattern matching on endpoints"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

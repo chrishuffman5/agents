@@ -1,0 +1,52 @@
+{
+  "skill": "rest",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "rest-openapi-jsonschema-version",
+      "knowledge": "recent",
+      "prompt": "Which specific JSON Schema draft version does OpenAPI 3.1 now fully align with? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2020-12"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/rest/SKILL.md - OpenAPI 3.1 key features: Full JSON Schema 2020-12 alignment"
+    },
+    {
+      "id": "rest-problem-details-rfc",
+      "knowledge": "stable",
+      "prompt": "Which RFC number defines the Problem Details format commonly used for structured REST API error responses? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9457"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/rest/SKILL.md - core knowledge list: Error handling (RFC 9457 Problem Details)"
+    },
+    {
+      "id": "rest-cors-wildcard-credentials",
+      "knowledge": "stable",
+      "prompt": "Is it valid to combine a wildcard value for Access-Control-Allow-Origin with Access-Control-Allow-Credentials set to true on the same response? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|incompatib|not compatible|not valid)"
+      },
+      "source": "plugins/api-realtime/skills/rest/SKILL.md - anti-pattern 8: wildcard CORS with credentials is incompatible with Allow-Credentials true"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

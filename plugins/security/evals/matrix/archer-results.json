@@ -1,0 +1,51 @@
+{
+  "skill": "archer",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "archer-onprem-min-specs",
+      "knowledge": "stable",
+      "prompt": "What minimum vCPU count and RAM does RSA Archer recommend for an on-premises medium-sized deployment? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16",
+          "64"
+        ]
+      },
+      "source": "plugins/security/skills/archer/SKILL.md - On-Premises requirements: Minimum 16 vCPU, 64GB RAM for medium deployment"
+    },
+    {
+      "id": "archer-issue-escalation-60days",
+      "knowledge": "recent",
+      "prompt": "In Archer's default audit issue escalation workflow, after how many days overdue does an open issue escalate all the way to the CISO, CFO, or Audit Committee? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b60\\b"
+      },
+      "source": "plugins/security/skills/archer/SKILL.md - Escalation rules: Issue overdue by 60 days - escalate to CISO/CFO/Audit Committee"
+    },
+    {
+      "id": "archer-fair-ale",
+      "knowledge": "recent",
+      "prompt": "In Archer's worked FAIR ransomware scenario, what is the calculated Annualized Loss Expectancy before any new control investment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\$?\\s*6\\.1\\s*m"
+      },
+      "source": "plugins/security/skills/archer/references/fair-example.md - Annualized Loss Expectancy: ALE = 2.3 x $2.65M = ~$6.1M/year (before controls)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

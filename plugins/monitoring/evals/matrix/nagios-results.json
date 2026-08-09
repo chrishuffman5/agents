@@ -1,0 +1,50 @@
+{
+  "skill": "nagios",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nagios-nrpe-port",
+      "knowledge": "recent",
+      "prompt": "What TCP port does the NRPE daemon listen on when running on a remote monitored host? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5667"
+        ]
+      },
+      "source": "plugins/monitoring/skills/nagios/SKILL.md - Architecture Overview, NRPE daemon on remote hosts listens on port 5667"
+    },
+    {
+      "id": "nagios-return-code-critical",
+      "knowledge": "stable",
+      "prompt": "In a Nagios plugin, which service state does an exit code of 2 represent? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)critical"
+      },
+      "source": "plugins/monitoring/skills/nagios/SKILL.md - Plugin System Return Codes table, code 2 equals CRITICAL"
+    },
+    {
+      "id": "nagios-core-license",
+      "knowledge": "stable",
+      "prompt": "Is Nagios Core free open-source software or a paid per-node commercial product? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(free|open.source|gpl)"
+      },
+      "source": "plugins/monitoring/skills/nagios/SKILL.md - intro paragraph and Core vs XI table, Nagios Core is open-source GPL v2 and free while Nagios XI is commercial per-node"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

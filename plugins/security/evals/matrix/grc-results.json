@@ -1,0 +1,54 @@
+{
+  "skill": "grc",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "grc-iso27001-2022-controls",
+      "knowledge": "recent",
+      "prompt": "How many Annex A controls does the ISO 27001:2022 revision specify, down from the earlier 2013 version? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b93\\b"
+      },
+      "source": "plugins/security/skills/grc/SKILL.md - ISO 27001 ISMS Structure: ISO 27001:2022 update: 93 controls (reorganized into 4 themes)"
+    },
+    {
+      "id": "grc-governing-bodies",
+      "knowledge": "stable",
+      "prompt": "Which governing body oversees the SOC 2 framework, and which governing body oversees ISO 27001? Answer concisely, naming both organizations.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AICPA",
+          "ISO/IEC"
+        ]
+      },
+      "source": "plugins/security/skills/grc/SKILL.md - Common Compliance Frameworks table: SOC 2 Type II governed by AICPA, ISO 27001 governed by ISO/IEC"
+    },
+    {
+      "id": "grc-tprm-vendor-tiers",
+      "knowledge": "stable",
+      "prompt": "In a typical third-party risk management vendor intake process, what criticality tiers are vendors classified into? Name at least two of them concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Critical",
+          "Medium"
+        ]
+      },
+      "source": "plugins/security/skills/grc/SKILL.md - TPRM Workflow: Vendor Intake classifies vendor as Critical / High / Medium / Low"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,83 @@
+{
+  "skill": "grafana",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 132,
+  "prompts": [
+    {
+      "id": "grafana-table-refactor",
+      "knowledge": "recent",
+      "prompt": "Grafana 12.x shipped a table panel refactor. What performance improvement percentage is cited for it? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "97.8"
+        ]
+      },
+      "source": "plugins/monitoring/skills/grafana/SKILL.md - 12.x Features bullet list, table refactor (97.8% faster)"
+    },
+    {
+      "id": "grafana-panel-limit",
+      "knowledge": "stable",
+      "prompt": "What is the recommended maximum number of panels to include on a single Grafana dashboard? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(20|30)\\b"
+      },
+      "source": "plugins/monitoring/skills/grafana/SKILL.md - Design Rules, target 20-30 panels maximum per dashboard"
+    },
+    {
+      "id": "grafana-mute-timings",
+      "knowledge": "stable",
+      "prompt": "In Grafana alerting, are mute timings recurring and policy-based, or one-time like silences? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)recurr"
+      },
+      "source": "plugins/monitoring/skills/grafana/SKILL.md - Top 10 Operational Rules number 7, mute timings are recurring and policy-based while silences are one-time"
+    },
+    {
+      "id": "grafana-tabs-version",
+      "knowledge": "recent",
+      "prompt": "Which minor release of Grafana 12 first introduced dashboard tabs and conditional rendering, and in what year did it ship? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "12.0",
+          "2025"
+        ]
+      },
+      "source": "plugins/analytics/skills/grafana/SKILL.md - Dashboard Architecture: Tabs (12.0+), Conditional rendering (12.0+); Grafana 12.x Key Features table: 12.0 (May 2025)."
+    },
+    {
+      "id": "grafana-mute-timing-inheritance",
+      "knowledge": "stable",
+      "prompt": "In Grafana alerting, does a mute timing set on a parent notification policy automatically apply to its child policies? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not inherited|do(es)? not)"
+      },
+      "source": "plugins/analytics/skills/grafana/SKILL.md - Anti-Patterns table: Mute timings are NOT inherited from parent notification policies; apply at each relevant policy level."
+    },
+    {
+      "id": "grafana-lgtm-benchmark",
+      "knowledge": "recent",
+      "prompt": "According to a GrafanaCON 2025 benchmark, roughly how many times faster was the LGTM stack's P99 query latency than the ELK stack? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(7\\s*x|seven\\s*times|7\\s*times)"
+      },
+      "source": "plugins/analytics/skills/grafana/SKILL.md - Performance Benchmarks (GrafanaCON 2025): LGTM stack query P99 85ms vs ELK stack 650ms (7x faster)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

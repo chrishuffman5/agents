@@ -1,0 +1,53 @@
+{
+  "skill": "aruba-aoscx",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aruba-aoscx-cx10000-dpu",
+      "knowledge": "recent",
+      "prompt": "The Aruba CX 10000 switch integrates a DPU on each line card to offload stateful firewall, NAT, and micro-segmentation at line rate. Which vendor makes this DPU? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Pensando"
+        ]
+      },
+      "source": "plugins/networking/skills/aruba-aoscx/SKILL.md - Integrated AMD Pensando DPU per line card offloads stateful firewall, NAT, and micro-segmentation to hardware"
+    },
+    {
+      "id": "aruba-aoscx-srv6-preview",
+      "knowledge": "recent",
+      "prompt": "Aruba AOS-CX 10.15 introduced a preview implementation of IPv6 Segment Routing. Which two switch platform families support this preview? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9300",
+          "10000"
+        ]
+      },
+      "source": "plugins/networking/skills/aruba-aoscx/references/versions/10.15.md - Early SRv6 support on CX 9300 and CX 10000 platforms, preview/beta status"
+    },
+    {
+      "id": "aruba-aoscx-vsx-l3",
+      "knowledge": "stable",
+      "prompt": "In an Aruba AOS-CX VSX pair, do the two switches share a single Layer 3 routing table, or does each maintain its own? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(own|independent|not shared|separate)"
+      },
+      "source": "plugins/networking/skills/aruba-aoscx/SKILL.md - Layer 3 NOT shared, each switch maintains its own routing table"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

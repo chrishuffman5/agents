@@ -1,0 +1,52 @@
+{
+  "skill": "remix",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "remix-missing-action-status",
+      "knowledge": "stable",
+      "prompt": "If a Form with method post targets a route module that exports no action function, what HTTP status code results? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "405"
+        ]
+      },
+      "source": "plugins/frontend/skills/remix/SKILL.md - pitfall 1: missing action export gives 405 Method Not Allowed"
+    },
+    {
+      "id": "remix-rebrand-year",
+      "knowledge": "recent",
+      "prompt": "In what year did Remix v2 rebrand into React Router v7, keeping the same team and the same API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2024"
+        ]
+      },
+      "source": "plugins/frontend/skills/remix/SKILL.md - intro: Remix v2 rebranded to React Router v7 in late 2024"
+    },
+    {
+      "id": "remix-root-errorboundary-full-doc",
+      "knowledge": "stable",
+      "prompt": "Why does the root level ErrorBoundary in React Router v7 or Remix need to render a complete document, unlike error boundaries on nested routes? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)html"
+      },
+      "source": "plugins/frontend/skills/remix/SKILL.md - pitfall 6: root ErrorBoundary must render full html document since no layout wraps it"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

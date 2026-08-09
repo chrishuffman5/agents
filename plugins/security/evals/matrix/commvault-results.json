@@ -1,0 +1,51 @@
+{
+  "skill": "commvault",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "commvault-ransomware-detection",
+      "knowledge": "recent",
+      "prompt": "Does Commvault Cloud include a built-in ML-based anomaly detection engine for ransomware, comparable to what Rubrik or Cohesity offer natively? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/security/skills/commvault/SKILL.md - Key Operational Guidance > Ransomware Detection: Commvault does not have built-in ML-based anomaly detection like Rubrik or Cohesity"
+    },
+    {
+      "id": "commvault-hyperscale-nodes",
+      "knowledge": "recent",
+      "prompt": "For a Commvault HyperScale X cluster, what is the minimum node count range needed to start, before you begin scaling out by adding more nodes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)2\\s*(-|to)\\s*4"
+      },
+      "source": "plugins/security/skills/commvault/SKILL.md - HyperScale X Architecture: Nodes: 2-4 nodes minimum; scale by adding nodes"
+    },
+    {
+      "id": "commvault-cloud-rewind-aws",
+      "knowledge": "stable",
+      "prompt": "Besides restoring EC2 instance data, name two categories of AWS infrastructure configuration that Commvault Cloud Rewind can rebuild during a full-stack recovery. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Route 53",
+          "Elastic Load Balancers"
+        ]
+      },
+      "source": "plugins/security/skills/commvault/SKILL.md - Cloud Rewind > What Cloud Rewind Recovers (AWS): VPC configuration, IAM roles and policies, Route 53 DNS records, Elastic Load Balancers, RDS database instances, S3 bucket configurations"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

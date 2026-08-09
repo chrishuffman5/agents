@@ -1,0 +1,51 @@
+{
+  "skill": "edr",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "edr-telemetry-retention",
+      "knowledge": "recent",
+      "prompt": "By default, how many days of telemetry does CrowdStrike Falcon Insight retain, and how many days of data does Microsoft Defender for Endpoint keep available for Advanced Hunting? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "90",
+          "30"
+        ]
+      },
+      "source": "plugins/security/skills/edr/SKILL.md - Telemetry retention varies by platform: CrowdStrike Falcon Insight 90 days (default), Defender MDE 30 days (Advanced Hunting)"
+    },
+    {
+      "id": "edr-mitre-technique-powershell",
+      "knowledge": "stable",
+      "prompt": "Under the MITRE ATT&CK framework as used for EDR detection mapping, which technique ID corresponds to the use of PowerShell? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)t1059\\.001"
+      },
+      "source": "plugins/security/skills/edr/SKILL.md - MITRE ATT&CK Integration example: Techniques T1059.001 = PowerShell"
+    },
+    {
+      "id": "edr-crowdstrike-footprint",
+      "knowledge": "recent",
+      "prompt": "In comparisons of EDR agent footprints, approximately how large is the CrowdStrike Falcon sensor commonly cited as being? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)25\\s*mb"
+      },
+      "source": "plugins/security/skills/edr/SKILL.md - Feature Matrix: Agent footprint row lists CrowdStrike as approximately 25MB, lightweight"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

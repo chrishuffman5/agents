@@ -1,0 +1,56 @@
+{
+  "skill": "mend",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mend-renovate-package-managers",
+      "knowledge": "recent",
+      "prompt": "Comparing Renovate to GitHub Dependabot for dependency updates, roughly how many package managers does Renovate support versus Dependabot's package manager count? Answer concisely with both approximate numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100",
+          "15"
+        ]
+      },
+      "source": "plugins/security/skills/mend/SKILL.md - Renovate Bot section: Broader package manager support: 100+ package managers vs. Dependabot's ~15"
+    },
+    {
+      "id": "mend-license-types-tracked",
+      "knowledge": "recent",
+      "prompt": "For license compliance policy purposes, roughly how many distinct open-source license types does Mend track? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300"
+        ]
+      },
+      "source": "plugins/security/skills/mend/SKILL.md - Mend Platform Overview: License compliance: 300+ license types tracked"
+    },
+    {
+      "id": "mend-sbom-formats",
+      "knowledge": "stable",
+      "prompt": "In which two standard SBOM formats can Mend export a project's software dependency inventory? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CycloneDX",
+          "SPDX"
+        ]
+      },
+      "source": "plugins/security/skills/mend/SKILL.md - Mend Platform Overview and SBOM Export section: CycloneDX and SPDX formats"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "sql-server",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sql-server-standard-edition-ram",
+      "knowledge": "recent",
+      "prompt": "In SQL Server 2025, what is the maximum RAM supported by Standard Edition. Answer with the exact number and unit.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "256"
+        ]
+      },
+      "source": "plugins/database/skills/sql-server/references/versions/2025.md - Standard Edition Improvements section: RAM limit raised to 256 GB, up from 128 GB."
+    },
+    {
+      "id": "sql-server-optimized-locking-default",
+      "knowledge": "recent",
+      "prompt": "In SQL Server 2025, is optimized locking turned on by default for a database. Answer with yes or no.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/database/skills/sql-server/references/versions/2025.md - Optimized Locking section note: Optimized locking is disabled by default in SQL Server 2025 and requires Accelerated Database Recovery to be enabled first."
+    },
+    {
+      "id": "sql-server-max-nc-indexes",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of nonclustered indexes allowed on a single SQL Server table. Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "999"
+        ]
+      },
+      "source": "plugins/database/skills/sql-server/SKILL.md - Indexing Strategies table: Nonclustered index row notes a maximum of 999 nonclustered indexes."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

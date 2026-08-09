@@ -1,0 +1,48 @@
+{
+  "skill": "aws-waf",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-waf-cloudfront-region",
+      "knowledge": "stable",
+      "prompt": "For an AWS WAF WebACL that protects a CloudFront distribution, in which AWS region must the WebACL be created? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)us-east-1"
+      },
+      "source": "plugins/security/skills/aws-waf/SKILL.md - Scopes: CLOUDFRONT - WebACL must be created in us-east-1, associated to CloudFront distribution"
+    },
+    {
+      "id": "aws-waf-webacl-wcu-limit",
+      "knowledge": "recent",
+      "prompt": "What is the default maximum Web ACL Capacity Unit total for a single AWS WAFv2 WebACL? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5,?000\\b"
+      },
+      "source": "plugins/security/skills/aws-waf/SKILL.md - WCU (Web ACL Capacity Units): WebACL default limit is 5,000 WCU"
+    },
+    {
+      "id": "aws-waf-rate-rule-window",
+      "knowledge": "recent",
+      "prompt": "AWS WAF rate-based rule statements count requests toward the configured limit over what fixed time window? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b5\\b\\D{0,3}minute"
+      },
+      "source": "plugins/security/skills/aws-waf/SKILL.md - Custom rate-based rule example: limit = 300 Requests per 5-minute window (100/min effective)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,53 @@
+{
+  "skill": "power-bi",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "power-bi-direct-lake-ga",
+      "knowledge": "recent",
+      "prompt": "When did the Direct Lake storage mode in Power BI reach general availability? Answer concisely with month and year.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "March",
+          "2026"
+        ]
+      },
+      "source": "plugins/analytics/skills/power-bi/SKILL.md - Storage Modes: Direct Lake (GA March 2026) reads Delta tables directly from OneLake."
+    },
+    {
+      "id": "power-bi-fsku-premium-features",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Fabric F-SKU that includes full Power BI Premium capability such as paginated reports, XMLA endpoints, deployment pipelines, and unlimited viewers? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bF64\\b"
+      },
+      "source": "plugins/analytics/skills/power-bi/SKILL.md - Licensing: F2-F32 SKUs do NOT include Power BI Premium features; F64 is the minimum for full Power BI Premium capability."
+    },
+    {
+      "id": "power-bi-calculate-function",
+      "knowledge": "stable",
+      "prompt": "In Power BI DAX, which single function is described as the most important because it modifies filter context before a calculation runs? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "CALCULATE"
+        ]
+      },
+      "source": "plugins/analytics/skills/power-bi/SKILL.md - DAX Fundamentals: CALCULATE -- The Core Function; it is the most important DAX function."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

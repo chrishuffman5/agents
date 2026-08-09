@@ -1,0 +1,52 @@
+{
+  "skill": "pagerduty",
+  "plugin": "monitoring",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pagerduty-events-endpoint",
+      "knowledge": "recent",
+      "prompt": "What is the base API endpoint hostname and path used to send events into PagerDuty through Events API v2? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "events.pagerduty.com"
+        ]
+      },
+      "source": "plugins/monitoring/skills/pagerduty/SKILL.md - Events API v2 section, endpoint is events.pagerduty.com/v2/enqueue"
+    },
+    {
+      "id": "pagerduty-priority-levels",
+      "knowledge": "stable",
+      "prompt": "PagerDuty incident priority levels range from P1 down to which lowest level? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bP5\\b"
+      },
+      "source": "plugins/monitoring/skills/pagerduty/SKILL.md - Incident Lifecycle section, priority levels P1 Critical through P5 Informational"
+    },
+    {
+      "id": "pagerduty-dedup-key",
+      "knowledge": "stable",
+      "prompt": "In the PagerDuty Events API v2 payload, which field lets repeated trigger, acknowledge, and resolve calls update the same alert instead of creating duplicates? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "dedup_key"
+        ]
+      },
+      "source": "plugins/monitoring/skills/pagerduty/SKILL.md - Events API v2 section, the same dedup_key updates existing alert state; Common Pitfalls number 3 reinforces always setting dedup_key"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

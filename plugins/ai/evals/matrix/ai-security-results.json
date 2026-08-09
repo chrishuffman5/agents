@@ -1,0 +1,53 @@
+{
+  "skill": "ai-security",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ai-security-redteam-exfiltration",
+      "knowledge": "recent",
+      "prompt": "In an internal Anthropic red-team test where the attacker controlled the prompt content via phishing, in how many out of 25 attempts did the attacker succeed at exfiltrating AWS credentials before environmental egress controls were applied? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "24"
+        ]
+      },
+      "source": "plugins/ai/skills/ai-security/SKILL.md - internal red team exfiltrated AWS credentials via a phished prompt in 24 of 25 attempts"
+    },
+    {
+      "id": "ai-security-adaptive-attack-rate",
+      "knowledge": "recent",
+      "prompt": "Roughly what attack success rate did Anthropic measure against Claude Opus 4.5 using an internal adaptive Best-of-N jailbreak attacker running 100 attempts per environment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)~?\\s?1\\s?%"
+      },
+      "source": "plugins/ai/skills/ai-security/SKILL.md - measured attack success rate against Claude Opus 4.5 is ~1% as of 2026-08-05"
+    },
+    {
+      "id": "ai-security-owasp-2025-risk-movement",
+      "knowledge": "stable",
+      "prompt": "In the OWASP Top 10 for LLM Applications 2025 edition, which risk category moved up from 6th place to 2nd place? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Sensitive",
+          "Disclosure"
+        ]
+      },
+      "source": "plugins/ai/skills/ai-security/SKILL.md - Sensitive Information Disclosure risen from 6th to 2nd"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

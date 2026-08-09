@@ -1,0 +1,52 @@
+{
+  "skill": "proxmox",
+  "plugin": "virtualization",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "proxmox-pbs-encryption",
+      "knowledge": "stable",
+      "prompt": "What client side encryption algorithm does Proxmox Backup Server use to protect backup data? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "AES-256"
+        ]
+      },
+      "source": "plugins/virtualization/skills/proxmox/SKILL.md - Backup section: PBS client-side encryption with AES-256-GCM"
+    },
+    {
+      "id": "proxmox-9-firewall-backend",
+      "knowledge": "recent",
+      "prompt": "Starting with Proxmox VE 9.x, which packet filtering framework fully replaces iptables as the firewall backend? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "nftables"
+        ]
+      },
+      "source": "plugins/virtualization/skills/proxmox/SKILL.md - Version Notes: Proxmox VE 9.x - Full nftables firewall backend (replaces iptables)"
+    },
+    {
+      "id": "proxmox-quorum",
+      "knowledge": "stable",
+      "prompt": "In a 3 node Proxmox VE cluster, how many node votes are needed to maintain quorum? Answer concisely with a number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2\\b|\\btwo\\b"
+      },
+      "source": "plugins/virtualization/skills/proxmox/SKILL.md - Clustering: Quorum requires majority of votes; 3 nodes = quorum at 2"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

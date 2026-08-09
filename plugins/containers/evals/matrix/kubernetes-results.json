@@ -1,0 +1,235 @@
+{
+  "skill": "kubernetes",
+  "plugin": "containers",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 15,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "k8s-sidecar-ga-version",
+      "knowledge": "recent",
+      "prompt": "At which Kubernetes minor version did native sidecar containers, meaning init containers with restartPolicy set to Always, become stable? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.34"
+        ]
+      },
+      "source": "plugins/containers/skills/kubernetes/SKILL.md - Sidecar containers (stable in K8s 1.34)"
+    },
+    {
+      "id": "k8s-nodeport-range",
+      "knowledge": "stable",
+      "prompt": "What is the default port range Kubernetes reserves for NodePort services? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "30000",
+          "32767"
+        ]
+      },
+      "source": "plugins/containers/skills/kubernetes/SKILL.md - NodePort | ClusterIP + port on every node (30000-32767)"
+    },
+    {
+      "id": "k8s-gateway-api-version",
+      "knowledge": "recent",
+      "prompt": "Which version of the Kubernetes Gateway API is now GA and adds BackendTLSPolicy alongside a stable GRPCRoute? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.4"
+        ]
+      },
+      "source": "plugins/containers/skills/kubernetes/SKILL.md - Gateway API (v1.4, GA) adds BackendTLSPolicy and stable GRPCRoute"
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 9,
+      "pass": 7,
+      "accuracy": 77.8,
+      "meanWallMs": 11758,
+      "meanTokensOut": 217,
+      "totalCostUsd": 1.0125,
+      "costPerCorrect": 0.1446
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 3,
+      "accuracy": 50.0,
+      "meanWallMs": 12428,
+      "meanTokensOut": 134,
+      "totalCostUsd": 0.3471,
+      "costPerCorrect": 0.1157
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 6,
+        "pass": 4,
+        "accuracy": 66.7,
+        "meanWallMs": 10587,
+        "meanTokensOut": 245,
+        "totalCostUsd": 0.8374,
+        "costPerCorrect": 0.2094
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7731,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1671,
+        "costPerCorrect": 0.1671
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14099,
+        "meanTokensOut": 162,
+        "totalCostUsd": 0.1751,
+        "costPerCorrect": 0.0584
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17124,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.18,
+        "costPerCorrect": 0.09
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 6,
+        "pass": 4,
+        "accuracy": 66.7,
+        "meanWallMs": 10587,
+        "meanTokensOut": 245,
+        "totalCostUsd": 0.8374,
+        "costPerCorrect": 0.2094
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7731,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1671,
+        "costPerCorrect": 0.1671
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14099,
+        "meanTokensOut": 162,
+        "totalCostUsd": 0.1751,
+        "costPerCorrect": 0.0584
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17124,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.18,
+        "costPerCorrect": 0.09
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 1,
+        "accuracy": 33.3,
+        "meanWallMs": 7731,
+        "meanTokensOut": 109,
+        "totalCostUsd": 0.1671,
+        "costPerCorrect": 0.1671
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 8568,
+        "meanTokensOut": 168,
+        "totalCostUsd": 0.4077,
+        "costPerCorrect": 0.2038
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E3",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 12606,
+        "meanTokensOut": 321,
+        "totalCostUsd": 0.4296,
+        "costPerCorrect": 0.2148
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 2,
+        "accuracy": 66.7,
+        "meanWallMs": 17124,
+        "meanTokensOut": 159,
+        "totalCostUsd": 0.18,
+        "costPerCorrect": 0.09
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 14099,
+        "meanTokensOut": 162,
+        "totalCostUsd": 0.1751,
+        "costPerCorrect": 0.0584
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

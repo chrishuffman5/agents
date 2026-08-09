@@ -1,0 +1,48 @@
+{
+  "skill": "forcepoint",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "forcepoint-classifier-count",
+      "knowledge": "recent",
+      "prompt": "About how many built-in content classifiers does Forcepoint DLP ship with? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?700\\+?"
+      },
+      "source": "plugins/security/skills/forcepoint/SKILL.md - Built-in Content Classifiers: Forcepoint includes 1,700+ pre-built classifiers"
+    },
+    {
+      "id": "forcepoint-ml-training-minimum",
+      "knowledge": "recent",
+      "prompt": "When training a custom machine learning content classifier in Forcepoint DLP on your own document samples, what is the minimum number of sample documents required per class? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b50\\b"
+      },
+      "source": "plugins/security/skills/forcepoint/SKILL.md - Classifier types: Machine learning classifiers - Custom: train on your own document samples (minimum 50 per class)"
+    },
+    {
+      "id": "forcepoint-agent-poll-interval",
+      "knowledge": "stable",
+      "prompt": "How often does the Forcepoint DLP endpoint agent check in with the Forcepoint Security Manager to refresh its policy, by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30\\s*minutes"
+      },
+      "source": "plugins/security/skills/forcepoint/SKILL.md - Troubleshooting: agent policy refresh: agent should poll FSM every 30 minutes"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

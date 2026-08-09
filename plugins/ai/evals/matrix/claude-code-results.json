@@ -1,0 +1,48 @@
+{
+  "skill": "claude-code",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "claude-code-auth-precedence",
+      "knowledge": "stable",
+      "prompt": "In Claude Code's authentication precedence order, which one wins when both an ANTHROPIC_AUTH_TOKEN and an ANTHROPIC_API_KEY are set in the environment? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)AUTH_TOKEN"
+      },
+      "source": "plugins/ai/skills/claude-code/SKILL.md - ANTHROPIC_AUTH_TOKEN ranks above ANTHROPIC_API_KEY in the auth precedence list"
+    },
+    {
+      "id": "claude-code-oauth-token-lifetime",
+      "knowledge": "recent",
+      "prompt": "For CI use, how long is the token minted by claude setup-token valid for? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(one.year|1.year|12.month)"
+      },
+      "source": "plugins/ai/skills/claude-code/SKILL.md - mint a one-year token with claude setup-token"
+    },
+    {
+      "id": "claude-code-mcp-output-limits",
+      "knowledge": "recent",
+      "prompt": "In Claude Code, at what token count does MCP tool output trigger a warning, and at what token count does it get truncated? Answer concisely with both numbers.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)10,?000.{0,60}25,?000"
+      },
+      "source": "plugins/ai/skills/claude-code/SKILL.md - output warns at 10,000 tokens and truncates at 25,000 (MAX_MCP_OUTPUT_TOKENS)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "memcached",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "memcached-extstore-min-version",
+      "knowledge": "recent",
+      "prompt": "Which minimum Memcached version introduced extstore, the feature that offloads large item values to flash or SSD storage while keeping metadata in RAM? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.5.4"
+        ]
+      },
+      "source": "plugins/database/skills/memcached/references/architecture.md - Extstore (External Storage) section states Memcached 1.5.4+ includes extstore."
+    },
+    {
+      "id": "memcached-elasticache-max-nodes",
+      "knowledge": "recent",
+      "prompt": "For AWS ElastiCache for Memcached, what is the maximum number of nodes allowed in a single cluster, and across how many shards at most in cluster mode? Answer with both exact numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "300",
+          "20"
+        ]
+      },
+      "source": "plugins/database/skills/memcached/SKILL.md - AWS ElastiCache for Memcached section states up to 300 nodes per cluster across up to 20 shards for cluster mode."
+    },
+    {
+      "id": "memcached-ketama-virtual-nodes",
+      "knowledge": "stable",
+      "prompt": "With Ketama consistent hashing in Memcached client libraries, each physical server is mapped to approximately how many points, or virtual nodes, on the hash ring? Answer with the approximate range.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "100",
+          "200"
+        ]
+      },
+      "source": "plugins/database/skills/memcached/SKILL.md - Consistent Hashing section states each server is mapped to approximately 100-200 points on the hash ring (virtual nodes)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "defender-easm",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "defender-easm-free-assets",
+      "knowledge": "recent",
+      "prompt": "Under Microsoft Defender EASM pricing, how many billable assets are included free before pay-as-you-go charges apply? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1,?000"
+      },
+      "source": "plugins/security/skills/defender-easm/SKILL.md - Pricing: First 1,000 billable assets: Free (trial/evaluation period)"
+    },
+    {
+      "id": "defender-easm-discovery-default",
+      "knowledge": "stable",
+      "prompt": "By default, how often does Microsoft Defender EASM run discovery scans against configured seeds, unless you set a custom schedule? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bweekly\\b"
+      },
+      "source": "plugins/security/skills/defender-easm/SKILL.md - Adding Discovery Seeds: Set discovery frequency: Weekly (default) or custom schedule"
+    },
+    {
+      "id": "defender-easm-asset-workflow",
+      "knowledge": "recent",
+      "prompt": "In Microsoft Defender EASM asset inventory, what are the first two states a discovered asset moves through, from initial discovery to being accepted as belonging to your organization? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Candidate",
+          "Confirmed Inventory"
+        ]
+      },
+      "source": "plugins/security/skills/defender-easm/SKILL.md - Asset States table and Workflow note: Discovered assets start as Candidate, then reviewed and marked Confirmed Inventory or Dismissed"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

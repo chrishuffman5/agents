@@ -1,0 +1,48 @@
+{
+  "skill": "looker",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "looker-ai-hosting-requirement",
+      "knowledge": "stable",
+      "prompt": "Can a customer-hosted, self-managed Looker deployment use the Gemini-powered Conversational Analytics and LookML Assistant features? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|cannot|can not|require.{0,40}hosted)"
+      },
+      "source": "plugins/analytics/skills/looker/SKILL.md - AI Features: AI features require Looker-hosted instances (Google Cloud Core). Customer-hosted deployments cannot use Gemini features."
+    },
+    {
+      "id": "looker-datagroup-trigger-precedence",
+      "knowledge": "recent",
+      "prompt": "In a Looker datagroup, if both sql_trigger and interval_trigger are configured, which one takes precedence? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)interval"
+      },
+      "source": "plugins/analytics/skills/looker/SKILL.md - Datagroups and Caching: Cannot combine sql_trigger and interval_trigger (interval takes precedence)."
+    },
+    {
+      "id": "looker-studio-pro-license",
+      "knowledge": "recent",
+      "prompt": "Does every Looker license come bundled with a Looker Studio license tier, and if so which one? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)looker studio pro"
+      },
+      "source": "plugins/analytics/skills/looker/SKILL.md - Looker vs Looker Studio: Each Looker license includes one Looker Studio Pro license."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

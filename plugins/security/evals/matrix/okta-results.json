@@ -1,0 +1,56 @@
+{
+  "skill": "okta",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "okta-rate-limits",
+      "knowledge": "recent",
+      "prompt": "What are Okta's default per-minute rate limits for the OAuth token issuance endpoint compared to the core authentication endpoint? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2400",
+          "600"
+        ]
+      },
+      "source": "plugins/security/skills/okta/SKILL.md - Rate Limits section: /api/v1/authn 600/minute, /oauth2/default/v1/token 2400/minute"
+    },
+    {
+      "id": "okta-oin-integration-count",
+      "knowledge": "stable",
+      "prompt": "Roughly how many pre-built application integrations are available in Okta's integration network catalog for SSO? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7,000"
+        ]
+      },
+      "source": "plugins/security/skills/okta/SKILL.md - Identity and Scope section: SSO to 7,000+ OIN integrations"
+    },
+    {
+      "id": "okta-threatinsight-actions",
+      "knowledge": "recent",
+      "prompt": "Okta ThreatInsight can take one of three actions when it evaluates a sign-in attempt against its IP threat intelligence database. Besides taking no action, what are the other two possible actions? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "audit",
+          "block"
+        ]
+      },
+      "source": "plugins/security/skills/okta/SKILL.md - ThreatInsight section: Actions: none, audit (log only), block (deny + log)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

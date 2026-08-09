@@ -1,0 +1,56 @@
+{
+  "skill": "lets-encrypt",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "lets-encrypt-6day-cert-lifetime",
+      "knowledge": "recent",
+      "prompt": "Let's Encrypt offers a short-lived certificate profile in addition to the standard 90-day certificates. How many days is that short-lived certificate valid for, and roughly when did this profile launch? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "6-day",
+          "2025"
+        ]
+      },
+      "source": "plugins/security/skills/lets-encrypt/SKILL.md - Certificate Lifetimes table: Short-lived (6-day), launched March 2025"
+    },
+    {
+      "id": "lets-encrypt-domain-rate-limit",
+      "knowledge": "recent",
+      "prompt": "Under Let's Encrypt's issuance rate limits, how many certificates can be issued per registered domain within a rolling week, the domain limit as distinct from the duplicate certificate limit? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "50/week"
+        ]
+      },
+      "source": "plugins/security/skills/lets-encrypt/SKILL.md - Rate Limit Management section: too many certificates already issued for this domain, Domain limit (50/week)"
+    },
+    {
+      "id": "lets-encrypt-cert-file-paths",
+      "knowledge": "stable",
+      "prompt": "On a server using certbot, under what directory path prefix are a domain's certificate files stored, and which specific file in that directory should be referenced as the certificate file in a web server config instead of the bare certificate-only file? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "/etc/letsencrypt/live",
+          "fullchain.pem"
+        ]
+      },
+      "source": "plugins/security/skills/lets-encrypt/SKILL.md - Certificate Files section: /etc/letsencrypt/live/<domain>/, use fullchain.pem"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

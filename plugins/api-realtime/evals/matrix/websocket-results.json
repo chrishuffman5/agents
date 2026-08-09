@@ -1,0 +1,52 @@
+{
+  "skill": "websocket",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "websocket-1006-close-code",
+      "knowledge": "stable",
+      "prompt": "In the WebSocket protocol, which close code indicates an abnormal closure where no close frame was ever received, such as the TCP connection just dropping? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1006"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/websocket/SKILL.md - Close Codes table: 1006 Abnormal closure (no close frame -- TCP dropped)"
+    },
+    {
+      "id": "websocket-client-frame-masking",
+      "knowledge": "stable",
+      "prompt": "Under RFC 6455, are WebSocket frames sent from the client to the server required to be masked? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|always|must|require)"
+      },
+      "source": "plugins/api-realtime/skills/websocket/SKILL.md - Frame Format: client-to-server frames are ALWAYS masked; server-to-client NEVER masked"
+    },
+    {
+      "id": "websocket-permessage-deflate-rfc",
+      "knowledge": "recent",
+      "prompt": "Which RFC number defines the permessage-deflate compression extension used by WebSocket? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7692"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/websocket/SKILL.md - core knowledge list: Extensions: permessage-deflate (RFC 7692)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,53 @@
+{
+  "skill": "nextjs",
+  "plugin": "frontend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "nextjs-v15-fetch-caching-default",
+      "knowledge": "stable",
+      "prompt": "Starting with Next.js 15, is a plain fetch call inside a Server Component cached by default, or not cached by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(no-?store|not cach)"
+      },
+      "source": "plugins/frontend/skills/nextjs/SKILL.md - Caching Model: v15+ does NOT cache by default (no-store)"
+    },
+    {
+      "id": "nextjs-v16-proxy-runtime",
+      "knowledge": "recent",
+      "prompt": "In Next.js 16, which file replaces middleware.ts, and what runtime does it execute on instead of the Edge Runtime? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "proxy.ts",
+          "Node.js"
+        ]
+      },
+      "source": "plugins/frontend/skills/nextjs/SKILL.md - Middleware and Proxy table: v16 uses proxy.ts on the Node.js Runtime"
+    },
+    {
+      "id": "nextjs-async-api-codemod",
+      "knowledge": "recent",
+      "prompt": "Next.js provides an automated codemod to migrate synchronous access to cookies, headers, and params to the new async APIs. What is the codemod named? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "next-async-request-api"
+        ]
+      },
+      "source": "plugins/frontend/skills/nextjs/SKILL.md - pitfall 2: run the codemod npx @next/codemod@canary next-async-request-api ."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

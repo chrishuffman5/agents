@@ -1,0 +1,50 @@
+{
+  "skill": "cisco-secure-client",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-secure-client-version",
+      "knowledge": "recent",
+      "prompt": "What is the current shipping version of Cisco Secure Client, including its maintenance release label? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "5.1.14.145"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-secure-client/SKILL.md - Current version (as of 2026): 5.1.14.145 (MR14)"
+    },
+    {
+      "id": "cisco-secure-client-dtls-gain",
+      "knowledge": "recent",
+      "prompt": "Roughly how much of a throughput improvement does DTLS give over a TLS-only connection for Cisco Secure Client VPN sessions? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)30.{0,8}50"
+      },
+      "source": "plugins/networking/skills/cisco-secure-client/SKILL.md - DTLS gives about 30-50% throughput improvement over TLS-only"
+    },
+    {
+      "id": "cisco-secure-client-tnd-headend",
+      "knowledge": "stable",
+      "prompt": "Does enabling Trusted Network Detection for Cisco Secure Client require any extra configuration on the ASA or FTD headend? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bno\\b"
+      },
+      "source": "plugins/networking/skills/cisco-secure-client/SKILL.md - TND is client-side only (no ASA/FTD config needed)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

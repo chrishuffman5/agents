@@ -1,0 +1,51 @@
+{
+  "skill": "ssrs",
+  "plugin": "analytics",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "ssrs-2022-patch-end",
+      "knowledge": "recent",
+      "prompt": "Through what month and year will SSRS 2022, the final standalone SSRS release, continue receiving security patches? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2033",
+          "January"
+        ]
+      },
+      "source": "plugins/analytics/skills/ssrs/SKILL.md - Future Direction: SSRS 2022 receives security patches through January 2033."
+    },
+    {
+      "id": "ssrs-pbirs-update-cadence",
+      "knowledge": "recent",
+      "prompt": "Roughly how often does Power BI Report Server ship updates, compared to SSRS which is tied to SQL Server release cycles? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(4\\s*months|four\\s*months)"
+      },
+      "source": "plugins/analytics/skills/ssrs/SKILL.md - SSRS vs Power BI Report Server table: update cadence for PBIRS is roughly every 4 months."
+    },
+    {
+      "id": "ssrs-tempdb-restart",
+      "knowledge": "stable",
+      "prompt": "Does the ReportServerTempDB catalog database survive a server restart, unlike a regular SQL Server tempdb? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|survive|does survive)"
+      },
+      "source": "plugins/analytics/skills/ssrs/SKILL.md - Dual Database Architecture: ReportServerTempDB survives restarts (unlike SQL Server tempdb)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

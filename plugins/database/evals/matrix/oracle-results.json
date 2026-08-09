@@ -1,0 +1,48 @@
+{
+  "skill": "oracle",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "oracle-26ai-binary-vector-storage",
+      "knowledge": "recent",
+      "prompt": "In Oracle AI Database 26ai, binary vectors provide how much lower storage compared to FLOAT32 vectors? Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)32\\s*x\\b"
+      },
+      "source": "plugins/database/skills/oracle/references/versions/26ai.md - Enhanced AI Vector Search > Binary Vectors: 32x lower storage compared to FLOAT32 vectors"
+    },
+    {
+      "id": "oracle-26ai-release-type",
+      "knowledge": "recent",
+      "prompt": "Is Oracle AI Database 26ai a traditional major version upgrade from Oracle 23ai, or is it delivered as a release update applied on top of 23ai? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(release update|patch|23\\.26)"
+      },
+      "source": "plugins/database/skills/oracle/references/versions/26ai.md - Version Identity: 26ai is NOT a new major version upgrade; it is 23ai with Release Update 23.26 applied via OPatch, internal version remains 23.x"
+    },
+    {
+      "id": "oracle-pga-limit-default",
+      "knowledge": "stable",
+      "prompt": "In Oracle Database, PGA_AGGREGATE_LIMIT defaults to what multiple of PGA_AGGREGATE_TARGET, or what percentage of physical memory? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(2x|two\\s*times|200\\s*%|200\\s*percent)"
+      },
+      "source": "plugins/database/skills/oracle/SKILL.md - Common Pitfalls #1: PGA_AGGREGATE_LIMIT defaults to 2x PGA_AGGREGATE_TARGET or 200% of physical memory"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

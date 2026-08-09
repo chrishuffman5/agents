@@ -1,0 +1,52 @@
+{
+  "skill": "mariadb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mariadb-vector-max-dimensions",
+      "knowledge": "recent",
+      "prompt": "In MariaDB, the VECTOR data type used for AI similarity search supports embeddings up to how many dimensions? Answer with the exact number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8192"
+        ]
+      },
+      "source": "plugins/database/skills/mariadb/references/versions/11.8.md - MariaDB Vector section states VECTOR supports up to 8192 dimensions."
+    },
+    {
+      "id": "mariadb-json-depth-limit-removed",
+      "knowledge": "recent",
+      "prompt": "MariaDB used to enforce a hard cap on how many levels deep a JSON document could be nested, before that restriction was removed in a rolling release. What was that old nesting limit, in levels? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\b32\\b|thirty[- ]two)"
+      },
+      "source": "plugins/database/skills/mariadb/references/versions/12.x.md - Removed JSON Depth Limit section (MariaDB 12.2) states the previous hard limit of 32 levels of JSON nesting has been removed."
+    },
+    {
+      "id": "mariadb-galera-large-transaction-threshold",
+      "knowledge": "stable",
+      "prompt": "In a Galera Cluster, transactions modifying more than roughly how many rows generate writesets large enough to stall the whole cluster during certification? Answer with the exact number, in thousands of rows.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "128"
+        ]
+      },
+      "source": "plugins/database/skills/mariadb/SKILL.md - Galera Limitations and Common Pitfalls sections both state transactions modifying more than approximately 128K rows cause cluster-wide performance issues."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

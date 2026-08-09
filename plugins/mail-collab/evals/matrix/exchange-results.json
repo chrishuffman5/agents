@@ -1,0 +1,48 @@
+{
+  "skill": "exchange",
+  "plugin": "mail-collab",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "exchange-safety-net-days",
+      "knowledge": "stable",
+      "prompt": "In Microsoft Exchange, what is the default retention period, in days, for delivered messages kept by the Safety Net feature so they can be resubmitted after a database failover? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b2\\s*day"
+      },
+      "source": "plugins/mail-collab/skills/exchange/SKILL.md - Safety Net: Retains delivered messages for 2 days (default). Enables resubmission after database failover."
+    },
+    {
+      "id": "exchange-preferred-dag-copies",
+      "knowledge": "stable",
+      "prompt": "For a properly architected Exchange Database Availability Group, how many total copies of each mailbox database does Microsoft recommend maintaining? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\b|\\bfour\\b"
+      },
+      "source": "plugins/mail-collab/skills/exchange/SKILL.md - Preferred Architecture: 4 copies per database (2 per datacenter), 3 HA copies + 1 lagged copy."
+    },
+    {
+      "id": "exchange-2019-eos",
+      "knowledge": "recent",
+      "prompt": "When does mainstream support end for Exchange Server 2019, after which organizations must rely on Extended Security Updates to stay protected? Answer concisely with the month and year.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(october\\s*2025|oct\\.?\\s*2025|10/2025)"
+      },
+      "source": "plugins/mail-collab/skills/exchange/SKILL.md - Exchange 2019 (end-of-support October 2025, ESU available); Version Matrix support status row confirms Oct 2025."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

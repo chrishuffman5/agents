@@ -1,0 +1,52 @@
+{
+  "skill": "fortinet-sdwan",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "fortinet-sdwan-passive-health-check-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which minimum FortiOS version can SD-WAN health checks derive SLA metrics passively from real application traffic instead of active probing? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "7.4.1"
+        ]
+      },
+      "source": "plugins/networking/skills/fortinet-sdwan/SKILL.md - passive health checks introduced in FortiOS 7.4.1+, derive SLA metrics from actual application traffic"
+    },
+    {
+      "id": "fortinet-sdwan-advpn-shortcut-before-76",
+      "knowledge": "recent",
+      "prompt": "Before FortiOS 7.6, how many concurrent ADVPN 2.0 shortcut tunnels could exist between a single pair of spokes? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bone\\b|\\b1\\b|single)"
+      },
+      "source": "plugins/networking/skills/fortinet-sdwan/references/versions/7.6.md - before 7.6 ADVPN 2.0 supported a single optimal shortcut per spoke-pair; 7.6 adds multiple shortcuts"
+    },
+    {
+      "id": "fortinet-sdwan-minimum-sla-strategy",
+      "knowledge": "stable",
+      "prompt": "Which FortiGate SD-WAN steering strategy keeps traffic on its current link and only reroutes when that link actually violates its SLA thresholds, to avoid unnecessary path switching? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Minimum SLA"
+        ]
+      },
+      "source": "plugins/networking/skills/fortinet-sdwan/SKILL.md - Minimum SLA strategy stays on current link unless SLA violated, minimizes reroutes"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

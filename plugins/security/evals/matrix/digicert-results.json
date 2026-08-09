@@ -1,0 +1,48 @@
+{
+  "skill": "digicert",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "digicert-max-validity",
+      "knowledge": "stable",
+      "prompt": "Under current CA and Browser Forum rules, what is the maximum validity period, in days, allowed for a publicly-trusted TLS certificate? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)398"
+      },
+      "source": "plugins/security/skills/digicert/SKILL.md - Certificate Types > TLS/SSL Certificates > Current CA/Browser Forum rules: Maximum validity: 398 days (enforced)"
+    },
+    {
+      "id": "digicert-ev-no-wildcard",
+      "knowledge": "stable",
+      "prompt": "Can an Extended Validation TLS certificate be issued as a wildcard certificate under CA and Browser Forum rules? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|cannot|can not)\\b"
+      },
+      "source": "plugins/security/skills/digicert/SKILL.md - EV certificate limitations: EV certificates cannot be wildcards (CA/Browser Forum rule)"
+    },
+    {
+      "id": "digicert-hsm-requirement-date",
+      "knowledge": "recent",
+      "prompt": "Since what month and year has the CA and Browser Forum required hardware-based private key storage, such as an HSM or USB token, for OV code signing certificates? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)june.{0,5}2023"
+      },
+      "source": "plugins/security/skills/digicert/SKILL.md - Code Signing Certificates: As of June 2023, CA/Browser Forum requires hardware-based key storage (HSM or physical USB token) for OV code signing as well"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

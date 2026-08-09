@@ -1,0 +1,48 @@
+{
+  "skill": "f5-waf",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "f5-waf-signature-count",
+      "knowledge": "recent",
+      "prompt": "Approximately how many attack signatures does the F5 Advanced WAF signature library include? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)9,?000\\+?"
+      },
+      "source": "plugins/security/skills/f5-waf/SKILL.md - Attack Signatures: a library of attack signatures (9,000+)"
+    },
+    {
+      "id": "f5-waf-datasafe-encryption",
+      "knowledge": "recent",
+      "prompt": "What encryption algorithm and key size does F5 DataSafe use to generate its per-session key when encrypting form field values in the browser? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)rsa-?\\s*2048"
+      },
+      "source": "plugins/security/skills/f5-waf/SKILL.md - DataSafe Configuration example: Encryption: RSA-2048 (per session key)"
+    },
+    {
+      "id": "f5-waf-positive-security-model",
+      "knowledge": "stable",
+      "prompt": "Does F5 Advanced WAF's positive security model work as an allowlist that denies everything not explicitly defined, or as a blocklist that only denies known bad patterns? Answer concisely, naming the model type it actually is.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)allow-?list"
+      },
+      "source": "plugins/security/skills/f5-waf/SKILL.md - Positive Security (Allowlist Model): Define exactly what your application allows. Deny everything else."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

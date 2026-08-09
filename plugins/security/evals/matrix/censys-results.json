@@ -1,0 +1,48 @@
+{
+  "skill": "censys",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "censys-zmap-scan-time",
+      "knowledge": "recent",
+      "prompt": "Roughly how long does it take for ZMap, the high-speed scanner developed at Censys, to scan the entire IPv4 address space? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)45\\s*min"
+      },
+      "source": "plugins/security/skills/censys/SKILL.md - How Censys Scans the Internet: ZMap can scan entire IPv4 space in ~45 minutes"
+    },
+    {
+      "id": "censys-ipv4-address-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many IPv4 addresses does Censys index through its internet-wide scanning? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)4\\.3\\s*(billion|bn)"
+      },
+      "source": "plugins/security/skills/censys/SKILL.md - What Censys indexes: All IPv4 addresses (4.3 billion)"
+    },
+    {
+      "id": "censys-asm-onboarding-time",
+      "knowledge": "recent",
+      "prompt": "After providing seeds during Censys ASM onboarding, how long does it typically take before initial results are available? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "4\\D{1,5}8\\s*hours"
+      },
+      "source": "plugins/security/skills/censys/SKILL.md - ASM Onboarding: Initial results typically available within 4-8 hours"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

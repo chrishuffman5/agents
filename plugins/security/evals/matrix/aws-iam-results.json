@@ -1,0 +1,50 @@
+{
+  "skill": "aws-iam",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-iam-sts-expiry",
+      "knowledge": "stable",
+      "prompt": "What is the typical expiration range for AWS STS temporary credentials issued via AssumeRole or federation? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)1\\D{0,4}12\\s*hours?"
+      },
+      "source": "plugins/security/skills/aws-iam/SKILL.md - Credential Management Best Practices table: STS temporary credentials auto-expire (1-12 hours)"
+    },
+    {
+      "id": "aws-iam-access-key-rotation",
+      "knowledge": "recent",
+      "prompt": "What is the maximum recommended rotation interval, in days, for a legacy IAM user access key used for programmatic access? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b90\\b"
+      },
+      "source": "plugins/security/skills/aws-iam/SKILL.md - Credential Management Best Practices table: IAM user access keys rotation 90 days max"
+    },
+    {
+      "id": "aws-iam-externalid",
+      "knowledge": "stable",
+      "prompt": "Which IAM trust policy condition key should you always include when allowing a third party to assume a cross-account role, in order to prevent confused deputy attacks? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ExternalId"
+        ]
+      },
+      "source": "plugins/security/skills/aws-iam/SKILL.md - Common Pitfalls: always use ExternalId condition to prevent confused deputy attacks"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

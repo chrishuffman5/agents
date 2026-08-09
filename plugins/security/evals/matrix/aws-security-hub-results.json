@@ -1,0 +1,51 @@
+{
+  "skill": "aws-security-hub",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aws-security-hub-normalized-critical-range",
+      "knowledge": "recent",
+      "prompt": "In AWS Security Hub's ASFF finding format, what numeric range of the Severity Normalized score, on its 0-100 scale, corresponds to a Critical severity finding? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b90\\b\\D{0,4}\\b100\\b"
+      },
+      "source": "plugins/security/skills/aws-security-hub/SKILL.md - Key ASFF fields explained: Severity.Normalized 0-100 numeric score (90-100=Critical)"
+    },
+    {
+      "id": "aws-security-hub-fsbp-control-count",
+      "knowledge": "recent",
+      "prompt": "Roughly how many controls does the AWS Foundational Security Best Practices standard include within Security Hub? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b300\\b"
+      },
+      "source": "plugins/security/skills/aws-security-hub/references/vulnerability-management.md - AWS Foundational Security Best Practices (FSBP): 300+ controls across all major AWS services"
+    },
+    {
+      "id": "aws-security-hub-finding-retention",
+      "knowledge": "stable",
+      "prompt": "By default, how many days does AWS Security Hub retain findings, and what is the configurable range? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "90",
+          "30"
+        ]
+      },
+      "source": "plugins/security/skills/aws-security-hub/SKILL.md - Key Limitations: findings are retained for 90 days (configurable to 30-90 days)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

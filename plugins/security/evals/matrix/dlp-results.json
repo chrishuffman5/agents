@@ -1,0 +1,48 @@
+{
+  "skill": "dlp",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "dlp-edm-false-positive",
+      "knowledge": "stable",
+      "prompt": "Among DLP content detection methods, which technique -- exact data matching against fingerprinted records, or plain regex pattern matching -- produces a near-zero false positive rate? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(exact data match|edm|fingerprint)"
+      },
+      "source": "plugins/security/skills/dlp/SKILL.md - Detection Methods: Exact Data Matching (EDM / Fingerprinting) - Near-zero false positives, only triggers on actual data values"
+    },
+    {
+      "id": "dlp-start-in-monitor-mode",
+      "knowledge": "stable",
+      "prompt": "According to general DLP best practice, should a brand-new DLP policy be deployed initially in blocking mode, or in audit and monitor mode? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(audit|monitor)"
+      },
+      "source": "plugins/security/skills/dlp/SKILL.md - Common DLP Anti-Patterns: Starting with block mode - Always begin in audit/monitor mode"
+    },
+    {
+      "id": "dlp-top-classification-tier",
+      "knowledge": "recent",
+      "prompt": "In a standard four-tier DLP data classification framework, what label is typically used for the highest sensitivity tier, above Confidential? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(restricted|highly confidential)"
+      },
+      "source": "plugins/security/skills/dlp/SKILL.md - Data Classification Tiers table: Tier 4 - Restricted, label Highly Confidential, examples PII/PHI/PCI data/trade secrets"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

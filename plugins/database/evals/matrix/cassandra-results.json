@@ -1,0 +1,50 @@
+{
+  "skill": "cassandra",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cassandra-5-java-version",
+      "knowledge": "recent",
+      "prompt": "What is the minimum Java version required to run Apache Cassandra 5.0? Answer with just the version number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b17\\b"
+      },
+      "source": "plugins/database/skills/cassandra/references/versions/5.0.md - Java 17 Requirement section: Cassandra 5.0 requires Java 17 (Java 11 and Java 8 are no longer supported)."
+    },
+    {
+      "id": "cassandra-ucs-shard-count",
+      "knowledge": "recent",
+      "prompt": "In Cassandra 5.0, when using the Unified Compaction Strategy with default settings, what is the default base_shard_count, the number of shards used for parallel compaction? Answer with the exact number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b4\\b"
+      },
+      "source": "plugins/database/skills/cassandra/references/versions/5.0.md - UCS configuration reference table: base_shard_count default is 4."
+    },
+    {
+      "id": "cassandra-gc-grace-default",
+      "knowledge": "stable",
+      "prompt": "In Cassandra, what is the default value, in seconds, of gc_grace_seconds, the setting controlling how long tombstones are kept before compaction can purge them? Answer with the exact number of seconds.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "864000"
+        ]
+      },
+      "source": "plugins/database/skills/cassandra/SKILL.md - Tombstones and TTL section: gc_grace_seconds (default 864000 = 10 days)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

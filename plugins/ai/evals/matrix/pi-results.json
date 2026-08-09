@@ -1,0 +1,57 @@
+{
+  "skill": "pi",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "pi-design-exclusions",
+      "knowledge": "stable",
+      "prompt": "Name the six features that the pi coding agent harness deliberately omits from its design. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "MCP",
+          "Plan",
+          "popups"
+        ]
+      },
+      "source": "plugins/ai/skills/pi/SKILL.md - six exclusions: MCP, Sub-agents, Plan mode, Permission popups, Built-in to-dos, Background bash"
+    },
+    {
+      "id": "pi-compaction-defaults",
+      "knowledge": "recent",
+      "prompt": "What are pi's default reserveTokens and keepRecentTokens values used to trigger automatic context compaction? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16384",
+          "20000"
+        ]
+      },
+      "source": "plugins/ai/skills/pi/SKILL.md - defaults: reserveTokens 16384, keepRecentTokens 20000"
+    },
+    {
+      "id": "pi-install-flag",
+      "knowledge": "stable",
+      "prompt": "What flag does pi's documented npm install command pass to disable dependency lifecycle scripts for supply-chain safety? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "--ignore-scripts"
+        ]
+      },
+      "source": "plugins/ai/skills/pi/SKILL.md - npm install -g --ignore-scripts is the documented install form"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

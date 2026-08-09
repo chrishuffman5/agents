@@ -1,0 +1,54 @@
+{
+  "skill": "sonic",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sonic-dash-acronym",
+      "knowledge": "recent",
+      "prompt": "In the SONiC ecosystem, what does the acronym DASH stand for, and which major cloud provider implements it for SmartNIC offload? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Disaggregated",
+          "Azure"
+        ]
+      },
+      "source": "plugins/networking/skills/sonic/SKILL.md - SONiC-DASH: Disaggregated API for SONiC Hosts; Implemented by Microsoft Azure (SmartNICs for Azure SDN)"
+    },
+    {
+      "id": "sonic-config-reload",
+      "knowledge": "recent",
+      "prompt": "If you hand-edit /etc/sonic/config_db.json directly on a SONiC switch, does that change take effect immediately, or must you run another command to apply it? Name the command in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(config reload|config load)"
+      },
+      "source": "plugins/networking/skills/sonic/SKILL.md - Common Pitfalls: Editing config_db.json without config reload -- changes not applied until config reload or config load"
+    },
+    {
+      "id": "sonic-sai-acronym",
+      "knowledge": "stable",
+      "prompt": "In SONiC, what does the acronym SAI stand for? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Abstraction",
+          "Interface"
+        ]
+      },
+      "source": "plugins/networking/skills/sonic/SKILL.md - SAI (Switch Abstraction Interface): Hardware abstraction, vendor libsai implementations"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,52 @@
+{
+  "skill": "claude-api",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "claude-api-anthropic-version",
+      "knowledge": "stable",
+      "prompt": "What value must the anthropic-version header carry on every request to the Claude Messages API? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2023-06-01"
+        ]
+      },
+      "source": "plugins/ai/skills/claude-api/SKILL.md - Send x-api-key, anthropic-version: 2023-06-01, and content-type on every call"
+    },
+    {
+      "id": "claude-api-cache-breakpoints",
+      "knowledge": "stable",
+      "prompt": "When using explicit block-level prompt caching breakpoints in the Claude Messages API, what is the maximum number of breakpoints allowed in a single request? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4"
+        ]
+      },
+      "source": "plugins/ai/skills/claude-api/SKILL.md - explicit block-level breakpoints, max 4 breakpoints"
+    },
+    {
+      "id": "claude-api-tokenizer-shift",
+      "knowledge": "recent",
+      "prompt": "When migrating a prompt from a pre-4.7 Claude model to Claude Opus 4.7 or later, roughly what percentage increase in token count should you expect for the same text, due to the newer tokenizer? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)~?\\s?30\\s?%"
+      },
+      "source": "plugins/ai/skills/claude-api/SKILL.md - newer tokenizer produces ~30% more tokens for the same text"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

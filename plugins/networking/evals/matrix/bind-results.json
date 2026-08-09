@@ -1,0 +1,51 @@
+{
+  "skill": "bind",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "bind-920-qptrie",
+      "knowledge": "recent",
+      "prompt": "BIND 9.20 replaced the RBTDB database engine as its default data structure. What is the new default engine called? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)qp-trie"
+      },
+      "source": "plugins/networking/skills/bind/references/versions/9.20.md - QP-Trie Database replaces RBTDB as default, 4-7% authoritative performance improvement"
+    },
+    {
+      "id": "bind-autodnssec-removed",
+      "knowledge": "recent",
+      "prompt": "The auto-dnssec option in named.conf now causes BIND to refuse to start if present. Which BIND version removed it, and what feature should you use instead? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9.20",
+          "dnssec-policy"
+        ]
+      },
+      "source": "plugins/networking/skills/bind/references/versions/9.20.md - auto-dnssec causes startup failure in 9.20, use dnssec-policy (KASP) instead"
+    },
+    {
+      "id": "bind-views-all-zones",
+      "knowledge": "stable",
+      "prompt": "In BIND named.conf, once you define even a single view, must every zone -- including localhost and root hints -- be placed inside a view? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\byes\\b"
+      },
+      "source": "plugins/networking/skills/bind/SKILL.md - Rules: once any view is defined, ALL zones must be inside a view, first match wins"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

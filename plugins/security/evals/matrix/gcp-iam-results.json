@@ -1,0 +1,48 @@
+{
+  "skill": "gcp-iam",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "gcp-iam-recommender-window",
+      "knowledge": "recent",
+      "prompt": "Over how many days of historical permission usage does Google Cloud's IAM Recommender analyze activity before generating role right-sizing recommendations? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)90\\s*days"
+      },
+      "source": "plugins/security/skills/gcp-iam/SKILL.md - IAM Recommender: Analyzes actual permission usage over 90 days"
+    },
+    {
+      "id": "gcp-iam-vpc-sc-protected-services",
+      "knowledge": "recent",
+      "prompt": "Roughly how many Google Cloud services can be included as protected services inside a VPC Service Controls perimeter? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)100\\+?"
+      },
+      "source": "plugins/security/skills/gcp-iam/SKILL.md - VPC Service Controls: Protected services -- BigQuery, Cloud Storage, GKE, and 100+ services"
+    },
+    {
+      "id": "gcp-iam-explicit-deny",
+      "knowledge": "stable",
+      "prompt": "Does a standard Google Cloud IAM policy support an explicit Deny binding the way AWS SCPs do? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|does not|not)\\b"
+      },
+      "source": "plugins/security/skills/gcp-iam/SKILL.md - IAM Policy Model: GCP IAM has no explicit Deny in IAM policies (IAM Deny policies are a separate feature in preview)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

@@ -1,0 +1,48 @@
+{
+  "skill": "postfix",
+  "plugin": "mail-collab",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "postfix-tlsrpt-version",
+      "knowledge": "recent",
+      "prompt": "Which Postfix release first added support for TLSRPT reporting under RFC 8460? Answer concisely with the version number.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b3\\.10\\b"
+      },
+      "source": "plugins/mail-collab/skills/postfix/SKILL.md - Key differences: 3.10 added TLSRPT support; Version Differences table row TLSRPT (RFC 8460): No / New."
+    },
+    {
+      "id": "postfix-pipelining-default",
+      "knowledge": "recent",
+      "prompt": "In Postfix, is the smtpd_forbid_unauth_pipelining protection enabled by default starting in version 3.10, compared to version 3.9 where it was merely available as an option? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|default)"
+      },
+      "source": "plugins/mail-collab/skills/postfix/SKILL.md - Version Differences table: smtpd_forbid_unauth_pipelining is Available in 3.9, Default enabled in 3.10."
+    },
+    {
+      "id": "postfix-virtual-domain-conflict",
+      "knowledge": "stable",
+      "prompt": "In Postfix configuration, is it acceptable to list the same domain in both mydestination and virtual_mailbox_domains at the same time? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|never|not\\b)"
+      },
+      "source": "plugins/mail-collab/skills/postfix/SKILL.md - Virtual Domains: Critical rule: Never list the same domain in both mydestination and virtual_mailbox_domains."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

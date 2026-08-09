@@ -1,0 +1,55 @@
+{
+  "skill": "socketio",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "socketio-latest-version",
+      "knowledge": "recent",
+      "prompt": "As of current guidance, what is the latest stable release line of Socket.IO? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.8"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/socketio/SKILL.md - Socket.IO 4.x (latest stable: 4.8.x)"
+    },
+    {
+      "id": "socketio-heartbeat-timing",
+      "knowledge": "stable",
+      "prompt": "In Socket.IO's Engine.IO transport layer, how often does the server send a ping heartbeat, and how many seconds does the client have to answer with a pong? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "25",
+          "20"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/socketio/SKILL.md - Engine.IO Transport Layer: server sends ping every 25s; client responds with pong within 20s"
+    },
+    {
+      "id": "socketio-state-recovery-version",
+      "knowledge": "recent",
+      "prompt": "Starting with which Socket.IO version was connection state recovery, which restores socket ID, rooms, and missed packets after a brief disconnect, introduced? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.6"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/socketio/SKILL.md - Connection State Recovery (v4.6+)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

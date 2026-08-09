@@ -1,0 +1,56 @@
+{
+  "skill": "terraform-network",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "terraform-network-panos-provider",
+      "knowledge": "recent",
+      "prompt": "What is the exact Terraform provider identifier (organization slash name) used to manage Palo Alto Networks PAN-OS firewalls? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "paloaltonetworks",
+          "panos"
+        ]
+      },
+      "source": "plugins/networking/skills/terraform-network/SKILL.md - Provider Reference: paloaltonetworks/panos (Palo Alto PAN-OS)"
+    },
+    {
+      "id": "terraform-network-bigip-provider",
+      "knowledge": "recent",
+      "prompt": "What is the exact Terraform provider identifier (organization slash name) used to manage F5 BIG-IP load balancer resources? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "F5Networks",
+          "bigip"
+        ]
+      },
+      "source": "plugins/networking/skills/terraform-network/SKILL.md - Provider Reference: F5Networks/bigip (F5 BIG-IP)"
+    },
+    {
+      "id": "terraform-network-state-locking",
+      "knowledge": "stable",
+      "prompt": "For a Terraform S3 remote state backend managing network infrastructure, what AWS service is commonly paired with it to provide state locking so two engineers cannot run terraform apply at the same time? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "DynamoDB"
+        ]
+      },
+      "source": "plugins/networking/skills/terraform-network/SKILL.md - State Management: State locking, DynamoDB table prevents concurrent applies"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

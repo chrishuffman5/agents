@@ -1,0 +1,56 @@
+{
+  "skill": "transformation",
+  "plugin": "etl",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "transformation-duckdb-scale",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, DuckDB's practical scale limit on a single machine is described as roughly how many gigabytes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "200"
+        ]
+      },
+      "source": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Scale row: DuckDB Single-machine (~200 GB)."
+    },
+    {
+      "id": "transformation-spark-testing-tools",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, since Apache Spark lacks dbt's built-in testing framework, which manual testing tools are named as options for testing Spark pipelines? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "pytest",
+          "chispa",
+          "deequ"
+        ]
+      },
+      "source": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Testing row: Spark Manual (pytest, chispa, deequ)."
+    },
+    {
+      "id": "transformation-dbtcore-current-version",
+      "knowledge": "stable",
+      "prompt": "In cross-tool transformation comparisons, what is listed as the current dbt Core version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1.11"
+        ]
+      },
+      "source": "plugins/etl/skills/transformation/SKILL.md - Comparison Matrix Version row: dbt Core 1.11 (current)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

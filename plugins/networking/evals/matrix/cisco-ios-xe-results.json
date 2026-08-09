@@ -1,0 +1,52 @@
+{
+  "skill": "cisco-ios-xe",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-ios-xe-gnmi-port",
+      "knowledge": "recent",
+      "prompt": "On a Cisco Catalyst 9000 running IOS-XE, what TCP port does the gNMI agent listen on for gRPC-based streaming telemetry and configuration? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "9339"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-ios-xe/SKILL.md - gNMI interface uses gRPC transport on port 9339"
+    },
+    {
+      "id": "cisco-ios-xe-1718-codename",
+      "knowledge": "recent",
+      "prompt": "Cisco IOS-XE 17.18 is the current Extended Maintenance LTS release family, spanning 17.16 through 17.18. What is the code name of this release family? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Fuentes"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-ios-xe/references/versions/17.18.md - IOS-XE 17.18 (Fuentes LTS), the Fuentes family (17.16-17.18)"
+    },
+    {
+      "id": "cisco-ios-xe-stackwise-members",
+      "knowledge": "stable",
+      "prompt": "What is the maximum number of chassis you can combine using Cisco StackWise Virtual on Catalyst 9400, 9500, and 9600 switches? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b2\\b"
+      },
+      "source": "plugins/networking/skills/cisco-ios-xe/SKILL.md - StackWise vs StackWise Virtual table lists Max members: StackWise Virtual = 2"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

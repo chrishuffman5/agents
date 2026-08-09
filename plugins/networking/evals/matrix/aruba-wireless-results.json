@@ -1,0 +1,50 @@
+{
+  "skill": "aruba-wireless",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "aruba-wireless-ap730-wifi7",
+      "knowledge": "recent",
+      "prompt": "Which HPE Aruba access point model is the first to support Wi-Fi 7 (802.11be), including Multi-Link Operation? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "730"
+        ]
+      },
+      "source": "plugins/networking/skills/aruba-wireless/SKILL.md - AP 730 | Wi-Fi 7 (802.11be) | Flagship; MLO support"
+    },
+    {
+      "id": "aruba-wireless-airmatch-cadence",
+      "knowledge": "recent",
+      "prompt": "Aruba AirMatch computes a network-wide optimal RF channel and power plan. How often does it push this updated plan out to the access points? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(once\\s*(a|per)\\s*day|daily|24\\s*hour)"
+      },
+      "source": "plugins/networking/skills/aruba-wireless/SKILL.md - Pushes optimized plan to APs once per day during off-peak hours to minimize disruption"
+    },
+    {
+      "id": "aruba-wireless-6ghz-wpa3",
+      "knowledge": "stable",
+      "prompt": "For an SSID broadcast in the 6 GHz band on Aruba access points, what wireless security protocol is mandatory? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)wpa3"
+      },
+      "source": "plugins/networking/skills/aruba-wireless/SKILL.md - 6 GHz without WPA3: 6 GHz SSIDs require WPA3"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

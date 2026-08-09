@@ -1,0 +1,50 @@
+{
+  "skill": "mysql",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "mysql-spatial-index-fix-version",
+      "knowledge": "recent",
+      "prompt": "MySQL 8.4.0 through 8.4.3 shipped with a bug that could corrupt spatial indexes during certain DML operations. Which patch release first fixed it? Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "8.4.4"
+        ]
+      },
+      "source": "plugins/database/skills/mysql/references/versions/8.4.md - Spatial Index Corruption pitfall section states the fix is to upgrade to 8.4.4 or later."
+    },
+    {
+      "id": "mysql-dedicated-server-dml-gain",
+      "knowledge": "recent",
+      "prompt": "With innodb_dedicated_server enabled by default in MySQL 8.4, what is the maximum DML throughput multiplier reported on dedicated database servers compared to default 8.0 settings? Answer with the exact multiplier.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(3\\s*x\\b|three\\s*times|threefold)"
+      },
+      "source": "plugins/database/skills/mysql/references/versions/8.4.md - innodb_dedicated_server=ON by Default section states up to 3x DML throughput improvement."
+    },
+    {
+      "id": "mysql-innodb-lru-old-sublist-fraction",
+      "knowledge": "stable",
+      "prompt": "In the InnoDB buffer pool LRU list, new pages are inserted at the midpoint, the head of the old sublist, rather than the head of the whole list. What fraction of the list, measured from the tail, makes up this old sublist by default? Answer with the exact fraction.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(3\\s*/\\s*8|three[- ]eighths)"
+      },
+      "source": "plugins/database/skills/mysql/references/architecture.md - LRU with Midpoint Insertion section states the old sublist is the tail, roughly 3/8 of the list."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

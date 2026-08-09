@@ -1,0 +1,56 @@
+{
+  "skill": "netapp-ontap",
+  "plugin": "storage",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "netapp-ontap-metrocluster-rto",
+      "knowledge": "stable",
+      "prompt": "For NetApp ONTAP MetroCluster with automatic unplanned switchover, what recovery time objective, in seconds, is targeted? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "120"
+        ]
+      },
+      "source": "plugins/storage/skills/netapp-ontap/SKILL.md - Data Protection Stack table: MetroCluster RTO < 120 seconds (AUSO)"
+    },
+    {
+      "id": "netapp-ontap-9-18-features",
+      "knowledge": "recent",
+      "prompt": "ONTAP 9.18.1 introduces two security-hardening capabilities for the cluster back-end network and encryption. Name them. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "mTLS",
+          "post-quantum"
+        ]
+      },
+      "source": "plugins/storage/skills/netapp-ontap/SKILL.md - Version-specific guidance: ONTAP 9.18.1: mTLS for cluster back-end network, post-quantum algorithm support"
+    },
+    {
+      "id": "netapp-ontap-volume-thresholds",
+      "knowledge": "stable",
+      "prompt": "For NetApp ONTAP volume utilization monitoring, what are the warning and critical percentage thresholds? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "80",
+          "90"
+        ]
+      },
+      "source": "plugins/storage/skills/netapp-ontap/SKILL.md - Key Operational Metrics table: Volume utilization Warning 80%, Critical 90%"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

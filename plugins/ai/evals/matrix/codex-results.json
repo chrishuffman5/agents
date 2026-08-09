@@ -1,0 +1,55 @@
+{
+  "skill": "codex",
+  "plugin": "ai",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "codex-gpt54-retirement",
+      "knowledge": "recent",
+      "prompt": "According to guidance on OpenAI Codex model choice, when are the GPT-5.4 model variants scheduled to retire? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026-08-31"
+        ]
+      },
+      "source": "plugins/ai/skills/codex/SKILL.md - GPT-5.4 variants are scheduled to retire 2026-08-31"
+    },
+    {
+      "id": "codex-agents-md-max-bytes",
+      "knowledge": "recent",
+      "prompt": "In OpenAI Codex, what is the default maximum size in KiB for a single AGENTS.md file before the tail of its content is silently lost? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "32"
+        ]
+      },
+      "source": "plugins/ai/skills/codex/SKILL.md - project_doc_max_bytes defaults to 32 KiB"
+    },
+    {
+      "id": "codex-review-severity",
+      "knowledge": "stable",
+      "prompt": "When someone comments @codex review on a GitHub pull request, which severity levels of issues does the posted review cover? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "P0",
+          "P1"
+        ]
+      },
+      "source": "plugins/ai/skills/codex/SKILL.md - @codex review posts a review covering only P0 and P1 severity issues"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

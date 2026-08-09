@@ -1,0 +1,50 @@
+{
+  "skill": "scylladb",
+  "plugin": "database",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "scylladb-vector-filter-version",
+      "knowledge": "recent",
+      "prompt": "In ScyllaDB, combining an ANN vector search with a WHERE clause filter on a non-vector column in the same query was first supported starting in which release. Answer with the exact version number.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "2026.1"
+        ]
+      },
+      "source": "plugins/database/skills/scylladb/references/versions/2026.1.md - Vector Search with Filtering and Quantization section: ANN search with filtering is listed as NEW in 2026.1, with basic unfiltered ANN search available since earlier versions."
+    },
+    {
+      "id": "scylladb-counter-tablets-2025",
+      "knowledge": "recent",
+      "prompt": "In ScyllaDB 2025.1, can a counter table be created in a tablets-enabled keyspace, or does it require a vnodes-based keyspace instead. Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(vnode|\\bno\\b|not support)"
+      },
+      "source": "plugins/database/skills/scylladb/references/versions/2025.1.md - Known Issues and Workarounds: Counters are NOT supported with tablets in 2025.1 (use vnodes for counter tables); this limitation is resolved in ScyllaDB 2026.1."
+    },
+    {
+      "id": "scylladb-ics-temp-space",
+      "knowledge": "stable",
+      "prompt": "When ScyllaDB uses Incremental Compaction Strategy instead of SizeTiered Compaction Strategy, roughly what percentage of temporary space overhead does compaction require. Answer with the approximate percentage range.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(10\\s*-\\s*15\\s*%|10%\\s*-\\s*15%|10 to 15 ?percent)"
+      },
+      "source": "plugins/database/skills/scylladb/SKILL.md - Compaction Strategies section: ICS has the same read/write amplification as STCS but only ~10-15% temporary space, versus STCS's 2x."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

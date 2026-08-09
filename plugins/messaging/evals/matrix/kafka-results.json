@@ -1,0 +1,82 @@
+{
+  "skill": "kafka",
+  "plugin": "messaging",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 132,
+  "prompts": [
+    {
+      "id": "kafka-share-groups-ga",
+      "knowledge": "recent",
+      "prompt": "In which Apache Kafka release did Share Groups, providing queue-like semantics without partition binding, reach general availability? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b4\\.2\\b"
+      },
+      "source": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
+    },
+    {
+      "id": "kafka-share-groups-preview",
+      "knowledge": "recent",
+      "prompt": "Before Share Groups became generally available in Kafka, in which earlier release were they available as a preview feature? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "\\b4\\.1\\b"
+      },
+      "source": "plugins/messaging/skills/kafka/SKILL.md - Share Groups section: GA in Kafka 4.2; preview in 4.1; EA in 4.0"
+    },
+    {
+      "id": "kafka-message-priority",
+      "knowledge": "stable",
+      "prompt": "Does Apache Kafka natively support message priority the way some traditional brokers do? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\bno\\b|not support|does not)"
+      },
+      "source": "plugins/messaging/skills/kafka/SKILL.md - Kafka vs Traditional Brokers table: Message priority Not supported for Kafka"
+    },
+    {
+      "id": "kafka-etl-zk-removed",
+      "knowledge": "stable",
+      "prompt": "Apache Kafka removed ZooKeeper entirely starting in which major version, becoming KRaft-only? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.0"
+        ]
+      },
+      "source": "plugins/etl/skills/kafka/SKILL.md - KRaft Consensus Timeline: KRaft production-ready in 3.3, ZooKeeper removed in 4.0."
+    },
+    {
+      "id": "kafka-etl-batch-size-default",
+      "knowledge": "stable",
+      "prompt": "What is the default value in bytes of the Kafka producer batch.size configuration parameter? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)16,?384"
+      },
+      "source": "plugins/etl/skills/kafka/SKILL.md - Producer Patterns, Batching and Compression table: batch.size default 16,384 (16 KB)."
+    },
+    {
+      "id": "kafka-etl-share-groups-ga",
+      "knowledge": "recent",
+      "prompt": "Kafka Share Groups, which provide queue-like consumption semantics, reached general availability in which Kafka version? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.2"
+        ]
+      },
+      "source": "plugins/etl/skills/kafka/SKILL.md - Version-Specific Guidance table: Kafka 4.2 -- Share Groups GA, Streams DLQ, CLI standardization (current)."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

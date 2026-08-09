@@ -1,0 +1,54 @@
+{
+  "skill": "cisco-sdwan",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "cisco-sdwan-omp-graceful-restart",
+      "knowledge": "recent",
+      "prompt": "In Cisco Catalyst SD-WAN, if the SD-WAN Controller (vSmart) becomes unavailable, for how long do WAN Edge routers keep the data plane up using cached OMP routes via graceful restart, by default? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)12\\s*hours?"
+      },
+      "source": "plugins/networking/skills/cisco-sdwan/SKILL.md - OMP graceful restart caches routes for 12 hours default"
+    },
+    {
+      "id": "cisco-sdwan-2015-pairing",
+      "knowledge": "recent",
+      "prompt": "Cisco Catalyst SD-WAN Manager release 20.15 LTS is paired with which IOS-XE WAN Edge release train? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "17.15"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-sdwan/references/versions/20.15.md - Paired WAN Edge Release: IOS-XE 17.15.x"
+    },
+    {
+      "id": "cisco-sdwan-tloc-tuple",
+      "knowledge": "stable",
+      "prompt": "In Cisco Catalyst SD-WAN, a TLOC (Transport Locator) that identifies a WAN Edge tunnel endpoint is made up of which three attributes? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "System-IP",
+          "Color",
+          "Encapsulation"
+        ]
+      },
+      "source": "plugins/networking/skills/cisco-sdwan/SKILL.md - TLOC = (System-IP, Color, Encapsulation)"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

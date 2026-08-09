@@ -1,0 +1,51 @@
+{
+  "skill": "drata",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "drata-autopilot-scale",
+      "knowledge": "recent",
+      "prompt": "Roughly how many automated compliance tests and how many third-party integrations does the Drata platform provide? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "1,200",
+          "170"
+        ]
+      },
+      "source": "plugins/security/skills/drata/SKILL.md - Platform Overview: 1,200+ automated tests, 170+ integrations"
+    },
+    {
+      "id": "drata-exception-expiry",
+      "knowledge": "stable",
+      "prompt": "When a failing compliance test in Drata is marked as an exception rather than fixed, what is the recommended maximum expiry period for that exception? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(1\\s*year|12\\s*months|one\\s*year)"
+      },
+      "source": "plugins/security/skills/drata/SKILL.md - Exception management: Expiry date required (maximum 1 year recommended)"
+    },
+    {
+      "id": "drata-precheck-score",
+      "knowledge": "recent",
+      "prompt": "Before inviting an auditor into Drata for a SOC 2 audit, what overall compliance score is recommended as the pre-audit target? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)85\\s*%?"
+      },
+      "source": "plugins/security/skills/drata/SKILL.md - Audit Package pre-audit checklist: Overall compliance score target >=85% before inviting auditor"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

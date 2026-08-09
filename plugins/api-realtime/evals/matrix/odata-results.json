@@ -1,0 +1,53 @@
+{
+  "skill": "odata",
+  "plugin": "api-realtime",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "odata-current-draft-version",
+      "knowledge": "recent",
+      "prompt": "As of the most recent committee draft, what version number has OData reached, and in what year was that draft published? Answer concisely with both details.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "4.02",
+          "2024"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/odata/SKILL.md - Current versions: OData 4.0 (2014), 4.01 (2020), 4.02 (committee draft 2024)"
+    },
+    {
+      "id": "odata-function-vs-action",
+      "knowledge": "stable",
+      "prompt": "In OData, when an operation is free of side effects and simply returns data, should it be modeled as a Function or an Action? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bfunctions?\\b"
+      },
+      "source": "plugins/api-realtime/skills/odata/SKILL.md - anti-pattern 6: side-effect-free operations should be Functions (GET), not Actions (POST)"
+    },
+    {
+      "id": "odata-standards-body",
+      "knowledge": "stable",
+      "prompt": "Which international standards organization maintains and governs the OData specification? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "OASIS"
+        ]
+      },
+      "source": "plugins/api-realtime/skills/odata/SKILL.md - OData (Open Data Protocol), the OASIS standard for RESTful data services"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

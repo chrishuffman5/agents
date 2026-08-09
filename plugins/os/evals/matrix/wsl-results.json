@@ -1,0 +1,213 @@
+{
+  "skill": "wsl",
+  "plugin": "os",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 12,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "wsl-open-source-date",
+      "knowledge": "recent",
+      "prompt": "In what month and year did WSL go fully open source? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)May\\s*2025"
+      },
+      "source": "plugins/os/skills/wsl/SKILL.md - Current state: WSL went fully open-source in May 2025."
+    },
+    {
+      "id": "wsl-systemd-native-version",
+      "knowledge": "stable",
+      "prompt": "Native systemd support in WSL2 first shipped with which WSL version, released in September 2022? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0\\.67\\.6"
+      },
+      "source": "plugins/os/skills/wsl/SKILL.md - systemd Support: Native systemd support since WSL 0.67.6 (September 2022)."
+    },
+    {
+      "id": "wsl-default-swap-percentage",
+      "knowledge": "stable",
+      "prompt": "By default, how large is the WSL2 swap file relative to the configured memory limit? Answer with the percentage.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)25\\s*%"
+      },
+      "source": "plugins/os/skills/wsl/SKILL.md - Memory Management: Swap is on a separate VHD (default 25% of memory limit)."
+    }
+  ],
+  "overall": {
+    "skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 9184,
+      "meanTokensOut": 128,
+      "totalCostUsd": 0.5798,
+      "costPerCorrect": 0.0966
+    },
+    "no-skill": {
+      "runs": 6,
+      "pass": 6,
+      "accuracy": 100.0,
+      "meanWallMs": 11065,
+      "meanTokensOut": 109,
+      "totalCostUsd": 0.3622,
+      "costPerCorrect": 0.0604
+    }
+  },
+  "byHarness": [
+    {
+      "harness": "claude",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6447,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.423,
+        "costPerCorrect": 0.141
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6274,
+        "meanTokensOut": 40,
+        "totalCostUsd": 0.1677,
+        "costPerCorrect": 0.0559
+      }
+    },
+    {
+      "harness": "codex",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11921,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15857,
+        "meanTokensOut": 178,
+        "totalCostUsd": 0.1945,
+        "costPerCorrect": 0.0648
+      }
+    }
+  ],
+  "byModel": [
+    {
+      "model": "claude-opus-5",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6447,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.423,
+        "costPerCorrect": 0.141
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6274,
+        "meanTokensOut": 40,
+        "totalCostUsd": 0.1677,
+        "costPerCorrect": 0.0559
+      }
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "lane": "cloud",
+      "skill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11921,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      },
+      "noskill": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15857,
+        "meanTokensOut": 178,
+        "totalCostUsd": 0.1945,
+        "costPerCorrect": 0.0648
+      }
+    }
+  ],
+  "byCell": [
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6274,
+        "meanTokensOut": 40,
+        "totalCostUsd": 0.1677,
+        "costPerCorrect": 0.0559
+      }
+    },
+    {
+      "harness": "claude",
+      "model": "claude-opus-5",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 6447,
+        "meanTokensOut": 133,
+        "totalCostUsd": 0.423,
+        "costPerCorrect": 0.141
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "no-skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 15857,
+        "meanTokensOut": 178,
+        "totalCostUsd": 0.1945,
+        "costPerCorrect": 0.0648
+      }
+    },
+    {
+      "harness": "codex",
+      "model": "gpt-5.6-sol",
+      "effort": "E1",
+      "mode": "skill",
+      "agg": {
+        "runs": 3,
+        "pass": 3,
+        "accuracy": 100.0,
+        "meanWallMs": 11921,
+        "meanTokensOut": 122,
+        "totalCostUsd": 0.1568,
+        "costPerCorrect": 0.0523
+      }
+    }
+  ],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

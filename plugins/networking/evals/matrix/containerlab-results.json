@@ -1,0 +1,53 @@
+{
+  "skill": "containerlab",
+  "plugin": "networking",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "containerlab-reconfigure-flag",
+      "knowledge": "recent",
+      "prompt": "In Containerlab, what flag do you add to the clab deploy command to force it to re-apply node startup configurations on an already-running lab? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "reconfigure"
+        ]
+      },
+      "source": "plugins/networking/skills/containerlab/SKILL.md - clab deploy -t topology.clab.yml --reconfigure re-applies startup configs"
+    },
+    {
+      "id": "containerlab-server-sizing",
+      "knowledge": "recent",
+      "prompt": "As a rule of thumb, what server specs, cpu cores and RAM, does Containerlab guidance suggest for running a 4-spine, 8-leaf fabric using native container images? Answer concisely with both numbers.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "16",
+          "64"
+        ]
+      },
+      "source": "plugins/networking/skills/containerlab/SKILL.md - A 16-core, 64 GB RAM server can run a 4-spine, 8-leaf fabric with native container images"
+    },
+    {
+      "id": "containerlab-root-required",
+      "knowledge": "stable",
+      "prompt": "Does deploying a Containerlab topology require root privileges on the host, since it manipulates network namespaces? Answer in one sentence.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(\\byes\\b|root|sudo)"
+      },
+      "source": "plugins/networking/skills/containerlab/SKILL.md - Containerlab requires root privileges for network namespace manipulation"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

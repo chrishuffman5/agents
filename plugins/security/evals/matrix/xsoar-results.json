@@ -1,0 +1,48 @@
+{
+  "skill": "xsoar",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "xsoar-formerly-demisto",
+      "knowledge": "stable",
+      "prompt": "Cortex XSOAR was formerly known by what product name before Palo Alto Networks acquired it? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)demisto"
+      },
+      "source": "plugins/security/skills/xsoar/SKILL.md - Cortex XSOAR (formerly Demisto), Palo Alto Networks SOAR platform"
+    },
+    {
+      "id": "xsoar-playbook-dag",
+      "knowledge": "stable",
+      "prompt": "What kind of graph structure are Cortex XSOAR playbooks built as? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)directed\\s+acyclic\\s+graph|\\bDAG\\b"
+      },
+      "source": "plugins/security/skills/xsoar/SKILL.md - Playbook Development: XSOAR playbooks are DAG (directed acyclic graph) workflows"
+    },
+    {
+      "id": "xsoar-integrations-count",
+      "knowledge": "recent",
+      "prompt": "Roughly how many integrations does Cortex XSOAR offer with security and IT tools? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)900\\+?"
+      },
+      "source": "plugins/security/skills/xsoar/SKILL.md - 900+ integrations with security and IT tools"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

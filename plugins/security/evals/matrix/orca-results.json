@@ -1,0 +1,51 @@
+{
+  "skill": "orca",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "orca-sidescan-sources",
+      "knowledge": "recent",
+      "prompt": "For AWS and GCP specifically, what type of cloud storage snapshot does Orca Security's agentless SideScanning technology read from in order to scan workloads without deploying an agent? Answer concisely, naming both snapshot types.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "EBS",
+          "GCS"
+        ]
+      },
+      "source": "plugins/security/skills/orca/SKILL.md - SideScanning reads EBS snapshots (AWS), Azure managed disk snapshots (Azure), and GCS disk snapshots (GCP) to scan without agents"
+    },
+    {
+      "id": "orca-scan-frequency",
+      "knowledge": "recent",
+      "prompt": "By default, how often does Orca Security re-run its agentless SideScanning assessment on a given cloud workload? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)(24\\s*hours?|daily|once\\s*(a|per)\\s*day)"
+      },
+      "source": "plugins/security/skills/orca/SKILL.md - Scanning frequency: Configurable; default is every 24 hours"
+    },
+    {
+      "id": "orca-risk-score-range",
+      "knowledge": "stable",
+      "prompt": "What numeric range does Orca Security use for its context-aware risk score that prioritizes security findings by actual business risk? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)0\\s*(-|to)\\s*100\\b"
+      },
+      "source": "plugins/security/skills/orca/SKILL.md - Orca risk score (0-100) representing actual business risk"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

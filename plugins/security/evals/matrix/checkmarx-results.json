@@ -1,0 +1,48 @@
+{
+  "skill": "checkmarx",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "checkmarx-kics-rule-count",
+      "knowledge": "recent",
+      "prompt": "As of 2026, approximately how many queries does KICS, Checkmarx's open-source infrastructure-as-code scanner, include across all supported platforms? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "2,?400"
+      },
+      "source": "plugins/security/skills/checkmarx/SKILL.md - KICS: Rule count: 2,400+ queries across all platforms (as of 2026)"
+    },
+    {
+      "id": "checkmarx-not-exploitable-persistence",
+      "knowledge": "recent",
+      "prompt": "In Checkmarx One, once a SAST finding is triaged and marked Not Exploitable, will that same false positive resurface as a New finding in the next scan? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b(no|not|won't|will not)\\b"
+      },
+      "source": "plugins/security/skills/checkmarx/SKILL.md - Results and Triage: Not Exploitable state persists across scans, will not resurface as New on the next scan"
+    },
+    {
+      "id": "checkmarx-sast-language-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many programming languages does the Checkmarx One SAST engine support? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "35\\+?"
+      },
+      "source": "plugins/security/skills/checkmarx/SKILL.md - SAST Engine, Language Support: 35+ languages"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

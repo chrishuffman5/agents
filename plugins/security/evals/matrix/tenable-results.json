@@ -1,0 +1,51 @@
+{
+  "skill": "tenable",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "tenable-plugin-count",
+      "knowledge": "stable",
+      "prompt": "Approximately how many vulnerability detection plugins are in the Tenable Nessus plugin library? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)200,?000"
+      },
+      "source": "plugins/security/skills/tenable/SKILL.md - Plugin Architecture key facts: 200,000+ plugins in the Tenable plugin library."
+    },
+    {
+      "id": "tenable-aes-formula",
+      "knowledge": "recent",
+      "prompt": "What two Tenable scores are combined, one being a 1-to-10 business-context rating and the other a dynamic threat-informed vulnerability score, to produce the Asset Exposure Score? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "ACR",
+          "VPR"
+        ]
+      },
+      "source": "plugins/security/skills/tenable/SKILL.md - Vulnerability Priority Rating section: ACR (Asset Criticality Rating) combined with VPR, ACR times VPR exposure feeds the Asset Exposure Score (AES)."
+    },
+    {
+      "id": "tenable-credentialed-rate",
+      "knowledge": "stable",
+      "prompt": "Roughly what percentage of vulnerabilities does a credentialed Tenable Nessus scan typically detect? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b95\\+?%?\\b"
+      },
+      "source": "plugins/security/skills/tenable/SKILL.md - Credentialed vs. Uncredentialed Scanning table: Detection rate 95%+ for credentialed versus ~40-60% for uncredentialed."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

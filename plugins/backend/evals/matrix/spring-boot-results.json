@@ -1,0 +1,52 @@
+{
+  "skill": "spring-boot",
+  "plugin": "backend",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "spring-boot-mockitobean",
+      "knowledge": "recent",
+      "prompt": "In Spring Boot 4.0, which annotation replaces the removed MockBean annotation for mocking beans in tests? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "MockitoBean"
+        ]
+      },
+      "source": "plugins/backend/skills/spring-boot/SKILL.md - @MockBean = Boot 3.x (removed in 4.0, replaced by @MockitoBean)"
+    },
+    {
+      "id": "spring-boot-undertow-removed",
+      "knowledge": "recent",
+      "prompt": "Spring Boot 4.0 dropped support for one embedded servlet container because it lacks Servlet 6.1 support. Which server was removed? Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Undertow"
+        ]
+      },
+      "source": "plugins/backend/skills/spring-boot/SKILL.md - Embedded Servers table: Undertow | Servlet | -- | Removed in Boot 4.0 (no Servlet 6.1 support)"
+    },
+    {
+      "id": "spring-boot-property-priority",
+      "knowledge": "stable",
+      "prompt": "In Spring Boot's configuration property resolution order, which takes precedence when both are set: command line arguments or environment variables? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)command.?line"
+      },
+      "source": "plugins/backend/skills/spring-boot/SKILL.md - Property priority (high to low): command-line args > system properties > env vars > profile-specific files > base application.yml > defaults."
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}

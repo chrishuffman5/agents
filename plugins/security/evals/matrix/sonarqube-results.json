@@ -1,0 +1,53 @@
+{
+  "skill": "sonarqube",
+  "plugin": "security",
+  "generated": "2026-08-09T00:59:12.9209624-05:00",
+  "partial": true,
+  "runsDone": 0,
+  "runsPlanned": 66,
+  "prompts": [
+    {
+      "id": "sonarqube-clean-code-attributes",
+      "knowledge": "stable",
+      "prompt": "SonarQube's Clean Code taxonomy defines four core attributes that clean code should have. Name all four. Answer concisely.",
+      "expected": {
+        "type": "contains_all",
+        "value": [
+          "Consistency",
+          "Intentionality",
+          "Adaptability",
+          "Responsibility"
+        ]
+      },
+      "source": "plugins/security/skills/sonarqube/SKILL.md - Clean Code Taxonomy: Four attributes of Clean Code: Consistency, Intentionality, Adaptability, Responsibility"
+    },
+    {
+      "id": "sonarqube-default-gate-coverage",
+      "knowledge": "recent",
+      "prompt": "Under SonarQube's default Sonar Way quality gate, what is the minimum test coverage percentage required on new code for the gate to pass? Answer concisely with the number.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\b80\\s*%?"
+      },
+      "source": "plugins/security/skills/sonarqube/SKILL.md - Default Sonar Way gate conditions: Coverage >= 80% (on new code)"
+    },
+    {
+      "id": "sonarqube-branch-analysis-edition",
+      "knowledge": "recent",
+      "prompt": "What is the minimum SonarQube edition, among Community, Developer, Enterprise, and Data Center, that supports branch analysis rather than only main-branch analysis? Answer concisely.",
+      "expected": {
+        "type": "regex",
+        "value": "(?i)\\bdeveloper\\b"
+      },
+      "source": "plugins/security/skills/sonarqube/SKILL.md - Branch Analysis and PR Decoration: requires Developer Edition or higher; Edition Comparison table"
+    }
+  ],
+  "overall": {
+    "skill": null,
+    "no-skill": null
+  },
+  "byHarness": [],
+  "byModel": [],
+  "byCell": [],
+  "costPolicy": "claude: CLI-reported cost_usd. codex/pi: estimated from matrix.config.json pricing rates; null rates -> cost omitted, never guessed. local lane: $0."
+}
