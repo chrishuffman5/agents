@@ -1,0 +1,114 @@
+{
+  "suite": "aws",
+  "description": "Cross-harness matrix suite for the refreshed cli-scripting:aws-cli and cloud-platforms:aws skills. Prompts are deliberately neutral (no 'according to the skills library') so the no-skill arm is not tipped off. Every expected answer is traceable to cited content shipped in the two skills on 2026-08-08. knowledge: 'recent' = fact a bare model plausibly lacks (post-cutoff or niche); 'stable' = long-standing fact a strong bare model may know.",
+  "tasks": [
+    {
+      "id": "awscli-login-version",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "The AWS CLI has an 'aws login' command that signs you in using AWS console credentials through a browser flow. What minimum AWS CLI version introduced this command? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["2.32"] },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/auth.md - aws login requires CLI >= 2.32.0"
+    },
+    {
+      "id": "awscli-role-chaining",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "When you use the AWS CLI to assume an IAM role from credentials that themselves came from an assumed role (role chaining), what is the maximum session duration of the chained session, regardless of what you pass to --duration-seconds? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(1\\s*hour|one\\s*hour|3,?600)" },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/auth.md - role chaining capped at 1 hour flat"
+    },
+    {
+      "id": "awscli-presign-max",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "What is the maximum expiration time you can set on a presigned URL generated with 'aws s3 presign'? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(604,?800|7\\s*days|seven\\s*days|one\\s*week|1\\s*week)" },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/commands.md - presign cap 604800 seconds (7 days)"
+    },
+    {
+      "id": "awscli-text-none",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "Using the AWS CLI with --output text, if your --query expression names a key that is absent or null in the response, what exact literal string does the CLI print for that value? Answer concisely.",
+      "expected": { "type": "contains_all", "value": ["None"] },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/core.md - text output renders absent keys as literal None"
+    },
+    {
+      "id": "awscli-sso-logout",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "recent",
+      "prompt": "With the AWS CLI, can 'aws sso logout' sign you out of a single named profile's SSO session only? Explain in one sentence what it actually does.",
+      "expected": { "type": "regex", "value": "(?i)\\ball\\b" },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/auth.md - sso logout clears ALL cached SSO tokens; no --profile scoping"
+    },
+    {
+      "id": "awscli-cred-precedence",
+      "skill": "aws-cli",
+      "plugin": "cli-scripting",
+      "knowledge": "stable",
+      "prompt": "In the AWS CLI v2 credential resolution order, which source wins when both are present: credentials set in environment variables, or credentials in the ~/.aws/credentials file? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)environment" },
+      "notes": "plugins/cli-scripting/skills/aws-cli/references/auth.md - env vars precede the credentials file in the resolution chain"
+    },
+    {
+      "id": "aws-scp-mgmt",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "In AWS Organizations, do service control policies (SCPs) restrict the management account itself? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|never|do(es)? not|not appl|exempt)" },
+      "notes": "plugins/cloud-platforms/skills/aws/references/multi-account.md - SCPs/RCPs never apply to the management account"
+    },
+    {
+      "id": "aws-tag-limits",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "For AWS resource tags: how many tags can a single resource carry, and what is the maximum character length of a tag key? Answer concisely with both numbers.",
+      "expected": { "type": "contains_all", "value": ["50", "128"] },
+      "notes": "plugins/cloud-platforms/skills/aws/references/tagging-governance.md - 50 tags/resource, key 128 chars, value 256 chars"
+    },
+    {
+      "id": "aws-cost-tag-backfill",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "After you activate a cost allocation tag in AWS, how far back can AWS backfill your cost data for that tag? Answer concisely.",
+      "expected": { "type": "regex", "value": "(?i)(12\\s*month|twelve\\s*month)" },
+      "notes": "plugins/cloud-platforms/skills/aws/references/tagging-governance.md - 12-month backfill on request"
+    },
+    {
+      "id": "aws-ou-depth",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "stable",
+      "prompt": "In AWS Organizations, how many levels deep can you nest organizational units under the root? Answer concisely.",
+      "expected": { "type": "regex", "value": "\\b5\\b|\\bfive\\b" },
+      "notes": "plugins/cloud-platforms/skills/aws/references/multi-account.md - OU nesting 5 levels deep including root"
+    },
+    {
+      "id": "aws-enforced-for",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "In AWS Organizations tag policies, if you enable enforcement (enforced_for) for a tag key, will that block creating a resource that is entirely missing the required tag? Answer in one or two sentences.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|does not|won't|will not|only.{0,60}(value|case|noncompliant|non-compliant))" },
+      "notes": "plugins/cloud-platforms/skills/aws/references/tagging-governance.md - enforced_for blocks noncompliant VALUES/case only, never missing tags; require-on-create needs SCP aws:RequestTag"
+    },
+    {
+      "id": "aws-migrationhub-status",
+      "skill": "aws",
+      "plugin": "cloud-platforms",
+      "knowledge": "recent",
+      "prompt": "As of late 2025, can a brand-new AWS customer onboard to AWS Migration Hub and AWS Application Discovery Service? Answer in one sentence.",
+      "expected": { "type": "regex", "value": "(?i)(\\bno\\b|closed|no longer|not available|cannot)" },
+      "notes": "plugins/cloud-platforms/skills/aws/references/resilience-migration.md - Migration Hub + ADS closed to new customers Nov 7, 2025"
+    }
+  ]
+}
