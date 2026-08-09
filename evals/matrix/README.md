@@ -1,0 +1,410 @@
+# Cross-Harness Eval Matrix
+
+A queue-driven test harness that measures what a skill is actually worth: every skill in the
+marketplace is exercised with **one-shot prompts** under multiple CLI harnesses (Claude Code,
+OpenAI Codex, pi), across cloud and local models, at multiple reasoning-effort levels — and
+every cell is run **twice**: once with the skill provisioned to the harness, once bare. The
+delta between those two arms, per accuracy / wall-clock / cost-per-correct-answer, is the
+measured value of the skills layer.
+
+The core hypothesis under test: *a well-curated skill lets a model at low effort match the
+accuracy of a bare model at high effort — the skill has already done the thinking the model
+would otherwise re-derive, so equal accuracy arrives faster and cheaper.*
+
+---
+
+## Where tasks come from (the part that is NOT in the database)
+
+**Your mental model is correct: tasks are authored and curated entirely outside SQLite, and
+the database is only an execution ledger that gets seeded from them.**
+
+The source of truth for every test is a **suite file** in [`suites/`](suites/) — one JSON file
+per plugin (`aws.json` is a special pilot suite that predates and complements
+`cli-scripting.json` / `cloud-platforms.json`). Suite files are human-readable, reviewed, and
+committed to git. Nothing about a task's *content* lives in the database — the DB stores the
+task's **id** and the fully rendered command (which embeds the prompt verbatim); the **expected
+answer spec is looked up from the suite JSON at grading time**, never copied into the DB. Edit
+a suite's expected spec and the next grade of that task uses the new spec, no reseeding needed.
+
+### Suite file schema
+
+```jsonc
+{
+  "suite": "cli-scripting",              // suite name, stored on every run row
+  "description": "…",
+  "tasks": [
+    {
+      "id": "kubectl-oomkill-exit-code",         // <skill>-<slug>: globally unique across ALL suites
+      "skill": "kubectl",                        // which skill this task tests
+      "plugin": "cli-scripting",                 // which plugin OWNS that skill (drives provisioning + exports)
+      "knowledge": "stable",                     // "recent" | "stable" (see below)
+      "prompt": "In Kubernetes, when a container is OOMKilled, what numeric exit code does the pod report? Answer with just the number.",
+      "expected": { "type": "contains_all", "value": ["137"] },
+      "notes": "plugins/cli-scripting/skills/kubectl/references/debugging.md - exit code 137"
+    }
+  ]
+}
+```
+
+Field by field:
+
+- **`id`** — the origin of every `task_id` you see in the database. Convention is
+  `<skill>-<slug>` in kebab-case. Ids must be unique across *all* suites (the seeder throws on
+  cross-suite collisions) because `run_id`s embed them and grading resolves tasks by id alone.
+- **`prompt`** — a **neutral practitioner question**. It must never mention a skills library,
+  documentation, or the marketplace: the no-skill arm gets the identical prompt, and any hint
+  would contaminate the control. Prompts usually end with "Answer concisely." to keep one-shot
+  outputs gradeable. Hard constraint: prompts may not contain double quotes, backticks, or
+  dollar signs — they are embedded verbatim inside a shell command string at seed time, and the
+  seeder rejects any prompt matching `["`$]`.
+- **`expected`** — the deterministic grading spec, evaluated by `Test-ExpectedSpec` in
+  [`MatrixRunner.psm1`](MatrixRunner.psm1):
+  - `contains_all` — every value must appear as a case-insensitive substring of the answer.
+    Values are chosen to be distinctive tokens (version numbers, exact names ≥4 chars) —
+    never short words like "all" or "no" that would substring-match almost anything.
+  - `regex` — a single .NET regex, usually `(?i)` with `\b` word boundaries, written to accept
+    reasonable phrasings of the same fact (e.g. `(?i)(1\s*hour|one\s*hour|3,?600)`).
+- **`knowledge`** — a task classification used in reporting, not grading:
+  - `recent` — a fact plausibly *newer or nichier than a model's training data* (version-gated
+    features from `references/versions/`, post-cutoff service changes). These are where a skill
+    should dominate.
+  - `stable` — a long-standing fact a strong bare model may know. These measure the floor and
+    catch skills that add no information.
+  Note "recent" is relative to each model's cutoff — a fact inside GPT-5.6's Feb-2026 cutoff
+  can be outside Haiku 4.5's Feb-2025 cutoff, which is visible in per-model deltas.
+- **`notes`** — the citation. Every expected answer must be a fact **actually stated in the
+  skill's shipped content**, and `notes` names the exact file (and usually the line/section).
+  This is the anti-hallucination contract: a task whose answer can't be traced to shipped skill
+  text doesn't belong in a suite. (It also means a wrong "expected" is a bug report against the
+  suite, findable by reading one file.)
+
+### How suites were curated
+
+Suite files were generated by research agents that read every skill's `SKILL.md` (and
+`references/` where needed) and extracted 3–4 gradeable facts per skill, each cited in `notes`.
+Every suite passed four validation gates before being seeded:
+
+1. JSON parses (`ConvertFrom-Json`).
+2. No prompt contains `"`, `` ` ``, or `$`.
+3. No duplicate task ids within the suite.
+4. No id collisions against other suites / the live queue.
+
+The seeder re-enforces gates 2–3 on every run, so hand-edited suites can't regress silently.
+
+---
+
+## Directory layout
+
+```
+evals/matrix/
+├── README.md                  ← this file
+├── matrix.config.json         ← the matrix definition: suites, lanes, models, efforts, profiles, pricing, throttles
+├── suites/*.json              ← task definitions (source of truth — see above)
+├── schema.sql                 ← SQLite schema: runs (queue+ledger) and timing_samples
+├── MatrixRunner.psm1          ← shared module: command templater, queue claim, parsers, grader, refusal detection
+├── seed-queue.ps1             ← expands config × suites into evalq.sqlite rows
+├── setup-workspaces.ps1       ← builds C:\evals\ (plugin/skill copies, per-plugin codex homes, claude home)
+├── dispatch.ps1               ← drains the queue: cloud ThreadJob pool + strictly-serial local lane
+├── invoke-run.ps1             ← executes ONE run in a child process; parses, grades, records
+├── timing-pass.ps1            ← serial re-timing of headline cells (median of N repeats)
+├── build-report.ps1           ← aggregates the DB into report/results.js
+├── export-plugin-results.ps1  ← writes per-skill results + reports into each plugin's evals/matrix/
+├── pilot-status.ps1           ← one-line status for external monitors
+├── report/index.html          ← local results dashboard (synthetic-sample fallback until real data exists)
+├── backup/                    ← zstd parquet dumps of the DB (gitignored)
+└── evalq.sqlite               ← the queue/ledger (gitignored)
+```
+
+---
+
+## The pipeline, end to end
+
+### 1. Configuration — `matrix.config.json`
+
+Declares:
+
+- **`suites`** — the list of `{file, profile}` entries. Profile `full` expands the complete
+  matrix for that suite; `campaign` trims it for marketplace scale (efforts E1+E3 only,
+  flagship+small cloud tiers only, one local weights-set) so 400+ skills stay tractable.
+- **`lanes`** — one entry per harness × provider × lane (cloud/local), each with its model
+  list, effort mapping (normalized `E1/E2/E3` → the harness's literal setting), optional codex
+  `sandbox` mode, and per-run env (`CODEX_HOME` swap, `CLAUDE_CONFIG_DIR`, Ollama endpoint).
+- **`pricing`** — `[input, cached-input, output]` USD per MTok per model (sourced from the
+  `ai:model-selection` skill, as-of date recorded). Claude's CLI reports real cost natively and
+  that wins; codex/pi costs are estimated from these rates; the local lane costs $0. Missing
+  rates yield NULL cost, never a guess.
+- **`throttle`** — per-provider concurrency caps for the cloud pool.
+
+Current roster: Claude Code × (Opus 5 / Sonnet 5 / Haiku 4.5 + local), Codex × (GPT-5.6
+Sol/Terra/Luna + local via `ollama-*` profiles), pi × local only. Local weights: `gemma4:12b`
+and `glm-4.7-flash` (**qwen3.6:27b was removed** — VRAM spillover made it 4.5× slower than glm
+at *worse* accuracy; its completed runs are retained in the DB as the evidence).
+
+### 2. Seeding — `seed-queue.ps1`
+
+Expands `lanes × models × efforts × skill-modes × suite-tasks × attempts` into **one row per
+planned run** in `evalq.sqlite`. Each row is fully self-describing:
+
+- **`run_id`** = `{harness}.{modelSlug}.{effortNorm}.{skillMode}.{task_id}.a{attempt}` — e.g.
+  `codex.gpt-5.6-sol.E1.skill.aws-enforced-for.a1`. The `task_id` segment is the suite task's
+  `id`, verbatim; the model slug is the model id with `: / \` replaced by `-`.
+- **`command`** — the exact CLI invocation, pre-rendered by `New-CellCommand` at seed time with
+  the prompt embedded verbatim. The dispatcher *executes* rows; it never composes commands.
+  This makes every run reproducible from its row alone.
+- **`env_json`** — the per-run environment map (`CODEX_HOME`, `CLAUDE_CONFIG_DIR`,
+  `ANTHROPIC_BASE_URL`…). Secrets would be stored as `@secret:` tokens resolved only at
+  dispatch — though the current matrix runs entirely on subscription auth and needs none.
+- Cell-key columns (`harness`, `provider`, `model`, `effort_norm`, `effort_literal`,
+  `skill_mode`, `lane`, `sandbox`) plus task metadata copied for query convenience
+  (`suite`, `task_id`, `skill`, `knowledge`).
+
+What the row does **not** contain: the expected spec, the notes citation, or any grading
+logic — those stay in the suite JSON and are resolved by id at grade time.
+
+Modes: `-WhatIfSummary` (print expansion, write nothing), `-Force` (drop + reseed),
+`-OnlyHarness <h>` (replace one harness's unfinished rows, keep its completed ones),
+`-Append` (add new rows via `INSERT OR IGNORE` without disturbing a live queue — how new
+suites join a running campaign).
+
+### 3. Workspaces — `setup-workspaces.ps1`
+
+Config-driven and idempotent; derives the plugin/skill set from the suites and builds
+`C:\evals\`:
+
+- `plugins\<plugin>\` — clean plugin copies for claude's skill arm (`--plugin-dir`).
+- `skills\<plugin>\<skill>\` — plugin-nested skill copies for pi's `--skill` (nested because
+  several plugins ship a skill named `overview`).
+- `codex-homes\<plugin>\` — one `CODEX_HOME` per plugin (auth + config + ollama profiles +
+  that plugin's skills under `skills\`). Per-plugin homes keep codex's ~8k-char always-loaded
+  skill-description budget intact; `codex-home-bare\` is the identical home minus skills.
+- `claude-home\` — a scratch `CLAUDE_CONFIG_DIR` holding only OAuth credentials: no user
+  plugins, no CLAUDE.md, no memory, no hooks. This is how claude cells run on **subscription
+  auth with no API key** (`--bare` is deliberately NOT used — it refuses OAuth).
+- **Contamination scrub** — the operator's real codex config had marketplace plugins enabled
+  (`cli-scripting@domain-expert` etc.), which would have silently fed the skill under test into
+  every codex *no-skill* cell. The setup strips all `domain-expert` marketplace/plugin sections
+  from every eval codex home and fails loudly if any reference survives.
+
+Skill-arm vs no-skill-arm per harness (the **parity rule**: both arms differ *only* in skill
+presence — identical prompt, flags, isolation):
+
+| Harness | skill arm | no-skill arm |
+|---|---|---|
+| claude | `--plugin-dir C:\evals\plugins\<plugin>` | `--disable-slash-commands` |
+| codex | `CODEX_HOME=C:\evals\codex-homes\<plugin>` | `CODEX_HOME=C:\evals\codex-home-bare` |
+| pi | `--skill C:\evals\skills\<plugin>\<skill>` | `--no-skills` |
+
+### 4. Dispatch — `dispatch.ps1`
+
+- **Cloud lane**: a per-provider ThreadJob slot pool (caps from config). Threads only
+  *schedule*; every run executes in a **child `pwsh` process** (`invoke-run.ps1`) — the one
+  place `$env:` is ever set, because env vars are process-wide and thread-parallel mutation
+  would cross-contaminate runs. Includes 10-minute timeout enforcement and **quota backoff**:
+  8 consecutive `QUOTA-REFUSAL`s on a provider halts that provider's launches instead of
+  churning the queue.
+- **Local lane**: strictly serial, guarded by a machine-wide PID lock (`C:\evals\local.lock`) —
+  local models must never run in parallel (they fight for VRAM). Runs are grouped by the
+  **underlying Ollama tag** (pi's `ollama/gemma4:12b` and claude/codex's `gemma4:12b` are the
+  same weights) so each model loads into VRAM once, serves all harnesses' runs consecutively,
+  and is evicted before the next group. A warm-up call precedes any timed run so cold loads
+  never touch measured wall-clock.
+- Claims are atomic (`Request-NextRun`: UPDATE-then-verify), so dispatchers are crash-safe and
+  resumable; `-ResetStale` requeues rows orphaned by a dead dispatcher. Filters: `-Lane`,
+  `-OnlyProvider`, `-OnlyHarness`, `-OnlySuites a,b,c`, `-MaxRuns` (smoke tests), `-DryRun`.
+- All operational log lines are timestamped. Long sweeps should be launched **detached**
+  (`Start-Process pwsh … -RedirectStandardOutput C:\evals\logs\…`) so harness/session task
+  management can't kill them mid-grind.
+
+### 5. Execution + grading — `invoke-run.ps1`
+
+One run per child process: resolve env → run the row's `command` → stopwatch → parse → grade →
+record. Parsing is per-harness (`Read-RunResult`):
+
+| Harness | Answer source | Tokens/cost source |
+|---|---|---|
+| claude (`--output-format json`) | `result` field | `usage.*`, native `total_cost_usd` |
+| codex (`--json` + `-o` file) | `last_message.txt` | last `turn.completed` event's `usage` |
+| pi (`--mode json`) | last `message_end` event | none reported (`message_update` is delta-only) |
+
+All field access is null-safe. If parsing yields **no answer**, a refusal check runs (rate
+limit / 429 / quota markers) — order matters: a real answer that merely *discusses* rate limits
+can never be misclassified. Refusals become `QUOTA-REFUSAL` error rows (requeueable, never
+graded as failures); other unparseable output becomes a clean `no answer parsed` error. Codex
+exit codes are undocumented, so grading never trusts `$LASTEXITCODE` — only the answer
+artifact.
+
+Grading: the task is looked up **by `task_id` across all configured suites**, and
+`Test-ExpectedSpec` applies the suite's `expected` spec to the parsed answer → `pass`/`fail`
+(`graded_by = expected-spec`). Raw stdout is archived per run (`raw-output.txt` in the run's
+workspace) so any parse/grade dispute is re-checkable without re-spending tokens.
+
+Cost is computed at completion: harness-reported when present (claude), else estimated from
+config pricing rates, else $0 (local), else NULL (no rates — never guessed).
+
+### 6. Outputs
+
+- **`build-report.ps1`** → `report/results.js`, consumed by `report/index.html` — the local
+  dashboard (P1 iso-accuracy speedup cards, P2 effort-collapse small multiples, per-task
+  skill-delta dumbbells by knowledge class, P3 equalizer table, filterable all-cells table).
+  Falls back to a clearly-bannered synthetic sample when no real data exists.
+- **`export-plugin-results.ps1`** → for every skill, into the **owning plugin**:
+  - `plugins/<plugin>/evals/matrix/<skill>-results.json` — aggregates **plus the exact prompts,
+    expected specs, and notes citations** (so each plugin ships its own test transparency), and
+  - `plugins/<plugin>/evals/matrix/<skill>-report.md` — readable skill-vs-no-skill report:
+    overall, by harness, by model with **price-to-performance** (cost per correct answer).
+  Also emits `docs/matrix-results.js`, the feed for the public docs dashboard's
+  Cross-Harness Skill Matrix section.
+- **`timing-pass.ps1`** — quoted P1 speed numbers come from *serial* re-runs (median of N
+  repeats, `timing_samples` table), never from parallel-sweep timings, which rate-limit and
+  queueing distort.
+
+### 7. Backup
+
+DuckDB federates the SQLite directly (per the `etl:duckdb` skill pattern):
+
+```sql
+INSTALL sqlite; LOAD sqlite;
+ATTACH 'evalq.sqlite' AS evalq (TYPE sqlite);
+COPY (SELECT * FROM evalq.runs)           TO 'backup/runs-<stamp>.parquet'           (FORMAT PARQUET, COMPRESSION ZSTD);
+COPY (SELECT * FROM evalq.timing_samples) TO 'backup/timing_samples-<stamp>.parquet' (FORMAT PARQUET, COMPRESSION ZSTD);
+```
+
+31,850 rows compress to ~2.3 MB (from a ~38 MB SQLite).
+
+---
+
+## The runtime tree: `C:\evals\`
+
+Everything the matrix touches at run time lives outside the repo in `C:\evals\`, built and
+refreshed by `setup-workspaces.ps1`. Nothing here is committed; all of it is reconstructable
+from the repo checkout, so it is safe to delete wholesale between campaigns (delete
+`evalq.sqlite` only if you mean to discard results — take a parquet backup first).
+
+```
+C:\evals\
+├── plugins\<plugin>\             ← clean plugin copies (claude --plugin-dir skill arm)
+├── skills\<plugin>\<skill>\      ← plugin-nested skill copies (pi --skill skill arm)
+│   └── aws-cli\, aws\            ← legacy flat copies from the pilot (older queued rows referenced them)
+├── codex-homes\<plugin>\         ← per-plugin CODEX_HOME: auth.json + config.toml + ollama-*.config.toml
+│   └── skills\<name>\            ←   + that plugin's skills (codex user-scope discovery)
+├── codex-home-bare\              ← the no-skill CODEX_HOME: same auth/config, no skills\ dir
+├── codex-home-skills\            ← legacy pilot home (aws-cli + aws only); superseded by codex-homes\
+├── claude-home\                  ← scratch CLAUDE_CONFIG_DIR for subscription OAuth
+│   ├── .credentials.json         ←   copied from ~/.claude at setup; the ONLY thing that matters here
+│   └── sessions\, projects\, …   ←   residue claude creates per run; harmless, safe to purge
+├── work\<harness>\<run_id>\      ← one workspace per run (see below)
+├── logs\                         ← detached-dispatcher stdout/stderr
+│   ├── cloud-dispatch.log/.err
+│   └── local-dispatch.log/.err
+├── local.lock                    ← GPU exclusivity: PID of the active local lane (absent when idle)
+└── secrets.json                  ← @secret: token store (currently empty — subscription auth everywhere)
+```
+
+### Per-run workspaces — `work\<harness>\<run_id>\`
+
+Every run gets its own directory, named exactly by its `run_id`, so parallel runs never share
+files and any run can be audited long after the fact:
+
+- **`raw-output.txt`** — the harness's complete stdout for the run (the JSON object / JSONL
+  event stream). This is the ground truth for every parse or grade dispute.
+- **`last_message.txt`** — codex runs only: the final assistant message written by `-o`
+  (this is what gets graded for codex).
+
+The directory is also the process CWD during the run, so any files a harness's tool-use
+creates land here instead of polluting a real project.
+
+### Debugging playbook
+
+**"Why did run X fail/get graded fail?"** — work from the row outward:
+
+```powershell
+Import-Module PSSQLite
+$db = 'C:\Users\chris\Github\domain-expert\evals\matrix\evalq.sqlite'
+# 1. The row: status, grade, answer, and the exact command that ran
+Invoke-SqliteQuery -DataSource $db -Query "SELECT * FROM runs WHERE run_id = @id" `
+    -SqlParameters @{ id = 'codex.gpt-5.6-sol.E1.skill.aws-enforced-for.a1' } | Format-List
+# 2. The raw harness output (parse disputes end here)
+Get-Content "C:\evals\work\codex\codex.gpt-5.6-sol.E1.skill.aws-enforced-for.a1\raw-output.txt"
+# 3. The expected spec it was graded against (suite JSON, by task_id)
+#    -> evals/matrix/suites/<suite>.json, task id 'aws-enforced-for'
+```
+
+If the answer looks right but graded `fail`, the bug is in the suite's `expected` spec — fix
+the JSON and requeue the run (grading re-reads suites at run time). If `raw-output.txt` shows a
+refusal or empty payload, the row's `answer` column carries the classified reason
+(`QUOTA-REFUSAL: …` / `no answer parsed …`).
+
+**Re-run one specific run** (no dispatcher needed — this is also the fastest way to test a
+pipeline change end-to-end):
+
+```powershell
+# requeue it, then execute it synchronously in the foreground
+Invoke-SqliteQuery -DataSource $db -Query "UPDATE runs SET status='queued', grade=NULL, answer=NULL WHERE run_id=@id" -SqlParameters @{ id = $runId }
+Invoke-SqliteQuery -DataSource $db -Query "UPDATE runs SET status='running' WHERE run_id=@id" -SqlParameters @{ id = $runId }
+pwsh -NoProfile -File .\invoke-run.ps1 -Database $db -RunId $runId    # prints DONE/ERROR/REFUSAL line
+```
+
+**Reproduce a run completely by hand** — the row is self-describing: set the `env_json`
+variables in a fresh shell, `cd` to the row's `workspace`, and paste the row's `command`.
+What you see is exactly what `invoke-run` saw.
+
+**"Is anything running right now?"**
+
+```powershell
+Get-Process pwsh | Where-Object { $_.CommandLine -match 'dispatch\.ps1' }   # dispatchers
+Get-Content C:\evals\local.lock -ErrorAction SilentlyContinue               # local lane owner PID
+ollama ps                                                                    # what's in VRAM
+Get-Content C:\evals\logs\local-dispatch.log -Tail 20                        # live tail (timestamped)
+Invoke-SqliteQuery -DataSource $db -Query "SELECT status, COUNT(*) n FROM runs GROUP BY status"
+./pilot-status.ps1                                                           # one-line left|errors|done
+```
+
+**Common failure signatures**
+
+| Symptom | Cause / fix |
+|---|---|
+| Row stuck `running`, no live dispatcher | Dispatcher died mid-run. `./dispatch.ps1 -ResetStale` requeues; a stale `local.lock` from a dead PID is reclaimed automatically on the next local launch. |
+| `QUOTA-REFUSAL` rows accumulating | Subscription window exhausted. The dispatcher halts that provider after 8 consecutive; requeue when the window resets: `UPDATE runs SET status='queued', answer=NULL WHERE status='error' AND answer LIKE 'QUOTA-REFUSAL%'` |
+| `no answer parsed` errors | Read that run's `raw-output.txt` — usually a harness error payload or an output-schema drift; fix the parser in `MatrixRunner.psm1` (`Read-RunResult`), then requeue. |
+| codex UAC elevation prompts | A sandboxed `-s` mode engaged the Windows sandbox. Eval cells use `danger-full-access` deliberately (self-authored prompts, no untrusted content). |
+| codex no-skill arm suspiciously skill-aware | Contamination: a codex home's `config.toml` re-acquired domain-expert marketplace plugins. Re-run `setup-workspaces.ps1` (it scrubs and verifies). |
+| Local runs 3–5× slower than usual, RAM pressure | Model too big for VRAM (the qwen3.6:27b failure mode). Keep local weights within GPU memory; check `ollama ps` for the resident size. |
+| Local timings look bimodal | A cold load leaked into the clock — only possible if the warm-up call failed (it logs `WARN: warm-up failed`). Quoted numbers should come from `timing-pass.ps1` medians anyway. |
+| Same-second log lines interleaved oddly in `cloud-dispatch.log` | Normal: pool completions are harvested in batches; per-line timestamps order them. |
+
+**Log hygiene** — dispatcher logs append forever; truncate between campaigns
+(`Clear-Content C:\evals\logs\*`). If a log balloons, read the last lines first: the
+timestamped format makes death-points obvious (the last `▶` without a matching `✔`/`✖` is the
+run that killed it).
+
+---
+
+## Quickstart
+
+```powershell
+cd evals/matrix
+
+./setup-workspaces.ps1                    # build C:\evals from the configured suites
+./seed-queue.ps1 -WhatIfSummary           # preview the expansion
+./seed-queue.ps1                          # seed evalq.sqlite
+
+./dispatch.ps1 -DryRun                    # what would run
+./dispatch.ps1 -Lane cloud -MaxRuns 4     # paid smoke test
+./dispatch.ps1 -Lane local -OnlySuites cli-scripting,cloud-platforms   # GPU grind, scoped
+
+./build-report.ps1                        # refresh report/index.html data
+./export-plugin-results.ps1               # per-plugin results + docs feed
+./timing-pass.ps1 -Auto -Repeats 3        # serial timing for headline cells (after a sweep)
+```
+
+Operational rules learned the hard way:
+
+- **Never edit pipeline files while a sweep is live** — in-flight child processes re-read them.
+- **One local lane, ever** (the lock enforces it); the GPU is a shared, serial resource.
+- **No API keys**: claude uses subscription OAuth via the scratch config dir, codex its ChatGPT
+  auth. Watch quota — a big cloud sweep can exhaust a subscription window; the refusal backoff
+  now halts a provider instead of burning the queue, and `QUOTA-REFUSAL` rows are requeueable
+  with a one-line UPDATE once the window resets.
+- **Suite edits are cheap**: fixing an `expected` spec re-grades on the next run of that task;
+  adding tasks/suites is `-Append` + `setup-workspaces.ps1`; nothing requires touching the DB
+  by hand.
