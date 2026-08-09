@@ -19,6 +19,16 @@ Import-Module PSSQLite
 Import-Module (Join-Path $PSScriptRoot 'MatrixRunner.psm1') -Force
 $invoker = Join-Path $PSScriptRoot 'invoke-run.ps1'
 
+# GPU exclusivity: refuse to run while a dispatcher's local lane holds the lock.
+$lockPath = 'C:\evals\local.lock'
+if (Test-Path $lockPath) {
+    $owner = Get-Content $lockPath -ErrorAction SilentlyContinue
+    if ($owner -and (Get-Process -Id $owner -ErrorAction SilentlyContinue)) {
+        throw "local lane running under PID $owner — timing pass would fight for the GPU. Wait for the sweep's local phase to finish."
+    }
+    Remove-Item $lockPath -Force
+}
+
 $cells = [System.Collections.Generic.List[object]]::new()
 foreach ($k in $CellKey) {
     $h, $m, $e, $mo = $k -split '\|'

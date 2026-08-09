@@ -93,6 +93,19 @@ function Invoke-CloudPool {
 }
 
 function Invoke-LocalSerial {
+    # GPU exclusivity: exactly one local lane may run machine-wide. Two dispatchers'
+    # local phases (or a concurrent timing pass) would fight for VRAM and wreck timings.
+    $lockPath = 'C:\evals\local.lock'
+    if (Test-Path $lockPath) {
+        $owner = Get-Content $lockPath -ErrorAction SilentlyContinue
+        if ($owner -and (Get-Process -Id $owner -ErrorAction SilentlyContinue)) {
+            Write-Warning "local lane already running under PID $owner — skipping local phase. Re-run dispatch -Lane local after it finishes."
+            return
+        }
+        Remove-Item $lockPath -Force   # stale lock from a dead process
+    }
+    Set-Content $lockPath -Value $PID
+    try {
     $models = Invoke-SqliteQuery -DataSource $DbPath -Query "
         SELECT DISTINCT model FROM runs WHERE status='queued' AND lane='local' ORDER BY model"
     foreach ($m in @($models | ForEach-Object model)) {
@@ -111,6 +124,7 @@ function Invoke-LocalSerial {
         }
         try { & ollama stop $tag 2>&1 | Out-Null } catch {}
     }
+    } finally { Remove-Item $lockPath -Force -ErrorAction SilentlyContinue }
 }
 
 $script:stopLaunching = $false
